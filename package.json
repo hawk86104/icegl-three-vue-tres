@@ -1,0 +1,30 @@
+{
+  "name": "@fesjs/template",
+  "version": "3.0.0",
+  "description": "fes项目模版",
+  "scripts": {
+    "build": "fes build",
+    "prod": "FES_ENV=prod fes build",
+    "analyze": "ANALYZE=1 fes build",
+    "dev": "fes dev",
+    "test:unit": "fes test:unit"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "devDependencies": {
+    "@webank/eslint-config-webank": "1.2.7"
+  },
+  "dependencies": {
+    "@fesjs/fes": "^3.0.0",
+    "@fesjs/plugin-access": "^3.0.0",
+    "@fesjs/plugin-layout": "^5.0.0",
+    "@fesjs/plugin-model": "^3.0.0",
+    "@fesjs/plugin-enums": "^3.0.0",
+    "@fesjs/fes-design": "^0.8.0",
+    "@fesjs/builder-vite": "^3.0.3",
+    "vue": "^3.2.47",
+    "core-js": "^3.29.1"
+  },
+  "private": true
+}
