@@ -4,7 +4,7 @@
  * @Autor: Hawk
  * @Date: 2023-10-17 09:35:18
  * @LastEditors: Hawk
- * @LastEditTime: 2023-10-17 15:16:25
+ * @LastEditTime: 2023-10-17 15:47:42
 -->
 <script setup>
 import { useRenderLoop } from '@tresjs/core'
@@ -30,9 +30,10 @@ const setColorMaterial = () => {
 		if (child.name === 'LANDMASS') {
 			const materials = Array.isArray(child.material) ? child.material : [child.material]
 			materials.forEach((material) => {
-				material.opacity = 0.8;
+				// material.opacity = 0.8;
 				// material.transparent = true;
-				material.color.setStyle("#040912");
+				material.color.setStyle("#112233");
+				material.side = THREE.DoubleSide //双面渲染
 			})
 		}
 	})

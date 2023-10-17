@@ -5,14 +5,14 @@
  * @Autor: Hawk
  * @Date: 2023-10-17 08:30:49
  * @LastEditors: Hawk
- * @LastEditTime: 2023-10-17 14:54:11
+ * @LastEditTime: 2023-10-17 15:44:20
 -->
 <template>
 	<TresCanvas v-bind="state">
 		<TresPerspectiveCamera :position="[600, 750, -1221]" :fov="45" :near="1" :far="10000" />
 		<OrbitControls v-bind="controlsState" />
-		<TresAmbientLight color="#adadad" />
-		<TresDirectionalLight :position="[100, 100, 0]" :intensity="0.5" color="#ffffff" cast-shadow />
+		<TresAmbientLight color="#ffffff" />
+		<TresDirectionalLight :position="[100, 100, 0]" :intensity="0.5" color="#ffffff" />
 
 		<Suspense>
 			<belt></belt>
@@ -31,7 +31,7 @@ import { OrbitControls } from '@tresjs/cientos';
 import belt from '../components/belt.vue';
 
 const state = reactive({
-	clearColor: '#32373E',
+	clearColor: '#000000',
 	shadows: true,
 	alpha: false,
 	useLegacyLights: true,
