@@ -4,8 +4,10 @@
  * @Autor: Hawk
  * @Date: 2023-10-16 10:53:09
  * @LastEditors: Hawk
- * @LastEditTime: 2023-10-16 10:57:22
+ * @LastEditTime: 2023-10-17 09:31:40
  */
+// import { resolve } from 'path';
+import { join } from 'path';
 import { defineBuildConfig } from '@fesjs/fes';
 import { templateCompilerOptions } from '@tresjs/core';
 
@@ -17,13 +19,16 @@ export default defineBuildConfig({
         },
     },
     layout: {
-        title: 'Fes.js',
-        footer: 'Created by MumbleFE',
+        title: 'Ice.gl',
+        // footer: '',
         navigation: 'mixin',
         multiTabs: false,
         menus: [
             {
                 name: 'index',
+            },
+            {
+                name: 'TheBasic',
             },
         ],
     },
@@ -33,7 +38,11 @@ export default defineBuildConfig({
             ['1', '有效的'],
         ],
     },
+    // hawk add
     viteVuePlugin: {
         ...templateCompilerOptions,
     },
+    alias: { PLS: join(__dirname, './src/plugins') },
+    // { find: 'pls', replacement: resolve(__dirname, './src/plugins') },
+    // { '@': join(__dirname, '/src') }
 });
