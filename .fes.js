@@ -7,6 +7,7 @@
  * @LastEditTime: 2023-10-16 10:57:22
  */
 import { defineBuildConfig } from '@fesjs/fes';
+import { templateCompilerOptions } from '@tresjs/core';
 
 export default defineBuildConfig({
     access: {
@@ -31,5 +32,8 @@ export default defineBuildConfig({
             ['0', '无效的'],
             ['1', '有效的'],
         ],
+    },
+    viteVuePlugin: {
+        ...templateCompilerOptions,
     },
 });

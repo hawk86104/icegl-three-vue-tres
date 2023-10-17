@@ -13,18 +13,22 @@
     "access": "public"
   },
   "devDependencies": {
+    "@types/three": "^0.157.0",
     "@webank/eslint-config-webank": "1.2.7"
   },
   "dependencies": {
+    "@fesjs/builder-vite": "^3.0.3",
     "@fesjs/fes": "^3.0.0",
+    "@fesjs/fes-design": "^0.8.0",
     "@fesjs/plugin-access": "^3.0.0",
+    "@fesjs/plugin-enums": "^3.0.0",
     "@fesjs/plugin-layout": "^5.0.0",
     "@fesjs/plugin-model": "^3.0.0",
-    "@fesjs/plugin-enums": "^3.0.0",
-    "@fesjs/fes-design": "^0.8.0",
-    "@fesjs/builder-vite": "^3.0.3",
-    "vue": "^3.2.47",
-    "core-js": "^3.29.1"
+    "@tresjs/cientos": "^3.5.0",
+    "@tresjs/core": "^3.3.0",
+    "core-js": "^3.29.1",
+    "three": "^0.157.0",
+    "vue": "^3.2.47"
   },
   "private": true
 }
