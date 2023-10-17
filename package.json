@@ -1,34 +1,35 @@
 {
-  "name": "@fesjs/template",
-  "version": "3.0.0",
-  "description": "fes项目模版",
-  "scripts": {
-    "build": "fes build",
-    "prod": "FES_ENV=prod fes build",
-    "analyze": "ANALYZE=1 fes build",
-    "dev": "fes dev",
-    "test:unit": "fes test:unit"
-  },
-  "publishConfig": {
-    "access": "public"
-  },
-  "devDependencies": {
-    "@types/three": "^0.157.0",
-    "@webank/eslint-config-webank": "1.2.7"
-  },
-  "dependencies": {
-    "@fesjs/builder-vite": "^3.0.3",
-    "@fesjs/fes": "^3.0.0",
-    "@fesjs/fes-design": "^0.8.0",
-    "@fesjs/plugin-access": "^3.0.0",
-    "@fesjs/plugin-enums": "^3.0.0",
-    "@fesjs/plugin-layout": "^5.0.0",
-    "@fesjs/plugin-model": "^3.0.0",
-    "@tresjs/cientos": "^3.5.0",
-    "@tresjs/core": "^3.3.0",
-    "core-js": "^3.29.1",
-    "three": "^0.157.0",
-    "vue": "^3.2.47"
-  },
-  "private": true
+    "name": "icegl-three-vue-tres",
+    "version": "0.0.1",
+    "description": "icegl出品:基于three + vue3.0的webgl三维可视化快速开发平台",
+    "scripts": {
+        "build": "fes build",
+        "prod": "FES_ENV=prod fes build",
+        "analyze": "ANALYZE=1 fes build",
+        "dev": "fes dev",
+        "test:unit": "fes test:unit"
+    },
+    "publishConfig": {
+        "access": "public"
+    },
+    "devDependencies": {
+        "@types/three": "^0.157.0",
+        "@webank/eslint-config-webank": "1.2.7",
+        "tweakpane": "^4.0.1"
+    },
+    "dependencies": {
+        "@fesjs/builder-vite": "^3.0.3",
+        "@fesjs/fes": "^3.0.0",
+        "@fesjs/fes-design": "^0.8.0",
+        "@fesjs/plugin-access": "^3.0.0",
+        "@fesjs/plugin-enums": "^3.0.0",
+        "@fesjs/plugin-layout": "^5.0.0",
+        "@fesjs/plugin-model": "^3.0.0",
+        "@tresjs/cientos": "^3.5.0",
+        "@tresjs/core": "^3.3.0",
+        "core-js": "^3.29.1",
+        "three": "^0.157.0",
+        "vue": "^3.2.47"
+    },
+    "private": true
 }
