@@ -4,7 +4,7 @@
  * @Autor: Hawk
  * @Date: 2023-10-16 10:53:09
  * @LastEditors: Hawk
- * @LastEditTime: 2023-10-17 09:31:40
+ * @LastEditTime: 2023-10-17 09:42:22
  */
 // import { resolve } from 'path';
 import { join } from 'path';
@@ -38,7 +38,7 @@ export default defineBuildConfig({
             ['1', '有效的'],
         ],
     },
-    // hawk add
+    //add by hawk
     viteVuePlugin: {
         ...templateCompilerOptions,
     },
