@@ -4,10 +4,11 @@
  * @Autor: Hawk
  * @Date: 2023-10-17 09:35:18
  * @LastEditors: Hawk
- * @LastEditTime: 2023-10-20 11:43:05
+ * @LastEditTime: 2023-10-20 15:47:17
 -->
 <script setup lang="ts">
 import { WireframeGeometry, LineSegments, Color, EdgesGeometry, ShaderMaterial } from 'three';
+import { watchEffect } from 'vue';
 const props = withDefaults(
 	defineProps<{
 		builds: any
@@ -17,27 +18,31 @@ const props = withDefaults(
 		style?: string
 	}>(),
 	{
-		width: 1.0,
+		width: 10000.0,
 		color: '#FFF',
 		opacity: 1.0,
-		style: 'Wireframe' // Wireframe / Shader
+		style: 'Shader' // Wireframe / Shader
 	},
 )
+let line = null as any
+let shader = null as any
 if (props.style === 'Wireframe') {
-	const wireframe = new WireframeGeometry(props.builds.geometry);
-	const line = new LineSegments(wireframe);
+	const wireframe = new EdgesGeometry(props.builds.geometry); // WireframeGeometry
+	line = new LineSegments(wireframe);
 	line.material.depthTest = true;
 	line.material.opacity = props.opacity;
 	line.material.transparent = true;
 	line.material.linewidth = props.width
-	props.builds.add(line);
+	line.applyMatrix4(props.builds.matrix.clone())
 } else {
-	debugger
-	const shader = {
+	shader = {
 		transparent: true,
 		uniforms: {
 			uColor: {
-				value: new Color('#FFF')
+				value: new Color(props.color)
+			},
+			uOpacity: {
+				value: props.opacity
 			}
 		},
 		vertexShader: `
@@ -47,25 +52,33 @@ if (props.style === 'Wireframe') {
       `,
 		fragmentShader: ` 
         uniform vec3 uColor;
+				uniform float uOpacity;
         void main() {
-          gl_FragColor = vec4(uColor, 1);
+          gl_FragColor = vec4(uColor, uOpacity);
         }
       `
 	}
 	const geometry = new EdgesGeometry(props.builds.geometry)
 	const surroundLineMaterial = new ShaderMaterial(shader)
-	const line = new LineSegments(geometry, surroundLineMaterial);
-	line.name = 'surroundLine';
-	// line.applyMatrix4(props.builds.matrix.clone())
-	line.material.linewidth = 1000
-	props.builds.add(line)
+	line = new LineSegments(geometry, surroundLineMaterial);
+	line.applyMatrix4(props.builds.matrix.clone())
+	line.material.linewidth = props.width
 }
+watchEffect(() => {
+	if (props.style === 'Shader') {
+		if (props.color) {
+			shader.uniforms.uColor.value = new Color(props.color)
+		}
+		if (props.width) {
+			line.material.linewidth = props.width
+		}
+		if (props.opacity) {
+			shader.uniforms.uOpacity.value = props.opacity
+		}
+	}
+});
 </script>
 
 <template>
-	<!-- <TresLineSegments>
-		<TresEdgesGeometry :geometry="props.builds.geometry" />
-		<TresShaderMaterial v-bind="shader" />
-	</TresLineSegments> -->
-	<!-- <primitive :object="line" /> -->
+	<primitive :object="line" />
 </template>

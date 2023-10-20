@@ -4,39 +4,50 @@
  * @Autor: Hawk
  * @Date: 2023-10-17 09:35:18
  * @LastEditors: Hawk
- * @LastEditTime: 2023-10-20 11:35:33
+ * @LastEditTime: 2023-10-20 16:25:31
 -->
 <script setup lang="ts">
 import { useRenderLoop } from '@tresjs/core'
-
+import { watchEffect } from 'vue';
 import * as THREE from 'three'
 // import { toRaw } from 'vue'
 const props = withDefaults(defineProps<{
 	model: any
+	bulidingsColor?: string
+	landColor?: string
+	opacity?: number
 }>(), {
+	bulidingsColor: '#EC5BFF',
+	landColor: '#112233',
+	opacity: 0.9
 })
 
 const timeDelta = { value: 0 }
 const CITY_UNTRIANGULATED = props.model.city
 const LANDMASS = props.model.land
-const setColorMaterial = () => {
-	// 设置城市建筑（mesh物体），材质基本颜色
-	let materials = Array.isArray(CITY_UNTRIANGULATED.material) ? CITY_UNTRIANGULATED.material : [CITY_UNTRIANGULATED.material]
-	materials.forEach((material) => {
-		material.opacity = 0.9;
-		material.transparent = true;
-		material.color.setStyle("#EC5BFF");
-	})
-
-	// 设置城市地面（mesh物体），材质基本颜色
-	materials = Array.isArray(LANDMASS.material) ? LANDMASS.material : [LANDMASS.material]
-	materials.forEach((material) => {
-		// material.opacity = 0.8;
-		// material.transparent = true;
-		material.color.setStyle("#112233");
-		material.side = THREE.DoubleSide //双面渲染
-	})
-
+const setColorMaterial = (type: any, param: string) => {
+	let materials
+	if (type === 'cu') {
+		// 设置城市建筑（mesh物体），材质基本颜色
+		materials = Array.isArray(CITY_UNTRIANGULATED.material) ? CITY_UNTRIANGULATED.material : [CITY_UNTRIANGULATED.material]
+		materials.forEach((material) => {
+			if (param === 'color') {
+				material[param].setStyle(props.bulidingsColor);
+			} else if (param === 'opacity') {
+				material.opacity = props.opacity;
+				material.transparent = true;
+			}
+		})
+	} else if (type === 'land') {
+		// 设置城市地面（mesh物体），材质基本颜色
+		materials = Array.isArray(LANDMASS.material) ? LANDMASS.material : [LANDMASS.material]
+		materials.forEach((material) => {
+			// material.opacity = 0.8;
+			// material.transparent = true;
+			material[param].setStyle(props.landColor);
+			material.side = THREE.DoubleSide //双面渲染
+		})
+	}
 }
 const setEffectMaterial = () => {
 	const { geometry } = CITY_UNTRIANGULATED;
@@ -105,19 +116,28 @@ const setEffectMaterial = () => {
 		}
 	})
 }
-setColorMaterial()
+// setColorMaterial()
 setEffectMaterial()
 
 const { onLoop } = useRenderLoop()
 
 onLoop(({ delta }) => {
 	timeDelta.value += delta;
-})   
+})
+watchEffect(() => {
+	if (props.bulidingsColor) {
+		setColorMaterial('cu', 'color')
+	}
+	if (props.landColor) {
+		setColorMaterial('land', 'color')
+	}
+	if (props.opacity) {
+		setColorMaterial('cu', 'opacity')
+	}
+});
 </script>
 
 <template>
-	<!-- <Suspense></Suspense> -->
 	<primitive :object="props.model.model">
-		<slot></slot>
 	</primitive>
 </template>
