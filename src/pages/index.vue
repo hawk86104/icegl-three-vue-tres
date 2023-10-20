@@ -4,10 +4,12 @@
  * @Autor: Hawk
  * @Date: 2023-10-16 10:53:09
  * @LastEditors: Hawk
- * @LastEditTime: 2023-10-17 10:06:36
+ * @LastEditTime: 2023-10-20 10:38:53
 -->
 <template>
-    <city />
+    <Suspense>
+        <city />
+    </Suspense>
 </template>
 
 <script setup>

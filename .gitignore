@@ -10,3 +10,4 @@
 /src/.fes-production
 /src/.fes-test
 .env.local
+dist

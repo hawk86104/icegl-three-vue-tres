@@ -4,51 +4,46 @@
  * @Autor: Hawk
  * @Date: 2023-10-17 09:35:18
  * @LastEditors: Hawk
- * @LastEditTime: 2023-10-17 15:47:42
+ * @LastEditTime: 2023-10-20 11:35:33
 -->
-<script setup>
+<script setup lang="ts">
 import { useRenderLoop } from '@tresjs/core'
-import { useFBX } from '@tresjs/cientos';
-import * as THREE from 'three'
 
-const path = './plugins/superzay/belt/model/shanghai.FBX';
-const model = await useFBX(path);
+import * as THREE from 'three'
+// import { toRaw } from 'vue'
+const props = withDefaults(defineProps<{
+	model: any
+}>(), {
+})
 
 const timeDelta = { value: 0 }
+const CITY_UNTRIANGULATED = props.model.city
+const LANDMASS = props.model.land
 const setColorMaterial = () => {
-	model.traverse((child) => {
-		// 设置城市建筑（mesh物体），材质基本颜色
-		if (child.name === 'CITY_UNTRIANGULATED') {
-			const materials = Array.isArray(child.material) ? child.material : [child.material]
-			materials.forEach((material) => {
-				material.opacity = 0.8;
-				material.transparent = true;
-				material.color.setStyle("#EC5BFF");
-			})
-		}
-		// 设置城市地面（mesh物体），材质基本颜色
-		if (child.name === 'LANDMASS') {
-			const materials = Array.isArray(child.material) ? child.material : [child.material]
-			materials.forEach((material) => {
-				// material.opacity = 0.8;
-				// material.transparent = true;
-				material.color.setStyle("#112233");
-				material.side = THREE.DoubleSide //双面渲染
-			})
-		}
+	// 设置城市建筑（mesh物体），材质基本颜色
+	let materials = Array.isArray(CITY_UNTRIANGULATED.material) ? CITY_UNTRIANGULATED.material : [CITY_UNTRIANGULATED.material]
+	materials.forEach((material) => {
+		material.opacity = 0.9;
+		material.transparent = true;
+		material.color.setStyle("#EC5BFF");
 	})
+
+	// 设置城市地面（mesh物体），材质基本颜色
+	materials = Array.isArray(LANDMASS.material) ? LANDMASS.material : [LANDMASS.material]
+	materials.forEach((material) => {
+		// material.opacity = 0.8;
+		// material.transparent = true;
+		material.color.setStyle("#112233");
+		material.side = THREE.DoubleSide //双面渲染
+	})
+
 }
 const setEffectMaterial = () => {
-	let cityBuildings = null// 城市建筑群
-	model.traverse((child) => {
-		if (child.name !== 'CITY_UNTRIANGULATED') return
-		cityBuildings = child
-	})
-	const { geometry } = cityBuildings;
+	const { geometry } = CITY_UNTRIANGULATED;
 	geometry.computeBoundingBox()
 	geometry.computeBoundingSphere()
 	const { max, min } = geometry.boundingBox;
-	const materials = Array.isArray(cityBuildings.material) ? cityBuildings.material : [cityBuildings.material]
+	const materials = Array.isArray(CITY_UNTRIANGULATED.material) ? CITY_UNTRIANGULATED.material : [CITY_UNTRIANGULATED.material]
 	materials.forEach((material) => {
 		material.onBeforeCompile = (shader) => {
 			shader.uniforms.uMax = {
@@ -117,11 +112,12 @@ const { onLoop } = useRenderLoop()
 
 onLoop(({ delta }) => {
 	timeDelta.value += delta;
-})
+})   
 </script>
 
 <template>
-	<Suspense>
-		<primitive :object="model" />
-	</Suspense>
+	<!-- <Suspense></Suspense> -->
+	<primitive :object="props.model.model">
+		<slot></slot>
+	</primitive>
 </template>

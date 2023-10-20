@@ -5,7 +5,7 @@
  * @Autor: Hawk
  * @Date: 2023-10-17 08:30:49
  * @LastEditors: Hawk
- * @LastEditTime: 2023-10-17 15:44:20
+ * @LastEditTime: 2023-10-20 11:17:08
 -->
 <template>
 	<TresCanvas v-bind="state">
@@ -13,22 +13,24 @@
 		<OrbitControls v-bind="controlsState" />
 		<TresAmbientLight color="#ffffff" />
 		<TresDirectionalLight :position="[100, 100, 0]" :intensity="0.5" color="#ffffff" />
-
-		<Suspense>
-			<belt></belt>
-		</Suspense>
-
-		<TresGridHelper />
+		<belt v-if="showBuildingLines" :model="CityFBX">
+			<buildingLines v-if="showBuildingLines" :builds="CityFBX.city" />
+		</belt>
+		<TresAxesHelper :args="[1000]" :position="[0, 19, 0]" />
+		<TresGridHelper :args="[6000, 100]" :position="[0, 19, 0]" />
 	</TresCanvas>
 </template>
 
 <script setup lang="ts">
 import { SRGBColorSpace, BasicShadowMap, NoToneMapping } from 'three';
-import { reactive, onMounted, watchEffect } from 'vue';
+import { reactive, onMounted, watchEffect, ref } from 'vue';
 import { TresCanvas } from '@tresjs/core';
 import { OrbitControls } from '@tresjs/cientos';
 
+import { loadCityFBX } from '../common/loadCity';
+
 import belt from '../components/belt.vue';
+import buildingLines from '../components/buildingLines.vue';
 
 const state = reactive({
 	clearColor: '#000000',
@@ -42,7 +44,21 @@ const state = reactive({
 
 const controlsState = reactive({ autoRotate: true, enableDamping: true });
 
-watchEffect(() => { });
+
+const showBuildingLines = ref(false)
+
+const CityFBX = await loadCityFBX()
+
+showBuildingLines.value = true
+watchEffect(() => {
+	// if (beltRef.value) {
+	// 	console.log(beltRef.value)
+	// 	debugger
+	// 	if (beltRef.value.cityBuildings) {
+	// 		showBuildingLines.value = true
+	// 	}
+	// }
+});
 onMounted(() => {
 
 })
