@@ -1,3 +1,11 @@
+/*
+ * @Description: 
+ * @Version: 1.668
+ * @Autor: Hawk
+ * @Date: 2023-10-16 10:53:09
+ * @LastEditors: Hawk
+ * @LastEditTime: 2023-10-21 18:50:15
+ */
 import { access, defineRuntimeConfig } from '@fesjs/fes';
 
 import PageLoading from '@/components/pageLoading.vue';
@@ -6,7 +14,7 @@ import UserCenter from '@/components/userCenter.vue';
 export default defineRuntimeConfig({
     beforeRender: {
         loading: <PageLoading />,
-        action() {
+        action () {
             const { setRole } = access;
             return new Promise((resolve) => {
                 setTimeout(() => {
@@ -23,3 +31,55 @@ export default defineRuntimeConfig({
         renderCustom: () => <UserCenter />,
     },
 });
+
+const findStringBetween = (str) => {
+    const regex = /plugins\/([^/]+)\/pages\//;
+    const match = str.match(regex);
+    if (match && match[1]) {
+      return match[1];
+    }
+    return null;
+}
+
+//自动读取plugins目录下所有插件的pages的目录下的*.vue 并加入路由
+export function patchRoutes ({ routes }) {
+    const needAddRouter = {}
+    const viteModules = import.meta.glob('./plugins/*/pages/*.vue');
+    for (const [key, value] of Object.entries(viteModules)) {
+        const pluginName = findStringBetween(key)
+        const pageName = key.slice(key.lastIndexOf('/') + 1, key.lastIndexOf('.'))
+        if(pluginName){
+            const nodeRouter = {
+                path:`/${pluginName}/${pageName}`,
+                component:value
+            }
+            if(needAddRouter[pluginName]){
+                needAddRouter[pluginName].push(nodeRouter)
+            }else{
+                needAddRouter[pluginName] = [nodeRouter]
+            }
+        }
+    }
+    // eslint-disable-next-line guard-for-in
+    for (const one in needAddRouter) {
+        const OneNode = needAddRouter[one]
+        const addRouterNode = {
+             path: `/${one}`,
+             component: () => import("./components/suspenseLayout.vue"),
+             children: []
+         }
+         // eslint-disable-next-line array-callback-return
+         OneNode.every((e)=>{
+            addRouterNode.children.push(e)
+        })
+        routes.unshift(addRouterNode)
+     }
+    // routes.unshift({
+    //     path: "/digitalCity",
+    //     component: () => import("./components/suspenseLayout.vue"),
+    //     children: [{
+    //         path: "/digitalCity/city",
+    //         component: ()=>import('./plugins/digitalCity/pages/city.vue'),
+    //     }]
+    // });
+}

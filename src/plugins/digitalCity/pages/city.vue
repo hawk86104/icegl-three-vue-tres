@@ -4,10 +4,10 @@
  * @Autor: Hawk
  * @Date: 2023-10-17 08:30:49
  * @LastEditors: Hawk
- * @LastEditTime: 2023-10-20 17:16:04
+ * @LastEditTime: 2023-10-21 17:22:46
 -->
 <template>
-	<TresCanvas v-bind="state">
+	<TresCanvas v-bind="state" window-size>
 		<TresPerspectiveCamera :position="[600, 750, -1221]" :fov="45" :near="1" :far="10000" />
 		<OrbitControls v-bind="controlsState" />
 		<TresAmbientLight color="#ffffff" />

@@ -4,7 +4,7 @@
  * @Autor: Hawk
  * @Date: 2023-10-17 09:35:18
  * @LastEditors: Hawk
- * @LastEditTime: 2023-10-20 17:25:16
+ * @LastEditTime: 2023-10-21 16:37:22
 -->
 <script setup lang="ts">
 import { useRenderLoop } from '@tresjs/core'
@@ -21,7 +21,6 @@ const props = withDefaults(defineProps<{
 	landColor: '#112233',
 	opacity: 0.9
 })
-debugger
 const timeDelta = { value: 0 }
 const CITY_UNTRIANGULATED = props.model.city
 const LANDMASS = props.model.land
