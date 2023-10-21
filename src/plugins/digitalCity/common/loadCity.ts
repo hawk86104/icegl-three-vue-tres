@@ -4,12 +4,12 @@
  * @Autor: Hawk
  * @Date: 2023-10-20 10:13:19
  * @LastEditors: Hawk
- * @LastEditTime: 2023-10-20 10:39:22
+ * @LastEditTime: 2023-10-21 15:47:05
  */
 import { useFBX } from '@tresjs/cientos';
 
 export const loadCityFBX = async()=>{
-  const path = './plugins/superzay/belt/model/shanghai.FBX';
+  const path = './plugins/digitalCity/belt/model/shanghai.FBX';
 	const model = await useFBX(path);
 	let CITY_UNTRIANGULATED = null
 	let LANDMASS = null

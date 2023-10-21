@@ -4,10 +4,14 @@
  * @Autor: Hawk
  * @Date: 2023-10-17 09:35:18
  * @LastEditors: Hawk
- * @LastEditTime: 2023-10-20 15:47:17
+ * @LastEditTime: 2023-10-20 17:20:33
 -->
 <script setup lang="ts">
-import { WireframeGeometry, LineSegments, Color, EdgesGeometry, ShaderMaterial } from 'three';
+import { Color, EdgesGeometry, ShaderMaterial } from 'three';
+import { LineSegments2 } from 'three/examples/jsm/lines/LineSegments2.js';
+import { LineMaterial } from 'three/examples/jsm/lines/LineMaterial.js';
+import { LineSegmentsGeometry } from 'three/examples/jsm/lines/LineSegmentsGeometry.js';
+
 import { watchEffect } from 'vue';
 const props = withDefaults(
 	defineProps<{
@@ -18,22 +22,29 @@ const props = withDefaults(
 		style?: string
 	}>(),
 	{
-		width: 10000.0,
+		width: 1.0,
 		color: '#FFF',
 		opacity: 1.0,
-		style: 'Shader' // Wireframe / Shader
+		style: 'Wireframe' // Wireframe / Shader
 	},
 )
 let line = null as any
 let shader = null as any
 if (props.style === 'Wireframe') {
-	const wireframe = new EdgesGeometry(props.builds.geometry); // WireframeGeometry
-	line = new LineSegments(wireframe);
-	line.material.depthTest = true;
-	line.material.opacity = props.opacity;
-	line.material.transparent = true;
-	line.material.linewidth = props.width
+	const edges = new EdgesGeometry(props.builds.geometry) // WireframeGeometry
+	let geometry = new LineSegmentsGeometry()
+	let wideEdges = geometry.fromEdgesGeometry(edges)
+	let edgesmaterial = new LineMaterial({
+		color: props.color,
+		linewidth: props.width,
+		opacity: props.opacity,
+		transparent: true
+	})
+	edgesmaterial.resolution.set(window.innerWidth, window.innerHeight);
+	line = new LineSegments2(wideEdges, edgesmaterial);
 	line.applyMatrix4(props.builds.matrix.clone())
+	// line.position.copy(props.builds.getWorldPosition())
+
 } else {
 	shader = {
 		transparent: true,
@@ -69,12 +80,20 @@ watchEffect(() => {
 		if (props.color) {
 			shader.uniforms.uColor.value = new Color(props.color)
 		}
-		if (props.width) {
-			line.material.linewidth = props.width
-		}
 		if (props.opacity) {
 			shader.uniforms.uOpacity.value = props.opacity
 		}
+	}
+	if (props.style === 'Wireframe') {
+		if (props.color) {
+			line.material.color = new Color(props.color)
+		}
+		if (props.opacity) {
+			line.material.opacity = props.opacity
+		}
+	}
+	if (props.width) {
+		line.material.linewidth = props.width
 	}
 });
 </script>

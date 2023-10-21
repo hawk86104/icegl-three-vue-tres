@@ -25,8 +25,8 @@
         "@fesjs/plugin-enums": "^3.0.0",
         "@fesjs/plugin-layout": "^5.0.0",
         "@fesjs/plugin-model": "^3.0.0",
-        "@tresjs/cientos": "^3.5.0",
-        "@tresjs/core": "^3.3.0",
+        "@tresjs/cientos": "^3.5.1",
+        "@tresjs/core": "^3.4.1",
         "core-js": "^3.29.1",
         "three": "^0.157.0",
         "vue": "^3.2.47"
