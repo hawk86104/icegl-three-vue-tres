@@ -4,7 +4,7 @@
  * @Autor: Hawk
  * @Date: 2023-10-16 10:53:09
  * @LastEditors: Hawk
- * @LastEditTime: 2023-10-21 18:48:57
+ * @LastEditTime: 2023-10-23 09:03:25
  */
 // import { resolve } from 'path';
 import { join } from 'path';
@@ -20,15 +20,11 @@ export default defineBuildConfig({
     },
     layout: {
         title: 'Ice.gl',
-        // footer: '',
-        navigation: 'mixin',
+        navigation: 'top',
         multiTabs: false,
         menus: [
             {
                 name: 'index',
-            },
-            {
-                name: 'TheBasic',
             },
         ],
     },
