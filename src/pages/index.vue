@@ -4,7 +4,7 @@
  * @Autor: Hawk
  * @Date: 2023-10-16 10:53:09
  * @LastEditors: Hawk
- * @LastEditTime: 2023-10-23 15:07:03
+ * @LastEditTime: 2023-10-23 15:43:08
 -->
 <template>
     <div class="flex h-full">
@@ -87,7 +87,7 @@ const goto = (value: string) => {
 const router = useRouter()
 const toPage = (value: any) => {
     let routeUrl = router.resolve({
-        path: "/digitalCity/city",
+        path: "/digitalCity/buildings",
     });
     window.open(routeUrl.href, '_blank');
 }

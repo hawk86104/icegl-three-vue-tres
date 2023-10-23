@@ -4,7 +4,7 @@
  * @Autor: Hawk
  * @Date: 2023-10-16 10:53:09
  * @LastEditors: Hawk
- * @LastEditTime: 2023-10-23 09:49:06
+ * @LastEditTime: 2023-10-23 15:34:10
  */
 import { defineRuntimeConfig,useModel } from '@fesjs/fes';
 
@@ -78,7 +78,7 @@ export function patchRoutes ({ routes }) {
              children: []
          }
          // eslint-disable-next-line array-callback-return
-         OneNode.every((e)=>{
+         OneNode.forEach((e)=>{
             addRouterNode.children.push(e)
         })
         routes.unshift(addRouterNode)

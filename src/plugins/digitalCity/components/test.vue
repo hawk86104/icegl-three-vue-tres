@@ -14,7 +14,7 @@ onUnmounted(() => {
 })
 onMounted(() => {
 	debugger
-	const showBuildingLines = inject('showBuildingLines')
+	const showbuildingsLines = inject('showbuildingsLines')
 })
 </script>
 
