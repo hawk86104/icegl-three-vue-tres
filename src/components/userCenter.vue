@@ -1,14 +1,22 @@
+<!--
+ * @Description: 
+ * @Version: 1.668
+ * @Autor: Hawk
+ * @Date: 2023-09-21 15:34:19
+ * @LastEditors: Hawk
+ * @LastEditTime: 2023-10-23 09:53:01
+-->
 <template>
-    <div class="right">{{ initialState.userName }}</div>
+    <div class="right">{{ userModel.user.userName }}</div>
 </template>
 <script>
 import { useModel } from '@fesjs/fes';
 
 export default {
-    setup() {
-        const initialState = useModel('@@initialState');
+    setup () {
+        const userModel = useModel('user');
         return {
-            initialState,
+            userModel,
         };
     },
 };

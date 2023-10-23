@@ -4,33 +4,43 @@
  * @Autor: Hawk
  * @Date: 2023-10-16 10:53:09
  * @LastEditors: Hawk
- * @LastEditTime: 2023-10-21 18:50:15
+ * @LastEditTime: 2023-10-23 09:49:06
  */
-import { access, defineRuntimeConfig } from '@fesjs/fes';
+import { defineRuntimeConfig,useModel } from '@fesjs/fes';
 
+import { FMenu } from '@fesjs/fes-design';
 import PageLoading from '@/components/pageLoading.vue';
 import UserCenter from '@/components/userCenter.vue';
+
+// add buy hawk
+import 'uno.css';
 
 export default defineRuntimeConfig({
     beforeRender: {
         loading: <PageLoading />,
         action () {
-            const { setRole } = access;
-            return new Promise((resolve) => {
-                setTimeout(() => {
-                    setRole('admin');
-                    // 初始化应用的全局状态，可以通过 useModel('@@initialState') 获取，具体用法看@/components/UserCenter 文件
-                    resolve({
-                        userName: '李雷',
-                    });
-                }, 1000);
-            });
+            const { signin } = useModel('user');
+            signin();
+            // const { setRole } = access;
+            // return new Promise((resolve) => {
+            //     setTimeout(() => {
+            //         setRole('admin');
+            //         // 初始化应用的全局状态，可以通过 useModel('@@initialState') 获取，具体用法看@/components/UserCenter 文件
+            //         resolve({
+            //             userName: '李雷',
+            //         });
+            //     }, 1000);
+            // });
         },
     },
     layout: {
         renderCustom: () => <UserCenter />,
     },
 });
+
+export function onAppCreated({ app }) {
+    app.use(FMenu);
+}
 
 const findStringBetween = (str) => {
     const regex = /plugins\/([^/]+)\/pages\//;
@@ -40,7 +50,6 @@ const findStringBetween = (str) => {
     }
     return null;
 }
-
 //自动读取plugins目录下所有插件的pages的目录下的*.vue 并加入路由
 export function patchRoutes ({ routes }) {
     const needAddRouter = {}
