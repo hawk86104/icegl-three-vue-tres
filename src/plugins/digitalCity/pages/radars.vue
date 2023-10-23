@@ -4,7 +4,7 @@
  * @Autor: Hawk
  * @Date: 2023-10-17 08:30:49
  * @LastEditors: Hawk
- * @LastEditTime: 2023-10-23 15:37:50
+ * @LastEditTime: 2023-10-23 15:52:51
 -->
 <template>
 	<TresCanvas v-bind="state" window-size>
@@ -14,6 +14,8 @@
 		<TresDirectionalLight :position="[100, 100, 0]" :intensity="0.5" color="#ffffff" />
 		<buildingsModel :model="CityFBX" />
 		<buildingsLines :builds="CityFBX.city" color="#000" />
+
+		<radraA />
 		<TresAxesHelper :args="[1000]" :position="[0, 19, 0]" />
 		<TresGridHelper :args="[6000, 100]" :position="[0, 19, 0]" />
 	</TresCanvas>
@@ -28,6 +30,8 @@ import { OrbitControls } from '@tresjs/cientos';
 import { loadCityFBX } from '../common/loadCity';
 import buildingsModel from '../components/buildings/buildingsModel.vue';
 import buildingsLines from '../components/buildings/buildingsLines.vue';
+
+import radraA from '../components/radras/radraA.vue';
 
 const state = reactive({
 	clearColor: '#000000',

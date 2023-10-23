@@ -36,6 +36,7 @@ const setColorMaterial = (type: any, param: string) => {
 				material.opacity = props.opacity;
 				material.transparent = true;
 			}
+			material.side = THREE.DoubleSide //双面渲染
 		})
 	} else if (type === 'land') {
 		// 设置城市地面（mesh物体），材质基本颜色
