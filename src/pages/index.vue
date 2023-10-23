@@ -4,7 +4,7 @@
  * @Autor: Hawk
  * @Date: 2023-10-16 10:53:09
  * @LastEditors: Hawk
- * @LastEditTime: 2023-10-23 15:43:08
+ * @LastEditTime: 2023-10-23 18:55:45
 -->
 <template>
     <div class="flex h-full">
@@ -40,26 +40,16 @@
             <div class="w-80 mr-10 mb-10 overflow-hidden">
                 <FCard header="建筑物" shadow="hover">
                     <video controls class="w-full max-h-70">
-                        <source src="plugins/digitalCity/preview/buildings.mp4" type="video/mp4" autoplay="true"
-                            loop="true" />
+                        <source :src="publicPath + 'plugins/digitalCity/preview/buildings.mp4'" type="video/mp4"
+                            autoplay="true" loop="true" />
                     </video>
-                    <div class="cursor-pointer" @click="toPage()">点击查看详情</div>
+                    <div class="cursor-pointer" @click="toPage('buildings')">点击查看详情</div>
                 </FCard>
             </div>
-            <div class="w-80 mr-10 mb-10 overflow-hidden cursor-pointer">
-                <FCard header="建筑物" shadow="hover">
-                    <video controls class="w-full max-h-70">
-                        <source src="plugins/digitalCity/preview/buildings.mp4" type="video/mp4" />
-                    </video>
-                    <div class="cursor-pointer">点击查看详情</div>
-                </FCard>
-            </div>
-            <div class="w-80 mr-10 mb-10 overflow-hidden cursor-pointer">
-                <FCard header="建筑物" shadow="hover">
-                    <video controls class="w-full max-h-70">
-                        <source src="plugins/digitalCity/preview/buildings.mp4" type="video/mp4" />
-                    </video>
-                    <div class="cursor-pointer">点击查看详情</div>
+            <div class="w-80 mr-10 mb-10 overflow-hidden">
+                <FCard header="雷达A" shadow="hover">
+                    <img class="w-full max-h-70" :src="publicPath + 'plugins/digitalCity/preview/radars.png'" />
+                    <div class="cursor-pointer" @click="toPage('radars')">点击查看详情</div>
                 </FCard>
             </div>
         </div>
@@ -83,11 +73,11 @@ defineRouteMeta({
 const goto = (value: string) => {
     console.log(value)
 }
-
+let publicPath = process.env.BASE_URL
 const router = useRouter()
 const toPage = (value: any) => {
     let routeUrl = router.resolve({
-        path: "/digitalCity/buildings",
+        path: "/digitalCity/" + value,
     });
     window.open(routeUrl.href, '_blank');
 }
