@@ -4,10 +4,10 @@
  * @Autor: Hawk
  * @Date: 2023-10-23 15:48:35
  * @LastEditors: Hawk
- * @LastEditTime: 2023-10-24 10:03:28
+ * @LastEditTime: 2023-10-24 11:23:09
 -->
 <script setup lang="ts">
-import { ref, watchEffect } from 'vue';
+import { ref, watch, defineExpose } from 'vue';
 import { useRenderLoop } from '@tresjs/core'
 import { Matrix4, AdditiveBlending, DoubleSide, Color } from 'three';
 const props = withDefaults(
@@ -38,9 +38,9 @@ onLoop(({ delta }) => {
 const shader = {
 	transparent: true,
 	blending: AdditiveBlending,
-	depthWrite: false,
+	depthWrite: true,
 	side: DoubleSide,
-
+	depthTest: true,
 	vertexShader: `
 	varying vec3 vPosition;
 	void main() {
@@ -102,19 +102,21 @@ const shader = {
 		ncolor: { value: new Color(props.color) },
 	},
 }
-
-watchEffect(() => {
-	if (TresCircleGeometryRef.value) {
+watch(TresCircleGeometryRef, (newValue, oldValue) => {
+	if (newValue && oldValue === undefined) {
 		const rotateMatrix = new Matrix4().makeRotationX(-Math.PI / 180 * 90)
 		TresCircleGeometryRef.value.applyMatrix4(rotateMatrix)
 	}
 })
+const MeshRef = ref()
+defineExpose({
+	MeshRef
+})
 </script>
 
 <template>
-	<TresMesh :position="props.position">
+	<TresMesh ref="MeshRef" :position="props.position">
 		<TresCircleGeometry ref="TresCircleGeometryRef" :args="[240, 1000]" />
 		<TresShaderMaterial v-bind="shader" />
-		<!-- <MeshPhongMaterial ref="MeshPhongMaterialRef" color="#ffff00" opacity="0.7" :transparent="true" /> -->
 	</TresMesh>
 </template>

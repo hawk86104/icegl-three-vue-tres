@@ -4,19 +4,39 @@
  * @Autor: Hawk
  * @Date: 2023-10-17 08:30:49
  * @LastEditors: Hawk
- * @LastEditTime: 2023-10-24 09:55:15
+ * @LastEditTime: 2023-10-24 10:54:43
 -->
 <template>
 	<pagesShow>
 		<template v-slot:ability>
-			<radraA :position="[10, 30, 0]" />
+			<radraA ref="radraARef" :position="[10, 30, 0]" @click="changeObject(radraARef)" />
+			<radraB :position="[100, 30, 0]" color="#00ff00" />
+			<!-- <TransformControls v-if="transformRef" :object="transformRef" v-bind="controlsState" /> -->
 		</template>
 	</pagesShow>
 </template>
 
 <script setup lang="ts">
-
+import { ref } from 'vue';
+// import { TransformControls } from '@tresjs/cientos'
 import pagesShow from '../components/pagesShow.vue'
 import radraA from '../components/radras/radraA.vue';
+import radraB from '../components/radras/radraB.vue';
 
+// const controlsState = reactive({
+// 	mode: 'translate',
+// 	enabled: true,
+// 	space: 'world',
+// 	axis: 'XYZ',
+// 	size: 2,
+// 	showX: true,
+// 	showY: true,
+// 	showZ: true,
+// })
+
+const transformRef = ref()
+const radraARef = ref()
+function changeObject(object: any) {
+	transformRef.value = object.MeshRef
+}
 </script>
