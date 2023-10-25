@@ -4,7 +4,7 @@
  * @Autor: Hawk
  * @Date: 2023-10-17 09:35:18
  * @LastEditors: Hawk
- * @LastEditTime: 2023-10-25 11:04:12
+ * @LastEditTime: 2023-10-25 11:15:30
 -->
 <script setup lang="ts">
 import { useRenderLoop } from '@tresjs/core'
@@ -36,6 +36,7 @@ const setColorMaterial = (type: any, param: string) => {
 				material.opacity = props.opacity;
 				material.transparent = true;
 			}
+			// material.blending = THREE.NormalBlending,
 			material.side = THREE.DoubleSide //双面渲染
 		})
 	} else if (type === 'land') {
