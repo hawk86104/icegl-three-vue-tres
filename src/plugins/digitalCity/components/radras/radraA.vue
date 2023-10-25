@@ -4,7 +4,7 @@
  * @Autor: Hawk
  * @Date: 2023-10-23 15:48:35
  * @LastEditors: Hawk
- * @LastEditTime: 2023-10-25 12:44:09
+ * @LastEditTime: 2023-10-25 14:40:05
 -->
 <script setup lang="ts">
 import { ref, watch, defineExpose, watchEffect } from 'vue';
@@ -13,6 +13,7 @@ import { Matrix4, AdditiveBlending, DoubleSide, Color } from 'three';
 const props = withDefaults(
 	defineProps<{
 		position?: Array<number>
+		size?: number
 		radius?: number
 		color?: string
 		opacity?: number
@@ -22,6 +23,7 @@ const props = withDefaults(
 	{
 		position: [0, 0, 0],
 		radius: 240,
+		size: 300,
 		color: '#ffff00',
 		opacity: 0.9,
 		speed: 300,
@@ -143,7 +145,7 @@ defineExpose({
 
 <template>
 	<TresMesh ref="MeshRef" :position="props.position">
-		<TresCircleGeometry ref="TresCircleGeometryRef" :args="[300, 1000]" />
+		<TresCircleGeometry ref="TresCircleGeometryRef" :args="[props.size, 1000]" />
 		<TresShaderMaterial v-bind="shader" />
 	</TresMesh>
 </template>

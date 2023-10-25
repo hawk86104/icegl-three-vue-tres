@@ -4,10 +4,10 @@
  * @Autor: Hawk
  * @Date: 2023-10-24 10:36:23
  * @LastEditors: Hawk
- * @LastEditTime: 2023-10-25 11:18:53
+ * @LastEditTime: 2023-10-25 14:57:39
 -->
 <script setup lang="ts">
-import { ref, watch, defineExpose } from 'vue';
+import { ref, watch, defineExpose, watchEffect } from 'vue';
 import { useRenderLoop } from '@tresjs/core'
 import { DoubleSide, Color, LineCurve3, Vector3, Matrix4 } from 'three';
 const props = withDefaults(
@@ -22,8 +22,8 @@ const props = withDefaults(
 	}>(),
 	{
 		position: [0, 0, 0],
-		radius: 120,
-		maxRadius: 450,
+		radius: 10,
+		maxRadius: 200,
 		color: '#ffff00',
 		opacity: 0.5,
 		period: 2,
@@ -38,7 +38,7 @@ const shader = {
 	color: props.color,
 	opacity: props.opacity,
 	transparent: true,
-	depthWrite: false,
+	depthWrite: true,
 	depthTest: true,
 	side: DoubleSide,
 	vertexShader: `
@@ -81,6 +81,15 @@ watch(TresTubeGeometryRef, (newValue, oldValue) => {
 		originScale = MeshRef.value.scale.clone()
 	}
 })
+const tubePath = ref(new LineCurve3(
+	new Vector3(0, 0, 0),
+	new Vector3(0, props.height, 0)
+));
+watchEffect(() => {
+	if (props.color) {
+		shader.uniforms.uColor.value = new Color(props.color)
+	}
+})
 const { onLoop } = useRenderLoop()
 const timeDelta = { value: 0 }
 onLoop(({ delta }) => {
@@ -98,14 +107,10 @@ onLoop(({ delta }) => {
 defineExpose({
 	MeshRef
 })
-const tubePath = ref(new LineCurve3(
-	new Vector3(0, 0, 0),
-	new Vector3(0, props.height, 0)
-));
 </script>
 
 <template>
-	<TresMesh ref="MeshRef" :position="props.position">
+	<TresMesh ref="MeshRef" :position="props.position" :renderOrder="1001">
 		<TresTubeGeometry ref="TresTubeGeometryRef" :args="[tubePath, 20, props.radius, 220, false]" />
 		<TresShaderMaterial v-bind="shader" />
 	</TresMesh>
