@@ -4,7 +4,7 @@
  * @Autor: Hawk
  * @Date: 2023-10-24 09:49:39
  * @LastEditors: Hawk
- * @LastEditTime: 2023-10-24 10:01:39
+ * @LastEditTime: 2023-10-24 17:52:08
 -->
 <template>
 	<TresCanvas v-bind="state" window-size>
@@ -39,7 +39,7 @@ import { TresCanvas } from '@tresjs/core';
 import { OrbitControls } from '@tresjs/cientos';
 
 import { loadCityFBX } from '../common/loadCity';
-import buildingsModel from "./buildings/buildingsModel.vue";
+import buildingsModel from "./buildings/buildingsModelShader.vue";
 import buildingsLines from "./buildings/buildingsLines.vue";
 
 const state = reactive({

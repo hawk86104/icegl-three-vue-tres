@@ -4,7 +4,7 @@
  * @Autor: Hawk
  * @Date: 2023-10-24 10:36:23
  * @LastEditors: Hawk
- * @LastEditTime: 2023-10-24 11:22:40
+ * @LastEditTime: 2023-10-24 11:46:32
 -->
 <script setup lang="ts">
 import { ref, watch, defineExpose } from 'vue';
@@ -38,6 +38,7 @@ const shader = {
 	color: props.color,
 	opacity: props.opacity,
 	transparent: true,
+	depthWrite: false,
 	depthTest: true,
 	side: DoubleSide,
 	vertexShader: `

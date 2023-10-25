@@ -4,7 +4,7 @@
  * @Autor: Hawk
  * @Date: 2023-10-17 09:35:18
  * @LastEditors: Hawk
- * @LastEditTime: 2023-10-20 17:20:33
+ * @LastEditTime: 2023-10-25 10:13:50
 -->
 <script setup lang="ts">
 import { Color, EdgesGeometry, ShaderMaterial } from 'three';
@@ -38,7 +38,9 @@ if (props.style === 'Wireframe') {
 		color: props.color,
 		linewidth: props.width,
 		opacity: props.opacity,
-		transparent: true
+		transparent: true,
+		depthWrite: true,
+		depthTest: true,
 	})
 	edgesmaterial.resolution.set(window.innerWidth, window.innerHeight);
 	line = new LineSegments2(wideEdges, edgesmaterial);
@@ -74,6 +76,7 @@ if (props.style === 'Wireframe') {
 	line = new LineSegments(geometry, surroundLineMaterial);
 	line.applyMatrix4(props.builds.matrix.clone())
 	line.material.linewidth = props.width
+	line.renderOrder = 1000
 }
 watchEffect(() => {
 	if (props.style === 'Shader') {

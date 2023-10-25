@@ -4,7 +4,7 @@
  * @Autor: Hawk
  * @Date: 2023-10-17 09:35:18
  * @LastEditors: Hawk
- * @LastEditTime: 2023-10-21 16:37:22
+ * @LastEditTime: 2023-10-25 08:57:48
 -->
 <script setup lang="ts">
 import { useRenderLoop } from '@tresjs/core'
@@ -73,7 +73,6 @@ const setEffectMaterial = () => {
 				value: 5
 			}
 			shader.uniforms.uTime = timeDelta
-			//timeDelta
 			const vertex = `
 	varying vec4 vPosition;
 	void main() {

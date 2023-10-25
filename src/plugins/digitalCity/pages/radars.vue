@@ -4,13 +4,13 @@
  * @Autor: Hawk
  * @Date: 2023-10-17 08:30:49
  * @LastEditors: Hawk
- * @LastEditTime: 2023-10-24 10:54:43
+ * @LastEditTime: 2023-10-25 10:16:50
 -->
 <template>
 	<pagesShow>
 		<template v-slot:ability>
-			<radraA ref="radraARef" :position="[10, 30, 0]" @click="changeObject(radraARef)" />
-			<radraB :position="[100, 30, 0]" color="#00ff00" />
+			<radraA ref="radraARef" :position="[10, 60, 0]" @click="changeObject(radraARef)" />
+			<radraB :position="[600, 30, 0]" color="#00ff00" />
 			<!-- <TransformControls v-if="transformRef" :object="transformRef" v-bind="controlsState" /> -->
 		</template>
 	</pagesShow>
