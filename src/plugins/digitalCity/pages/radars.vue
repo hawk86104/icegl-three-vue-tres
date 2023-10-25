@@ -4,14 +4,14 @@
  * @Autor: Hawk
  * @Date: 2023-10-17 08:30:49
  * @LastEditors: Hawk
- * @LastEditTime: 2023-10-25 14:54:00
+ * @LastEditTime: 2023-10-25 15:06:23
 -->
 <template>
 	<pagesShow>
 		<template v-slot:ability>
 			<radraA v-if="typeAradarState.show" ref="radraARef" :color="typeAradarState.color" :radius="typeAradarState.radius"
 				:size="300" :position="[10, 60, 0]" />
-			<radraB v-if="typeBradarState.show" :position="[600, 30, 0]" :color="typeBradarState.color" :height="100"
+			<radraB v-if="typeBradarState.show" :position="[600, 30, 0]" :color="typeBradarState.color" :height="80"
 				:maxRadius="typeBradarState.maxRadius" />
 		</template>
 	</pagesShow>
@@ -49,7 +49,7 @@ f1.addBinding(typeAradarState, 'radius', {
 const typeBradarState = reactive({
 	show: true,
 	color: '#ffff00',
-	maxRadius: 100,
+	maxRadius: 300,
 })
 const f2 = paneControl.addFolder({
 	title: 'B型',

@@ -4,11 +4,11 @@
  * @Autor: Hawk
  * @Date: 2023-10-24 16:33:55
  * @LastEditors: Hawk
- * @LastEditTime: 2023-10-25 11:16:09
+ * @LastEditTime: 2023-10-25 15:48:19
 -->
 <script setup lang="ts">
 import { useRenderLoop } from '@tresjs/core'
-import { ref, watchEffect } from 'vue';
+import { ref, watchEffect, watch } from 'vue';
 import * as THREE from 'three'
 // import { toRaw } from 'vue'
 const props = withDefaults(defineProps<{
@@ -16,10 +16,12 @@ const props = withDefaults(defineProps<{
 	bulidingsColor?: string
 	landColor?: string
 	opacity?: number
+	gradient?: boolean
 }>(), {
 	bulidingsColor: '#d88de2',
 	landColor: '#112233',
-	opacity: 0.9
+	opacity: 0.9,
+	gradient: true
 })
 const timeDelta = ref(0)
 const CITY_UNTRIANGULATED = props.model.city
@@ -63,18 +65,24 @@ const setEffectMaterial = () => {
 				},
 				uLightColor: {
 					value: new THREE.Color('#ffffff')
-				}
+				},
+				uTopColor: {
+					value: new THREE.Color('#ffff00')
+				},
 			},
 		])
 	uniformsConfig.uTime = timeDelta//!! 见上
-	CITY_UNTRIANGULATED.material = new THREE.ShaderMaterial({
-		depthWrite: true,
-		depthTest: true,
-		transparent: true,
-		side: THREE.DoubleSide,//双面渲染
-		lights: true,
-		uniforms: uniformsConfig,
-		vertexShader: `
+	uniformsConfig.uGradient = {
+		value: props.gradient
+	},
+		CITY_UNTRIANGULATED.material = new THREE.ShaderMaterial({
+			depthWrite: true,
+			depthTest: true,
+			transparent: true,
+			side: THREE.DoubleSide,//双面渲染
+			lights: true,
+			uniforms: uniformsConfig,
+			vertexShader: `
 			varying vec4 vPosition;
 			varying vec3 vNormal;
 			void main() {
@@ -86,7 +94,7 @@ const setEffectMaterial = () => {
 				gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
 			}
 `,
-		fragmentShader: `	
+			fragmentShader: `	
 			#if NUM_DIR_LIGHTS > 0
 				struct DirectionalLight {
 						vec3 direction;
@@ -102,12 +110,13 @@ const setEffectMaterial = () => {
 			uniform vec3 uMax; 
 			uniform vec3 uMin; 
 			uniform float uBorderWidth; 
-			uniform vec3 uLightColor;
+			uniform vec3 uLightColor;				//打光颜色
 			uniform float uCircleTime; 
 			vec4 uMax_world;
 			vec4 uMin_world;
 			varying vec3 vNormal;
-			uniform vec3 ambientLightColor;
+			uniform vec3 uTopColor;					//顶部颜色
+			uniform bool uGradient;
 			void main() {
 				// 转世界坐标
 				uMax_world =  modelMatrix * vec4(uMax,1.0);
@@ -125,10 +134,17 @@ const setEffectMaterial = () => {
 					intensity = smoothstep(0.0, 0.1, intensity);
 					vec3 outColor = mix(uColor, uColor*intensity, 0.2);
 					gl_FragColor = vec4(outColor, uOpacity);
+
+					//根据高度计算颜色
+					if(uGradient){
+						float rateHight = (vPosition.y - uMin_world.y) / (uMax_world.y - uMin_world.y); 
+						outColor = mix(outColor, uTopColor, rateHight);
+						gl_FragColor = vec4(outColor, uOpacity);
+					}
 				}
 			}
 `
-	})
+		})
 
 }
 setEffectMaterial()
@@ -148,7 +164,14 @@ watchEffect(() => {
 	if (props.opacity) {
 		CITY_UNTRIANGULATED.material.uniforms.uOpacity.value = props.opacity
 	}
+	// if (props.gradient) {
+	// 	console.log('gradient', props.gradient)
+	// 	CITY_UNTRIANGULATED.material.uniforms.uGradient.value = props.gradient
+	// }
 });
+watch(props, (newValue, oldValue) => {
+	CITY_UNTRIANGULATED.material.uniforms.uGradient.value = newValue.gradient
+})
 </script>
 
 <template>

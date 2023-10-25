@@ -4,14 +4,14 @@
  * @Autor: Hawk
  * @Date: 2023-10-17 08:30:49
  * @LastEditors: Hawk
- * @LastEditTime: 2023-10-25 11:16:27
+ * @LastEditTime: 2023-10-25 15:48:40
 -->
 <template>
 	<pagesShow :showBuildings="false">
 		<template v-slot:ability>
 			<buildingsModel v-if="buildingState.show && showbuildingsLines" :model="CityFBX"
 				:bulidingsColor="buildingState.bulidingsColor" :landColor="buildingState.landColor"
-				:opacity="buildingState.opacity" />
+				:gradient="buildingState.gradient" :opacity="buildingState.opacity" />
 			<buildingsLines v-if="buildingsLinesState.show && showbuildingsLines" :builds="CityFBX.city"
 				:width="buildingsLinesState.width" :color="buildingsLinesState.color" :opacity="buildingsLinesState.opacity" />
 		</template>
@@ -62,6 +62,7 @@ onMounted(() => {
 	});
 	f2.addBinding(buildingState, 'show', { label: '显示' })
 	f2.addBinding(buildingState, 'bulidingsColor', { label: '楼宇颜色' })
+	f2.addBinding(buildingState, 'gradient', { label: '渐变' })
 	f2.addBinding(buildingState, 'opacity', {
 		label: '透明度',
 		min: 0,
@@ -82,7 +83,7 @@ const buildingState = reactive({
 	bulidingsColor: '#d88de2',
 	landColor: '#112233',
 	opacity: 0.9,
-	show: true
+	show: true,
+	gradient: true
 })
-
 </script>

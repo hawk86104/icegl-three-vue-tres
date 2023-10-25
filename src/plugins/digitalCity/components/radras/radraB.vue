@@ -4,7 +4,7 @@
  * @Autor: Hawk
  * @Date: 2023-10-24 10:36:23
  * @LastEditors: Hawk
- * @LastEditTime: 2023-10-25 14:57:39
+ * @LastEditTime: 2023-10-25 15:03:12
 -->
 <script setup lang="ts">
 import { ref, watch, defineExpose, watchEffect } from 'vue';
@@ -27,7 +27,7 @@ const props = withDefaults(
 		color: '#ffff00',
 		opacity: 0.5,
 		period: 2,
-		height: 200,
+		height: 100,
 	},
 )
 
@@ -111,7 +111,7 @@ defineExpose({
 
 <template>
 	<TresMesh ref="MeshRef" :position="props.position" :renderOrder="1001">
-		<TresTubeGeometry ref="TresTubeGeometryRef" :args="[tubePath, 20, props.radius, 220, false]" />
+		<TresTubeGeometry ref="TresTubeGeometryRef" :args="[tubePath, 20, props.radius, 100/*平滑度*/, false]" />
 		<TresShaderMaterial v-bind="shader" />
 	</TresMesh>
 </template>
