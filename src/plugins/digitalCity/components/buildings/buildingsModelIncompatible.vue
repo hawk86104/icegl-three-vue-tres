@@ -4,7 +4,7 @@
  * @Autor: Hawk
  * @Date: 2023-10-17 09:35:18
  * @LastEditors: Hawk
- * @LastEditTime: 2023-10-25 08:57:48
+ * @LastEditTime: 2023-10-25 11:04:12
 -->
 <script setup lang="ts">
 import { useRenderLoop } from '@tresjs/core'
@@ -122,6 +122,7 @@ const { onLoop } = useRenderLoop()
 
 onLoop(({ delta }) => {
 	timeDelta.value += delta;
+	// timeDelta.value = 0.2;
 })
 watchEffect(() => {
 	if (props.bulidingsColor) {

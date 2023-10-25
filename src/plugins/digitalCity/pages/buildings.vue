@@ -4,7 +4,7 @@
  * @Autor: Hawk
  * @Date: 2023-10-17 08:30:49
  * @LastEditors: Hawk
- * @LastEditTime: 2023-10-25 10:09:00
+ * @LastEditTime: 2023-10-25 10:55:31
 -->
 <template>
 	<pagesShow :showBuildings="false">
@@ -23,7 +23,7 @@ import { reactive, onMounted, ref } from 'vue';
 import { Pane } from 'tweakpane';
 
 import { loadCityFBX } from '../common/loadCity';
-import buildingsModel from '../components/buildings/buildingsModelShader.vue';
+import buildingsModel from '../components/buildings/buildingsModelShader.vue'; // buildingsModelIncompatible buildingsModelShader
 import buildingsLines from '../components/buildings/buildingsLines.vue';
 
 import pagesShow from '../components/pagesShow.vue'
@@ -37,7 +37,7 @@ onMounted(() => {
 		title: '建筑效果',
 		expanded: true,
 	});
-	paneControl.containerElem_.style.top = '54px'
+	// paneControl.containerElem_.style.top = '54px'
 
 	const f1 = paneControl.addFolder({
 		title: '线条',

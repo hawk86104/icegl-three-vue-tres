@@ -4,11 +4,11 @@
  * @Autor: Hawk
  * @Date: 2023-10-24 16:33:55
  * @LastEditors: Hawk
- * @LastEditTime: 2023-10-25 10:07:25
+ * @LastEditTime: 2023-10-25 11:03:22
 -->
 <script setup lang="ts">
 import { useRenderLoop } from '@tresjs/core'
-import { watchEffect } from 'vue';
+import { ref, watchEffect } from 'vue';
 import * as THREE from 'three'
 // import { toRaw } from 'vue'
 const props = withDefaults(defineProps<{
@@ -21,7 +21,7 @@ const props = withDefaults(defineProps<{
 	landColor: '#112233',
 	opacity: 0.9
 })
-const timeDelta = { value: 0 }
+const timeDelta = ref(0)
 const CITY_UNTRIANGULATED = props.model.city
 CITY_UNTRIANGULATED.renderOrder = 1001
 const LANDMASS = props.model.land
@@ -44,39 +44,43 @@ const setEffectMaterial = () => {
 	geometry.computeBoundingBox()
 	geometry.computeBoundingSphere()
 	const { max, min } = geometry.boundingBox;
+
 	CITY_UNTRIANGULATED.material.dispose()
 
+	const uniformsConfig =
+		THREE.UniformsUtils.merge([
+			THREE.UniformsLib["lights"], {
+				uMax: { value: max },
+				uMin: { value: min },
+				uBorderWidth: { value: 5 },
+				uCircleTime: { value: 5 },
+				// uTime: timeDelta, !! bug 注意 直接这样赋值再 merge 会无法跟踪值的变化
+				uColor: {
+					value: new THREE.Color(props.bulidingsColor)
+				},
+				uOpacity: {
+					value: props.opacity
+				},
+				uLightColor: {
+					value: new THREE.Color('#ffffff')
+				}
+			},
+		])
+	uniformsConfig.uTime = timeDelta//!! 见上
 	CITY_UNTRIANGULATED.material = new THREE.ShaderMaterial({
 		depthWrite: true,
 		depthTest: true,
 		transparent: true,
 		side: THREE.DoubleSide,//双面渲染
 		lights: true,
-		uniforms:
-			THREE.UniformsUtils.merge([
-				THREE.UniformsLib["lights"], {
-					uMax: { value: max },
-					uMin: { value: min },
-					uBorderWidth: { value: 5 },
-					uCircleTime: { value: 5 },
-					uTime: timeDelta,
-					uColor: {
-						value: new THREE.Color(props.bulidingsColor)
-					},
-					uOpacity: {
-						value: props.opacity
-					},
-					uLightColor: {
-						value: new THREE.Color('#ffffff')
-					}
-				},
-			]),
+		uniforms: uniformsConfig,
 		vertexShader: `
 			varying vec4 vPosition;
 			varying vec3 vNormal;
 			void main() {
 				vec4 worldNormal = modelMatrix * vec4(normal, 0.0);
   			vNormal = normalize(worldNormal.xyz);
+				vNormal = vec3(1.0, 1.0, 1.0);
 
 				vPosition = modelMatrix * vec4(position,1.0);
 				gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
@@ -113,7 +117,7 @@ const setEffectMaterial = () => {
 				float lightOffset = rate * (uMax_world.y - uMin_world.y);
 
 				if (uMin_world.y + lightOffset < vPosition.y && uMin_world.y + lightOffset + uBorderWidth > vPosition.y) {
-					gl_FragColor = vec4(uLightColor, uOpacity);
+					gl_FragColor = vec4(uLightColor, 1.0);
 				} else {
 					// 计算定向光照强度
 					vec3 lightDirection = normalize(directionalLights[0].direction);
