@@ -4,10 +4,10 @@
  * @Autor: Hawk
  * @Date: 2023-10-23 15:48:35
  * @LastEditors: Hawk
- * @LastEditTime: 2023-10-25 11:18:48
+ * @LastEditTime: 2023-10-25 12:44:09
 -->
 <script setup lang="ts">
-import { ref, watch, defineExpose } from 'vue';
+import { ref, watch, defineExpose, watchEffect } from 'vue';
 import { useRenderLoop } from '@tresjs/core'
 import { Matrix4, AdditiveBlending, DoubleSide, Color } from 'three';
 const props = withDefaults(
@@ -23,9 +23,9 @@ const props = withDefaults(
 		position: [0, 0, 0],
 		radius: 240,
 		color: '#ffff00',
-		opacity: 0.5,
+		opacity: 0.9,
 		speed: 300,
-		followWidth: 220,
+		followWidth: 220, //扇面大小
 	},
 )
 
@@ -109,14 +109,41 @@ watch(TresCircleGeometryRef, (newValue, oldValue) => {
 	}
 })
 const MeshRef = ref()
+watchEffect(() => {
+	if (props.color) {
+		shader.uniforms.ncolor.value = new Color(props.color)
+	}
+	if (props.radius) {
+		shader.uniforms.uRadius.value = props.radius
+		// if (MeshRef.value && TresCircleGeometryRef.value) {
+		// 	const rotateMatrix = new Matrix4().makeRotationX(-Math.PI / 180 * 90)
+		// 	TresCircleGeometryRef.value.applyMatrix4(rotateMatrix)
+		// }
+		// if (TresCircleGeometryRef.value) {
+		// 	console.log('props.radius', rotateX.value)
+		// 	rotateX.value += 0.01
+
+		// 	debugger
+		// const rotateMatrix = new Matrix4().makeRotationX(-Math.PI / 180 * 90)
+		// TresCircleGeometryRef.value.applyMatrix4(rotateMatrix)
+		// TresCircleGeometryRef.value.rotateY(-Math.PI / 180 * 90)
+		// if (MeshRef.value.updateMatrix) {
+		// 	console.log('props.updateMatrix')
+		// 	MeshRef.value.updateMatrix()
+		// }
+		// }
+	}
+})
+const rotateX = ref(-Math.PI / 180 * 90)
 defineExpose({
 	MeshRef
 })
+// :rotate-x="rotateX"
 </script>
 
 <template>
 	<TresMesh ref="MeshRef" :position="props.position">
-		<TresCircleGeometry ref="TresCircleGeometryRef" :args="[240, 1000]" />
+		<TresCircleGeometry ref="TresCircleGeometryRef" :args="[300, 1000]" />
 		<TresShaderMaterial v-bind="shader" />
 	</TresMesh>
 </template>
