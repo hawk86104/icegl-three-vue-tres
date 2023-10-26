@@ -4,7 +4,7 @@
  * @Autor: Hawk
  * @Date: 2023-10-16 10:53:09
  * @LastEditors: Hawk
- * @LastEditTime: 2023-10-23 18:55:45
+ * @LastEditTime: 2023-10-26 10:50:18
 -->
 <template>
     <div class="flex h-full">
@@ -28,7 +28,7 @@
                     </template>
                     <template #label>插件中心</template>
                     <f-menu-item value="2.1">
-                        <template #label>数字城市</template>
+                        <template #label>{{ pluginsConfig.digitalCity.title }}</template>
                     </f-menu-item>
                     <f-menu-item value="2.2">
                         <template #label>BBB</template>
@@ -36,20 +36,15 @@
                 </f-sub-menu>
             </f-menu>
         </div>
-        <div class="flex flex-wrap flex-justify-start content-start mt-6 pl-6">
-            <div class="w-80 mr-10 mb-10 overflow-hidden">
-                <FCard header="建筑物" shadow="hover">
-                    <video controls class="w-full max-h-70">
-                        <source :src="publicPath + 'plugins/digitalCity/preview/buildings.mp4'" type="video/mp4"
-                            autoplay="true" loop="true" />
+        <div class="flex flex-wrap flex-justify-start content-start mt-6 pl-6" v-for="(onePlugin, pkey) in pluginsConfig"
+            :key="pkey">
+            <div class="w-80 mr-10 mb-10 overflow-hidden" v-for="(onePreview, okey) in onePlugin.preview" :key="okey">
+                <FCard :header="onePreview.title" shadow="hover">
+                    <video controls class="w-full max-h-70" v-if="onePreview.type === 'video'">
+                        <source :src="publicPath + onePreview.src" type="video/mp4" autoplay="true" loop="true" />
                     </video>
-                    <div class="cursor-pointer" @click="toPage('buildings')">点击查看详情</div>
-                </FCard>
-            </div>
-            <div class="w-80 mr-10 mb-10 overflow-hidden">
-                <FCard header="雷达A" shadow="hover">
-                    <img class="w-full max-h-70" :src="publicPath + 'plugins/digitalCity/preview/radars.png'" />
-                    <div class="cursor-pointer" @click="toPage('radars')">点击查看详情</div>
+                    <img class="w-full max-h-70" v-else :src="publicPath + onePreview.src" />
+                    <div class="cursor-pointer" @click="toPage(pkey, onePreview.name)">点击查看详情</div>
                 </FCard>
             </div>
         </div>
@@ -58,26 +53,26 @@
 
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
-
 import { defineRouteMeta } from '@fesjs/fes';
 import { AppstoreOutlined, PictureOutlined } from '@fesjs/fes-design/icon';
 import { FCard } from '@fesjs/fes-design';
-// eslint-disable-next-line import/no-unresolved
-// import city from 'PLS/digitalCity/pages/city.vue'; //'@/plugins/'
+import { getPluginsConfig } from '../common/utils';
 
 defineRouteMeta({
     name: 'index',
     title: '开源框架展示',
 });
 
+let pluginsConfig = getPluginsConfig();
+
 const goto = (value: string) => {
     console.log(value)
 }
 let publicPath = process.env.BASE_URL
 const router = useRouter()
-const toPage = (value: any) => {
+const toPage = (plugin: string, value: any) => {
     let routeUrl = router.resolve({
-        path: "/digitalCity/" + value,
+        path: `/${plugin}/${value}`
     });
     window.open(routeUrl.href, '_blank');
 }

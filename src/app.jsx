@@ -4,7 +4,7 @@
  * @Autor: Hawk
  * @Date: 2023-10-16 10:53:09
  * @LastEditors: Hawk
- * @LastEditTime: 2023-10-23 15:34:10
+ * @LastEditTime: 2023-10-26 09:13:20
  */
 import { defineRuntimeConfig,useModel } from '@fesjs/fes';
 
@@ -35,6 +35,11 @@ export default defineRuntimeConfig({
     },
     layout: {
         renderCustom: () => <UserCenter />,
+        menus: [
+            {
+                name: 'index',
+            },
+        ],
     },
 });
 
