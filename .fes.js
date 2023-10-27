@@ -1,9 +1,9 @@
 /*
  * @Description:
  * @Version: 1.668
- * @Autor: Hawk
+ * @Autor: 地虎降天龙
  * @Date: 2023-10-16 10:53:09
- * @LastEditors: Hawk
+ * @LastEditors: 地虎降天龙
  * @LastEditTime: 2023-10-26 09:13:11
  */
 // import { resolve } from 'path';
@@ -36,7 +36,7 @@ export default defineBuildConfig({
             ['1', '有效的'],
         ],
     },
-    //add by hawk
+    //add by 地虎降天龙
     viteVuePlugin: {
         ...templateCompilerOptions,
     },

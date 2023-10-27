@@ -8,7 +8,7 @@ module.exports = {
     env: {
         jest: true,
     },
-    //add by hawk
+    //add by 地虎降天龙
     // settings: {
     //     'import/resolver': {
     //         alias: {

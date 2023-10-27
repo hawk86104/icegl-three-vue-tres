@@ -1,10 +1,10 @@
 /*
  * @Description: 
  * @Version: 1.668
- * @Autor: Hawk
+ * @Autor: 地虎降天龙
  * @Date: 2023-10-16 10:53:09
- * @LastEditors: Hawk
- * @LastEditTime: 2023-10-26 09:13:20
+ * @LastEditors: 地虎降天龙
+ * @LastEditTime: 2023-10-27 09:17:45
  */
 import { defineRuntimeConfig,useModel } from '@fesjs/fes';
 
@@ -12,7 +12,7 @@ import { FMenu } from '@fesjs/fes-design';
 import PageLoading from '@/components/pageLoading.vue';
 import UserCenter from '@/components/userCenter.vue';
 
-// add buy hawk
+// add buy 地虎降天龙
 import 'uno.css';
 
 export default defineRuntimeConfig({

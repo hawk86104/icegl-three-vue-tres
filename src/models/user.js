@@ -1,9 +1,9 @@
 /*
  * @Description:
  * @Version: 1.668
- * @Autor: Hawk
+ * @Autor: 地虎降天龙
  * @Date: 2023-10-21 15:34:19
- * @LastEditors: Hawk
+ * @LastEditors: 地虎降天龙
  * @LastEditTime: 2023-10-23 09:51:35
  */
 import { reactive } from 'vue';
@@ -15,7 +15,7 @@ export default function userModel () {
 	const signin = () => {
 		// todo
 		const { setRole } = access;
-		user.userName = 'hawk';
+		user.userName = '地虎降天龙';
 		setRole('admin');
 	};
 
