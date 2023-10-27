@@ -1,3 +1,11 @@
+/*
+ * @Description: 
+ * @Version: 1.668
+ * @Autor: 地虎降天龙
+ * @Date: 2023-10-16 10:53:09
+ * @LastEditors: 地虎降天龙
+ * @LastEditTime: 2023-10-27 15:35:18
+ */
 // 放工具函数
 const findStringBetween = (str) => {
 	const regex = /\/([^/]+)(?=\/[^/]*$)/;
@@ -11,7 +19,6 @@ export const getPluginsConfig = () => {
 	// 获得插件列表 根据插件目录
 	const modulePaths = import.meta.globEager('PLS/**/config.js');
 	const config = {};
-	// console.log(Object.keys(modulePaths))
 	for (const path of Object.keys(modulePaths)) {
 		const name = findStringBetween(path)
 		if (!name) {

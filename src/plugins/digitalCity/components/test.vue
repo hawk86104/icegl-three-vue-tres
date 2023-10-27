@@ -4,17 +4,30 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-10-17 09:35:18
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-10-20 09:49:59
+ * @LastEditTime: 2023-10-27 17:38:35
 -->
 <script setup lang="ts">
-import { onMounted, onUnmounted, inject } from 'vue'
-
+import { onMounted, onUnmounted, inject, defineExpose, ref } from 'vue'
+const props = withDefaults(
+	defineProps<{
+		showBuildings?: boolean
+		autoRotate?: boolean
+	}>(),
+	{
+		showBuildings: true,
+		autoRotate: true
+	},
+)
 onUnmounted(() => {
 
 })
 onMounted(() => {
-	debugger
-	const showbuildingsLines = inject('showbuildingsLines')
+	// debugger
+	// const showbuildingsLines = inject('showbuildingsLines')
+})
+// const count = ref(123456)
+defineExpose({
+	props
 })
 </script>
 

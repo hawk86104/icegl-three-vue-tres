@@ -4,9 +4,10 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-10-17 08:30:49
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-10-25 15:06:23
+ * @LastEditTime: 2023-10-27 16:24:10
 -->
 <template>
+	<loading></loading>
 	<pagesShow>
 		<template v-slot:ability>
 			<radraA v-if="typeAradarState.show" ref="radraARef" :color="typeAradarState.color" :radius="typeAradarState.radius"
@@ -23,6 +24,7 @@ import { Pane } from 'tweakpane';
 import pagesShow from '../components/pagesShow.vue'
 import radraA from '../components/radras/radraA.vue';
 import radraB from '../components/radras/radraB.vue';
+import loading from '../components/loading.vue'
 
 const radraARef = ref()
 

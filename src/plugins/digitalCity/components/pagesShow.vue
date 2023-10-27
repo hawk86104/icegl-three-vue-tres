@@ -4,11 +4,11 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-10-24 09:49:39
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-10-24 17:52:08
+ * @LastEditTime: 2023-10-27 18:18:02
 -->
 <template>
 	<TresCanvas v-bind="state" window-size>
-		<TresPerspectiveCamera :position="[600, 750, -1221]" :fov="45" :near="1" :far="10000" />
+		<TresPerspectiveCamera ref="perspectiveCameraRef" :position="[600, 750, -1221]" :fov="45" :near="1" :far="10000" />
 		<OrbitControls v-bind="controlsState" />
 		<TresAmbientLight color="#ffffff" />
 		<TresDirectionalLight :position="[100, 100, 0]" :intensity="0.5" color="#ffffff" />
@@ -27,15 +27,17 @@
 const props = withDefaults(
 	defineProps<{
 		showBuildings?: boolean
+		autoRotate?: boolean
 	}>(),
 	{
-		showBuildings: true
+		showBuildings: true,
+		autoRotate: true
 	},
 )
 
 import { SRGBColorSpace, BasicShadowMap, NoToneMapping } from 'three';
-import { reactive } from 'vue';
-import { TresCanvas } from '@tresjs/core';
+import { reactive, ref } from 'vue';
+import { TresCanvas, } from '@tresjs/core'; //useRenderLoop
 import { OrbitControls } from '@tresjs/cientos';
 
 import { loadCityFBX } from '../common/loadCity';
@@ -51,11 +53,18 @@ const state = reactive({
 	outputColorSpace: SRGBColorSpace,
 	toneMapping: NoToneMapping,
 });
-const controlsState = reactive({ autoRotate: true, enableDamping: true });
+const controlsState = reactive({ autoRotate: props.autoRotate, enableDamping: true });
 
 let cityFBX = null
 if (props.showBuildings) {
 	cityFBX = await loadCityFBX()
 }
 
+const perspectiveCameraRef = ref()
+// const { onLoop } = useRenderLoop()
+// onLoop(({ delta }) => {
+// 	if (perspectiveCameraRef.value) {
+// 		console.log(perspectiveCameraRef.value.position)
+// 	}
+// })
 </script>
