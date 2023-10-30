@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-10-24 16:33:55
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-10-27 18:24:43
+ * @LastEditTime: 2023-10-30 17:38:59
 -->
 <script setup lang="ts">
 import { useRenderLoop } from '@tresjs/core'
@@ -46,7 +46,9 @@ const setEffectMaterial = () => {
 	geometry.computeBoundingBox()
 	geometry.computeBoundingSphere()
 	const { max, min } = geometry.boundingBox;
-
+	// CITY_UNTRIANGULATED.material.transparent = true
+	// debugger
+	// return
 	CITY_UNTRIANGULATED.material.dispose()
 
 	const uniformsConfig =
@@ -74,15 +76,15 @@ const setEffectMaterial = () => {
 	uniformsConfig.uTime = timeDelta//!! 见上
 	uniformsConfig.uGradient = {
 		value: props.gradient
-	},
-		CITY_UNTRIANGULATED.material = new THREE.ShaderMaterial({
-			depthWrite: true,
-			depthTest: true,
-			transparent: true,
-			side: THREE.DoubleSide,//双面渲染
-			lights: true,
-			uniforms: uniformsConfig,
-			vertexShader: `
+	}
+	CITY_UNTRIANGULATED.material = new THREE.ShaderMaterial({
+		depthWrite: true,
+		depthTest: true,
+		transparent: true,			//如果材质透明，那么楼宇就被渲染到后面了
+		side: THREE.DoubleSide,//双面渲染
+		lights: true,
+		uniforms: uniformsConfig,
+		vertexShader: `
 			varying vec4 vPosition;
 			varying vec3 vNormal;
 			void main() {
@@ -94,7 +96,7 @@ const setEffectMaterial = () => {
 				gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
 			}
 `,
-			fragmentShader: `	
+		fragmentShader: `	
 			#if NUM_DIR_LIGHTS > 0
 				struct DirectionalLight {
 						vec3 direction;
@@ -144,8 +146,7 @@ const setEffectMaterial = () => {
 				}
 			}
 `
-		})
-
+	})
 }
 setEffectMaterial()
 
@@ -155,6 +156,7 @@ onLoop(({ delta }) => {
 	timeDelta.value += delta;
 })
 watchEffect(() => {
+	// return
 	if (props.bulidingsColor) {
 		CITY_UNTRIANGULATED.material.uniforms.uColor.value.setStyle(props.bulidingsColor)
 	}

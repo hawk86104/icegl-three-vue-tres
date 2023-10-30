@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-10-24 09:49:39
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-10-27 18:18:02
+ * @LastEditTime: 2023-10-30 17:17:41
 -->
 <template>
 	<TresCanvas v-bind="state" window-size>

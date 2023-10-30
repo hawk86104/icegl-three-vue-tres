@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-10-27 16:43:05
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-10-30 11:51:31
+ * @LastEditTime: 2023-10-30 17:43:33
 -->
 <script setup lang="ts">
 import { reactive, ref, watchEffect, watch } from 'vue'
@@ -74,7 +74,7 @@ watch(
 
 <template>
 	<Precipitation ref="precipitationRef" :position="[0, props.areaY / 2, 0]" :speed="props.speed" :color="props.color"
-		:area="[props.areaX, props.areaY, props.areaZ]" :count="props.count" :depthWrite="false"
+		:alphaTest="0.3" :area="[props.areaX, props.areaY, props.areaZ]" :count="props.count" :depthWrite="true"
 		:randomness="props.randomness" :size="props.size" :opacity="1.0" :map="texture.value.map"
 		:alphaMap="texture.value.map" />
 </template>
