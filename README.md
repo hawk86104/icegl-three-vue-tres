@@ -4,11 +4,10 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-10-16 10:53:09
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-10-31 11:10:26
+ * @LastEditTime: 2023-10-31 11:24:00
 -->
-🧊icegl-three-vue-tres是一款让你的三维可视化项目快速落地的开源开发框架
-
-加入我们共同学习webGL：[ICE图形学社区](https://www.icegl.cn)
+# 🧊🧊🧊🧊🧊icegl-three-vue-tres🧊🧊🧊🧊🧊
+# 🎉🎊 一款让三维可视化项目快速落地的开源开发框架 🎊🎉
 
 # 生态 `@ThreeJS-@Vue3.x-@TresJS`
 > icegl出品，永久开源且免费商用
