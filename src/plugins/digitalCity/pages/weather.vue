@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-10-17 08:30:49
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-10-31 16:56:57
+ * @LastEditTime: 2023-10-31 17:43:39
 -->
 <template>
 	<loading :hasFinishLoading="hasFinishLoading" :progress="progress"></loading>
@@ -27,7 +27,15 @@ import pagesShow from '../components/pagesShow.vue'
 import precipitation from '../components/weather/precipitation.vue';
 // import smokes from '../components/weather/smokes.vue';
 
-const { hasFinishLoading, progress } = await useProgress()
+// const { hasFinishLoading, progress } = await useProgress()
+const hasFinishLoading = ref(false)
+const progress = ref(0)
+setInterval(() => {
+	if (progress.value++ === 99) {
+		progress.value = 99
+		hasFinishLoading.value = true
+	}
+}, 10)
 
 const pagesShowRef = ref()
 watchEffect(() => {

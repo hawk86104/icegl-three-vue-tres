@@ -4,11 +4,11 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-10-31 15:37:26
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-10-31 17:04:46
+ * @LastEditTime: 2023-10-31 17:42:52
 -->
 <template>
-	<Transition name="fade-overlay" enter-active-class="opacity-1 transition-opacity"
-		leave-active-class="opacity-0 transition-opacity duration-1000">
+	<Transition name="fade-overlay" enter-active-class="opacity-1 transition-opacity duration-0"
+		leave-active-class="opacity-0 transition-opacity duration-2000">
 		<div v-show="!hasFinishLoading" class="w-full h-screen flex justify-center items-center z-999" ref="vantaRef">
 			<div class="text-white text-10 w-full text-center p-10 select-none" style="background-color: #0000007a;">
 				载入中 · · · {{ progress }} %
@@ -34,7 +34,6 @@ const props = withDefaults(
 		progress: 0,
 	},
 )
-debugger
 const vantaRef = ref()
 let vantaEffect = null as any
 const initVantaEffect = () => {
@@ -47,8 +46,10 @@ const initVantaEffect = () => {
 }
 const destroyVantaEffect = () => {
 	if (vantaEffect) {
-		vantaEffect.destroy()
-		vantaEffect = null
+		setTimeout(() => {
+			vantaEffect.destroy()
+			vantaEffect = null
+		}, 2000)
 	}
 }
 onMounted(() => {
@@ -66,6 +67,12 @@ watch(
 		} else {
 			initVantaEffect()
 		}
+	})
+watch(
+	() => props.progress,
+	async (nv, ov) => {
+		console.log('progress:', nv, ov)
+
 	})
 </script>
 <style lang="less"></style>

@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-10-24 09:49:39
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-10-31 16:29:37
+ * @LastEditTime: 2023-10-31 17:32:39
 -->
 <template>
 	<TresCanvas v-bind="state" window-size>
@@ -68,3 +68,9 @@ const perspectiveCameraRef = ref()
 // 	}
 // })
 </script>
+<style lang="less">
+// #app {
+// 	width: 100%;
+// 	height: 100%;
+// }
+</style>
