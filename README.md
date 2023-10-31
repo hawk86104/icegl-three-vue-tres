@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-10-16 10:53:09
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-10-31 11:01:29
+ * @LastEditTime: 2023-10-31 11:10:26
 -->
 🧊icegl-three-vue-tres是一款让你的三维可视化项目快速落地的开源开发框架
 
@@ -71,3 +71,13 @@ ThreeJS大名鼎鼎的基于浏览器渲染，JavaScript语言的3D库。
 <p align = "left">    
 <img src="https://icegl-1314935952.cos.ap-beijing.myqcloud.com/uploads/20230731/17d59bab46815cce1f4f1e09dcbb6ccc.png" width="300" />
 </p>
+
+# 版权信息
+
+本项目遵循Apache2开源协议发布，并提供永久免费使用以及商用。
+
+本项目包含的第三方源码和二进制文件之版权信息另行标注。
+
+版权所有Copyright © 2022-2025 by 🧊Ice.gl (https://www.icegl.cn)
+
+All rights reserved。
