@@ -4,10 +4,10 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-10-17 08:30:49
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-10-30 11:46:11
+ * @LastEditTime: 2023-10-31 16:56:57
 -->
 <template>
-	<loading></loading>
+	<loading :hasFinishLoading="hasFinishLoading" :progress="progress"></loading>
 	<pagesShow ref="pagesShowRef" :autoRotate="false">
 		<template v-slot:ability>
 			<Suspense>
@@ -20,10 +20,14 @@
 <script setup lang="ts">
 import { ref, watchEffect, reactive, toRefs } from 'vue';
 import { Pane } from 'tweakpane';
+import { useProgress } from '@tresjs/cientos';
+// import loading from '../components/loading.vue'
+import loading from 'PLS/vantaJS/pages/loadingA.vue'
 import pagesShow from '../components/pagesShow.vue'
-import loading from '../components/loading.vue'
 import precipitation from '../components/weather/precipitation.vue';
 // import smokes from '../components/weather/smokes.vue';
+
+const { hasFinishLoading, progress } = await useProgress()
 
 const pagesShowRef = ref()
 watchEffect(() => {

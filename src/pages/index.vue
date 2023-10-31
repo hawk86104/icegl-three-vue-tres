@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-10-16 10:53:09
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-10-26 10:50:18
+ * @LastEditTime: 2023-10-31 16:23:29
 -->
 <template>
     <div class="flex h-full">
@@ -31,21 +31,27 @@
                         <template #label>{{ pluginsConfig.digitalCity.title }}</template>
                     </f-menu-item>
                     <f-menu-item value="2.2">
-                        <template #label>BBB</template>
+                        <template #label>{{ pluginsConfig.vantaJS.title }}</template>
                     </f-menu-item>
                 </f-sub-menu>
             </f-menu>
         </div>
-        <div class="flex flex-wrap flex-justify-start content-start mt-6 pl-6" v-for="(onePlugin, pkey) in pluginsConfig"
-            :key="pkey">
-            <div class="w-80 mr-10 mb-10 overflow-hidden" v-for="(onePreview, okey) in onePlugin.preview" :key="okey">
-                <FCard :header="onePreview.title" shadow="hover">
-                    <video controls class="w-full max-h-70" v-if="onePreview.type === 'video'">
-                        <source :src="publicPath + onePreview.src" type="video/mp4" autoplay="true" loop="true" />
-                    </video>
-                    <img class="w-full max-h-70" v-else :src="publicPath + onePreview.src" />
-                    <div class="cursor-pointer" @click="toPage(pkey, onePreview.name)">点击查看详情</div>
-                </FCard>
+        <div class="w-full">
+            <div style="background-color: #f1f1f2;" v-for="(onePlugin, pkey) in pluginsConfig" :key="pkey">
+                <FDivider titlePlacement="left">{{ onePlugin.title }}</FDivider>
+                <FText class="ml-13" tag="i" size="small">{{ onePlugin.intro }}</FText>
+                <div class="flex flex-wrap flex-justify-start content-start mt-6 pl-6">
+                    <div class="w-80 mr-10 mb-10 overflow-hidden" v-for="(onePreview, okey) in onePlugin.preview"
+                        :key="okey">
+                        <FCard :header="onePreview.title" shadow="hover">
+                            <video controls class="w-full max-h-70" v-if="onePreview.type === 'video'">
+                                <source :src="publicPath + onePreview.src" type="video/mp4" autoplay="true" loop="true" />
+                            </video>
+                            <img class="w-full max-h-70" v-else :src="publicPath + onePreview.src" />
+                            <div class="cursor-pointer" @click="toPage(pkey, onePreview.name)">点击查看详情</div>
+                        </FCard>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -55,7 +61,7 @@
 import { useRouter } from 'vue-router'
 import { defineRouteMeta } from '@fesjs/fes';
 import { AppstoreOutlined, PictureOutlined } from '@fesjs/fes-design/icon';
-import { FCard } from '@fesjs/fes-design';
+import { FCard, FDivider, FText } from '@fesjs/fes-design';
 import { getPluginsConfig } from '../common/utils';
 
 defineRouteMeta({
