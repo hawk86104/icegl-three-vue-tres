@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-10-16 10:53:09
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-10-31 16:23:29
+ * @LastEditTime: 2023-11-01 12:55:50
 -->
 <template>
     <div class="flex h-full">
@@ -31,6 +31,9 @@
                         <template #label>{{ pluginsConfig.digitalCity.title }}</template>
                     </f-menu-item>
                     <f-menu-item value="2.2">
+                        <template #label>{{ pluginsConfig.earthSample.title }}</template>
+                    </f-menu-item>
+                    <f-menu-item value="2.3">
                         <template #label>{{ pluginsConfig.vantaJS.title }}</template>
                     </f-menu-item>
                 </f-sub-menu>
@@ -58,8 +61,7 @@
 </template>
 
 <script setup lang="ts">
-import { useRouter } from 'vue-router'
-import { defineRouteMeta } from '@fesjs/fes';
+import { defineRouteMeta, useRouter } from '@fesjs/fes'; // 一大坑，fesJS的路由被他自己封装了
 import { AppstoreOutlined, PictureOutlined } from '@fesjs/fes-design/icon';
 import { FCard, FDivider, FText } from '@fesjs/fes-design';
 import { getPluginsConfig } from '../common/utils';
@@ -69,13 +71,15 @@ defineRouteMeta({
     title: '开源框架展示',
 });
 
+const router = useRouter()  // 一大坑，fesJS的路由被他自己封装了
+
 let pluginsConfig = getPluginsConfig();
 
 const goto = (value: string) => {
     console.log(value)
 }
 let publicPath = process.env.BASE_URL
-const router = useRouter()
+
 const toPage = (plugin: string, value: any) => {
     let routeUrl = router.resolve({
         path: `/${plugin}/${value}`

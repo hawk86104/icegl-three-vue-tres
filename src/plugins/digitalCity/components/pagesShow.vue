@@ -4,9 +4,10 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-10-24 09:49:39
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-10-31 17:32:39
+ * @LastEditTime: 2023-11-01 13:04:39
 -->
 <template>
+	<!-- <loading></loading> -->
 	<TresCanvas v-bind="state" window-size>
 		<TresPerspectiveCamera ref="perspectiveCameraRef" :position="[600, 750, -1221]" :fov="45" :near="1" :far="10000" />
 		<OrbitControls v-bind="controlsState" />
@@ -43,6 +44,8 @@ import { OrbitControls } from '@tresjs/cientos';
 import { loadCityFBX } from '../common/loadCity';
 import buildingsModel from "./buildings/buildingsModelShader.vue";
 import buildingsLines from "./buildings/buildingsLines.vue";
+
+// import loading from './loading.vue'
 
 const state = reactive({
 	clearColor: '#000000',

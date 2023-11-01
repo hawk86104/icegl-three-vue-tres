@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-10-27 16:19:37
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-10-27 16:28:42
+ * @LastEditTime: 2023-11-01 13:07:23
 -->
 <template>
 	<Transition name="fade-overlay" enter-active-class="opacity-1 transition-opacity duration-100"
@@ -21,10 +21,16 @@
 
 
 <script setup lang="ts">
+import { watch } from "vue"
 import { useProgress } from '@tresjs/cientos';
 import { LoadingOutlined } from '@fesjs/fes-design/icon';
 
 const { hasFinishLoading, progress } = await useProgress()
 // const hasFinishLoading = false
 // const progress = 80
+watch(
+	() => progress.value,
+	async (nv, ov) => {
+		console.log(nv, ov)
+	})
 </script>
