@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-01 09:57:06
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-11-01 09:59:10
+ * @LastEditTime: 2023-11-02 09:35:02
 -->
 <script setup lang="ts">
 import { onMounted, getCurrentInstance } from 'vue'
@@ -13,7 +13,7 @@ import { AdditiveBlending, DoubleSide, Vector3 } from 'three';
 import { gsap } from "gsap";
 
 const pTexture = await useTexture(
-	['./plugins/earthSample/image/light_column.png', './plugins/earthSample/image/label.png']
+	['./plugins/earthSample/image/earthA/light_column.png', './plugins/earthSample/image/earthA/label.png']
 )
 
 const { onLoop } = useRenderLoop()

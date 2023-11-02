@@ -4,18 +4,18 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-10-31 15:37:26
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-10-31 17:42:52
+ * @LastEditTime: 2023-11-02 09:19:20
 -->
 <template>
-	<Transition name="fade-overlay" enter-active-class="opacity-1 transition-opacity duration-0"
-		leave-active-class="opacity-0 transition-opacity duration-2000">
-		<div v-show="!hasFinishLoading" class="w-full h-screen flex justify-center items-center z-999" ref="vantaRef">
-			<div class="text-white text-10 w-full text-center p-10 select-none" style="background-color: #0000007a;">
-				载入中 · · · {{ progress }} %
-				<LoadingOutlined class="text-rose" />
-			</div>
+	<!-- <Transition name="fade-overlay" enter-active-class="opacity-1 transition-opacity duration-0"
+		leave-active-class="opacity-0 transition-opacity duration-2000"> -->
+	<div v-show="!hasFinishLoading" class="w-full h-screen flex justify-center items-center z-999 bgc" ref="vantaRef">
+		<div class="text-white text-10 w-full text-center p-10 select-none" style="background-color: #0000007a;">
+			载入中 · · · {{ progress }} %
+			<LoadingOutlined class="text-rose" />
 		</div>
-	</Transition>
+	</div>
+	<!-- </Transition> -->
 </template>
 
 <script setup lang="ts">
@@ -75,4 +75,8 @@ watch(
 
 	})
 </script>
-<style lang="less"></style>
+<style lang="less" scope>
+.bgc {
+	background-color: #23153c;
+}
+</style>

@@ -15,6 +15,7 @@ export default {
 	"state": "active",
 	"require": [],
 	"preview": [
-		{ "src": "plugins/earthSample/preview/earthA.png", "type": "img", "name": "earthA", "title": "样式A" }
+		{ "src": "plugins/earthSample/preview/earthA.png", "type": "img", "name": "earthA", "title": "样式A" },
+		{ "src": "plugins/earthSample/preview/earthA.png", "type": "img", "name": "menuA", "title": "菜单A" }
 	]
 }

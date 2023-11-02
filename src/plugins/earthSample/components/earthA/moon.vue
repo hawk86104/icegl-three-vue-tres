@@ -12,7 +12,7 @@ import { useRenderLoop, useTexture } from '@tresjs/core'
 import { AdditiveBlending, DoubleSide } from 'three';
 
 const pTexture = await useTexture(
-	['./plugins/earthSample/image/moon.jpg', './plugins/earthSample/image/moon_ring.png']
+	['./plugins/earthSample/image/earthA/moon.jpg', './plugins/earthSample/image/earthA/moon_ring.png']
 )
 
 const { onLoop } = useRenderLoop()

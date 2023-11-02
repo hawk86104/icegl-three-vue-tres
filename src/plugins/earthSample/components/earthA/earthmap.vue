@@ -12,7 +12,7 @@ import { useRenderLoop, useTexture } from '@tresjs/core'
 import { AdditiveBlending } from 'three';
 
 const pTexture = await useTexture(
-	['./plugins/earthSample/image/map.jpg', './plugins/earthSample/image/earth.jpg', './plugins/earthSample/image/glow.png', './plugins/earthSample/image/innerGlow.png']
+	['./plugins/earthSample/image/earthA/map.jpg', './plugins/earthSample/image/earthA/earth.jpg', './plugins/earthSample/image/earthA/glow.png', './plugins/earthSample/image/earthA/innerGlow.png']
 )
 const { onLoop } = useRenderLoop()
 onLoop(({ delta }) => {
