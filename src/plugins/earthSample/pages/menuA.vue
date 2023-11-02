@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-02 09:30:20
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-11-02 17:06:29
+ * @LastEditTime: 2023-11-02 20:13:24
 -->
 <template>
 	<div class="bg-img flex justify-center flex-items-center">
@@ -13,6 +13,7 @@
 			<Suspense>
 				<circleo />
 			</Suspense>
+			<div class="css_globe_halo1"></div>
 			<Suspense>
 				<earth />
 			</Suspense>
@@ -35,5 +36,16 @@ import earth from '../components/menuA/earth.vue'
 	background-size: cover;
 	top: 0;
 	width: 100%;
+}
+
+.css_globe_halo1 {
+	position: absolute;
+	background: url("plugins/earthSample/image/menuA/css_globe_halo1.png");
+	background-size: cover;
+	filter: hue-rotate(1deg);
+	width: 100%;
+	height: 100%;
+	// margin-left: -10px;
+	// margin-top: 3px;
 }
 </style>

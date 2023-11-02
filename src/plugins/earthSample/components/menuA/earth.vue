@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-02 16:25:00
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-11-02 18:03:57
+ * @LastEditTime: 2023-11-02 18:10:04
 -->
 <script setup>
 import { watchEffect, ref } from 'vue'
@@ -40,7 +40,7 @@ watchEffect(() => {
 	<div class="w-100 h-100">
 		<TresCanvas ref="TresCanvasRef" v-bind="gl">
 			<TresPerspectiveCamera :position="[0, 0, 365]" :fov="45" :near="1" :far="10000" />
-			<OrbitControls :autoRotate="false" :autoRotateSpeed="2" />
+			<OrbitControls :autoRotate="true" :autoRotateSpeed="2" />
 			<!-- <TresMesh :position="[0, 0, 0]">
 				<TresSphereGeometry :args="[150, 20, 20]" />
 				<TresMeshBasicMaterial color="#03d9de" :wireframe="true" :opacity="0.8" />

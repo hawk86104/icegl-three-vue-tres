@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-02 17:32:16
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-11-02 18:03:26
+ * @LastEditTime: 2023-11-02 20:08:15
  */
 import * as THREE from 'three';
 import { countryPositionList } from '../data/postions'
@@ -24,7 +24,7 @@ const getVector3 = (e) => {
 }
 const addMeshes = (e, t) => {
 	const kb = new THREE.Object3D
-	const colorList = ["#ff0000", "#00ff00"]
+	const colorList = ["#66ffff", "#66aaaa"]
 	const n = colorList[t]
 	const i = new THREE.CircleGeometry(3, 6)
 	const r = new THREE.CircleGeometry(2, 6)

@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-01 09:57:06
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-11-02 18:05:58
+ * @LastEditTime: 2023-11-02 20:16:28
 -->
 <script setup lang="ts">
 import { watchEffect, ref } from 'vue'
@@ -36,7 +36,7 @@ watchEffect(() => {
 		TresCanvasRef.value.context.renderer.value.setPixelRatio((window.devicePixelRatio) ? window.devicePixelRatio : 1);
 		TresCanvasRef.value.context.renderer.value.autoClear = true;
 		TresCanvasRef.value.context.renderer.value.autoClearColor = new Color(1, 0, 0, 0);
-		// TresCanvasRef.value.context.renderer.value.setClearColor(0x000000, 0.0);
+		TresCanvasRef.value.context.renderer.value.setClearColor(0x000000, 0.0);
 
 		const scene = TresCanvasRef.value.context.scene.value
 		const camera = TresCanvasRef.value.context.camera.value
