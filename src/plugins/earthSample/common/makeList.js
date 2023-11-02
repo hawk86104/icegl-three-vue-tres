@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-02 17:32:16
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-11-02 20:08:15
+ * @LastEditTime: 2023-11-02 21:42:08
  */
 import * as THREE from 'three';
 import { countryPositionList } from '../data/postions'
@@ -86,4 +86,146 @@ export const initCountryPosition = (scene) => {
 		scene.add(addMeshes(a, o))
 		scene.add(addlightMeshes(a))
 	}
+}
+
+const Xb = (e, t, Eb, Lb) => {
+	const n = Math.trunc(Lb.width * e)
+		, i = Math.trunc(Lb.height * t);
+	return Eb.data[4 * (i * Eb.width + n)] === 0
+}
+const addPoints = (scene, Eb, Lb) => {
+	const e = [], t = [], n = []
+	for (let i = 0; i < 2; i++) {
+		e[i] = {
+			positions: []
+		}
+		n[i] = {
+			sizes: []
+		};
+		const r = new THREE.PointsMaterial;
+		r.size = 5
+		r.color = new THREE.Color(10092543)
+		r.map = new THREE.TextureLoader().load('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAQAAADZc7J/AAAAg0lEQVR4Ae3UVwHEIBBF0XEQCZEUCUhASiREAhKQggQk3O19gbe9Hr4p07D39UeHIxDXK+DoTIcjcyzjTMNEyaTdXtN6BQMtQz11iZZUSScehbcSAopgJYje+YCMIlsJEUV8YBk7Mi25NpfKG7w8i/o86q/wt34oOnpGEhuJkd7e1t8MNqiNF6OGKt4AAAAASUVORK5CYII=')
+		r.depthWrite = false
+		r.transparent = true
+		r.opacity = .3
+		r.side = THREE.FrontSide
+		r.blending = THREE.AdditiveBlending;
+		const a = i / 2;
+		r.t_ = a * Math.PI * 2
+		r.speed_ = .05
+		r.min_ = .2 * Math.random() + .5
+		r.delta_ = .1 * Math.random() + .1
+		r.opacity_coef_ = 1
+		t.push(r)
+	}
+	const o = new THREE.Spherical;
+	o.radius = 100;
+	for (let s = 200, l = 0; l < s; l++) {
+		for (let c = new THREE.Vector3, u = s * (1 - Math.sin(l / s * Math.PI)) / s + .5, h = 0; h < s; h += u) {
+			const d = h / s
+				, f = l / s
+				, p = Math.floor(2 * Math.random())
+				, v = e[p]
+				, m = n[p];
+			if (Xb(d, f, Eb, Lb)) {
+				o.theta = d * Math.PI * 2 - Math.PI / 2
+				o.phi = f * Math.PI
+				c.setFromSpherical(o)
+				v.positions.push(c.x)
+				v.positions.push(c.y)
+				v.positions.push(c.z)
+				if (h % 3 === 0) {
+					m.sizes.push(6)
+				}
+			}
+		}
+	}
+	const Ob = new THREE.Object3D
+	for (let g = 0; g < e.length; g++) {
+		const _ = new THREE.BufferGeometry()
+		const y = e[g]
+		const b = n[g]
+		const x = new Float32Array(y.positions.length)
+		const w = new Float32Array(b.sizes.length)
+		for (let M = 0; M < y.positions.length; M++)
+			x[M] = y.positions[M];
+		for (let S = 0; S < b.sizes.length; S++)
+			w[S] = b.sizes[S];
+		_.setAttribute("position", new THREE.BufferAttribute(x, 3))
+		_.setAttribute("size", new THREE.BufferAttribute(w, 1))
+		_.computeBoundingSphere();
+		const T = new THREE.Points(_, t[g])
+		Ob.add(T)
+	}
+	Ob.name = 'pointsEearth'
+	scene.add(Ob)
+}
+export const addImgEarth = (scene) => {
+	const Lb = document.createElement("img")
+	Lb.src = `${process.env.BASE_URL}plugins/earthSample/image/menuA/earth.jpg`
+	Lb.onload = function () {
+		const t = document.createElement("canvas")
+		const n = t.getContext("2d")
+		t.width = Lb.width
+		t.height = Lb.height
+		n.drawImage(Lb, 0, 0, Lb.width, Lb.height)
+		const Eb = n.getImageData(0, 0, Lb.width, Lb.height)
+		addPoints(scene, Eb, Lb)
+	}
+}
+
+export const XRayearth = (scene) => {
+	const XRayMaterial = function (e) {
+		const t = {
+			uTex: {
+				type: "t",
+				value: e.map || new THREE.Texture
+			},
+			offsetRepeat: {
+				value: new THREE.Vector4(0, 0, 1, 1)
+			},
+			alphaProportion: {
+				type: "1f",
+				value: e.alphaProportion || .5
+			},
+			diffuse: {
+				value: e.color || new THREE.Color(16777215)
+			},
+			opacity: {
+				value: e.opacity || 1
+			},
+			gridOffset: {
+				value: 0
+			}
+		};
+		return new THREE.ShaderMaterial({
+			uniforms: t,
+			vertexShader: " \nvarying float _alpha;\nvarying vec2 vUv;\nuniform vec4 offsetRepeat;\nuniform float alphaProportion;\nvoid main() {\ngl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );\nvUv = uv * offsetRepeat.zw + offsetRepeat.xy;\nvec4 worldPosition = modelMatrix * vec4( vec3( position ), 1.0 );\nvec3 cameraToVertex = normalize( cameraPosition - worldPosition.xyz);\n_alpha = 1.0 - max( 0.0, dot( normal, cameraToVertex ) );\n_alpha = max( 0.0, (_alpha - alphaProportion) / (1.0 - alphaProportion) );\n}",
+			fragmentShader: "\nuniform sampler2D uTex;\nuniform vec3 diffuse;\nuniform float opacity;\nuniform float gridOffset;\nvarying float _alpha;\nvarying vec2 vUv;\nvoid main() {\nvec4 texColor = texture2D( uTex, vUv );\nfloat _a = _alpha * opacity;\nif( _a <= 0.0 ) discard;\n_a = _a * ( sin( vUv.y * 1.0 + gridOffset ) * .5 + .5 );\ngl_FragColor = vec4( texColor.rgb * diffuse, _a );\n}",
+			transparent: true,
+			blending: THREE.AdditiveBlending,
+			depthTest: true,
+			side: THREE.DoubleSide
+		})
+	}
+
+	const e = new THREE.SphereGeometry(1.1 * 100, 120, 144)
+	const t = (new THREE.TextureLoader).load(`${process.env.BASE_URL}plugins/earthSample/image/menuA/clouds.jpg`);
+	t.wrapT = THREE.ClampToEdgeWrapping
+	t.wrapS = THREE.ClampToEdgeWrapping
+	const n = new XRayMaterial({
+		map: t,
+		alphaProportion: .35,
+		color: new THREE.Color(6723993),
+		opacity: 1,
+		gridOffsetSpeed: .6
+	})
+	const i = new THREE.Mesh(e, n)
+	i.matrixAutoUpdate = false
+	const Ob = new THREE.Object3D
+	Ob.name = 'cloudsEearth'
+	Ob.add(i)
+	scene.add(Ob)
+	return Ob
 }
