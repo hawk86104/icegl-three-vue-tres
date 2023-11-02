@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-10-16 10:53:09
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-10-31 11:38:06
+ * @LastEditTime: 2023-11-02 08:05:54
 -->
 # 🧊🧊🧊 icegl-three-vue-tres 🧊🧊🧊
 ## 🎉🎉🎊 三维可视化项目快速落地の开源框架 🎊🎉🎉
@@ -31,7 +31,7 @@ ThreeJS大名鼎鼎的基于浏览器渲染，JavaScript语言的3D库。
 
 集成封装项目落地的常用库：图标、多语言、API接口调用、Vuex/Pinia、model数据封装、页面layout/权限access、路由管理等。
 
-- 🌠 像写Vue3.x一样写三维可视化项目 * TresJS [点击详情](https://tresjs.org/guide)
+- 🌠 像写Vue3.x一样写三维可视化项目，并且全功能版本追溯保持threeJS最新版本 * TresJS [点击详情](https://tresjs.org/guide)
 
 ```html
 <template>
