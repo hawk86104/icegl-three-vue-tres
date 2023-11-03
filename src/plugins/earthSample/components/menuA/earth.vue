@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-02 16:25:00
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-11-02 21:57:43
+ * @LastEditTime: 2023-11-03 09:08:01
 -->
 <script setup>
 import { watchEffect, ref } from 'vue'
@@ -53,10 +53,10 @@ onLoop(({ delta }) => {
 </script>
 
 <template>
-	<div class="w-100 h-100">
+	<div class="w-full h-full">
 		<TresCanvas ref="TresCanvasRef" v-bind="gl">
 			<TresPerspectiveCamera :position="[0, 0, 365]" :fov="45" :near="1" :far="10000" />
-			<OrbitControls :autoRotate="true" :autoRotateSpeed="2" />
+			<OrbitControls :autoRotate="true" :autoRotateSpeed="2" :enableZoom="false" :enablePan="false" />
 		</TresCanvas>
 	</div>
 </template>

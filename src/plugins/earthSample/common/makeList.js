@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-02 17:32:16
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-11-02 21:42:08
+ * @LastEditTime: 2023-11-03 10:33:31
  */
 import * as THREE from 'three';
 import { countryPositionList } from '../data/postions'
@@ -26,30 +26,36 @@ const addMeshes = (e, t) => {
 	const kb = new THREE.Object3D
 	const colorList = ["#66ffff", "#66aaaa"]
 	const n = colorList[t]
-	const i = new THREE.CircleGeometry(3, 6)
 	const r = new THREE.CircleGeometry(2, 6)
-	const a = i.vertices;
-	// a.shift();
-	const o = new THREE.BoxGeometry();
-	o.vertices = a;
+	const l = new THREE.MeshBasicMaterial({
+		color: n,
+		side: THREE.DoubleSide,
+		transparent: true,
+		opacity: 1
+	})
+
+	// 设置起始角度和角度范围，以跳过中间的顶点
+	const bigline = new THREE.CircleGeometry(3, 6)
+	// bigline.vertices.shift(); 新版本的变化
+	const positions = bigline.getAttribute('position');
+	const newPositions = new Float32Array(positions.count * 3 - 3);
+	for (let i = 3; i < positions.array.length; i++) {
+		newPositions[i - 3] = positions.array[i];
+	}
+	const newGeometry = new THREE.BufferGeometry();
+	newGeometry.setAttribute('position', new THREE.BufferAttribute(newPositions, 3));
 	const s = new THREE.MeshBasicMaterial({
 		color: n,
 		side: THREE.DoubleSide,
 		blending: THREE.AdditiveBlending
 	})
-		, l = new THREE.MeshBasicMaterial({
-			color: n,
-			side: THREE.DoubleSide,
-			transparent: !0,
-			opacity: 1
-		})
-		, c = new THREE.LineLoop(o, s)
-		, u = new THREE.Mesh(r, l);
-	c.position.copy(e)
+	const cLineLoop = new THREE.LineLoop(newGeometry, s)
+	const u = new THREE.Mesh(r, l);
 	u.position.copy(e)
+	cLineLoop.position.copy(e)
 	u.lookAt(new THREE.Vector3(0, 0, 0))
-	c.lookAt(new THREE.Vector3(0, 0, 0))
-	kb.add(c)
+	cLineLoop.lookAt(new THREE.Vector3(0, 0, 0))
+	kb.add(cLineLoop)
 	kb.add(u)
 	return kb
 }
@@ -58,9 +64,11 @@ const addlightMeshes = (e) => {
 		, i = new THREE.MeshBasicMaterial({
 			map: n,
 			alphaMap: n,
-			transparent: !0,
-			depthTest: !0,
-			opacity: .7,
+			transparent: true,
+			depthTest: true,
+			depthWrite: true,
+			alphaTest: 0.3,
+			opacity: .9,
 			side: THREE.DoubleSide,
 			color: 16777215,
 			blending: THREE.AdditiveBlending
@@ -105,10 +113,10 @@ const addPoints = (scene, Eb, Lb) => {
 		const r = new THREE.PointsMaterial;
 		r.size = 5
 		r.color = new THREE.Color(10092543)
-		r.map = new THREE.TextureLoader().load('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAQAAADZc7J/AAAAg0lEQVR4Ae3UVwHEIBBF0XEQCZEUCUhASiREAhKQggQk3O19gbe9Hr4p07D39UeHIxDXK+DoTIcjcyzjTMNEyaTdXtN6BQMtQz11iZZUSScehbcSAopgJYje+YCMIlsJEUV8YBk7Mi25NpfKG7w8i/o86q/wt34oOnpGEhuJkd7e1t8MNqiNF6OGKt4AAAAASUVORK5CYII=')
+		r.map = new THREE.TextureLoader().load(`${process.env.BASE_URL}plugins/earthSample/image/menuA/circle.png`)
 		r.depthWrite = false
 		r.transparent = true
-		r.opacity = .3
+		r.opacity = .2
 		r.side = THREE.FrontSide
 		r.blending = THREE.AdditiveBlending;
 		const a = i / 2;
@@ -205,7 +213,7 @@ export const XRayearth = (scene) => {
 			fragmentShader: "\nuniform sampler2D uTex;\nuniform vec3 diffuse;\nuniform float opacity;\nuniform float gridOffset;\nvarying float _alpha;\nvarying vec2 vUv;\nvoid main() {\nvec4 texColor = texture2D( uTex, vUv );\nfloat _a = _alpha * opacity;\nif( _a <= 0.0 ) discard;\n_a = _a * ( sin( vUv.y * 1.0 + gridOffset ) * .5 + .5 );\ngl_FragColor = vec4( texColor.rgb * diffuse, _a );\n}",
 			transparent: true,
 			blending: THREE.AdditiveBlending,
-			depthTest: true,
+			depthTest: false,
 			side: THREE.DoubleSide
 		})
 	}
