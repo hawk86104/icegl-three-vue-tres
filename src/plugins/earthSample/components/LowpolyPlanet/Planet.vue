@@ -3,16 +3,17 @@
  * @Version: 1.668
  * @Autor: Hawk
  * @Date: 2023-10-13 09:05:49
- * @LastEditors: Hawk
- * @LastEditTime: 2023-10-13 09:09:33
+ * @LastEditors: 地虎降天龙
+ * @LastEditTime: 2023-11-03 12:24:32
 -->
 <script setup lang="ts">
-import Airplane from './Airplane.vue'
-import Cloud from './Cloud.vue'
 import { useGLTF } from '@tresjs/cientos'
 import { useRenderLoop } from '@tresjs/core'
+import Airplane from './airplane.vue'
+import Cloud from './cloud.vue'
+
 const { nodes } = await useGLTF(
-  'https://raw.githubusercontent.com/Tresjs/assets/main/models/gltf/low-poly/planet.gltf',
+  './plugins/earthSample/model/lowpolyPlanet/planet.gltf',
 )
 
 const planet = nodes.Planet

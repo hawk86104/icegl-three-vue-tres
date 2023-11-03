@@ -3,8 +3,8 @@
  * @Version: 1.668
  * @Autor: Hawk
  * @Date: 2023-10-13 09:05:49
- * @LastEditors: Hawk
- * @LastEditTime: 2023-10-13 09:11:19
+ * @LastEditors: 地虎降天龙
+ * @LastEditTime: 2023-11-03 12:24:27
 -->
 <script setup lang="ts">
 import type { Object3D } from 'three'
@@ -15,7 +15,7 @@ const props = defineProps<{
   planet: Object3D
 }>()
 
-const { scene } = await useGLTF('https://raw.githubusercontent.com/Tresjs/assets/main/models/gltf/low-poly/cloud.gltf')
+const { scene } = await useGLTF('./plugins/earthSample/model/lowpolyPlanet/cloud.gltf')
 const cloudRef = shallowRef()
 
 const cloud = scene.children[0] as Object3D

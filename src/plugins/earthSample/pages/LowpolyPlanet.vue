@@ -4,7 +4,7 @@
  * @Autor: Hawk
  * @Date: 2023-10-13 09:04:49
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-11-03 11:32:40
+ * @LastEditTime: 2023-11-03 12:25:01
 -->
 <script setup lang="ts">
 import { TresCanvas, useRenderLoop } from '@tresjs/core'
@@ -12,7 +12,8 @@ import { OrbitControls, Stars } from '@tresjs/cientos'
 import { PCFSoftShadowMap, SRGBColorSpace } from 'three'
 import { shallowRef } from 'vue'
 
-import Planet from '../components/LowpolyPlanet/Planet.vue'
+import loading from 'PLS/digitalCity/components/loading.vue'
+import Planet from '../components/lowpolyPlanet/planet.vue'
 
 const gl = {
 	clearColor: '#11101B',
@@ -29,6 +30,7 @@ useRenderLoop().onLoop(({ delta }) => {
 </script>
 
 <template>
+	<loading />
 	<TresCanvas v-bind="gl" window-size>
 		<TresPerspectiveCamera :position="[0, 1, 5]" :fov="75" :near="0.1" :far="1000" />
 		<OrbitControls />

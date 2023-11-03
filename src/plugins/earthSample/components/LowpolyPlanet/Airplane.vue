@@ -3,8 +3,8 @@
  * @Version: 1.668
  * @Autor: Hawk
  * @Date: 2023-10-13 09:05:49
- * @LastEditors: Hawk
- * @LastEditTime: 2023-10-13 09:10:51
+ * @LastEditors: 地虎降天龙
+ * @LastEditTime: 2023-11-03 12:24:00
 -->
 <script setup lang="ts">
 import type { Object3D } from 'three'
@@ -16,10 +16,8 @@ const props = defineProps<{
 }>()
 
 const { scene } = await useGLTF(
-  'https://raw.githubusercontent.com/Tresjs/assets/main/models/gltf/low-poly/airplane.gltf',
+  './plugins/earthSample/model/lowpolyPlanet/airplane.gltf', // https://icegl-1314935952.cos.ap-beijing.myqcloud.com/assets/model/
 )
-
-const airplaneRef = shallowRef()
 
 const airplane = scene
 airplane.rotation.set(0, Math.PI, 0)

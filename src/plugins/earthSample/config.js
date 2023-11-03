@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-01 09:49:28
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-11-03 11:35:45
+ * @LastEditTime: 2023-11-03 12:20:39
  */
 export default {
 	"name": "earthSample",
@@ -17,6 +17,6 @@ export default {
 	"preview": [
 		{ "src": "plugins/earthSample/preview/earthA.png", "type": "img", "name": "earthA", "title": "样式A" },
 		{ "src": "plugins/earthSample/preview/menuA.png", "type": "img", "name": "menuA", "title": "菜单A" },
-		{ "src": "plugins/earthSample/preview/LowpolyPlanet.png", "type": "img", "name": "LowpolyPlanet", "title": "低像素多边形" }
+		{ "src": "plugins/earthSample/preview/lowpolyPlanet.png", "type": "img", "name": "lowpolyPlanet", "title": "低像素多边形" }
 	]
 }
