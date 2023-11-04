@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-10-16 10:53:09
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-11-02 09:08:58
+ * @LastEditTime: 2023-11-03 16:29:18
 -->
 <template>
     <div class="flex h-full">
@@ -15,52 +15,47 @@
                         <AppstoreOutlined />
                     </template>
                     <template #label>原生功能展示</template>
-                    <f-menu-item value="1.1">
-                        <template #label>AAA</template>
-                    </f-menu-item>
-                    <f-menu-item value="1.2">
-                        <template #label>BBB</template>
-                    </f-menu-item>
+                    <template v-for="(bP, pkey) in pluginsConfig">
+                        <f-menu-item v-if="pkey === 'basic'" v-for="(onePlugin, okey) in bP.child" :value="onePlugin.name">
+                            <template #label>{{ onePlugin.title }}</template>
+                        </f-menu-item>
+                    </template>
                 </f-sub-menu>
                 <f-sub-menu value="2">
                     <template #icon>
                         <PictureOutlined />
                     </template>
                     <template #label>插件中心</template>
-                    <f-menu-item v-for="(onePlugin, pkey) in pluginsConfig" :value="pkey">
-                        <template #label>{{ onePlugin.title }}</template>
-                    </f-menu-item>
+                    <template v-for="(onePlugin, pkey) in pluginsConfig">
+                        <f-menu-item v-if="pkey !== 'basic'" :value="pkey">
+                            <template #label>{{ onePlugin.title }}</template>
+                        </f-menu-item>
+                    </template>
                 </f-sub-menu>
             </f-menu>
         </div>
         <div class="flex-1 overflow-scroll" style="height: calc(100vh - 54px);">
-            <div style="background-color: #f1f1f2;" v-for="(onePlugin, pkey) in pluginsConfig" :key="pkey"
-                :ref="el => tabListRef[pkey] = el">
-                <FDivider titlePlacement="left">{{ onePlugin.title + pkey }}</FDivider>
-                <FText class="ml-13" tag="i" size="small">{{ onePlugin.intro }}</FText>
-                <div class="flex flex-wrap flex-justify-start content-start mt-6 pl-6">
-                    <div class="w-80 mr-10 mb-10 overflow-hidden" v-for="(onePreview, okey) in onePlugin.preview"
-                        :key="okey">
-                        <FCard :header="onePreview.title" shadow="hover">
-                            <video controls class="w-full max-h-70" v-if="onePreview.type === 'video'">
-                                <source :src="publicPath + onePreview.src" type="video/mp4" autoplay="true" loop="true" />
-                            </video>
-                            <img class="w-full max-h-70" v-else :src="publicPath + onePreview.src" />
-                            <div class="cursor-pointer" @click="toPage(pkey, onePreview.name)">点击查看详情</div>
-                        </FCard>
-                    </div>
+            <template v-for="(onePlugin, pkey) in pluginsConfig" :key="pkey">
+                <div style="background-color: #f1f1f2;" v-if="pkey !== 'basic'" :ref="el => tabListRef[pkey] = el">
+                    <cardList :onePlugin="onePlugin" />
                 </div>
-            </div>
+                <template v-else>
+                    <div style="background-color: #f1f1f2;" v-for="(one, opkey) in onePlugin.child" :key="opkey"
+                        :ref="el => tabListRef[one.name] = el">
+                        <cardList :onePlugin="one" />
+                    </div>
+                </template>
+            </template>
         </div>
     </div>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import { defineRouteMeta, useRouter } from '@fesjs/fes'; //fesJS的路由被他自己封装了
+import { defineRouteMeta } from '@fesjs/fes'; //fesJS的路由被他自己封装了
 import { AppstoreOutlined, PictureOutlined } from '@fesjs/fes-design/icon';
-import { FCard, FDivider, FText } from '@fesjs/fes-design';
 import { getPluginsConfig } from '../common/utils';
+import cardList from '../components/cardList.vue'
 
 defineRouteMeta({
     name: 'index',
@@ -72,14 +67,7 @@ let pluginsConfig = getPluginsConfig();
 const goto = (value: string) => {
     tabListRef.value[value.value]?.scrollIntoView({ behavior: 'smooth', block: 'center', inline: "nearest" })
 }
-const router = useRouter()  //fesJS的路由被他自己封装了
-let publicPath = process.env.BASE_URL
-const toPage = (plugin: string, value: any) => {
-    let routeUrl = router.resolve({
-        path: `/${plugin}/${value}`
-    });
-    window.open(routeUrl.href, '_blank');
-}
+
 </script>
 
 <style lang="less">
@@ -87,7 +75,7 @@ const toPage = (plugin: string, value: any) => {
     /* margin-right: 6.2em !important; */
     width: 12.5rem !important;
     padding: 0 !important;
-    justify-content: center;
+    justify-content: center !important;
     margin: 0 !important;
 }
 </style>
