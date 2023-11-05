@@ -31,7 +31,7 @@ import earth from '../components/menuA/earth.vue'
 .bg-img {
 	height: 100%;
 	position: absolute;
-	background: url("@/../plugins/earthSample/image/menuA/bg-img.jpg");
+	background: url("@/../../plugins/earthSample/image/menuA/bg-img.jpg");
 	background-size: cover;
 	top: 0;
 	width: 100%;
@@ -39,7 +39,7 @@ import earth from '../components/menuA/earth.vue'
 
 .css_globe_halo1 {
 	position: absolute;
-	background: url("@/../plugins/earthSample/image/menuA/css_globe_halo1.png");
+	background: url("@/../../plugins/earthSample/image/menuA/css_globe_halo1.png");
 	background-size: cover;
 	filter: hue-rotate(1deg);
 	width: 100%;
