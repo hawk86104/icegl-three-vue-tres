@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-10-16 10:53:09
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-11-04 19:01:15
+ * @LastEditTime: 2023-11-05 10:15:53
  */
 import { defineRuntimeConfig,useModel } from '@fesjs/fes';
 
@@ -39,6 +39,9 @@ export default defineRuntimeConfig({
             {
                 name: 'index',
             },
+            // {
+            //     name: 'preview',
+            // },
         ],
     },
 });

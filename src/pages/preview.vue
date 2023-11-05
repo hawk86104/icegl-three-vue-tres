@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-10-16 10:53:09
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-11-05 10:15:59
+ * @LastEditTime: 2023-11-05 10:04:18
 -->
 <template>
     <div class="flex h-full">
@@ -58,7 +58,7 @@ import { getPluginsConfig } from '../common/utils';
 import cardList from '../components/cardList.vue'
 
 defineRouteMeta({
-    name: 'index',
+    name: 'preview',
     title: '开源框架展示',
 });
 
