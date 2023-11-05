@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-03 16:02:49
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-11-04 19:01:01
+ * @LastEditTime: 2023-11-05 11:52:56
 -->
 <template>
 	<FDivider titlePlacement="left">{{ props.onePlugin.title + ' - ' + props.onePlugin.name }}</FDivider>
@@ -45,3 +45,18 @@ const toPage = (plugin: any, value: any) => {
 	window.open(routeUrl.href, '_blank');
 }
 </script>
+
+<style>
+.fes-divider:not(.is-vertical) .fes-divider-text {
+	font-size: 1.2em;
+	background-color: #0f1222;
+	font-weight: bolder;
+	color: white;
+}
+
+.fes-divider {
+	background-color: #0f1222;
+	margin: 0px 10px 0px;
+	width: 95%;
+}
+</style>

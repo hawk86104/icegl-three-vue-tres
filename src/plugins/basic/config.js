@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-03 15:07:09
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-11-05 08:37:36
+ * @LastEditTime: 2023-11-05 11:33:06
  */
 export default {
 	"name": "basic",
@@ -29,6 +29,15 @@ export default {
 				{ "src": "plugins/basic/base/preview/shaderParticles.png", "type": "img", "name": "shaderParticles", "title": "着色器实践" },
 				{ "src": "plugins/basic/base/preview/penetrateEvent.png", "type": "img", "name": "penetrateEvent", "title": "穿透事件" }
 			]
-		}
+		}, {
+			"name": "materials",
+			"title": "材质",
+			"intro": "各种衍生材质展示",
+			"pNode": "basic",
+			"preview": [
+				{ "src": "plugins/basic/materials/preview/glassMaterial.png", "type": "img", "name": "glassMaterial", "title": "玻璃材质" },
+				{ "src": "plugins/basic/materials/preview/wobbleMaterial.png", "type": "img", "name": "wobbleMaterial", "title": "流体波动" },
+			]
+		},
 	]
 }
