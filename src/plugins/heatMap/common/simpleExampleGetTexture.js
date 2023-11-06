@@ -4,8 +4,9 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-06 19:04:41
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-11-06 19:04:52
+ * @LastEditTime: 2023-11-06 20:50:20
  */
+import { wrapYoyo } from 'gsap/all'
 import * as THREE from 'three'
 
 export const parms = {
@@ -29,8 +30,8 @@ const drawCircular = (context, opts) => {
 
 	// 创建圆设置填充色
 	const rGradient = context.createRadialGradient(x, y, 0, x, y, radius)
-	rGradient.addColorStop(0, "rgba(255, 0, 0, 1)")
-	rGradient.addColorStop(1, "rgba(0, 255, 0, 0)")
+	rGradient.addColorStop(0, "rgba(255, 255, 0, 1)")
+	rGradient.addColorStop(1, "rgba(255, 0, 0, 0)")
 	context.fillStyle = rGradient
 
 	// 设置globalAlpha
@@ -83,11 +84,14 @@ export const getPaletteMap = () => {
 	return paletteTexture
 }
 
-// 获取透明度阶梯图
+// 获取透明度阶梯图 单色
 export const getAlphaScaleMap = () => {
 	const canvas = document.createElement("canvas")
 	canvas.width = parms.w
 	canvas.height = parms.h
+	canvas.style.position = 'absolute'
+	canvas.style.top = '20px'
+	canvas.style.right = '0'
 	const context = canvas.getContext("2d")
 	// 随机生成温度
 	const tenperature = getTemperature()
@@ -95,13 +99,16 @@ export const getAlphaScaleMap = () => {
 	for (let i = 0; i < parms.segments; i++) {
 		// 计算出当前温度占标准温度的权值
 		const weight = tenperature[i] / 35
+		const x = Math.random() * parms.w
+		const y = Math.random() * parms.h
 		drawCircular(context, {
-			x: Math.random() * parms.w,
-			y: Math.random() * parms.h,
+			x,
+			y,
 			radius: 80,
 			weight
 		})
 	}
+	document.body.appendChild(canvas)
 	const tex = new THREE.Texture(canvas)
 	tex.minFilter = THREE.NearestFilter
 	tex.needsUpdate = true

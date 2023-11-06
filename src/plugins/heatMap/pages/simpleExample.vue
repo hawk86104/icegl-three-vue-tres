@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-06 18:53:07
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-11-06 19:26:08
+ * @LastEditTime: 2023-11-06 19:32:53
 -->
 
 <script setup lang="ts">
@@ -67,7 +67,7 @@ const shader = {
 		<OrbitControls :autoRotate="true" :autoRotateSpeed="2" />
 		<TresAmbientLight color="#eef0ff" :intensity="1" />
 
-		<TresMesh :position="[0, 0, 1]">
+		<TresMesh :position="[0, 0, 10]">
 			<TresPlaneGeometry :args="[1500, 1500]" />
 			<!-- <MeshBasicMaterial color="red" :side="DoubleSide"></MeshBasicMaterial> -->
 			<TresShaderMaterial v-bind="shader" />
