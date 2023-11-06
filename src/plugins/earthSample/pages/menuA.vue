@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-02 09:30:20
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-11-03 11:03:59
+ * @LastEditTime: 2023-11-06 11:59:07
 -->
 <template>
 	<div class="bg-img flex justify-center flex-items-center">
@@ -31,7 +31,7 @@ import earth from '../components/menuA/earth.vue'
 .bg-img {
 	height: 100%;
 	position: absolute;
-	background: url("@/../../plugins/earthSample/image/menuA/bg-img.jpg");
+	background: url("@/../../plugins/earthSample/image/menuA/bg-img.png");
 	background-size: cover;
 	top: 0;
 	width: 100%;

@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-02 17:32:16
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-11-03 10:33:31
+ * @LastEditTime: 2023-11-06 12:01:54
  */
 import * as THREE from 'three';
 import { countryPositionList } from '../data/postions'
@@ -219,7 +219,7 @@ export const XRayearth = (scene) => {
 	}
 
 	const e = new THREE.SphereGeometry(1.1 * 100, 120, 144)
-	const t = (new THREE.TextureLoader).load(`${process.env.BASE_URL}plugins/earthSample/image/menuA/clouds.jpg`);
+	const t = (new THREE.TextureLoader).load(`${process.env.BASE_URL}plugins/earthSample/image/menuA/clouds.png`);
 	t.wrapT = THREE.ClampToEdgeWrapping
 	t.wrapS = THREE.ClampToEdgeWrapping
 	const n = new XRayMaterial({
