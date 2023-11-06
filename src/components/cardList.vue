@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-03 16:02:49
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-11-05 11:52:56
+ * @LastEditTime: 2023-11-06 10:07:29
 -->
 <template>
 	<FDivider titlePlacement="left">{{ props.onePlugin.title + ' - ' + props.onePlugin.name }}</FDivider>
@@ -15,7 +15,12 @@
 				<video controls class="w-full max-h-70" v-if="onePreview.type === 'video'">
 					<source :src="publicPath + onePreview.src" type="video/mp4" autoplay="true" loop="true" />
 				</video>
-				<img class="w-full max-h-70" v-else :src="publicPath + onePreview.src" />
+				<img class="w-full max-h-70" v-else-if="onePreview.type === 'img'" :src="publicPath + onePreview.src" />
+				<div class="w-full h-48 text-3 text-left mb-2"
+					style="background-color: rgb(55 56 61);overflow: hidden;border-radius: 10px;"
+					v-else-if="onePreview.type === 'text'">
+					<div class="p-2" style="color: white;">{{ onePreview.src }}</div>
+				</div>
 				<div class="cursor-pointer" @click="toPage(props.onePlugin, onePreview.name)">点击查看详情</div>
 			</FCard>
 		</div>

@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-10-26 09:20:42
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-10-30 11:59:43
+ * @LastEditTime: 2023-11-05 20:05:04
  */
 export default {
 	"name": "digitalCity",
@@ -13,7 +13,7 @@ export default {
 	"version": "0.0.1",
 	"author": "地虎降天龙",
 	"state": "active",
-	"require": [],
+	"require": ['cannon-es'],
 	"preview": [
 		{ "src": "plugins/digitalCity/preview/buildings.mp4", "type": "video", "name": "buildings", "title": "建筑物" },
 		{ "src": "plugins/digitalCity/preview/radars.png", "type": "img", "name": "radars", "title": "雷达" },

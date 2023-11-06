@@ -27,6 +27,7 @@
         "@fesjs/plugin-model": "^3.0.0",
         "@tresjs/cientos": "^3.5.1",
         "@tresjs/core": "^3.4.1",
+        "cannon-es": "^0.20.0",
         "core-js": "^3.29.1",
         "gsap": "^3.12.2",
         "three": "^0.157.0",

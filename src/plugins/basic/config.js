@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-03 15:07:09
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-11-05 11:33:06
+ * @LastEditTime: 2023-11-06 10:29:54
  */
 export default {
 	"name": "basic",
@@ -37,6 +37,19 @@ export default {
 			"preview": [
 				{ "src": "plugins/basic/materials/preview/glassMaterial.png", "type": "img", "name": "glassMaterial", "title": "玻璃材质" },
 				{ "src": "plugins/basic/materials/preview/wobbleMaterial.png", "type": "img", "name": "wobbleMaterial", "title": "流体波动" },
+			]
+		}, {
+			"name": "controls",
+			"title": "控制器",
+			"intro": "各种控制器",
+			"pNode": "basic",
+			"preview": [
+				{ "src": "plugins/basic/controls/preview/cameraControls.png", "type": "img", "name": "cameraControls", "title": "摄像头控制" },
+				{ "src": "plugins/basic/controls/preview/orbitControls.png", "type": "img", "name": "orbitControls", "title": "orbitControls" },
+				{ "src": "plugins/basic/controls/preview/transformControls.png", "type": "img", "name": "transformControls", "title": "变换控制器" },
+				{ "src": "与OrbitControls类似，该控件用于从鸟瞰视角在地图上变换相机，但使用鼠标/触摸交互的特定预设，并在默认情况下禁用屏幕空间平移。", "type": "text", "name": "mapControls", "title": "地图控制器" },
+				{ "src": "第一人称视角，键盘控制视角。W、S、A、D：前后左右；空格：跳起；ESC：退出控制。", "type": "text", "name": "firstPersonControls", "title": "第一人称键盘控制" },
+				{ "src": "plugins/basic/controls/preview/scrollControls.png", "type": "img", "name": "scrollControls", "title": "滚轮控制器" },
 			]
 		},
 	]
