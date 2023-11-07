@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-06 18:53:07
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-11-06 19:32:53
+ * @LastEditTime: 2023-11-07 10:07:44
 -->
 
 <script setup lang="ts">
@@ -59,6 +59,11 @@ const shader = {
 		}
 	}
 }
+function onPointerMove(ev) {
+	if (ev) {
+		console.log(ev)
+	}
+}
 </script>
 
 <template>
@@ -67,7 +72,7 @@ const shader = {
 		<OrbitControls :autoRotate="true" :autoRotateSpeed="2" />
 		<TresAmbientLight color="#eef0ff" :intensity="1" />
 
-		<TresMesh :position="[0, 0, 10]">
+		<TresMesh :position="[0, 0, 10]" @pointer-move="onPointerMove">
 			<TresPlaneGeometry :args="[1500, 1500]" />
 			<!-- <MeshBasicMaterial color="red" :side="DoubleSide"></MeshBasicMaterial> -->
 			<TresShaderMaterial v-bind="shader" />
