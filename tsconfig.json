@@ -23,7 +23,9 @@
       "@/*": [
         "./src/*"
       ],
-      "PLS/*": ["./src/plugins/*"],
+      "PLS/*": [
+        "./src/plugins/*"
+      ],
       "@@/*": [
         "./src/.fes/*"
       ]
