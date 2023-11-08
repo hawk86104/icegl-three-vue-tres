@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-08 10:41:23
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-11-08 11:26:27
+ * @LastEditTime: 2023-11-08 11:38:37
 -->
 <script lang="ts" setup>
 import { watchEffect, defineExpose } from 'vue';
@@ -12,10 +12,14 @@ import { DoubleSide, Texture } from 'three'
 import h337 from 'heatmap.js-fix'
 const props = withDefaults(
 	defineProps<{
+		position?: Array<number>
+		Plane?: Array<number>
 		show2dCanvas?: boolean
 		heightRatio?: number
 	}>(),
 	{
+		position: [0, 0, 0],
+		Plane: [50, 50, 1000, 1000],
 		show2dCanvas: true,
 		heightRatio: 6
 	},
@@ -111,10 +115,10 @@ defineExpose({
 // }
 </script>
 <template>
-	<TresMesh :position="[0, 0, 0]">
+	<TresMesh :position="props.position">
 		<!-- @pointer-move="onPointerMove" -->
 		<!-- <BoxGeometry :args="[50, 10, 50]"></BoxGeometry> -->
-		<TresPlaneGeometry :args="[50, 50, 1000, 1000]" :rotate-x="-Math.PI * 0.5" />
+		<TresPlaneGeometry :args="props.Plane" :rotate-x="-Math.PI * 0.5" />
 		<TresShaderMaterial v-bind="shader" />
 	</TresMesh>
 </template>
