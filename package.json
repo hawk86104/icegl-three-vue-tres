@@ -7,6 +7,7 @@
         "prod": "FES_ENV=prod fes build",
         "analyze": "ANALYZE=1 fes build",
         "dev": "fes dev",
+        "preview": "vite preview",
         "test:unit": "fes test:unit"
     },
     "publishConfig": {
