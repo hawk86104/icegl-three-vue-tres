@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-10-17 08:30:49
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-11-05 11:30:19
+ * @LastEditTime: 2023-11-08 10:31:40
 -->
 <template>
 	<pagesShow :showBuildings="false">
@@ -23,7 +23,7 @@ import { reactive, onMounted, ref } from 'vue';
 import { Pane } from 'tweakpane';
 
 import { loadCityFBX } from '../common/loadCity';
-import buildingsModel from '../components/buildings/buildingsModelShader.vue'; // buildingsModelIncompatible buildingsModelShader
+import buildingsModel from '../components/buildings/buildingsModelCustomShader.vue'; // buildingsModelIncompatible buildingsModelShader buildingsModelCustomShader
 import buildingsLines from '../components/buildings/buildingsLines.vue';
 
 import pagesShow from '../components/pagesShow.vue'
@@ -80,7 +80,7 @@ const buildingsLinesState = reactive({
 })
 // buildingState 建筑线条控制
 const buildingState = reactive({
-	bulidingsColor: '#d88de2',
+	bulidingsColor: '#e523ff',
 	landColor: '#112233',
 	opacity: 0.9,
 	show: true,
