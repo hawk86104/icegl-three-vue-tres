@@ -19,5 +19,6 @@ export default {
 		{ "src": "plugins/digitalCity/preview/radars.png", "type": "img", "name": "radars", "title": "雷达" },
 		{ "src": "plugins/digitalCity/preview/weather.png", "type": "img", "name": "weather", "title": "天气" },
 		{ "src": "plugins/digitalCity/preview/heatmap.png", "type": "img", "name": "heatmap", "title": "热力图" },
+		{ "src": "plugins/digitalCity/preview/heatmap2.png", "type": "img", "name": "heatmap2", "title": "建筑物-热力图" },
 	]
 }

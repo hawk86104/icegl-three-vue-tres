@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-08 10:41:23
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-11-08 11:38:37
+ * @LastEditTime: 2023-11-08 14:04:46
 -->
 <script lang="ts" setup>
 import { watchEffect, defineExpose } from 'vue';
@@ -89,7 +89,7 @@ const shader = {
 	varying vec3 cl;
 	void main() {
 		float v = abs(hValue - 1.);
-		gl_FragColor = vec4(cl, .8 - v * v) ; 
+		gl_FragColor = vec4(cl, .8 - v * v*1.1) ; 
 	}`,
 	uniforms: {
 		heightMap: {
