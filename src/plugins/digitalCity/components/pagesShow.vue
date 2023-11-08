@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-10-24 09:49:39
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-11-01 13:04:39
+ * @LastEditTime: 2023-11-08 10:31:05
 -->
 <template>
 	<!-- <loading></loading> -->
@@ -42,7 +42,7 @@ import { TresCanvas, } from '@tresjs/core'; //useRenderLoop
 import { OrbitControls } from '@tresjs/cientos';
 
 import { loadCityFBX } from '../common/loadCity';
-import buildingsModel from "./buildings/buildingsModelShader.vue";
+import buildingsModel from "./buildings/buildingsModelCustomShader.vue";// buildingsModelIncompatible buildingsModelShader buildingsModelCustomShader
 import buildingsLines from "./buildings/buildingsLines.vue";
 
 // import loading from './loading.vue'

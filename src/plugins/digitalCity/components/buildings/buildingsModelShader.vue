@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-10-24 16:33:55
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-10-30 17:38:59
+ * @LastEditTime: 2023-11-08 10:04:48
 -->
 <script setup lang="ts">
 import { useRenderLoop } from '@tresjs/core'
@@ -90,7 +90,7 @@ const setEffectMaterial = () => {
 			void main() {
 				vec4 worldNormal = modelMatrix * vec4(normal, 0.0);
   			vNormal = normalize(worldNormal.xyz);
-				vNormal = vec3(1.0, 1.0, 1.0);
+				// vNormal = vec3(1.0, 1.0, 1.0);
 
 				vPosition = modelMatrix * vec4(position,1.0);
 				gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);

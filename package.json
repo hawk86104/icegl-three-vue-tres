@@ -26,7 +26,7 @@
         "@fesjs/plugin-enums": "^3.0.0",
         "@fesjs/plugin-layout": "^5.0.0",
         "@fesjs/plugin-model": "^3.0.0",
-        "@tresjs/cientos": "^3.5.1",
+        "@tresjs/cientos": "^3.6.0",
         "@tresjs/core": "^3.4.1",
         "cannon-es": "^0.20.0",
         "core-js": "^3.29.1",
