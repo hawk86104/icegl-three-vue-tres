@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-10-26 09:20:42
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-11-05 20:05:04
+ * @LastEditTime: 2023-11-08 11:32:39
  */
 export default {
 	"name": "digitalCity",
@@ -17,6 +17,8 @@ export default {
 	"preview": [
 		{ "src": "plugins/digitalCity/preview/buildings.mp4", "type": "video", "name": "buildings", "title": "建筑物" },
 		{ "src": "plugins/digitalCity/preview/radars.png", "type": "img", "name": "radars", "title": "雷达" },
-		{ "src": "plugins/digitalCity/preview/weather.png", "type": "img", "name": "weather", "title": "天气" }
+		{ "src": "plugins/digitalCity/preview/weather.png", "type": "img", "name": "weather", "title": "天气" },
+		{ "src": "plugins/digitalCity/preview/heatmap.png", "type": "img", "name": "heatmap", "title": "热力图" },
+		{ "src": "plugins/digitalCity/preview/heatmap2.png", "type": "img", "name": "heatmap2", "title": "建筑物-热力图" },
 	]
 }
