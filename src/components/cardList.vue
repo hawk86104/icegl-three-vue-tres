@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-03 16:02:49
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-11-09 10:56:10
+ * @LastEditTime: 2023-11-09 11:50:44
 -->
 <template>
 	<FDivider titlePlacement="left">{{ props.onePlugin.title + ' - ' + props.onePlugin.name }}</FDivider>
@@ -13,9 +13,9 @@
 		<div class="w-80 mr-10 mb-10 overflow-hidden" v-for="(onePreview, okey) in onePlugin.preview" :key="okey">
 			<FCard :header="onePreview.title" shadow="hover">
 				<video controls class="w-full max-h-70" v-if="onePreview.type === 'video'">
-					<source :src="publicPath + '/' + onePreview.src" type="video/mp4" autoplay="true" loop="true" />
+					<source :src="publicPath + onePreview.src" type="video/mp4" autoplay="true" loop="true" />
 				</video>
-				<img class="w-full max-h-70" v-else-if="onePreview.type === 'img'" :src="publicPath + '/' + onePreview.src" />
+				<img class="w-full max-h-70" v-else-if="onePreview.type === 'img'" :src="publicPath + onePreview.src" />
 				<div class="w-full h-48 text-3 text-left mb-2"
 					style="background-color: rgb(55 56 61);overflow: hidden;border-radius: 10px;"
 					v-else-if="onePreview.type === 'text'">
