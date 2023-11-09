@@ -8,7 +8,7 @@
       "dom"
     ],
     "sourceMap": true,
-    "baseUrl": "/icegl-three-vue-tres",
+    "baseUrl": ".",
     "jsx": "preserve",
     "allowSyntheticDefaultImports": true,
     "moduleResolution": "node",
