@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-10-16 10:53:09
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-11-09 09:21:34
+ * @LastEditTime: 2023-11-09 10:08:16
 -->
 <template>
     <div class="flex h-full">
@@ -90,5 +90,11 @@ const goto = (value: string) => {
     padding: 0 !important;
     justify-content: center !important;
     margin: 0 !important;
+}
+
+.fes-menu.is-vertical.is-inverted .fes-menu-item,
+.fes-menu.is-horizontal.is-inverted .fes-menu-item {
+    font-size: 0.93em;
+    font-weight: 100;
 }
 </style>
