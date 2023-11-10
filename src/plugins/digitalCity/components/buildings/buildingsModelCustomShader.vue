@@ -40,6 +40,9 @@ const setEffectMaterial = () => {
 	const { max, min } = geometry.boundingBox;
 	// CITY_UNTRIANGULATED.material.dispose()
 	// 这里对原有的 CITY_UNTRIANGULATED.material 做继承 使用 CustomShaderMaterial
+	if (CITY_UNTRIANGULATED.material.__csm) {
+		return
+	}
 	const material = new CustomShaderMaterial({
 		baseMaterial: CITY_UNTRIANGULATED.material,
 		vertexShader: `
@@ -141,9 +144,10 @@ watchEffect(() => {
 watch(props, (newValue, oldValue) => {
 	CITY_UNTRIANGULATED.material.uniforms.uGradient.value = newValue.gradient
 })
+const pObject = props.model.model.clone()
 </script>
 
 <template>
-	<primitive :object="props.model.model.clone()">
+	<primitive :object="pObject">
 	</primitive>
 </template>

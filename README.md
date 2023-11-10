@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-10-16 10:53:09
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-11-08 08:32:38
+ * @LastEditTime: 2023-11-09 14:46:42
 -->
 # 🧊🧊🧊 icegl-three-vue-tres 🧊🧊🧊
 ## 🎉🎉🎊 三维可视化项目快速落地の开源框架 🎊🎉🎉
@@ -39,7 +39,10 @@ ThreeJS大名鼎鼎的基于浏览器渲染，JavaScript语言的3D库。
 
 集成封装项目落地的常用库：图标、多语言、API接口调用、Vuex/Pinia、model数据封装、页面layout/权限access、路由管理等。
 
-- 🌠 像写Vue3.x一样写三维可视化项目，并且全功能版本追溯保持threeJS最新版本 * TresJS [点击详情](https://tresjs.org/guide)
+- 🌠 像写Vue3.x一样写三维可视化项目[点击详情](https://tresjs.org/guide)
+
+全功能版本追溯保持threeJS最新版本 * TresJS 
+最新Vue3.x的语法糖写法，TS/JS通吃，让你以最新最爽快的方式构建三维可视化项目
 
 ```html
 <template>
@@ -51,6 +54,15 @@ ThreeJS大名鼎鼎的基于浏览器渲染，JavaScript语言的3D库。
     </TresMesh>
   </TresCanvas>
 </template>
+<script setup lang="ts">
+  import { useRenderLoop, useTexture } from '@tresjs/core'
+  //读取材质
+  const pTexture = await useTexture(['./**.jpg', './**.png'])
+  const { onLoop } = useRenderLoop()
+  onLoop(({ delta }) => {
+    //循环render
+  })
+</script>
 ```
 - 🧩 丰富的插件应用市场
 
