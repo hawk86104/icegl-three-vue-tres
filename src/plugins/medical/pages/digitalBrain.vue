@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-10 16:13:11
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-11-14 16:39:28
+ * @LastEditTime: 2023-11-14 17:02:03
 -->
 <template>
 	<TresCanvas v-bind="state" window-size>
@@ -58,7 +58,7 @@ paneControl.addBinding(xRayState, 'opacity', {
 	max: 1,
 	step: 0.1,
 })
-const path = './plugins/medical/model/BrainUVs.obj';
+const path = './plugins/medical/model/brainparts.OBJ';
 const loader = new OBJLoader()
 const model = await loadOBJ(path, loader)
 const state = reactive({
