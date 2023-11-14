@@ -4,10 +4,9 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-10-16 10:53:09
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-11-05 10:15:53
+ * @LastEditTime: 2023-11-14 11:46:55
  */
-import { defineRuntimeConfig,useModel } from '@fesjs/fes';
-
+import { defineRuntimeConfig,useModel,defineBuildConfig } from '@fesjs/fes'
 import { FMenu } from '@fesjs/fes-design';
 import PageLoading from '@/components/pageLoading.vue';
 import UserCenter from '@/components/userCenter.vue';

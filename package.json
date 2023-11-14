@@ -35,6 +35,7 @@
         "three": "^0.157.0",
         "unocss": "^0.56.5",
         "vanta": "^0.5.24",
+        "vite-plugin-glsl": "^1.1.2",
         "vue": "^3.2.47"
     },
     "private": true
