@@ -1,29 +1,32 @@
-<!--
- * @Description: 
- * @Version: 1.668
- * @Autor: 地虎降天龙
- * @Date: 2023-10-16 10:53:09
- * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-11-09 14:46:42
--->
 # 🧊🧊🧊 icegl-three-vue-tres 🧊🧊🧊
 ## 🎉🎉🎊 三维可视化项目快速落地の开源框架 🎊🎉🎉
 ## 🧊🧊🧊🧊🧊🧊🧊🧊🧊🧊🧊🧊🧊🧊🧊🧊🧊🧊
+<br/>
+<p align="center">
+    <a target="_black" href="https://space.bilibili.com/410503457">
+       <img alt="bilibili" src="https://img.shields.io/badge/dynamic/json?url=https://api.bilibili.com/x/relation/stat?vmid=410503457&query=data.follower&color=282c34&label=B站&labelColor=FE7398&logo=data%3Aimage%2Fpng%3Bbase64%2CiVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAD7ElEQVR4nO2dW9WrMBCFK6ESkFAJSKiESqgEHCABCZWAhEpAAhL2ecik5dDc%2FpXLBDLfWnlqy0xmJ5BMQnq5CIIgCIIgCIIgCIIgCEIBAHQAemYfrgCunD6wAKAHsEKxALgx+bCQD8%2FS9tmgVqeDr1lLigDgZvDhXso+K9TyTBQRwRJ8AHjntl0Flh5QRAQK%2FmKxPeayWx2OXpBNBKiHvi34b7T2MC4pAvW6twR%2FRwkRKPizBN8CgEcuESj4Lwm+BwBjahEk+H8EwJRKhOaCDzW8e1JLfkUUH1NgmR3XmHffHR1l+72BSs8d7w8U+JDAnZERQMcV+CtUi7dNqFqibB4J7vtrq7xKCuAasbTMXCL4T+5aVk6+2xHUrWdhruAR6HIJcOeu2UHI8zyAe2ytWfEdWz9PVvQ8YAmIQ5dDAB9LFsMVAv8oMO2zAGrC5WNIarRiAuKR9jYEd9pY08aa6uUzIHGRdkgKd8pY0yc1WjEBAqypDYoAG0QAZkQAZkQAZkQAZk4vANQenjsSzS3I%2FwcSbXU5jQBUkRtdf4Rar90v8kSv3+I3ffCCSpk8I%2Fw+lgDkdI%2Fv2rEp2CaiWm1AsDQLlDAD+dlFXLMeAaCSeLZdaSFE5VUQNot38cKuEeBgAsSuG0flVZBmEanbXfNQAsS0fgBYIn2fIu3%2FBBMHEyBmDXlFfA8IzeHb+Ems4WAChKykrVA9ZfsQTL57jXzRg4A5wC%2FA8N4ADiZAZwm2XjW75Qh2KOTfA0p4kygPw28OJcCVgn3nDnYo2EwEYRgGH0qAMyICMCMCMCMCMCMCMCMCMCMCfP3qwHDOQ4AAUekTk8FaBRihJnZdYbvtCGC7LvmkM63GjVDINPFrQgCq5ETXfmMzI90FXzPvfqt7x4rEu%2FZaEcCUxFvgz2zO+BUn6UkoaEEAsptiMSX5e8FoRYCN7cVgb4Vq7U%2FH50Pq4JNP7Qiw8UFnJwcK+tXy+Wj6PLEvPgHSHv5UgwA1IQIwwyFAyLJin9RoxYgAzAQIkPwNmf26busC+OIx5TDqo5nDT+F%2FSS%2F9CYzwb+No49zNy2evkYv0LywGGAXUvp6eSneycqOic0w20k7CNgKE7jJunSGLACTCxF27ylmQc98T5MQUH49swd+I0HPXslLKnT0N+wnkrTKi9JZL%2FL9i1SorMmdeQ4TQQ7OFMxIMzGD45w8nUL1im7efENZLJpgPSw0pfz0cdt4U3230Td%2FTvx2R6d2FrHhEWLkq5PELOMsRPHCPnAZGv1xJteL7jbJiaW3sB2nDvPC%2FosSYvjRQz4cJ6n7KO3rYQL7M+L6nVtfDVRAEQRAEQRAEQRAEIZ5%2FSAXmdfXaoQsAAAAASUVORK5CYII%3D&cacheSeconds=3600">
+    </a>
+    <a target="_black" href="https://gitee.com/ice-gl/icegl-three-vue-tres">
+      <img src="https://gitee.com/ice-gl/icegl-three-vue-tres/badge/star.svg?theme=dark" alt="gitee-starts" />
+    </a>
+</p>
+<br/>
 
 # 生态 `@ThreeJS-@Vue3.x-@TresJS`
 > icegl出品，永久开源且免费商用，持续更新ing，请点击右上角start⭐关注
 
 本项目融合于三大生态系统中：
-- 🎲 ThreeJS * [点击详情](https://threejs.org)
-
+- 🎲 ThreeJS * [点击详情](https://threejs.org)<br/>
+![npm](https://img.shields.io/npm/v/three?label=three)<br/>
 ThreeJS大名鼎鼎的基于浏览器渲染，JavaScript语言的3D库。
 
-- 🍀 Vue3.x * [点击详情](https://cn.vuejs.org)
-
+- 🍀 Vue3.x * [点击详情](https://cn.vuejs.org)<br/>
+![npm](https://img.shields.io/npm/v/vue?label=vue&color=%2342b883)<br/>
 易学易用，性能出色，适用场景丰富的 Web 前端框架。
 
-- ⚡ TresJS * [点击详情](https://tresjs.org)
-
+- ⚡ TresJS * [点击详情](https://tresjs.org)<br/>
+<a href="https://www.npmjs.com/package/@tresjs/core"><img src="https://img.shields.io/npm/v/@tresjs/core?color=%2382DBCA&label=%40tresjs%2Fcore&logo=data:image/svg%2bxml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTExLjY4NTQgMy40MjkxNkMxMi4wNzM4IDIuNzgxODIgMTMuMDEyIDIuNzgxODIgMTMuNDAwNCAzLjQyOTE1TDE5LjE3NzEgMTMuMDU2OUMxOS41NzcgMTMuNzIzNSAxOS4wOTY5IDE0LjU3MTQgMTguMzE5NiAxNC41NzE0SDYuNzY2MjRDNS45ODg5NCAxNC41NzE0IDUuNTA4ODMgMTMuNzIzNSA1LjkwODc1IDEzLjA1NjlMMTEuNjg1NCAzLjQyOTE2WiIgZmlsbD0iIzgyREJDNSIvPgo8cGF0aCBkPSJNMTUuNjg1NyAxMC41NDI5QzE1LjY4NTcgOS45OTA1OSAxNi4xMzM0IDkuNTQyODggMTYuNjg1NyA5LjU0Mjg4SDI2QzI2LjU1MjIgOS41NDI4OCAyNyA5Ljk5MDU5IDI3IDEwLjU0MjlWMTkuODU3MkMyNyAyMC40MDk0IDI2LjU1MjIgMjAuODU3MiAyNiAyMC44NTcySDE2LjY4NTdDMTYuMTMzNCAyMC44NTcyIDE1LjY4NTcgMjAuNDA5NCAxNS42ODU3IDE5Ljg1NzJWMTAuNTQyOVoiIGZpbGw9IiM0RjRGNEYiLz4KPGNpcmNsZSBjeD0iMTYiIGN5PSIyMiIgcj0iNiIgZmlsbD0iI0VGQUMzNSIvPgo8L3N2Zz4K" alt="npm package"></a>
+![npm](https://img.shields.io/npm/v/%40tresjs%2Fcientos?label=%40tresjs%2Fcientos)<br/>
 使用Vue3.x组件实现声明式的ThreeJS，做属于前端的三维项目。
 
 # 🏕点击预览：[🌏opensource.icegl.cn](http://opensource.icegl.cn)
@@ -35,7 +38,8 @@ ThreeJS大名鼎鼎的基于浏览器渲染，JavaScript语言的3D库。
 更多演示请进入预览页面
 
 # 优势
-- 🌈 前端の基本素养 * FesJS [点击详情](https://fesjs.mumblefe.cn)
+- 🌈 前端の基本素养 * FesJS [点击详情](https://fesjs.mumblefe.cn)<br/>
+![npm](https://img.shields.io/npm/v/%40fesjs%2Ffes?label=%40fesjs%2Ffes)
 
 集成封装项目落地的常用库：图标、多语言、API接口调用、Vuex/Pinia、model数据封装、页面layout/权限access、路由管理等。
 
