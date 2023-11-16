@@ -47,7 +47,7 @@
                     </div>
                 </template>
             </template>
-            <div style="background-color: rgb(90, 76, 76);" :ref="el => tabListRef.abus = el">
+            <div style="background-color: #f1f1f2;" :ref="el => tabListRef.abus = el">
                 <aboutUs />
             </div>
         </div>
