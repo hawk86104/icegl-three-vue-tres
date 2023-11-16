@@ -3,10 +3,11 @@
     "version": "0.0.1",
     "description": "icegl出品:基于three + vue3.0的webgl三维可视化快速开发平台",
     "scripts": {
-        "build": "fes build",
-        "prod": "FES_ENV=prod fes build",
-        "analyze": "ANALYZE=1 fes build",
         "dev": "fes dev",
+        "build": "fes build",
+        "pre.dev": "FES_ENV=predev fes dev",
+        "pre.build": "FES_ENV=predev fes build",
+        "analyze": "ANALYZE=1 fes build",
         "test:unit": "fes test:unit"
     },
     "publishConfig": {

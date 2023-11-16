@@ -1,100 +1,110 @@
-<!--
- * @Description: 
- * @Version: 1.668
- * @Autor: 地虎降天龙
- * @Date: 2023-10-16 10:53:09
- * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-11-09 10:08:16
--->
 <template>
-    <div class="flex h-full">
-        <div class="w-50" style="background-color: black;">
-            <f-menu mode="vertical" :defaultExpandAll="true" :inverted="true" @select="goto">
-                <f-sub-menu value="1">
-                    <template #icon>
-                        <AppstoreOutlined />
-                    </template>
-                    <template #label>原生功能展示</template>
-                    <template v-for="(bP, pkey) in pluginsConfig">
-                        <f-menu-item v-if="pkey === 'basic'" v-for="(onePlugin, okey) in bP.child" :value="onePlugin.name">
-                            <template #label>{{ onePlugin.title }}</template>
-                        </f-menu-item>
-                    </template>
-                </f-sub-menu>
-                <f-sub-menu value="2">
-                    <template #icon>
-                        <PictureOutlined />
-                    </template>
-                    <template #label>插件中心</template>
-                    <template v-for="(onePlugin, pkey) in pluginsConfig">
-                        <f-menu-item v-if="pkey !== 'basic'" :value="pkey">
-                            <template #label>{{ onePlugin.title }}</template>
-                        </f-menu-item>
-                    </template>
-                </f-sub-menu>
-                <f-sub-menu value="8">
-                    <template #icon>
-                        <ClusterOutlined />
-                    </template>
-                    <template #label>aboutUs</template>
-                    <f-menu-item value="abus">
-                        <template #label>关于我们</template>
-                    </f-menu-item>
-                </f-sub-menu>
-            </f-menu>
-        </div>
-        <div class="flex-1 overflow-scroll" style="height: calc(100vh - 54px);">
-            <template v-for="(onePlugin, pkey) in pluginsConfig" :key="pkey">
-                <div style="background-color: #f1f1f2;" v-if="pkey !== 'basic'" :ref="el => tabListRef[pkey] = el">
-                    <cardList :onePlugin="onePlugin" />
-                </div>
-                <template v-else>
-                    <div style="background-color: #f1f1f2;" v-for="(one, opkey) in onePlugin.child" :key="opkey"
-                        :ref="el => tabListRef[one.name] = el">
-                        <cardList :onePlugin="one" />
-                    </div>
-                </template>
-            </template>
-            <div style="background-color: rgb(255 255 255);" :ref="el => tabListRef.abus = el">
-                <aboutUs />
-            </div>
-        </div>
-    </div>
+    <TresCanvas v-bind="state" window-size>
+        <TresPerspectiveCamera :position="[15, 15, 15]" :fov="45" :near="0.1" :far="1000" :look-at="[0, 0, 0]" />
+        <OrbitControls v-bind="controlsState" />
+        <TresAmbientLight :intensity="0.5" />
+
+        <TresMesh ref="sphereRef" :position="[0, 4, 0]" cast-shadow @pointer-enter="onPointerEnter"
+            @pointer-leave="onPointerLeave">
+            <TresSphereGeometry :args="[2, 32, 32]" />
+            <TresMeshToonMaterial color="#006060" />
+        </TresMesh>
+
+        <TresMesh ref="sphereRef2" :position="[4, 4, 0]" cast-shadow @pointer-enter="onPointerEnter"
+            @pointer-leave="onPointerLeave">
+            <TresSphereGeometry :args="[2, 32, 32]" />
+            <TresMeshToonMaterial color="#006060" />
+        </TresMesh>
+
+        <TresMesh :rotation="[-Math.PI / 2, 0, 0]" receive-shadow>
+            <TresPlaneGeometry :args="[20, 20, 20, 20]" />
+            <TresMeshToonMaterial />
+        </TresMesh>
+
+
+        <TresDirectionalLight ref="TDirectionalLight" :position="[10, 8, 4]" :intensity="1" cast-shadow />
+        <TresDirectionalLight :position="[10, 2, 4]" :intensity="1" cast-shadow />
+
+        <TresGridHelper />
+    </TresCanvas>
 </template>
-
+  
+  
 <script setup lang="ts">
-import { ref } from 'vue';
-import { defineRouteMeta } from '@fesjs/fes'; //fesJS的路由被他自己封装了
-import { AppstoreOutlined, PictureOutlined, ClusterOutlined } from '@fesjs/fes-design/icon';
-import { getPluginsConfig } from '../common/utils';
-import cardList from '../components/cardList.vue'
-import aboutUs from '../components/aboutUs.vue'
+import { SRGBColorSpace, BasicShadowMap, NoToneMapping } from 'three'
+import { reactive, ref, onMounted, shallowRef, watchEffect } from 'vue'
+import { TresCanvas, useRenderLoop } from '@tresjs/core'
+import { OrbitControls } from '@tresjs/cientos'
 
-defineRouteMeta({
-    name: 'index',
-    title: '开源框架展示',
-});
+const state = reactive({
+    clearColor: '#201919',
+    shadows: true,
+    alpha: false,
 
-const tabListRef = ref([])
-let pluginsConfig = getPluginsConfig();
-const goto = (value: string) => {
-    tabListRef.value[value.value]?.scrollIntoView({ behavior: 'smooth', block: 'center', inline: "nearest" })
+    shadowMapType: BasicShadowMap,
+    outputColorSpace: SRGBColorSpace,
+    toneMapping: NoToneMapping,
+})
+
+const controlsState = reactive({
+    enableDamping: true,
+    dampingFactor: 0.05,
+    enableZoom: true,
+    autoRotate: false,
+    autoRotateSpeed: 2,
+    maxPolarAngle: Math.PI,
+    minPolarAngle: 0,
+    maxAzimuthAngle: Math.PI,
+    minAzimuthAngle: -Math.PI,
+    enablePan: true,
+    keyPanSpeed: 7,
+    maxDistance: 100,
+    minDistance: 0,
+    minZoom: 0,
+    maxZoom: 100,
+    zoomSpeed: 1,
+    enableRotate: true,
+    rotateSpeed: 1,
+})
+
+
+const sphereRef = ref()
+const sphereRef2 = ref()
+const TDirectionalLight = shallowRef()
+
+// const { onLoop, pause, resume } = useRenderLoop()
+const { onLoop } = useRenderLoop()
+
+onLoop(({ elapsed }) => {
+    if (!sphereRef.value) return
+    sphereRef.value.position.y += Math.sin(elapsed) * 0.01
+    sphereRef2.value.position.y += Math.sin(elapsed) * 0.01
+})
+
+function onPointerEnter(ev: any) {
+    if (ev) {
+        ev.object.material.color.set('#DFFF45')
+        // pause()
+    }
+}
+function onPointerLeave(ev: any) {
+    if (ev) {
+        ev.material.color.set('#006060')
+        // resume()
+    }
 }
 
+watchEffect(() => {
+    if (TDirectionalLight.value) {
+        TDirectionalLight.value.shadow.mapSize.set(1000, 1000)
+        TDirectionalLight.value.shadow.camera.near = 0.5; // default
+        // TDirectionalLight.value.shadow.camera.far = 50000; // default
+        TDirectionalLight.value.shadow.camera.top = 20
+        TDirectionalLight.value.shadow.camera.right = 20
+        TDirectionalLight.value.shadow.camera.left = -20
+        TDirectionalLight.value.shadow.camera.bottom = -20
+    }
+})
+onMounted(() => {
+})
 </script>
-
-<style lang="less">
-.layout-logo {
-    /* margin-right: 6.2em !important; */
-    width: 12.5rem !important;
-    padding: 0 !important;
-    justify-content: center !important;
-    margin: 0 !important;
-}
-
-.fes-menu.is-vertical.is-inverted .fes-menu-item,
-.fes-menu.is-horizontal.is-inverted .fes-menu-item {
-    font-size: 0.93em;
-    font-weight: 100;
-}
-</style>
