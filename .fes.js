@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-10-16 10:53:09
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-11-16 09:46:17
+ * @LastEditTime: 2023-11-17 09:11:22
  */
 // import { resolve } from 'path';
 import { join } from 'path';
@@ -35,7 +35,7 @@ export default defineBuildConfig({
         ...templateCompilerOptions,
     },
     viteOption: {
-        base: "./", // /icegl-three-vue-tres/
+        base: "./",
         plugins: [
             UnoCSS({
                 /* options */

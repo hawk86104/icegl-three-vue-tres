@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-14 10:06:40
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-11-14 16:30:45
+ * @LastEditTime: 2023-11-17 08:35:33
 -->
 <template>
 	<TresMesh ref="TresMeshRef">
@@ -16,8 +16,8 @@
 <script setup lang="ts">
 import * as THREE from 'three'
 import { useTexture, useRenderLoop, useTresContext } from '@tresjs/core'
-// import xRayVertex from '../shaders/xRay.vert';
-// import xRayFrag from '../shaders/xRay.frag';
+import xRayVertex from '../shaders/xRay.vert?raw';
+import xRayFrag from '../shaders/xRay.frag?raw';
 import * as BufferGeometryUtils from 'three/addons/utils/BufferGeometryUtils.js';
 import { ref, watchEffect } from 'vue';
 
@@ -30,37 +30,6 @@ const props = withDefaults(defineProps<{
 	opacity: 1.0,
 })
 
-const xRayVertex = `
-uniform float c;
-uniform float p;
-uniform float uTime;
-varying float intensity;
-varying  vec2 vUv;
-void main(){
-    vUv = uv;
-    vec3 vNormal = normalize( normalMatrix * normal );
-    intensity = pow(c - abs(dot(vNormal, vec3(0, 0, 1))), p);
-    gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
- }
-`
-const xRayFrag = `
-uniform vec3 glowColor;
-uniform sampler2D lightningTexture;
-varying float intensity;
-varying vec2 vUv;
-uniform float offsetY;
-uniform float uTime;
-uniform float uOpacity;
-
-void main(){
-  vec2 uv=vUv;
-  uv.y+=offsetY;
-  vec3 glow=glowColor*intensity;
-  vec3 color=vec3(step(.1,uv.y)-step(.2,uv.y))-vec3(texture2D(lightningTexture,uv));
-  float alpha=clamp(cos(uTime*3.),.5,1.);
-  gl_FragColor=vec4(glow+color,alpha*uOpacity);
-}
-`
 const TresMeshRef = ref()
 const brainBufferGeometries = [] as Array<THREE.BufferGeometry>
 props.model.traverse((child) => {

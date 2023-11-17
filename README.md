@@ -46,11 +46,9 @@ ThreeJS大名鼎鼎的基于浏览器渲染，JavaScript语言的3D库。
 <a href="https://www.npmjs.com/package/@fesjs/fes">
 <img src="https://img.shields.io/npm/v/%40fesjs%2Ffes?label=%40fesjs%2Ffes">
 </a><br/>
-
 集成封装项目落地的常用库：图标、多语言、API接口调用、Vuex/Pinia、model数据封装、页面layout/权限access、路由管理等。
 
-- 🌠 像写Vue3.x一样写三维可视化项目[点击详情](https://tresjs.org/guide)
-
+- 🌠 像写Vue3.x一样写三维可视化项目[点击详情](https://tresjs.org/guide)<br/>
 全功能版本追溯保持threeJS最新版本 * TresJS 
 最新Vue3.x的语法糖写法，TS/JS通吃，让你以最新最爽快的方式构建三维可视化项目
 
@@ -74,8 +72,7 @@ ThreeJS大名鼎鼎的基于浏览器渲染，JavaScript语言的3D库。
   })
 </script>
 ```
-- 🧩 丰富的插件应用市场
-
+- 🧩 丰富的插件应用市场<br/>
 插件中心包含各式各样的项目场景和功能。插件是ICE社区生态中重要的一环，在应用市场中完整应用和普通插件统一称为插件。
 
 ### 我们将会逐一把落地的项目以插件的形式加入到此开源框中...
