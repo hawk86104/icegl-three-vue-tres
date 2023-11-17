@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-14 10:06:40
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-11-17 08:35:33
+ * @LastEditTime: 2023-11-17 10:24:46
 -->
 <template>
 	<TresMesh ref="TresMeshRef">
@@ -32,6 +32,7 @@ const props = withDefaults(defineProps<{
 
 const TresMeshRef = ref()
 const brainBufferGeometries = [] as Array<THREE.BufferGeometry>
+
 props.model.traverse((child) => {
 	if (child instanceof THREE.Mesh) {
 		child.geometry.verticesNeedUpdate = true

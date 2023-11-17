@@ -16,22 +16,22 @@
 > icegl出品，永久开源且免费商用，持续更新ing，请点击右上角start⭐关注
 
 本项目融合于三大生态系统中：
-- 🎲 ThreeJS * [点击详情](https://threejs.org)<br/>
+- 🎲 ThreeJS * [点击详情](https://threejs.org)
 <a href="https://www.npmjs.com/package/three">
 <img src="https://img.shields.io/npm/v/three?label=three">
-</a><br/>
-ThreeJS大名鼎鼎的基于浏览器渲染，JavaScript语言的3D库。
+</a>
+ThreeJS大名鼎鼎的基于浏览器渲染，JavaScript语言的3D库。<br/><br/>
 
-- 🍀 Vue3.x * [点击详情](https://cn.vuejs.org)<br/>
+- 🍀 Vue3.x * [点击详情](https://cn.vuejs.org)
 <a href="https://www.npmjs.com/package/vue">
 <img src="https://img.shields.io/npm/v/vue?label=vue&color=%2342b883">
-</a><br/>
-易学易用，性能出色，适用场景丰富的 Web 前端框架。
+</a>
+易学易用，性能出色，适用场景丰富的 Web 前端框架。<br/><br/>
 
-- ⚡ TresJS * [点击详情](https://tresjs.org)<br/>
+- ⚡ TresJS * [点击详情](https://tresjs.org)
+
 <a href="https://www.npmjs.com/package/@tresjs/core"><img src="https://img.shields.io/npm/v/@tresjs/core?color=%2382DBCA&label=%40tresjs%2Fcore&logo=data:image/svg%2bxml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTExLjY4NTQgMy40MjkxNkMxMi4wNzM4IDIuNzgxODIgMTMuMDEyIDIuNzgxODIgMTMuNDAwNCAzLjQyOTE1TDE5LjE3NzEgMTMuMDU2OUMxOS41NzcgMTMuNzIzNSAxOS4wOTY5IDE0LjU3MTQgMTguMzE5NiAxNC41NzE0SDYuNzY2MjRDNS45ODg5NCAxNC41NzE0IDUuNTA4ODMgMTMuNzIzNSA1LjkwODc1IDEzLjA1NjlMMTEuNjg1NCAzLjQyOTE2WiIgZmlsbD0iIzgyREJDNSIvPgo8cGF0aCBkPSJNMTUuNjg1NyAxMC41NDI5QzE1LjY4NTcgOS45OTA1OSAxNi4xMzM0IDkuNTQyODggMTYuNjg1NyA5LjU0Mjg4SDI2QzI2LjU1MjIgOS41NDI4OCAyNyA5Ljk5MDU5IDI3IDEwLjU0MjlWMTkuODU3MkMyNyAyMC40MDk0IDI2LjU1MjIgMjAuODU3MiAyNiAyMC44NTcySDE2LjY4NTdDMTYuMTMzNCAyMC44NTcyIDE1LjY4NTcgMjAuNDA5NCAxNS42ODU3IDE5Ljg1NzJWMTAuNTQyOVoiIGZpbGw9IiM0RjRGNEYiLz4KPGNpcmNsZSBjeD0iMTYiIGN5PSIyMiIgcj0iNiIgZmlsbD0iI0VGQUMzNSIvPgo8L3N2Zz4K" alt="npm package"></a>
-![npm](https://img.shields.io/npm/v/%40tresjs%2Fcientos?label=%40tresjs%2Fcientos)<br/>
-使用Vue3.x组件实现声明式的ThreeJS，做属于前端的三维项目。
+使用Vue3.x组件实现声明式的ThreeJS，做属于前端的三维项目。<br/><br/>
 
 # 🏕点击预览：[🌏opensource.icegl.cn](http://opensource.icegl.cn)
 ![展示](./preview/数字城市1.gif)
@@ -42,14 +42,15 @@ ThreeJS大名鼎鼎的基于浏览器渲染，JavaScript语言的3D库。
 更多演示请进入预览页面
 
 # 优势
-- 🌈 前端の基本素养 * FesJS [点击详情](https://fesjs.mumblefe.cn)<br/>
+- 🌈 前端の基本素养 * FesJS [点击详情](https://fesjs.mumblefe.cn)
 <a href="https://www.npmjs.com/package/@fesjs/fes">
 <img src="https://img.shields.io/npm/v/%40fesjs%2Ffes?label=%40fesjs%2Ffes">
-</a><br/>
-集成封装项目落地的常用库：图标、多语言、API接口调用、Vuex/Pinia、model数据封装、页面layout/权限access、路由管理等。
+</a>
+集成封装项目落地的常用库：图标、多语言、API接口调用、Vuex/Pinia、model数据封装、页面layout/权限access、路由管理等。<br/>
 
-- 🌠 像写Vue3.x一样写三维可视化项目[点击详情](https://tresjs.org/guide)<br/>
-全功能版本追溯保持threeJS最新版本 * TresJS 
+- 🌠 像写Vue3.x一样写三维可视化项目[点击详情](https://tresjs.org/guide)
+
+![npm](https://img.shields.io/npm/v/%40tresjs%2Fcientos?label=%40tresjs%2Fcientos)全功能版本追溯保持threeJS最新版本 * TresJS 
 最新Vue3.x的语法糖写法，TS/JS通吃，让你以最新最爽快的方式构建三维可视化项目
 
 ```html

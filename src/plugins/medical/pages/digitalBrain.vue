@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-10 16:13:11
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-11-14 17:02:03
+ * @LastEditTime: 2023-11-17 16:20:31
 -->
 <template>
 	<TresCanvas v-bind="state" window-size>
@@ -17,6 +17,8 @@
 			<Suspense>
 				<xRayEffect v-if="xRayState.show" :model="model" v-bind="xRayState" />
 			</Suspense>
+
+			<bubblesEffect v-if="bubblesState.show" :model="model" v-bind="bubblesState" />
 		</TresGroup>
 	</TresCanvas>
 </template>
@@ -32,6 +34,7 @@ import { Pane } from 'tweakpane';
 import { loadOBJ } from '../common/util'
 import cloudPoints from '../components/cloudPoints.vue'
 import xRayEffect from '../components/xRayEffect.vue'
+import bubblesEffect from '../components/bubblesEffect.vue'
 
 const cloudPointsState = reactive({
 	color: '#fff',
@@ -51,13 +54,27 @@ const xRayState = reactive({
 	show: true,
 	opacity: 1.0
 })
-paneControl.addBinding(xRayState, 'show', { label: '脑组织显示' })
-paneControl.addBinding(xRayState, 'color', { label: '脑组织颜色' })
+paneControl.addBinding(xRayState, 'show', { label: '脑轮廓显示' })
+paneControl.addBinding(xRayState, 'color', { label: '脑轮廓颜色' })
 paneControl.addBinding(xRayState, 'opacity', {
+	label: '脑轮廓透明度', min: 0,
+	max: 1,
+	step: 0.1,
+})
+
+const bubblesState = reactive({
+	color: '#9e00af',
+	show: true,
+	opacity: 1.0
+})
+paneControl.addBinding(bubblesState, 'show', { label: '脑组织显示' })
+paneControl.addBinding(bubblesState, 'color', { label: '脑组织颜色' })
+paneControl.addBinding(bubblesState, 'opacity', {
 	label: '脑组织透明度', min: 0,
 	max: 1,
 	step: 0.1,
 })
+
 const path = './plugins/medical/model/brainparts.OBJ';
 const loader = new OBJLoader()
 const model = await loadOBJ(path, loader)
