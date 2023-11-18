@@ -1,6 +1,6 @@
 <template>
     <div class="flex h-full">
-        <div class="w-50" style="background-color: black;">
+        <div class="w-50" style="background-color: #0f1222;">
             <f-menu mode="vertical" :defaultExpandAll="true" :inverted="true" @select="goto">
                 <f-sub-menu value="1">
                     <template #icon>
