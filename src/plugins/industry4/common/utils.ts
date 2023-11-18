@@ -1,3 +1,11 @@
+/*
+ * @Description: 
+ * @Version: 1.668
+ * @Autor: 地虎降天龙
+ * @Date: 2023-11-18 14:47:13
+ * @LastEditors: 地虎降天龙
+ * @LastEditTime: 2023-11-18 16:41:59
+ */
 import * as THREE from 'three'
 import * as BufferGeometryUtils from 'three/addons/utils/BufferGeometryUtils.js';
 
@@ -23,6 +31,7 @@ export const reduceModelLine = (object: THREE.Object3D): any => {
     object.traverse((mesh: THREE.Mesh) => {
         if (mesh.isMesh) {
             brainBufferGeometries.push(mesh.geometry)
+            mesh.material = meshMaterial
         }
     })
     const tmpGeometry = BufferGeometryUtils.mergeGeometries(
@@ -34,64 +43,17 @@ export const reduceModelLine = (object: THREE.Object3D): any => {
     lines.material = lineMaterial
     return lines
 }
-
-export const changeModelMaterial = (object: THREE.Object3D, lineGroup: THREE.Group): any => {
-    const group: THREE.Group = object as any
-    if (group.isObject3D) {
-        const lg = new THREE.Group()
-        lineGroup.add(lg)
-        lg.name = group.name + '_line'
-        group.traverse((mesh: THREE.Mesh) => {
-            if (mesh.isMesh) {
-                const quaternion = new THREE.Quaternion()
-                const worldPos = new THREE.Vector3()
-                const worldScale = new THREE.Vector3()
-                // 获取四元数
-                mesh.getWorldQuaternion(quaternion)
-                // 获取位置信息
-                mesh.getWorldPosition(worldPos)
-                // 获取缩放比例
-                mesh.getWorldScale(worldScale)
-                mesh.material = meshMaterial
-
-                // 以模型顶点信息创建线条
-                const line = getLine(mesh, Math.PI * 6.137, undefined, 1)
-                const name = mesh.name + '_line'
-                line.name = name
-                // 给线段赋予模型相同的坐标信息
-                line.quaternion.copy(quaternion)
-                line.position.copy(worldPos)
-                line.scale.copy(worldScale)
-                lg.add(line)
-            }
-        })
-    }
-}
-
-export const getLine = (object: THREE.Mesh, thresholdAngle = 1, color = new THREE.Color('#ff0ff0'), opacity = 1): THREE.LineSegments => {
-    // 创建线条，参数为 几何体模型，相邻面的法线之间的角度，
-    var edges = new THREE.EdgesGeometry(object.geometry, thresholdAngle);
-    var line = new THREE.LineSegments(edges);
-    lineMaterial.opacity = opacity
-    line.material = lineMaterial
-    return line;
-}
-
 const params = {
     threshold: 0,
-    strength: 0.972, // 强度
-    radius: 0.21,// 半径
-    exposure: 1.55 // 扩散
+    strength: 0.972,    // 强度
+    radius: 0.21,       // 半径
 };
 export const unreal = (scene: THREE.Scene, camera: THREE.PerspectiveCamera, renderer: THREE.WebGLRenderer, width: number, height: number) => {
     debugger
     // 渲染器通道，将场景全部加入渲染器
     const renderScene = new RenderPass(scene, camera);
     // 添加虚幻发光通道
-    const bloomPass = new UnrealBloomPass(new THREE.Vector2(width, height), 1.5, 0.4, 0.85);
-    bloomPass.threshold = params.threshold;
-    bloomPass.strength = params.strength;
-    bloomPass.radius = params.radius;
+    const bloomPass = new UnrealBloomPass(new THREE.Vector2(width, height), params.strength, params.radius, params.threshold);
 
     // 创建合成器
     const bloomComposer = new EffectComposer(renderer);
