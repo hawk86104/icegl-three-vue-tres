@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-18 14:47:13
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-11-18 16:41:59
+ * @LastEditTime: 2023-11-18 19:44:25
  */
 import * as THREE from 'three'
 import * as BufferGeometryUtils from 'three/addons/utils/BufferGeometryUtils.js';
@@ -49,7 +49,6 @@ const params = {
     radius: 0.21,       // 半径
 };
 export const unreal = (scene: THREE.Scene, camera: THREE.PerspectiveCamera, renderer: THREE.WebGLRenderer, width: number, height: number) => {
-    debugger
     // 渲染器通道，将场景全部加入渲染器
     const renderScene = new RenderPass(scene, camera);
     // 添加虚幻发光通道
@@ -89,7 +88,6 @@ export const unreal = (scene: THREE.Scene, camera: THREE.PerspectiveCamera, rend
         }), 'baseTexture'
     );
     mixPass.needsSwap = true;
-
     // 合成器输出通道
     const outputPass = new OutputPass();
     const finalComposer = new EffectComposer(renderer);
