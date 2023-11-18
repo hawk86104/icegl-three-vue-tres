@@ -4,16 +4,17 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-18 14:47:13
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-11-18 19:44:25
+ * @LastEditTime: 2023-11-18 20:06:16
  */
 import * as THREE from 'three'
-import * as BufferGeometryUtils from 'three/addons/utils/BufferGeometryUtils.js';
-
-import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass';
-import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer';
-import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass';
-import { OutputPass } from 'three/examples/jsm/postprocessing/OutputPass';
-import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass';
+import * as BufferGeometryUtils from 'three/addons/utils/BufferGeometryUtils.js'
+import deviceVertex from '../shaders/device.vert?raw'
+import deviceFrag from '../shaders/device.frag?raw'
+import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass'
+import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer'
+import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass'
+import { OutputPass } from 'three/examples/jsm/postprocessing/OutputPass'
+import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass'
 
 let color = new THREE.Color('#0fb1fb')
 const meshMaterial = new THREE.MeshBasicMaterial({
@@ -69,21 +70,8 @@ export const unreal = (scene: THREE.Scene, camera: THREE.PerspectiveCamera, rend
                 baseTexture: { value: null },
                 bloomTexture: { value: bloomComposer.renderTarget2.texture }
             },
-            vertexShader: `
-            varying vec2 vUv;
-            void main() {
-                vUv = uv;
-                gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
-            }
-            `,
-            fragmentShader: `
-            uniform sampler2D baseTexture;
-            uniform sampler2D bloomTexture;
-            varying vec2 vUv;
-            void main() {
-                gl_FragColor = ( texture2D( baseTexture, vUv ) + vec4( 1.0 ) * texture2D( bloomTexture, vUv ) );
-            }
-            `,
+            vertexShader: deviceVertex,
+            fragmentShader: deviceFrag,
             defines: {}
         }), 'baseTexture'
     );
