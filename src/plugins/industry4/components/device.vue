@@ -23,7 +23,7 @@ const props = withDefaults(
 );
 
 const { nodes } = await useGLTF(
-	'./plugins/industry4/model/deviceDraco.glb',
+	'./plugins/industry4/model/modelDraco.glb',
 	{ draco: true })
 const lineGroup = reduceModelLine(nodes.Sketchfab_model)
 
