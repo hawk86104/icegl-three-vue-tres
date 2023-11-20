@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-18 14:47:13
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-11-18 20:06:16
+ * @LastEditTime: 2023-11-20 08:29:15
  */
 import * as THREE from 'three'
 import * as BufferGeometryUtils from 'three/addons/utils/BufferGeometryUtils.js'
@@ -56,11 +56,11 @@ export const unreal = (scene: THREE.Scene, camera: THREE.PerspectiveCamera, rend
     const bloomPass = new UnrealBloomPass(new THREE.Vector2(width, height), params.strength, params.radius, params.threshold);
 
     // 创建合成器
-    const bloomComposer = new EffectComposer(renderer);
-    bloomComposer.renderToScreen = false;
+    const effectComposer = new EffectComposer(renderer);
+    effectComposer.renderToScreen = false;
     // 将渲染器和场景结合到合成器中
-    bloomComposer.addPass(renderScene);
-    bloomComposer.addPass(bloomPass);
+    effectComposer.addPass(renderScene);
+    effectComposer.addPass(bloomPass);
 
     // 着色器通道
     const mixPass = new ShaderPass(
@@ -68,7 +68,7 @@ export const unreal = (scene: THREE.Scene, camera: THREE.PerspectiveCamera, rend
         new THREE.ShaderMaterial({
             uniforms: {
                 baseTexture: { value: null },
-                bloomTexture: { value: bloomComposer.renderTarget2.texture }
+                bloomTexture: { value: effectComposer.renderTarget2.texture }
             },
             vertexShader: deviceVertex,
             fragmentShader: deviceFrag,
@@ -84,7 +84,7 @@ export const unreal = (scene: THREE.Scene, camera: THREE.PerspectiveCamera, rend
     finalComposer.addPass(outputPass);
     return {
         finalComposer,
-        bloomComposer,
+        effectComposer,
         renderScene,
         bloomPass
     }

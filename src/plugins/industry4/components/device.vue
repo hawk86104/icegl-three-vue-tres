@@ -23,23 +23,24 @@ const props = withDefaults(
 );
 
 const { nodes } = await useGLTF(
-	// './plugins/industry4/model/device.gltf',
-	"https://opensource-1314935952.cos.ap-nanjing.myqcloud.com/model/industry4/device.gltf",
+	'./plugins/industry4/model/deviceDraco.glb',
 	{ draco: true })
 const lineGroup = reduceModelLine(nodes.Sketchfab_model)
 
 const { camera, renderer, scene, sizes } = useTresContext()
-let finalComposer, bloomComposer, bloomPass
+let finalComposer = null as any
+let effectComposer = null as any
+let bloomPass = null as any
 const darkMaterial = new MeshBasicMaterial({ color: 'black' })
 watchEffect(() => {
 	if (camera.value) {
 		scene.value.add(lineGroup)
 		const { finalComposer: F,
-			bloomComposer: B,
+			effectComposer: B,
 			bloomPass: BP
 		} = unreal(scene.value, camera.value, renderer.value, sizes.width.value, sizes.height.value)
 		finalComposer = F
-		bloomComposer = B
+		effectComposer = B
 		bloomPass = BP
 		bloomPass.threshold = props.threshold
 		bloomPass.strength = props.strength
@@ -88,18 +89,18 @@ onLoop(({ elapsed }) => {
 	}
 })
 onAfterLoop(({ elapsed }) => {
-	if (bloomComposer) {
+	if (effectComposer) {
 		scene.value.traverse((child) => {
 			darkenNonBloomed(child)
 		})
-		bloomComposer.render()
+		effectComposer.render(elapsed)
 	}
 
 	if (finalComposer) {
 		scene.value.traverse((child) => {
 			restoreMaterial(child)
 		})
-		finalComposer.render()
+		finalComposer.render(elapsed)
 	}
 })
 </script>
