@@ -11,26 +11,20 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, onMounted, ref } from 'vue';
-import { TresCanvas, useRenderLoop, useTexture } from '@tresjs/core'; //useRenderLoop
+import { reactive, onMounted } from 'vue';
+import { TresCanvas, useRenderLoop, useTexture } from '@tresjs/core';
 import { OrbitControls } from '@tresjs/cientos';
-import { AdditiveBlending, DoubleSide, Mesh, Vector2, BoxGeometry, Group, PlaneGeometry, TorusKnotGeometry } from 'three';
+import { DoubleSide, Mesh, Vector2, BoxGeometry, Group, PlaneGeometry, TorusKnotGeometry } from 'three';
 import ShaderToyMaterial from '../common/ShaderToyMaterial.js';
 import { Pane } from 'tweakpane';
 import axios from 'axios';
-const props = withDefaults(
-    defineProps<{
-        showBuildings?: boolean;
-        autoRotate?: boolean;
-    }>(),
-    {
-        showBuildings: true,
-        autoRotate: true,
-    },
-);
-
-const controlsState = reactive({ autoRotate: props.autoRotate, enableDamping: true });
-
+const state = {
+    clearColor: '#000000',
+    shadows: true,
+    alpha: false,
+    useLegacyLights: true,
+}
+const controlsState = { autoRotate: true, enableDamping: true }
 const paneControl = new Pane({ title: '参数' });
 const cloudPointsState = reactive({
     addres: 'https://www.shadertoy.com/view/mtyGWy',
