@@ -3,9 +3,7 @@
     "outDir": "build/dist",
     "module": "esnext",
     "target": "esnext",
-    "types": [
-      "vite-plugin-glsl/ext"
-    ],
+    "types": [],
     "lib": [
       "esnext",
       "dom"

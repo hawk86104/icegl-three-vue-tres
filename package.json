@@ -5,9 +5,9 @@
     "scripts": {
         "dev": "fes dev",
         "build": "fes build",
-        "pre.dev": "FES_ENV=predev fes dev",
-        "pre.build": "FES_ENV=predev fes build",
-        "analyze": "ANALYZE=1 fes build",
+        "pre.dev": "cross-env FES_ENV=predev fes dev",
+        "pre.build": "cross-env FES_ENV=predev fes build",
+        "analyze": "cross-env ANALYZE=1 fes build",
         "test:unit": "fes test:unit"
     },
     "publishConfig": {
@@ -16,6 +16,7 @@
     "devDependencies": {
         "@types/three": "^0.157.0",
         "@webank/eslint-config-webank": "1.2.7",
+        "cross-env": "^7.0.3",
         "tweakpane": "^4.0.1"
     },
     "dependencies": {
@@ -28,6 +29,7 @@
         "@fesjs/plugin-model": "^3.0.0",
         "@tresjs/cientos": "^3.6.0",
         "@tresjs/core": "^3.5.0",
+        "axios": "^1.6.2",
         "cannon-es": "^0.20.0",
         "core-js": "^3.29.1",
         "gsap": "^3.12.2",
@@ -35,7 +37,6 @@
         "three": "^0.158.0",
         "unocss": "^0.56.5",
         "vanta": "^0.5.24",
-        "vite-plugin-glsl": "^1.1.2",
         "vue": "^3.3.8"
     },
     "private": true
