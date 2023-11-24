@@ -98,7 +98,8 @@ ThreeJS大名鼎鼎的基于浏览器渲染，JavaScript语言的3D库。<br/><b
 ![展示](./preview/compileMode.png)
 
 # 📖 文档
-项目文档正在紧张的编写中...敬请期待!
+文档在紧张的编写中🥰...<br/>
+点击查看：[🌏docs.icegl.cn](http://docs.icegl.cn/)
 
 # ❓ 问题反馈
 在使用中有任何问题，请使用以下联系方式联系我们
