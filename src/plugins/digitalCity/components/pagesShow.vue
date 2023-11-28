@@ -4,10 +4,9 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-10-24 09:49:39
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-11-08 10:31:05
+ * @LastEditTime: 2023-11-28 10:33:19
 -->
 <template>
-	<!-- <loading></loading> -->
 	<TresCanvas v-bind="state" window-size>
 		<TresPerspectiveCamera ref="perspectiveCameraRef" :position="[600, 750, -1221]" :fov="45" :near="1" :far="10000" />
 		<OrbitControls v-bind="controlsState" />
@@ -38,14 +37,12 @@ const props = withDefaults(
 
 import { SRGBColorSpace, BasicShadowMap, NoToneMapping } from 'three';
 import { reactive, ref } from 'vue';
-import { TresCanvas, } from '@tresjs/core'; //useRenderLoop
+import { TresCanvas, } from '@tresjs/core';
 import { OrbitControls } from '@tresjs/cientos';
 
 import { loadCityFBX } from '../common/loadCity';
 import buildingsModel from "./buildings/buildingsModelCustomShader.vue";// buildingsModelIncompatible buildingsModelShader buildingsModelCustomShader
 import buildingsLines from "./buildings/buildingsLines.vue";
-
-// import loading from './loading.vue'
 
 const state = reactive({
 	clearColor: '#000000',
@@ -62,18 +59,5 @@ let cityFBX = null
 if (props.showBuildings) {
 	cityFBX = await loadCityFBX()
 }
-
 const perspectiveCameraRef = ref()
-// const { onLoop } = useRenderLoop()
-// onLoop(({ delta }) => {
-// 	if (perspectiveCameraRef.value) {
-// 		console.log(perspectiveCameraRef.value.position)
-// 	}
-// })
 </script>
-<style lang="less">
-// #app {
-// 	width: 100%;
-// 	height: 100%;
-// }
-</style>

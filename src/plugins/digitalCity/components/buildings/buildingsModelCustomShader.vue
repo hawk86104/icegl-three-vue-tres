@@ -148,6 +148,5 @@ const pObject = props.model.model.clone()
 </script>
 
 <template>
-	<primitive :object="pObject">
-	</primitive>
+	<primitive :object="pObject" />
 </template>
