@@ -33,7 +33,7 @@ ThreeJS大名鼎鼎的基于浏览器渲染，JavaScript语言的3D库。<br/><b
 <a href="https://www.npmjs.com/package/@tresjs/core"><img src="https://img.shields.io/npm/v/@tresjs/core?color=%2382DBCA&label=%40tresjs%2Fcore&logo=data:image/svg%2bxml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTExLjY4NTQgMy40MjkxNkMxMi4wNzM4IDIuNzgxODIgMTMuMDEyIDIuNzgxODIgMTMuNDAwNCAzLjQyOTE1TDE5LjE3NzEgMTMuMDU2OUMxOS41NzcgMTMuNzIzNSAxOS4wOTY5IDE0LjU3MTQgMTguMzE5NiAxNC41NzE0SDYuNzY2MjRDNS45ODg5NCAxNC41NzE0IDUuNTA4ODMgMTMuNzIzNSA1LjkwODc1IDEzLjA1NjlMMTEuNjg1NCAzLjQyOTE2WiIgZmlsbD0iIzgyREJDNSIvPgo8cGF0aCBkPSJNMTUuNjg1NyAxMC41NDI5QzE1LjY4NTcgOS45OTA1OSAxNi4xMzM0IDkuNTQyODggMTYuNjg1NyA5LjU0Mjg4SDI2QzI2LjU1MjIgOS41NDI4OCAyNyA5Ljk5MDU5IDI3IDEwLjU0MjlWMTkuODU3MkMyNyAyMC40MDk0IDI2LjU1MjIgMjAuODU3MiAyNiAyMC44NTcySDE2LjY4NTdDMTYuMTMzNCAyMC44NTcyIDE1LjY4NTcgMjAuNDA5NCAxNS42ODU3IDE5Ljg1NzJWMTAuNTQyOVoiIGZpbGw9IiM0RjRGNEYiLz4KPGNpcmNsZSBjeD0iMTYiIGN5PSIyMiIgcj0iNiIgZmlsbD0iI0VGQUMzNSIvPgo8L3N2Zz4K" alt="npm package"></a>
 使用Vue3.x组件实现声明式的ThreeJS，做属于前端的三维项目。<br/><br/>
 
-# 🏕点击预览：[🌏opensource.icegl.cn](http://opensource.icegl.cn)
+## 🏕点击预览：[🌏opensource.icegl.cn](http://opensource.icegl.cn)
 ![展示](./preview/数字城市1.gif)
 ![展示](./preview/地球2.gif)
 ![展示](./preview/地球3.gif)
@@ -98,7 +98,7 @@ ThreeJS大名鼎鼎的基于浏览器渲染，JavaScript语言的3D库。<br/><b
 ![展示](./preview/compileMode.png)
 
 # 📖 文档
-项目文档正在紧张的编写中...敬请期待!
+## 使用说明：[🌏docs.icegl.cn](http://docs.icegl.cn/)
 
 # ❓ 问题反馈
 在使用中有任何问题，请使用以下联系方式联系我们
