@@ -8,7 +8,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive } from 'vue';
+import { reactive } from 'vue';
 import { Pane } from 'tweakpane';
 import heatmapJS from 'PLS/heatMap/components/heatmapJS.vue'
 import loading from '../components/loading.vue'

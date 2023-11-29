@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-03 15:07:09
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-11-06 11:11:51
+ * @LastEditTime: 2023-11-29 16:24:18
  */
 export default {
 	"name": "basic",
@@ -59,6 +59,15 @@ export default {
 			"preview": [
 				{ "src": "plugins/basic/htmls/preview/htmls.png", "type": "img", "name": "htmls", "title": "简单dom" },
 				{ "src": "plugins/basic/htmls/preview/website.png", "type": "img", "name": "website", "title": "内嵌网页" },
+			]
+		}, {
+			"name": "shine",
+			"title": "闪耀发光类",
+			"intro": "关于物体发光的简单例子",
+			"pNode": "basic",
+			"preview": [
+				{ "src": "plugins/basic/shine/preview/spriteImage.png", "type": "img", "name": "spriteImage", "title": "点精灵贴图" },
+				{ "src": "plugins/basic/shine/preview/shader.png", "type": "img", "name": "shader", "title": "着色器方式" },
 			]
 		},
 	]

@@ -5221,6 +5221,11 @@ three-stdlib@^2.27.3:
     fflate "^0.6.9"
     potpack "^1.0.1"
 
+three-subdivide@^1.1.5:
+  version "1.1.5"
+  resolved "https://registry.yarnpkg.com/three-subdivide/-/three-subdivide-1.1.5.tgz#de688d328247380112bb1033aee88dcae435cd5b"
+  integrity sha512-eEWMevrsHIMnC1xbsZSQZIB8QBr8XeXZhTSAdYrLm3ZC/yTdR4ocOZ2Qi+gEyPJFOt3iirQ+SQR0jCamk7e6FQ==
+
 three@^0.158.0:
   version "0.158.0"
   resolved "https://registry.yarnpkg.com/three/-/three-0.158.0.tgz#03ddd5b60ce9c31be8fb69f27a6d9efd49908ac3"
