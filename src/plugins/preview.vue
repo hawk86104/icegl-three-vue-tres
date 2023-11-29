@@ -1,3 +1,11 @@
+<!--
+ * @Description: 
+ * @Version: 1.668
+ * @Autor: 地虎降天龙
+ * @Date: 2023-11-18 22:17:49
+ * @LastEditors: 地虎降天龙
+ * @LastEditTime: 2023-11-29 08:54:48
+-->
 <template>
     <div class="flex h-full">
         <div class="w-50" style="background-color: #0f1222;">
@@ -6,7 +14,7 @@
                     <template #icon>
                         <AppstoreOutlined />
                     </template>
-                    <template #label>原生功能展示</template>
+                    <template #label>基础功能展示</template>
                     <template v-for="(bP, pkey) in pluginsConfig">
                         <f-menu-item v-if="pkey === 'basic'" v-for="(onePlugin, okey) in bP.child" :value="onePlugin.name">
                             <template #label>{{ onePlugin.title }}</template>
