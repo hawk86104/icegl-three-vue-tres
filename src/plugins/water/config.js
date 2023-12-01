@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-10 16:11:27
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-12-01 15:10:24
+ * @LastEditTime: 2023-12-01 17:22:22
  */
 
 export default {
@@ -18,5 +18,6 @@ export default {
 	"require": [],
 	"preview": [
 		{ "src": "plugins/water/preview/tilingCaustics.png", "type": "img", "name": "tilingCaustics", "title": "波纹A" },
+		{ "src": "plugins/water/preview/tilingCaustics.png", "type": "img", "name": "waterGlass", "title": "波浪A" },
 	]
 }
