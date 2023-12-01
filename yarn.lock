@@ -1338,6 +1338,14 @@
   dependencies:
     "@fesjs/utils" "^3.0.1"
 
+"@fesjs/plugin-request@^4.0.0-beta.6":
+  version "4.0.0-beta.6"
+  resolved "https://registry.yarnpkg.com/@fesjs/plugin-request/-/plugin-request-4.0.0-beta.6.tgz#126fb6a53a417f8c7ad946ad6a5a6adfb818bc83"
+  integrity sha512-JIayot8x2DTFQhmoJaLEWComRUAZf+gvHdIjvhnzKr3w7DsgfPFhjG3EERNCSL4JHTPywngP8ZGZsYkQ0zDzlA==
+  dependencies:
+    "@fesjs/utils" "^3.0.1"
+    "@qlin/request" "^0.1.2"
+
 "@fesjs/preset-built-in@^3.1.5":
   version "3.1.5"
   resolved "https://registry.yarnpkg.com/@fesjs/preset-built-in/-/preset-built-in-3.1.5.tgz#cae2895f5cf5f9a9cf11550b3b63968489a3225a"
@@ -1528,6 +1536,14 @@
   resolved "https://registry.yarnpkg.com/@polka/url/-/url-1.0.0-next.23.tgz#498e41218ab3b6a1419c735e5c6ae2c5ed609b6c"
   integrity sha512-C16M+IYz0rgRhWZdCmK+h58JMv8vijAA61gmz2rspCSwKwzBebpdcsiUmwrtJRdphuY30i6BSLEOP8ppbNLyLg==
 
+"@qlin/request@^0.1.2":
+  version "0.1.11"
+  resolved "https://registry.yarnpkg.com/@qlin/request/-/request-0.1.11.tgz#55b7d9705121570d19973be3cbeefc4fdb6fe40e"
+  integrity sha512-psqxvMkrzbXNCA8BB/XGZXiEbsGapyEOf8Na7NjfW7IYcTflTXvVi67wk0V8UWQf67zBxii4LRut958DjBj/YQ==
+  dependencies:
+    "@types/lodash-es" "^4.17.6"
+    lodash-es "^4.17.21"
+
 "@rollup/pluginutils@^4.2.0":
   version "4.2.1"
   resolved "https://registry.yarnpkg.com/@rollup/pluginutils/-/pluginutils-4.2.1.tgz#e6c6c3aba0744edce3fb2074922d3776c0af2a6d"
@@ -1602,6 +1618,13 @@
   version "4.17.9"
   resolved "https://registry.yarnpkg.com/@types/lodash-es/-/lodash-es-4.17.9.tgz#49dbe5112e23c54f2b387d860b7d03028ce170c2"
   integrity sha512-ZTcmhiI3NNU7dEvWLZJkzG6ao49zOIjEgIE0RgV7wbPxU0f2xT3VSAHw2gmst8swH6V0YkLRGp4qPlX/6I90MQ==
+  dependencies:
+    "@types/lodash" "*"
+
+"@types/lodash-es@^4.17.6":
+  version "4.17.12"
+  resolved "https://registry.yarnpkg.com/@types/lodash-es/-/lodash-es-4.17.12.tgz#65f6d1e5f80539aa7cfbfc962de5def0cf4f341b"
+  integrity sha512-0NgftHUcV4v34VhXm8QBSftKVXtbkBG3ViCjs6+eJ5a6y6Mi/jiFGPc1sC7QK+9BFhWrURE3EOggmWaSxL9OzQ==
   dependencies:
     "@types/lodash" "*"
 
