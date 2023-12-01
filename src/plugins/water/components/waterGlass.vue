@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-12-01 14:04:27
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-12-01 19:14:34
+ * @LastEditTime: 2023-12-01 19:24:26
 -->
 
 <template>
@@ -29,20 +29,20 @@ const uniforms = {
 }
 const smState = {
 	side: THREE.DoubleSide,
-	ior: 1.0,
-	reflectivity: 1.0,
-	sheen: 0.1,
-	sheenColor: new THREE.Color('#346DB7'),
+	// ior: 1.0,
+	// reflectivity: 1.0,
+	// sheen: 0.1,
+	// sheenColor: new THREE.Color('#346DB7'),
 	// transparent: true,
 	// opacity: 0.9,
 	// depthWrite: false,
 	// depthTest: true,
 	color: new THREE.Color('#346DB7'),
-	metalness: 0.334,
+	metalness: 0.087,
 	roughness: 0.0,
 	transmission: 1,
 	thickness: 1.5,
-	refractionRatio: 1.0
+	refractionRatio: 1.5
 }
 const { onLoop } = useRenderLoop()
 onLoop(({ delta }) => {

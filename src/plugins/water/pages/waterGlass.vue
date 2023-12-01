@@ -4,14 +4,17 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-12-01 17:21:26
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-12-01 19:09:10
+ * @LastEditTime: 2023-12-01 19:23:19
 -->
 
 <template>
 	<TresCanvas v-bind="gl" window-size>
 		<TresPerspectiveCamera :position="[10, 10, 10]" />
 		<TresAmbientLight :intensity="1" />
-		<TresDirectionalLight :args="[0xffffff, 9.0]" />
+		<!-- <TresDirectionalLight :args="[0xffffff, 9.0]" v-light-helper /> -->
+		<TresPointLight :args="[0xffffff, 100.0, 0, 0.1]" :position="[0, 3, 0]" v-light-helper />
+		<TresPointLight :args="[0xffffff, 100.0, 0, 0.1]" :position="[1, 3, 1]" v-light-helper />
+		<TresPointLight :args="[0xffffff, 100.0, 0, 0.1]" :position="[-1, 3, -1]" v-light-helper />
 		<OrbitControls />
 		<TresGridHelper :args="[10, 10]" />
 		<waterGlass />
@@ -20,7 +23,7 @@
 
 <script setup lang="ts">
 import { TresCanvas } from '@tresjs/core'
-import { OrbitControls } from '@tresjs/cientos'
+import { OrbitControls, vLightHelper } from '@tresjs/cientos'
 import waterGlass from '../components/waterGlass.vue'
 import { reactive } from 'vue';
 import * as THREE from 'three'
