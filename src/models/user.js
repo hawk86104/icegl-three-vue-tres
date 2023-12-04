@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-10-21 15:34:19
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-10-23 09:51:35
+ * @LastEditTime: 2023-12-04 19:35:08
  */
 import { reactive } from 'vue';
 import { access } from '@fesjs/fes';
@@ -15,7 +15,7 @@ export default function userModel () {
 	const signin = () => {
 		// todo
 		const { setRole } = access;
-		user.userName = '地虎降天龙';
+		user.userName = '';
 		setRole('admin');
 	};
 

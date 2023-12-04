@@ -4,13 +4,13 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-10-16 10:53:09
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-11-16 15:22:17
+ * @LastEditTime: 2023-12-04 19:54:44
  */
 import { defineBuildConfig } from '@fesjs/fes';
 
 export default defineBuildConfig({
     layout: {
-        title: 'Icegl',
+        title: 'TvT.js',
         navigation: 'top',
         multiTabs: false,
         isFixedHeader: true,
@@ -19,7 +19,58 @@ export default defineBuildConfig({
             {
                 name: 'preview',
                 path: '/',
-                title: '开源框架展示'
+                title: '📀 预览演示'
+            },
+            {
+                // name: 'docs',
+                // path: 'http://docs.icegl.cn',
+                title: '📚 说明文档',
+                children: [
+                    {
+                        path: 'http://docs.icegl.cn',
+                        title: '🧊 TvT框架文档'
+                    }, {
+                        path: 'https://threejs.org/docs/index.html#manual/zh/introduction/Creating-a-scene',
+                        title: '🎲 three.js'
+                    }, {
+                        path: 'https://tresjs.org/guide/',
+                        title: '⚡ tres.js'
+                    }, {
+                        path: 'https://fesjs.mumblefe.cn/',
+                        title: '💠 fes.js'
+                    },
+                ]
+            },
+            {
+                path: 'https://icegl.cn/',
+                title: '🧊 ICEGL官网'
+            },
+            {
+                path: 'https://space.bilibili.com/410503457',
+                title: '🅱️ B站主页'
+            },
+            {
+                title: '👨‍🏫 课程中心',
+                children: [
+                    {
+                        path: 'https://icegl.cn/courses',
+                        title: '🌁 WebGL初/中/高级教程'
+                    }, {
+                        path: 'https://www.bilibili.com/video/BV1iR4y1C7LQ/',
+                        title: '🏙 WebGL Shader初级教程'
+                    }, {
+                        path: 'https://study.163.com/course/introduction/1213599804.htm?inLoc=ss_ssjg_tjlb_webgl&share=1&shareId=1033552384',
+                        title: '🌇 WebGL Shader中级教程'
+                    },
+                ]
+            },
+            {
+                path: 'https://icegl.cn/ask',
+                title: '🙋‍♀️ 社区问答'
+            },
+            {
+                path: 'https://icegl.cn/p/aboutus',
+                title: '💫 关于我们'
             }
         ],
     },

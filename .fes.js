@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-10-16 10:53:09
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-11-17 16:35:40
+ * @LastEditTime: 2023-12-04 19:57:17
  */
 // import { resolve } from 'path';
 import { join } from 'path';
@@ -14,6 +14,7 @@ import UnoCSS from 'unocss/vite';
 // import glsl from 'vite-plugin-glsl';
 
 export default defineBuildConfig({
+    title: 'TvT.js',
     publicPath: './',
     access: {
         roles: {

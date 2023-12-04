@@ -38,7 +38,7 @@ const props = withDefaults(
 
 const smState = {
 	uniforms: {
-		resolution: { type: "v2", value: { x: 2, y: 2 } },
+		resolution: { type: "v2", value: { x: 1, y: 1 } },
 		backgroundColor: { type: "c", value: new THREE.Color(props.color) },
 		color: { type: "c", value: new THREE.Color('#fff') },
 		speed: { type: "f", value: props.speed },
