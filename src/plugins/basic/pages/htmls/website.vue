@@ -19,7 +19,7 @@ const gl = {
     <TresPerspectiveCamera :position="[-5, 4, 3]" />
     <OrbitControls />
     <Suspense>
-      <laptop/>
+      <laptop />
     </Suspense>
     <!-- <ContactShadows :blur="3.5" :resolution="512" :opacity="1" /> -->
     <TresAmbientLight :intensity="1" />

@@ -4,12 +4,12 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-12-01 14:04:27
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-12-01 19:24:26
+ * @LastEditTime: 2023-12-06 17:48:00
 -->
 
 <template>
-	<TresMesh :rotation-x="-Math.PI / 2" :position-y="1">
-		<TresPlaneGeometry :args="[10, 10, 20, 20]"></TresPlaneGeometry>
+	<TresMesh :rotation-x="-Math.PI / 2" :position-y="0.1">
+		<TresPlaneGeometry :args="[1, 1, 64, 64]"></TresPlaneGeometry>
 		<CustomShaderMaterial v-bind="smState" :baseMaterial="THREE.MeshPhysicalMaterial" :vertexShader="vertexShader"
 			:uniforms="uniforms" silent />
 	</TresMesh>
@@ -19,13 +19,26 @@
 import * as THREE from 'three'
 import { useRenderLoop } from '@tresjs/core'
 import { CustomShaderMaterial } from '@tresjs/cientos'
+import { watch } from "vue"
 import vertexShader from '../shaders/waterGlass.vert?raw'
+const props = withDefaults(
+	defineProps<{
+		color?: string
+		amplitude?: number
+		frequency?: number
+	}>(),
+	{
+		color: '#fff',
+		amplitude: 0.066,
+		frequency: 5.0,
+	},
+)
 
 const uniforms = {
 	time: { type: "f", value: 0.1 },
-	amplitude: { type: "f", value: 0.366 },
+	amplitude: { type: "f", value: props.amplitude },
 	speed: { type: "f", value: 0.277 },
-	frequency: { type: "f", value: 15.0 },
+	frequency: { type: "f", value: props.frequency },
 }
 const smState = {
 	side: THREE.DoubleSide,
@@ -37,7 +50,7 @@ const smState = {
 	// opacity: 0.9,
 	// depthWrite: false,
 	// depthTest: true,
-	color: new THREE.Color('#346DB7'),
+	color: new THREE.Color('#006EFF'),
 	metalness: 0.087,
 	roughness: 0.0,
 	transmission: 1,
@@ -49,4 +62,9 @@ onLoop(({ delta }) => {
 	uniforms.time.value += delta;
 })
 
+watch(() => props, () => {
+	smState.color = new THREE.Color(props.color)
+	uniforms.amplitude.value = props.amplitude
+	uniforms.frequency.value = props.frequency
+}, { deep: true })
 </script>

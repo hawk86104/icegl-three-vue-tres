@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-18 22:17:49
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-12-04 19:34:10
+ * @LastEditTime: 2023-12-06 16:28:10
 -->
 <template>
     <div class="flex h-full">
@@ -32,15 +32,6 @@
                         </f-menu-item>
                     </template>
                 </f-sub-menu>
-                <!-- <f-sub-menu value="8">
-                    <template #icon>
-                        <ClusterOutlined />
-                    </template>
-                    <template #label>aboutUs</template>
-                    <f-menu-item value="abus">
-                        <template #label>关于我们</template>
-                    </f-menu-item>
-                </f-sub-menu> -->
             </f-menu>
         </div>
         <div class="flex-1 overflow-scroll" style="height: calc(100vh - 54px);">
@@ -55,9 +46,6 @@
                     </div>
                 </template>
             </template>
-            <!-- <div style="background-color: #f1f1f2;" :ref="el => tabListRef.abus = el">
-                <aboutUs />
-            </div> -->
         </div>
     </div>
 </template>
@@ -65,10 +53,9 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { defineRouteMeta } from '@fesjs/fes';
-import { AppstoreOutlined, PictureOutlined, ClusterOutlined } from '@fesjs/fes-design/icon';
+import { AppstoreOutlined, PictureOutlined } from '@fesjs/fes-design/icon';
 import { getPluginsConfig } from '../common/utils';
 import cardList from '../components/cardList.vue'
-import aboutUs from '../components/aboutUs.vue'
 
 defineRouteMeta({
     name: 'preview',

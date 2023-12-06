@@ -3,16 +3,6 @@ uniform float amplitude;
 uniform float speed;
 uniform float frequency;
 
-// Description : Array and textureless GLSL 2D/3D/4D simplex
-//               noise functions.
-//      Author : Ian McEwan, Ashima Arts.
-//  Maintainer : ijm
-//     Lastmod : 20110822 (ijm)
-//     License : Copyright (C) 2011 Ashima Arts. All rights reserved.
-//               Distributed under the MIT License. See LICENSE file.
-//               https://github.com/ashima/webgl-noise
-//
-
 vec3 mod289(vec3 x){
 	return x-floor(x*(1./289.))*289.;
 }
@@ -43,13 +33,9 @@ float noise(vec3 v){
 	vec3 i1=min(g.xyz,l.zxy);
 	vec3 i2=max(g.xyz,l.zxy);
 	
-	//   x0 = x0 - 0.0 + 0.0 * C.xxx;
-	//   x1 = x0 - i1  + 1.0 * C.xxx;
-	//   x2 = x0 - i2  + 2.0 * C.xxx;
-	//   x3 = x0 - 1.0 + 3.0 * C.xxx;
 	vec3 x1=x0-i1+C.xxx;
-	vec3 x2=x0-i2+C.yyy;// 2.0*C.x = 1/3 = C.y
-	vec3 x3=x0-D.yyy;// -1.0+3.0*C.x = -0.5 = -D.y
+	vec3 x2=x0-i2+C.yyy;
+	vec3 x3=x0-D.yyy;
 	
 	// Permutations
 	i=mod289(i);
@@ -58,8 +44,6 @@ float noise(vec3 v){
 				+i.y+vec4(0.,i1.y,i2.y,1.))
 				+i.x+vec4(0.,i1.x,i2.x,1.));
 				
-				// Gradients: 7x7 points over a square, mapped onto an octahedron.
-				// The ring size 17*17 = 289 is close to a multiple of 49 (49*6 = 294)
 				float n_=.142857142857;// 1.0/7.0
 				vec3 ns=n_*D.wyz-D.xzx;
 				
@@ -75,8 +59,6 @@ float noise(vec3 v){
 				vec4 b0=vec4(x.xy,y.xy);
 				vec4 b1=vec4(x.zw,y.zw);
 				
-				//vec4 s0 = vec4(lessThan(b0,0.0))*2.0 - 1.0;
-				//vec4 s1 = vec4(lessThan(b1,0.0))*2.0 - 1.0;
 				vec4 s0=floor(b0)*2.+1.;
 				vec4 s1=floor(b1)*2.+1.;
 				vec4 sh=-step(h,vec4(0.));
@@ -108,7 +90,6 @@ float noise(vec3 v){
 				return noise(vec3(point.x*frequency,point.y*frequency,time*speed))*amplitude;
 			}
 			
-			// http://lolengine.net/blog/2013/09/21/picking-orthogonal-vector-combing-coconuts
 			vec3 orthogonal(vec3 v){
 				return normalize(abs(v.x)>abs(v.z)
 				?vec3(-v.y,v.x,0.)
@@ -126,16 +107,15 @@ float noise(vec3 v){
 				vec3 displacedNeighbour1=neighbour1+normal*displace(neighbour1);
 				vec3 displacedNeighbour2=neighbour2+normal*displace(neighbour2);
 				
-				// https://i.ya-webdesign.com/images/vector-normals-tangent-16.png
 				vec3 displacedTangent=displacedNeighbour1-displacedPosition;
 				vec3 displacedBitangent=displacedNeighbour2-displacedPosition;
 				
-				// https://upload.wikimedia.org/wikipedia/commons/d/d2/Right_hand_rule_cross_product.svg
 				vec3 displacedNormal=normalize(cross(displacedTangent,displacedBitangent));
 				
 				// vNormal=normalMatrix*displacedNormal;
 				//vNormal = normal;
 				csm_Normal=normalMatrix*displacedNormal;
+				// csm_Normal=normal;
 				// gl_Position=projectionMatrix*modelViewMatrix*vec4(displacedPosition,1.);
 				csm_Position=displacedPosition;
 			}
