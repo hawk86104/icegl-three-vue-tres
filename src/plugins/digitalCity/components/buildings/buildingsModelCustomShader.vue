@@ -19,6 +19,9 @@ const props = withDefaults(defineProps<{
 })
 const timeDelta = ref(0)
 const CITY_UNTRIANGULATED = props.model.city
+//debugger
+//props.model.model.children[0].material = new THREE.MeshBasicMaterial({ color: '#ffff00' })
+
 CITY_UNTRIANGULATED.renderOrder = 1001
 const LANDMASS = props.model.land
 const setColorMaterial = (type: any, param: string) => {
