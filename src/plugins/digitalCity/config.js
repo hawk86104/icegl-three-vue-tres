@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-10-26 09:20:42
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-11-28 16:53:05
+ * @LastEditTime: 2023-12-11 17:01:01
  */
 export default {
 	"name": "digitalCity",
@@ -22,5 +22,6 @@ export default {
 		{ "src": "plugins/digitalCity/preview/fireA.png", "type": "img", "name": "fireA", "title": "火A效果" },
 		{ "src": "plugins/digitalCity/preview/heatmap.png", "type": "img", "name": "heatmap", "title": "热力图" },
 		{ "src": "plugins/digitalCity/preview/heatmap2.png", "type": "img", "name": "heatmap2", "title": "建筑物-热力图" },
+		{ "src": "plugins/digitalCity/preview/cityRiver.png", "type": "img", "name": "cityRiver", "title": "城市河流" },
 	]
 }
