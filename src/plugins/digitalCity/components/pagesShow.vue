@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-10-24 09:49:39
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-11-28 10:33:19
+ * @LastEditTime: 2023-12-11 16:35:51
 -->
 <template>
 	<TresCanvas v-bind="state" window-size>
@@ -18,8 +18,8 @@
 		</template>
 
 		<slot name="ability"></slot>
-		<TresAxesHelper :args="[1000]" :position="[0, 19, 0]" />
-		<TresGridHelper :args="[6000, 100]" :position="[0, 19, 0]" />
+		<TresAxesHelper v-if="props.showAxesHelper" :args="[1000]" :position="[0, 19, 0]" />
+		<TresGridHelper v-if="props.showGridHelper" :args="[6000, 100]" :position="[0, 19, 0]" />
 	</TresCanvas>
 </template>
 
@@ -28,10 +28,14 @@ const props = withDefaults(
 	defineProps<{
 		showBuildings?: boolean
 		autoRotate?: boolean
+		showAxesHelper?: boolean
+		showGridHelper?: boolean
 	}>(),
 	{
 		showBuildings: true,
-		autoRotate: true
+		autoRotate: true,
+		showAxesHelper: true,
+		showGridHelper: true,
 	},
 )
 
