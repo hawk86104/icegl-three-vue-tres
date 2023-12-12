@@ -4,10 +4,10 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-10-24 09:49:39
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-12-11 16:35:51
+ * @LastEditTime: 2023-12-12 10:01:50
 -->
 <template>
-	<TresCanvas v-bind="state" window-size>
+	<TresCanvas ref="tcRef" v-bind="state" window-size>
 		<TresPerspectiveCamera ref="perspectiveCameraRef" :position="[600, 750, -1221]" :fov="45" :near="1" :far="10000" />
 		<OrbitControls v-bind="controlsState" />
 		<TresAmbientLight color="#ffffff" />
@@ -64,4 +64,6 @@ if (props.showBuildings) {
 	cityFBX = await loadCityFBX()
 }
 const perspectiveCameraRef = ref()
+const tcRef = ref()
+
 </script>

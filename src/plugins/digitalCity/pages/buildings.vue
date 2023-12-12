@@ -4,10 +4,10 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-10-17 08:30:49
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-11-08 10:31:40
+ * @LastEditTime: 2023-12-12 10:36:06
 -->
 <template>
-	<pagesShow :showBuildings="false">
+	<pagesShow :showBuildings="false" ref="pagesShowRef">
 		<template v-slot:ability>
 			<buildingsModel v-if="buildingState.show && showbuildingsLines" :model="CityFBX"
 				:bulidingsColor="buildingState.bulidingsColor" :landColor="buildingState.landColor"
@@ -19,7 +19,7 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, onMounted, ref } from 'vue';
+import { reactive, onMounted, ref } from 'vue'; // watchEffect
 import { Pane } from 'tweakpane';
 
 import { loadCityFBX } from '../common/loadCity';
@@ -28,9 +28,17 @@ import buildingsLines from '../components/buildings/buildingsLines.vue';
 
 import pagesShow from '../components/pagesShow.vue'
 
+const pagesShowRef = ref()
 const showbuildingsLines = ref(false)
 const CityFBX = await loadCityFBX()
 showbuildingsLines.value = true
+
+// watchEffect(() => {
+// 	if (pagesShowRef.value) {
+// 		debugger
+// 		pagesShowRef.value.$refs.tcRef.value.context.value.scene.value.fog = true;
+// 	}
+// })
 
 onMounted(() => {
 	const paneControl = new Pane({
