@@ -1338,6 +1338,13 @@
   dependencies:
     "@fesjs/utils" "^3.0.1"
 
+"@fesjs/plugin-pinia@^3.0.1":
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/@fesjs/plugin-pinia/-/plugin-pinia-3.0.1.tgz#e8d8e106db9e369ce68d3d8deac289e6bc90019d"
+  integrity sha512-m1jBReTMEvGBEr8YKWOUACMBLxJfuKRCuw6wZ8MhgBiGbHTZSbO34Io0e3JMLjXvImniS6mgt2bpAt/BM4hIiA==
+  dependencies:
+    "@fesjs/utils" "^3.0.1"
+
 "@fesjs/plugin-request@^4.0.0-beta.6":
   version "4.0.0-beta.6"
   resolved "https://registry.yarnpkg.com/@fesjs/plugin-request/-/plugin-request-4.0.0-beta.6.tgz#126fb6a53a417f8c7ad946ad6a5a6adfb818bc83"
@@ -4633,6 +4640,14 @@ pify@^4.0.1:
   resolved "https://registry.yarnpkg.com/pify/-/pify-4.0.1.tgz#4b2cd25c50d598735c50292224fd8c6df41e3231"
   integrity sha512-uB80kBFb/tfd68bVleG9T5GGsGPjJrLAUpR5PZIrhBnIaRTQRjqdJSsIKkOP6OAIFbj7GOrcudc5pNjZ+geV2g==
 
+pinia@^2.1.7:
+  version "2.1.7"
+  resolved "https://registry.yarnpkg.com/pinia/-/pinia-2.1.7.tgz#4cf5420d9324ca00b7b4984d3fbf693222115bbc"
+  integrity sha512-+C2AHFtcFqjPih0zpYuvof37SFxMQ7OEG2zV9jRI12i9BOy3YQVAHwdKtyyc8pDcDyIc33WCIsZaCFWU7WWxGQ==
+  dependencies:
+    "@vue/devtools-api" "^6.5.0"
+    vue-demi ">=0.14.5"
+
 pirates@^4.0.5:
   version "4.0.6"
   resolved "https://registry.yarnpkg.com/pirates/-/pirates-4.0.6.tgz#3018ae32ecfcff6c29ba2267cbf21166ac1f36b9"
@@ -5240,6 +5255,11 @@ three-custom-shader-material@^5.4.0:
     glsl-tokenizer "^2.1.5"
     object-hash "^3.0.0"
 
+three-mesh-bvh@^0.6.8:
+  version "0.6.8"
+  resolved "https://registry.yarnpkg.com/three-mesh-bvh/-/three-mesh-bvh-0.6.8.tgz#f27d18ca75bdc59316dff0f561af8fb316621a54"
+  integrity sha512-EGebF9DZx1S8+7OZYNNTT80GXJZVf+UYXD/HyTg/e2kR/ApofIFfUS4ZzIHNnUVIadpnLSzM4n96wX+l7GMbnQ==
+
 three-stdlib@^2.27.3:
   version "2.28.5"
   resolved "https://registry.yarnpkg.com/three-stdlib/-/three-stdlib-2.28.5.tgz#8184f5bacc90c2eec6ed36a861224e18799226fd"
@@ -5519,7 +5539,7 @@ vite@^4.2.1:
   optionalDependencies:
     fsevents "~2.3.2"
 
-vue-demi@*, vue-demi@>=0.14.6:
+vue-demi@*, vue-demi@>=0.14.5, vue-demi@>=0.14.6:
   version "0.14.6"
   resolved "https://registry.yarnpkg.com/vue-demi/-/vue-demi-0.14.6.tgz#dc706582851dc1cdc17a0054f4fec2eb6df74c92"
   integrity sha512-8QA7wrYSHKaYgUxDA5ZC24w+eHm3sYCbp0EzcDwKqN3p6HqtTCGR/GVsPyZW92unff4UlcSh++lmqDWN3ZIq4w==
