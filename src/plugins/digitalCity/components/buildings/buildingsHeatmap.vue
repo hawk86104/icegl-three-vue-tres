@@ -4,12 +4,12 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-09 09:33:51
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-12-13 19:27:05
+ * @LastEditTime: 2023-12-13 19:57:41
 -->
 <script setup lang="ts">
 import { initHeatmap, setData, getData } from 'PLS/heatMap/common/utils'
 import { resetUV } from '../../common/utils'
-import { watchEffect } from 'vue';
+import { watchEffect } from 'vue'
 import * as THREE from 'three'
 import { computeBoundsTree, disposeBoundsTree, acceleratedRaycast } from 'three-mesh-bvh'
 import * as BufferGeometryUtils from 'three/addons/utils/BufferGeometryUtils.js'
@@ -86,23 +86,26 @@ watchEffect(() => {
 	}
 });
 
+import { useDigitalCityStore } from 'PLS/digitalCity/stores/digitalCity'
+const buildingsHeatmap = useDigitalCityStore()
 const onPointerMove = (ev) => {
 	if (ev) {
 		// console.log(ev)
 		// uv坐标转canvas坐标
 		const valueUV = { x: ev.uv.x * heatmap._config.width, y: (1 - ev.uv.y) * heatmap._config.height }
-		// console.log('数值：', valueUV)
-		// console.log('数值———：', getData(heatmap, valueUV))
+		console.log('数值：', ev)
+		console.log('数值———：', getData(heatmap, valueUV))
+		buildingsHeatmap.setTemperature(getData(heatmap, valueUV))
 	}
 }
 const onPointerEnter = (ev) => {
 	if (ev) {
-		// showDiv.value = true
+		buildingsHeatmap.$patch({ showDiv: true })
 	}
 }
 const onPointerLeave = (ev) => {
 	if (ev) {
-		// showDiv.value = false
+		buildingsHeatmap.setShowDiv(false)
 	}
 }
 
