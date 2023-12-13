@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-10-16 10:53:09
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-12-04 19:57:17
+ * @LastEditTime: 2023-12-13 08:46:51
  */
 // import { resolve } from 'path';
 import { join } from 'path';
@@ -13,6 +13,8 @@ import { templateCompilerOptions } from '@tresjs/core';
 import UnoCSS from 'unocss/vite';
 // import glsl from 'vite-plugin-glsl';
 
+
+const timeStamp = new Date().getTime()
 export default defineBuildConfig({
     title: 'TvT.js',
     publicPath: './',
@@ -43,6 +45,15 @@ export default defineBuildConfig({
             }),
             // glsl(),
         ],
+        build: {
+            rollupOptions: {
+                output: {
+                    chunkFileNames: `js/[name].[hash]${timeStamp}.js`,
+                    entryFileNames: `js/[name].[hash]${timeStamp}.js`,
+                    assetFileNames: `[ext]/[name].[hash]${timeStamp}.[ext]`,
+                },
+            }
+        },
     },
     alias: { PLS: join(__dirname, './src/plugins') },
     // { find: 'pls', replacement: resolve(__dirname, './src/plugins') },
