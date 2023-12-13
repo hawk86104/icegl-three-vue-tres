@@ -36,6 +36,7 @@
         "gsap": "^3.12.2",
         "heatmap.js-fix": "^1.0.0",
         "three": "^0.159.0",
+        "three-mesh-bvh": "^0.6.8",
         "three-subdivide": "^1.1.5",
         "unocss": "^0.56.5",
         "vanta": "^0.5.24",
