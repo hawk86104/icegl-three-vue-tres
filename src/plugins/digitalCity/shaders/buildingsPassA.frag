@@ -11,6 +11,7 @@ uniform vec3 uColor;
 uniform float uScalenum;//最大范围
 uniform float uScaleone;//单条圈间距
 uniform float uWidth;//单条厚度
+uniform vec2 uPosition;//位置
 
 vec3 WorldPosFromDepth(float depth){
 	float z=(depth-.5)*2.;
@@ -38,10 +39,13 @@ void main(){
 	
 	// vec3 pos=WorldPosFromDepth(depth);
 	vec3 pos=WorldPosFromDepth2(depth);
-	
+	pos.x=pos.x+uPosition.x;
+	pos.z=pos.z+uPosition.y;
 	float dis=distance(pos.xz,vec2(0,0));
 	vec3 color=vec3(base);
-	
+	if(pos.y<=0.){
+		discard;
+	}
 	if(dis<uScalenum){
 		vec3 scanT=uColor;
 		float wave=fract((dis-time*10.)/uScaleone);

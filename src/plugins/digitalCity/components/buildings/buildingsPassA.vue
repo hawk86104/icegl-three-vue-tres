@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-12-15 11:01:46
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-12-15 16:26:46
+ * @LastEditTime: 2023-12-15 17:25:06
 -->
 
 <script setup lang="ts">
@@ -28,13 +28,15 @@ const props = withDefaults(
 		uScaleone?: number
 		uWidth?: number
 		speed?: number
+		uPosition?: any
 	}>(),
 	{
 		color: '#FFF',
 		uScalenum: 150,
 		uScaleone: 24,
 		uWidth: 1.0,
-		speed: 1.0
+		speed: 1.0,
+		uPosition: { x: 0, y: 0 }
 	},
 )
 
@@ -67,6 +69,7 @@ const shaderPass = new ShaderPass(
 			uScalenum: { value: props.uScalenum },
 			uScaleone: { value: props.uScaleone },
 			uWidth: { value: props.uWidth },
+			uPosition: { value: new THREE.Vector2(props.uPosition.x, props.uPosition.y) },
 		},
 		vertexShader,
 		fragmentShader,
@@ -107,6 +110,9 @@ watchEffect(() => {
 	}
 	if (props.uWidth) {
 		shaderPass.material.uniforms.uWidth.value = props.uWidth
+	}
+	if (props.uPosition) {
+		shaderPass.material.uniforms.uPosition.value.set(props.uPosition.x, props.uPosition.y)
 	}
 })
 </script>

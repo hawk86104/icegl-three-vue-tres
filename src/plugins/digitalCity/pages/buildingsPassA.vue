@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-12-15 10:58:31
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-12-15 16:30:34
+ * @LastEditTime: 2023-12-15 17:27:27
 -->
 
 <template>
@@ -27,7 +27,8 @@ const passState = reactive({
 	uScalenum: 250,
 	uScaleone: 82,
 	uWidth: 0.2,
-	speed: 10.0
+	speed: 10.0,
+	uPosition: { x: 0, y: 0 },
 })
 
 const paneControl = new Pane({
@@ -59,4 +60,11 @@ paneControl.addBinding(passState, 'speed', {
 	max: 20,
 	step: 1,
 })
+paneControl.addBinding(passState, 'uPosition', {
+	picker: 'inline',
+	label: '位置',
+	expanded: true,
+	x: { min: -1000, max: 1000, step: 10 },
+	y: { min: -1000, max: 1000, step: 10 },
+});
 </script>
