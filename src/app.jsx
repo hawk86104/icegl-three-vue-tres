@@ -60,7 +60,7 @@ export function patchRoutes ({ routes }) {
     const viteModules = import.meta.glob('./plugins/**/pages/**/*.vue')
     const needAddRouter = {
         path: '/plugins',
-        component: () => import("./components/suspenseLayout.vue"),
+        component: () => import("./components/forPreview/suspenseLayout.vue"),
         children: []
     }
     // eslint-disable-next-line guard-for-in

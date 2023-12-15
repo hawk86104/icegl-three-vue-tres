@@ -55,7 +55,7 @@ import { ref } from 'vue';
 import { defineRouteMeta } from '@fesjs/fes';
 import { AppstoreOutlined, PictureOutlined } from '@fesjs/fes-design/icon';
 import { getPluginsConfig } from '../common/utils';
-import cardList from '../components/cardList.vue'
+import cardList from '../components/forPreview/cardList.vue'
 
 defineRouteMeta({
     name: 'preview',
