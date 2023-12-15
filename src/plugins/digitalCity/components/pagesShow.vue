@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-10-24 09:49:39
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-12-12 10:01:50
+ * @LastEditTime: 2023-12-15 12:37:17
 -->
 <template>
 	<TresCanvas ref="tcRef" v-bind="state" window-size>
@@ -30,12 +30,14 @@ const props = withDefaults(
 		autoRotate?: boolean
 		showAxesHelper?: boolean
 		showGridHelper?: boolean
+		disableRender?: boolean
 	}>(),
 	{
 		showBuildings: true,
 		autoRotate: true,
 		showAxesHelper: true,
 		showGridHelper: true,
+		disableRender: false,
 	},
 )
 
@@ -56,6 +58,7 @@ const state = reactive({
 	shadowMapType: BasicShadowMap,
 	outputColorSpace: SRGBColorSpace,
 	toneMapping: NoToneMapping,
+	disableRender: props.disableRender
 });
 const controlsState = reactive({ autoRotate: props.autoRotate, enableDamping: true });
 
