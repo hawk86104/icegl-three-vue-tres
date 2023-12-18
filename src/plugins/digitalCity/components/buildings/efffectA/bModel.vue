@@ -3,7 +3,7 @@
 import { useRenderLoop } from '@tresjs/core'
 // import { CustomShaderMaterial } from '@tresjs/cientos'
 import CustomShaderMaterial from 'three-custom-shader-material/vanilla'
-import { ref, watchEffect, watch } from 'vue';
+import { watchEffect, watch } from 'vue';
 import * as THREE from 'three'
 const props = withDefaults(defineProps<{
 	model: any
@@ -19,10 +19,9 @@ const props = withDefaults(defineProps<{
 	opacity: 0.9,
 	gradient: true
 })
-const timeDelta = ref(0)
 const CITY_UNTRIANGULATED = props.model.city
 //debugger
-//props.model.model.children[0].material = new THREE.MeshBasicMaterial({ color: '#ffff00' })
+props.model.model.children[0].material = new THREE.MeshBasicMaterial({ color: '#ffff00' })
 
 CITY_UNTRIANGULATED.renderOrder = 1001
 const LANDMASS = props.model.land
@@ -113,7 +112,9 @@ const setEffectMaterial = () => {
 			uTopColor: {
 				value: new THREE.Color(props.topColor)
 			},
-			uTime: timeDelta,
+			uTime: {
+				value: 0
+			},
 			uGradient: {
 				value: props.gradient
 			}
@@ -133,7 +134,8 @@ setEffectMaterial()
 const { onLoop } = useRenderLoop()
 
 onLoop(({ delta }) => {
-	timeDelta.value += delta;
+	CITY_UNTRIANGULATED.material.uniforms.uTime.value += delta
+	// console.log(CITY_UNTRIANGULATED.material.uniforms.uTime.value)
 })
 watchEffect(() => {
 	if (props.bulidingsColor) {
