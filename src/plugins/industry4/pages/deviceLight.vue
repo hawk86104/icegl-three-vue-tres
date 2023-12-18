@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-18 08:51:19
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-11-18 20:56:51
+ * @LastEditTime: 2023-12-18 10:18:07
 -->
 <template>
 	<TresCanvas v-bind="state" window-size>
@@ -34,6 +34,7 @@ const state = reactive({
 	shadowMapType: BasicShadowMap,
 	outputColorSpace: SRGBColorSpace,
 	toneMapping: NoToneMapping,
+	disableRender: true
 })
 const controlsState = reactive({
 	autoRotate: true,

@@ -4,11 +4,11 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-12-15 10:58:31
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-12-15 17:27:27
+ * @LastEditTime: 2023-12-18 11:05:32
 -->
 
 <template>
-	<pagesShow :disableRender="true" :showAxesHelper="false" :autoRotate="false">
+	<pagesShow :disableRender="true" :showAxesHelper="false">
 		<template v-slot:ability>
 			<buildingsPassA v-bind="passState" />
 		</template>
