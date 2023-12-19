@@ -39,9 +39,12 @@ ThreeJS大名鼎鼎的基于浏览器渲染，JavaScript语言的3D库。<br/><b
 
 ## 🏕点击预览：[🌏opensource.icegl.cn](http://opensource.icegl.cn)
 ![展示](./preview/数字城市1.gif)
-![展示](./preview/地球2.gif)
+![展示](./preview/数字城市2.gif)
 ![展示](./preview/地球3.gif)
+![展示](./preview/热力图2.gif)
 ![展示](./preview/热力图.gif)
+![展示](./preview/数字大脑.gif)
+![展示](./preview/shadertoyMaterial.gif)
 
 更多演示请进入预览页面
 
