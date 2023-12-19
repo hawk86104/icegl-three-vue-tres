@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-12-15 10:58:31
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-12-18 18:23:08
+ * @LastEditTime: 2023-12-19 15:45:00
 -->
 
 <template>
@@ -44,12 +44,6 @@ paneControl.addBinding(lineState, 'speed', {
 	min: 0.1,
 	max: 1,
 	step: 0.1,
-})
-paneControl.addBinding(lineState, 'scale', {
-	label: '最大扩散',
-	min: 10,
-	max: 2000,
-	step: 10,
 })
 paneControl.addBinding(lineState, 'scale', {
 	label: '最大扩散',
