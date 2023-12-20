@@ -59,7 +59,7 @@ const shader = {
     vec4 uMax_world = modelMatrix * vec4(uMax,1.0);
     vec4 uMin_world = modelMatrix * vec4(uMin,1.0);
     // 根据像素点世界坐标的y轴高度,设置透明度
-    float opacity =1.0 - (vPosition.y - uMin_world.y) / (uMax_world.y -uMin_world.y); 
+    float opacity =1.0 - (vPosition.y - uMin_world.y) / (uMax_world.y -uMin_world.y) ; 
     gl_FragColor = vec4( uColor, opacity);
   }
   `,

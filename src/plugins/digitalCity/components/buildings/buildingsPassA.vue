@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-12-15 11:01:46
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-12-15 17:25:06
+ * @LastEditTime: 2023-12-20 11:09:23
 -->
 
 <script setup lang="ts">
@@ -73,6 +73,10 @@ const shaderPass = new ShaderPass(
 		},
 		vertexShader,
 		fragmentShader,
+		// transparent: false,
+		// depthWrite: false,
+		// depthTest: true,
+		// side: THREE.DoubleSide,//双面渲染
 	})
 )
 effectComposer.addPass(shaderPass)
