@@ -38,6 +38,11 @@ ThreeJS大名鼎鼎的基于浏览器渲染，JavaScript语言的3D库。<br/><b
 使用Vue3.x组件实现声明式的ThreeJS，做属于前端的三维项目。<br/><br/>
 
 ## 🏕点击预览：[🌏opensource.icegl.cn](http://opensource.icegl.cn)
+
+```shell 
+因项目经常更新编译，如发现访问错误，请清空浏览器缓存。
+```
+
 ![展示](./preview/数字城市1.gif)
 ![展示](./preview/数字城市2.gif)
 ![展示](./preview/地球3.gif)
