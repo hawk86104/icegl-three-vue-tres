@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-10-17 08:30:49
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-11-01 13:05:50
+ * @LastEditTime: 2023-12-20 11:10:22
 -->
 <template>
 	<loading></loading>
@@ -23,8 +23,8 @@ import { ref, reactive } from 'vue';
 import { Pane } from 'tweakpane';
 import loading from '../components/loading.vue'
 import pagesShow from '../components/pagesShow.vue'
-import radraA from '../components/radras/radraA.vue';
-import radraB from '../components/radras/radraB.vue';
+import radraA from '../components/radras/radraA.vue'
+import radraB from '../components/radras/radraB.vue'
 
 const radraARef = ref()
 
