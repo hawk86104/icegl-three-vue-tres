@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-18 08:51:19
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-12-18 10:18:07
+ * @LastEditTime: 2023-12-21 08:32:53
 -->
 <template>
 	<TresCanvas v-bind="state" window-size>
@@ -15,6 +15,7 @@
 		<Suspense>
 			<device v-bind="deviceState" />
 		</Suspense>
+		<TresGridHelper :position="[0, -1, 0]" />
 	</TresCanvas>
 </template>
 
@@ -42,7 +43,7 @@ const controlsState = reactive({
 
 const deviceState = reactive({
 	threshold: 0,				// 阈值
-	strength: 0.972,    // 强度
+	strength: 0.6,    // 强度
 	radius: 0.21,       // 半径
 })
 const paneControl = new Pane({ title: '参数', });

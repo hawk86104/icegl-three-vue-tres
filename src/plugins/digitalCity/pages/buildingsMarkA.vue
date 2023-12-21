@@ -15,7 +15,7 @@
 			<radraA :size="200" :radius="200" :position="[210, 30, -50]" color="#66ffff" />
 			<Suspense>
 				<markA :position="[-410, 19, -260]" :scale="0.13" img="./plugins/digitalCity/image/znsb-err.png"
-					:foremost="true" />
+					:sizeAttenuation="true" :foremost="true" />
 			</Suspense>
 			<radraB :position="[-410, 19, -260]" :height="60" color="#ff0000" />
 		</template>
