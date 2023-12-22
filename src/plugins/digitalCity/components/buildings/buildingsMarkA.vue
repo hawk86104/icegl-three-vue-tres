@@ -15,6 +15,7 @@ const props = withDefaults(
 		img: string
 		offset?: Array<number>
 		foremost?: boolean
+		sizeAttenuation?: boolean
 	}>(),
 	{
 		color: '#fff',
@@ -22,6 +23,7 @@ const props = withDefaults(
 		scale: 0.1,
 		offset: [0.344, 0.394],	//图片偏移量
 		foremost: true,	//是否在最前
+		sizeAttenuation: false
 	},
 )
 
@@ -30,7 +32,7 @@ const smState = reactive({
 	color: props.color,
 	transparent: true,
 	depthWrite: false,
-	sizeAttenuation: false, //不自动缩放
+	sizeAttenuation: props.sizeAttenuation, //自动缩放
 	toneMapped: false,
 	depthTest: !props.foremost,//深度检测， 就是 是否遮挡
 })

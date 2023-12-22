@@ -4,14 +4,13 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-10 16:13:11
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-11-17 17:21:32
+ * @LastEditTime: 2023-12-22 11:40:43
 -->
 <template>
 	<TresCanvas v-bind="state" window-size>
 		<TresPerspectiveCamera :position="[100, 400, 500]" :fov="45" :near="0.1" :far="10000" :look-at="[0, 0, 0]" />
 		<OrbitControls v-bind="controlsState" />
 		<TresAmbientLight :intensity="0.5" />
-		<TresGridHelper :args="[400, 10]" />
 		<TresGroup :position="[0, 120, 0]">
 			<cloudPoints v-if="cloudPointsState.show" :model="model" v-bind="cloudPointsState"></cloudPoints>
 			<Suspense>
@@ -20,6 +19,7 @@
 
 			<bubblesEffect v-if="bubblesState.show" :model="model" v-bind="bubblesState" />
 		</TresGroup>
+		<TresGridHelper :args="[400, 10]" />
 	</TresCanvas>
 </template>
 

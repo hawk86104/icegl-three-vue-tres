@@ -2,7 +2,7 @@
 .cache
 
 # dependencies
-/node_modules
+/node_modules/*
 /coverage
 
 # fes
@@ -10,4 +10,9 @@
 /src/.fes-production
 /src/.fes-test
 .env.local
-# dist
+dist
+
+#不排除 排除alienkitty 和 oimophysics  基于:https://github.com/alienkitty/alien.js 库
+#因为这两个库从npm包很难下载，且有的下架了
+!/node_modules/@alienkitty/
+!/node_modules/oimophysics/
