@@ -38,6 +38,7 @@
         "core-js": "^3.29.1",
         "gsap": "^3.12.2",
         "heatmap.js-fix": "^1.0.0",
+        "oimophysics": "^1.2.2",
         "patch-package": "^8.0.0",
         "pinia": "^2.1.7",
         "postinstall-postinstall": "^2.1.0",
