@@ -8,7 +8,8 @@
         "pre.dev": "cross-env FES_ENV=predev fes dev",
         "pre.build": "cross-env FES_ENV=predev fes build",
         "analyze": "cross-env ANALYZE=1 fes build",
-        "test:unit": "fes test:unit"
+        "test:unit": "fes test:unit",
+        "postinstall": "patch-package"
     },
     "publishConfig": {
         "access": "public"
@@ -20,6 +21,7 @@
         "tweakpane": "^4.0.1"
     },
     "dependencies": {
+        "@alienkitty/space.js": "^1.1.0",
         "@fesjs/builder-vite": "^3.0.3",
         "@fesjs/fes": "^3.1.5",
         "@fesjs/fes-design": "^0.8.10",
@@ -36,7 +38,9 @@
         "core-js": "^3.29.1",
         "gsap": "^3.12.2",
         "heatmap.js-fix": "^1.0.0",
+        "patch-package": "^8.0.0",
         "pinia": "^2.1.7",
+        "postinstall-postinstall": "^2.1.0",
         "three": "^0.159.0",
         "three-mesh-bvh": "^0.6.8",
         "three-subdivide": "^1.1.5",
