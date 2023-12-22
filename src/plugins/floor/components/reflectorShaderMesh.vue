@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-12-22 16:05:20
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-12-22 20:35:05
+ * @LastEditTime: 2023-12-22 21:27:29
 -->
 
 <template>
@@ -26,11 +26,11 @@ pTexture[1].wrapS = RepeatWrapping
 pTexture[1].wrapT = RepeatWrapping
 
 const reflector = new Reflector()
-debugger
+
 const material = new ReflectorMaterial({
-	reflectivity: 0.1,	//反射率
+	reflectivity: 0.2,	//反射率
 	mirror: 1,
-	mixStrength: 5,
+	mixStrength: 9,
 	// color: new Color('#ffffff'),
 	map: pTexture[0],
 	normalMap: pTexture[1],

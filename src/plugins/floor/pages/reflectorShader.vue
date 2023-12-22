@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-12-22 08:09:35
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-12-22 20:36:16
+ * @LastEditTime: 2023-12-22 21:27:35
 -->
 
 <template>
@@ -23,7 +23,6 @@
 		</Suspense>
 	</TresCanvas>
 </template>
-
 
 <script setup lang="ts">
 import { TresCanvas } from '@tresjs/core'
