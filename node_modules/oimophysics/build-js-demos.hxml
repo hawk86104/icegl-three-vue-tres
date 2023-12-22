@@ -1,0 +1,5 @@
+-cp src
+-cp demos/src
+-D analyzer-optimize
+-main demo.js.DemoJS
+-js demos/bin/js/demos.js

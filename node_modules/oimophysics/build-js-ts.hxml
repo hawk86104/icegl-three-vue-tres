@@ -1,0 +1,27 @@
+-cp exports/src
+-cp src
+-main export.ts.Export
+-lib hxtsdgen
+-D analyzer-optimize
+-D hxtsdgen_namespaced
+-D hxtsdgen_enums_ts
+-D hxtsdgen_types_ts
+-js bin/js_modules/OimoPhysics.js
+-D js-es=6
+-D js_unflatten
+-D js_classic
+-D shallow-expose
+
+#
+#
+#
+# After build you will need to edit generated JS file:
+# Remove all lines before `var oimo = oimo || {};`
+# Replace last two lines `export.ts.Export.main();
+#                         var Export = $hx_exports["Export"];`
+# with next: `export {oimo};`
+# Remove Export class from OimoPhysics.d.ts
+#
+#
+#
+#

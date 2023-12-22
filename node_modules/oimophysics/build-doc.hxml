@@ -1,0 +1,7 @@
+-cp src
+-cp exports/src
+-D analyzer-optimize
+-main export.Export
+--interp
+-xml docs/doc.xml
+-cmd haxelib run dox -i docs/doc.xml -o docs -in "oimo.(collision|common|dynamics)" -ex "oimo.dynamics.constraint.(info|solver.common)" --title "OimoPhysics API documentation" -D website https://github.com/saharan/OimoPhysics -D source-path https://github.com/saharan/OimoPhysics/tree/master/src/ -D description "OimoPhysics API Documentation" -D version 1.2.2

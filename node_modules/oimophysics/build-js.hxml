@@ -1,0 +1,10 @@
+-cp src
+-cp exports/src
+-D analyzer-optimize
+-D js-es=6
+-main export.js.Export
+-js bin/js/OimoPhysics.js
+
+#
+# place Closure Compiler at `./compiler.jar` and run `./minify-js.sh` afterwards to generate minified js
+#
