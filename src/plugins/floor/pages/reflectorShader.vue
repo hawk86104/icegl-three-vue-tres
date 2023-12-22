@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-12-22 08:09:35
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-12-22 19:59:36
+ * @LastEditTime: 2023-12-22 20:36:16
 -->
 
 <template>
@@ -13,7 +13,7 @@
 		<OrbitControls enableDamping />
 		<TresAmbientLight :intensity="10.0" />
 		<TresDirectionalLight :position="[0, 10, 0]" :intensity="10" v-light-helper color="#ffffff" />
-		<Box :args="[1, 1, 1]" color="orange" :position="[3, 0, 0]" />
+		<Box :args="[1, 1, 1]" color="orange" :position="[3, 1, 0]" />
 		<TresMesh :position="[0, 2, -4]">
 			<TresBoxGeometry :args="[1, 1, 1]" />
 			<TresMeshNormalMaterial />
