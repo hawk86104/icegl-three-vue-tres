@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-10 16:13:11
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-12-22 11:40:43
+ * @LastEditTime: 2023-12-22 11:46:26
 -->
 <template>
 	<TresCanvas v-bind="state" window-size>
@@ -19,7 +19,7 @@
 
 			<bubblesEffect v-if="bubblesState.show" :model="model" v-bind="bubblesState" />
 		</TresGroup>
-		<TresGridHelper :args="[400, 10]" />
+		<reflectorMesh v-bind="configState" />
 	</TresCanvas>
 </template>
 
@@ -29,12 +29,22 @@ import { SRGBColorSpace, BasicShadowMap, NoToneMapping } from 'three'
 import { reactive } from 'vue'
 import { TresCanvas } from '@tresjs/core'
 import { OrbitControls } from '@tresjs/cientos'
-import { OBJLoader } from 'three/addons/loaders/OBJLoader.js';
+import { OBJLoader } from 'three/addons/loaders/OBJLoader.js'
 import { Pane } from 'tweakpane';
 import { loadOBJ } from '../common/util'
 import cloudPoints from '../components/cloudPoints.vue'
 import xRayEffect from '../components/xRayEffect.vue'
 import bubblesEffect from '../components/bubblesEffect.vue'
+import reflectorMesh from 'PLS/floor/components/reflectorMesh.vue'
+
+const configState = reactive({
+	mirrorSize: 500,
+	gridSize: 490,
+	mirrorColor: '#efefef',
+	divisions: 10,								//网格密度							 初始化时设置
+	colorCenterLine: "#444444",		//网格颜色 中心的XZ轴		  初始化时设置
+	colorGrid: "#888888"					//网格颜色							 初始化时设置
+})
 
 const cloudPointsState = reactive({
 	color: '#fff',
@@ -79,7 +89,7 @@ const path = './plugins/medical/model/brainparts.OBJ';
 const loader = new OBJLoader()
 const model = await loadOBJ(path, loader)
 const state = reactive({
-	clearColor: '#000',
+	clearColor: '#201919',
 	shadows: true,
 	alpha: false,
 	shadowMapType: BasicShadowMap,
