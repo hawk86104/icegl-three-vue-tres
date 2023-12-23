@@ -1590,18 +1590,18 @@
   resolved "https://registry.yarnpkg.com/@sideway/pinpoint/-/pinpoint-2.0.0.tgz#cff8ffadc372ad29fd3f78277aeb29e632cc70df"
   integrity sha512-RNiOoTPkptFtSVzQevY/yWtZwf/RxyVnPy/OcA9HBM3MlGDnBEYL5B41H0MTn0Uec8Hi+2qUtTfG2WWZBmMejQ==
 
-"@tresjs/cientos@^3.6.0":
-  version "3.6.0"
-  resolved "https://registry.yarnpkg.com/@tresjs/cientos/-/cientos-3.6.0.tgz#aa36b10348055903830b4168ed26ca7fd0c81ac9"
-  integrity sha512-VM6LamAFlcKufbrtbYN71ncuAw2JPVfKUC6Ey9+scq05qvHdQM8fU0WoppNZEtmIL7m2aUqroOZRnr9LXyZPCg==
+"@tresjs/cientos@3.7.0":
+  version "3.7.0"
+  resolved "https://registry.npmjs.org/@tresjs/cientos/-/cientos-3.7.0.tgz#01d182f44da2ca73932a16bca74600fc48bcf9cb"
+  integrity sha512-et5SNCgRZGb6/NU7CQbrn5E31wr9qq/I8v3YvX7TXWw+RmLmP6UBh4Ctr/dNNpsXwXnUr9oJ6KtFbJU2Gwmd5Q==
   dependencies:
     "@tresjs/core" "3.5.0"
-    "@vueuse/core" "^10.5.0"
+    "@vueuse/core" "^10.6.1"
     camera-controls "^2.7.2"
-    stats-gl "^1.0.5"
+    stats-gl "^2.0.1"
     stats.js "^0.17.0"
     three-custom-shader-material "^5.4.0"
-    three-stdlib "^2.27.3"
+    three-stdlib "^2.28.7"
 
 "@tresjs/core@3.5.0":
   version "3.5.0"
@@ -1611,13 +1611,13 @@
     "@alvarosabu/utils" "^3.1.1"
     "@vueuse/core" "^10.3.0"
 
-"@tresjs/core@^3.5.1":
-  version "3.5.1"
-  resolved "https://registry.yarnpkg.com/@tresjs/core/-/core-3.5.1.tgz#25cc29a1e93c15e2a8f8965feced1d0ca218c3ff"
-  integrity sha512-j7fHT3X8NamQk+n5A20r/UUkInHWQOJr5dzzcuOCdD6s3FFc3WMYtbRq+cJN8FR8mS0vpSK6h9s82com8cmRNA==
+"@tresjs/core@3.6.0":
+  version "3.6.0"
+  resolved "https://registry.npmjs.org/@tresjs/core/-/core-3.6.0.tgz#7405c05d93f00425e89eca3ba4137cc12ced7285"
+  integrity sha512-eG5WFyETwSMmGt/5v+5yTk8nxU2ohyUdE2F6Dv4e7PIMXGsiNaT6ouT3jR9oK4LBU+I/1KZXb0V6HJKCS+AV/Q==
   dependencies:
     "@alvarosabu/utils" "^3.1.1"
-    "@vueuse/core" "^10.5.0"
+    "@vueuse/core" "^10.7.0"
 
 "@types/draco3d@^1.4.0":
   version "1.4.8"
@@ -1677,11 +1677,6 @@
   version "0.0.16"
   resolved "https://registry.yarnpkg.com/@types/web-bluetooth/-/web-bluetooth-0.0.16.tgz#1d12873a8e49567371f2a75fe3e7f7edca6662d8"
   integrity sha512-oh8q2Zc32S6gd/j50GowEjKLoOVOwHP/bWVjKJInBwQqdOYMdPrf1oVlelTlyfFK3CKxL1uahMDAr+vy8T7yMQ==
-
-"@types/web-bluetooth@^0.0.18":
-  version "0.0.18"
-  resolved "https://registry.yarnpkg.com/@types/web-bluetooth/-/web-bluetooth-0.0.18.tgz#74bd1c8fd3a2058cb6fc76b188fcded50a83d866"
-  integrity sha512-v/ZHEj9xh82usl8LMR3GarzFY1IrbXJw5L4QfQhokjRV91q+SelFqxQWSep1ucXEZ22+dSTwLFkXeur25sPIbw==
 
 "@types/web-bluetooth@^0.0.20":
   version "0.0.20"
@@ -2050,7 +2045,7 @@
   resolved "https://registry.yarnpkg.com/@vue/shared/-/shared-3.3.4.tgz#06e83c5027f464eef861c329be81454bc8b70780"
   integrity sha512-7OjdcV8vQ74eiz1TZLzZP4JwqM5fA94K6yntPS5Z25r9HDuGNzaGdgvwKYq6S+MxwF0TFRwe50fIR/MYnakdkQ==
 
-"@vueuse/core@^10.3.0":
+"@vueuse/core@^10.3.0", "@vueuse/core@^10.6.1", "@vueuse/core@^10.7.0":
   version "10.7.0"
   resolved "https://registry.yarnpkg.com/@vueuse/core/-/core-10.7.0.tgz#34f2f02f179dc0dcffc2be70d6b1233e011404b9"
   integrity sha512-4EUDESCHtwu44ZWK3Gc/hZUVhVo/ysvdtwocB5vcauSV4B7NiGY5972WnsojB3vRNdxvAt7kzJWE2h9h7C9d5w==
@@ -2058,16 +2053,6 @@
     "@types/web-bluetooth" "^0.0.20"
     "@vueuse/metadata" "10.7.0"
     "@vueuse/shared" "10.7.0"
-    vue-demi ">=0.14.6"
-
-"@vueuse/core@^10.5.0":
-  version "10.5.0"
-  resolved "https://registry.yarnpkg.com/@vueuse/core/-/core-10.5.0.tgz#04d1e6d26592bb997bb755a4830ea7583c3e8612"
-  integrity sha512-z/tI2eSvxwLRjOhDm0h/SXAjNm8N5ld6/SC/JQs6o6kpJ6Ya50LnEL8g5hoYu005i28L0zqB5L5yAl8Jl26K3A==
-  dependencies:
-    "@types/web-bluetooth" "^0.0.18"
-    "@vueuse/metadata" "10.5.0"
-    "@vueuse/shared" "10.5.0"
     vue-demi ">=0.14.6"
 
 "@vueuse/core@^9.6.0":
@@ -2080,11 +2065,6 @@
     "@vueuse/shared" "9.13.0"
     vue-demi "*"
 
-"@vueuse/metadata@10.5.0":
-  version "10.5.0"
-  resolved "https://registry.yarnpkg.com/@vueuse/metadata/-/metadata-10.5.0.tgz#7501a88cf5cbf7a515a03f0b8bbe3cecf30cad11"
-  integrity sha512-fEbElR+MaIYyCkeM0SzWkdoMtOpIwO72x8WsZHRE7IggiOlILttqttM69AS13nrDxosnDBYdyy3C5mR1LCxHsw==
-
 "@vueuse/metadata@10.7.0":
   version "10.7.0"
   resolved "https://registry.yarnpkg.com/@vueuse/metadata/-/metadata-10.7.0.tgz#7b05e6cfd376aa9bb339a81e16a89c12f3e88c03"
@@ -2094,13 +2074,6 @@
   version "9.13.0"
   resolved "https://registry.yarnpkg.com/@vueuse/metadata/-/metadata-9.13.0.tgz#bc25a6cdad1b1a93c36ce30191124da6520539ff"
   integrity sha512-gdU7TKNAUVlXXLbaF+ZCfte8BjRJQWPCa2J55+7/h+yDtzw3vOoGQDRXzI6pyKyo6bXFT5/QoPE4hAknExjRLQ==
-
-"@vueuse/shared@10.5.0":
-  version "10.5.0"
-  resolved "https://registry.yarnpkg.com/@vueuse/shared/-/shared-10.5.0.tgz#b3ac8c190a5dae41db5e1b60fe304a9b4247393c"
-  integrity sha512-18iyxbbHYLst9MqU1X1QNdMHIjks6wC7XTVf0KNOv5es/Ms6gjVFCAAWTVP2JStuGqydg3DT+ExpFORUEi9yhg==
-  dependencies:
-    vue-demi ">=0.14.6"
 
 "@vueuse/shared@10.7.0":
   version "10.7.0"
@@ -5247,10 +5220,10 @@ source-map@^0.7.4:
   resolved "https://registry.yarnpkg.com/source-map/-/source-map-0.7.4.tgz#a9bbe705c9d8846f4e08ff6765acf0f1b0898656"
   integrity sha512-l3BikUxvPOcn5E74dZiq5BGsTb5yEwhaTSzccU6t4sDOH8NWJCstKO5QT2CvtFoK6F0saL7p9xHAqHOlCPJygA==
 
-stats-gl@^1.0.5:
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/stats-gl/-/stats-gl-1.0.5.tgz#7f2b6688cc37b3d4bc79749ab122c063528be9c3"
-  integrity sha512-XimMxvwnf1Qf5KwebhcoA34kcX+fWEkIl0QjNkCbu4IpoyDMMsOajExn7FIq5w569k45+LhmsuRlGSrsvmGdNw==
+stats-gl@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.npmjs.org/stats-gl/-/stats-gl-2.0.1.tgz#4626a1575af00f0c5daba41ebc8f8e29a0a1998a"
+  integrity sha512-EhFm1AxoSBK3MflkFawZ4jmOX1dWu0nBAtCpvGxGsondEvCpsohbpRpM8pi8UAcxG5eRsDsCiRcxdH20j3Rp9A==
 
 stats.js@^0.17.0:
   version "0.17.0"
@@ -5394,10 +5367,10 @@ three-mesh-bvh@^0.6.8:
   resolved "https://registry.yarnpkg.com/three-mesh-bvh/-/three-mesh-bvh-0.6.8.tgz#f27d18ca75bdc59316dff0f561af8fb316621a54"
   integrity sha512-EGebF9DZx1S8+7OZYNNTT80GXJZVf+UYXD/HyTg/e2kR/ApofIFfUS4ZzIHNnUVIadpnLSzM4n96wX+l7GMbnQ==
 
-three-stdlib@^2.27.3:
-  version "2.28.5"
-  resolved "https://registry.yarnpkg.com/three-stdlib/-/three-stdlib-2.28.5.tgz#8184f5bacc90c2eec6ed36a861224e18799226fd"
-  integrity sha512-JdLMhkpT+1ZWeQPyKQNW1zqUwISI2hsUljS6u3vB9lp5EvwsayaAzGnbVeR35895udOF+zxcTiQY3psk+qqlxg==
+three-stdlib@^2.28.7:
+  version "2.28.7"
+  resolved "https://registry.npmjs.org/three-stdlib/-/three-stdlib-2.28.7.tgz#677ad2ce4d57375f7582e5fd62eadfd07ef6059a"
+  integrity sha512-E7NuztilCswBKnEoyqydvA7N4dy0cf/gLA0bKrrg6+Q6j4WtusGa/+t9oK2HVq47S1AHRH2CvFHpdIGNjPKo/A==
   dependencies:
     "@types/draco3d" "^1.4.0"
     "@types/offscreencanvas" "^2019.6.4"
@@ -5411,10 +5384,10 @@ three-subdivide@^1.1.5:
   resolved "https://registry.yarnpkg.com/three-subdivide/-/three-subdivide-1.1.5.tgz#de688d328247380112bb1033aee88dcae435cd5b"
   integrity sha512-eEWMevrsHIMnC1xbsZSQZIB8QBr8XeXZhTSAdYrLm3ZC/yTdR4ocOZ2Qi+gEyPJFOt3iirQ+SQR0jCamk7e6FQ==
 
-three@^0.159.0:
-  version "0.159.0"
-  resolved "https://registry.npmmirror.com/three/-/three-0.159.0.tgz#6576b1210805b14f0765bac41fd0e4ec18e43b2e"
-  integrity sha512-eCmhlLGbBgucuo4VEA9IO3Qpc7dh8Bd4VKzr7WfW4+8hMcIfoAVi1ev0pJYN9PTTsCslbcKgBwr2wNZ1EvLInA==
+three@0.160.0:
+  version "0.160.0"
+  resolved "https://registry.npmjs.org/three/-/three-0.160.0.tgz#cd1e4dbd01aee0719280a9086d75545db52b7a8f"
+  integrity sha512-DLU8lc0zNIPkM7rH5/e1Ks1Z8tWCGRq6g8mPowdDJpw1CFBJMU7UoJjC6PefXW7z//SSl0b2+GCw14LB+uDhng==
 
 through2@^0.6.3:
   version "0.6.5"
