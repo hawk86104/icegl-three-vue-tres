@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-12-22 08:09:35
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-12-23 11:04:50
+ * @LastEditTime: 2023-12-25 12:26:27
 -->
 
 <template>
@@ -32,8 +32,8 @@ import { reactive } from 'vue'
 import { Pane } from 'tweakpane'
 
 const configState = reactive({
-	reflectivity: 0.29,
-	mirror: 1,	// 去除纹理 镜面化 
+	reflectivity: 0.49,
+	mirror: 0.25,	// 去除纹理 镜面化 
 	mixStrength: 26,
 	showGridHelper: true,
 	// color: '#ffffff'
