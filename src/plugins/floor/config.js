@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-12-20 17:01:37
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-12-25 11:40:49
+ * @LastEditTime: 2023-12-26 16:15:10
  */
 export default {
 	"name": "floor",
@@ -12,7 +12,7 @@ export default {
 	"intro": "地面集合例子",
 	"version": "0.0.1",
 	"author": "地虎降天龙",
-	"website": "www.icegl.cn",
+	"website": "https://gitee.com/hawk86104",
 	"state": "active",
 	"require": [],
 	"preview": [

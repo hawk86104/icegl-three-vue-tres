@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-10-26 09:20:42
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-12-20 11:22:25
+ * @LastEditTime: 2023-12-26 16:13:46
  */
 export default {
 	"name": "digitalCity",
@@ -12,6 +12,7 @@ export default {
 	"intro": "基于城市场景的可视化展示插件",
 	"version": "0.0.1",
 	"author": "地虎降天龙",
+	"website": "https://gitee.com/hawk86104",
 	"state": "active",
 	"require": ['cannon-es'],
 	"preview": [
