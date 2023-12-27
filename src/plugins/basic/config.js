@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-03 15:07:09
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-11-29 16:24:18
+ * @LastEditTime: 2023-12-27 09:01:28
  */
 export default {
 	"name": "basic",
@@ -59,6 +59,7 @@ export default {
 			"preview": [
 				{ "src": "plugins/basic/htmls/preview/htmls.png", "type": "img", "name": "htmls", "title": "简单dom" },
 				{ "src": "plugins/basic/htmls/preview/website.png", "type": "img", "name": "website", "title": "内嵌网页" },
+				{ "src": "plugins/basic/htmls/preview/websiteReflector.png", "type": "img", "name": "websiteReflector", "title": "网页电脑+镜面" },
 			]
 		}, {
 			"name": "shine",

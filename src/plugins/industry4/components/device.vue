@@ -59,7 +59,7 @@ watchEffect(() => {
 
 const materials = {}
 const darkenNonBloomed = (obj: Mesh) => {
-	if (obj.isMesh || obj.type === "GridHelper") { // obj.type === "GridHelper" 这里去掉 网格辅助的材质
+	if (obj.isMesh || obj.type === "GridHelper" || obj.name === "reflectorShaderMesh") { // obj.type === "GridHelper" 这里去掉 网格辅助的材质
 		materials[obj.uuid] = obj.material;
 		obj.material = darkMaterial;
 	}

@@ -4,11 +4,21 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-03 16:02:49
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-12-15 09:32:01
+ * @LastEditTime: 2023-12-27 09:29:05
 -->
 <template>
 	<FDivider titlePlacement="left">{{ props.onePlugin.title + ' - ' + props.onePlugin.name }}</FDivider>
-	<FText class="ml-13" tag="i" size="small">{{ props.onePlugin.intro }}</FText>
+	<FSpace vertical>
+		<a target="_blank" :href="props.onePlugin.website" style="text-decoration: none;color: black;">
+			<FText v-if="props.onePlugin.author" class="text-right ml-[10px] w-95/100 mt-[-24px] block position-relative"
+				style="color:#0f1222" size="small">
+				<UserOutlined class="position-relative top-[2px]" /> 作者：
+				{{
+					props.onePlugin.author }}
+			</FText>
+		</a>
+		<FText class="ml-13" tag="i" size="small">{{ props.onePlugin.intro }}</FText>
+	</FSpace>
 	<div class="flex flex-wrap flex-justify-start content-start mt-6 pl-6">
 		<div class="w-80 mr-10 mb-10 overflow-hidden" v-for="(onePreview, okey) in onePlugin.preview" :key="okey">
 			<FCard :header="onePreview.title" shadow="hover">
@@ -27,8 +37,9 @@
 	</div>
 </template>
 <script setup lang="ts">
-import { FCard, FDivider, FText } from '@fesjs/fes-design';
-import { useRouter } from '@fesjs/fes'; //fesJS的路由被他自己封装了
+import { FCard, FDivider, FSpace, FText } from '@fesjs/fes-design'
+import { useRouter } from '@fesjs/fes' //fesJS的路由被他自己封装了
+import { UserOutlined } from '@fesjs/fes-design/icon'
 const props = withDefaults(
 	defineProps<{
 		onePlugin: Object

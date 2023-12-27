@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-10 16:11:27
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-12-11 11:11:27
+ * @LastEditTime: 2023-12-26 16:13:54
  */
 
 export default {
@@ -13,7 +13,7 @@ export default {
 	"intro": "河流、水域、海洋等场景",
 	"version": "0.0.1",
 	"author": "地虎降天龙",
-	"website": "www.icegl.cn",
+	"website": "https://gitee.com/hawk86104",
 	"state": "active",
 	"require": [],
 	"preview": [

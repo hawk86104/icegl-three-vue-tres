@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-01 09:49:28
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-11-04 16:36:44
+ * @LastEditTime: 2023-12-26 16:13:40
  */
 export default {
 	"name": "earthSample",
@@ -12,7 +12,7 @@ export default {
 	"intro": "基于threeJS简单地球的例子",
 	"version": "0.0.1",
 	"author": "地虎降天龙",
-	"website": "www.icegl.cn",
+	"website": "https://gitee.com/hawk86104",
 	"state": "active",
 	"require": [],
 	"preview": [

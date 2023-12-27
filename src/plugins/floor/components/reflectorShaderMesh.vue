@@ -4,13 +4,15 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-12-22 16:05:20
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-12-23 11:03:26
+ * @LastEditTime: 2023-12-27 09:21:18
 -->
 
 <template>
-	<primitive :object="meshOB" />
-	<primitive :object="gridHelp" />
-	<!-- <TresGridHelper v-if="props.showGridHelper" :args="[9.5, 10]" /> -->
+	<TresGroup :position="props.position">
+		<primitive :object="meshOB" />
+		<primitive :object="gridHelp" />
+		<!-- <TresGridHelper v-if="props.showGridHelper" :args="[9.5, 10]" /> -->
+	</TresGroup>
 </template>
 
 <script lang="ts" setup>
@@ -24,12 +26,14 @@ const props = withDefaults(defineProps<{
 	mixStrength?: Number	//混合
 	showGridHelper?: boolean
 	color?: string
+	position?: Array<number>
 }>(), {
 	reflectivity: 0.2,
 	mirror: 0.1,
 	mixStrength: 9,
 	showGridHelper: true,
-	color: '#ffffff'
+	color: '#ffffff',
+	position: [0, -1, 0],
 })
 
 const { scene } = useTresContext()
@@ -52,20 +56,24 @@ const material = new ReflectorMaterial({
 	normalScale: new Vector2(5, 5),
 	fog: scene.fog,
 	dithering: true
-});
+})
 material.uniforms.tReflect = reflector.renderTargetUniform
 material.uniforms.uMatrix = reflector.textureMatrixUniform
 
 const geometry = new PlaneGeometry(10, 10)
 const meshOB = new Mesh(geometry, material)
+meshOB.name = "reflectorShaderMesh"
 meshOB.position.y = -.01
 meshOB.rotation.x = -Math.PI / 2
 meshOB.add(reflector)
 meshOB.onBeforeRender = (rendererSelf, sceneSelf, cameraSelf) => {
+	meshOB.visible = false
 	reflector.update(rendererSelf, sceneSelf, cameraSelf)
-};
+	meshOB.visible = true
+}
 
 const gridHelp = new GridHelper(9.5, 10)
+gridHelp.visible = props.showGridHelper
 watchEffect(() => {
 	if (props.reflectivity) {
 		material.uniforms.uReflectivity.value = props.reflectivity
