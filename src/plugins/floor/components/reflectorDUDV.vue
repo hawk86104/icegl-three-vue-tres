@@ -14,19 +14,21 @@
 </template>
 
 <script lang="ts" setup>
-import { Mesh, PlaneGeometry, RepeatWrapping, Color, GridHelper } from "three"
+import { Mesh, PlaneGeometry, RepeatWrapping, GridHelper } from "three"
 import { useTexture } from '@tresjs/core'
 import { Reflector, ReflectorDudvMaterial } from '../lib/alienJS/all.three.js'
 
-import { watchEffect } from 'vue'
+import { watchEffect, watch } from 'vue'
 const props = withDefaults(defineProps<{
 	reflectivity?: Number
+	showGridHelper?: boolean
 }>(), {
 	reflectivity: 0.8,
+	showGridHelper: true,
 })
 const reflector = new Reflector()
 const gridHelp = new GridHelper(9.5, 10)
-
+gridHelp.visible = props.showGridHelper
 
 const { map } = await useTexture({ map: './plugins/floor/image/waterdudv.jpg' })
 map.wrapS = RepeatWrapping
@@ -55,5 +57,10 @@ watchEffect(() => {
 	}
 })
 
-
+watch(
+	() => props.showGridHelper,
+	(newVal) => {
+		gridHelp.visible = newVal
+	}
+)
 </script>

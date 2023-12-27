@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-12-22 08:09:35
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-12-25 12:23:37
+ * @LastEditTime: 2023-12-27 08:58:03
 -->
 
 <template>
@@ -37,6 +37,7 @@ import { Pane } from 'tweakpane'
 
 const configState = reactive({
 	reflectivity: 2.6,
+	showGridHelper: true
 })
 
 const paneControl = new Pane({
@@ -49,4 +50,5 @@ paneControl.addBinding(configState, 'reflectivity', {
 	max: 10.0,
 	step: 0.1,
 })
+paneControl.addBinding(configState, 'showGridHelper', { label: '显示网格' })
 </script>
