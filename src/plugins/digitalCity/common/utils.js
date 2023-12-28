@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-09 09:33:51
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-12-13 11:34:54
+ * @LastEditTime: 2023-12-28 09:05:07
  */
 import { BufferAttribute } from 'three'
 
@@ -46,3 +46,18 @@ export const setGeometryUVForm = (srcGeometry, toGeometry) => {
 	const Puvs = new Float32Array(PuvList)
 	toGeometry.setAttribute('uv', new BufferAttribute(Puvs, 2));
 }
+
+import { request } from '@fesjs/fes'
+export const loadGeojson = (filepath, dataType) => new Promise((resolve, reject) => {
+	request(filepath, {})
+		.then((res) => {
+			if (dataType) {
+				resolve(res.dataType)
+			}
+			resolve(res.features)
+		})
+		.catch((err) => {
+			console.err(err)
+			reject(error)
+		});
+})

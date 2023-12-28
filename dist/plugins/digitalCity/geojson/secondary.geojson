@@ -1,0 +1,1803 @@
+{
+  "type": "FeatureCollection",
+  "generator": "overpass-turbo",
+  "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.",
+  "timestamp": "2023-12-28T06:58:44Z",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/24474697",
+        "cycleway": "lane",
+        "highway": "secondary",
+        "name": "四川北路",
+        "name:en": "North Sichuan Road",
+        "surface": "asphalt"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.4814071,
+            31.2453432
+          ],
+          [
+            121.4813356,
+            31.2456282
+          ]
+        ]
+      },
+      "id": "way/24474697"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/40113020",
+        "bicycle": "no",
+        "highway": "secondary",
+        "lanes": "2",
+        "maxspeed": "40",
+        "maxspeed:type": "sign",
+        "name": "河南中路",
+        "name:en": "Middle Henan Road",
+        "oneway": "yes",
+        "surface": "asphalt"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.4787871,
+            31.2433362
+          ],
+          [
+            121.479043,
+            31.2428021
+          ],
+          [
+            121.4791855,
+            31.2424694
+          ],
+          [
+            121.4792036,
+            31.2424232
+          ]
+        ]
+      },
+      "id": "way/40113020"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/46975377",
+        "bicycle": "no",
+        "highway": "secondary",
+        "lanes": "2",
+        "name": "河南中路",
+        "name:en": "Middle Henan Road",
+        "name:zh": "河南中路",
+        "name:zh-Hans": "河南中路",
+        "name:zh-Hant": "河南中路",
+        "oneway": "yes"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.4822933,
+            31.2330403
+          ],
+          [
+            121.4822503,
+            31.2331022
+          ],
+          [
+            121.4822181,
+            31.2331563
+          ],
+          [
+            121.4821547,
+            31.2333004
+          ],
+          [
+            121.4821131,
+            31.2334714
+          ],
+          [
+            121.4820967,
+            31.2335388
+          ],
+          [
+            121.4820045,
+            31.2339462
+          ],
+          [
+            121.4818089,
+            31.2347993
+          ],
+          [
+            121.4816958,
+            31.2352802
+          ],
+          [
+            121.481625,
+            31.2355777
+          ],
+          [
+            121.4815895,
+            31.2356928
+          ],
+          [
+            121.4814721,
+            31.236074
+          ],
+          [
+            121.4813806,
+            31.2364613
+          ],
+          [
+            121.4813189,
+            31.2367007
+          ],
+          [
+            121.4809423,
+            31.2378796
+          ]
+        ]
+      },
+      "id": "way/46975377"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/46975399",
+        "bicycle": "no",
+        "highway": "secondary",
+        "lanes": "2",
+        "name": "河南中路",
+        "name:en": "Middle Henan Road",
+        "name:zh": "河南中路",
+        "name:zh-Hans": "河南中路",
+        "name:zh-Hant": "河南中路",
+        "oneway": "yes"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.4811841,
+            31.2366656
+          ],
+          [
+            121.4813475,
+            31.2360456
+          ],
+          [
+            121.4813841,
+            31.2359131
+          ],
+          [
+            121.4814649,
+            31.2356356
+          ],
+          [
+            121.4815554,
+            31.2352752
+          ],
+          [
+            121.4816693,
+            31.2347746
+          ],
+          [
+            121.4817846,
+            31.2342292
+          ],
+          [
+            121.4820032,
+            31.2333384
+          ],
+          [
+            121.482034,
+            31.2332408
+          ],
+          [
+            121.4820694,
+            31.2331723
+          ]
+        ]
+      },
+      "id": "way/46975399"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/47150988",
+        "bicycle": "no",
+        "highway": "secondary",
+        "lanes": "1",
+        "name": "九江路",
+        "name:en": "Jiujiang Road",
+        "name:zh": "九江路",
+        "name:zh-Hans": "九江路",
+        "name:zh-Hant": "九江路",
+        "source": "Bing",
+        "wikidata": "Q15924655",
+        "wikipedia": "zh:九江路 (上海)"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.4807239,
+            31.2386065
+          ],
+          [
+            121.4806414,
+            31.2385845
+          ],
+          [
+            121.4806165,
+            31.2385778
+          ],
+          [
+            121.4804521,
+            31.2385422
+          ],
+          [
+            121.4797257,
+            31.2383684
+          ],
+          [
+            121.4788783,
+            31.2381381
+          ],
+          [
+            121.478272,
+            31.2379528
+          ],
+          [
+            121.4776058,
+            31.237731
+          ],
+          [
+            121.4773937,
+            31.2376545
+          ],
+          [
+            121.4771281,
+            31.2375522
+          ],
+          [
+            121.4767894,
+            31.2374147
+          ],
+          [
+            121.4761819,
+            31.2371615
+          ],
+          [
+            121.4753744,
+            31.2368639
+          ],
+          [
+            121.4750563,
+            31.2367491
+          ]
+        ]
+      },
+      "id": "way/47150988"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/47405752",
+        "highway": "secondary",
+        "name": "天潼路",
+        "name:en": "Tiantong Road",
+        "oneway": "yes"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.4777618,
+            31.2457242
+          ],
+          [
+            121.4776935,
+            31.2457045
+          ],
+          [
+            121.4776343,
+            31.2456932
+          ],
+          [
+            121.4775855,
+            31.2456862
+          ],
+          [
+            121.4775098,
+            31.2456798
+          ],
+          [
+            121.4769149,
+            31.2456207
+          ],
+          [
+            121.4767574,
+            31.2456089
+          ],
+          [
+            121.4766392,
+            31.2456
+          ],
+          [
+            121.4757324,
+            31.2454998
+          ],
+          [
+            121.4750869,
+            31.2454336
+          ],
+          [
+            121.4740083,
+            31.2453413
+          ],
+          [
+            121.4733357,
+            31.2452898
+          ],
+          [
+            121.4721718,
+            31.2451731
+          ],
+          [
+            121.4716649,
+            31.2451032
+          ]
+        ]
+      },
+      "id": "way/47405752"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/48985076",
+        "highway": "secondary",
+        "name": "河南北路",
+        "name:en": "North Henan Road",
+        "oneway": "yes"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.4778709,
+            31.2457559
+          ],
+          [
+            121.4778705,
+            31.2458542
+          ],
+          [
+            121.4778701,
+            31.2459095
+          ],
+          [
+            121.477865,
+            31.2459777
+          ],
+          [
+            121.477771,
+            31.2466824
+          ],
+          [
+            121.4777108,
+            31.2471333
+          ],
+          [
+            121.4776845,
+            31.247288
+          ],
+          [
+            121.4776734,
+            31.2473537
+          ],
+          [
+            121.4776299,
+            31.2475732
+          ],
+          [
+            121.477593,
+            31.2477358
+          ],
+          [
+            121.4775488,
+            31.2478915
+          ],
+          [
+            121.4773473,
+            31.2485564
+          ],
+          [
+            121.4772896,
+            31.2487467
+          ],
+          [
+            121.4772071,
+            31.2490017
+          ],
+          [
+            121.4771091,
+            31.2492532
+          ],
+          [
+            121.4770662,
+            31.2493632
+          ],
+          [
+            121.4769547,
+            31.249606
+          ],
+          [
+            121.4769021,
+            31.249694
+          ]
+        ]
+      },
+      "id": "way/48985076"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/49225334",
+        "highway": "secondary",
+        "name": "天潼路",
+        "name:en": "Tiantong Road",
+        "surface": "asphalt",
+        "wikidata": "Q10940405"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.4799235,
+            31.2465443
+          ],
+          [
+            121.4798204,
+            31.2464681
+          ],
+          [
+            121.4796361,
+            31.2463492
+          ],
+          [
+            121.4793982,
+            31.2461805
+          ],
+          [
+            121.479289,
+            31.2461072
+          ],
+          [
+            121.4791699,
+            31.246053
+          ],
+          [
+            121.4791367,
+            31.246043
+          ],
+          [
+            121.4791033,
+            31.2460348
+          ],
+          [
+            121.479066,
+            31.2460295
+          ],
+          [
+            121.479027,
+            31.2460263
+          ],
+          [
+            121.4788532,
+            31.2460244
+          ],
+          [
+            121.478787,
+            31.2460202
+          ],
+          [
+            121.4787256,
+            31.2460137
+          ],
+          [
+            121.4786698,
+            31.246004
+          ],
+          [
+            121.4786094,
+            31.2459896
+          ],
+          [
+            121.4785257,
+            31.2459624
+          ],
+          [
+            121.4781798,
+            31.2458502
+          ],
+          [
+            121.4778709,
+            31.2457559
+          ]
+        ]
+      },
+      "id": "way/49225334"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/73897717",
+        "bridge": "yes",
+        "highway": "secondary",
+        "lanes": "2",
+        "layer": "1",
+        "name": "河南北路",
+        "name:en": "North Henan Road",
+        "oneway": "yes"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.4785118,
+            31.2439757
+          ],
+          [
+            121.4784017,
+            31.244165
+          ],
+          [
+            121.4782924,
+            31.2443736
+          ]
+        ]
+      },
+      "id": "way/73897717"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/73897718",
+        "bridge": "yes",
+        "highway": "secondary",
+        "lanes": "2",
+        "layer": "1",
+        "name": "河南中路",
+        "name:en": "Middle Henan Road",
+        "oneway": "yes"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.4788831,
+            31.2433919
+          ],
+          [
+            121.4785118,
+            31.2439757
+          ]
+        ]
+      },
+      "id": "way/73897718"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/73897730",
+        "bridge": "yes",
+        "highway": "secondary",
+        "lanes": "2",
+        "layer": "1",
+        "name": "河南北路",
+        "name:en": "North Henan Road",
+        "oneway": "yes"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.4782026,
+            31.2442847
+          ],
+          [
+            121.4783047,
+            31.244082
+          ],
+          [
+            121.4784144,
+            31.2438879
+          ]
+        ]
+      },
+      "id": "way/73897730"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/73897732",
+        "bridge": "yes",
+        "highway": "secondary",
+        "lanes": "2",
+        "layer": "1",
+        "name": "河南中路",
+        "name:en": "Middle Henan Road",
+        "oneway": "yes"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.4784144,
+            31.2438879
+          ],
+          [
+            121.4787871,
+            31.2433362
+          ]
+        ]
+      },
+      "id": "way/73897732"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/150943904",
+        "cycleway": "lane",
+        "highway": "secondary",
+        "lanes": "1",
+        "name": "四川中路",
+        "name:en": "Middle Sichuan Road",
+        "surface": "asphalt"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.482294,
+            31.24269
+          ],
+          [
+            121.4822578,
+            31.2428098
+          ],
+          [
+            121.4821976,
+            31.2429828
+          ],
+          [
+            121.4821196,
+            31.2431981
+          ],
+          [
+            121.4820936,
+            31.2432713
+          ],
+          [
+            121.4818247,
+            31.244041
+          ],
+          [
+            121.4817998,
+            31.2441222
+          ],
+          [
+            121.4816304,
+            31.2446302
+          ],
+          [
+            121.4814408,
+            31.2452235
+          ],
+          [
+            121.4814071,
+            31.2453432
+          ]
+        ]
+      },
+      "id": "way/150943904"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/177594560",
+        "bridge": "yes",
+        "cycleway": "lane",
+        "heritage": "yes",
+        "heritage:operator": "上海市优秀历史建筑",
+        "heritage:ref": "A-Ⅲ-014",
+        "highway": "secondary",
+        "layer": "1",
+        "name": "四川路桥",
+        "name:en": "Sichuan Bridge",
+        "surface": "asphalt"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.4813356,
+            31.2456282
+          ],
+          [
+            121.481277,
+            31.2459608
+          ],
+          [
+            121.4812309,
+            31.2462818
+          ]
+        ]
+      },
+      "id": "way/177594560"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/226657313",
+        "bicycle": "no",
+        "highway": "secondary",
+        "name": "北京东路",
+        "name:en": "East Beijing Road",
+        "old_name": "北京路",
+        "old_name:en": "Peking Road"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.482294,
+            31.24269
+          ],
+          [
+            121.4823686,
+            31.2427075
+          ],
+          [
+            121.4824258,
+            31.2427131
+          ],
+          [
+            121.4828648,
+            31.2427131
+          ],
+          [
+            121.4829777,
+            31.24271
+          ],
+          [
+            121.4838152,
+            31.2427006
+          ],
+          [
+            121.4845983,
+            31.2426856
+          ],
+          [
+            121.4856406,
+            31.2426657
+          ],
+          [
+            121.4857885,
+            31.2426629
+          ],
+          [
+            121.4858949,
+            31.2426453
+          ]
+        ]
+      },
+      "id": "way/226657313"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/449718769",
+        "bicycle": "no",
+        "highway": "secondary",
+        "lanes": "2",
+        "lanes:psv:conditional": "1 @ (07:00-10:00; 16:00-19:00)",
+        "name": "河南中路",
+        "name:en": "Middle Henan Road",
+        "name:zh": "河南中路",
+        "name:zh-Hans": "河南中路",
+        "name:zh-Hant": "河南中路",
+        "oneway": "yes",
+        "surface": "asphalt"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.4804216,
+            31.2396573
+          ],
+          [
+            121.4804,
+            31.2397102
+          ],
+          [
+            121.480053,
+            31.2405607
+          ]
+        ]
+      },
+      "id": "way/449718769"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/449718771",
+        "bicycle": "no",
+        "highway": "secondary",
+        "lanes": "2",
+        "name": "河南中路",
+        "name:en": "Middle Henan Road",
+        "oneway": "yes"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.480306,
+            31.2396215
+          ],
+          [
+            121.4803336,
+            31.2395424
+          ]
+        ]
+      },
+      "id": "way/449718771"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/449718773",
+        "bicycle": "no",
+        "highway": "secondary",
+        "lanes": "2",
+        "name": "河南中路",
+        "name:en": "Middle Henan Road",
+        "name:zh": "河南中路",
+        "name:zh-Hans": "河南中路",
+        "name:zh-Hant": "河南中路",
+        "oneway": "yes"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.4803336,
+            31.2395424
+          ],
+          [
+            121.4803985,
+            31.2393629
+          ],
+          [
+            121.4804322,
+            31.2392555
+          ],
+          [
+            121.4805819,
+            31.238705
+          ],
+          [
+            121.4806165,
+            31.2385778
+          ],
+          [
+            121.4806466,
+            31.238477
+          ],
+          [
+            121.4808319,
+            31.2378564
+          ]
+        ]
+      },
+      "id": "way/449718773"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/449718774",
+        "highway": "secondary",
+        "lanes": "2",
+        "name": "河南中路",
+        "name:en": "Middle Henan Road",
+        "oneway": "yes"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.4804478,
+            31.2395855
+          ],
+          [
+            121.4804216,
+            31.2396573
+          ]
+        ]
+      },
+      "id": "way/449718774"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/449718776",
+        "bicycle": "no",
+        "highway": "secondary",
+        "lanes": "3",
+        "lanes:psv": "1",
+        "name": "河南中路",
+        "name:en": "Middle Henan Road",
+        "name:zh": "河南中路",
+        "name:zh-Hans": "河南中路",
+        "name:zh-Hant": "河南中路",
+        "oneway": "yes",
+        "surface": "asphalt"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.4799417,
+            31.2405239
+          ],
+          [
+            121.4802164,
+            31.2398498
+          ],
+          [
+            121.4802837,
+            31.2396783
+          ],
+          [
+            121.480306,
+            31.2396215
+          ]
+        ]
+      },
+      "id": "way/449718776"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/449718778",
+        "bicycle": "no",
+        "highway": "secondary",
+        "lanes": "2",
+        "name": "河南中路",
+        "name:en": "Middle Henan Road",
+        "oneway": "yes",
+        "surface": "asphalt"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.480053,
+            31.2405607
+          ],
+          [
+            121.4797797,
+            31.2412248
+          ],
+          [
+            121.4793048,
+            31.2424421
+          ]
+        ]
+      },
+      "id": "way/449718778"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/484298629",
+        "bicycle": "no",
+        "highway": "secondary",
+        "name": "北京东路",
+        "name:en": "East Beijing Road",
+        "old_name": "北京路",
+        "old_name:en": "Peking Road",
+        "wikidata": "Q10902006"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.4692554,
+            31.239747
+          ],
+          [
+            121.4699383,
+            31.2399075
+          ],
+          [
+            121.4709459,
+            31.2401312
+          ],
+          [
+            121.4715555,
+            31.2402809
+          ],
+          [
+            121.4721639,
+            31.2404417
+          ],
+          [
+            121.4730769,
+            31.2406836
+          ],
+          [
+            121.4736606,
+            31.2408396
+          ]
+        ]
+      },
+      "id": "way/484298629"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/730661155",
+        "bicycle": "no",
+        "highway": "secondary",
+        "name": "北京东路",
+        "name:en": "East Beijing Road",
+        "old_name": "北京路",
+        "old_name:en": "Peking Road",
+        "wikidata": "Q10902006"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.4745864,
+            31.2410872
+          ],
+          [
+            121.4746474,
+            31.2411032
+          ],
+          [
+            121.4748816,
+            31.2411628
+          ],
+          [
+            121.4752234,
+            31.2412494
+          ],
+          [
+            121.4753292,
+            31.241277
+          ],
+          [
+            121.4755659,
+            31.2413512
+          ],
+          [
+            121.4765695,
+            31.2416929
+          ],
+          [
+            121.4772436,
+            31.2419325
+          ],
+          [
+            121.4773742,
+            31.2419768
+          ],
+          [
+            121.477741,
+            31.2420774
+          ],
+          [
+            121.4780105,
+            31.2421486
+          ],
+          [
+            121.4789733,
+            31.2423744
+          ],
+          [
+            121.4792036,
+            31.2424232
+          ]
+        ]
+      },
+      "id": "way/730661155"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/730661156",
+        "bicycle": "no",
+        "highway": "secondary",
+        "lanes": "2",
+        "name": "河南中路",
+        "name:en": "Middle Henan Road",
+        "oneway": "yes",
+        "surface": "asphalt"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.4793048,
+            31.2424421
+          ],
+          [
+            121.4792789,
+            31.2424851
+          ],
+          [
+            121.4788831,
+            31.2433919
+          ]
+        ]
+      },
+      "id": "way/730661156"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/730661158",
+        "bicycle": "no",
+        "highway": "secondary",
+        "name": "北京东路",
+        "name:en": "East Beijing Road",
+        "old_name": "北京路",
+        "old_name:en": "Peking Road",
+        "wikidata": "Q10902006"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.4810571,
+            31.2425656
+          ],
+          [
+            121.4813291,
+            31.2425836
+          ],
+          [
+            121.4816836,
+            31.2426112
+          ],
+          [
+            121.4819722,
+            31.2426369
+          ],
+          [
+            121.4821394,
+            31.2426575
+          ],
+          [
+            121.482294,
+            31.24269
+          ]
+        ]
+      },
+      "id": "way/730661158"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/987437442",
+        "highway": "secondary",
+        "lanes": "2",
+        "name": "河南北路",
+        "name:en": "North Henan Road",
+        "oneway": "yes"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.4777618,
+            31.2457242
+          ],
+          [
+            121.477766,
+            31.2456863
+          ],
+          [
+            121.4777702,
+            31.2456476
+          ],
+          [
+            121.4777842,
+            31.2455691
+          ],
+          [
+            121.477866,
+            31.2452399
+          ],
+          [
+            121.4779604,
+            31.2449104
+          ],
+          [
+            121.4780109,
+            31.2447481
+          ],
+          [
+            121.4780681,
+            31.2445937
+          ],
+          [
+            121.4781321,
+            31.244437
+          ],
+          [
+            121.4782026,
+            31.2442847
+          ]
+        ]
+      },
+      "id": "way/987437442"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/987437443",
+        "bicycle": "no",
+        "highway": "secondary",
+        "name": "北京东路",
+        "name:en": "East Beijing Road",
+        "old_name": "北京路",
+        "old_name:en": "Peking Road",
+        "wikidata": "Q10902006"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.4792036,
+            31.2424232
+          ],
+          [
+            121.4793048,
+            31.2424421
+          ]
+        ]
+      },
+      "id": "way/987437443"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/987437450",
+        "bicycle": "no",
+        "highway": "secondary",
+        "lanes": "2",
+        "maxspeed": "40",
+        "maxspeed:type": "sign",
+        "name": "河南中路",
+        "name:en": "Middle Henan Road",
+        "name:zh": "河南中路",
+        "name:zh-Hans": "河南中路",
+        "name:zh-Hant": "河南中路",
+        "oneway": "yes",
+        "surface": "asphalt"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.4792036,
+            31.2424232
+          ],
+          [
+            121.479677,
+            31.2412082
+          ],
+          [
+            121.4799417,
+            31.2405239
+          ]
+        ]
+      },
+      "id": "way/987437450"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/1004590755",
+        "highway": "secondary",
+        "name": "天潼路",
+        "name:en": "Tiantong Road",
+        "name:zh": "天潼路",
+        "oneway": "yes"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.4716856,
+            31.2449828
+          ],
+          [
+            121.4724118,
+            31.2451039
+          ],
+          [
+            121.4725795,
+            31.2451319
+          ],
+          [
+            121.4727464,
+            31.2451484
+          ],
+          [
+            121.4736712,
+            31.2452396
+          ],
+          [
+            121.4740219,
+            31.2452729
+          ],
+          [
+            121.4748326,
+            31.2453497
+          ],
+          [
+            121.4755058,
+            31.2454139
+          ],
+          [
+            121.4757444,
+            31.2454359
+          ]
+        ]
+      },
+      "id": "way/1004590755"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/1064398286",
+        "bicycle": "no",
+        "highway": "secondary",
+        "name": "北京东路",
+        "name:en": "East Beijing Road",
+        "old_name": "北京路",
+        "old_name:en": "Peking Road",
+        "wikidata": "Q10902006"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.4793048,
+            31.2424421
+          ],
+          [
+            121.4794418,
+            31.242469
+          ],
+          [
+            121.4799926,
+            31.2425044
+          ],
+          [
+            121.4804202,
+            31.2425255
+          ],
+          [
+            121.4810571,
+            31.2425656
+          ]
+        ]
+      },
+      "id": "way/1064398286"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/1064398290",
+        "bicycle": "no",
+        "highway": "secondary",
+        "lanes": "2",
+        "name": "河南中路",
+        "oneway": "yes"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.4809423,
+            31.2378796
+          ],
+          [
+            121.4808056,
+            31.2383481
+          ],
+          [
+            121.4807932,
+            31.2383905
+          ],
+          [
+            121.4807592,
+            31.2385071
+          ],
+          [
+            121.4807239,
+            31.2386065
+          ]
+        ]
+      },
+      "id": "way/1064398290"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/1064799811",
+        "highway": "secondary",
+        "name": "天潼路",
+        "name:en": "Tiantong Road",
+        "surface": "asphalt",
+        "wikidata": "Q10940405"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.4778709,
+            31.2457559
+          ],
+          [
+            121.4777618,
+            31.2457242
+          ]
+        ]
+      },
+      "id": "way/1064799811"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/1064799812",
+        "highway": "secondary",
+        "name": "河南北路",
+        "name:en": "North Henan Road",
+        "oneway": "yes"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.4782924,
+            31.2443736
+          ],
+          [
+            121.4782381,
+            31.2444937
+          ],
+          [
+            121.478184,
+            31.2446322
+          ],
+          [
+            121.4781308,
+            31.2447785
+          ],
+          [
+            121.4780807,
+            31.2449407
+          ],
+          [
+            121.4779821,
+            31.2452652
+          ],
+          [
+            121.4778957,
+            31.2456059
+          ],
+          [
+            121.4778799,
+            31.2456849
+          ],
+          [
+            121.4778709,
+            31.2457559
+          ]
+        ]
+      },
+      "id": "way/1064799812"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/1064804956",
+        "bicycle": "no",
+        "highway": "secondary",
+        "name": "北京东路",
+        "name:en": "East Beijing Road",
+        "old_name": "北京路",
+        "old_name:en": "Peking Road",
+        "wikidata": "Q10902006"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.4736606,
+            31.2408396
+          ],
+          [
+            121.4739633,
+            31.2409166
+          ],
+          [
+            121.4743302,
+            31.2410114
+          ],
+          [
+            121.4745167,
+            31.2410634
+          ],
+          [
+            121.4745864,
+            31.2410872
+          ]
+        ]
+      },
+      "id": "way/1064804956"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/1068447133",
+        "bicycle": "no",
+        "highway": "secondary",
+        "lanes": "1",
+        "name": "九江路",
+        "name:en": "Jiujiang Road",
+        "name:zh": "九江路",
+        "name:zh-Hans": "九江路",
+        "name:zh-Hant": "九江路",
+        "source": "Bing",
+        "wikidata": "Q15924655",
+        "wikipedia": "zh:九江路 (上海)"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.4750563,
+            31.2367491
+          ],
+          [
+            121.474286,
+            31.2365514
+          ],
+          [
+            121.4735192,
+            31.2363642
+          ],
+          [
+            121.4728937,
+            31.2362148
+          ],
+          [
+            121.4722735,
+            31.2360664
+          ],
+          [
+            121.4719348,
+            31.2359912
+          ],
+          [
+            121.4707471,
+            31.2357268
+          ],
+          [
+            121.4705,
+            31.2356837
+          ]
+        ]
+      },
+      "id": "way/1068447133"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/1068447147",
+        "bicycle": "no",
+        "highway": "secondary",
+        "lanes": "2",
+        "name": "河南中路",
+        "name:en": "Middle Henan Road",
+        "name:zh": "河南中路",
+        "name:zh-Hans": "河南中路",
+        "name:zh-Hant": "河南中路",
+        "oneway": "yes"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.4807239,
+            31.2386065
+          ],
+          [
+            121.4806913,
+            31.2387257
+          ],
+          [
+            121.4805972,
+            31.2390698
+          ],
+          [
+            121.4805518,
+            31.2392356
+          ],
+          [
+            121.4805034,
+            31.2393992
+          ],
+          [
+            121.4804478,
+            31.2395855
+          ]
+        ]
+      },
+      "id": "way/1068447147"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/1074771165",
+        "bicycle": "no",
+        "highway": "secondary",
+        "lanes": "2",
+        "name": "河南中路",
+        "name:en": "Middle Henan Road",
+        "name:zh": "河南中路",
+        "name:zh-Hans": "河南中路",
+        "name:zh-Hant": "河南中路",
+        "oneway": "yes"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.4808319,
+            31.2378564
+          ],
+          [
+            121.4809243,
+            31.2375337
+          ],
+          [
+            121.4810497,
+            31.2370959
+          ],
+          [
+            121.4811429,
+            31.2368047
+          ],
+          [
+            121.4811841,
+            31.2366656
+          ]
+        ]
+      },
+      "id": "way/1074771165"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/1101656547",
+        "highway": "secondary",
+        "lanes": "2",
+        "name": "河南北路",
+        "name:en": "North Henan Road",
+        "oneway": "yes"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.4772322,
+            31.2484212
+          ],
+          [
+            121.4773579,
+            31.2480679
+          ],
+          [
+            121.4774309,
+            31.2478625
+          ],
+          [
+            121.477479,
+            31.2477241
+          ],
+          [
+            121.4775233,
+            31.247554
+          ],
+          [
+            121.4775679,
+            31.2473422
+          ],
+          [
+            121.4776048,
+            31.247117
+          ],
+          [
+            121.4776375,
+            31.2468462
+          ],
+          [
+            121.47772,
+            31.2460874
+          ],
+          [
+            121.4777618,
+            31.2457242
+          ]
+        ]
+      },
+      "id": "way/1101656547"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/1101656569",
+        "highway": "secondary",
+        "name": "天潼路",
+        "name:en": "Tiantong Road",
+        "name:zh": "天潼路",
+        "oneway": "yes"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.4757444,
+            31.2454359
+          ],
+          [
+            121.4765277,
+            31.245508
+          ],
+          [
+            121.4774476,
+            31.245601
+          ],
+          [
+            121.4776777,
+            31.2456518
+          ],
+          [
+            121.4777618,
+            31.2457242
+          ]
+        ]
+      },
+      "id": "way/1101656569"
+    }
+  ]
+}
