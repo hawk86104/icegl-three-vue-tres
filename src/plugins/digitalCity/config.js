@@ -28,5 +28,6 @@ export default {
 		{ "src": "plugins/digitalCity/preview/buildingsPassA.png", "type": "img", "name": "buildingsPassA", "title": "建筑物后期A" },
 		{ "src": "plugins/digitalCity/preview/buildingsEffectA.png", "type": "img", "name": "buildingsEffectA", "title": "建筑物效果A" },
 		{ "src": "plugins/digitalCity/preview/buildingsMarkA.png", "type": "img", "name": "buildingsMarkA", "title": "建筑物标记A" },
+		{ "src": "plugins/digitalCity/preview/buildingsMarkA.png", "type": "img", "name": "roadLines", "title": "道路飞线" },
 	]
 }
