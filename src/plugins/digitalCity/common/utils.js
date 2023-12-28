@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-09 09:33:51
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-12-28 09:05:07
+ * @LastEditTime: 2023-12-28 15:17:58
  */
 import { BufferAttribute } from 'three'
 
@@ -49,7 +49,7 @@ export const setGeometryUVForm = (srcGeometry, toGeometry) => {
 
 import { request } from '@fesjs/fes'
 export const loadGeojson = (filepath, dataType) => new Promise((resolve, reject) => {
-	request(filepath, {})
+	request(filepath, {}, { method: 'get' })
 		.then((res) => {
 			if (dataType) {
 				resolve(res.dataType)
