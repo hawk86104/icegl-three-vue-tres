@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-12-11 15:00:44
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-12-11 16:22:39
+ * @LastEditTime: 2024-01-03 10:57:44
 -->
 
 <template>
@@ -29,8 +29,9 @@ const props = withDefaults(defineProps<{
 
 const pTexture = await useTexture(['./plugins/water/images/Water_1_M_Normal.jpg', './plugins/water/images/Water_2_M_Normal.jpg'])
 
+const wG = props.waterGeometry.clone()
 const tsWater = new Water(
-	props.waterGeometry,
+	wG,
 	{
 		color: props.color,
 		scale: props.scale,
@@ -50,6 +51,7 @@ watchEffect(() => {
 		tsWater.material.uniforms.color.value.set(props.color)
 	}
 	if (props.scale) {
+		debugger
 		tsWater.material.uniforms.config.value.w = props.scale
 	}
 })
