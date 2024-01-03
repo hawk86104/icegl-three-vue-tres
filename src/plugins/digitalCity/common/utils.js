@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-09 09:33:51
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-01-03 14:50:30
+ * @LastEditTime: 2024-01-03 17:48:10
  */
 import { BufferAttribute, Box3, Vector3, RepeatWrapping, Color, Mesh, PlaneGeometry, Vector2, DoubleSide, Material, MeshBasicMaterial, BufferGeometry } from 'three'
 
@@ -94,52 +94,19 @@ export const initMeshBvh = () => {
 	Mesh.prototype.raycast = acceleratedRaycast;
 }
 
-// 镜面
-import { BasicMaterial, Reflector, ReflectorDudvMaterial } from 'PLS/floor/lib/alienJS/all.three.js'
-import { useTexture } from '@tresjs/core'
-export const setFloorMesh = async (mesh) => {
-	// mesh.material.color = new Color('#ff0')
-	// return
-	const reflector = new Reflector()
-	reflector.applyMatrix4(mesh.parent.parent.parent.parent.matrix)
-	// reflector.textureMatrixUniform
-
-	const { map } = await useTexture({ map: './plugins/floor/image/waterdudv.jpg' })
-	map.wrapS = RepeatWrapping
-	map.wrapT = RepeatWrapping
-	map.repeat.set(6, 3)
-	const material = new ReflectorDudvMaterial({
-		map: map,
-		reflectivity: 999
-	})
-	material.uniforms.tReflect = { value: reflector.renderTarget.texture }
-	material.uniforms.tReflectBlur = reflector.renderTargetUniform
-	material.uniforms.uMatrix = reflector.textureMatrixUniform
-	// mesh.material.dispose()
-	mesh.material = material
-	mesh.add(reflector)
-	// mesh.material.color = new Color('#ff0')
-	mesh.onBeforeRender = (rendererSelf, sceneSelf, cameraSelf) => {
-		// debugger
-		console.log("onBeforeRender")
-		mesh.visible = false
-		reflector.update(rendererSelf, sceneSelf, cameraSelf)
-		mesh.visible = true
-	}
-}
-
 //水面
+import { useTexture } from '@tresjs/core'
 import { Water } from 'three/addons/objects/Water2'
 export const setThreeWater2 = async (mesh) => {
 	const pTexture = await useTexture(['./plugins/water/images/Water_1_M_Normal.jpg', './plugins/water/images/Water_2_M_Normal.jpg'])
 	const waterGeometry = mesh.geometry.clone()
-	randomUV(waterGeometry)
+	resetUV(waterGeometry)
 	waterGeometry.computeBoundsTree()
 	const tsWater = new Water(
 		waterGeometry,
 		{
 			color: new Color('#fff'),
-			scale: 300,
+			scale: 20,
 			flowDirection: new Vector2(1, 1),
 			textureWidth: 1024,
 			textureHeight: 1024,
@@ -151,7 +118,7 @@ export const setThreeWater2 = async (mesh) => {
 	tsWater.material.depthWrite = true
 	tsWater.material.depthTest = true
 	tsWater.material.side = DoubleSide
-	tsWater.material.uniforms.config.value.w = 300
+	tsWater.material.uniforms.config.value.w = 20
 	tsWater.material.uniforms.reflectivity.value = 0.46
 	return tsWater
 }

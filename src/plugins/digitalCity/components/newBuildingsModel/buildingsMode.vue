@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-01-02 10:55:34
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-01-03 14:51:22
+ * @LastEditTime: 2024-01-03 18:39:44
 -->
 <template>
 	<Suspense>
@@ -15,31 +15,25 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useRenderLoop } from '@tresjs/core'
-import { Group, Color, DirectionalLight, DoubleSide, Mesh, EdgesGeometry } from 'three'
+import { Group, Color, DoubleSide, Mesh, EdgesGeometry, AdditiveBlending } from 'three'
 import { LineSegments2 } from 'three/examples/jsm/lines/LineSegments2.js'
 import { LineMaterial } from 'three/examples/jsm/lines/LineMaterial.js'
 import { LineSegmentsGeometry } from 'three/examples/jsm/lines/LineSegmentsGeometry.js'
 import { useGLTF } from '@tresjs/cientos'
 import CustomShaderMaterial from 'three-custom-shader-material/vanilla'
-// import { setFloorMesh } from '../../common/utils'
-import { setThreeWater2, initMeshBvh } from '../../common/utils'
+import { setThreeWater2, initMeshBvh, resetUV } from '../../common/utils'
 import vertexShader from '../../shaders/buildingsCustomShaderMaterial.vert?raw'
 import fragmentShader from '../../shaders/buildingsCustomShaderMaterial.frag?raw'
+import HolographicMaterial from '../../common/HolographicMaterial'
 
 initMeshBvh()
 const { scene }
 	= await useGLTF('https://opensource-1314935952.cos.ap-nanjing.myqcloud.com/model/digitalCity/shanghaiDraco.gltf',
 		{ draco: true },
 	)
-console.log(scene)
+// console.log(scene)
 const group = scene.clone() as Group
-// group.scale.set(1, 1, 1)
-
 const timeDelta = ref(0)
-const { onLoop } = useRenderLoop()
-onLoop(({ delta }) => {
-	timeDelta.value += delta;
-})
 const setEffectMaterial = (mesh) => {
 	const { geometry } = mesh
 	geometry.computeBoundingBox()
@@ -103,20 +97,13 @@ group.traverse(async (mesh: any) => {
 		if (mesh.name.indexOf('Floor') !== -1) {
 			//设置成地板材质
 			// mesh.receiveShadow = true
-			// await setFloorMesh(mesh)
 			// mesh.material.color = new Color('#ff0')
 			// mesh.material = floorMaterial
 		} else if (mesh.name.indexOf('River') !== -1) {
 			//替换水的材质
 			const waterm = await setThreeWater2(mesh)
 			waterm.position.set(0, 0, 1800)
-			// waterm.position.set(10, 10, 6000)
-			// waterm.scale.set(10, 10, 10)
-			// waterm.rotation.set(0, -Math.PI / 2, 0)
-			// const rtmp = new Group()
-			// group.add()
 			mesh.add(waterm)
-			// waterm.position.set(0, -10, 0)
 		} else {
 			setEffectMaterial(mesh)
 			setBuildsLine(mesh)
@@ -126,6 +113,79 @@ group.traverse(async (mesh: any) => {
 		}
 	}
 })
+const PARAMS = {
+	fresnelAmount: 5,
+	scanlineSize: 15,
+	signalSpeed: 1.3,
+	fresnelOpacity: 0.01,
+	hologramColor: "#e05b0f",
+}
+const holoMaterial = new HolographicMaterial({ blendMode: AdditiveBlending, hologramBrightness: 2.5, side: DoubleSide })
+holoMaterial.uniforms.fresnelAmount.value = PARAMS.fresnelAmount
+holoMaterial.uniforms.scanlineSize.value = PARAMS.scanlineSize
+holoMaterial.uniforms.signalSpeed.value = PARAMS.signalSpeed
+holoMaterial.uniforms.fresnelOpacity.value = PARAMS.fresnelOpacity
+holoMaterial.uniforms.hologramColor.value = new Color(PARAMS.hologramColor)
+holoMaterial.uniforms.enableBlinking.value = false
+holoMaterial.depthTest = true
+const { onLoop } = useRenderLoop()
+onLoop(({ delta }) => {
+	timeDelta.value += delta;
+	holoMaterial.update()
+})
+
+//关键建筑物
+const setImportantBuilds = () => {
+	// 环球金融中心
+	const hqjrzx = group.getObjectByName('02-huanqiujinrongzhongxin_huanqiujinrongzhongxin_0')
+	hqjrzx.name = 'hqjrzx'
+	hqjrzx.material.dispose()
+	resetUV(hqjrzx.geometry)
+	hqjrzx.material = holoMaterial
+
+	const shzx = group.getObjectByName('01-shanghaizhongxindasha_shanghaizhongxindasha_0')
+	shzx.name = 'shzx'
+	shzx.material.dispose()
+	resetUV(shzx.geometry)
+	shzx.material = holoMaterial
+}
+setImportantBuilds()
 
 
+import { Pane } from 'tweakpane'
+const paneControl = new Pane({
+	title: '效果参数',
+	expanded: true,
+})
+paneControl.addBinding(PARAMS, 'fresnelAmount', {
+	min: 0,
+	max: 5,
+	step: 0.1,
+}).on('change', (ev) => {
+	holoMaterial.uniforms.fresnelAmount.value = ev.value
+})
+paneControl.addBinding(PARAMS, 'scanlineSize', {
+	min: 1,
+	max: 15,
+	step: 0.1,
+}).on('change', (ev) => {
+	holoMaterial.uniforms.scanlineSize.value = ev.value
+})
+paneControl.addBinding(PARAMS, 'signalSpeed', {
+	min: 0,
+	max: 1,
+	step: 0.01,
+}).on('change', (ev) => {
+	holoMaterial.uniforms.signalSpeed.value = ev.value
+})
+paneControl.addBinding(PARAMS, 'fresnelOpacity', {
+	min: 0,
+	max: 1,
+	step: 0.1,
+}).on('change', (ev) => {
+	holoMaterial.uniforms.fresnelOpacity.value = ev.value
+})
+paneControl.addBinding(PARAMS, 'hologramColor', { label: '圈颜色' }).on('change', (ev) => {
+	holoMaterial.uniforms.hologramColor.value = new Color(ev.value)
+})
 </script>
