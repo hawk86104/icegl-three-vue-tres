@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-01-02 10:55:34
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-01-03 18:39:44
+ * @LastEditTime: 2024-01-03 18:55:25
 -->
 <template>
 	<Suspense>
@@ -128,13 +128,9 @@ holoMaterial.uniforms.fresnelOpacity.value = PARAMS.fresnelOpacity
 holoMaterial.uniforms.hologramColor.value = new Color(PARAMS.hologramColor)
 holoMaterial.uniforms.enableBlinking.value = false
 holoMaterial.depthTest = true
-const { onLoop } = useRenderLoop()
-onLoop(({ delta }) => {
-	timeDelta.value += delta;
-	holoMaterial.update()
-})
 
 //关键建筑物
+let shzx = null
 const setImportantBuilds = () => {
 	// 环球金融中心
 	const hqjrzx = group.getObjectByName('02-huanqiujinrongzhongxin_huanqiujinrongzhongxin_0')
@@ -143,14 +139,23 @@ const setImportantBuilds = () => {
 	resetUV(hqjrzx.geometry)
 	hqjrzx.material = holoMaterial
 
-	const shzx = group.getObjectByName('01-shanghaizhongxindasha_shanghaizhongxindasha_0')
+	shzx = group.getObjectByName('01-shanghaizhongxindasha_shanghaizhongxindasha_0')
 	shzx.name = 'shzx'
 	shzx.material.dispose()
 	resetUV(shzx.geometry)
-	shzx.material = holoMaterial
+	shzx.material = holoMaterial.clone()
+	shzx.material.uniforms.hologramColor.value = new Color('#006cf9')
+	shzx.material.uniforms.fresnelAmount.value = 5
+	shzx.material.uniforms.scanlineSize.value = 2.1
+	shzx.material.uniforms.signalSpeed.value = 0.4
 }
 setImportantBuilds()
-
+const { onLoop } = useRenderLoop()
+onLoop(({ delta }) => {
+	timeDelta.value += delta;
+	holoMaterial.update()
+	shzx.material.update()
+})
 
 import { Pane } from 'tweakpane'
 const paneControl = new Pane({
