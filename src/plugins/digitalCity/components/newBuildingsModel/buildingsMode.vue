@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-01-02 10:55:34
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-01-03 10:47:20
+ * @LastEditTime: 2024-01-03 14:51:22
 -->
 <template>
 	<Suspense>
@@ -22,10 +22,11 @@ import { LineSegmentsGeometry } from 'three/examples/jsm/lines/LineSegmentsGeome
 import { useGLTF } from '@tresjs/cientos'
 import CustomShaderMaterial from 'three-custom-shader-material/vanilla'
 // import { setFloorMesh } from '../../common/utils'
-import { setThreeWater2 } from '../../common/utils'
+import { setThreeWater2, initMeshBvh } from '../../common/utils'
 import vertexShader from '../../shaders/buildingsCustomShaderMaterial.vert?raw'
 import fragmentShader from '../../shaders/buildingsCustomShaderMaterial.frag?raw'
 
+initMeshBvh()
 const { scene }
 	= await useGLTF('https://opensource-1314935952.cos.ap-nanjing.myqcloud.com/model/digitalCity/shanghaiDraco.gltf',
 		{ draco: true },
@@ -43,6 +44,7 @@ const setEffectMaterial = (mesh) => {
 	const { geometry } = mesh
 	geometry.computeBoundingBox()
 	geometry.computeBoundingSphere()
+	geometry.computeBoundsTree()
 	const { max, min } = geometry.boundingBox
 	const material = new CustomShaderMaterial({
 		baseMaterial: mesh.material,
@@ -83,6 +85,7 @@ const setBuildsLine = (mesh) => {
 	const edges = new EdgesGeometry(mesh.geometry, 1000) // WireframeGeometry
 	let geometry = new LineSegmentsGeometry()
 	let wideEdges = geometry.fromEdgesGeometry(edges)
+	wideEdges.computeBoundsTree()
 	let edgesmaterial = new LineMaterial({
 		color: new Color('#000'),
 		linewidth: 0.8,

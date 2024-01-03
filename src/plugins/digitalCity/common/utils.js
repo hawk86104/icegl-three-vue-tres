@@ -4,9 +4,9 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-09 09:33:51
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-01-03 10:56:06
+ * @LastEditTime: 2024-01-03 14:50:30
  */
-import { BufferAttribute, Box3, Vector3, RepeatWrapping, Color, Mesh, PlaneGeometry, Vector2, DoubleSide, Material, MeshBasicMaterial } from 'three'
+import { BufferAttribute, Box3, Vector3, RepeatWrapping, Color, Mesh, PlaneGeometry, Vector2, DoubleSide, Material, MeshBasicMaterial, BufferGeometry } from 'three'
 
 export const resetUV = (geometry) => {
 	geometry.computeBoundingBox()
@@ -87,6 +87,12 @@ export const toMeshSceneCenter = (mesh) => {
 	const { center, size } = getBoxInfo(mesh)
 	mesh.position.copy(center.negate().setY(0))
 }
+import { computeBoundsTree, disposeBoundsTree, acceleratedRaycast } from 'three-mesh-bvh'
+export const initMeshBvh = () => {
+	BufferGeometry.prototype.computeBoundsTree = computeBoundsTree;
+	BufferGeometry.prototype.disposeBoundsTree = disposeBoundsTree;
+	Mesh.prototype.raycast = acceleratedRaycast;
+}
 
 // 镜面
 import { BasicMaterial, Reflector, ReflectorDudvMaterial } from 'PLS/floor/lib/alienJS/all.three.js'
@@ -128,6 +134,7 @@ export const setThreeWater2 = async (mesh) => {
 	const pTexture = await useTexture(['./plugins/water/images/Water_1_M_Normal.jpg', './plugins/water/images/Water_2_M_Normal.jpg'])
 	const waterGeometry = mesh.geometry.clone()
 	randomUV(waterGeometry)
+	waterGeometry.computeBoundsTree()
 	const tsWater = new Water(
 		waterGeometry,
 		{
