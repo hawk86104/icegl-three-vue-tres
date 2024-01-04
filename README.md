@@ -45,6 +45,7 @@ ThreeJS大名鼎鼎的基于浏览器渲染，JavaScript语言的3D库。<br/><b
 
 ![展示](./preview/数字城市1.gif)
 ![展示](./preview/数字城市2.gif)
+![展示](./public/plugins/digitalCity/preview/city2.gif)
 ![展示](./preview/地球3.gif)
 ![展示](./preview/热力图2.gif)
 ![展示](./preview/热力图.gif)

@@ -4,7 +4,11 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-10-16 10:53:09
  * @LastEditors: 地虎降天龙
+<<<<<<< HEAD
  * @LastEditTime: 2023-12-13 08:46:51
+=======
+ * @LastEditTime: 2024-01-04 10:35:21
+>>>>>>> master
  */
 // import { resolve } from 'path';
 import { join } from 'path';
@@ -53,6 +57,9 @@ export default defineBuildConfig({
                     assetFileNames: `[ext]/[name].[hash]${timeStamp}.[ext]`,
                 },
             }
+        },
+        server: {
+            host: "0.0.0.0"
         },
     },
     alias: { PLS: join(__dirname, './src/plugins') },

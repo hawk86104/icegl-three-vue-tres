@@ -4,6 +4,8 @@ import { useRenderLoop } from '@tresjs/core'
 // import { CustomShaderMaterial } from '@tresjs/cientos'
 import CustomShaderMaterial from 'three-custom-shader-material/vanilla'
 import { ref, watchEffect, watch } from 'vue';
+import vertexShader from '../../shaders/buildingsCustomShaderMaterial.vert?raw'
+import fragmentShader from '../../shaders/buildingsCustomShaderMaterial.frag?raw'
 import * as THREE from 'three'
 const props = withDefaults(defineProps<{
 	model: any
@@ -50,51 +52,8 @@ const setEffectMaterial = () => {
 	}
 	const material = new CustomShaderMaterial({
 		baseMaterial: CITY_UNTRIANGULATED.material,
-		vertexShader: `
-		varying vec4 vPosition;
-		void main() {
-			vPosition = modelMatrix * vec4(position,1.0);
-			csm_Position = position * vec3(1.0);
-		}
-		`,
-		fragmentShader: `
-		uniform mat4 modelMatrix;
-		varying vec4 vPosition;
-		uniform vec3 uMax; 
-		uniform vec3 uMin; 
-		uniform float uOpacity;  
-		uniform float uBorderWidth; 
-		uniform vec3 uLightColor;
-		uniform vec3 uColor;
-		uniform float uCircleTime; 
-		uniform float uTime; 
-		uniform vec3 uTopColor;					//顶部颜色
-		uniform bool uGradient;
-		vec4 uMax_world;
-		vec4 uMin_world;
-		void main() {
-			// 转世界坐标
-			uMax_world =  modelMatrix * vec4(uMax,1.0);
-			uMin_world =  modelMatrix * vec4(uMin,1.0);
-			vec3 distColor = uColor;
-			float residue = uTime - floor(uTime / uCircleTime) * uCircleTime;
-			float rate = residue / uCircleTime;
-			float lightOffset = rate * (uMax_world.y - uMin_world.y);
-
-			if (uMin_world.y + lightOffset < vPosition.y && uMin_world.y + lightOffset + uBorderWidth > vPosition.y) {
-				csm_DiffuseColor = vec4(uLightColor, uOpacity);
-			} else {
-				csm_DiffuseColor = vec4(distColor, uOpacity);
-			}
-
-			//根据高度计算颜色
-			if(uGradient){
-				float rateHight = (vPosition.y - uMin_world.y) / (uMax_world.y - uMin_world.y); 
-				vec3 outColor = mix(csm_DiffuseColor.xyz, uTopColor, rateHight*2.0);
-				csm_DiffuseColor = vec4(outColor, uOpacity);
-			}
-    }
-		`,
+		vertexShader: vertexShader,
+		fragmentShader: fragmentShader,
 		silent: true, // Disables the default warning if true
 		uniforms: {
 			uMax: { value: max },
