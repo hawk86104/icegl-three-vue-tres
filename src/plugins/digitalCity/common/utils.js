@@ -4,9 +4,9 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-09 09:33:51
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-01-03 17:48:10
+ * @LastEditTime: 2024-01-04 09:25:52
  */
-import { BufferAttribute, Box3, Vector3, RepeatWrapping, Color, Mesh, PlaneGeometry, Vector2, DoubleSide, Material, MeshBasicMaterial, BufferGeometry } from 'three'
+import { BufferAttribute, Box3, Vector3, RepeatWrapping, Color, Mesh, PlaneGeometry, Vector2, DoubleSide, Material, MeshBasicMaterial, BufferGeometry, Matrix4 } from 'three'
 
 export const resetUV = (geometry) => {
 	geometry.computeBoundingBox()
@@ -121,4 +121,24 @@ export const setThreeWater2 = async (mesh) => {
 	tsWater.material.uniforms.config.value.w = 20
 	tsWater.material.uniforms.reflectivity.value = 0.46
 	return tsWater
+}
+
+/**
+ * 锚点重置到中心
+ * @param {Object3D} mesh 
+ */
+export function reAnchorCenter (mesh) {
+	const geometry = mesh.geometry
+	const position = mesh.position
+	geometry.computeBoundingBox()
+	const center = new Vector3();
+	geometry.boundingBox.getCenter(center);
+	const m = new Matrix4();
+	m.set(1, 0, 0, center.x - position.x,
+		0, 1, 0, center.y - position.y,
+		0, 0, 1, center.z - position.z,
+		0, 0, 0, 1)
+	geometry.center();
+
+	mesh.position.applyMatrix4(m)
 }

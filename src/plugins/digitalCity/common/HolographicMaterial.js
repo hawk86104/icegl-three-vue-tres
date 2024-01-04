@@ -1,7 +1,7 @@
 /**
  * Holographic material by Anderson Mancini - Dec 2023.
  */
-import { ShaderMaterial, Clock, Uniform, Color,  NormalBlending, AdditiveBlending, FrontSide, BackSide, DoubleSide  } from 'three';
+import { ShaderMaterial, Clock, Uniform, Color, NormalBlending, AdditiveBlending, FrontSide, BackSide, DoubleSide } from 'three';
 
 class HolographicMaterial extends ShaderMaterial {
 
@@ -28,7 +28,7 @@ class HolographicMaterial extends ShaderMaterial {
     super();
 
     this.vertexShader = /*GLSL */
-    `
+      `
       #define STANDARD
       varying vec3 vViewPosition;
       #ifdef USE_TRANSMISSION
@@ -89,7 +89,7 @@ class HolographicMaterial extends ShaderMaterial {
       }`
 
     this.fragmentShader = /*GLSL */
-    ` 
+      ` 
       varying vec2 vUv;
       varying vec3 vPositionW;
       varying vec4 vPos;
@@ -147,6 +147,7 @@ class HolographicMaterial extends ShaderMaterial {
         vec3 finalColor;
 
         if(blinkFresnelOnly){
+          // finalColor = vec3(1.0,1.0,0);
           finalColor = scanlineMix.rgb + fresnelEffect * blink;
         }else{
           finalColor = scanlineMix.rgb * blink + fresnelEffect;
@@ -156,93 +157,93 @@ class HolographicMaterial extends ShaderMaterial {
 
       }`
 
-      // Set default values or modify existing properties if needed
-      this.uniforms = {
-        /**
-         * The time uniform representing animation time.
-         * @type {Uniform<number>}
-         * @default 0.0
-         */
-        time: new Uniform(0),
-  
-        /**
-         * The opacity for the fresnel effect.
-         * @type {Uniform<number>}
-         * @default 1.0
-         */
-        fresnelOpacity: new Uniform(parameters.fresnelOpacity !== undefined ? parameters.fresnelOpacity : 1.0),
-  
-        /**
-         * The strength of the fresnel effect.
-         * @type {Uniform<number>}
-         * @default 1.0
-         */
-        fresnelAmount: new Uniform(parameters.fresnelAmount !== undefined ? parameters.fresnelAmount : 0.45),
-  
-        /**
-         * The size of the scanline effect.
-         * @type {Uniform<number>}
-         * @default 1.0
-         */
-        scanlineSize: new Uniform(parameters.scanlineSize !== undefined ? parameters.scanlineSize : 8.0),
-  
-        /**
-         * The brightness of the hologram.
-         * @type {Uniform<number>}
-         * @default 1.0
-         */
-        hologramBrightness: new Uniform(parameters.hologramBrightness !== undefined ? parameters.hologramBrightness : 1.0),
-  
-        /**
-         * The speed of the signal effect.
-         * @type {Uniform<number>}
-         * @default 1.0
-         */
-        signalSpeed: new Uniform(parameters.signalSpeed !== undefined ? parameters.signalSpeed : 1.0),
-  
-        /**
-         * The color of the hologram.
-         * @type {Uniform<Color>}
-         * @default new Color(0xFFFFFF)
-         */
-        hologramColor: new Uniform(parameters.hologramColor !== undefined ? new Color(parameters.hologramColor) : new Color("#00d5ff")),
-  
-        /**
-         * Enable/disable blinking effect.
-         * @type {Uniform<boolean>}
-         * @default true
-         */
-        enableBlinking: new Uniform(parameters.enableBlinking !== undefined ? parameters.enableBlinking : true),
-  
-        /**
-         * Enable blinking only on the fresnel effect.
-         * @type {Uniform<boolean>}
-         * @default false
-         */
-        blinkFresnelOnly: new Uniform(parameters.blinkFresnelOnly !== undefined ? parameters.blinkFresnelOnly : true),
-  
-        /**
-         * The opacity of the hologram.
-         * @type {Uniform<number>}
-         * @default 1.0
-         */
-        hologramOpacity: new Uniform(parameters.hologramOpacity !== undefined ? parameters.hologramOpacity : 1.0),
-      };
-  
-      this.clock = new Clock()
-      this.setValues(parameters);
-      this.depthTest = parameters.depthTest !== undefined ? parameters.depthTest : false;
-      this.blending = parameters.blendMode !== undefined ? parameters.blendMode : AdditiveBlending;
-      this.transparent = true;
-      this.side = parameters.side !== undefined ? parameters.side : FrontSide;
+    // Set default values or modify existing properties if needed
+    this.uniforms = {
+      /**
+       * The time uniform representing animation time.
+       * @type {Uniform<number>}
+       * @default 0.0
+       */
+      time: new Uniform(0),
+
+      /**
+       * The opacity for the fresnel effect.
+       * @type {Uniform<number>}
+       * @default 1.0
+       */
+      fresnelOpacity: new Uniform(parameters.fresnelOpacity !== undefined ? parameters.fresnelOpacity : 1.0),
+
+      /**
+       * The strength of the fresnel effect.
+       * @type {Uniform<number>}
+       * @default 1.0
+       */
+      fresnelAmount: new Uniform(parameters.fresnelAmount !== undefined ? parameters.fresnelAmount : 0.45),
+
+      /**
+       * The size of the scanline effect.
+       * @type {Uniform<number>}
+       * @default 1.0
+       */
+      scanlineSize: new Uniform(parameters.scanlineSize !== undefined ? parameters.scanlineSize : 8.0),
+
+      /**
+       * The brightness of the hologram.
+       * @type {Uniform<number>}
+       * @default 1.0
+       */
+      hologramBrightness: new Uniform(parameters.hologramBrightness !== undefined ? parameters.hologramBrightness : 1.0),
+
+      /**
+       * The speed of the signal effect.
+       * @type {Uniform<number>}
+       * @default 1.0
+       */
+      signalSpeed: new Uniform(parameters.signalSpeed !== undefined ? parameters.signalSpeed : 1.0),
+
+      /**
+       * The color of the hologram.
+       * @type {Uniform<Color>}
+       * @default new Color(0xFFFFFF)
+       */
+      hologramColor: new Uniform(parameters.hologramColor !== undefined ? new Color(parameters.hologramColor) : new Color("#00d5ff")),
+
+      /**
+       * Enable/disable blinking effect.
+       * @type {Uniform<boolean>}
+       * @default true
+       */
+      enableBlinking: new Uniform(parameters.enableBlinking !== undefined ? parameters.enableBlinking : true),
+
+      /**
+       * Enable blinking only on the fresnel effect.
+       * @type {Uniform<boolean>}
+       * @default false
+       */
+      blinkFresnelOnly: new Uniform(parameters.blinkFresnelOnly !== undefined ? parameters.blinkFresnelOnly : true),
+
+      /**
+       * The opacity of the hologram.
+       * @type {Uniform<number>}
+       * @default 1.0
+       */
+      hologramOpacity: new Uniform(parameters.hologramOpacity !== undefined ? parameters.hologramOpacity : 1.0),
+    };
+
+    this.clock = new Clock()
+    this.setValues(parameters);
+    this.depthTest = parameters.depthTest !== undefined ? parameters.depthTest : false;
+    this.blending = parameters.blendMode !== undefined ? parameters.blendMode : AdditiveBlending;
+    this.transparent = true;
+    this.side = parameters.side !== undefined ? parameters.side : FrontSide;
 
   }
 
 
-  update() {
+  update () {
     this.uniforms.time.value = this.clock.getElapsedTime();
   }
 
 }
 
-export default HolographicMaterial ;
+export default HolographicMaterial;

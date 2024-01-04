@@ -29,6 +29,6 @@ export default {
 		{ "src": "plugins/digitalCity/preview/buildingsEffectA.png", "type": "img", "name": "buildingsEffectA", "title": "建筑物效果A" },
 		{ "src": "plugins/digitalCity/preview/buildingsMarkA.png", "type": "img", "name": "buildingsMarkA", "title": "建筑物标记A" },
 		{ "src": "plugins/digitalCity/preview/roadLines.png", "type": "img", "name": "roadLines", "title": "道路飞线" },
-		{ "src": "plugins/digitalCity/preview/roadLines.png", "type": "img", "name": "roadLines2", "title": "新模型飞线" },
+		{ "src": "plugins/digitalCity/preview/roadLines.png", "type": "img", "name": "city2", "title": "城市新模型" },
 	]
 }

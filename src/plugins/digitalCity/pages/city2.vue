@@ -4,10 +4,10 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-10-24 09:49:39
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-01-03 15:50:51
+ * @LastEditTime: 2024-01-04 09:48:22
 -->
 <template>
-	<TresCanvas shadows window-size clearColor="#000">
+	<TresCanvas shadows window-size clearColor="#333">
 		<TresPerspectiveCamera :position="[0.5, 2, 1.5]" :fov="45" :near="0.1" :far="100000" />
 		<OrbitControls />
 		<TresAmbientLight color="#ffffff" />
