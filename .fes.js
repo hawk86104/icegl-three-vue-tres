@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-10-16 10:53:09
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-12-04 19:44:27
+ * @LastEditTime: 2024-01-04 10:35:21
  */
 // import { resolve } from 'path';
 import { join } from 'path';
@@ -43,6 +43,9 @@ export default defineBuildConfig({
             }),
             // glsl(),
         ],
+        server: {
+            host: "0.0.0.0"
+        },
     },
     alias: { PLS: join(__dirname, './src/plugins') },
     // { find: 'pls', replacement: resolve(__dirname, './src/plugins') },
