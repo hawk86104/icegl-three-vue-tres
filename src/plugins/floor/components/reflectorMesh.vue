@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-12-21 17:05:09
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-12-22 09:29:44
+ * @LastEditTime: 2024-01-05 16:01:48
 -->
 <template>
 	<primitive :object="mirror" :rotation-x="-Math.PI / 2" :position-y="-0.0001" />
@@ -47,7 +47,7 @@ const mirrorConfig = {
 	color: new Color(props.mirrorColor), //color: 反射面的颜色，可以是一个 CSS 颜色字符串或是一个 three.js 的 Color 对象，默认值是 0x7F7F7F。
 }
 const mirror = new Reflector(new PlaneGeometry(srcSize, srcSize), mirrorConfig)
-
+// mirror.receiveShadow = true
 const gridHelp = new GridHelper(srcSize, props.divisions, props.colorCenterLine, props.colorGrid);
 watchEffect(() => {
 	if (props.mirrorColor) {
