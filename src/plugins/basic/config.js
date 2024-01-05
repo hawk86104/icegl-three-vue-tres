@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-03 15:07:09
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-12-27 09:01:28
+ * @LastEditTime: 2024-01-05 09:25:01
  */
 export default {
 	"name": "basic",
@@ -37,6 +37,7 @@ export default {
 			"preview": [
 				{ "src": "plugins/basic/materials/preview/glassMaterial.png", "type": "img", "name": "glassMaterial", "title": "玻璃材质" },
 				{ "src": "plugins/basic/materials/preview/wobbleMaterial.png", "type": "img", "name": "wobbleMaterial", "title": "流体波动" },
+				{ "src": "plugins/basic/materials/preview/clippingMaterial.png", "type": "img", "name": "clippingMaterial", "title": "材质裁剪" },
 			]
 		}, {
 			"name": "controls",
