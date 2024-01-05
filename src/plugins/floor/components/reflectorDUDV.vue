@@ -4,13 +4,15 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-12-25 11:41:13
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-12-25 12:21:42
+ * @LastEditTime: 2024-01-05 20:49:22
 -->
 
 
 <template>
-	<primitive :object="mirror" :position-y="-0.01" />
-	<primitive :object="gridHelp" />
+	<TresGroup :scale="props.scale">
+		<primitive :object="mirror" :position-y="-0.01" />
+		<primitive :object="gridHelp" />
+	</TresGroup>
 </template>
 
 <script lang="ts" setup>
@@ -22,8 +24,10 @@ import { watchEffect, watch } from 'vue'
 const props = withDefaults(defineProps<{
 	reflectivity?: Number
 	showGridHelper?: boolean
+	scale?: Number
 }>(), {
 	reflectivity: 0.8,
+	scale: 1.0,
 	showGridHelper: true,
 })
 const reflector = new Reflector()
