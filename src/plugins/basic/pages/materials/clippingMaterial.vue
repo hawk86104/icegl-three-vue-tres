@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-01-05 09:23:48
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-01-05 15:47:53
+ * @LastEditTime: 2024-01-06 08:58:35
 -->
 
 <script setup lang="ts">
@@ -73,7 +73,7 @@ paneControl.addBinding(clipPlanes[2], 'constant', {
 		<TresGroup>
 			<TresMesh v-for="i in meshList" :key="i">
 				<TresSphereGeometry :args="[i / 30, 48, 24]" />
-				<TresMeshLambertMaterial :color="new Color().setHSL(Math.random(), 0.5, 0.5, SRGBColorSpace)" :side="DoubleSide"
+				<TresMeshLambertMaterial :color="(new Color()).setHSL(Math.random(), 0.5, 0.5, SRGBColorSpace)" :side="DoubleSide"
 					:clippingPlanes="clipPlanes" :clipIntersection="params.clipIntersection" />
 			</TresMesh>
 		</TresGroup>
