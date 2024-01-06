@@ -4,14 +4,14 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-01-05 09:23:48
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-01-06 08:58:35
+ * @LastEditTime: 2024-01-06 09:14:24
 -->
 
 <script setup lang="ts">
 import { ref, watchEffect } from 'vue'
 import { TresCanvas } from '@tresjs/core'
 import { OrbitControls } from '@tresjs/cientos'
-import { Color, SRGBColorSpace, Plane, Vector3, DoubleSide } from 'three'
+import { Plane, Vector3, DoubleSide, MathUtils } from 'three'
 import { Pane } from 'tweakpane'
 
 const tcRef = ref()
@@ -61,6 +61,7 @@ paneControl.addBinding(clipPlanes[2], 'constant', {
 	max: 1,
 	step: 0.1,
 })
+
 </script>
 
 <template>
@@ -71,10 +72,10 @@ paneControl.addBinding(clipPlanes[2], 'constant', {
 		<OrbitControls />
 
 		<TresGroup>
-			<TresMesh v-for="i in meshList" :key="i">
+			<TresMesh v-for="i in   meshList    " :key="i">
 				<TresSphereGeometry :args="[i / 30, 48, 24]" />
-				<TresMeshLambertMaterial :color="(new Color()).setHSL(Math.random(), 0.5, 0.5, SRGBColorSpace)" :side="DoubleSide"
-					:clippingPlanes="clipPlanes" :clipIntersection="params.clipIntersection" />
+				<TresMeshLambertMaterial :color="[MathUtils.randInt(0.1, 1), MathUtils.randInt(0, 1), MathUtils.randInt(0, 1)]"
+					:side="DoubleSide" :clippingPlanes="clipPlanes" :clipIntersection="params.clipIntersection" />
 			</TresMesh>
 		</TresGroup>
 
