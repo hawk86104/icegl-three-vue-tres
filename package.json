@@ -7,6 +7,7 @@
         "build": "fes build",
         "pre.dev": "cross-env FES_ENV=predev fes dev",
         "pre.build": "cross-env FES_ENV=predev fes build",
+        "plugin.marker": "node pluginMaker/index.js",
         "analyze": "cross-env ANALYZE=1 fes build",
         "test:unit": "fes test:unit",
         "postinstall": "patch-package"
@@ -35,6 +36,7 @@
         "@tresjs/core": "3.6.0",
         "axios": "^1.6.2",
         "cannon-es": "^0.20.0",
+        "compressing": "^1.10.0",
         "core-js": "^3.29.1",
         "gsap": "^3.12.2",
         "heatmap.js-fix": "^1.0.0",
