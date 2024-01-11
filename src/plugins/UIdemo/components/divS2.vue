@@ -44,7 +44,10 @@ let publicPath = process.env.BASE_URL
 .divS2 {
 	user-select: none;
 	pointer-events: none !important;
-	position: relative !important;
+
+	div:first-of-type {
+		position: relative !important;
+	}
 
 	.poputs_show_cl {
 		opacity: 1.0;

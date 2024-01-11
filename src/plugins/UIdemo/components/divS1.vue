@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-01-11 09:06:30
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-01-11 09:09:03
+ * @LastEditTime: 2024-01-11 10:10:43
 -->
 <script setup lang="ts">
 import { reactive } from 'vue'
@@ -34,11 +34,9 @@ const state = reactive({
 .divS1 {
 	user-select: none;
 	pointer-events: none !important;
-	position: relative !important;
 
-	#inner {
-		user-select: none;
-		pointer-events: none !important;
+	div:first-of-type {
+		position: relative !important;
 	}
 
 	.boxStyle1 {
