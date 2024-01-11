@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-18 08:51:19
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-01-11 17:03:14
+ * @LastEditTime: 2024-01-11 17:54:48
 -->
 <template>
 	<TresCanvas clearColor="#333" window-size>
@@ -39,12 +39,11 @@ import illustratePropeller from '../components/illustratePropeller.vue'
 import illustrateWing from '../components/illustrateWing.vue'
 
 const configState = reactive({
-	reflectivity: 0.41,
-	mirror: 3.25,	// 去除纹理 镜面化 
-	mixStrength: 22,
+	reflectivity: 0.941,
+	mirror: 113.25,
+	mixStrength: 12,
 	showGridHelper: true,
 	scale: 100.0
-	// color: '#ffffff'
 })
 
 

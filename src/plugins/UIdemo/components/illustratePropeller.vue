@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-01-11 15:37:56
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-01-11 17:52:35
+ * @LastEditTime: 2024-01-11 18:01:58
 -->
 
 <script setup lang="ts">
@@ -13,7 +13,6 @@ import { Html } from '@tresjs/cientos'
 const state = reactive({
 	wrapperClass: 'illustrate1',
 	as: 'div',
-	sprite: true,
 	transform: true,
 	distanceFactor: 120,
 })
@@ -41,6 +40,11 @@ setInterval(() => {
 .illustrate1 {
 	user-select: none;
 	pointer-events: none !important;
+
+	#inner {
+		user-select: none;
+		pointer-events: none !important;
+	}
 
 	.cStyle1 {
 		width: 15px;
