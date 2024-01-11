@@ -36,15 +36,17 @@
         </div>
         <div class="flex-1 overflow-scroll" style="height: calc(100vh - 54px);">
             <template v-for="(onePlugin, pkey) in pluginsConfig" :key="pkey">
-                <div style="background-color: #f1f1f2;" v-if="pkey !== 'basic'" :ref="el => tabListRef[pkey] = el">
-                    <cardList :onePlugin="onePlugin" />
-                </div>
-                <template v-else>
+                <template v-if="pkey === 'basic'">
                     <div style="background-color: #f1f1f2;" v-for="(one, opkey) in onePlugin.child" :key="opkey"
                         :ref="el => tabListRef[one.name] = el">
                         <cardList :onePlugin="one" />
                     </div>
                 </template>
+            </template>
+            <template v-for="(onePlugin, pkey) in pluginsConfig" :key="pkey">
+                <div style="background-color: #f1f1f2;" v-if="pkey !== 'basic'" :ref="el => tabListRef[pkey] = el">
+                    <cardList :onePlugin="onePlugin" />
+                </div>
             </template>
         </div>
     </div>
