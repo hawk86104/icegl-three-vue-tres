@@ -1,11 +1,26 @@
+<!--
+ * @Description: 
+ * @Version: 1.668
+ * @Autor: 地虎降天龙
+ * @Date: 2024-01-11 10:30:21
+ * @LastEditors: 地虎降天龙
+ * @LastEditTime: 2024-01-11 10:37:43
+-->
 
 <script setup lang="ts">
 import { reactive } from 'vue'
+// import { Color, MeshPhongMaterial, BoxGeometry } from 'three'
 import { Html } from '@tresjs/cientos'
 
 const state = reactive({
 	wrapperClass: 'divS2',
 	as: 'div',
+	sprite: true,
+	center: true,	//居中
+	transform: true,//根据模型同步变换矩阵
+	distanceFactor: 1,
+	// material: new MeshPhongMaterial({ color: 'red' }),
+	// geometry: new BoxGeometry()
 })
 let publicPath = process.env.BASE_URL
 </script>
@@ -44,6 +59,11 @@ let publicPath = process.env.BASE_URL
 .divS2 {
 	user-select: none;
 	pointer-events: none !important;
+
+	#inner {
+		user-select: none;
+		pointer-events: none !important;
+	}
 
 	.poputs_show_cl {
 		opacity: 1.0;

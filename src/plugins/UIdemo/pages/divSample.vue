@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-06 11:08:24
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-01-11 09:17:25
+ * @LastEditTime: 2024-01-11 10:38:39
 -->
 
 <script setup lang="ts">
@@ -12,6 +12,7 @@ import { TresCanvas } from '@tresjs/core'
 import { OrbitControls } from '@tresjs/cientos'
 import divS1 from '../components/divS1.vue'
 import divS2 from '../components/divS2.vue'
+import divSprite from '../components/divSprite.vue'
 </script>
 
 <template>
@@ -23,6 +24,7 @@ import divS2 from '../components/divS2.vue'
 			<TresMeshNormalMaterial />
 			<divS1 />
 			<divS2 />
+			<divSprite />
 		</TresMesh>
 	</TresCanvas>
 </template>

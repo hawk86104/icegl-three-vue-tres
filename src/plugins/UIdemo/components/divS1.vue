@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-01-11 09:06:30
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-01-11 09:09:03
+ * @LastEditTime: 2024-01-11 10:23:30
 -->
 <script setup lang="ts">
 import { reactive } from 'vue'
@@ -14,10 +14,6 @@ import { Html } from '@tresjs/cientos'
 const state = reactive({
 	wrapperClass: 'divS1',
 	as: 'div',
-	// center: true,	//居中
-	// transform: true,//根据模型同步变换矩阵
-	// material: new MeshPhongMaterial({ color: 'red' }),
-	// geometry: new BoxGeometry()
 })
 </script>
 <template>
@@ -31,15 +27,13 @@ const state = reactive({
 
 <!-- scoped bg-#00336660 -->
 <style lang="less">
+.divS1>div:first-of-type {
+	position: relative !important;
+}
+
 .divS1 {
 	user-select: none;
 	pointer-events: none !important;
-	position: relative !important;
-
-	#inner {
-		user-select: none;
-		pointer-events: none !important;
-	}
 
 	.boxStyle1 {
 		padding: 10px;
