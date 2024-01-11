@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-06 11:08:24
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-11-06 11:09:45
+ * @LastEditTime: 2024-01-11 08:10:47
 -->
 
 <script setup lang="ts">
@@ -61,15 +61,31 @@ const state = reactive({
 		<TresMesh ref="torusRef" :position="[7, 1, 1]">
 			<TresTorusGeometry />
 			<TresMeshNormalMaterial />
+			<Html v-bind="state" transform sprite>
+			<h1 class="bg-white text-xs p-0.5 text-fuchsia-500">
+				I'm a Sprite 👻
+			</h1>
+
+			</Html>
 		</TresMesh>
+
+		<Html :position="[2, -1, 1]" v-bind="state" transform sprite>
+		<h1 class="bg-blue-gray-900 text-xs rounded p-0.5 text-green-100">
+			I'm just a Div 🔖
+		</h1>
+
+		</Html>
+
 		<TresAmbientLight :intensity="1" />
 	</TresCanvas>
 </template>
 
-<style scoped>
-.web {
-	width: 600px;
-	height: 400px;
-	border-radius: 10px;
+<!-- scoped -->
+<style lang="less">
+.wrapper {
+	#inner {
+		user-select: none;
+		pointer-events: none !important;
+	}
 }
 </style>
