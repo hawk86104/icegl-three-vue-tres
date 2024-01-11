@@ -4,11 +4,11 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-12-22 16:05:20
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-12-27 09:21:18
+ * @LastEditTime: 2024-01-11 15:25:35
 -->
 
 <template>
-	<TresGroup :position="props.position">
+	<TresGroup :position="props.position" :scale="props.scale">
 		<primitive :object="meshOB" />
 		<primitive :object="gridHelp" />
 		<!-- <TresGridHelper v-if="props.showGridHelper" :args="[9.5, 10]" /> -->
@@ -27,6 +27,7 @@ const props = withDefaults(defineProps<{
 	showGridHelper?: boolean
 	color?: string
 	position?: Array<number>
+	scale?: Number // 大小
 }>(), {
 	reflectivity: 0.2,
 	mirror: 0.1,
@@ -34,6 +35,7 @@ const props = withDefaults(defineProps<{
 	showGridHelper: true,
 	color: '#ffffff',
 	position: [0, -1, 0],
+	scale: 1.0
 })
 
 const { scene } = useTresContext()

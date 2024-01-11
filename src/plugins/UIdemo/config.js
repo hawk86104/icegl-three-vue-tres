@@ -10,5 +10,6 @@ export default {
 	"require": [],
 	"preview": [
 		{ "src": "plugins/UIdemo/preview/divSample.png", "type": "img", "name": "divSample", "title": "简单DIV" },
+		{ "src": "plugins/UIdemo/preview/divIllustrate.png", "type": "img", "name": "divIllustrate", "title": "DIV说明样例" },
 	]
 }
