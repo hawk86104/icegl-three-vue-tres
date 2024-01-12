@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-18 08:51:19
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-01-11 17:54:48
+ * @LastEditTime: 2024-01-12 09:18:10
 -->
 <template>
 	<TresCanvas clearColor="#333" window-size>
@@ -23,6 +23,8 @@
 
 		<illustratePropeller />
 		<illustrateWing />
+		<illustrateTire />
+		<illustrateTireMesh />
 
 	</TresCanvas>
 </template>
@@ -37,6 +39,8 @@ import reflectorShaderMesh from 'PLS/floor/components/reflectorShaderMesh.vue'
 import modelVue from '../components/model.vue'
 import illustratePropeller from '../components/illustratePropeller.vue'
 import illustrateWing from '../components/illustrateWing.vue'
+import illustrateTire from '../components/illustrateTire.vue'
+import illustrateTireMesh from '../components/illustrateTireMesh.vue'
 
 const configState = reactive({
 	reflectivity: 0.941,
