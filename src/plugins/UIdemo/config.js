@@ -1,3 +1,11 @@
+/*
+ * @Description: 
+ * @Version: 1.668
+ * @Autor: 地虎降天龙
+ * @Date: 2024-01-12 09:24:00
+ * @LastEditors: 地虎降天龙
+ * @LastEditTime: 2024-01-13 11:21:08
+ */
 
 export default {
 	"name": "UIdemo",
@@ -11,5 +19,6 @@ export default {
 	"preview": [
 		{ "src": "plugins/UIdemo/preview/divSample.png", "type": "img", "name": "divSample", "title": "简单DIV" },
 		{ "src": "plugins/UIdemo/preview/divIllustrate.png", "type": "img", "name": "divIllustrate", "title": "DIV说明样例" },
+		{ "src": "plugins/UIdemo/preview/sizeMark.png", "type": "img", "name": "sizeMark", "title": "尺寸样式" },
 	]
 }
