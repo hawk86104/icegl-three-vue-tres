@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-01-16 10:30:59
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-01-16 10:55:44
+ * @LastEditTime: 2024-01-16 12:04:33
 -->
 <template>
 	<Html v-bind="state" :position="[0.6, -0.01, 0.16]" :rotation="[0, 0.6, 0]">
@@ -32,19 +32,31 @@
 </template>
 <script setup lang="ts">
 import { Html } from "@tresjs/cientos"
-import { reactive } from 'vue'
+// import { useSeek } from "@tresjs/core"
+import { reactive, inject } from 'vue'
+const props = defineProps({
+	model: {
+		type: Object,
+		required: true,
+	},
+})
 
+const animationPlay = inject('animationPlay')
+const onClick = () => {
+	animationPlay.value = !animationPlay.value
+}
+
+// const { seek } = useSeek()
+// const seekObj = seek(props.model, 'name', 'Object_6')
+// seekObj.material.color.set('red')
 const state = reactive({
 	wrapperClass: 'svgCom',
 	as: 'div',
 	transform: true,
 	distanceFactor: 0.3,
-	center: true
+	center: true,
+	// occlude: [seekObj]
 })
-
-const onClick = () => {
-	console.log('dsad')
-}
 </script>
 <style>
 .svgCom>div:first-of-type {

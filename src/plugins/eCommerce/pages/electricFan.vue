@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-01-16 08:58:24
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-01-16 09:58:23
+ * @LastEditTime: 2024-01-16 11:13:31
 -->
 <script setup lang="ts">
 import { OrbitControls } from '@tresjs/cientos'
@@ -21,8 +21,8 @@ const gl = {
 }
 
 const state = reactive({
-	selectedColor: '#903345',
-	colors: ['#903345', '#F2D3AC', '#F2F2F2', '#000000'],
+	selectedColor: '#F2D3AC',
+	colors: ['#F2D3AC', '#903345', '#F2F2F2', '#000000'],
 })
 </script>
 
@@ -45,14 +45,14 @@ const state = reactive({
 			<div class="h-1/2 w-full md:w-1/2" />
 			<div class="p-6 w-full md:w-1/2 md:p-4 text-light">
 				<h1 class="title animate-fade-in-right animate-ease">
-					电风扇 🌀
+					电风扇 ☁️
 				</h1>
 
 				<span class="absolute border-1 border-solid border-white w-800px inline-block" />
 
 				<p class="w-full md:w-2/3 my-8 animate-fade-in mt-32 position-relative">
-					点击 "下方按钮" ，选择自己喜欢的颜色。<br>
-					点击 "模型上按钮" ，开关风扇。
+					点击 <span class="font-bold">"模型上按钮"</span> ，开关风扇。<br>
+					点击 <span class="font-bold">"下方按钮"</span> ，选择自己喜欢的颜色。
 				</p>
 
 				<ul class="flex gap-8">
@@ -106,7 +106,8 @@ const state = reactive({
 
 .landingpage-bg {
 	background-image: url("@/../plugins/digitalCity/preview/heatmap2.png");
-	filter: blur(46px);
+	filter: blur(46px) hue-rotate(325deg) grayscale(100%);
+	/* 模糊度  色阶  灰度*/
 }
 
 li {
