@@ -17,6 +17,6 @@ export default {
 	"state": "active",
 	"require": [],
 	"preview": [
-		{ "src": "plugins/basic/base/preview/theBasic.png", "type": "img", "name": "electricFan", "title": "电风扇" },
+		{ "src": "plugins/eCommerce/preview/electricFan.png", "type": "img", "name": "electricFan", "title": "电风扇" },
 	]
 }

@@ -4,12 +4,12 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-01-16 08:58:24
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-01-17 09:22:37
+ * @LastEditTime: 2024-01-17 15:49:23
 -->
 <script setup lang="ts">
 import { OrbitControls } from '@tresjs/cientos'
 import { TresCanvas } from "@tresjs/core"
-import { reactive } from "vue"
+import { reactive, ref } from "vue"
 import { BasicShadowMap, SRGBColorSpace } from 'three'
 import eFan from '../components/eFan.vue'
 
@@ -20,30 +20,37 @@ const gl = {
 	outputColorSpace: SRGBColorSpace,
 }
 
+const circleScaleRef = ref()
+const circleScaleAnimation = ref(false)
+
 const state = reactive({
 	selectedColor: '#ff8b04',
 	colors: ['#ff8b04', '#999999', '#d3ac10', '#ffbec4', '#d0d5c6'],
 })
+const oldColor = ref(state.selectedColor)
+const onClick = (color) => {
+	oldColor.value = state.selectedColor
+	state.selectedColor = color
+	circleScaleAnimation.value = !circleScaleAnimation.value
+}
+
 </script>
 
 <template>
 	<div class="landingpage-bg w-full inset-0 h-full" />
-	<div class="absolute
-    p-8
-    md:p-0
-    w-full
-    inset-0
-    h-full
-    flex
-    flex-col
-    md:flex-row
-    md:justify-center
-    md:items-center
-    bg-red-200
-    bg-opacity-75">
-		<div class="w-full h-full md:w-2/3 md:h-1/2 bg-red-300 shadow-lg rounded flex flex-col md:flex-row">
+	<div class="absolute p-8 md:p-0 w-full inset-0 h-full
+    flex flex-col md:flex-row md:justify-center md:items-center"
+		:style="{ backgroundColor: state.selectedColor + '80' }">
+		<div class="w-full h-full pos-absolute md:w-2/3 md:h-1/2 shadow-lg rounded flex flex-col md:flex-row opacity-66"
+			:style="{ backgroundColor: oldColor }">
+			<div class="w-full h-full overflow-hidden pos-absolute">
+				<div class="circleScale"
+					:class="{ circleScaleAnimationOld: circleScaleAnimation, circleScaleAnimationNew: !circleScaleAnimation }"
+					ref="circleScaleRef" :style="{ backgroundColor: state.selectedColor }">
+				</div>
+			</div>
 			<div class="h-1/2 w-full md:w-1/2" />
-			<div class="p-6 w-full md:w-1/2 md:p-4 text-light">
+			<div class="z-1 p-6 w-full md:w-1/2 md:p-4 text-light">
 				<h1 class="title animate-fade-in-right animate-ease">
 					电风扇 ☁️
 				</h1>
@@ -58,7 +65,7 @@ const state = reactive({
 				<ul class="flex gap-8">
 					<li v-for="color in state.colors" :key="color">
 						<button class="w-10 h-10 rounded-full border-2 border-solid border-white mr-2 cursor-pointer"
-							:style="{ backgroundColor: color }" @click="state.selectedColor = color" />
+							:style="{ backgroundColor: color }" @click="onClick(color)" />
 					</li>
 				</ul>
 			</div>
@@ -91,6 +98,50 @@ const state = reactive({
 
 * {
 	font-family: 'Heebo', sans-serif;
+}
+
+.circleScale {
+	position: relative;
+	top: 12%;
+	left: 16%;
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+	opacity: 0.66;
+	/* transform: scale(50); */
+	/* background-color: #ff8b04; */
+	/* -webkit-animation: circleScaleExpand 1s ease-in forwards;
+	animation: circleScaleExpand 1s ease-in forwards; */
+}
+
+.circleScaleAnimationOld {
+	-webkit-animation: circleScaleExpandOld 1s ease-in forwards;
+	animation: circleScaleExpandOld 1s ease-in forwards;
+}
+
+.circleScaleAnimationNew {
+	-webkit-animation: circleScaleExpandNew 1s ease-out forwards;
+	animation: circleScaleExpandNew 1s ease-out forwards;
+}
+
+@keyframes circleScaleExpandOld {
+	0% {
+		transform: scale(0.1);
+	}
+
+	100% {
+		transform: scale(50.1);
+	}
+}
+
+@keyframes circleScaleExpandNew {
+	0% {
+		transform: scale(0);
+	}
+
+	100% {
+		transform: scale(50);
+	}
 }
 
 .title {
