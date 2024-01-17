@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-01-16 08:58:24
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-01-16 11:13:31
+ * @LastEditTime: 2024-01-17 09:22:37
 -->
 <script setup lang="ts">
 import { OrbitControls } from '@tresjs/cientos'
@@ -21,8 +21,8 @@ const gl = {
 }
 
 const state = reactive({
-	selectedColor: '#F2D3AC',
-	colors: ['#F2D3AC', '#903345', '#F2F2F2', '#000000'],
+	selectedColor: '#ff8b04',
+	colors: ['#ff8b04', '#999999', '#d3ac10', '#ffbec4', '#d0d5c6'],
 })
 </script>
 
