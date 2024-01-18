@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-12-20 17:01:37
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-12-27 08:43:22
+ * @LastEditTime: 2024-01-18 16:10:59
  */
 export default {
 	"name": "floor",
@@ -21,5 +21,6 @@ export default {
 		{ "src": "plugins/floor/preview/reflectorDiffuse.png", "type": "img", "name": "reflectorDiffuse", "title": "fiber镜面" },
 		{ "src": "plugins/floor/preview/reflectorDUDV.png", "type": "img", "name": "reflectorDUDV", "title": "dudv镜面" },
 		{ "src": "plugins/floor/preview/showFloor.png", "type": "img", "name": "showFloor", "title": "地板模型拼接+镜面" },
+		{ "src": "plugins/floor/preview/videoFloor.png", "type": "img", "name": "videoFloor", "title": "video动态底座" },
 	]
 }

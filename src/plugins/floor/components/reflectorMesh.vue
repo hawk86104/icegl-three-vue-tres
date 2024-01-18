@@ -7,8 +7,10 @@
  * @LastEditTime: 2024-01-05 16:01:48
 -->
 <template>
-	<primitive :object="mirror" :rotation-x="-Math.PI / 2" :position-y="-0.0001" />
-	<primitive :object="gridHelp" />
+	<TresGroup>
+		<primitive :object="mirror" :rotation-x="-Math.PI / 2" :position-y="-0.0001" />
+		<primitive :object="gridHelp" />
+	</TresGroup>
 	<!-- <TresGridHelper ref="rghRef" size="1000" divisions="10000" /> -->
 </template>
 
