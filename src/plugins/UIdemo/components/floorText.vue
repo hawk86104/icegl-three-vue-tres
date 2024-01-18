@@ -22,7 +22,7 @@
 import { useGLTF, Text3D } from '@tresjs/cientos'
 
 const { nodes } = await useGLTF(
-	'https://opensource-1314935952.cos.ap-nanjing.myqcloud.com/model/floor/redTextFloor/scene.gltf', { draco: true })
+	'https://opensource-1314935952.cos.ap-nanjing.myqcloud.com/model/floor/redTextFloor/scene.gltf', { draco: true, decoderPath: './draco/' })
 
 console.log(nodes)
 const floor = nodes.Sketchfab_model.getObjectByName('floor_grid_07_-_Default_0')

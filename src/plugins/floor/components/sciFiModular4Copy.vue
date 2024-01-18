@@ -37,7 +37,7 @@ const props = withDefaults(
 const { scene } = useTresContext()
 const { nodes } = await useGLTF(
 	'./plugins/floor/model/modular_sci-fi_floor.glb',
-	{ draco: true })
+	{ draco: true, decoderPath: './draco/' })
 const ob = nodes.Cube016__0
 console.log(ob)
 

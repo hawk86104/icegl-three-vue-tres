@@ -25,7 +25,7 @@ const props = withDefaults(
 
 const { nodes } = await useGLTF(
 	'./plugins/industry4/model/modelDraco.glb',
-	{ draco: true })
+	{ draco: true, decoderPath: './draco/' })
 const lineGroup = reduceModelLine(nodes.Sketchfab_model)
 
 const { camera, renderer, scene, sizes } = useTresContext()
