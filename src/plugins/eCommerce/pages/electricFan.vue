@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-01-16 08:58:24
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-01-17 16:02:18
+ * @LastEditTime: 2024-01-18 09:09:35
 -->
 <script setup lang="ts">
 import { OrbitControls } from '@tresjs/cientos'
@@ -94,10 +94,10 @@ const onClick = (color) => {
 }
 </style>
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Heebo&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Heebo&display=swap'); */
 
 * {
-	font-family: 'Heebo', sans-serif;
+	font-family: sans-serif;
 }
 
 .circleScale {
@@ -130,7 +130,7 @@ const onClick = (color) => {
 	}
 
 	100% {
-		transform: scale(50.1);
+		transform: scale(80.1);
 	}
 }
 
@@ -140,7 +140,7 @@ const onClick = (color) => {
 	}
 
 	100% {
-		transform: scale(50);
+		transform: scale(80);
 	}
 }
 
