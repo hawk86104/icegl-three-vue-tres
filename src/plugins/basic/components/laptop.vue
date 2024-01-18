@@ -27,6 +27,6 @@ const primitiveref = ref()
 const { nodes }
 	// https://vazxmixjsiawhamofees.supabase.co/storage/v1/object/public/models/macbook/model.gltf
 	= await useGLTF('./plugins/basic/htmls/model/model.gltf',
-		{ draco: true },
+		{ draco: true, decoderPath: './draco/' },
 	)
 </script>

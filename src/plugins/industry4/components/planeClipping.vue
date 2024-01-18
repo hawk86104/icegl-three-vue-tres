@@ -16,7 +16,7 @@ const { renderer } = useTresContext()
 renderer.value.localClippingEnabled = true
 
 const { nodes } = await useGLTF(
-	'https://opensource-1314935952.cos.ap-nanjing.myqcloud.com/model/industry4/plane/scene.gltf', { draco: true })
+	'https://opensource-1314935952.cos.ap-nanjing.myqcloud.com/model/industry4/plane/scene.gltf', { draco: true, decoderPath: './draco/' })
 
 console.log(nodes)
 //移除地板

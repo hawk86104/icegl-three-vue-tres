@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-12-20 17:08:52
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-12-27 08:38:58
+ * @LastEditTime: 2024-01-18 12:02:37
 
  Sketchfab_model 
  Cube001__0 Cube009__0  Cube013__0 Cube014__0 Cube015__0 Cube016__0
@@ -31,8 +31,7 @@ const props = withDefaults(
 const { scene } = useTresContext()
 const { nodes } = await useGLTF(
 	'https://opensource-1314935952.cos.ap-nanjing.myqcloud.com/model/floor/modelDraco.glb',
-	// './plugins/floor/model/modular_sci-fi_floor/scene.gltf',
-	{ draco: true })
+	{ draco: true, decoderPath: './draco/' })
 const ob = nodes.Cube016__0
 console.log(ob)
 
