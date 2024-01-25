@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-01-25 10:20:13
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-01-25 11:30:24
+ * @LastEditTime: 2024-01-25 16:07:30
 -->
 
 <template>
@@ -21,7 +21,7 @@
 		</TresMesh>
 
 		<Suspense>
-			<whiteFloorMesh />
+			<whiteFloorMesh v-bind="configState" />
 		</Suspense>
 	</TresCanvas>
 </template>
@@ -31,7 +31,29 @@
 import { TresCanvas } from '@tresjs/core'
 import { OrbitControls, vLightHelper, Box } from '@tresjs/cientos'
 import whiteFloorMesh from '../components/whiteFloorMesh.vue'
-import { shallowRef, watchEffect } from 'vue'
+import { shallowRef, watchEffect, reactive } from 'vue'
+import { Pane } from 'tweakpane'
+
+const configState = reactive({
+	size: [20, 20],
+	color: '#cbcb96',
+	shadowColor: '#b8b59e',
+	receiveShadow: true,
+	edge: 0.35
+})
+const paneControl = new Pane({
+	title: '地板参数',
+	expanded: true,
+})
+paneControl.addBinding(configState, 'edge', {
+	label: '边缘模糊',
+	min: 0.2,
+	max: 0.36,
+	step: 0.01,
+})
+paneControl.addBinding(configState, 'color', { label: '地板颜色' })
+paneControl.addBinding(configState, 'shadowColor', { label: '阴影颜色' })
+paneControl.addBinding(configState, 'receiveShadow', { label: '显示阴影' })
 
 const TDirectionalLight = shallowRef()
 watchEffect(() => {
@@ -39,10 +61,6 @@ watchEffect(() => {
 		TDirectionalLight.value.shadow.mapSize.set(1024, 1024)
 		TDirectionalLight.value.shadow.camera.near = 0.1
 		TDirectionalLight.value.shadow.camera.far = 5000
-		// TDirectionalLight.value.shadow.camera.top = 500
-		// TDirectionalLight.value.shadow.camera.right = 500
-		// TDirectionalLight.value.shadow.camera.left = -500
-		// TDirectionalLight.value.shadow.camera.bottom = -500
 		TDirectionalLight.value.shadow.radius = 10
 	}
 })

@@ -4,11 +4,11 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-01-25 10:23:43
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-01-25 11:24:17
+ * @LastEditTime: 2024-01-25 15:56:11
 -->
 
 <template>
-	<TresMesh ref="tmRef" :rotation-x="-Math.PI / 2" receive-shadow>
+	<TresMesh ref="tmRef" :rotation-x="-Math.PI / 2">
 		<TresPlaneGeometry :args="props.size" />
 		<TresShaderMaterial v-bind="tsMaterial" />
 	</TresMesh>
@@ -16,13 +16,20 @@
 
 <script lang="ts" setup>
 import * as THREE from "three"
-import { watch, reactive, ref } from 'vue'
+import { watch, ref } from 'vue'
 import { useTexture } from '@tresjs/core'
+import { getVertexShader, getFragmentShader } from '../shaders/whiteFloor'
 
 const props = withDefaults(defineProps<{
-	size?: Array<number>
+	size?: number[]
+	color?: string
+	shadowColor?: string
+	edge?: number
 }>(), {
-	size: [20, 20]
+	size: [20, 20],
+	color: '#990',
+	shadowColor: '#999',
+	edge: 0.35
 })
 
 const tmRef = ref()
@@ -37,62 +44,36 @@ const tsMaterial = {
 			THREE.UniformsLib["lights"],
 			{
 				uTexture: { type: "t", value: pTexture },
+				uColor: { value: new THREE.Color(props.color) },
+				uShadowColor: { value: new THREE.Color(props.shadowColor) },
+				fEdge: { type: "f", value: props.edge },
 			}
 		]),
 	side: THREE.DoubleSide,
-	vertexShader: `
-       varying vec2 vUv;
-			 	${THREE.ShaderChunk["common"]}
-      	${THREE.ShaderChunk["bsdfs"]}
-      	${THREE.ShaderChunk["shadowmap_pars_vertex"]}
-       void main() {
-					${THREE.ShaderChunk['beginnormal_vertex']}
-          ${THREE.ShaderChunk['defaultnormal_vertex']}
-          ${THREE.ShaderChunk["begin_vertex"]}
-          ${THREE.ShaderChunk["project_vertex"]}
-          ${THREE.ShaderChunk["worldpos_vertex"]}
-          ${THREE.ShaderChunk["shadowmap_vertex"]}
+	vertexShader: getVertexShader(),
 
-           gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);    
-           vUv = uv;
-       }`,
-
-	fragmentShader: `
-       varying vec2 vUv;
-       uniform sampler2D uTexture;
-			 // ShaderMaterial 下的 纹理参数重复无效 要在着色器中增加
-			 float repeatTime = 100.0;
-
-       float smoothsteps(float t) {
-           return t * t * (3.0 - 2.0 * t);
-       }
-
-				${THREE.ShaderChunk["common"]}
-				${THREE.ShaderChunk["packing"]}
-				${THREE.ShaderChunk["bsdfs"]}
-				${THREE.ShaderChunk["lights_pars_begin"]}
-				${THREE.ShaderChunk["shadowmap_pars_fragment"]}
-				${THREE.ShaderChunk["shadowmask_pars_fragment"]}
-
-       void main() {
-           vec4 col = texture2D(uTexture, vUv * repeatTime);
-           // col.rgb *= vec3(1.3, 1.15, 1.0) * 1.2;
-           col.rgb *= vec3(0.97, 0.95, 0.9) * 1.2;
-           
-           float alpha = 1.0;
-           float d = length(vUv - vec2(0.5));
-           if(d > 0.35) {
-               alpha = 1.0 - smoothsteps( clamp( (d - 0.35) / 0.15, 0.0, 1.0) );
-           }
-
-					vec3 shadowColor = vec3(0,0,0);
-          vec3 addShadow = mix( shadowColor , col.rgb ,getShadowMask());
-
-           gl_FragColor = vec4(addShadow, alpha);  
-       }`,
+	fragmentShader: getFragmentShader(),
 	lights: true,
 	transparent: true,
 }
 
+watch(
+	() => props.edge,
+	(newVal) => {
+		tsMaterial.uniforms.fEdge.value = newVal
+	}
+)
 
+watch(
+	() => props.color,
+	(newVal) => {
+		tsMaterial.uniforms.uColor.value = new THREE.Color(props.color)
+	}
+)
+watch(
+	() => props.shadowColor,
+	(newVal) => {
+		tsMaterial.uniforms.uShadowColor.value = new THREE.Color(props.shadowColor)
+	}
+)
 </script>
