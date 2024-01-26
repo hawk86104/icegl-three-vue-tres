@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-18 22:17:49
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-12-06 16:28:10
+ * @LastEditTime: 2024-01-25 09:48:45
 -->
 <template>
     <div class="flex h-full">
@@ -85,5 +85,15 @@ const goto = (value: string) => {
 .fes-menu.is-horizontal.is-inverted .fes-menu-item {
     font-size: 0.93em;
     font-weight: 100;
+}
+
+.fes-menu.is-vertical.is-inverted {
+    overflow: hidden;
+    height: calc(100vh - 54px);
+    overflow: scroll;
+}
+
+.fes-menu.is-vertical.is-inverted::-webkit-scrollbar {
+    display: none;
 }
 </style>
