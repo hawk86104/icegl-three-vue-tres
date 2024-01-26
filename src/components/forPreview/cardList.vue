@@ -75,4 +75,10 @@ const toPage = (plugin: any, value: any) => {
 	margin: 0px 10px 0px;
 	width: 95%;
 }
+
+.fes-card__header {
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
 </style>

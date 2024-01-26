@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-01-25 10:23:43
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-01-26 15:21:10
+ * @LastEditTime: 2024-01-26 15:42:15
 -->
 
 <template></template>
@@ -12,7 +12,7 @@
 <script lang="ts" setup>
 import * as THREE from "three"
 import { useTresContext } from '@tresjs/core'
-import { loadHDR } from '../common/utils'
+import { useTexture } from '@tresjs/core'
 
 const props = withDefaults(defineProps<{
 	texture: string
@@ -20,7 +20,12 @@ const props = withDefaults(defineProps<{
 })
 const { scene } = useTresContext()
 
-const pTexture = await loadHDR(props.texture)
+const { map: pTexture } = await useTexture({ map: props.texture })
+pTexture.wrapS = pTexture.wrapT = THREE.ClampToEdgeWrapping
+pTexture.generateMipmaps = false
+pTexture.magFilter = THREE.LinearFilter
+pTexture.minFilter = THREE.LinearFilter
+pTexture.mapping = THREE.EquirectangularReflectionMapping
 
 //该纹理贴图将会被设为场景中所有物理材质的环境贴图。 然而，该属性不能够覆盖已存在的、已分配给 MeshStandardMaterial.envMap 的贴图。默认为null。
 scene.value.environment = pTexture
