@@ -9,6 +9,8 @@ export default {
 	"state": "active",
 	"require": [],
 	"preview": [
-		{ "src": "plugins/basic/base/preview/theBasic.png", "type": "img", "name": "skyBoxA", "title": "矩形jpg/png:着色器渲染" },
+		{ "src": "plugins/basic/base/preview/theBasic.png", "type": "img", "name": "skyBoxA", "title": "单张:矩形jpg/png:着色器渲染" },
+		{ "src": "plugins/basic/base/preview/theBasic.png", "type": "img", "name": "skyBoxB", "title": "单张:HDR渲染:着色器渲染" },
+		{ "src": "plugins/basic/base/preview/theBasic.png", "type": "img", "name": "skyBoxC", "title": "单张:HDR渲染:scene:env/background" },
 	]
 }

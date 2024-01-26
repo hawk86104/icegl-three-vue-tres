@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-01-25 10:20:13
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-01-26 12:23:53
+ * @LastEditTime: 2024-01-26 14:39:17
 -->
 
 <template>
@@ -25,7 +25,7 @@
 		</Suspense>
 
 		<Suspense>
-			<skyBox texture="./plugins/skyBox/image/workshop_blur.jpg" />
+			<skyBox texture="https://opensource-1314935952.cos.ap-nanjing.myqcloud.com/images/skyBox/workshop_blur.jpg" />
 		</Suspense>
 	</TresCanvas>
 </template>
