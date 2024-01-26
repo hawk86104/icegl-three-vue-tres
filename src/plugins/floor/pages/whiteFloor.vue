@@ -4,11 +4,11 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-01-25 10:20:13
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-01-25 16:07:30
+ * @LastEditTime: 2024-01-26 10:51:08
 -->
 
 <template>
-	<TresCanvas clearColor="#201919" window-size shadows>
+	<TresCanvas v-bind="tcConfig">
 		<TresPerspectiveCamera :position="[15, 15, 15]" :fov="45" :near="0.1" :far="10000" :look-at="[0, 0, 0]" />
 		<OrbitControls enableDamping />
 		<TresAmbientLight :intensity="10.0" />
@@ -23,16 +23,30 @@
 		<Suspense>
 			<whiteFloorMesh v-bind="configState" />
 		</Suspense>
+
+		<Suspense>
+			<skyBox texture="./plugins/floor/image/workshop_blur.jpg" />
+		</Suspense>
 	</TresCanvas>
 </template>
 
 
 <script setup lang="ts">
+import * as THREE from "three"
 import { TresCanvas } from '@tresjs/core'
 import { OrbitControls, vLightHelper, Box } from '@tresjs/cientos'
 import whiteFloorMesh from '../components/whiteFloorMesh.vue'
+import skyBox from '../components/skyBox.vue'
 import { shallowRef, watchEffect, reactive } from 'vue'
 import { Pane } from 'tweakpane'
+
+const tcConfig = {
+	clearColor: "#201919",
+	windowSize: true,
+	shadows: true,
+	toneMapping: THREE.ACESFilmicToneMapping,
+	toneMappingExposure: 0.8,
+}
 
 const configState = reactive({
 	size: [20, 20],
