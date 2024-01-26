@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-01-25 10:20:13
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-01-26 10:51:08
+ * @LastEditTime: 2024-01-26 12:23:53
 -->
 
 <template>
@@ -25,7 +25,7 @@
 		</Suspense>
 
 		<Suspense>
-			<skyBox texture="./plugins/floor/image/workshop_blur.jpg" />
+			<skyBox texture="./plugins/skyBox/image/workshop_blur.jpg" />
 		</Suspense>
 	</TresCanvas>
 </template>
@@ -36,7 +36,7 @@ import * as THREE from "three"
 import { TresCanvas } from '@tresjs/core'
 import { OrbitControls, vLightHelper, Box } from '@tresjs/cientos'
 import whiteFloorMesh from '../components/whiteFloorMesh.vue'
-import skyBox from '../components/skyBox.vue'
+import skyBox from 'PLS/skyBox/components/skyBoxAmesh.vue'
 import { shallowRef, watchEffect, reactive } from 'vue'
 import { Pane } from 'tweakpane'
 
