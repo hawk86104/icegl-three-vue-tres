@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-01-25 10:23:43
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-01-26 12:10:21
+ * @LastEditTime: 2024-01-29 16:46:46
 -->
 
 <template>
@@ -56,6 +56,6 @@ const tsMaterial = {
 				float u = (atan(dir.x, dir.z) + PI) / (PI * 2.0);
 				gl_FragColor = texture2D(uSkybox, vec2(u, v));
 		}`,
-	depthWrite: true,
+	depthWrite: false,
 }
 </script>
