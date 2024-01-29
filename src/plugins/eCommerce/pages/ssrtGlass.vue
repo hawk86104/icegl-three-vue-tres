@@ -4,12 +4,12 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-01-25 10:20:13
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-01-29 16:51:50
+ * @LastEditTime: 2024-01-29 18:49:44
 -->
 
 <template>
 	<TresCanvas v-bind="tcConfig">
-		<TresPerspectiveCamera :position="[12, 12, 12]" :fov="45" :near="0.1" :far="10000" :look-at="[0, 0, 0]" />
+		<TresPerspectiveCamera :position="[0, 8, -13]" :fov="45" :near="0.1" :far="1000" :look-at="[0, 0, 0]" />
 		<OrbitControls enableDamping />
 		<TresAmbientLight :intensity="10.0" />
 		<Suspense>
@@ -18,7 +18,7 @@
 
 		<Suspense>
 			<!-- <ssrtGlassMesh modelPath="./plugins/basic/htmls/model/model.gltf" modelName="Macbook" -->
-			<ssrtGlassMesh :scale="2"
+			<ssrtGlassMesh :scale="2" v-bind="glassConfig"
 				modelPath="https://opensource-1314935952.cos.ap-nanjing.myqcloud.com/model/eCommerce/guanYu.glb"
 				modelName="statue"
 				skyBoxTexture="https://opensource-1314935952.cos.ap-nanjing.myqcloud.com/images/skyBox/workshop_blur.jpg" />
@@ -38,6 +38,7 @@ import { OrbitControls } from '@tresjs/cientos'
 import whiteFloorMesh from 'PLS/floor/components/whiteFloorMesh.vue'
 import skyBox from 'PLS/skyBox/components/skyBoxAmesh.vue'
 import { reactive } from 'vue'
+import { Pane } from 'tweakpane'
 
 import ssrtGlassMesh from "../components/ssrtGlassMesh.vue"
 
@@ -56,4 +57,41 @@ const flootrConfigState = reactive({
 	edge: 0.35
 })
 
+const glassConfig = reactive({
+	extintionFactor: 5.0,
+	reflectionFactor: 1,
+	exposure: 0,
+	extintionColor1: 'rgb(192,123,25)',
+	extintionColor2: 'rgb(26, 166, 192)',
+	extintionCol1Random: false,
+	extintionCol2Random: false
+})
+const paneControl = new Pane({ title: '参数', });
+paneControl.addBinding(glassConfig, 'extintionFactor', {
+	label: '消光系数', min: 0,
+	max: 10,
+	step: 0.1,
+})
+paneControl.addBinding(glassConfig, 'reflectionFactor', {
+	label: '反射系数', min: 0,
+	max: 2,
+	step: 0.1,
+})
+paneControl.addBinding(glassConfig, 'exposure', {
+	label: '曝光系数', min: -1,
+	max: 1,
+	step: 0.1,
+})
+paneControl.addBinding(glassConfig, 'extintionColor1', {
+	label: '消光颜色一'
+})
+paneControl.addBinding(glassConfig, 'extintionColor2', {
+	label: '消光颜色二'
+})
+paneControl.addBinding(glassConfig, 'extintionCol1Random', {
+	label: '随机色1'
+})
+paneControl.addBinding(glassConfig, 'extintionCol2Random', {
+	label: '随机色2'
+})
 </script>

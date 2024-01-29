@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-01-16 08:58:24
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-01-29 10:34:57
+ * @LastEditTime: 2024-01-29 19:28:11
  */
 
 export default {
@@ -18,6 +18,6 @@ export default {
 	"require": [],
 	"preview": [
 		{ "src": "plugins/eCommerce/preview/electricFan.png", "type": "img", "name": "electricFan", "title": "电风扇" },
-		{ "src": "plugins/eCommerce/preview/electricFan.png", "type": "img", "name": "ssrtGlass", "title": "水晶玻璃化" },
+		{ "src": "plugins/eCommerce/preview/ssrtGlass.png", "type": "img", "name": "ssrtGlass", "title": "水晶玻璃化", referenceSource: { title: 'Domenicobrz', url: 'https://github.com/Domenicobrz/SS-refraction-through-depth-peeling-in-threejs?tab=readme-ov-file' } },
 	]
 }
