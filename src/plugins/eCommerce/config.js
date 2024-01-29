@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-01-16 08:58:24
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-01-16 09:01:17
+ * @LastEditTime: 2024-01-29 10:34:57
  */
 
 export default {
@@ -18,5 +18,6 @@ export default {
 	"require": [],
 	"preview": [
 		{ "src": "plugins/eCommerce/preview/electricFan.png", "type": "img", "name": "electricFan", "title": "电风扇" },
+		{ "src": "plugins/eCommerce/preview/electricFan.png", "type": "img", "name": "ssrtGlass", "title": "水晶玻璃化" },
 	]
 }
