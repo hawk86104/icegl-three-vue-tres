@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-01-30 14:29:07
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-01-30 15:01:49
+ * @LastEditTime: 2024-01-30 16:08:56
 -->
 <template>
 	<TresCanvas v-bind="state" ref="tcRef">

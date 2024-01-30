@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-03 15:07:09
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-01-30 14:31:21
+ * @LastEditTime: 2024-01-30 16:05:51
  */
 export default {
 	"name": "basic",
@@ -73,6 +73,7 @@ export default {
 				{ "src": "plugins/basic/shine/preview/shader.png", "type": "img", "name": "shader", "title": "着色器方式" },
 				{ "src": "plugins/basic/shine/preview/bloomPass.png", "type": "img", "name": "bloomPass", "title": "后期处理-效果叠加" },
 				{ "src": "plugins/basic/shine/preview/MaskPass.png", "type": "img", "name": "MaskPass", "title": "后期处理-掩膜通道" },
+				{ "src": "plugins/basic/shine/preview/effectComposerLayers.png", "type": "img", "name": "effectComposerLayers", "title": "后期处理-图层叠加" },
 			]
 		},
 	]
