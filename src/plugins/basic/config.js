@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-03 15:07:09
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-01-09 17:04:58
+ * @LastEditTime: 2024-01-30 14:31:21
  */
 export default {
 	"name": "basic",
@@ -27,7 +27,8 @@ export default {
 				{ "src": "plugins/basic/base/preview/theBasic.png", "type": "img", "name": "theBasic", "title": "基本" },
 				{ "src": "plugins/basic/base/preview/theEvents.png", "type": "img", "name": "theEvents", "title": "事件" },
 				{ "src": "plugins/basic/base/preview/shaderParticles.png", "type": "img", "name": "shaderParticles", "title": "着色器实践" },
-				{ "src": "plugins/basic/base/preview/penetrateEvent.png", "type": "img", "name": "penetrateEvent", "title": "穿透事件" }
+				{ "src": "plugins/basic/base/preview/penetrateEvent.png", "type": "img", "name": "penetrateEvent", "title": "穿透事件" },
+				{ "src": "plugins/basic/base/preview/multipleScenes.png", "type": "img", "name": "multipleScenes", "title": "多场景" }
 			]
 		}, {
 			"name": "materials",
