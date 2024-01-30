@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-03 15:07:09
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-01-09 17:04:58
+ * @LastEditTime: 2024-01-30 17:14:22
  */
 export default {
 	"name": "basic",
@@ -27,7 +27,8 @@ export default {
 				{ "src": "plugins/basic/base/preview/theBasic.png", "type": "img", "name": "theBasic", "title": "基本" },
 				{ "src": "plugins/basic/base/preview/theEvents.png", "type": "img", "name": "theEvents", "title": "事件" },
 				{ "src": "plugins/basic/base/preview/shaderParticles.png", "type": "img", "name": "shaderParticles", "title": "着色器实践" },
-				{ "src": "plugins/basic/base/preview/penetrateEvent.png", "type": "img", "name": "penetrateEvent", "title": "穿透事件" }
+				{ "src": "plugins/basic/base/preview/penetrateEvent.png", "type": "img", "name": "penetrateEvent", "title": "穿透事件" },
+				{ "src": "plugins/basic/base/preview/multipleScenes.png", "type": "img", "name": "multipleScenes", "title": "多场景" }
 			]
 		}, {
 			"name": "materials",
@@ -72,6 +73,11 @@ export default {
 				{ "src": "plugins/basic/shine/preview/shader.png", "type": "img", "name": "shader", "title": "着色器方式" },
 				{ "src": "plugins/basic/shine/preview/bloomPass.png", "type": "img", "name": "bloomPass", "title": "后期处理-效果叠加" },
 				{ "src": "plugins/basic/shine/preview/MaskPass.png", "type": "img", "name": "MaskPass", "title": "后期处理-掩膜通道" },
+				{ "src": "plugins/basic/shine/preview/effectComposerLayers.png", "type": "img", "name": "effectComposerLayers", "title": "后期处理-图层叠加" },
+				{
+					"src": "plugins/basic/shine/preview/EffectComposerShaderPass.png", "type": "img", "name": "EffectComposerShaderPass", "title": "后期处理-图层+ShaderPass",
+					referenceSource: { title: 'zerotoinfinity', url: 'https://www.cnblogs.com/zerotoinfinity/p/15910759.html' }
+				},
 			]
 		},
 	]
