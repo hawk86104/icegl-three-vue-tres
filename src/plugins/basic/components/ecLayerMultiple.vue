@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-01-11 08:12:17
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-01-31 11:55:54
+ * @LastEditTime: 2024-01-31 15:09:33
 -->
 <template>
 	<TresMesh ref="normalBox" :position="[3, 2, 1]">
@@ -102,6 +102,8 @@ const afterImagePassEffect = (renderer: THREE.WebGLRenderer) => {
 }
 afterImagePassEffect(renderer.value)
 
+// import { SMAAPass } from 'three/addons/postprocessing/SMAAPass' //效果不好
+import { FXAAShader } from 'three/addons/shaders/FXAAShader' //效果不错
 let finalComposer = null as any
 const makeFinalComposer = (renderer: THREE.WebGLRenderer) => {
 	finalComposer = new EffectComposer(renderer)
@@ -141,6 +143,16 @@ const makeFinalComposer = (renderer: THREE.WebGLRenderer) => {
 	const finalPass = new ShaderPass(finalShader, "baseTexture")
 	finalPass.needsSwap = true
 	finalComposer.addPass(finalPass)
+
+	const { width, height } = renderer.getDrawingBufferSize(new THREE.Vector2())
+	// 抗锯齿 效果不好
+	// const pixelRatio = renderer.getPixelRatio()
+	// const smaaPass = new SMAAPass(width * pixelRatio, height * pixelRatio)
+	// finalComposer.addPass(smaaPass)
+	//fxaa抗锯齿 效果不错
+	const fxaaPass = new ShaderPass(FXAAShader)
+	fxaaPass.uniforms.resolution.value.set(1 / width, 1 / height)
+	finalComposer.addPass(fxaaPass)
 }
 makeFinalComposer(renderer.value)
 
