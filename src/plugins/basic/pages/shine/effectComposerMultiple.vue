@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-01-09 15:02:26
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-01-31 10:21:54
+ * @LastEditTime: 2024-01-31 11:15:54
 -->
 
 <template>
@@ -13,14 +13,14 @@
 		<TresAmbientLight :intensity="1" />
 		<OrbitControls />
 		<TresGridHelper :args="[10, 10]" />
-		<ecLayerCopyShader />
+		<ecLayerMultiple />
 	</TresCanvas>
 </template>
 
 <script setup lang="ts">
 import { TresCanvas } from '@tresjs/core'
 import { OrbitControls } from '@tresjs/cientos'
-import ecLayerCopyShader from '../../components/ecLayerCopyShader.vue'
+import ecLayerMultiple from '../../components/ecLayerMultiple.vue'
 import { watchEffect, ref } from 'vue'
 
 const tcRef = ref()

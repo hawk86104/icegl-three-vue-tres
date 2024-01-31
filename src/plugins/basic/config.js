@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-03 15:07:09
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-01-31 10:18:04
+ * @LastEditTime: 2024-01-31 11:59:12
  */
 export default {
 	"name": "basic",
@@ -78,7 +78,7 @@ export default {
 					"src": "plugins/basic/shine/preview/effectComposerShaderPass.png", "type": "img", "name": "effectComposerShaderPass", "title": "后期处理-图层+ShaderPass",
 					referenceSource: { title: 'zerotoinfinity', url: 'https://www.cnblogs.com/zerotoinfinity/p/15910759.html' }
 				},
-				{ "src": "plugins/basic/shine/preview/effectComposerShaderPass.png", "type": "img", "name": "effectComposerCopyShader", "title": "后期处理-CopyShader" },
+				{ "src": "plugins/basic/shine/preview/effectComposerMultiple.png", "type": "img", "name": "effectComposerMultiple", "title": "后期处理-多个叠加" },
 			]
 		},
 	]
