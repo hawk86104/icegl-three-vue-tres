@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-03 15:07:09
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-01-30 17:14:22
+ * @LastEditTime: 2024-01-31 10:18:04
  */
 export default {
 	"name": "basic",
@@ -75,9 +75,10 @@ export default {
 				{ "src": "plugins/basic/shine/preview/MaskPass.png", "type": "img", "name": "MaskPass", "title": "后期处理-掩膜通道" },
 				{ "src": "plugins/basic/shine/preview/effectComposerLayers.png", "type": "img", "name": "effectComposerLayers", "title": "后期处理-图层叠加" },
 				{
-					"src": "plugins/basic/shine/preview/EffectComposerShaderPass.png", "type": "img", "name": "EffectComposerShaderPass", "title": "后期处理-图层+ShaderPass",
+					"src": "plugins/basic/shine/preview/effectComposerShaderPass.png", "type": "img", "name": "effectComposerShaderPass", "title": "后期处理-图层+ShaderPass",
 					referenceSource: { title: 'zerotoinfinity', url: 'https://www.cnblogs.com/zerotoinfinity/p/15910759.html' }
 				},
+				{ "src": "plugins/basic/shine/preview/effectComposerShaderPass.png", "type": "img", "name": "effectComposerCopyShader", "title": "后期处理-CopyShader" },
 			]
 		},
 	]
