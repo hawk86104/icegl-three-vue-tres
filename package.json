@@ -22,7 +22,6 @@
     "tweakpane": "^4.0.1"
   },
   "dependencies": {
-    "@alienkitty/space.js": "^1.1.0",
     "@fesjs/builder-vite": "^3.0.3",
     "@fesjs/fes": "^3.1.5",
     "@fesjs/fes-design": "^0.8.10",

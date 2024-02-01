@@ -18,7 +18,7 @@ import {
 
 import { ReflectorBlurMaterial } from '../materials/ReflectorBlurMaterial.js';
 
-import { getFullscreenTriangle } from '@alienkitty/space.js/three';
+import { getFullscreenTriangle } from '../../../@alienkitty/space.js/src/three';
 
 export class Reflector extends Group {
     constructor({
@@ -74,7 +74,7 @@ export class Reflector extends Group {
         this.screen.frustumCulled = false;
     }
 
-    setSize(width, height) {
+    setSize (width, height) {
         this.renderTarget.setSize(width, height);
         this.renderTargetRead.setSize(width, height);
         this.renderTargetWrite.setSize(width, height);
@@ -82,7 +82,7 @@ export class Reflector extends Group {
         this.blurMaterial.uniforms.uResolution.value.set(width, height);
     }
 
-    update(renderer, scene, camera) {
+    update (renderer, scene, camera) {
         this.reflectorWorldPosition.setFromMatrixPosition(this.matrixWorld);
         this.cameraWorldPosition.setFromMatrixPosition(camera.matrixWorld);
 
@@ -214,7 +214,7 @@ export class Reflector extends Group {
         renderer.setRenderTarget(currentRenderTarget);
     }
 
-    destroy() {
+    destroy () {
         this.renderTargetWrite.dispose();
         this.renderTargetRead.dispose();
         this.renderTarget.dispose();
