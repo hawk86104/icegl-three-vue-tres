@@ -1,6 +1,6 @@
 <template >
     <canvas id="canvaswebgl">
-        <img id="logo-texture" src="plugins/postProcessing/image/logo.png" style="display: none" />
+        <img id="logo-texture" :src="publicPath + 'plugins/postProcessing/image/logo.png'" style="display: none" />
     </canvas>
 </template>
 
@@ -14,6 +14,9 @@ import { initShaders, resizeCanvasToDisplaySize, degToRad } from '../common/ice-
 import * as glMatrix from 'gl-matrix';
 import { onMounted, reactive } from 'vue';
 import { Pane } from 'tweakpane';
+
+let publicPath = process.env.BASE_URL
+
 var positionLocation = null;
 var texcoordLocation = null;
 let canvas: HTMLCanvasElement;

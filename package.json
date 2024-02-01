@@ -32,7 +32,7 @@
     "@fesjs/plugin-pinia": "^3.0.1",
     "@fesjs/plugin-request": "^4.0.0-beta.6",
     "@tresjs/cientos": "3.7.0",
-    "@tresjs/core": "3.6.0",
+    "@tresjs/core": "3.7.0",
     "axios": "1.6.7",
     "cannon-es": "^0.20.0",
     "compressing": "^1.10.0",

@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-01-09 17:15:51
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-01-11 08:07:42
+ * @LastEditTime: 2024-02-01 17:52:32
 -->
 <template>
 	<Box :args="[1, 1, 1]" color="orange" :position="[3, 2, 1]" />
@@ -15,6 +15,7 @@
 </template>
 
 <script setup lang="ts">
+import { watchEffect } from 'vue'
 import * as THREE from 'three'
 import { Box } from '@tresjs/cientos'
 import { useTresContext, useRenderLoop } from '@tresjs/core'
@@ -34,10 +35,7 @@ import { MaskPass, ClearMaskPass } from 'three/examples/jsm/postprocessing/MaskP
 const clearMask = new ClearMaskPass()
 
 const { camera, renderer, scene, sizes } = useTresContext()
-let effectComposer = new EffectComposer(renderer.value)
-effectComposer.renderTarget1.stencilBuffer = true
-effectComposer.renderTarget2.stencilBuffer = true
-
+let effectComposer = null as any
 const params = {
 	threshold: 0,
 	strength: 0.972,    // 强度
@@ -55,7 +53,6 @@ const bloomPassEffect = (scene: THREE.Scene, camera: THREE.PerspectiveCamera, re
 	const bloomPass = new UnrealBloomPass(new THREE.Vector2(width, height), params.strength, params.radius, params.threshold)
 	effectComposer.addPass(bloomPass)
 }
-bloomPassEffect(scene.value, camera.value as any, renderer.value, sizes.width.value, sizes.height.value)
 
 // const Tcamera = new THREE.PerspectiveCamera(45, 1, 0.1, 1000)
 // Tcamera.position.set(-15, 30, 40) // 设置相机位置
@@ -81,7 +78,6 @@ const MaskPassEffect = (scene2: THREE.Scene, camera: THREE.PerspectiveCamera, re
 
 	//顺序是 +渲染通道[RenderPass] + 掩膜[MaskPass] + 效果[FilmPass] + 清除掩膜[ClearMaskPass]
 }
-// MaskPassEffect(new THREE.Scene(), camera.value as any, renderer.value, sizes.width.value, sizes.height.value)
 
 const glitchPassEffect = (scene3: THREE.Scene, camera: THREE.PerspectiveCamera, renderer: THREE.WebGLRenderer, width: number, height: number) => {
 	// scene.value
@@ -113,7 +109,6 @@ const glitchPassEffect = (scene3: THREE.Scene, camera: THREE.PerspectiveCamera, 
 	effectComposer.addPass(clearMask) // 清除掩膜通道
 	//顺序是 +渲染通道[RenderPass] + 掩膜[MaskPass] + 效果[GlitchPass] + 清除掩膜[ClearMaskPass]
 }
-glitchPassEffect(new THREE.Scene(), camera.value as any, renderer.value, sizes.width.value, sizes.height.value)
 
 const endEffectCopy = () => {
 	//创建效果复制通道
@@ -121,7 +116,19 @@ const endEffectCopy = () => {
 	effectCopy.renderToScreen = true
 	effectComposer.addPass(effectCopy) //添加效果复制通道，将最终的结果复制到屏幕
 }
-endEffectCopy()
+
+watchEffect(() => {
+	if (sizes.width.value && !effectComposer) {
+		effectComposer = new EffectComposer(renderer.value)
+		effectComposer.renderTarget1.stencilBuffer = true
+		effectComposer.renderTarget2.stencilBuffer = true
+
+		bloomPassEffect(scene.value, camera.value as any, renderer.value, sizes.width.value, sizes.height.value)
+		// MaskPassEffect(new THREE.Scene(), camera.value as any, renderer.value, sizes.width.value, sizes.height.value)
+		glitchPassEffect(new THREE.Scene(), camera.value as any, renderer.value, sizes.width.value, sizes.height.value)
+		endEffectCopy()
+	}
+})
 
 const { onLoop } = useRenderLoop()
 onLoop(() => {

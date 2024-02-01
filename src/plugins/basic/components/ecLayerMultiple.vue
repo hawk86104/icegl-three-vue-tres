@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-01-11 08:12:17
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-01-31 15:09:33
+ * @LastEditTime: 2024-02-01 18:00:42
 -->
 <template>
 	<TresMesh ref="normalBox" :position="[3, 2, 1]">
@@ -74,7 +74,6 @@ const bloomPassEffect = (scene: THREE.Scene, camera: THREE.PerspectiveCamera, re
 	const bloomPass = new UnrealBloomPass(new THREE.Vector2(width, height), params.strength, params.radius, params.threshold)
 	bloomEffectComposer.addPass(bloomPass)
 }
-bloomPassEffect(scene.value, camera.value as any, renderer.value, sizes.width.value, sizes.height.value)
 
 import { FilmPass } from 'three/examples/jsm/postprocessing/FilmPass.js'
 let filmEffectComposer = null as any
@@ -87,7 +86,6 @@ const filmPassEffect = (renderer: THREE.WebGLRenderer) => {
 	const filmPass = new FilmPass()
 	filmEffectComposer.addPass(filmPass)
 }
-filmPassEffect(renderer.value)
 
 import { AfterimagePass } from "three/examples/jsm/postprocessing/AfterimagePass.js"
 let afterImageEffectComposer = null as any
@@ -100,7 +98,6 @@ const afterImagePassEffect = (renderer: THREE.WebGLRenderer) => {
 	const afterImagePass = new AfterimagePass()
 	afterImageEffectComposer.addPass(afterImagePass)
 }
-afterImagePassEffect(renderer.value)
 
 // import { SMAAPass } from 'three/addons/postprocessing/SMAAPass' //效果不好
 import { FXAAShader } from 'three/addons/shaders/FXAAShader' //效果不错
@@ -154,7 +151,16 @@ const makeFinalComposer = (renderer: THREE.WebGLRenderer) => {
 	fxaaPass.uniforms.resolution.value.set(1 / width, 1 / height)
 	finalComposer.addPass(fxaaPass)
 }
-makeFinalComposer(renderer.value)
+
+watchEffect(() => {
+	if (sizes.width.value) {
+		bloomPassEffect(scene.value, camera.value as any, renderer.value, sizes.width.value, sizes.height.value)
+		afterImagePassEffect(renderer.value)
+		filmPassEffect(renderer.value)
+		makeFinalComposer(renderer.value)
+	}
+})
+
 
 const { onLoop } = useRenderLoop()
 onLoop(() => {

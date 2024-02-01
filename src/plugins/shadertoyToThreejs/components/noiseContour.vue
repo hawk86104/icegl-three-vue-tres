@@ -3,11 +3,12 @@
  * @version: 
  * @Author: Jsonco
  * @Date: 2023-11-29 20:09:06
- * @LastEditors: sueRimn
- * @LastEditTime: 2023-11-30 23:02:23
+ * @LastEditors: 地虎降天龙
+ * @LastEditTime: 2024-02-01 18:20:13
 -->
 <template>
-    <TresMesh ref="noiseContourMeshRef2" :side="DoubleSide" :position="[400, 100, 0]" :rotation-x="((2 * Math.PI) / 360) * 90" cast-shadow>
+    <TresMesh ref="noiseContourMeshRef2" :side="DoubleSide" :position="[400, 100, 0]"
+        :rotation-x="((2 * Math.PI) / 360) * 90" cast-shadow>
         <TresBoxGeometry :args="[400, 400, 400]" />
         <TresMeshPhongMaterial color="#ffffff" :shininess="0.0" />
     </TresMesh>
@@ -18,15 +19,16 @@
 </template>
 
 <script setup lang="ts">
-import { TresCanvas, useRenderLoop, useTresContextProvider, useTresContext, useTexture } from '@tresjs/core';
-import { OrbitControls } from '@tresjs/cientos';
-import { AdditiveBlending, DoubleSide, Vector2, LinearFilter, RGBAFormat, WebGLRenderTarget } from 'three';
+import { watchEffect } from 'vue'
+import { useRenderLoop, useTresContext, useTexture } from '@tresjs/core'
+import { DoubleSide, Vector2, LinearFilter, RGBAFormat, WebGLRenderTarget } from 'three'
 
-import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass';
-import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass';
-import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer';
-const { camera, renderer, scene, sizes } = useTresContext();
-const pTexture = await useTexture({ map: './plugins/shadertoyToThreejs/image/noise.png' });
+import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass'
+import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass'
+import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer'
+
+const { camera, renderer, scene, sizes } = useTresContext()
+const pTexture = await useTexture({ map: './plugins/shadertoyToThreejs/image/noise.png' })
 const { onLoop, onAfterLoop } = useRenderLoop();
 const PARAMETERS = {
     minFilter: LinearFilter,
@@ -92,14 +94,12 @@ const drawShader = {
     },
     vertexShader: VERTEX,
     fragmentShader: FRAGMENT,
-};
+}
 
-const composer = new EffectComposer(renderer.value);
-composer.addPass(new RenderPass(scene.value, camera.value));
+let composer = null as any
 
-const pass = new ShaderPass(drawShader);
+const pass = new ShaderPass(drawShader)
 // pass.renderToScreen = true;
-composer.addPass(pass);
 
 const FRAGMENT_FINAL = `
 uniform sampler2D tDiffuse;
@@ -155,18 +155,28 @@ const finalShader = {
     },
     vertexShader: VERTEX,
     fragmentShader: FRAGMENT_FINAL,
-};
+}
 
-const passFinal = new ShaderPass(finalShader);
-passFinal.renderToScreen = true;
-passFinal.material.extensions.derivatives = true;
-composer.addPass(passFinal);
+const passFinal = new ShaderPass(finalShader)
+passFinal.renderToScreen = true
+passFinal.material.extensions.derivatives = true
+watchEffect(() => {
+    if (sizes.width.value) {
+        composer = new EffectComposer(renderer.value)
+        composer.addPass(new RenderPass(scene.value, camera.value))
+        composer.addPass(pass)
+        composer.addPass(passFinal)
+    }
+})
+
 onLoop(({ elapsed }) => {
     renderer.value.render(scene.value, camera.value, shadowBuffer);
     pass.uniforms.tShadow.value = shadowBuffer.texture;
     passFinal.uniforms.iTime.value = elapsed;
 });
 onAfterLoop(() => {
-    composer.render();
+    if (composer) {
+        composer.render()
+    }
 });
 </script>
