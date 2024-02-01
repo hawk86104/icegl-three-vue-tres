@@ -98,15 +98,15 @@ ThreeJS大名鼎鼎的基于浏览器渲染，JavaScript语言的3D库。<br/><b
 
 2、cd 到项目根目录
 
-3、npm install	//安装依赖
+3、yarn	//安装依赖
 
-4、npm run pre.dev	// 预览 下的调试模式
+4、yarn pre.dev	// 预览 下的调试模式
 
-5、npm run dev // 自己项目 下的调试模式
+5、yarn dev // 自己项目 下的调试模式
 
-6、npm run pre.build	//预览 下的编译打包
+6、yarn pre.build	//预览 下的编译打包
 
-7、npm run build	//自己项目 下的编译打包
+7、yarn build	//自己项目 下的编译打包
 ```
 ![展示](./preview/compileMode.png)
 
