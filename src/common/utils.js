@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-10-16 10:53:09
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-01-29 19:19:26
+ * @LastEditTime: 2024-02-01 12:34:32
  */
 // 放工具函数
 const findStringBetween = (str) => {
@@ -17,7 +17,7 @@ const findStringBetween = (str) => {
 }
 export const getPluginsConfig = () => {
 	// 获得插件列表 根据插件目录
-	const modulePaths = import.meta.globEager('PLS/**/config.js');
+	const modulePaths = import.meta.glob('PLS/**/config.js', { eager: true })
 	const config = {};
 	for (const path of Object.keys(modulePaths)) {
 		const name = findStringBetween(path)
