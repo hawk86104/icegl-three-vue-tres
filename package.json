@@ -16,7 +16,7 @@
     "access": "public"
   },
   "devDependencies": {
-    "@types/three": "0.160",
+    "@types/three": "0.161.1",
     "@webank/eslint-config-webank": "1.3.1",
     "cross-env": "^7.0.3",
     "tweakpane": "4.0.3"
@@ -44,8 +44,8 @@
     "patch-package": "^8.0.0",
     "pinia": "^2.1.7",
     "postinstall-postinstall": "^2.1.0",
-    "three": "0.160.0",
-    "three-mesh-bvh": "^0.6.8",
+    "three": "0.161.0",
+    "three-mesh-bvh": "0.7.1",
     "three-subdivide": "^1.1.5",
     "unocss": "0.58.4",
     "vanta": "^0.5.24",
