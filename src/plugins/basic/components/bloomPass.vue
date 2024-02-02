@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-01-11 08:12:17
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-01-12 08:52:55
+ * @LastEditTime: 2024-02-01 17:44:37
 -->
 <template>
 	<Box :args="[1, 1, 1]" color="orange" :position="[3, 2, 1]" />
@@ -15,6 +15,7 @@
 </template>
 
 <script setup lang="ts">
+import { watchEffect } from 'vue'
 import * as THREE from 'three'
 import { Box } from '@tresjs/cientos'
 import { useTresContext, useRenderLoop } from '@tresjs/core'
@@ -40,11 +41,11 @@ const bloomPassEffect = (scene: THREE.Scene, camera: THREE.PerspectiveCamera, re
 	const bloomPass = new UnrealBloomPass(new THREE.Vector2(width, height), params.strength, params.radius, params.threshold)
 	// 创建合成器
 	effectComposer = new EffectComposer(renderer)
+	// effectComposer.renderToScreen = false
 	// 将渲染器和场景结合到合成器中
 	effectComposer.addPass(renderScene)
 	effectComposer.addPass(bloomPass)
 }
-bloomPassEffect(scene.value, camera.value as any, renderer.value, sizes.width.value, sizes.height.value)
 
 const filmPassEffect = (scene2: THREE.Scene, camera: THREE.PerspectiveCamera, renderer: THREE.WebGLRenderer, width: number, height: number) => {
 	let meshCurve = new THREE.Mesh(new THREE.BoxGeometry(1, 1, 1), new THREE.MeshNormalMaterial())
@@ -67,7 +68,13 @@ const filmPassEffect = (scene2: THREE.Scene, camera: THREE.PerspectiveCamera, re
 	// const outputPass = new OutputPass()
 	// effectComposer.addPass(outputPass)
 }
-filmPassEffect(new THREE.Scene(), camera.value as any, renderer.value, sizes.width.value, sizes.height.value)
+
+watchEffect(() => {
+	if (sizes.width.value) {
+		bloomPassEffect(scene.value, camera.value as any, renderer.value, sizes.width.value, sizes.height.value)
+		filmPassEffect(new THREE.Scene(), camera.value as any, renderer.value, sizes.width.value, sizes.height.value)
+	}
+})
 
 const { onLoop } = useRenderLoop()
 onLoop(() => {

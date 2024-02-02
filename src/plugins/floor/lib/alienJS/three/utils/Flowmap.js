@@ -15,7 +15,7 @@ import {
     WebGLRenderTarget
 } from 'three';
 
-import { getFullscreenTriangle } from '@alienkitty/space.js/three';
+import { getFullscreenTriangle } from '../../../@alienkitty/space.js/src/three';
 
 import { vertexShader, fragmentShader } from '../../shaders/FlowmapShader.js';
 
@@ -71,7 +71,7 @@ export class Flowmap {
         this.screen.frustumCulled = false;
     }
 
-    update() {
+    update () {
         const currentRenderTarget = this.renderer.getRenderTarget();
         const currentAutoClear = this.renderer.autoClear;
         this.renderer.autoClear = false;
@@ -91,7 +91,7 @@ export class Flowmap {
         this.renderer.setRenderTarget(currentRenderTarget);
     }
 
-    destroy() {
+    destroy () {
         this.renderTargetWrite.dispose();
         this.renderTargetRead.dispose();
         this.material.dispose();

@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-01-11 08:12:17
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-01-31 10:46:56
+ * @LastEditTime: 2024-02-01 17:59:36
 -->
 <template>
 	<TresMesh ref="normalBox" :position="[3, 2, 1]">
@@ -15,28 +15,17 @@
 		<TresBoxGeometry :args="[1, 1, 1]" />
 		<TresMeshNormalMaterial />
 	</TresMesh>
-	<TresMesh ref="filmBox" :position="[1, 2, 3]">
+	<!-- <TresMesh ref="filmBox" :position="[1, 2, 3]">
 		<TresBoxGeometry :args="[1, 1, 1]" />
 		<TresMeshNormalMaterial />
-	</TresMesh>
+	</TresMesh> -->
 </template>
 
 <script setup lang="ts">
 import { watchEffect, ref } from 'vue'
 const normalBox = ref()
 const shineBox = ref()
-const filmBox = ref()
-watchEffect(() => {
-	if (normalBox.value) {
-		normalBox.value.layers.set(0)
-	}
-	if (shineBox.value) {
-		shineBox.value.layers.set(1)
-	}
-	if (filmBox.value) {
-		filmBox.value.layers.set(2)
-	}
-})
+// const filmBox = ref()
 
 import * as THREE from 'three'
 import { useTresContext, useRenderLoop } from '@tresjs/core'
@@ -66,7 +55,6 @@ const bloomPassEffect = (scene: THREE.Scene, camera: THREE.PerspectiveCamera, re
 	effectComposer.addPass(renderScene)
 	effectComposer.addPass(bloomPass)
 }
-bloomPassEffect(scene.value, camera.value as any, renderer.value, sizes.width.value, sizes.height.value)
 
 const makeFinalComposer = (renderer: THREE.WebGLRenderer) => {
 	finalComposer = new EffectComposer(renderer)
@@ -97,7 +85,22 @@ const makeFinalComposer = (renderer: THREE.WebGLRenderer) => {
 	finalComposer.addPass(renderScene)
 	finalComposer.addPass(finalPass)
 }
-makeFinalComposer(renderer.value)
+
+watchEffect(() => {
+	if (normalBox.value) {
+		normalBox.value.layers.set(0)
+	}
+	if (shineBox.value) {
+		shineBox.value.layers.set(1)
+	}
+	// if (filmBox.value) {
+	// 	filmBox.value.layers.set(2)
+	// }
+	if (sizes.width.value) {
+		bloomPassEffect(scene.value, camera.value as any, renderer.value, sizes.width.value, sizes.height.value)
+		makeFinalComposer(renderer.value)
+	}
+})
 
 const { onLoop } = useRenderLoop()
 onLoop(() => {

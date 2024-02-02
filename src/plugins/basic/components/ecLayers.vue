@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-01-11 08:12:17
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-01-30 16:42:41
+ * @LastEditTime: 2024-02-01 17:56:10
 -->
 <template>
 	<Box ref="normalBox" :args="[1, 1, 1]" color="orange" :position="[3, 2, 1]" />
@@ -20,9 +20,21 @@
 
 <script setup lang="ts">
 import { watchEffect, ref } from 'vue'
+import * as THREE from 'three'
+import { Box } from '@tresjs/cientos'
+import { useTresContext, useRenderLoop } from '@tresjs/core'
+import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass'
+import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer'
+import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass'
+// import { FilmPass } from 'three/examples/jsm/postprocessing/FilmPass.js'
+
+const { camera, renderer, scene, sizes } = useTresContext()
+
 const normalBox = ref()
 const shineBox = ref()
 const filmBox = ref()
+
+let effectComposer = null as any
 watchEffect(() => {
 	if (normalBox.value) {
 		normalBox.value.value.layers.set(0)
@@ -33,23 +45,15 @@ watchEffect(() => {
 	if (filmBox.value) {
 		filmBox.value.layers.set(2)
 	}
+	if (sizes.width.value) {
+		bloomPassEffect(scene.value, camera.value as any, renderer.value, sizes.width.value, sizes.height.value)
+	}
 })
-
-import * as THREE from 'three'
-import { Box } from '@tresjs/cientos'
-import { useTresContext, useRenderLoop } from '@tresjs/core'
-import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass'
-import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer'
-import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass'
-// import { FilmPass } from 'three/examples/jsm/postprocessing/FilmPass.js'
-
-const { camera, renderer, scene, sizes } = useTresContext()
 const params = {
 	threshold: 0,
 	strength: 0.972,    // 强度
 	radius: 0.21,       // 半径
 }
-let effectComposer = null as any
 const bloomPassEffect = (scene: THREE.Scene, camera: THREE.PerspectiveCamera, renderer: THREE.WebGLRenderer, width: number, height: number) => {
 	// 渲染器通道，将场景全部加入渲染器
 	const renderScene = new RenderPass(scene, camera)
@@ -61,7 +65,6 @@ const bloomPassEffect = (scene: THREE.Scene, camera: THREE.PerspectiveCamera, re
 	effectComposer.addPass(renderScene)
 	effectComposer.addPass(bloomPass)
 }
-bloomPassEffect(scene.value, camera.value as any, renderer.value, sizes.width.value, sizes.height.value)
 
 // let effectComposer2 = null as any
 // const filmPassEffect = (scene2: THREE.Scene, camera: THREE.PerspectiveCamera, renderer: THREE.WebGLRenderer, width: number, height: number) => {
