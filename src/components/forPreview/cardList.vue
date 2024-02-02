@@ -22,10 +22,10 @@
 	<div class="flex flex-wrap flex-justify-start content-start mt-6 pl-6">
 		<div class="w-80 mr-10 mb-10 overflow-hidden" v-for="(onePreview, okey) in onePlugin.preview" :key="okey">
 			<FCard :header="onePreview.title" shadow="hover">
-				<video controls class="w-full max-h-70" v-if="onePreview.type === 'video'">
+				<video controls class="w-full max-h-70 h-14em" v-if="onePreview.type === 'video'">
 					<source :src="publicPath + onePreview.src" type="video/mp4" autoplay="true" loop="true" />
 				</video>
-				<img class="w-full max-h-70" v-else-if="onePreview.type === 'img'" :src="publicPath + onePreview.src" />
+				<img class="w-full max-h-70 h-14em" v-else-if="onePreview.type === 'img'" :src="publicPath + onePreview.src" />
 				<div class="w-full h-48 text-3 text-left mb-2"
 					style="background-color: rgb(55 56 61);overflow: hidden;border-radius: 10px;"
 					v-else-if="onePreview.type === 'text'">
