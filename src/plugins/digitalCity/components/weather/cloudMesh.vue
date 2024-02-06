@@ -1,0 +1,73 @@
+<!--
+ * @Description: 
+ * @Version: 1.668
+ * @Autor: 地虎降天龙
+ * @Date: 2023-10-27 16:43:05
+ * @LastEditors: 地虎降天龙
+ * @LastEditTime: 2024-02-06 12:38:31
+-->
+<script setup lang="ts">
+import { useTexture, useRenderLoop } from '@tresjs/core'
+import * as THREE from 'three'
+import { default as SPE } from '../../common/ShaderParticleEngine/build/SPE'
+// const SPE = require('../../common/ShaderParticleEngine/build/SPE')
+
+const { map: pTexture } = await useTexture({
+	map: './plugins/digitalCity/image/cloud.png'
+})
+pTexture.magFilter = THREE.LinearMipMapLinearFilter
+pTexture.minFilter = THREE.LinearMipMapLinearFilter
+
+const particleGroup = new SPE.Group({
+	texture: {
+		value: pTexture
+	},
+	blending: THREE.NormalBlending,
+	fog: true,
+	depthTest: false,
+	depthWrite: false,
+})
+
+const emitter = new SPE.Emitter({
+	particleCount: 750,
+	maxAge: {
+		value: 3,
+	},
+	position: {
+		value: new THREE.Vector3(0, 0, 0),
+		spread: new THREE.Vector3(100, 60, 100)
+	},
+	velocity: {
+		value: new THREE.Vector3(0, 0, 30)
+	},
+	wiggle: {
+		spread: 10
+	},
+	size: {
+		value: 75,
+		spread: 50
+	},
+	opacity: {
+		value: [0, 1, 0]
+	},
+	color: {
+		value: new THREE.Color(1, 1, 1),
+		spread: new THREE.Color(0.1, 0.1, 0.1)
+	},
+	angle: {
+		value: [0, Math.PI * 0.125]
+	}
+});
+
+particleGroup.addEmitter(emitter)
+const objCloud = particleGroup.mesh
+
+const { onLoop } = useRenderLoop()
+onLoop(({ dt }) => {
+	particleGroup.tick(dt)
+})
+</script>
+
+<template>
+	<primitive :object="objCloud" :position="[0, 200, 0]" :renderOrder="3000" />
+</template>

@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-01-16 08:58:24
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-02-04 17:34:54
+ * @LastEditTime: 2024-02-05 11:56:33
  */
 
 export default {
@@ -17,7 +17,10 @@ export default {
 	"state": "active",
 	"require": [],
 	"preview": [
-		{ "src": "plugins/eCommerce/preview/electricFan.png", "type": "img", "name": "electricFan", "title": "电风扇" },
+		{
+			"src": "plugins/eCommerce/preview/electricFan.png", "type": "img", "name": "electricFan", "title": "电风扇",
+			referenceSource: { title: 'AlvaroSaburido', url: 'https://lab.tresjs.org/experiments/product-landing-page' }
+		},
 		{
 			"src": "plugins/eCommerce/preview/ssrtGlass.png", "type": "img", "name": "ssrtGlass", "title": "水晶玻璃化",
 			referenceSource: { title: 'Domenicobrz', url: 'https://github.com/Domenicobrz/SS-refraction-through-depth-peeling-in-threejs?tab=readme-ov-file' }
