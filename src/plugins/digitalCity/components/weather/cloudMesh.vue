@@ -4,13 +4,12 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-10-27 16:43:05
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-02-06 12:38:31
+ * @LastEditTime: 2024-02-06 17:04:41
 -->
 <script setup lang="ts">
 import { useTexture, useRenderLoop } from '@tresjs/core'
 import * as THREE from 'three'
 import { default as SPE } from '../../common/ShaderParticleEngine/build/SPE'
-// const SPE = require('../../common/ShaderParticleEngine/build/SPE')
 
 const { map: pTexture } = await useTexture({
 	map: './plugins/digitalCity/image/cloud.png'
@@ -23,19 +22,20 @@ const particleGroup = new SPE.Group({
 		value: pTexture
 	},
 	blending: THREE.NormalBlending,
-	fog: true,
+	// fog: true,
 	depthTest: false,
 	depthWrite: false,
 })
 
 const emitter = new SPE.Emitter({
-	particleCount: 750,
+	type: SPE.distributions.BOX,
+	particleCount: 26,
 	maxAge: {
-		value: 3,
+		value: 10,
 	},
 	position: {
 		value: new THREE.Vector3(0, 0, 0),
-		spread: new THREE.Vector3(100, 60, 100)
+		spread: new THREE.Vector3(2000, 100, 2000)
 	},
 	velocity: {
 		value: new THREE.Vector3(0, 0, 30)
@@ -44,18 +44,23 @@ const emitter = new SPE.Emitter({
 		spread: 10
 	},
 	size: {
-		value: 75,
-		spread: 50
+		value: 520,
+		spread: [100, 220],
+		randomise: true,
+	},
+	drag: {
+		value: 220,
 	},
 	opacity: {
-		value: [0, 1, 0]
+		value: [0, 1, 0],
+		randomise: true,
 	},
 	color: {
 		value: new THREE.Color(1, 1, 1),
 		spread: new THREE.Color(0.1, 0.1, 0.1)
 	},
 	angle: {
-		value: [0, Math.PI * 0.125]
+		value: [0, Math.PI * 1 / 8]
 	}
 });
 

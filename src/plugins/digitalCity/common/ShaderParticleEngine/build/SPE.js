@@ -2842,7 +2842,6 @@ SPE.Emitter = function (options) {
         _spread: utils.ensureArrayInstanceOf(options.color.spread, THREE.Vector3, new THREE.Vector3()),
         _randomise: utils.ensureTypedArg(options.position.randomise, types.BOOLEAN, false)
     };
-
     this.opacity = {
         _value: utils.ensureArrayTypedArg(options.opacity.value, types.NUMBER, 1),
         _spread: utils.ensureArrayTypedArg(options.opacity.spread, types.NUMBER, 0),
