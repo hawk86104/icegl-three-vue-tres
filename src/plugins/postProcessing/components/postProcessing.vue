@@ -72,7 +72,7 @@ let listData = [
     { text: 'SEPIAPass', value: { SEPIAPass, params: { amount: 10 } } },
     { text: 'SNOISEPass', value: { SNOISEPass, params: { amount: 0.1, speed: 0 } } },
     { text: 'BOXBLURPass', value: { BOXBLURPass, params: { deltax: 10, deltay: 10, taps: 1 } } },
-    { text: 'DENOISEPass', value: { DENOISEPass, params: { exponent: 100, strength: 100 } } },
+    { text: 'DENOISEPass', value: { DENOISEPass, params: { exponent: 1, strength: 10 } } },
     { text: 'CGAPass', value: { CGAPass, params: { pixelDensity: 4, cgaMap: normalmapimg.map } } },
     { text: 'SOBELPass', value: { SOBELPass } },
     { text: 'RGBPass', value: { RGBPass, params: { x: 1000, y: 1000 } } },
