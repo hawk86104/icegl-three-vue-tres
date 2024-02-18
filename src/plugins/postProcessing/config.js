@@ -10,6 +10,7 @@ export default {
     preview: [
         { src: 'plugins/postProcessing/preview/webgl帧缓冲DEMO.png', type: 'img', name: 'webglFrameBuffer', title: 'WebGL帧缓冲DEMO' },
         { src: 'plugins/postProcessing/preview/webgl实现后处理.png', type: 'img', name: 'webglPostProcessing', title: 'WebGL后处理DEMO' },
+        { src: 'plugins/postProcessing/preview/后处理编辑器.png', type: 'img', name: 'postProcessingEditor', title: '后处理编辑器' },
 
     ],
 };
