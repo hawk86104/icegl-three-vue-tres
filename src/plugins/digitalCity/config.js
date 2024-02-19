@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-10-26 09:20:42
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-02-06 17:50:10
+ * @LastEditTime: 2024-02-19 16:26:29
  */
 export default {
 	"name": "digitalCity",
@@ -22,11 +22,13 @@ export default {
 		{ "src": "plugins/digitalCity/preview/weather.png", "type": "img", "name": "weather", "title": "天气" },
 		{ "src": "plugins/digitalCity/preview/clouds.png", "type": "img", "name": "clouds", "title": "云☁️" },
 		{ "src": "plugins/digitalCity/preview/fog.png", "type": "img", "name": "fog", "title": "迷雾" },
+		{ "src": "plugins/digitalCity/preview/smoke.png", "type": "img", "name": "smoke", "title": "烟" },
 		{
 			"src": "plugins/digitalCity/preview/fireA.png", "type": "img", "name": "fireA", "title": "火A🔥效果",
 			referenceSource: { title: 'jaimetorrealba', url: 'https://lab.jaimetorrealba.com/fire_shaders_demos' }
 		},
 		{ "src": "plugins/digitalCity/preview/fireB.png", "type": "img", "name": "fireB", "title": "火B🔥效果" },
+		{ "src": "plugins/digitalCity/preview/fireBall.png", "type": "img", "name": "fireBall", "title": "火球🔥效果" },
 		{ "src": "plugins/digitalCity/preview/heatmap.png", "type": "img", "name": "heatmap", "title": "热力图" },
 		{ "src": "plugins/digitalCity/preview/heatmap2.png", "type": "img", "name": "heatmap2", "title": "建筑物-热力图" },
 		{ "src": "plugins/digitalCity/preview/cityRiver.png", "type": "img", "name": "cityRiver", "title": "城市河流" },
