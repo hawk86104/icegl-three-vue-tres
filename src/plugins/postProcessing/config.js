@@ -1,7 +1,15 @@
+/*
+ * @Description: 
+ * @Version: 1.668
+ * @Autor: 地虎降天龙
+ * @Date: 2024-02-18 10:26:51
+ * @LastEditors: 地虎降天龙
+ * @LastEditTime: 2024-02-18 16:45:43
+ */
 export default {
     name: 'postProcessing',
     title: '后处理原理剖析',
-    intro: '后处理原理剖析文档地址：',
+    intro: '后处理原理剖析文档地址：完善中，待增加',
     version: '0.0.1',
     author: 'Jsonco',
     website: "https://space.bilibili.com/410503457",
