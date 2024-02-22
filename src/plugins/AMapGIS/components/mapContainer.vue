@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-02-21 13:47:51
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-02-22 09:18:32
+ * @LastEditTime: 2024-02-22 12:32:43
 -->
 <template>
 	<div id="mapContainer"></div>
@@ -17,8 +17,12 @@ import { useMapStore } from '../stores/mapStore'
 
 const props = withDefaults(defineProps<{
 	center?: Array<Number>
+	zoom?: Number
+	pitch?: Number
 }>(), {
-	center: [0, 0]
+	center: [0, 0],
+	zoom: 14,
+	pitch: 50
 })
 
 const mapStore = useMapStore()
@@ -32,9 +36,9 @@ onMounted(async () => {
 			map = new _AMap.Map('mapContainer', {
 				center: props.center,
 				zooms: [2, 20],
-				zoom: 14,
 				viewMode: '3D',
-				pitch: 50,
+				zoom: props.zoom,
+				pitch: props.pitch,
 			})
 			map.on('click', (e) => {
 				const text = `您在 [ ${e.lnglat.getLng()},${e.lnglat.getLat()} ] 的位置单击了地图！`
