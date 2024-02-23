@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-12-11 15:00:44
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-01-03 10:57:44
+ * @LastEditTime: 2024-02-21 09:03:31
 -->
 
 <template>
@@ -51,7 +51,6 @@ watchEffect(() => {
 		tsWater.material.uniforms.color.value.set(props.color)
 	}
 	if (props.scale) {
-		debugger
 		tsWater.material.uniforms.config.value.w = props.scale
 	}
 })

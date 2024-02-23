@@ -8,6 +8,13 @@
  */
 import { BufferAttribute, Box3, Vector3, RepeatWrapping, Color, Mesh, PlaneGeometry, Vector2, DoubleSide, Material, MeshBasicMaterial, BufferGeometry, Matrix4 } from 'three'
 
+import { request } from '@fesjs/fes'
+import { computeBoundsTree, disposeBoundsTree, acceleratedRaycast } from 'three-mesh-bvh'
+
+//水面
+import { useTexture } from '@tresjs/core'
+import { Water } from 'three/addons/objects/Water2'
+
 export const resetUV = (geometry) => {
 	geometry.computeBoundingBox()
 	const { max, min } = geometry.boundingBox;
@@ -43,7 +50,6 @@ export const setGeometryUVForm = (srcGeometry, toGeometry) => {
 	const { max, min } = srcGeometry.boundingBox;
 	const roomX = max.x - min.x
 	const roomY = max.y - min.y
-	// debugger
 	const PuvList = []
 	for (let i = 0; i < toGeometry.attributes.position.count; i++) {
 		let tmpU = (toGeometry.attributes.position.getX(i) - min.x) / roomX
@@ -56,13 +62,11 @@ export const setGeometryUVForm = (srcGeometry, toGeometry) => {
 	const Puvs = new Float32Array(PuvList)
 	toGeometry.setAttribute('uv', new BufferAttribute(Puvs, 2));
 }
-
-import { request } from '@fesjs/fes'
 export const loadGeojson = (filepath, dataType) => new Promise((resolve, reject) => {
 	request(filepath, {}, { method: 'get' })
 		.then((res) => {
 			if (dataType) {
-				resolve(res.dataType)
+				resolve(res[dataType])
 			}
 			resolve(res.features)
 		})
@@ -87,16 +91,11 @@ export const toMeshSceneCenter = (mesh) => {
 	const { center, size } = getBoxInfo(mesh)
 	mesh.position.copy(center.negate().setY(0))
 }
-import { computeBoundsTree, disposeBoundsTree, acceleratedRaycast } from 'three-mesh-bvh'
 export const initMeshBvh = () => {
 	BufferGeometry.prototype.computeBoundsTree = computeBoundsTree;
 	BufferGeometry.prototype.disposeBoundsTree = disposeBoundsTree;
 	Mesh.prototype.raycast = acceleratedRaycast;
 }
-
-//水面
-import { useTexture } from '@tresjs/core'
-import { Water } from 'three/addons/objects/Water2'
 export const setThreeWater2 = async (mesh) => {
 	const pTexture = await useTexture(['./plugins/water/images/Water_1_M_Normal.jpg', './plugins/water/images/Water_2_M_Normal.jpg'])
 	const waterGeometry = mesh.geometry.clone()
