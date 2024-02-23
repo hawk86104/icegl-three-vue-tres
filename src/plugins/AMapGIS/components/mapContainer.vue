@@ -19,26 +19,29 @@ const props = withDefaults(defineProps<{
 	center?: Array<Number>
 	zoom?: Number
 	pitch?: Number
+	mapStyle?: String
 }>(), {
 	center: [0, 0],
 	zoom: 14,
-	pitch: 50
+	pitch: 50,
+	mapStyle: 'normal',
 })
 
 const mapStore = useMapStore()
 let map = null
 onMounted(async () => {
 	await AMapLoader.load({
-		key: "0c7222955570f1b434c4adfcc1e955e8",
+		key: "0c7222955570f1b434c4adfcc1e955e8", //可自行修改成自己得高德API key
 		version: "2.0",
 	})
 		.then((_AMap) => {
 			map = new _AMap.Map('mapContainer', {
 				center: props.center,
-				zooms: [2, 20],
+				zooms: [1, 20],
 				viewMode: '3D',
 				zoom: props.zoom,
 				pitch: props.pitch,
+				mapStyle: 'amap://styles/'+props.mapStyle,
 			})
 			map.on('click', (e) => {
 				const text = `您在 [ ${e.lnglat.getLng()},${e.lnglat.getLat()} ] 的位置单击了地图！`

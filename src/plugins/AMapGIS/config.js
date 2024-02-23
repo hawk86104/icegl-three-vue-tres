@@ -9,7 +9,7 @@ export default {
 	"state": "active",
 	"require": [],
 	"preview": [
-		{ "src": "plugins/basic/base/preview/theBasic.png", "type": "img", "name": "cubeMesh", "title": "正方体实例" },
-		{ "src": "plugins/basic/base/preview/theBasic.png", "type": "img", "name": "buildings", "title": "建筑物" },
+		{ "src": "plugins/AMapGIS/preview/cubeMesh.png", "type": "img", "name": "cubeMesh", "title": "正方体实例" },
+		{ "src": "plugins/AMapGIS/preview/buildings.png", "type": "img", "name": "buildings", "title": "建筑物" },
 	]
 }

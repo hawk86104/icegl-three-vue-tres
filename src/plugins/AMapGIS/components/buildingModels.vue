@@ -1,10 +1,9 @@
 
 <template>
-	<TresGroup :position="tgPosition" :rotate-z="-Math.PI / 2">
+	<TresGroup>
 		<TresMesh v-for="(item, index) in meshList" :key="`${index}`">
 			<TresBufferGeometry ref="tbgRef" :position="[item.positionArray, 3]" :faceUv="[item.uvArray, 2]"
 				:normal="[item.normalArray, 3]" />
-			<!-- <TresMeshBasicMaterial color="orange" /> -->
 			<TresShaderMaterial v-bind="tsMaterialConfig" />
 		</TresMesh>
 	</TresGroup>
@@ -12,7 +11,7 @@
 
 <script lang="ts" setup>
 import { loadGeojson } from 'PLS/digitalCity/common/utils'
-import { shallowRef, watchEffect, reactive } from 'vue'
+import { watchEffect, reactive } from 'vue'
 import vertexShader from '../shaders/buildingModels.vert?raw'
 import fragmentShader from '../shaders/buildingModels.frag?raw'
 import { useMapStore } from '../stores/mapStore'
@@ -50,16 +49,22 @@ const transP2 = (arr: Array<number>) => {
 		arr[i + 1] = outP[1]
 	}
 }
+const transP3 = (arr: Array<number>) => {
+	for (let i = 0; i < arr.length; i += 3) {
+		const s = [arr[i], arr[i + 1]]
+		const outP = mapStore.mapHandle.customCoords.lngLatToCoord(s)
+		arr[i] = outP[0]
+		arr[i + 1] = outP[1]
+		arr[i + 2] = arr[i + 2]*0.2
+	}
+}
 
 const meshList = reactive([] as any)
-
 const markBuildingsPrimary = async () => {
-	const buildingsPrimary = await loadGeojson('plugins/AMapGIS/geojson/buildings.geojson', 'buildings')
+	const buildingsPrimary = await loadGeojson('https://opensource-1314935952.cos.ap-nanjing.myqcloud.com/json/AMapGIS/latlngbuildings.geojson', 'buildings')
 	for (let index = 0; index < buildingsPrimary.length; index++) {
 		const element = buildingsPrimary[index]
-		// debugger
-		transP(element.geometry)
-		// debugger
+		transP3(element.geometry)
 		const positionArray = new Float32Array(element.geometry)
 		const uvArray = new Float32Array(element.faceUv)
 		const normalArray = new Float32Array(element.geometry.length)
@@ -81,24 +86,11 @@ const tsMaterialConfig = {
 	fragmentShader,
 }
 
-const tbgRef = shallowRef()
 watchEffect(() => {
-	if (tbgRef.value) {
-		// tbgRef.value.computeVertexNormals()
-		// tbgRef.value.computeBoundingBox()
-	}
 	if (mapStore.cameraState) {
 		markBuildingsPrimary()
-		tsMaterialConfig.uniforms.u_zoom.value = mapStore.mapHandle.getZoom()
-		tsMaterialConfig.uniforms.u_near.value = mapStore.cameraState.near
-		tsMaterialConfig.uniforms.u_far.value = mapStore.cameraState.far
 	}
 })
-
-const tgPosition = [0, 0, 0]
-// 9336520.282000005
-// 2987338.3369999975
-
 const { onLoop } = useRenderLoop()
 onLoop(() => {
 	if (mapStore.cameraState) {
