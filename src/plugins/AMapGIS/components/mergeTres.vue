@@ -6,6 +6,7 @@
  * @LastEditors: 地虎降天龙
  * @LastEditTime: 2024-02-22 13:13:04
 -->
+<template></template>
 <script setup>
 import { watchEffect } from 'vue'
 import { useTresContext } from '@tresjs/core'
@@ -23,7 +24,7 @@ let customCoords = null
 let customLayer = null
 watchEffect(() => {
 	if (mapStore.aMap) {
-		renderer.value.autoClear = false
+		// renderer.value.autoClear = false
 		customCoords = mapStore.mapHandle.customCoords
 		customLayer = new mapStore.aMap.CustomLayer(renderer.value.domElement, {
 			zIndex: 10,
@@ -53,5 +54,4 @@ watchEffect(() => {
 		mapStore.mapHandle.add(customLayer)
 	}
 })
-
 </script>

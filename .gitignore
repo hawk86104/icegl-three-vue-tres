@@ -16,3 +16,4 @@
 #!/node_modules/@alienkitty/
 #!/node_modules/oimophysics/
 yarn.lock
+yarn-error.log

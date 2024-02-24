@@ -71,7 +71,7 @@ export const loadGeojson = (filepath, dataType) => new Promise((resolve, reject)
 			resolve(res.features)
 		})
 		.catch((err) => {
-			console.err(err)
+			console.error(err)
 			reject(error)
 		});
 })
