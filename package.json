@@ -16,6 +16,8 @@
     "access": "public"
   },
   "devDependencies": {
+    "@types/mapbox__tilebelt": "^1.0.4",
+    "@types/offscreencanvas": "^2019.7.3",
     "@types/three": "0.161.1",
     "@webank/eslint-config-webank": "1.3.1",
     "cross-env": "^7.0.3",
@@ -32,6 +34,8 @@
     "@fesjs/plugin-model": "3.0.1",
     "@fesjs/plugin-pinia": "^3.0.1",
     "@fesjs/plugin-request": "^4.0.0-beta.6",
+    "@here/quantized-mesh-decoder": "^1.2.8",
+    "@mapbox/tilebelt": "^1.0.2",
     "@tresjs/cientos": "3.7.0",
     "@tresjs/core": "3.7.0",
     "axios": "1.6.7",
@@ -47,8 +51,10 @@
     "pinia": "^2.1.7",
     "postinstall-postinstall": "^2.1.0",
     "three": "0.161.0",
+    "three-bvh-csg": "^0.0.16",
     "three-mesh-bvh": "0.7.1",
     "three-subdivide": "^1.1.5",
+    "tilebelt-wgs84": "^1.0.4",
     "unocss": "0.58.4",
     "vanta": "^0.5.24",
     "vue": "3.4.15"
