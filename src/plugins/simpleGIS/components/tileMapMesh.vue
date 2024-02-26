@@ -1,15 +1,13 @@
 <template>
-	<!-- <OrbitControls v-bind="controlsState" :target="orbitControlPostion" /> -->
+	<OrbitControls v-bind="controlsState" ref="orbitControlRef" />
 	<primitive :object="map" />
 </template>
 
 <script lang="ts" setup>
-// import { OrbitControls } from '@tresjs/cientos'
+import { OrbitControls } from '@tresjs/cientos'
 import { useTresContext, useRenderLoop } from '@tresjs/core'
 import { watchEffect, reactive, ref } from 'vue'
-import { OrbitControls } from 'three/addons/controls/OrbitControls.js'
 import { Map, PlaneProvider, MapProvider, TerrainMeshProvider, UTM, MartiniTerrainProvider } from '../lib/threeSatelliteMap/index'
-import * as THREE from "three"
 
 const props = withDefaults(defineProps<{
 	bbox?: Array<number>
@@ -18,17 +16,11 @@ const props = withDefaults(defineProps<{
 	bbox: [104.955976, 20.149765, 120.998419, 30.528687],
 	maxZoom: 20,
 })
-
-// const controlsState = reactive({
-// 	enableDamping: true,
-// 	dampingFactor: 0.05,
-// })
-// const orbitControlPostion = ref([666975.9502699381, 3547712.254078843, 0])
-// const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 1e7 * 10)
-// camera.up = new THREE.Vector3(0, 0, 1)
-// camera.position.set(666975.9502699381, 3547712.254078843, 13137.654582887653)
-// camera.lookAt(666975.9502699381, 3547712.254078843, 0)
-
+const controlsState = reactive({
+	enableDamping: true,
+	dampingFactor: 0.05,
+})
+const orbitControlRef = ref()
 const { camera, renderer, scene } = useTresContext()
 
 const planProvider = new PlaneProvider()
@@ -57,42 +49,32 @@ map.provider = meshProvider
 
 map.bbox = props.bbox
 map.maxZoom = props.maxZoom
-// map.camera = camera
 
-let controls = null
-let firstXamera = false
+let firstCamera = false
+let firstOrbitControlRef = false
 watchEffect(() => {
-	if (camera.value && !firstXamera) {
-		firstXamera = true
-		camera.value.up = new THREE.Vector3(0, 0, 1)
-		camera.value.position.set(666975.9502699381, 3547712.254078843, 13137.654582887653)
-		camera.value.lookAt(666975.9502699381, 3547712.254078843, 0)
-
+	if (camera.value && !firstCamera) {
+		firstCamera = true
 		map.camera = camera.value
-		controls = new OrbitControls(camera.value, renderer.value.domElement)
-
-		controls.position0.set(666975.9502699381, 3547712.254078843, 13137.654582887653)
-		controls.target.set(666975.9502699381, 3547712.254078843, 0)
-		console.log('watchEffect', map.camera)
+	}
+	if (orbitControlRef.value && !firstOrbitControlRef) {
+		firstOrbitControlRef = true
+		orbitControlRef.value.value.target.x = camera.value.position.x
+		orbitControlRef.value.value.target.y = camera.value.position.y
+		orbitControlRef.value.value.target.z = 0
 	}
 })
-let lastRotation = [0, 0, 0]
 
 const { onLoop } = useRenderLoop()
 onLoop(() => {
+	if (renderer.value) {
+		const far = Math.abs(camera.value.position.z) * 50
+		camera.value.far = far + 5000
+		camera.value.updateProjectionMatrix()
 
-	if (renderer.value && controls) {
-		debugger
-		controls.update()
-
-		// const far = Math.abs(camera.value.position.z) * 50
-		// camera.value.far = far + 5000
-		// camera.value.updateProjectionMatrix()
-		// if (lastRotation[0] === camera.value.rotation.x && lastRotation[1] === camera.value.rotation.y && lastRotation[2] === camera.value.rotation.z) {
-		// 	orbitControlPostion.value = [camera.value.position.x, camera.value.position.y, 0]
-		// }
-		// lastRotation = [camera.value.rotation.x, camera.value.rotation.y, camera.value.rotation.z]
-
+		if (orbitControlRef.value) {
+			orbitControlRef.value.value.target.z = 0
+		}
 		map.update()
 		renderer.value.render(scene.value, camera.value)
 	}
