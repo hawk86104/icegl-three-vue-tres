@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-02-23 16:40:14
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-02-26 16:10:58
+ * @LastEditTime: 2024-02-27 09:59:39
  */
 
 export default {
@@ -21,6 +21,10 @@ export default {
 		{
 			"src": "plugins/simpleGIS/preview/tileMap.png", "type": "img", "name": "tileMap", "title": "地图瓦片展示",
 			referenceSource: { title: 'xianziljl', url: 'https://github.com/xianziljl/three-satellite-map' }
+		},
+		{
+			"src": "plugins/simpleGIS/preview/renderer3DTiles.png", "type": "img", "name": "renderer3DTiles", "title": "3DTiles展示",
+			referenceSource: { title: 'nasa-ammos', url: 'https://nasa-ammos.github.io/3DTilesRendererJS/' }
 		},
 	]
 }
