@@ -24,6 +24,7 @@
     "tweakpane": "4.0.3"
   },
   "dependencies": {
+    "3d-tiles-renderer": "^0.3.25",
     "@amap/amap-jsapi-loader": "^1.0.1",
     "@fesjs/builder-vite": "4.0.2",
     "@fesjs/fes": "3.1.8",
