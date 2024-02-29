@@ -6,10 +6,10 @@
 
 		<TresAmbientLight color="#ffffff" />
 		<TresDirectionalLight :position="[100, 100, 0]" :intensity="0.5" color="#ffffff" />
-		<tilesBuildings :position="[185465.52598346426, 2494900.945635518, 21]" />
+		<tilesBuildings :position="[185507.52598346426, 2494899.945635518, 21]" />
 
 		<Suspense>
-			<tileMapMesh :bbox="[104.955976, 20.149765, 120.998419, 30.528687]" />
+			<tileMapBuildingsMesh :bbox="[104.955976, 20.149765, 120.998419, 30.528687]" />
 		</Suspense>
 	</TresCanvas>
 </template>
@@ -20,7 +20,7 @@ import { reactive } from 'vue'
 import { TresCanvas } from '@tresjs/core'
 import * as THREE from 'three'
 import tilesBuildings from '../components/tilesBuildings.vue'
-import tileMapMesh from '../components/tileMapMesh.vue'
+import tileMapBuildingsMesh from '../components/tileMapBuildingsMesh.vue'
 
 const state = reactive({
 	clearColor: '#201919',

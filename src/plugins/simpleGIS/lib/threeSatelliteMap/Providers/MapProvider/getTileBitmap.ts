@@ -1,3 +1,11 @@
+/*
+ * @Description: 
+ * @Version: 1.668
+ * @Autor: 地虎降天龙
+ * @Date: 2024-02-26 18:58:32
+ * @LastEditors: 地虎降天龙
+ * @LastEditTime: 2024-02-29 11:09:32
+ */
 import { Fetch } from '../../Utils/Fetch';
 
 let offscreencanvas: OffscreenCanvas;
@@ -6,7 +14,6 @@ export async function getTileBitmap(tileNo: number[], fetch: Fetch, debug = fals
     const res = await fetch.ready();
     const blob = await res.blob();
     const bitmap = await createImageBitmap(blob, debug ? undefined : { imageOrientation: 'flipY' });
-
     if (!debug) {
         return bitmap;
     }

@@ -1,3 +1,11 @@
+/*
+ * @Description: 
+ * @Version: 1.668
+ * @Autor: 地虎降天龙
+ * @Date: 2024-02-26 18:58:32
+ * @LastEditors: 地虎降天龙
+ * @LastEditTime: 2024-02-29 11:05:49
+ */
 import { Fetch } from '../../Utils/Fetch';
 import { getTileBitmap } from './getTileBitmap';
 
@@ -22,7 +30,7 @@ self.onmessage = async (e: MessageType) => {
     }
 
     try {
-        const fetch = new Fetch(url, { cache: 'force-cache' });
+        const fetch = new Fetch(url, { cache: 'force-cache', mode: 'cors' });
         fetchingMap.set(id, fetch);
         const bitmap = await getTileBitmap(tileNo, fetch, debug);
         // @ts-ignore

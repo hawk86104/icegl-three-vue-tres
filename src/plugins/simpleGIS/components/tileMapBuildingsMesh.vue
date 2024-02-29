@@ -1,11 +1,3 @@
-<!--
- * @Description: 
- * @Version: 1.668
- * @Autor: 地虎降天龙
- * @Date: 2024-02-26 18:58:32
- * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-02-29 11:53:03
--->
 <template>
 	<OrbitControls v-bind="controlsState" ref="orbitControlRef" />
 	<primitive :object="map" />
@@ -46,13 +38,12 @@ mapProvider.source = 'https://webrd04.is.autonavi.com/appmaptile?lang=zh_cn&size
 // mapProvider.source = 'https://webst01.is.autonavi.com/appmaptile?style=6&x={x}&y={y}&z={z}'
 mapProvider.showTileNo = false
 mapProvider.useWorker = true
+// mapProvider.debug = true
 
 const meshProvider = new TerrainMeshProvider(martiniProvider, mapProvider)
 meshProvider.showBoundingBox = false
 meshProvider.wireframe = false
-// meshProvider.flatShading = true
-// meshProvider.useStandardMaterial = true
-
+meshProvider.flatShading = false
 
 const map = new Map()
 map.provider = meshProvider
