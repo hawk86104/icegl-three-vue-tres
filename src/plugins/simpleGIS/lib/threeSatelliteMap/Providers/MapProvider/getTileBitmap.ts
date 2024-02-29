@@ -1,11 +1,33 @@
+/*
+ * @Description: 
+ * @Version: 1.668
+ * @Autor: 地虎降天龙
+ * @Date: 2024-02-26 18:58:32
+ * @LastEditors: 地虎降天龙
+ * @LastEditTime: 2024-02-29 17:53:19
+ */
 import { Fetch } from '../../Utils/Fetch';
 
 let offscreencanvas: OffscreenCanvas;
 
-export async function getTileBitmap(tileNo: number[], fetch: Fetch, debug = false): Promise<ImageBitmap> {
+export async function getTileBitmap(tileNo: number[], fetch: Fetch, debug = false, filter: string): Promise<ImageBitmap> {
     const res = await fetch.ready();
     const blob = await res.blob();
     const bitmap = await createImageBitmap(blob, debug ? undefined : { imageOrientation: 'flipY' });
+
+    if (filter && !debug) {
+        if (!offscreencanvas) {
+            offscreencanvas = new OffscreenCanvas(256, 256);
+        }
+        const ctx = offscreencanvas.getContext('2d');
+        if (!ctx) {
+            throw new Error('Offscreencanvas.getContext("2d") error!');
+        }
+        ctx.drawImage(bitmap, 0, 0)
+        // 应用模糊滤镜效果
+        ctx.filter = filter
+        return await createImageBitmap(offscreencanvas)
+    }
 
     if (!debug) {
         return bitmap;

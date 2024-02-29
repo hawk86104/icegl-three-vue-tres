@@ -1,4 +1,12 @@
-import { Box3Helper, BufferGeometry, Mesh, MeshBasicMaterial, MeshStandardMaterial, Texture } from 'three';
+/*
+ * @Description: 
+ * @Version: 1.668
+ * @Autor: 地虎降天龙
+ * @Date: 2024-02-26 18:58:32
+ * @LastEditors: 地虎降天龙
+ * @LastEditTime: 2024-02-29 11:51:41
+ */
+import { Box3Helper, BufferGeometry, Mesh, MeshBasicMaterial, MeshStandardMaterial, Texture, SRGBColorSpace } from 'three';
 import { TerrainMesh } from './TerrainMesh';
 import { Provider } from '../Provider';
 // import { Completer } from '../Utils/PromiseUtils';
@@ -23,6 +31,7 @@ class TerrainMeshProvider implements Provider<Mesh> {
         const res = await Promise.all(tasks);
         const geometry = res[0] as BufferGeometry;
         const texture = res[1] as Texture;
+        texture.colorSpace = SRGBColorSpace;
         const { wireframe, flatShading } = this;
         const material = this.useStandardMaterial
             ? new MeshStandardMaterial({ map: texture, wireframe, flatShading })

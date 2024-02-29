@@ -1,3 +1,11 @@
+<!--
+ * @Description: 
+ * @Version: 1.668
+ * @Autor: 地虎降天龙
+ * @Date: 2024-02-26 18:58:32
+ * @LastEditors: 地虎降天龙
+ * @LastEditTime: 2024-02-29 11:53:03
+-->
 <template>
 	<OrbitControls v-bind="controlsState" ref="orbitControlRef" />
 	<primitive :object="map" />
@@ -42,7 +50,9 @@ mapProvider.useWorker = true
 const meshProvider = new TerrainMeshProvider(martiniProvider, mapProvider)
 meshProvider.showBoundingBox = false
 meshProvider.wireframe = false
-meshProvider.flatShading = false
+// meshProvider.flatShading = true
+// meshProvider.useStandardMaterial = true
+
 
 const map = new Map()
 map.provider = meshProvider
