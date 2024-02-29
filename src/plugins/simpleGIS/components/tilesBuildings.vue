@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-02-28 14:45:57
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-02-29 12:40:18
+ * @LastEditTime: 2024-02-29 18:06:35
 -->
 <template>
 	<TresGroup>
@@ -21,6 +21,10 @@ import * as THREE from 'three'
 import CustomShaderMaterial from 'three-custom-shader-material/vanilla'
 import vertexShader from '../shaders/buildingsShaderMaterial.vert?raw'
 import fragmentShader from '../shaders/buildingsShaderMaterial.frag?raw'
+
+import { LineSegments2 } from 'three/examples/jsm/lines/LineSegments2.js'
+import { LineMaterial } from 'three/examples/jsm/lines/LineMaterial.js'
+import { LineSegmentsGeometry } from 'three/examples/jsm/lines/LineSegmentsGeometry.js'
 
 const props = withDefaults(defineProps<{
 	bulidingsColor?: string
@@ -45,6 +49,7 @@ const setEffectMaterial = (mesh: any) => {
 		vertexShader: vertexShader,
 		fragmentShader: fragmentShader,
 		silent: true,
+		// wireframe: true,
 		uniforms: {
 			uMax: { value: max },
 			uMin: { value: min },
@@ -84,6 +89,23 @@ tiles.onLoadModel = (scene: any) => {
 			setEffectMaterial(c)
 			c.receiveShadow = false
 			c.castShadow = false
+
+			// 增加线轮廓
+			const edges = new THREE.EdgesGeometry(c.geometry.clone())
+			let geometry = new LineSegmentsGeometry()
+			let wideEdges = geometry.fromEdgesGeometry(edges)
+			let edgesmaterial = new LineMaterial({
+				color: 0x000000,
+				linewidth: 1,
+				opacity: 1,
+				transparent: true,
+				depthWrite: true,
+				depthTest: true,
+			})
+			edgesmaterial.resolution.set(window.innerWidth, window.innerHeight)
+			const line = new LineSegments2(wideEdges, edgesmaterial)
+			line.applyMatrix4(c.matrix.clone())
+			c.parent.add(line)
 		}
 	})
 }

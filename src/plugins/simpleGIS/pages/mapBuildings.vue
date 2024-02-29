@@ -1,8 +1,7 @@
 
 <template>
 	<TresCanvas v-bind="state" window-size>
-		<TresPerspectiveCamera :position="mapCenter" :fov="60" :near="1" :far="1e8" :look-at="[mapCenter[0], mapCenter[1], 0]"
-			:up="[0, 0, 1]" />
+		<TresPerspectiveCamera :position="mapCenter" :fov="60" :near="1" :far="1e8" :up="[0, 0, 1]" />
 
 		<TresAmbientLight color="#ffffff" />
 		<TresDirectionalLight :position="[100, 100, 0]" :intensity="0.5" color="#ffffff" />

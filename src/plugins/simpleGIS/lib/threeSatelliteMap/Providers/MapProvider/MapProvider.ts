@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-02-26 18:58:32
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-02-29 11:05:45
+ * @LastEditTime: 2024-02-29 17:51:12
  */
 import { Texture } from 'three';
 import { Provider } from '../Provider';
@@ -17,6 +17,7 @@ class MapProvider implements Provider<Texture>{
     maxZoom = 20;
     source = 'https://gac-geo.googlecnapps.cn/maps/vt?lyrs=s&x=[x]&y=[y]&z=[z]';
     showTileNo = false;
+    filter = ''
     private _useWorker = false;
     private _worker?: PromiseWorker;
 
@@ -44,14 +45,14 @@ class MapProvider implements Provider<Texture>{
                 this._worker = new PromiseWorker(MapWorker);
             }
             const id = this.getId(tileNo);
-            const data = await this._worker.postMessage({ id, tileNo, url, debug: this.showTileNo });
+            const data = await this._worker.postMessage({ id, tileNo, url, debug: this.showTileNo, filter: this.filter });
             // @ts-ignore
             texture.image = data!.bitmap as ImageBitmap;
         } else {
             const fetch = new Fetch(url, { cache: 'force-cache', mode: 'cors' });
             this.fetching.set(tileNo, fetch);
             try {
-                texture.image = await getTileBitmap(tileNo, fetch, this.showTileNo);
+                texture.image = await getTileBitmap(tileNo, fetch, this.showTileNo, this.filter);
             } finally {
                 this.fetching.delete(tileNo);
             }
