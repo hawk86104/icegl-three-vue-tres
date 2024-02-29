@@ -15,6 +15,10 @@ export async function getTileBitmap(tileNo: number[], fetch: Fetch, debug = fals
     const blob = await res.blob();
     const bitmap = await createImageBitmap(blob, debug ? undefined : { imageOrientation: 'flipY' });
 
+    // if (!debug) {
+    //     return bitmap;
+    // }
+
     if (!offscreencanvas) {
         offscreencanvas = new OffscreenCanvas(256, 256); // 256
     }
@@ -27,9 +31,7 @@ export async function getTileBitmap(tileNo: number[], fetch: Fetch, debug = fals
     // 应用模糊滤镜效果
     ctx.filter = 'invert(100%) hue-rotate(321deg) grayscale(80%) brightness(120%)' // 这里可以调整模糊程度
 
-    // if (!debug) {
-    //     return bitmap;
-    // }
+
     if (!debug) {
         return await createImageBitmap(offscreencanvas);
     }

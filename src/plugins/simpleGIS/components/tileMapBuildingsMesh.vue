@@ -26,10 +26,10 @@ const { camera, renderer, scene } = useTresContext()
 const planProvider = new PlaneProvider()
 planProvider.coordType = UTM
 
-const martiniProvider = new MartiniTerrainProvider()
-martiniProvider.source = 'https://api.maptiler.com/tiles/terrain-rgb-v2/[z]/[x]/[y].webp?key=L55MtSxL94Yb4hQeWewp';
-// martiniProvider.source = 'http://tile.writter.com.cn/tiles/[z]/[x]/[y]/terrain.webp'
-martiniProvider.coordType = UTM
+// const martiniProvider = new MartiniTerrainProvider()
+// martiniProvider.source = 'https://api.maptiler.com/tiles/terrain-rgb-v2/[z]/[x]/[y].webp?key=L55MtSxL94Yb4hQeWewp';
+// // martiniProvider.source = 'http://tile.writter.com.cn/tiles/[z]/[x]/[y]/terrain.webp'
+// martiniProvider.coordType = UTM
 
 const mapProvider = new MapProvider()
 // mapProvider.source = 'https://mts2.google.com/vt/lyrs=s&hl=zh-CN&x=[x]&y=[y]&z=[z]'
@@ -40,7 +40,7 @@ mapProvider.showTileNo = false
 mapProvider.useWorker = true
 // mapProvider.debug = true
 
-const meshProvider = new TerrainMeshProvider(martiniProvider, mapProvider)
+const meshProvider = new TerrainMeshProvider(planProvider, mapProvider)
 meshProvider.showBoundingBox = false
 meshProvider.wireframe = false
 meshProvider.flatShading = false

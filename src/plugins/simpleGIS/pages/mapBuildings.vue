@@ -23,10 +23,9 @@ import tilesBuildings from '../components/tilesBuildings.vue'
 import tileMapBuildingsMesh from '../components/tileMapBuildingsMesh.vue'
 
 const state = reactive({
-	clearColor: '#201919',
+	clearColor: '#000000',
 	disableRender: true,
 	alpha: false,
-	useLegacyLights: true,
 	shadowMapType: THREE.BasicShadowMap,
 	outputColorSpace: THREE.SRGBColorSpace,
 	toneMapping: THREE.NoToneMapping,
