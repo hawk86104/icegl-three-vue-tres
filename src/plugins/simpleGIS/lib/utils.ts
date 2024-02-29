@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-02-28 16:26:55
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-02-29 08:43:10
+ * @LastEditTime: 2024-02-29 08:55:54
  */
 import * as THREE from 'three'
 import { Tileset } from '3d-tiles-renderer'
@@ -49,3 +49,36 @@ export const onLoadTileSetForCesium3Dtitles = (tiles: any) => {
 
 	}
 }
+
+/*
+涉及坐标的转换
+https://github.com/NASA-AMMOS/3DTilesRendererJS/issues/413
+From [lat, lon, height] to [x, y, z]
+
+const positionVector = new Vector3();
+
+tiles.ellipsoid.getCartographicToPosition(
+			MathUtils.degToRad(lat),
+			MathUtils.degToRad(lon),
+			height,
+			positionVector
+);
+
+const mat = tiles.group.matrixWorld.clone();
+positionVector.applyMatrix4(mat);
+From [x, y, z] to [lat, lon, height]
+
+ const res = {};
+ const intersectedPoint = getTilesIntersection(); // Vector3
+ 
+ const mat = tiles.group.matrixWorld.clone().invert();
+ const vec = intersectedPoint.applyMatrix4(mat);
+ 
+ tiles.ellipsoid.getPositionToCartographic(vec, res);
+
+
+ https://github.com/NASA-AMMOS/3DTilesRendererJS/issues/404
+ How to get the centre location (latitude and longitude) of the 3D tiles when the user moves the 3D view
+
+ const { lat, lng } = mapCenterOnMove; tiles.setLatLonToYUp(lat * MathUtils.DEG2RAD, lng * MathUtils.DEG2RAD); tiles.update();
+*/

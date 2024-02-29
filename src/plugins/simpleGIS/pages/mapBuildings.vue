@@ -4,8 +4,8 @@
 		<TresPerspectiveCamera :position="mapCenter" :fov="60" :near="1" :far="1e8" :look-at="[mapCenter[0], mapCenter[1], 0]"
 			:up="[0, 0, 1]" />
 
-		<TresAmbientLight :intensity="0.5" />
-		<TresDirectionalLight :position="[1, 2, 3]" :intensity="1.25" />
+		<TresAmbientLight color="#ffffff" />
+		<TresDirectionalLight :position="[100, 100, 0]" :intensity="0.5" color="#ffffff" />
 		<tilesBuildings :position="[185465.52598346426, 2494900.945635518, 21]" />
 
 		<Suspense>
@@ -18,12 +18,18 @@
 <script setup lang="ts">
 import { reactive } from 'vue'
 import { TresCanvas } from '@tresjs/core'
+import * as THREE from 'three'
 import tilesBuildings from '../components/tilesBuildings.vue'
 import tileMapMesh from '../components/tileMapMesh.vue'
 
 const state = reactive({
 	clearColor: '#201919',
 	disableRender: true,
+	alpha: false,
+	useLegacyLights: true,
+	shadowMapType: THREE.BasicShadowMap,
+	outputColorSpace: THREE.SRGBColorSpace,
+	toneMapping: THREE.NoToneMapping,
 })
 
 const mapCenter = [185098.52598346426, 2494608.945635518, 4712.578125399592]
