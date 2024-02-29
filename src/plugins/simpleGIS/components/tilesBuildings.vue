@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-02-28 14:45:57
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-02-29 10:45:23
+ * @LastEditTime: 2024-02-29 12:40:18
 -->
 <template>
 	<TresGroup>
@@ -99,7 +99,7 @@ watchEffect(() => {
 
 const { onBeforeLoop } = useRenderLoop()
 onBeforeLoop(({ delta }) => {
-	timeDelta.value += delta
+	timeDelta.value += delta * 2.0
 	if (camera.value && sizes.width.value) {
 		camera.value.updateMatrixWorld()
 		tiles.update()
