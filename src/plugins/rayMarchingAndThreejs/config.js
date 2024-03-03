@@ -8,14 +8,16 @@ export default {
     state: 'active',
     require: [],
     preview: [
-        { src: 'plugins/rayMarchingAndThreejs/preview/光追基础框架.png', type: 'img', name: 'rayMarchingBasic', title: '基础框架' },
-        { src: 'plugins/rayMarchingAndThreejs/preview/位置变换.png', type: 'img', name: 'rayMarchingTranform', title: '基础变换' },
-        { src: 'plugins/rayMarchingAndThreejs/preview/多个sdf.png', type: 'img', name: 'rayMarchingCombination', title: 'sdf创建多个实体' },
-        { src: 'plugins/rayMarchingAndThreejs/preview/综合案例1.png', type: 'img', name: 'rayMarchingVIew', title: '光追构建复杂体' },
+        { src: 'plugins/rayMarchingAndThreejs/preview/光追基础框架.png', type: 'img', name: 'rayMarchingBasic', title: '光追基础框架' },
+        { src: 'plugins/rayMarchingAndThreejs/preview/位置变换.png', type: 'img', name: 'rayMarchingTranform', title: '光追基础变换' },
         {
-            src: 'plugins/rayMarchingAndThreejs/preview/蘑菇.png', type: 'img', name: 'rayMarchingMushroom', title: '蘑菇',
-            referenceSource: { title: 'xianziljl', url: 'https://www.shadertoy.com/view/XsBSzh' }
+            src: 'plugins/rayMarchingAndThreejs/preview/多个sdf.png', type: 'img', name: 'rayMarchingCombination', title: '光追创建多个实体',
+            referenceSource: { title: 'Inigo Quilez  ', url: 'https://iquilezles.org/articles/distfunctions/' }
         },
-
+        {
+            src: 'plugins/rayMarchingAndThreejs/preview/蘑菇.png', type: 'img', name: 'rayMarchingMushroom', title: '光追构建蘑菇',
+            referenceSource: { title: 'XsBSzh', url: 'https://www.shadertoy.com/view/XsBSzh' }
+        },
+        { src: 'plugins/rayMarchingAndThreejs/preview/综合案例1.png', type: 'img', name: 'rayMarchingVIew', title: '光追构建复杂体' },
     ],
 };
