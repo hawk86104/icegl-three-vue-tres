@@ -23,7 +23,7 @@ const state = {
     alpha: false,
     useLegacyLights: true,
 };
-const controlsState = { autoRotate: true, enableDamping: true };
+const controlsState = { autoRotate: false, enableDamping: true };
 
 const { onLoop } = useRenderLoop();
 onLoop(({ delta }) => {});
