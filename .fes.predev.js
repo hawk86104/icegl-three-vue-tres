@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-10-16 10:53:09
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-12-04 19:54:44
+ * @LastEditTime: 2024-03-05 08:47:57
  */
 import { defineBuildConfig } from '@fesjs/fes';
 
@@ -22,8 +22,10 @@ export default defineBuildConfig({
                 title: '📀 预览演示'
             },
             {
-                // name: 'docs',
-                // path: 'http://docs.icegl.cn',
+                path: 'https://gitee.com/ice-gl/icegl-three-vue-tres',
+                title: '📜 源码地址'
+            },
+            {
                 title: '📚 说明文档',
                 children: [
                     {
