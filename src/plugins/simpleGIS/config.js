@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-02-23 16:40:14
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-02-28 14:44:23
+ * @LastEditTime: 2024-03-05 08:52:50
  */
 
 export default {
@@ -18,6 +18,10 @@ export default {
 	"require": [],
 	"preview": [
 		{ "src": "plugins/simpleGIS/preview/chinaMap.png", "type": "img", "name": "chinaMap", "title": "中国地图展示" },
+		{
+			"src": "plugins/simpleGIS/preview/jiangSuMap.png", "type": "img", "name": "jiangSuMap", "title": "江苏地图展示",
+			referenceSource: { title: 'ouzexi', url: 'https://github.com/ouzexi/threejs-guangdong-map' }
+		},
 		{
 			"src": "plugins/simpleGIS/preview/tileMap.png", "type": "img", "name": "tileMap", "title": "地图瓦片展示",
 			referenceSource: { title: 'xianziljl', url: 'https://github.com/xianziljl/three-satellite-map' }

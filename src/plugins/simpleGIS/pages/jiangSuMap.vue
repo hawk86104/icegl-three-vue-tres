@@ -1,0 +1,38 @@
+<template>
+	<TresCanvas v-bind="state" window-size>
+		<TresPerspectiveCamera :position="[0, 12, 0]" :fov="75" :near="0.1" :far="1000" />
+		<OrbitControls v-bind="controlsState" />
+		<TresAmbientLight :intensity="8.8" />
+		<TresDirectionalLight :position="[0, 10, 5]" :intensity="0.2" />
+		<TresDirectionalLight :position="[0, 10, -5]" :intensity="0.2" />
+		<TresDirectionalLight :position="[5, 10, 0]" :intensity="0.2" />
+		<TresDirectionalLight :position="[-5, 10, 0]" :intensity="0.2" />
+
+
+
+
+		<!-- <TresGridHelper /> -->
+		<Suspense>
+			<jiangSuMapMesh />
+		</Suspense>
+	</TresCanvas>
+</template>
+
+<script setup lang="ts">
+import { reactive } from 'vue'
+import { TresCanvas } from '@tresjs/core'
+import { OrbitControls } from '@tresjs/cientos'
+import jiangSuMapMesh from '../components/jiangSuMapMesh.vue'
+
+const state = reactive({
+	clearColor: '#ffdbd1',
+	alpha: true,
+	antialias: true
+})
+
+const controlsState = reactive({
+	enableDamping: true,
+	dampingFactor: 0.05,
+})
+
+</script>
