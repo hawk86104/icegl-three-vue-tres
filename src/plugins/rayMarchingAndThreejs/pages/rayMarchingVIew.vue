@@ -11,21 +11,17 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, onMounted } from 'vue';
-import { TresCanvas, useRenderLoop, useTexture } from '@tresjs/core';
-import { OrbitControls } from '@tresjs/cientos';
-import rayMarchingMaterial from '../components/rayMarchingMaterial.vue';
-import { Pane } from 'tweakpane';
-import axios from 'axios';
+import { TresCanvas } from '@tresjs/core'
+import { OrbitControls } from '@tresjs/cientos'
+
+import rayMarchingMaterial from '../components/rayMarchingMaterial.vue'
+
 const state = {
     clearColor: '#000000',
     shadows: true,
     alpha: false,
     useLegacyLights: true,
 };
-const controlsState = { autoRotate: false, enableDamping: true };
+const controlsState = { autoRotate: false, enableDamping: true }
 
-const { onLoop } = useRenderLoop();
-onLoop(({ delta }) => {});
-onMounted(() => {});
 </script>

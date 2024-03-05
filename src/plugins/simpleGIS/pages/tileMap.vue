@@ -4,12 +4,11 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-02-24 10:03:05
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-02-29 11:52:57
+ * @LastEditTime: 2024-03-05 18:03:12
 -->
 <template>
 	<TresCanvas v-bind="state" window-size>
-		<TresPerspectiveCamera :position="mapCenter" :fov="60" :near="1" :far="1e8" :look-at="[mapCenter[0], mapCenter[1], 0]"
-			:up="[0, 0, 1]" />
+		<TresPerspectiveCamera :position="new THREE.Vector3(mapCenter[0], mapCenter[1], mapCenter[2])" :fov="60" :near="1" :far="1e8" :look-at="[mapCenter[0], mapCenter[1], 0]" :up="[0, 0, 1]" />
 		<Suspense>
 			<tileMapMesh :bbox="[104.955976, 20.149765, 120.998419, 30.528687]" />
 		</Suspense>

@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-01-05 09:23:48
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-01-06 09:14:24
+ * @LastEditTime: 2024-03-05 18:51:05
 -->
 
 <script setup lang="ts">
@@ -16,7 +16,7 @@ import { Pane } from 'tweakpane'
 
 const tcRef = ref()
 
-const meshList = []
+const meshList = [] as number[]
 for (let index = 1; index < 30; index += 2) {
 	meshList.push(index)
 }
@@ -34,7 +34,7 @@ const params = {
 
 watchEffect(() => {
 	if (tcRef.value) {
-		let renderer = tcRef.value.context.renderer.value
+		const renderer = tcRef.value.context.renderer.value
 		renderer.localClippingEnabled = true
 	}
 })
@@ -72,12 +72,12 @@ paneControl.addBinding(clipPlanes[2], 'constant', {
 		<OrbitControls />
 
 		<TresGroup>
-			<TresMesh v-for="i in   meshList    " :key="i">
+			<TresMesh v-for="i in meshList " :key="i">
 				<TresSphereGeometry :args="[i / 30, 48, 24]" />
 				<TresMeshLambertMaterial :color="[MathUtils.randInt(0.1, 1), MathUtils.randInt(0, 1), MathUtils.randInt(0, 1)]"
-					:side="DoubleSide" :clippingPlanes="clipPlanes" :clipIntersection="params.clipIntersection" />
+					:side="DoubleSide" :clippingPlanes="clipPlanes" :clipIntersection="params.clipIntersection"
+/>
 			</TresMesh>
 		</TresGroup>
-
-	</TresCanvas>
+</TresCanvas>
 </template>

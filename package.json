@@ -16,12 +16,12 @@
     "access": "public"
   },
   "devDependencies": {
+    "@tweakpane/core": "^2.0.3",
     "@types/mapbox__tilebelt": "^1.0.4",
     "@types/offscreencanvas": "^2019.7.3",
     "@types/three": "0.161.1",
     "@webank/eslint-config-webank": "1.3.1",
-    "cross-env": "^7.0.3",
-    "tweakpane": "4.0.3"
+    "cross-env": "^7.0.3"
   },
   "dependencies": {
     "3d-tiles-renderer": "^0.3.25",
@@ -56,6 +56,7 @@
     "three-mesh-bvh": "0.7.1",
     "three-subdivide": "^1.1.5",
     "tilebelt-wgs84": "^1.0.4",
+    "tweakpane": "4.0.3",
     "unocss": "0.58.4",
     "vanta": "^0.5.24",
     "vue": "3.4.15"
