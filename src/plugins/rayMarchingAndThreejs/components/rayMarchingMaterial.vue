@@ -3,8 +3,8 @@
  * @version: 
  * @Author: Jsonco
  * @Date: 2023-11-29 20:09:06
- * @LastEditors: sueRimn
- * @LastEditTime: 2023-11-30 23:02:23
+ * @LastEditors: 地虎降天龙
+ * @LastEditTime: 2024-03-05 18:57:47
 -->
 <template>
     <TresMesh ref="MeshRef" :rotation="[Math.PI / 2, 0, 0]">
@@ -14,12 +14,12 @@
 </template>
 
 <script setup lang="ts">
-import { TresCanvas, useRenderLoop, useTresContextProvider, useTresContext, useTexture } from '@tresjs/core';
-import { OrbitControls } from '@tresjs/cientos';
-import { AdditiveBlending, DoubleSide, Vector2, LinearFilter, RGBAFormat, WebGLRenderTarget, Color } from 'three';
-import { ref, watch, defineExpose, watchEffect } from 'vue';
-import stringVertex from '../shaders/rayMarching.vert?raw';
-import stringFrag from '../shaders/rayMarching.frag?raw';
+import {  useRenderLoop } from '@tresjs/core'
+import { DoubleSide, Vector2 } from 'three'
+import { watchEffect } from 'vue'
+
+import stringVertex from '../shaders/rayMarching.vert?raw'
+import stringFrag from '../shaders/rayMarching.frag?raw'
 const { onLoop, onAfterLoop } = useRenderLoop();
 const shader = {
     transparent: true,
@@ -44,14 +44,14 @@ const windowHalfX = window.innerWidth / 2;
 const windowHalfY = window.innerHeight / 2;
 let mouseX = 0;
 let mouseY = 0;
-function onMouseMove(e) {
+function onMouseMove(e: MouseEvent) {
     mouseX = e.clientX - windowHalfX;
     mouseY = e.clientY - windowHalfY;
 }
 document.addEventListener('mousemove', onMouseMove, false);
 watchEffect(() => {});
-onLoop(({ elapsed }) => {
-    shader.uniforms.u_time.value += 0.001;
+onLoop(() => {
+    shader.uniforms.u_time.value += 0.01;
     shader.uniforms.u_mouse.value = new Vector2(mouseX, mouseY);
 });
 onAfterLoop(() => {});

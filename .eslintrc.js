@@ -1,3 +1,11 @@
+/*
+ * @Description: 
+ * @Version: 1.668
+ * @Autor: 地虎降天龙
+ * @Date: 2023-10-16 10:53:09
+ * @LastEditors: 地虎降天龙
+ * @LastEditTime: 2024-03-05 18:51:52
+ */
 module.exports = {
     extends: ['@webank/eslint-config-webank/vue.js'],
     overrides: [
@@ -24,7 +32,9 @@ module.exports = {
         'prettier/prettier': 'off',
         "vue/space-unary-ops": "off",
         "vue/comma-dangle": "off",
-        "no-debugger": "off"
+        "no-debugger": "off",
+        // "semi": "off",
+        // "init-declarations": "off",
         // "space-unary-ops": "off",
         // 'import/no-unresolved': [
         //     2,

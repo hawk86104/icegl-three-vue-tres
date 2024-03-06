@@ -1,3 +1,11 @@
+<!--
+ * @Description: 
+ * @Version: 1.668
+ * @Autor: 地虎降天龙
+ * @Date: 2024-03-05 12:42:04
+ * @LastEditors: 地虎降天龙
+ * @LastEditTime: 2024-03-05 18:53:47
+-->
 <template>
 	<TresCanvas v-bind="state" window-size>
 		<TresPerspectiveCamera :position="[0, 12, 0]" :fov="75" :near="0.1" :far="1000" />
@@ -7,10 +15,6 @@
 		<TresDirectionalLight :position="[0, 10, -5]" :intensity="0.2" />
 		<TresDirectionalLight :position="[5, 10, 0]" :intensity="0.2" />
 		<TresDirectionalLight :position="[-5, 10, 0]" :intensity="0.2" />
-
-
-
-
 		<!-- <TresGridHelper /> -->
 		<Suspense>
 			<jiangSuMapMesh />

@@ -15,6 +15,12 @@ export default {
             referenceSource: { title: 'Inigo Quilez  ', url: 'https://iquilezles.org/articles/distfunctions/' }
         },
         {
+            src: 'plugins/rayMarchingAndThreejs/preview/创建复杂几何体.png', type: 'img', name: 'rayMarchingFract', title: '光追创建复杂几何体',
+        },
+        {
+            src: 'plugins/rayMarchingAndThreejs/preview/颜色赋值.png', type: 'img', name: 'rayMarchingColor', title: '颜色赋值',
+        },
+        {
             src: 'plugins/rayMarchingAndThreejs/preview/蘑菇.png', type: 'img', name: 'rayMarchingMushroom', title: '光追构建蘑菇',
             referenceSource: { title: 'XsBSzh', url: 'https://www.shadertoy.com/view/XsBSzh' }
         },
