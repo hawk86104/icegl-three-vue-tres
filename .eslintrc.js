@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-10-16 10:53:09
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-03-05 18:51:52
+ * @LastEditTime: 2024-03-07 10:07:04
  */
 module.exports = {
     extends: ['@webank/eslint-config-webank/vue.js'],
@@ -36,11 +36,11 @@ module.exports = {
         // "semi": "off",
         // "init-declarations": "off",
         // "space-unary-ops": "off",
-        // 'import/no-unresolved': [
-        //     2,
-        //     {
-        //         ignore: ['^@/', 'PLS'], // 设置的路径别名
-        //     },
-        // ],
+        'import/no-unresolved': [
+            2,
+            {
+                ignore: ['^@/', 'PLS'], // 设置的路径别名
+            },
+        ],
     },
 };
