@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-01-25 10:20:13
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-01-26 14:39:17
+ * @LastEditTime: 2024-03-07 10:07:53
 -->
 
 <template>
@@ -12,8 +12,7 @@
 		<TresPerspectiveCamera :position="[15, 15, 15]" :fov="45" :near="0.1" :far="10000" :look-at="[0, 0, 0]" />
 		<OrbitControls enableDamping />
 		<TresAmbientLight :intensity="10.0" />
-		<TresDirectionalLight ref="TDirectionalLight" :position="[0, 10, 10]" :intensity="1" v-light-helper color="#ffffff"
-			cast-shadow />
+		<TresDirectionalLight ref="TDirectionalLight" v-light-helper :position="[0, 10, 10]" :intensity="1" color="#ffffff" cast-shadow />
 		<Box :args="[1, 1, 1]" color="orange" :position="[3, 2, 1]" cast-shadow />
 		<TresMesh :position="[0, 2, -4]" cast-shadow>
 			<TresBoxGeometry :args="[1, 1, 1]" />
@@ -35,10 +34,10 @@
 import * as THREE from "three"
 import { TresCanvas } from '@tresjs/core'
 import { OrbitControls, vLightHelper, Box } from '@tresjs/cientos'
-import whiteFloorMesh from '../components/whiteFloorMesh.vue'
 import skyBox from 'PLS/skyBox/components/skyBoxAmesh.vue'
 import { shallowRef, watchEffect, reactive } from 'vue'
 import { Pane } from 'tweakpane'
+import whiteFloorMesh from '../components/whiteFloorMesh.vue'
 
 const tcConfig = {
 	clearColor: "#201919",

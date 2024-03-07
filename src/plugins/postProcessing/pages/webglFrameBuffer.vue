@@ -1,12 +1,12 @@
-<template >
+<template>
     <canvas id="canvaswebgl" style="height: 500px; width: 500px"></canvas>
 </template>
 
 <script setup lang="ts">
-import { OrbitControls } from '@tresjs/cientos';
-import { initShaders, resizeCanvasToDisplaySize, degToRad } from '../common/ice-utils.js';
 import * as glMatrix from 'gl-matrix';
 import { onMounted } from 'vue';
+// eslint-disable-next-line import/extensions
+import { initShaders, resizeCanvasToDisplaySize, degToRad } from '../common/ice-utils.js'
 
 const vertexString = `
 attribute vec4 a_position;
@@ -26,10 +26,10 @@ void main(){
 }
 `;
 const main = function () {
-    var canvas = document.querySelector('#canvaswebgl');
-    var gl = canvas.getContext('webgl');
+    const canvas = document.querySelector('#canvaswebgl') as HTMLCanvasElement;
+    const gl = canvas?.getContext('webgl');
     if (!gl) {
-        return;
+        return
     }
     // 初始化shader
     var program = initShaders(gl, vertexString, fragmentString);

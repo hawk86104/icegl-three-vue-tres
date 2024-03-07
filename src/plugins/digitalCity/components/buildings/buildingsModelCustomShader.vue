@@ -4,8 +4,8 @@ import { useRenderLoop } from '@tresjs/core'
 // import { CustomShaderMaterial } from '@tresjs/cientos'
 import CustomShaderMaterial from 'three-custom-shader-material/vanilla'
 import { ref, watchEffect, watch } from 'vue';
-import vertexShader from '../../shaders/buildingsCustomShaderMaterial.vert?raw'
-import fragmentShader from '../../shaders/buildingsCustomShaderMaterial.frag?raw'
+import vertexShader from '../../shaders/buildingsCustomShaderMaterial.vert'
+import fragmentShader from '../../shaders/buildingsCustomShaderMaterial.frag'
 import * as THREE from 'three'
 const props = withDefaults(defineProps<{
 	model: any
@@ -34,7 +34,7 @@ const setColorMaterial = (type: any, param: string) => {
 	} else if (type === 'land') {
 		// 设置城市地面（mesh物体），材质基本颜色
 		materials = Array.isArray(LANDMASS.material) ? LANDMASS.material : [LANDMASS.material]
-		materials.forEach((material) => {
+		materials.forEach((material:any) => {
 			material[param].setStyle(props.landColor);
 			material.side = THREE.DoubleSide //双面渲染
 		})
@@ -77,7 +77,6 @@ const setEffectMaterial = () => {
 				value: props.gradient
 			}
 		},
-
 		depthWrite: true,
 		depthTest: true,
 		transparent: true,			//如果材质透明，那么楼宇就被渲染到后面了

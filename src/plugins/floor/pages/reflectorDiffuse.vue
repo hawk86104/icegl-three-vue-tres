@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-12-22 08:09:35
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-12-25 11:31:18
+ * @LastEditTime: 2024-03-07 10:12:27
 -->
 
 <template>
@@ -12,7 +12,7 @@
 		<TresPerspectiveCamera :position="[-15, 15, -15]" :fov="45" :near="0.1" :far="10000" :look-at="[0, 0, 0]" />
 		<OrbitControls enableDamping />
 		<TresAmbientLight :intensity="10.0" />
-		<TresDirectionalLight :position="[0, 8, 0]" :intensity="10" v-light-helper color="#fff" />
+		<TresDirectionalLight v-light-helper :position="[0, 8, 0]" :intensity="10" color="#fff" />
 		<Box :args="[1, 1, 1]" color="orange" :position="[3, 1, 0]" />
 		<TresMesh :position="[0, 2, 4]">
 			<TresBoxGeometry :args="[1, 1, 1]" />
@@ -27,10 +27,10 @@
 <script setup lang="ts">
 import { TresCanvas } from '@tresjs/core'
 import { OrbitControls, Box, vLightHelper } from '@tresjs/cientos'
-import reflectorDiffuse from '../components/reflectorDiffuse.vue'
 
 import { reactive } from 'vue'
 import { Pane } from 'tweakpane'
+import reflectorDiffuse from '../components/reflectorDiffuse.vue'
 
 const configState = reactive({
 	mirror: 0.9,	// 去除纹理 镜面化 
