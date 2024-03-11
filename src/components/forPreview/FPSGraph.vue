@@ -58,7 +58,7 @@ useRafFn(({ timestamp }) => {
 <style lang="less" scoped>
 .fpsStats {
 	z-index: 99999;
-	position: absolute;
+	position: fixed;
 	display: flex;
 	align-items: center;
 	background-color: white;
