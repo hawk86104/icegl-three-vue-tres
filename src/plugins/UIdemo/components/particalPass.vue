@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-03-11 18:15:25
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-03-11 18:38:33
+ * @LastEditTime: 2024-03-11 18:52:41
 -->
 <template>
 </template>
@@ -16,6 +16,12 @@ import { useTresContext, useRenderLoop } from '@tresjs/core'
 import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass'
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer'
 import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass'
+
+const props = withDefaults(defineProps<{
+	use?: boolean
+}>(), {
+	use: true,
+})
 
 const { camera, renderer, scene, sizes } = useTresContext()
 const params = {
@@ -57,8 +63,15 @@ watchEffect(() => {
 
 const { onLoop } = useRenderLoop()
 onLoop(() => {
-	if (effectComposer) {
-		effectComposer.render()
+	if (props.use) {
+		if (effectComposer) {
+			effectComposer.render()
+		}
+	} else {
+		if (renderer.value && camera.value) {
+			renderer.value.render(scene.value, camera.value)
+		}
 	}
+
 })
 </script>

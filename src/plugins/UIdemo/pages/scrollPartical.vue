@@ -4,13 +4,14 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-03-08 15:06:29
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-03-11 18:30:44
+ * @LastEditTime: 2024-03-11 19:05:03
 -->
 <script setup lang="ts">
-import { ref, watchEffect } from 'vue'
+import { ref, watchEffect, reactive } from 'vue'
 import { TresCanvas } from '@tresjs/core'
 import { ScrollControls } from '@tresjs/cientos'
 import { SRGBColorSpace } from 'three'
+import { Pane } from 'tweakpane'
 import particalFBO from '../components/particalFBO.vue'
 import particalPass from '../components/particalPass.vue'
 
@@ -31,16 +32,30 @@ const gl = {
   useLegacyLights: false,
   physicallyCorrectLights: true,
 }
+const paneState = reactive({
+  pass: true,
+  color: '#ffaa00'
+})
+const paneControl = new Pane({
+  title: '参数',
+  expanded: true
+})
+paneControl.addBinding(paneState, 'pass', {
+  label: '后处理'
+})
+paneControl.addBinding(paneState, 'color', {
+  label: '颜色'
+})
 </script>
 
 <template>
   <TresCanvas v-bind="gl">
     <TresPerspectiveCamera :position="[0, 0, -4]" :fov="45" :near="0.1" :far="1000" :look-at="[0, 0, 0]" />
 
-    <particalPass />
+    <particalPass :use="paneState.pass" />
     <ScrollControls v-model="progress" :distance="10" :smooth-scroll="0.1" html-scroll>
       <Suspense>
-        <particalFBO :progress="progress" />
+        <particalFBO :progress="progress" :color="paneState.color" />
       </Suspense>
     </ScrollControls>
   </TresCanvas>
@@ -61,7 +76,7 @@ const gl = {
 main {
   background-color: transparent;
   position: relative;
-  z-index: 1;
+  /* z-index: 1; */
 }
 
 section {
@@ -75,5 +90,10 @@ h1 {
   margin-left: 6em;
   font-size: 3em;
   text-align: center;
+}
+</style>
+<style>
+.tp-dfwv {
+  position: fixed !important;
 }
 </style>

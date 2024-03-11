@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-03-11 15:02:07
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-03-11 18:29:57
+ * @LastEditTime: 2024-03-11 19:05:08
 -->
 <script setup lang="ts">
 import * as THREE from 'three'
@@ -21,10 +21,12 @@ const props = withDefaults(defineProps<{
 	progress?: number
 	width?: number
 	height?: number
+	color?: string
 }>(), {
 	progress: 0,
 	width: 256,
-	height: 256
+	height: 256,
+	color: '#ffaa00'
 })
 
 const pMesh = ref()
@@ -82,7 +84,7 @@ const FBOcamera = new THREE.OrthographicCamera(-1, 1, 1, -1, 1 / Math.pow(2, 53)
 FBOscene.add(simMesh)
 
 const { onBeforeLoop } = useRenderLoop()
-const { scene, camera, renderer } = useTresContext()
+const { camera, renderer } = useTresContext()
 onBeforeLoop(({ elapsed }) => {
 	if (renderer.value && camera.value && pMesh.value) {
 		renderer.value.setRenderTarget(fboTarget)
@@ -102,7 +104,7 @@ onBeforeLoop(({ elapsed }) => {
 		simMesh.material.uniforms.uTime.value = elapsed
 
 		pMesh.value.particles.material.uniforms.uPositions.value = fboTarget.texture
-		// renderer.value.render(scene.value, camera.value)
+		pMesh.value.particles.material.uniforms.uColor.value.setStyle(props.color)
 	}
 })
 

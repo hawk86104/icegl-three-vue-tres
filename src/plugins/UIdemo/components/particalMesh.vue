@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-03-08 15:30:41
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-03-11 15:31:39
+ * @LastEditTime: 2024-03-11 19:05:11
 -->
 
 <script setup lang="ts">
@@ -29,6 +29,9 @@ const makeRenderMaterial = () => {
 			uPositions: { value: null },
 			uSize: { value: 12 },
 			uPixelRatio: { value: Math.min(window.devicePixelRatio, 2) },
+			uColor: {
+				value: new THREE.Color('#ffaa00')
+			},
 		},
 		vertexShader: particlesVertex,
 		fragmentShader: particlesFragment,
