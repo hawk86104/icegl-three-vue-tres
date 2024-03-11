@@ -4,11 +4,14 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-03-11 15:02:07
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-03-11 15:55:00
+ * @LastEditTime: 2024-03-11 18:29:57
 -->
 <script setup lang="ts">
 import * as THREE from 'three'
+import * as BufferGeometryUtils from 'three/addons/utils/BufferGeometryUtils.js'
 import { useGLTF } from '@tresjs/cientos'
+import { OBJLoader } from 'three/addons/loaders/OBJLoader.js'
+import { loadOBJ } from 'PLS/medical/common/util'
 import { makeSimMesh, makeTexture } from '../lib/utils'
 import { useTresContext, useRenderLoop } from '@tresjs/core'
 import particalMesh from '../components/particalMesh.vue'
@@ -36,53 +39,70 @@ const fboTarget = new THREE.WebGLRenderTarget(props.width, props.height, {
 	type: THREE.FloatType
 })
 
-const boyGlb = (await useGLTF('./plugins/UIdemo/model/boy.glb')).scene
-const boyGeometry = (boyGlb.children[0] as THREE.Mesh).geometry
-boyGeometry.scale(2.2, 2.2, 2.2)
-boyGeometry.translate(-1, -2.5, 0)
-boyGeometry.rotateY(-Math.PI / 2)
-boyGeometry.rotateZ(Math.PI / 3)
+const mergeGeometriesForMesh = (model: THREE.Object3D) => {
+	const gList: any[] = []
+	model.traverse((child: THREE.Object3D) => {
+		if (child instanceof THREE.Mesh) {
+			child.geometry.deleteAttribute('uv')
+			child.geometry.deleteAttribute('normal')
+			child.geometry.deleteAttribute('tangent')
+			gList.push(child.geometry)
+		}
+	})
+	//合并 geometry
+	return BufferGeometryUtils.mergeGeometries(gList)
+}
 
-const oniGlb = (await useGLTF('./plugins/UIdemo/model/oni.glb')).scene
-const oniGeometry = (oniGlb.children[0] as THREE.Mesh).geometry
-oniGeometry.scale(0.2, 0.1, 0.2)
-oniGeometry.translate(0, -1.5, 0)
+const brainpartsPath = './plugins/medical/model/brainparts.OBJ'
+const objLoader = new OBJLoader()
+const brainpartsModel = await loadOBJ(brainpartsPath, objLoader)
+const brainpartsGeometries = mergeGeometriesForMesh(brainpartsModel)
+brainpartsGeometries.scale(0.01, 0.01, 0.01)
+const brainTexture = makeTexture(brainpartsGeometries)
+
+const guanyuModel = (await useGLTF('https://opensource-1314935952.cos.ap-nanjing.myqcloud.com/model/eCommerce/guanYu.glb', { draco: true, decoderPath: './draco/' })).scene
+const guanyuGeometries = mergeGeometriesForMesh(guanyuModel.children[0])
+guanyuGeometries.rotateX(Math.PI / 2)
+guanyuGeometries.translate(0, -0.9, 0)
+const guanyuTexture = makeTexture(guanyuGeometries)
+
+const planeModel = (await useGLTF('https://opensource-1314935952.cos.ap-nanjing.myqcloud.com/model/industry4/plane/scene.gltf', { draco: true, decoderPath: './draco/' })).scene
+const planeGeometries = mergeGeometriesForMesh(planeModel.children[0].children[0].children[0].children[0])
+planeGeometries.rotateX(-Math.PI / 2)
+planeGeometries.rotateY(Math.PI / 3)
+planeGeometries.translate(0.0, -0.9, 0)
+const planeTexture = makeTexture(planeGeometries)
 
 const simMesh = makeSimMesh()
-simMesh.material.uniforms.uTextureA.value = makeTexture(boyGeometry)
-simMesh.material.uniforms.uTextureB.value = makeTexture(oniGeometry)
+// simMesh.material.uniforms.uTextureA.value = brainTexture
+// simMesh.material.uniforms.uTextureB.value = guanyuTexture
 
 const FBOscene = new THREE.Scene()
 const FBOcamera = new THREE.OrthographicCamera(-1, 1, 1, -1, 1 / Math.pow(2, 53), 1)
 FBOscene.add(simMesh)
 
-const { onLoop } = useRenderLoop()
+const { onBeforeLoop } = useRenderLoop()
 const { scene, camera, renderer } = useTresContext()
-let ischange = false
-onLoop(({ elapsed }) => {
+onBeforeLoop(({ elapsed }) => {
 	if (renderer.value && camera.value && pMesh.value) {
 		renderer.value.setRenderTarget(fboTarget)
 		renderer.value.clear()
 		renderer.value.render(FBOscene, FBOcamera as THREE.Camera)
 		renderer.value.setRenderTarget(null)
 
-		if (props.progress < 2 / 3) {
-			simMesh.material.uniforms.uScroll.value = props.progress / 2 * 3
+		if (props.progress < 1 / 2) {
+			simMesh.material.uniforms.uTextureA.value = guanyuTexture
+			simMesh.material.uniforms.uTextureB.value = brainTexture
+			simMesh.material.uniforms.uScroll.value = props.progress * 2
 		} else {
-			if (!ischange) {
-				ischange = true
-				const tmpTexture = simMesh.material.uniforms.uTextureA.value
-				simMesh.material.uniforms.uTextureA.value = simMesh.material.uniforms.uTextureB.value
-				simMesh.material.uniforms.uTextureB.value = tmpTexture
-			}
-			simMesh.material.uniforms.uScroll.value = (props.progress - 2 / 3) * 3
+			simMesh.material.uniforms.uTextureA.value = brainTexture
+			simMesh.material.uniforms.uTextureB.value = planeTexture
+			simMesh.material.uniforms.uScroll.value = (props.progress - 1 / 2) * 2
 		}
-
-		// simMesh.material.uniforms.uScroll.value = props.progress
 		simMesh.material.uniforms.uTime.value = elapsed
 
 		pMesh.value.particles.material.uniforms.uPositions.value = fboTarget.texture
-		renderer.value.render(scene.value, camera.value)
+		// renderer.value.render(scene.value, camera.value)
 	}
 })
 

@@ -20,30 +20,16 @@ mat3 rotationMatrix3(vec3 axis, float angle) {
 }
 
 void main() {
-  // vec3 textureA = rotationMatrix3(vec3(1., 0., 0.), sin(uTime) * .1) *
-  //                 texture2D(uTextureA, vUv).xyz;
-  vec3 textureA = texture2D(uTextureA, vUv).xyz;
+  vec3 textureA = rotationMatrix3(vec3(10., 6., 3.), sin(uTime) * .1) *
+                  texture2D(uTextureA, vUv).xyz;
+  // vec3 textureA = texture2D(uTextureA, vUv).xyz;
 
-  // vec3 textureB = rotationMatrix3(vec3(0., 1., 0.), sin(uTime) * .3 + 3.14) *
-  //                 texture2D(uTextureB, vUv).xyz;
-  vec3 textureB = texture2D(uTextureB, vUv).xyz;
+  vec3 textureB = rotationMatrix3(vec3(10., 6., 3.), sin(uTime) * .1) *
+                  texture2D(uTextureB, vUv).xyz;
+  // vec3 textureB = texture2D(uTextureB, vUv).xyz;
 
-  // float time = uTime;
-
-  // float m = min(smoothstep(0.1, 1.3, time), 1.0);
-  // float m2 = min(smoothstep(0.1, 3.3, time - 5.), 1.0);
-
-  vec3 pos = vec3(0.0);
-
-  // if (m < 1.0) {
-  //   pos = mix(textureA, textureB, m);
-  // } else {
-  //   pos = mix(textureB, textureA, m2);
-  // }
-  // float range = 1. / 2.0;
-  // float r = random(vUv) * .2;
   float t = uScroll;
-  pos = mix(textureA, textureB, t);
+  vec3 pos = mix(textureA, textureB, t);
 
   gl_FragColor = vec4(pos, 1.);
 }
