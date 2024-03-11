@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-03-08 15:06:29
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-03-11 15:19:46
+ * @LastEditTime: 2024-03-11 15:38:42
 -->
 <script setup lang="ts">
 import { ref, watchEffect } from 'vue'
@@ -48,6 +48,9 @@ const gl = {
     </section>
     <section>
       <h1>2 section</h1>
+    </section>
+    <section>
+      <h1>3 section</h1>
     </section>
   </main>
 </template>

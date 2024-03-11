@@ -4,12 +4,12 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-03-11 15:02:07
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-03-11 15:30:48
+ * @LastEditTime: 2024-03-11 15:55:00
 -->
 <script setup lang="ts">
 import * as THREE from 'three'
 import { useGLTF } from '@tresjs/cientos'
-import { makeSimMesh } from '../lib/utils'
+import { makeSimMesh, makeTexture } from '../lib/utils'
 import { useTresContext, useRenderLoop } from '@tresjs/core'
 import particalMesh from '../components/particalMesh.vue'
 import { ref } from 'vue'
@@ -48,7 +48,9 @@ const oniGeometry = (oniGlb.children[0] as THREE.Mesh).geometry
 oniGeometry.scale(0.2, 0.1, 0.2)
 oniGeometry.translate(0, -1.5, 0)
 
-const simMesh = makeSimMesh(boyGeometry, oniGeometry)
+const simMesh = makeSimMesh()
+simMesh.material.uniforms.uTextureA.value = makeTexture(boyGeometry)
+simMesh.material.uniforms.uTextureB.value = makeTexture(oniGeometry)
 
 const FBOscene = new THREE.Scene()
 const FBOcamera = new THREE.OrthographicCamera(-1, 1, 1, -1, 1 / Math.pow(2, 53), 1)
@@ -56,6 +58,7 @@ FBOscene.add(simMesh)
 
 const { onLoop } = useRenderLoop()
 const { scene, camera, renderer } = useTresContext()
+let ischange = false
 onLoop(({ elapsed }) => {
 	if (renderer.value && camera.value && pMesh.value) {
 		renderer.value.setRenderTarget(fboTarget)
@@ -63,7 +66,19 @@ onLoop(({ elapsed }) => {
 		renderer.value.render(FBOscene, FBOcamera as THREE.Camera)
 		renderer.value.setRenderTarget(null)
 
-		simMesh.material.uniforms.uScroll.value = props.progress
+		if (props.progress < 2 / 3) {
+			simMesh.material.uniforms.uScroll.value = props.progress / 2 * 3
+		} else {
+			if (!ischange) {
+				ischange = true
+				const tmpTexture = simMesh.material.uniforms.uTextureA.value
+				simMesh.material.uniforms.uTextureA.value = simMesh.material.uniforms.uTextureB.value
+				simMesh.material.uniforms.uTextureB.value = tmpTexture
+			}
+			simMesh.material.uniforms.uScroll.value = (props.progress - 2 / 3) * 3
+		}
+
+		// simMesh.material.uniforms.uScroll.value = props.progress
 		simMesh.material.uniforms.uTime.value = elapsed
 
 		pMesh.value.particles.material.uniforms.uPositions.value = fboTarget.texture

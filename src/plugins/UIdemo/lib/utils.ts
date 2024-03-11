@@ -1,3 +1,11 @@
+/*
+ * @Description: 
+ * @Version: 1.668
+ * @Autor: 地虎降天龙
+ * @Date: 2024-03-08 16:07:15
+ * @LastEditors: 地虎降天龙
+ * @LastEditTime: 2024-03-11 15:53:29
+ */
 
 import * as THREE from 'three'
 import simVertex from '../shaders/simVertex.vert'
@@ -50,14 +58,11 @@ export const makeTexture = (geometry: THREE.BufferGeometry) => {
 	return dataTexture;
 }
 
-export const makeSimMaterial = (geometry1: THREE.BufferGeometry, geometry2: THREE.BufferGeometry) => {
-	const uTextureA = makeTexture(geometry1)
-	const uTextureB = makeTexture(geometry2)
-
+export const makeSimMaterial = () => {
 	const simMaterial = new THREE.ShaderMaterial({
 		uniforms: {
-			uTextureA: { value: uTextureA },
-			uTextureB: { value: uTextureB },
+			uTextureA: { value: null },
+			uTextureB: { value: null },
 			uTime: { value: 0 },
 			uScroll: { value: 0 },
 		},
@@ -67,8 +72,8 @@ export const makeSimMaterial = (geometry1: THREE.BufferGeometry, geometry2: THRE
 	return simMaterial
 }
 
-export const makeSimMesh = (geometry1: THREE.BufferGeometry, geometry2: THREE.BufferGeometry) => {
-	const simMaterial = makeSimMaterial(geometry1, geometry2)
+export const makeSimMesh = () => {
+	const simMaterial = makeSimMaterial()
 	const geometry = new THREE.BufferGeometry()
 	geometry.setAttribute('position', new THREE.BufferAttribute(
 		new Float32Array([
