@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-03-08 15:30:41
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-03-11 13:40:31
+ * @LastEditTime: 2024-03-11 14:25:28
 -->
 
 <script setup lang="ts">
@@ -29,8 +29,8 @@ boyGeometry.rotateZ(Math.PI / 3)
 
 const oniGlb = (await useGLTF('./plugins/UIdemo/model/oni.glb')).scene
 const oniGeometry = (oniGlb.children[0] as THREE.Mesh).geometry
-oniGeometry.scale(0.3, 0.3, 0.3)
-oniGeometry.translate(0, -7, 0)
+oniGeometry.scale(0.2, 0.1, 0.2)
+oniGeometry.translate(0, -1.5, 0)
 
 const simMesh = makeSimMesh(boyGeometry, oniGeometry)
 const width = 256
@@ -55,7 +55,7 @@ watchEffect(() => {
 
 		FBOscene.add(simMesh)
 		particles = createParticles(width, height)
-		scene.value.add(particles)
+		// scene.value.add(particles)
 	}
 })
 const { onLoop } = useRenderLoop()
@@ -69,20 +69,19 @@ onLoop(({ elapsed }) => {
 
 		simMesh.material.uniforms.uScroll.value = props.progress
 		simMesh.material.uniforms.uTime.value = elapsed
-		particles.material.uniforms.uScroll.value = props.progress
-		particles.material.uniforms.uTime.value = elapsed
 
 		// Use the result of the swap as the new position for the particles' renderer
 		particles.material.uniforms.uPositions.value = FBOrtt.texture
 
 		renderer.value.render(scene.value, camera.value)
 		// console.log('onLoop ~ progress:', props.progress)
+		// console.log('onLoop ~ elapsed:', elapsed)
 	}
 })
 
 </script>
 <template>
-	<!-- <primitive :object="simMesh"/> -->
+	<primitive :object="particles" />
 	<!-- <primitive :object="boyGlb" />
 		<primitive :object="oniGlb" /> -->
 </template>

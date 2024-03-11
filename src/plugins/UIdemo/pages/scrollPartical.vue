@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-03-08 15:06:29
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-03-11 12:05:47
+ * @LastEditTime: 2024-03-11 14:27:46
 -->
 <script setup lang="ts">
 import { ref, watchEffect } from 'vue'
@@ -35,17 +35,17 @@ const gl = {
 
 const { onLoop } = useRenderLoop()
 onLoop(() => {
-  if (boxRef.value) {
-    boxRef.value.value.rotation.x = progress.value * 10
-    boxRef.value.value.rotation.y = progress.value * 2
-  }
+  // if (boxRef.value) {
+  //   boxRef.value.value.rotation.x = progress.value * 10
+  //   boxRef.value.value.rotation.y = progress.value * 2
+  // }
 })
 </script>
 
 <template>
   <TresCanvas v-bind="gl">
     <TresPerspectiveCamera :position="[0, 0, -4]" :fov="45" :near="0.1" :far="1000" :look-at="[0, 0, 0]" />
-    <TresGridHelper :args="[10, 10]" />
+    <!-- <TresGridHelper :args="[10, 10]" /> -->
 
     <ScrollControls ref="scRef" v-model="progress" :distance="10" :smooth-scroll="0.1" html-scroll>
       <!-- <Box ref="boxRef" :scale="0.5" :color="0xff00ff" :position="[-1, 1, 0]" /> -->
@@ -60,15 +60,6 @@ onLoop(() => {
     </section>
     <section>
       <h1>2 section</h1>
-    </section>
-    <section>
-      <h1>3 section</h1>
-    </section>
-    <section>
-      <h1>4 section</h1>
-    </section>
-    <section>
-      <h1>5 section</h1>
     </section>
   </main>
 </template>
@@ -88,7 +79,7 @@ section {
   min-height: 100vh;
   display: grid;
   place-items: center;
-  outline: 1px solid red;
+  /* outline: 1px solid red; */
 }
 
 h1 {

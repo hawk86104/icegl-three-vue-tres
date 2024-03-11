@@ -60,15 +60,8 @@ export const makeSimMaterial = (geometry1: THREE.BufferGeometry, geometry2: THRE
 		uniforms: {
 			uTextureA: { value: uTextureA },
 			uTextureB: { value: uTextureB },
-			uTextureC: { value: uTextureA },
-			uTextureD: { value: uTextureB },
-			uTextureE: { value: uTextureA },
 			uTime: { value: 0 },
 			uScroll: { value: 0 },
-		},
-		defines:
-		{
-			uTotalModels: '4.0',
 		},
 		vertexShader: simVertex,
 		fragmentShader: simFragment
@@ -111,14 +104,7 @@ export const makeRenderMaterial = () => {
 		uniforms: {
 			uPositions: { value: null },
 			uSize: { value: 12 },
-			uTime: { value: 0 },
 			uPixelRatio: { value: Math.min(window.devicePixelRatio, 2) },
-			uScroll: { value: 0 },
-		},
-		defines:
-		{
-			uTotalModels: '4.0',
-			uRange: 1.0 / parseFloat('4.0'),
 		},
 		vertexShader: particlesVertex,
 		fragmentShader: particlesFragment,
