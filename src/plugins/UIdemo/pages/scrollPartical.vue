@@ -4,17 +4,15 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-03-08 15:06:29
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-03-11 14:27:46
+ * @LastEditTime: 2024-03-11 15:19:46
 -->
 <script setup lang="ts">
 import { ref, watchEffect } from 'vue'
-import { TresCanvas, useRenderLoop } from '@tresjs/core'
-import { ScrollControls, Box } from '@tresjs/cientos'
+import { TresCanvas } from '@tresjs/core'
+import { ScrollControls } from '@tresjs/cientos'
 import { SRGBColorSpace } from 'three'
-import particalMesh from '../components/particalMesh.vue'
+import particalFBO from '../components/particalFBO.vue'
 
-const scRef = ref()
-const boxRef = ref()
 const progress = ref(0)
 
 watchEffect(() => {
@@ -32,25 +30,15 @@ const gl = {
   useLegacyLights: false,
   physicallyCorrectLights: true,
 }
-
-const { onLoop } = useRenderLoop()
-onLoop(() => {
-  // if (boxRef.value) {
-  //   boxRef.value.value.rotation.x = progress.value * 10
-  //   boxRef.value.value.rotation.y = progress.value * 2
-  // }
-})
 </script>
 
 <template>
   <TresCanvas v-bind="gl">
     <TresPerspectiveCamera :position="[0, 0, -4]" :fov="45" :near="0.1" :far="1000" :look-at="[0, 0, 0]" />
-    <!-- <TresGridHelper :args="[10, 10]" /> -->
 
-    <ScrollControls ref="scRef" v-model="progress" :distance="10" :smooth-scroll="0.1" html-scroll>
-      <!-- <Box ref="boxRef" :scale="0.5" :color="0xff00ff" :position="[-1, 1, 0]" /> -->
+    <ScrollControls v-model="progress" :distance="10" :smooth-scroll="0.1" html-scroll>
       <Suspense>
-        <particalMesh :progress="progress" />
+        <particalFBO :progress="progress" />
       </Suspense>
     </ScrollControls>
   </TresCanvas>
@@ -65,10 +53,6 @@ onLoop(() => {
 </template>
 
 <style scoped>
-.scroll {
-  height: 200vh;
-}
-
 main {
   background-color: transparent;
   position: relative;
@@ -79,7 +63,6 @@ section {
   min-height: 100vh;
   display: grid;
   place-items: center;
-  /* outline: 1px solid red; */
 }
 
 h1 {

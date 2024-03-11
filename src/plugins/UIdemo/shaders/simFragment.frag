@@ -45,9 +45,5 @@ void main() {
   float t = uScroll;
   pos = mix(textureA, textureB, t);
 
-  // if (textureA == vec3(0.0) || textureB == vec3(0.0)) {
-  //   pos = vec3(0.0, 0.0, 0.0);
-  // }
-
   gl_FragColor = vec4(pos, 1.);
 }
