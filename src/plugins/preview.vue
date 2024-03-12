@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-18 22:17:49
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-03-12 10:18:22
+ * @LastEditTime: 2024-03-12 10:49:58
 -->
 <template>
     <div class="flex h-full">
@@ -29,9 +29,10 @@
                     <template #label>插件中心</template>
                     <template v-for="(onePlugin, pkey) in  pluginsConfig ">
                         <f-menu-item v-if="pkey !== 'basic'" :value="pkey">
-                            <template #label>{{ onePlugin.title }}</template>
-                            <template #icon v-if="isNew(onePlugin.updateTime)">
-                                <EditOutlined :size="12" :rotate="135" color="#5384ff" />
+                            <template #label>
+                                <EditOutlined style="position: absolute;left: 13px;top: 20px;"
+                                    v-if="isNew(onePlugin.updateTime)" :size="12" :rotate="135" color="#ffffff" />{{
+                onePlugin.title }}
                             </template>
                         </f-menu-item>
                     </template>

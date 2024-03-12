@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-02-23 16:40:14
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-03-05 08:52:50
+ * @LastEditTime: 2024-03-12 10:45:49
  */
 
 export default {
@@ -16,6 +16,8 @@ export default {
 	"website": "https://gitee.com/hawk86104",
 	"state": "active",
 	"require": [],
+	"creatTime": "2024-02-12",
+	"updateTime": "2024-03-10",
 	"preview": [
 		{ "src": "plugins/simpleGIS/preview/chinaMap.png", "type": "img", "name": "chinaMap", "title": "中国地图展示" },
 		{
