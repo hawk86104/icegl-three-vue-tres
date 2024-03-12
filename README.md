@@ -120,7 +120,7 @@
 
 # 📖 文档
 
-## 使用说明：[🌏docs.icegl.cn](http://docs.icegl.cn/)
+## 使用说明：[🌏docs.icegl.cn](https://docs.icegl.cn/)
 
 # ❓ 问题反馈
 

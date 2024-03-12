@@ -1,3 +1,11 @@
+<!--
+ * @Description: 
+ * @Version: 1.668
+ * @Autor: 地虎降天龙
+ * @Date: 2023-11-29 16:29:32
+ * @LastEditors: 地虎降天龙
+ * @LastEditTime: 2024-03-12 19:03:12
+-->
 <template>
 	<loading></loading>
 	<pagesShow>
@@ -11,7 +19,7 @@
 import { reactive } from 'vue';
 import { Pane } from 'tweakpane';
 import heatmapJS from 'PLS/heatMap/components/heatmapJS.vue'
-import loading from '../components/loading.vue'
+import loading from 'PLS/UIdemo/components/loading.vue'
 import pagesShow from '../components/pagesShow.vue'
 
 const typeState = reactive({

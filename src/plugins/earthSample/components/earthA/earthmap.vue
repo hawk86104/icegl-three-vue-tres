@@ -4,22 +4,16 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-01 09:57:06
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-01-05 16:18:39
+ * @LastEditTime: 2024-03-12 15:44:53
 -->
 <script setup lang="ts">
-import { onMounted } from 'vue'
-import { useRenderLoop, useTexture } from '@tresjs/core'
+import { useTexture } from '@tresjs/core'
 import { AdditiveBlending } from 'three';
 
 const pTexture = await useTexture(
 	['./plugins/earthSample/image/earthA/map.jpg', './plugins/earthSample/image/earthA/earth.jpg', './plugins/earthSample/image/earthA/glow.png', './plugins/earthSample/image/earthA/innerGlow.png']
 )
-const { onLoop } = useRenderLoop()
-onLoop(({ delta }) => {
-})
 
-onMounted(() => {
-})
 </script>
 
 <template>
@@ -29,7 +23,8 @@ onMounted(() => {
 	</TresMesh>
 	<TresMesh>
 		<TresSphereGeometry :args="[53, 32, 32]" />
-		<TresMeshBasicMaterial :map="pTexture[1]" :alphaMap="pTexture[1]" :blending="AdditiveBlending" :transparent="true" />
+		<TresMeshBasicMaterial :map="pTexture[1]" :alphaMap="pTexture[1]" :blending="AdditiveBlending"
+			:transparent="true" />
 	</TresMesh>
 	<TresSprite :scale="[155, 155, 0]">
 		<TresSpriteMaterial color="#4d76cf" :map="pTexture[2]" :blending="AdditiveBlending" :depthWrite="false"

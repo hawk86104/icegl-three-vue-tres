@@ -4,14 +4,14 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-10-17 08:30:49
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-12-20 11:10:22
+ * @LastEditTime: 2024-03-12 19:03:08
 -->
 <template>
 	<loading></loading>
 	<pagesShow>
 		<template v-slot:ability>
-			<radraA v-if="typeAradarState.show" ref="radraARef" :color="typeAradarState.color" :radius="typeAradarState.radius"
-				:size="300" :position="[10, 60, 0]" />
+			<radraA v-if="typeAradarState.show" ref="radraARef" :color="typeAradarState.color"
+				:radius="typeAradarState.radius" :size="300" :position="[10, 60, 0]" />
 			<radraB v-if="typeBradarState.show" :position="[600, 30, 0]" :color="typeBradarState.color" :height="80"
 				:maxRadius="typeBradarState.maxRadius" />
 		</template>
@@ -21,7 +21,7 @@
 <script setup lang="ts">
 import { ref, reactive } from 'vue';
 import { Pane } from 'tweakpane';
-import loading from '../components/loading.vue'
+import loading from 'PLS/UIdemo/components/loading.vue'
 import pagesShow from '../components/pagesShow.vue'
 import radraA from '../components/radras/radraA.vue'
 import radraB from '../components/radras/radraB.vue'

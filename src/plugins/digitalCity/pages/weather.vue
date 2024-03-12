@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-10-17 08:30:49
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-11-01 12:59:58
+ * @LastEditTime: 2024-03-12 19:03:01
 -->
 <template>
 	<loading></loading>
@@ -20,8 +20,8 @@
 <script setup lang="ts">
 import { ref, watchEffect, reactive, toRefs } from 'vue';
 import { Pane } from 'tweakpane';
+import loading from 'PLS/UIdemo/components/loading.vue'
 import pagesShow from '../components/pagesShow.vue'
-import loading from '../components/loading.vue'
 import precipitation from '../components/weather/precipitation.vue';
 // import smokes from '../components/weather/smokes.vue';
 

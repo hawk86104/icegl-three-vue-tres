@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-28 10:04:13
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-11-28 16:48:12
+ * @LastEditTime: 2024-03-12 19:03:17
 -->
 <template>
 	<loading></loading>
@@ -19,10 +19,10 @@
 
 <script setup lang="ts">
 import { Pane } from 'tweakpane';
-import { ref, reactive, watchEffect } from 'vue';
-import loading from '../components/loading.vue'
+import { ref, reactive, watchEffect } from 'vue'
+import loading from 'PLS/UIdemo/components/loading.vue'
 import pagesShow from '../components/pagesShow.vue'
-import fireA from '../components/fire/fireA.vue';
+import fireA from '../components/fire/fireA.vue'
 
 const paneControl = new Pane({
 	title: '火-参数',
