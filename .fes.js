@@ -4,13 +4,15 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-10-16 10:53:09
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-03-07 12:10:45
+ * @LastEditTime: 2024-03-12 11:17:04
  */
 // import { resolve } from 'path';
 import { join } from 'path';
 import { defineBuildConfig } from '@fesjs/fes'
 import { templateCompilerOptions } from '@tresjs/core'
+// eslint-disable-next-line import/no-unresolved
 import UnoCSS from 'unocss/vite'
+// eslint-disable-next-line import/no-extraneous-dependencies
 import glsl from 'vite-plugin-glsl'
 
 
@@ -38,7 +40,7 @@ export default defineBuildConfig({
         ...templateCompilerOptions,
     },
     viteOption: {
-        base: "/icegl-three-vue-tres/", //     ./     /icegl-three-vue-tres/
+        base: "./", //     ./     /icegl-three-vue-tres/
         plugins: [
             UnoCSS({
                 /* options */
@@ -57,6 +59,16 @@ export default defineBuildConfig({
         server: {
             host: "0.0.0.0"
         },
+        // server: {
+        //     host: "0.0.0.0",
+        //     proxy: {
+        //         '/cosv2': {
+        //             target: 'https://opensource-1314935952.cos.ap-nanjing.myqcloud.com',
+        //             changeOrigin: true,
+        //             rewrite: (path) => path.replace(/^\/cosv2/, '')
+        //         },
+        //     },
+        // },
     },
     alias: { PLS: join(__dirname, './src/plugins') },
     // { find: 'pls', replacement: resolve(__dirname, './src/plugins') },

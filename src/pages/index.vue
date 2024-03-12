@@ -27,9 +27,10 @@
 
         <TresGridHelper />
     </TresCanvas>
+    <h1 class="text-center text-white w-full absolute"> 若需查看插件中心，请运行：npm pre.dev</h1>
 </template>
-  
-  
+
+
 <script setup lang="ts">
 import { SRGBColorSpace, BasicShadowMap, NoToneMapping } from 'three'
 import { reactive, ref, onMounted, shallowRef, watchEffect } from 'vue'

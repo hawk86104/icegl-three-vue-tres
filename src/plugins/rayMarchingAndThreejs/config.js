@@ -6,6 +6,8 @@ export default {
     author: 'Jsonco',
     website: "https://space.bilibili.com/410503457",
     state: 'active',
+    "creatTime": "2024-02-22",
+    "updateTime": "2024-03-10",
     require: [],
     preview: [
         { src: 'plugins/rayMarchingAndThreejs/preview/光追基础框架.png', type: 'img', name: 'rayMarchingBasic', title: '光追基础框架' },

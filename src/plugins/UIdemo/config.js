@@ -1,12 +1,3 @@
-/*
- * @Description: 
- * @Version: 1.668
- * @Autor: 地虎降天龙
- * @Date: 2024-01-12 09:24:00
- * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-03-08 15:05:00
- */
-
 export default {
 	"name": "UIdemo",
 	"title": "UI界面的例子",
@@ -16,6 +7,8 @@ export default {
 	"website": "https://gitee.com/hawk86104",
 	"state": "active",
 	"require": [],
+	"creatTime": "2024-01-12",
+	"updateTime": "2024-03-11",
 	"preview": [
 		{ "src": "plugins/UIdemo/preview/divSample.png", "type": "img", "name": "divSample", "title": "简单DIV" },
 		{ "src": "plugins/UIdemo/preview/divIllustrate.png", "type": "img", "name": "divIllustrate", "title": "DIV说明样例" },
