@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-03-12 19:56:21
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-03-12 21:51:18
+ * @LastEditTime: 2024-03-12 22:13:54
 -->
 <template>
 	<div v-show="!hasFinishLoading"
@@ -104,6 +104,6 @@ if (props.isDemo) {
 }
 </script>
 
-<style>
+<style scoped>
 @import "./huruji.less";
 </style>
