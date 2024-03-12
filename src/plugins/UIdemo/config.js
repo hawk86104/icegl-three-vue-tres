@@ -1,7 +1,15 @@
+/*
+ * @Description: 
+ * @Version: 1.668
+ * @Autor: 地虎降天龙
+ * @Date: 2024-03-12 11:16:41
+ * @LastEditors: 地虎降天龙
+ * @LastEditTime: 2024-03-12 15:08:10
+ */
 export default {
 	"name": "UIdemo",
-	"title": "UI界面的例子",
-	"intro": "描述",
+	"title": "UI界面相关",
+	"intro": "UI界面的例子，浏览器滚动，资源加载器Loading样式",
 	"version": "0.0.1",
 	"author": "地虎降天龙",
 	"website": "https://gitee.com/hawk86104",
@@ -17,5 +25,6 @@ export default {
 			"src": "plugins/UIdemo/preview/scrollPartical.png", "type": "img", "name": "scrollPartical", "title": "滚动粒子",
 			referenceSource: { title: 'MisterPrada', url: 'https://github.com/MisterPrada/morph-particles' }
 		},
+		{ "src": "plugins/UIdemo/preview/loadingManagerStyle.png", "type": "img", "name": "loadingManagerStyle", "title": "资源加载器Loading" },
 	]
 }

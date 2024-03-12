@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-03 16:02:49
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-12-27 09:29:05
+ * @LastEditTime: 2024-03-12 21:19:52
 -->
 <template>
 	<FDivider titlePlacement="left">{{ props.onePlugin.title + ' - ' + props.onePlugin.name }}</FDivider>
@@ -14,7 +14,7 @@
 				style="color:#0f1222" size="small">
 				<UserOutlined class="position-relative top-[2px]" /> 作者：
 				{{
-					props.onePlugin.author }}
+		props.onePlugin.author }}
 			</FText>
 		</a>
 		<FText class="ml-13" tag="i" size="small">{{ props.onePlugin.intro }}</FText>
@@ -25,7 +25,8 @@
 				<video controls class="w-full max-h-70 h-14em" v-if="onePreview.type === 'video'">
 					<source :src="publicPath + onePreview.src" type="video/mp4" autoplay="true" loop="true" />
 				</video>
-				<img class="w-full max-h-70 h-14em" v-else-if="onePreview.type === 'img'" :src="publicPath + onePreview.src" />
+				<FImage class="w-full max-h-70 h-14em" v-else-if="onePreview.type === 'img'" :src="publicPath + onePreview.src"
+					lazy />
 				<div class="w-full h-48 text-3 text-left mb-2"
 					style="background-color: rgb(55 56 61);overflow: hidden;border-radius: 10px;"
 					v-else-if="onePreview.type === 'text'">
@@ -37,7 +38,7 @@
 	</div>
 </template>
 <script setup lang="ts">
-import { FCard, FDivider, FSpace, FText } from '@fesjs/fes-design'
+import { FCard, FDivider, FSpace, FText, FImage } from '@fesjs/fes-design'
 import { useRouter } from '@fesjs/fes' //fesJS的路由被他自己封装了
 import { UserOutlined } from '@fesjs/fes-design/icon'
 const props = withDefaults(

@@ -4,9 +4,10 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-03-08 15:06:29
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-03-12 09:45:43
+ * @LastEditTime: 2024-03-12 20:48:17
 -->
 <script setup lang="ts">
+import loading from 'PLS/UIdemo/components/loading/huruji.vue'
 import { ref, watchEffect, reactive } from 'vue'
 import { TresCanvas } from '@tresjs/core'
 import { ScrollControls } from '@tresjs/cientos'
@@ -49,6 +50,7 @@ paneControl.addBinding(paneState, 'color', {
 </script>
 
 <template>
+  <loading :styleNum="4" />
   <TresCanvas v-bind="gl">
     <TresPerspectiveCamera :position="[0, 0, -4]" :fov="45" :near="0.1" :far="1000" :look-at="[0, 0, 0]" />
 

@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-01 09:49:13
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-11-29 09:56:08
+ * @LastEditTime: 2024-03-12 19:02:55
 -->
 <script setup lang="ts">
 import { ref } from 'vue';
@@ -12,7 +12,7 @@ import { TresCanvas, useRenderLoop } from '@tresjs/core'
 import { OrbitControls } from '@tresjs/cientos'
 import { PCFSoftShadowMap, SRGBColorSpace } from 'three'
 
-// import loading from 'PLS/digitalCity/components/loading.vue'
+import loading from 'PLS/UIdemo/components/loading/default.vue'
 
 import starts from '../components/earthA/starts.vue'
 import earthmap from '../components/earthA/earthmap.vue'
@@ -34,7 +34,7 @@ useRenderLoop().onLoop(({ delta }) => {
 </script>
 
 <template>
-	<!-- <loading /> -->
+	<loading />
 	<TresCanvas v-bind="gl" window-size>
 		<TresPerspectiveCamera :position="[0, 50, 300]" :fov="45" :near="0.1" :far="100000" />
 		<OrbitControls :autoRotate="true" :autoRotateSpeed="2" />

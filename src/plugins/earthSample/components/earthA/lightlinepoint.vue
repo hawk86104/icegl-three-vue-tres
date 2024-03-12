@@ -8,7 +8,7 @@
 -->
 <script setup lang="ts">
 import { onMounted, getCurrentInstance } from 'vue'
-import { useRenderLoop, useTexture } from '@tresjs/core'
+import { useTexture } from '@tresjs/core'
 import { AdditiveBlending, DoubleSide, Vector3 } from 'three';
 import { gsap } from "gsap";
 
@@ -16,9 +16,6 @@ const pTexture = await useTexture(
 	['./plugins/earthSample/image/earthA/light_column.png', './plugins/earthSample/image/earthA/label.png']
 )
 
-const { onLoop } = useRenderLoop()
-onLoop(({ delta }) => {
-})
 const GZNUM = 30
 const gspList = []
 let proxy = null
