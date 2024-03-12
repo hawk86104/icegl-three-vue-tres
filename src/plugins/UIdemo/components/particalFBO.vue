@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-03-11 15:02:07
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-03-11 19:05:08
+ * @LastEditTime: 2024-03-12 09:40:48
 -->
 <script setup lang="ts">
 import * as THREE from 'three'
@@ -68,11 +68,11 @@ guanyuGeometries.rotateX(Math.PI / 2)
 guanyuGeometries.translate(0, -0.9, 0)
 const guanyuTexture = makeTexture(guanyuGeometries)
 
-const planeModel = (await useGLTF('https://opensource-1314935952.cos.ap-nanjing.myqcloud.com/model/industry4/plane/scene.gltf', { draco: true, decoderPath: './draco/' })).scene
-const planeGeometries = mergeGeometriesForMesh(planeModel.children[0].children[0].children[0].children[0])
+const planeModel = (await useGLTF('./plugins/industry4/model/modelDraco.glb', { draco: true, decoderPath: './draco/' })).scene
+const planeGeometries = mergeGeometriesForMesh(planeModel.children[0])
 planeGeometries.rotateX(-Math.PI / 2)
 planeGeometries.rotateY(Math.PI / 3)
-planeGeometries.translate(0.0, -0.9, 0)
+planeGeometries.translate(0.0, 0, 0)
 const planeTexture = makeTexture(planeGeometries)
 
 const simMesh = makeSimMesh()
