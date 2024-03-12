@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-03-08 15:06:29
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-03-11 19:05:03
+ * @LastEditTime: 2024-03-12 09:45:43
 -->
 <script setup lang="ts">
 import { ref, watchEffect, reactive } from 'vue'
@@ -64,10 +64,10 @@ paneControl.addBinding(paneState, 'color', {
       <h1>关羽 - GuanYu</h1>
     </section>
     <section>
-      <h1 style="margin-left: -3em;">大脑 - Brain</h1>
+      <h1 style="margin-left: -11em;margin-bottom: -10em;">大脑 - Brain</h1>
     </section>
     <section>
-      <h1>飞机 - Plane</h1>
+      <h1 style="margin-left: 11em;margin-bottom: -10em;">设备 - Device</h1>
     </section>
   </main>
 </template>

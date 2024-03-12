@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-18 22:17:49
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-01-25 09:48:45
+ * @LastEditTime: 2024-03-12 10:18:22
 -->
 <template>
     <div class="flex h-full">
@@ -16,7 +16,8 @@
                     </template>
                     <template #label>基础功能展示</template>
                     <template v-for="(bP, pkey) in pluginsConfig">
-                        <f-menu-item v-if="pkey === 'basic'" v-for="(onePlugin, okey) in bP.child" :value="onePlugin.name">
+                        <f-menu-item v-if="pkey === 'basic'" v-for="(onePlugin, okey) in bP.child"
+                            :value="onePlugin.name">
                             <template #label>{{ onePlugin.title }}</template>
                         </f-menu-item>
                     </template>
@@ -26,24 +27,27 @@
                         <PictureOutlined />
                     </template>
                     <template #label>插件中心</template>
-                    <template v-for="(onePlugin, pkey) in pluginsConfig">
+                    <template v-for="(onePlugin, pkey) in  pluginsConfig ">
                         <f-menu-item v-if="pkey !== 'basic'" :value="pkey">
                             <template #label>{{ onePlugin.title }}</template>
+                            <template #icon v-if="isNew(onePlugin.updateTime)">
+                                <EditOutlined :size="12" :rotate="135" color="#5384ff" />
+                            </template>
                         </f-menu-item>
                     </template>
                 </f-sub-menu>
             </f-menu>
         </div>
         <div class="flex-1 overflow-scroll" style="height: calc(100vh - 54px);">
-            <template v-for="(onePlugin, pkey) in pluginsConfig" :key="pkey">
+            <template v-for="( onePlugin, pkey ) in  pluginsConfig " :key="pkey">
                 <template v-if="pkey === 'basic'">
-                    <div style="background-color: #f1f1f2;" v-for="(one, opkey) in onePlugin.child" :key="opkey"
+                    <div style="background-color: #f1f1f2;" v-for="( one, opkey ) in  onePlugin.child " :key="opkey"
                         :ref="el => tabListRef[one.name] = el">
                         <cardList :onePlugin="one" />
                     </div>
                 </template>
             </template>
-            <template v-for="(onePlugin, pkey) in pluginsConfig" :key="pkey">
+            <template v-for="( onePlugin, pkey ) in  pluginsConfig " :key="pkey">
                 <div style="background-color: #f1f1f2;" v-if="pkey !== 'basic'" :ref="el => tabListRef[pkey] = el">
                     <cardList :onePlugin="onePlugin" />
                 </div>
@@ -53,9 +57,9 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import { defineRouteMeta } from '@fesjs/fes';
-import { AppstoreOutlined, PictureOutlined } from '@fesjs/fes-design/icon';
+import { AppstoreOutlined, PictureOutlined, EditOutlined } from '@fesjs/fes-design/icon';
 import { getPluginsConfig } from '../common/utils';
 import cardList from '../components/forPreview/cardList.vue'
 
@@ -65,11 +69,25 @@ defineRouteMeta({
 });
 
 const tabListRef = ref([])
-let pluginsConfig = getPluginsConfig();
+let pluginsConfig = getPluginsConfig()
 const goto = (value: string) => {
     tabListRef.value[value.value]?.scrollIntoView({ behavior: 'smooth', block: 'center', inline: "nearest" })
 }
-
+const isNew = ((time: string) => {
+    if (time) {
+        const targetDate = new Date(time)
+        const currentDate = new Date()
+        const targetTimestamp = targetDate.getTime()
+        const currentTimestamp = currentDate.getTime()
+        const timeDifference = currentTimestamp - targetTimestamp
+        const millisecondsPerDay = 1000 * 60 * 60 * 24 // 每天的毫秒数
+        const daysDifference = Math.floor(timeDifference / millisecondsPerDay)
+        if (daysDifference < 7) { //小于七天 算新插件
+            return true
+        }
+    }
+    return false
+})
 </script>
 
 <style lang="less">

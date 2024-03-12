@@ -111,8 +111,17 @@ const createPlugins = (pluginName) => {
 		.then(() => {
 			// 要替换的字符及其替换后的内容
 			const configFile = pluginPath + '/config.js'
+
+			// 获得当前日期
+			const currentDate = new Date()
+			const year = currentDate.getFullYear()// 获取年份
+			const month = String(currentDate.getMonth() + 1).padStart(2, '0') // 获取月份（注意月份是从 0 开始的，需要加 1）
+			const day = String(currentDate.getDate()).padStart(2, '0') // 获取日期
+			const formattedDate = `${year}-${month}-${day}`
+
 			const replaceCharacters = {
 				'template': pluginName,
+				'2024-01-01': formattedDate,
 			}
 			// 读取原始文件内容
 			fs.readFile(configFile, 'utf8', (err, data) => {
