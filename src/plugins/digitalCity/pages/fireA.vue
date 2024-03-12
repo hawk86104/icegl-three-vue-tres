@@ -20,7 +20,7 @@
 <script setup lang="ts">
 import { Pane } from 'tweakpane';
 import { ref, reactive, watchEffect } from 'vue'
-import loading from 'PLS/UIdemo/components/loading.vue'
+import loading from 'PLS/UIdemo/components/loading/default.vue'
 import pagesShow from '../components/pagesShow.vue'
 import fireA from '../components/fire/fireA.vue'
 

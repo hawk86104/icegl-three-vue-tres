@@ -21,7 +21,7 @@
 <script setup lang="ts">
 import { ref, reactive } from 'vue';
 import { Pane } from 'tweakpane';
-import loading from 'PLS/UIdemo/components/loading.vue'
+import loading from 'PLS/UIdemo/components/loading/default.vue'
 import pagesShow from '../components/pagesShow.vue'
 import radraA from '../components/radras/radraA.vue'
 import radraB from '../components/radras/radraB.vue'

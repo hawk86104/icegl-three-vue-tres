@@ -20,7 +20,7 @@
 <script setup lang="ts">
 import { ref, watchEffect, reactive, toRefs } from 'vue';
 import { Pane } from 'tweakpane';
-import loading from 'PLS/UIdemo/components/loading.vue'
+import loading from 'PLS/UIdemo/components/loading/default.vue'
 import pagesShow from '../components/pagesShow.vue'
 import precipitation from '../components/weather/precipitation.vue';
 // import smokes from '../components/weather/smokes.vue';

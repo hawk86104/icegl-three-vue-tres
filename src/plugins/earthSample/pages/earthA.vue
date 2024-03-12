@@ -12,7 +12,7 @@ import { TresCanvas, useRenderLoop } from '@tresjs/core'
 import { OrbitControls } from '@tresjs/cientos'
 import { PCFSoftShadowMap, SRGBColorSpace } from 'three'
 
-import loading from 'PLS/UIdemo/components/loading.vue'
+import loading from 'PLS/UIdemo/components/loading/default.vue'
 
 import starts from '../components/earthA/starts.vue'
 import earthmap from '../components/earthA/earthmap.vue'

@@ -19,7 +19,7 @@
 import { reactive } from 'vue';
 import { Pane } from 'tweakpane';
 import heatmapJS from 'PLS/heatMap/components/heatmapJS.vue'
-import loading from 'PLS/UIdemo/components/loading.vue'
+import loading from 'PLS/UIdemo/components/loading/default.vue'
 import pagesShow from '../components/pagesShow.vue'
 
 const typeState = reactive({
