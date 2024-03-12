@@ -4,12 +4,12 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-03-12 19:56:21
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-03-12 20:45:10
+ * @LastEditTime: 2024-03-12 21:51:18
 -->
 <template>
 	<div v-show="!hasFinishLoading"
 		class="absolute bg-grey-600 t-0 l-0 w-full h-full z-20 flex justify-center items-center text-black font-mono bg-black">
-		<div class="text-white flex flex-items-center float-left">
+		<div class="text-white flex flex-items-center float-left huruji-loader">
 			<div class="loader13" v-if="props.styleNum === 4">
 				<div class="loader-13">
 					<div></div>
@@ -82,14 +82,28 @@
 
 <script setup lang="ts">
 import { useProgress } from '@tresjs/cientos'
+
 const props = withDefaults(defineProps<{
 	styleNum?: number
+	isDemo?: boolean
 }>(), {
 	styleNum: 0,
+	isDemo: false
 })
 const { hasFinishLoading, progress } = await useProgress()
+
+const animloop = () => {
+	if (progress.value++ > 100) {
+		progress.value = 0
+	}
+	console.log(progress.value)
+	requestAnimationFrame(animloop)
+}
+if (props.isDemo) {
+	requestAnimationFrame(animloop)
+}
 </script>
 
-<style scoped>
-@import "./huruji.css";
+<style>
+@import "./huruji.less";
 </style>

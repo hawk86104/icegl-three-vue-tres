@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-01-13 11:20:35
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-03-12 20:43:08
+ * @LastEditTime: 2024-03-12 21:51:59
 -->
 
 <script setup lang="ts">
@@ -35,7 +35,7 @@ paneControl.addBinding(paneState, 'styleNum', {
 </script>
 
 <template>
-	<loading :styleNum="paneState.styleNum" />
+	<loading :styleNum="paneState.styleNum" isDemo />
 </template>
 
 <style>
