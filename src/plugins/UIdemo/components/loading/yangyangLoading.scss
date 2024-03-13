@@ -1,0 +1,36 @@
+#leaf {
+  fill-opacity: 0.56;
+  fill        : #5384ff;
+}
+
+@for $i from 0 through 35 {
+  .flo:nth-child(36n + #{$i}) {
+    animation: leaf#{$i} 0.1*36s 0s ease both infinite;
+  }
+
+  @keyframes leaf#{$i} {
+    0% {
+      opacity         : 0;
+      transform       : rotate(($i - 1)*10deg);
+      transform-origin: 400px 300px;
+    }
+
+    #{($i)/35*100}% {
+      opacity         : 0;
+      transform       : rotate(($i - 1)*10deg);
+      transform-origin: 400px 300px;
+    }
+
+    #{($i)/35*100 + 0.2}% {
+      opacity         : 0.3;
+      transform       : rotate($i*10deg);
+      transform-origin: 400px 300px;
+    }
+
+    100% {
+      opacity         : 0.3;
+      transform       : rotate($i*10deg);
+      transform-origin: 400px 300px;
+    }
+  }
+}

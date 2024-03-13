@@ -1,0 +1,194 @@
+.loader1 {
+	--s: 25px;
+	--g: 5px;
+
+	width: calc(3*(1.353*var(--s) + var(--g)));
+	display: grid;
+	justify-items: end;
+	aspect-ratio: 3;
+	overflow: hidden;
+	--_m: linear-gradient(90deg, #0000, #000 15px calc(100% - 15px), #0000);
+	-webkit-mask: var(--_m);
+	mask: var(--_m);
+}
+
+.loader1:before {
+	content: "";
+	width: 200%;
+	background:
+		linear-gradient(90deg, #5384ff 50%, #0000 0),
+		conic-gradient(from -90deg at var(--s) calc(0.353*var(--s)),
+			#fff 135deg, #666 0 270deg, #aaa 0);
+	background-blend-mode: multiply;
+	--_m:
+		linear-gradient(to bottom right,
+			#0000 calc(0.25*var(--s)), #000 0 calc(100% - calc(0.25*var(--s)) - 1.414*var(--g)), #0000 0),
+		conic-gradient(from -90deg at right var(--g) bottom var(--g), #000 90deg, #0000 0);
+	-webkit-mask: var(--_m);
+	mask: var(--_m);
+	background-size: calc(100%/3) 100%, calc(100%/6) 100%;
+	-webkit-mask-size: calc(100%/6) 100%;
+	mask-size: calc(100%/6) 100%;
+	-webkit-mask-composite: source-in;
+	mask-composite: intersect;
+	animation: l10 1s infinite linear;
+}
+
+@keyframes l10 {
+	to {
+		transform: translate(calc(100%/3))
+	}
+}
+
+
+/* HTML: <div class="loader"></div> */
+.loader2 {
+  --s: 25px;
+  
+  --_d: calc(0.353*var(--s));
+  width: calc(var(--s) + var(--_d));
+  aspect-ratio: 1;
+  display: grid;
+}
+.loader2:before,
+.loader2:after {
+  content:"";
+  clip-path:polygon(var(--_d) 0,100% 0,100% calc(100% - var(--_d)),calc(100% - var(--_d)) 100%,0 100%,0 var(--_d));
+  background:
+    conic-gradient(from -90deg at var(--s) var(--_d),
+     #fff 135deg,#666 0 270deg,#aaa 0);
+  animation: l4 1.2s infinite;
+}
+.loader2:before {
+  z-index: 1;
+  margin-bottom: calc(var(--_d)/-2 - 1px);
+}
+.loader2:after {
+  margin-top: calc(var(--_d)/-2 - 1px);
+  animation-delay: 0.6s
+}
+@keyframes l4{
+  0%     {transform: translate(0)}
+  16.67% {transform: translate(-10px)}
+  33.33% {transform: translate(10px)}
+  50%,
+  100%   {transform: translate(0)}
+}
+
+/* HTML: <div class="loader"></div> */
+.loader3 {
+  width: fit-content;
+  font-weight: bold;
+  font-family: monospace;
+  font-size: 30px;
+  color :#00000000;
+  overflow: hidden;
+  animation: l9 5s infinite cubic-bezier(0.3,1,0,1);
+}
+.loader3:before {
+  content:"Loading..."
+}
+@keyframes l9 {
+  0%  {text-shadow: 0    0 #952aff, 11ch 0 #8A9B0F, 22ch 0 #C02942, 33ch 0 #00A0B0,44ch 0 #952aff}
+  25% {text-shadow:-11ch 0 #952aff,  0ch 0 #8A9B0F, 11ch 0 #C02942, 22ch 0 #00A0B0,33ch 0 #952aff}
+  50% {text-shadow:-22ch 0 #952aff,-11ch 0 #8A9B0F,  0ch 0 #C02942, 11ch 0 #00A0B0,22ch 0 #952aff}
+  75% {text-shadow:-33ch 0 #952aff,-22ch 0 #8A9B0F,-11ch 0 #C02942,  0ch 0 #00A0B0,11ch 0 #952aff}
+  100%{text-shadow:-44ch 0 #952aff,-33ch 0 #8A9B0F,-22ch 0 #C02942,-11ch 0 #00A0B0, 0ch 0 #952aff}
+}
+
+/* HTML: <div class="loader"></div> */
+.loader4 {
+  width: fit-content;
+  font-weight: bold;
+  font-family: monospace;
+  font-size: 30px;
+  background: linear-gradient(135deg,#0000 calc(50% - 0.5em),#fff 0 calc(50% + 0.5em),#0000 0) right/300% 100%;
+  animation: l22 2s infinite;
+}
+.loader4::before {
+  content: "Loading...";
+  color: #0000;
+  padding: 0 5px;
+  background: inherit;
+  background-image: linear-gradient(135deg,#fff calc(50% - 0.5em),#000 0 calc(50% + 0.5em),#fff 0);
+  -webkit-background-clip:text;
+          background-clip:text;
+}
+
+@keyframes l22{
+  100%{background-position: left}
+}
+
+/* HTML: <div class="loader"></div> */
+.loader5 {
+  width: fit-content;
+  font-weight: bold;
+  font-family: monospace;
+  text-shadow: 
+    0 0 0 rgb(255 0 0), 
+    0 0 0 rgb(0 255 0), 
+    0 0 0 rgb(0 0 255);
+  font-size: 30px;
+  animation: l32 1s infinite cubic-bezier(0.5,-2000,0.5,2000);
+}
+.loader5:before {
+  content:"Loading...";
+}
+
+@keyframes l32{
+  25%,100% {
+  text-shadow: 
+     0.03px -0.01px 0.01px rgb(255 0 0), 
+     0.02px  0.02px 0     rgb(0 255 0), 
+    -0.02px  0.02px 0     rgb(0 0 255);
+  }
+}
+
+/* HTML: <div class="loader"></div> */
+.loader6 {
+  width: 100px;
+  height: 50px;
+  border-radius: 100px 100px 0 0;
+  position: relative;
+  overflow: hidden;
+}
+.loader6:before {
+  content: "";
+  position: absolute;
+  inset: 0 0 -100%;
+  background: radial-gradient(farthest-side at top,#0000 35%,#aa47be,#039be6,#26c6dc,#459e44,#f9ec44,#f68524,#fa3536,#0000) bottom/100% 50% no-repeat;
+  animation: l8 2s infinite;
+}
+@keyframes l8 {
+  0%,20%   {transform: rotate(0)}
+  40%,60%  {transform: rotate(.5turn)}
+  80%,100% {transform: rotate(1turn)}
+}
+
+/* HTML: <div class="loader"></div> */
+.loader7 {
+  width: 120px;
+  height: 22px;
+  border-radius: 40px;
+  color: #ffffff;
+  border: 2px solid;
+  position: relative;
+  overflow: hidden;
+}
+.loader7::before {
+  content: "";
+  position: absolute;
+  margin: 2px;
+  width: 14px;
+  top: 0;
+  bottom: 0;
+  left: -20px;
+  border-radius: inherit;
+  background: currentColor;
+  box-shadow: -10px 0 12px 3px currentColor;
+  clip-path: polygon(0 5%, 100% 0,100% 100%,0 95%,-30px 50%);
+  animation: l14 1s infinite linear;
+}
+@keyframes l14 {
+  100% {left: calc(100% + 20px)}
+}

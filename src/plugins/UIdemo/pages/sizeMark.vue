@@ -4,10 +4,11 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-01-13 11:20:35
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-01-13 21:40:08
+ * @LastEditTime: 2024-03-13 20:46:55
 -->
 
 <script setup lang="ts">
+import { randomLoading as loading } from 'PLS/UIdemo'
 import { shallowRef, watchEffect } from 'vue'
 import { TresCanvas } from '@tresjs/core'
 import { OrbitControls } from '@tresjs/cientos'
@@ -38,12 +39,13 @@ const controlsState = {
 </script>
 
 <template>
-	<TresCanvas clearColor='#999' window-size shadows>
+	<loading />
+	<TresCanvas clearColor="#999" window-size shadows>
 		<TresPerspectiveCamera :position="[-100, 800, 500]" :fov="50" :near="0.1" :far="10000" />
 		<OrbitControls v-bind="controlsState" />
 		<TresAmbientLight color="#ffffff" intensity="2" />
-		<TresDirectionalLight color="#ffffff" :position="[260, 260, 350]" :intensity="6" cast-shadow
-			ref="TDirectionalLight" />
+		<TresDirectionalLight ref="TDirectionalLight" color="#ffffff" :position="[260, 260, 350]" :intensity="6"
+			cast-shadow />
 
 		<Suspense>
 			<modelVue />
@@ -65,8 +67,5 @@ const controlsState = {
 			<arrow25D :position="[-230, 96, 0]" :scale="30" text="高:46m" :rotation="[Math.PI / 2, 0, 0]" :zRoom="2"
 				:arrScale="[2, 2, 0.4]" :textRotation="[-Math.PI / 1.5, 0, 0]" />
 		</Suspense>
-
 	</TresCanvas>
 </template>
-
-

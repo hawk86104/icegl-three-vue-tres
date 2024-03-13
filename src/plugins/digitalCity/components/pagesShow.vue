@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-10-24 09:49:39
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-12-28 09:18:39
+ * @LastEditTime: 2024-03-13 20:49:23
 -->
 <template>
 	<TresCanvas ref="tcRef" v-bind="state" window-size>
@@ -40,7 +40,6 @@ const props = withDefaults(
 		disableRender: false,
 	},
 )
-
 import { SRGBColorSpace, BasicShadowMap, NoToneMapping } from 'three';
 import { reactive, ref } from 'vue';
 import { TresCanvas, } from '@tresjs/core';

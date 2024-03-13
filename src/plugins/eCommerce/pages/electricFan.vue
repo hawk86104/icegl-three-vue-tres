@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-01-16 08:58:24
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-01-18 09:09:35
+ * @LastEditTime: 2024-03-13 21:01:35
 -->
 <script setup lang="ts">
 import { OrbitControls } from '@tresjs/cientos'
@@ -44,9 +44,9 @@ const onClick = (color) => {
 		<div class="w-full h-full pos-absolute md:w-2/3 md:h-1/2 shadow-lg rounded flex flex-col md:flex-row opacity-66"
 			:style="{ backgroundColor: oldColor }">
 			<div class="w-full h-full overflow-hidden pos-absolute">
-				<div class="circleScale"
+				<div ref="circleScaleRef" class="circleScale"
 					:class="{ circleScaleAnimationOld: circleScaleAnimation, circleScaleAnimationNew: !circleScaleAnimation }"
-					ref="circleScaleRef" :style="{ backgroundColor: state.selectedColor }">
+					:style="{ backgroundColor: state.selectedColor }">
 				</div>
 			</div>
 			<div class="h-1/2 w-full md:w-1/2" />

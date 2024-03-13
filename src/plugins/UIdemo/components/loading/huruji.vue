@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-03-12 19:56:21
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-03-12 22:13:54
+ * @LastEditTime: 2024-03-13 11:25:04
 -->
 <template>
 	<div v-show="!hasFinishLoading"
@@ -19,7 +19,7 @@
 					<div></div>
 				</div>
 			</div>
-			载入中... {{ progress }} %
+			<template v-if="showProgress">载入中... {{ progress }} %</template>
 			<div class="loader5" v-if="props.styleNum === 0">
 				<div class="loader-five">
 					<div></div>
@@ -86,9 +86,11 @@ import { useProgress } from '@tresjs/cientos'
 const props = withDefaults(defineProps<{
 	styleNum?: number
 	isDemo?: boolean
+	showProgress?: boolean
 }>(), {
 	styleNum: 0,
-	isDemo: false
+	isDemo: false,
+	showProgress: true
 })
 const { hasFinishLoading, progress } = await useProgress()
 
@@ -96,7 +98,7 @@ const animloop = () => {
 	if (progress.value++ > 100) {
 		progress.value = 0
 	}
-	console.log(progress.value)
+	// console.log(progress.value)
 	requestAnimationFrame(animloop)
 }
 if (props.isDemo) {

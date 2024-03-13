@@ -4,10 +4,11 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-01-25 10:20:13
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-01-29 18:49:44
+ * @LastEditTime: 2024-03-13 20:50:31
 -->
 
 <template>
+	<loading />
 	<TresCanvas v-bind="tcConfig">
 		<TresPerspectiveCamera :position="[0, 8, -13]" :fov="45" :near="0.1" :far="1000" :look-at="[0, 0, 0]" />
 		<OrbitControls enableDamping />
@@ -32,6 +33,8 @@
 
 
 <script setup lang="ts">
+
+import { randomLoading as loading } from 'PLS/UIdemo'
 import * as THREE from "three"
 import { TresCanvas } from '@tresjs/core'
 import { OrbitControls } from '@tresjs/cientos'

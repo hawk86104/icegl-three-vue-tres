@@ -4,17 +4,19 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-02-04 14:31:59
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-02-04 17:29:28
+ * @LastEditTime: 2024-03-13 20:51:44
 -->
 <script setup>
 import { TresCanvas } from '@tresjs/core'
 import { OrbitControls } from '@tresjs/cientos'
 import skyBox from 'PLS/skyBox/components/skyBoxDmesh.vue'
+import { randomLoading as loading } from 'PLS/UIdemo'
 import stencilMaskMesh from '../components/stencilMaskBox.vue'
 import stencilMaskModels from '../components/stencilMaskModels.vue'
 
 </script>
 <template>
+	<loading />
 	<TresCanvas ref="canvasRef" window-size clear-color="#111">
 		<TresPerspectiveCamera :position="[-1, 0, 2]" :fov="45" :aspect="1" :near="0.1" :far="1000" />
 		<OrbitControls auto-rotate />

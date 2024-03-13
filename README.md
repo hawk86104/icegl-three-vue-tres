@@ -9,6 +9,9 @@
     <a target="_black" href="https://gitee.com/ice-gl/icegl-three-vue-tres">
       <img src="https://gitee.com/ice-gl/icegl-three-vue-tres/badge/star.svg?theme=dark" alt="gitee-starts" />
     </a>
+    <a target="_black" href="https://afdian.net/@tvt_js">
+      <img src="https://img.shields.io/badge/爱发电-ICEGL-blue.svg?style=flat-square&color=027afd&logo=github-sponsors" alt="爱发电" />
+    </a>
 </p>
 
 ## 🧊🧊🧊🧊🧊🧊🧊🧊🧊🧊🧊🧊🧊🧊🧊🧊🧊🧊🧊🧊

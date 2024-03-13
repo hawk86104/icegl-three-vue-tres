@@ -4,20 +4,21 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-18 08:51:19
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-01-05 20:55:53
+ * @LastEditTime: 2024-03-13 20:41:29
 -->
 <template>
+	<loading />
 	<TresCanvas clearColor="#333" shadows window-size>
 		<TresPerspectiveCamera :position="[500, 330, 500]" :fov="50" :near="0.1" :far="10000" />
 		<OrbitControls />
 		<TresAmbientLight color="#ffffff" intensity="1" />
 		<!-- <TresGridHelper :position="[0, 1, 0]" :args="[500, 10]" /> -->
-		<TresDirectionalLight ref="TDirectionalLight" color="#ffffff" :position="[300, 300, 350]" :intensity="6" cast-shadow/>
+		<TresDirectionalLight ref="TDirectionalLight" color="#ffffff" :position="[300, 300, 350]" :intensity="6"
+			cast-shadow />
 		<Suspense>
 			<planeClipping />
 		</Suspense>
 		<reflectorMesh v-bind="configState" />
-
 	</TresCanvas>
 </template>
 
@@ -26,8 +27,9 @@
 import { shallowRef, watchEffect, reactive } from 'vue'
 import { TresCanvas } from '@tresjs/core'
 import { OrbitControls } from '@tresjs/cientos'
-import planeClipping from '../components/planeClipping.vue'
 import reflectorMesh from 'PLS/floor/components/reflectorMesh.vue'
+import { randomLoading as loading } from 'PLS/UIdemo'
+import planeClipping from '../components/planeClipping.vue'
 
 const configState = reactive({
 	mirrorSize: 900,

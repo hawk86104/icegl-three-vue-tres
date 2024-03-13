@@ -4,9 +4,10 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-10 16:13:11
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-12-22 11:46:26
+ * @LastEditTime: 2024-03-13 20:58:06
 -->
 <template>
+	<loading />
 	<TresCanvas v-bind="state" window-size>
 		<TresPerspectiveCamera :position="[100, 400, 500]" :fov="45" :near="0.1" :far="10000" :look-at="[0, 0, 0]" />
 		<OrbitControls v-bind="controlsState" />
@@ -31,11 +32,12 @@ import { TresCanvas } from '@tresjs/core'
 import { OrbitControls } from '@tresjs/cientos'
 import { OBJLoader } from 'three/addons/loaders/OBJLoader.js'
 import { Pane } from 'tweakpane';
+import reflectorMesh from 'PLS/floor/components/reflectorMesh.vue'
+import { randomLoading as loading } from 'PLS/UIdemo'
 import { loadOBJ } from '../common/util'
 import cloudPoints from '../components/cloudPoints.vue'
 import xRayEffect from '../components/xRayEffect.vue'
 import bubblesEffect from '../components/bubblesEffect.vue'
-import reflectorMesh from 'PLS/floor/components/reflectorMesh.vue'
 
 const configState = reactive({
 	mirrorSize: 500,

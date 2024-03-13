@@ -36,6 +36,7 @@
     "@fesjs/plugin-model": "3.0.1",
     "@fesjs/plugin-pinia": "^3.0.1",
     "@fesjs/plugin-request": "^4.0.0-beta.6",
+    "@fesjs/plugin-sass": "^3.0.0",
     "@here/quantized-mesh-decoder": "^1.2.8",
     "@mapbox/tilebelt": "^1.0.2",
     "@tresjs/cientos": "3.7.0",

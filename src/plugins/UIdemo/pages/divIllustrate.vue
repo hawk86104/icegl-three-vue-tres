@@ -7,6 +7,7 @@
  * @LastEditTime: 2024-01-13 11:37:38
 -->
 <template>
+	<loading />
 	<TresCanvas clearColor="#333" window-size>
 		<TresPerspectiveCamera :position="[-500, 330, 500]" :fov="50" :near="0.1" :far="10000" />
 		<OrbitControls />
@@ -25,12 +26,12 @@
 		<illustrateWing />
 		<illustrateTire />
 		<illustrateTireMesh />
-
 	</TresCanvas>
 </template>
 
 
 <script setup lang="ts">
+import { randomLoading as loading } from 'PLS/UIdemo'
 import { reactive } from 'vue'
 import { TresCanvas } from '@tresjs/core'
 import { OrbitControls } from '@tresjs/cientos'
