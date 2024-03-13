@@ -4,10 +4,10 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-03-08 15:06:29
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-03-12 20:48:17
+ * @LastEditTime: 2024-03-13 20:55:06
 -->
 <script setup lang="ts">
-import { loading1 as loading } from 'PLS/UIdemo'
+import { bubbleLoading as loading } from 'PLS/UIdemo'
 import { ref, watchEffect, reactive } from 'vue'
 import { TresCanvas } from '@tresjs/core'
 import { ScrollControls } from '@tresjs/cientos'

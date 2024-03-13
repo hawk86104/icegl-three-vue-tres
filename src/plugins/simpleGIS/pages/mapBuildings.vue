@@ -4,12 +4,13 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-02-29 18:51:13
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-03-05 18:54:09
+ * @LastEditTime: 2024-03-13 21:00:01
 -->
 
 <template>
 	<TresCanvas v-bind="state" window-size>
-		<TresPerspectiveCamera :position="new THREE.Vector3(mapCenter[0], mapCenter[1], mapCenter[2])" :fov="60" :near="1" :far="1e8" :up="[0, 0, 1]" />
+		<TresPerspectiveCamera :position="new THREE.Vector3(mapCenter[0], mapCenter[1], mapCenter[2])" :fov="60" :near="1"
+			:far="1e8" :up="[0, 0, 1]" />
 
 		<TresAmbientLight color="#ffffff" />
 		<TresDirectionalLight :position="[100, 100, 0]" :intensity="0.5" color="#ffffff" />

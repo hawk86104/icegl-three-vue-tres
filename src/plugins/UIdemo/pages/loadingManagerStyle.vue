@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-03-12 21:53:22
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-03-13 18:47:12
+ * @LastEditTime: 2024-03-13 20:54:42
 -->
 
 <script setup lang="ts">
@@ -17,7 +17,7 @@ const paneControl = new Pane({
 	expanded: true
 })
 const paneState = reactive({
-	styleNum: 23,
+	styleNum: 22,
 	showProgress: true
 })
 paneControl.addBinding(paneState, 'showProgress', { label: '显示进度', })

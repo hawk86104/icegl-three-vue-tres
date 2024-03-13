@@ -4,9 +4,10 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-18 08:51:19
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-12-27 09:24:06
+ * @LastEditTime: 2024-03-13 20:56:54
 -->
 <template>
+	<loading />
 	<TresCanvas v-bind="state" window-size>
 		<TresPerspectiveCamera :position="[5, 5, 5]" :fov="45" :near="1" :far="1000" />
 		<OrbitControls v-bind="controlsState" />
@@ -25,8 +26,9 @@ import { SRGBColorSpace, BasicShadowMap, NoToneMapping } from 'three'
 import { reactive } from 'vue'
 import { TresCanvas } from '@tresjs/core'
 import { OrbitControls } from '@tresjs/cientos'
-import device from '../components/device.vue'
 import reflectorShaderMesh from 'PLS/floor/components/reflectorShaderMesh.vue'
+import { randomLoading as loading } from 'PLS/UIdemo'
+import device from '../components/device.vue'
 
 const configState = reactive({
 	reflectivity: 0.1,

@@ -4,13 +4,14 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-12-27 08:47:10
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-12-27 08:57:22
+ * @LastEditTime: 2024-03-13 20:43:34
 -->
 <script setup lang="ts">
+import { randomLoading as loading } from 'PLS/UIdemo'
 import { TresCanvas } from '@tresjs/core'
-import laptop from '../../components/laptop.vue'
-import { OrbitControls, } from '@tresjs/cientos'
+import { OrbitControls } from '@tresjs/cientos'
 import reflectorDUDV from 'PLS/floor/components/reflectorDUDV.vue'
+import laptop from '../../components/laptop.vue'
 
 const configState = {
 	reflectivity: 3.6,
@@ -20,6 +21,7 @@ const configState = {
 </script>
 
 <template>
+	<loading />
 	<TresCanvas clearColor="#241a1a" window-size>
 		<TresPerspectiveCamera :position="[-5, 4, 3]" />
 		<OrbitControls />

@@ -4,10 +4,10 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-10-17 08:30:49
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-12-12 10:36:06
+ * @LastEditTime: 2024-03-13 20:49:29
 -->
 <template>
-	<pagesShow :showBuildings="false" ref="pagesShowRef">
+	<pagesShow ref="pagesShowRef" :showBuildings="false">
 		<template v-slot:ability>
 			<buildingsModel v-if="buildingState.show && showbuildingsLines" :model="CityFBX"
 				:bulidingsColor="buildingState.bulidingsColor" :landColor="buildingState.landColor"
