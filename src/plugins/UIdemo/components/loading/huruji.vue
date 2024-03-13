@@ -19,7 +19,7 @@
 					<div></div>
 				</div>
 			</div>
-			载入中... {{ progress }} %
+			<template v-if="showProgress">载入中... {{ progress }} %</template>
 			<div class="loader5" v-if="props.styleNum === 0">
 				<div class="loader-five">
 					<div></div>
@@ -86,9 +86,11 @@ import { useProgress } from '@tresjs/cientos'
 const props = withDefaults(defineProps<{
 	styleNum?: number
 	isDemo?: boolean
+	showProgress?: boolean
 }>(), {
 	styleNum: 0,
-	isDemo: false
+	isDemo: false,
+	showProgress: true
 })
 const { hasFinishLoading, progress } = await useProgress()
 

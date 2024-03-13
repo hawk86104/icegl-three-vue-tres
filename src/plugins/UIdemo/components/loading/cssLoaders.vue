@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-03-12 21:53:22
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-03-13 11:41:40
+ * @LastEditTime: 2024-03-13 16:29:58
 -->
 <template>
 	<div v-show="!hasFinishLoading"
@@ -18,7 +18,7 @@
 			<div class="loader6" v-else-if="props.styleNum === 5"></div>
 			<div class="loader7" v-else-if="props.styleNum === 6"></div>
 
-			{{ progress }} %
+			<template v-if="showProgress">{{ progress }} %</template>
 		</div>
 	</div>
 </template>
@@ -30,9 +30,11 @@ import { useProgress } from '@tresjs/cientos'
 const props = withDefaults(defineProps<{
 	styleNum?: number
 	isDemo?: boolean
+	showProgress?: boolean
 }>(), {
 	styleNum: 0,
-	isDemo: false
+	isDemo: false,
+	showProgress: true
 })
 
 const { hasFinishLoading, progress } = await useProgress()
