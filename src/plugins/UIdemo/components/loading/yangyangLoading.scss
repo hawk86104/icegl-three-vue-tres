@@ -15,13 +15,13 @@
       transform-origin: 400px 300px;
     }
 
-    #{($i)/35*100}% {
+    #{calc(($i) / 35)*100}% {
       opacity         : 0;
       transform       : rotate(($i - 1)*10deg);
       transform-origin: 400px 300px;
     }
 
-    #{($i)/35*100 + 0.2}% {
+    #{calc($i / 35)*100 + 0.2}% {
       opacity         : 0.3;
       transform       : rotate($i*10deg);
       transform-origin: 400px 300px;
