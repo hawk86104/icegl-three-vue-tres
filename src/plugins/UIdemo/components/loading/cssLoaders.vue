@@ -4,10 +4,10 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-03-12 21:53:22
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-03-13 16:29:58
+ * @LastEditTime: 2024-03-14 08:12:45
 -->
 <template>
-	<div v-show="!hasFinishLoading"
+	<div v-if="!hasFinishLoading"
 		class="absolute bg-grey-600 t-0 l-0 w-full h-full z-20 flex justify-center items-center text-black font-mono bg-black">
 		<div class="text-center text-white">
 			<div class="loader1" v-if="props.styleNum === 0"></div>

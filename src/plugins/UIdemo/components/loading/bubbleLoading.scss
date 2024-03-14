@@ -76,10 +76,11 @@ $count: 200;
 
 @for $i from 1 through $count {
 	.g-bubble:nth-child(#{$i}) {
-		--rotate   : calc(#{360 / $count} * #{$i} * 1deg);
-		--delayTime: calc(4000 * #{$i / $count} * -1ms);
+		$rotate    : calc(360 / $count) * $i;
+		--rotate   : calc(#{$rotate} * 1deg);
+		--delayTime: calc(4000 * #{calc($i / $count)} * -1ms);
 		--width    : 30px;
-		--scale    : #{0.4 + random(10) / 10};
+		--scale    : #{0.4 + calc(random(10) / 10)};
 		--x        : #{-100 + random(200)}px;
 		--y        : #{-100 + random(200)}px;
 		width      : var(--width);

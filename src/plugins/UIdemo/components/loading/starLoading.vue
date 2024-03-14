@@ -7,7 +7,7 @@
  * @LastEditTime: 2024-03-13 19:44:52
 -->
 <template>
-	<div v-show="!hasFinishLoading"
+	<div v-if="!hasFinishLoading"
 		class="absolute bg-grey-600 t-0 l-0 w-full h-full z-20 flex justify-center items-center text-black font-mono bg-black">
 		<div class=" text-white">
 			<div class="stars flex-wrap">

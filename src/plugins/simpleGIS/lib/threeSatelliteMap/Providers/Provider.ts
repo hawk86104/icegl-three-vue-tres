@@ -1,4 +1,5 @@
-interface Provider<T>{
+interface Provider<T> {
+    filter: any;
     /**
      * 所能提供的数据的最大层级。
      */
