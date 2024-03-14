@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-02-29 10:48:53
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-02-29 18:50:25
+ * @LastEditTime: 2024-03-14 22:41:32
 -->
 <template>
 	<OrbitControls v-bind="controlsState" ref="orbitControlRef" />
@@ -12,6 +12,7 @@
 </template>
 
 <script lang="ts" setup>
+import * as THREE from 'three'
 import { OrbitControls } from '@tresjs/cientos'
 import { useTresContext, useRenderLoop } from '@tresjs/core'
 import { watchEffect, reactive, ref } from 'vue'
@@ -46,14 +47,25 @@ mapProvider.source = 'https://webrd04.is.autonavi.com/appmaptile?lang=zh_cn&size
 // mapProvider.source = 'https://webst01.is.autonavi.com/appmaptile?style=6&x={x}&y={y}&z={z}'
 mapProvider.showTileNo = false
 mapProvider.useWorker = true
-//滤镜效果
-mapProvider.filter = 'invert(100%) hue-rotate(321deg) grayscale(80%) brightness(120%)'
 // mapProvider.debug = true
 
 const meshProvider = new TerrainMeshProvider(planProvider, mapProvider)
 meshProvider.showBoundingBox = false
 meshProvider.wireframe = false
 meshProvider.flatShading = false
+//滤镜效果
+meshProvider.filter = {
+	opposite: true,
+	genBright: 1.3,
+	genContrast: 1,
+	genSaturation: 1,
+}
+let color = new THREE.Color('#4688b5')
+meshProvider.filter.monochrome = {
+	r: color.r,
+	g: color.g,
+	b: color.b,
+}
 
 const map = new Map()
 map.provider = meshProvider

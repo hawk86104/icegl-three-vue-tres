@@ -1,5 +1,5 @@
 import { getChildren } from '@mapbox/tilebelt';
-import { Box3, Object3D } from 'three';
+import { Box3, Object3D, Mesh } from 'three';
 import { Map } from './Map';
 
 class Tile extends Object3D {
@@ -14,7 +14,7 @@ class Tile extends Object3D {
     boundingBoxWorld = new Box3();
 
     content?: Object3D;
-    
+
     constructor() {
         super();
     }
@@ -53,7 +53,7 @@ class Tile extends Object3D {
             }
         }
 
-        this.update();        
+        this.update();
     }
 
     update() {
@@ -65,6 +65,10 @@ class Tile extends Object3D {
         if (!cameraFrustum.intersectsBox(this.boundingBoxWorld)) {
             this.simplify();
             return;
+        }
+
+        if (this.content instanceof Mesh && this.map.provider.filter) {
+            this.content.material.uniforms.t_Matrix.value = this.map.provider.getTranMatrix()
         }
 
         let distance = this.boundingBoxWorld.distanceToPoint(cameraWorldPosition);
