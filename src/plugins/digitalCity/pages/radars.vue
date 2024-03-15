@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-10-17 08:30:49
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-03-12 19:03:08
+ * @LastEditTime: 2024-03-15 12:12:46
 -->
 <template>
 	<loading></loading>
@@ -21,10 +21,9 @@
 <script setup lang="ts">
 import { ref, reactive } from 'vue';
 import { Pane } from 'tweakpane';
-import loading from 'PLS/UIdemo/components/loading/default.vue'
+import { defaultLoading as loading } from 'PLS/UIdemo'
+import { radraA, radraB } from 'PLS/digitalCity'
 import pagesShow from '../components/pagesShow.vue'
-import radraA from '../components/radras/radraA.vue'
-import radraB from '../components/radras/radraB.vue'
 
 const radraARef = ref()
 

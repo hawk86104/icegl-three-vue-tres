@@ -4,11 +4,11 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-02-29 10:48:53
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-03-14 22:41:32
+ * @LastEditTime: 2024-03-15 19:52:10
 -->
 <template>
 	<OrbitControls v-bind="controlsState" ref="orbitControlRef" />
-	<primitive :object="map" />
+	<primitive :object="map" :rotation="[-Math.PI / 2, 0, 0]" />
 </template>
 
 <script lang="ts" setup>
@@ -69,6 +69,9 @@ meshProvider.filter.monochrome = {
 
 const map = new Map()
 map.provider = meshProvider
+// map.matrix.multiply(new THREE.Matrix4().makeRotationAxis(new THREE.Vector3(0, 0, 1), - Math.PI / 2))
+// map.applyMatrix4(new THREE.Matrix4().makeRotationAxis(new THREE.Vector3(1, 0, 0), Math.PI / 2))
+// map.updateMatrix()
 
 map.bbox = props.bbox
 map.maxZoom = props.maxZoom
@@ -82,39 +85,21 @@ watchEffect(() => {
 	}
 	if (orbitControlRef.value && !firstOrbitControlRef) {
 		firstOrbitControlRef = true
-
-		// camera.value.lookAt(0, 0, 0)
-		// camera.value.position.x += 200
-		// camera.value.position.y -= 200
-		// camera.value.position.z = 600
-
 		orbitControlRef.value.value.target.x = camera.value.position.x
-		orbitControlRef.value.value.target.y = camera.value.position.y
-		orbitControlRef.value.value.target.z = 0
-
-		// camera.value.position.x = 187083.29118444995
-		// camera.value.position.y = 2493066.0481375763
-		// camera.value.position.z = 919.9993174713077
-
-		// camera.value.rotation.x = 0.5773496316950935
-		// camera.value.rotation.y = 0.35860567370955987
-		// camera.value.rotation.z = 0.4942056703070541
-		// map.camera = camera.value
-		// orbitControlRef.value.value.target.x = 186088.2115110314
-		// orbitControlRef.value.value.target.y = 2494148.892637813
-		// orbitControlRef.value.value.target.z = -0.000018780958164596405
+		orbitControlRef.value.value.target.y = 0
+		orbitControlRef.value.value.target.z = camera.value.position.z
 	}
 })
 
 const { onLoop } = useRenderLoop()
 onLoop(() => {
 	if (renderer.value) {
-		const far = Math.abs(camera.value.position.z) * 50
+		const far = Math.abs(camera.value.position.y) * 50
 		camera.value.far = far + 5000
 		camera.value.updateProjectionMatrix()
 
 		if (orbitControlRef.value) {
-			orbitControlRef.value.value.target.z = 0
+			orbitControlRef.value.value.target.y = 0
 		}
 		map.update()
 		renderer.value.render(scene.value, camera.value)
