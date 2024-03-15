@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-10-24 10:36:23
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-12-20 11:36:40
+ * @LastEditTime: 2024-03-15 18:45:38
 -->
 <script setup lang="ts">
 import { ref, watch, defineExpose, watchEffect } from 'vue';
@@ -81,6 +81,21 @@ watch(TresTubeGeometryRef, (newValue, oldValue) => {
 		originScale = MeshRef.value.scale.clone()
 	}
 })
+
+// watch(MeshRef, (newValue, oldValue) => {
+// 	if (newValue && oldValue === undefined) {
+// 		MeshRef.value.matrixAutoUpdate = false
+
+// 		const upAdjustment = new Matrix4()
+// 		//upAdjustment.makeRotationAxis(new Vector3(1, 0, 0), -Math.PI / 2)  ==  upAdjustment.makeRotationX(-Math.PI / 2)
+// 		upAdjustment.makeRotationAxis(new Vector3(1, 0, 0), -Math.PI / 2)
+// 		MeshRef.value.applyMatrix4(upAdjustment)
+
+// 		// 调用 updateMatrixWorld() 来强制更新 matrixWorld
+// 		MeshRef.value.updateMatrixWorld(true)
+// 	}
+// })
+
 const tubePath = ref(new LineCurve3(
 	new Vector3(0, 0, 0),
 	new Vector3(0, props.height, 0)

@@ -1,3 +1,11 @@
+<!--
+ * @Description: 
+ * @Version: 1.668
+ * @Autor: 地虎降天龙
+ * @Date: 2024-02-27 11:36:30
+ * @LastEditors: 地虎降天龙
+ * @LastEditTime: 2024-03-15 20:03:40
+-->
 
 <template>
 	<TresCanvas v-bind="state" window-size>
@@ -7,6 +15,7 @@
 		<TresAmbientLight :intensity="0.5" />
 		<TresDirectionalLight ref="TDirectionalLight" :position="[1, 2, 3]" :intensity="1.25" />
 		<tilesMesh />
+		<TresAxesHelper :args="[100]" />
 	</TresCanvas>
 </template>
 

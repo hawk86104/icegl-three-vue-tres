@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-02-28 16:26:55
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-02-29 08:55:54
+ * @LastEditTime: 2024-03-15 21:45:11
  */
 import * as THREE from 'three'
 import { Tileset } from '3d-tiles-renderer'
@@ -33,19 +33,18 @@ export const onLoadTileSetForCesium3Dtitles = (tiles: any) => {
 			position = sphere.center.clone()
 			distanceToEllipsoidCenter = position.length()
 		}
-		tiles.group.matrix.copy(matrix).invert()
-		tiles.group.updateMatrix()
+		// tiles.group.matrix.copy(matrix).invert()
+		// tiles.group.updateMatrix()
+		// tiles.group.position.z = -distanceToEllipsoidCenter
 
+		const surfaceDirection = position?.normalize()
+		const up = new THREE.Vector3(0, 1, 0)
+		const rotationToNorthPole = rotationBetweenDirections(surfaceDirection, up)
+		tiles.group.quaternion.x = rotationToNorthPole.x
+		tiles.group.quaternion.y = rotationToNorthPole.y
+		tiles.group.quaternion.z = rotationToNorthPole.z
+		tiles.group.quaternion.w = rotationToNorthPole.w
 		tiles.group.position.y = -distanceToEllipsoidCenter
-		// const surfaceDirection = position?.normalize()
-		// const up = new THREE.Vector3(0, 1, 0)
-		// const rotationToNorthPole = rotationBetweenDirections(surfaceDirection, up)
-		// tiles.group.quaternion.x = rotationToNorthPole.x
-		// tiles.group.quaternion.y = rotationToNorthPole.y
-		// tiles.group.quaternion.z = rotationToNorthPole.z
-		// tiles.group.quaternion.w = rotationToNorthPole.w
-		// tiles.group.position.y = -distanceToEllipsoidCenter
-		// tiles.group.position.z = 0
 
 	}
 }

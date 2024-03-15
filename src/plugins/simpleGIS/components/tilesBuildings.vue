@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-02-28 14:45:57
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-02-29 18:06:35
+ * @LastEditTime: 2024-03-15 21:52:48
 -->
 <template>
 	<TresGroup>
@@ -108,6 +108,17 @@ tiles.onLoadModel = (scene: any) => {
 			c.parent.add(line)
 		}
 	})
+
+	// 对齐 tiles center
+	const box = new THREE.Box3()
+	const sphere = new THREE.Sphere()
+	if (tiles.getBoundingBox(box)) {
+		box.getCenter(tiles.group.position)
+		tiles.group.position.multiplyScalar(- 1)
+	} else if (tiles.getBoundingSphere(sphere)) {
+		tiles.group.position.copy(sphere.center)
+		tiles.group.position.multiplyScalar(- 1)
+	}
 }
 onLoadTileSetForCesium3Dtitles(tiles)
 

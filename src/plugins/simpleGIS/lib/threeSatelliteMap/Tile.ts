@@ -35,7 +35,8 @@ class Tile extends Object3D {
             return;
         }
         this.add(this.content);
-        this.boundingBoxWorld.setFromObject(this.content).applyMatrix4(this.matrixWorld);
+        //hawk add
+        this.boundingBoxWorld.setFromObject(this.content).applyMatrix4(this.matrixWorld.makeRotationX(-Math.PI / 2));
         this.map.add(this);
         this.visible = true;
         this.isReady = true;
