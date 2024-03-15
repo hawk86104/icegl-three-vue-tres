@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-02-24 10:03:05
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-03-14 22:34:44
+ * @LastEditTime: 2024-03-15 11:13:53
 -->
 <template>
 	<TresCanvas v-bind="state" window-size>
@@ -64,7 +64,8 @@ const state = reactive({
 	precision: 'highp'
 })
 
-// const mapCenter = [958792.6688235556, 2771848.203330192, 1241.0896440063382]
+//const mapCenter = webMercatorToLonLat(13222524.44100642, 3765560.203675016)
 const positionUtm = lonLatToWebMerctor(118.779958, 32.017136)
+
 const mapCenter = [positionUtm[0], positionUtm[1], 5000]
 </script>
