@@ -4,11 +4,11 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-02-26 18:58:32
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-03-14 22:37:55
+ * @LastEditTime: 2024-03-15 22:10:10
 -->
 <template>
 	<OrbitControls v-bind="controlsState" ref="orbitControlRef" />
-	<primitive :object="map" />
+	<primitive :object="map" :rotation="[-Math.PI / 2, 0, 0]" />
 </template>
 
 <script lang="ts" setup>
@@ -101,8 +101,8 @@ watchEffect(() => {
 	if (orbitControlRef.value && !firstOrbitControlRef) {
 		firstOrbitControlRef = true
 		orbitControlRef.value.value.target.x = camera.value.position.x
-		orbitControlRef.value.value.target.y = camera.value.position.y
-		orbitControlRef.value.value.target.z = 0
+		orbitControlRef.value.value.target.y = 0
+		orbitControlRef.value.value.target.z = camera.value.position.z
 	}
 	if (props.genBright) {
 		meshProvider.filter.genBright = props.genBright
@@ -138,12 +138,12 @@ watch(() => props.isMonochrome, (value) => {
 const { onLoop } = useRenderLoop()
 onLoop(() => {
 	if (renderer.value) {
-		const far = Math.abs(camera.value.position.z) * 50
+		const far = Math.abs(camera.value.position.y) * 50
 		camera.value.far = far + 5000
 		camera.value.updateProjectionMatrix()
 
 		if (orbitControlRef.value) {
-			orbitControlRef.value.value.target.z = 0
+			orbitControlRef.value.value.target.y = 0
 		}
 		map.update()
 		renderer.value.render(scene.value, camera.value)
