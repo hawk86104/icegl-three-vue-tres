@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-02-28 16:26:55
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-03-15 21:45:11
+ * @LastEditTime: 2024-03-16 12:12:26
  */
 import * as THREE from 'three'
 import { Tileset } from '3d-tiles-renderer'
@@ -44,7 +44,7 @@ export const onLoadTileSetForCesium3Dtitles = (tiles: any) => {
 		tiles.group.quaternion.y = rotationToNorthPole.y
 		tiles.group.quaternion.z = rotationToNorthPole.z
 		tiles.group.quaternion.w = rotationToNorthPole.w
-		tiles.group.position.y = -distanceToEllipsoidCenter
+		tiles.group.position.z = -distanceToEllipsoidCenter
 
 	}
 }

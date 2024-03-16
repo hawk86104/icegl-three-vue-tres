@@ -4,12 +4,10 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-02-24 10:03:05
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-03-15 22:09:11
+ * @LastEditTime: 2024-03-16 14:35:45
 -->
 <template>
 	<TresCanvas v-bind="state" window-size>
-		<TresPerspectiveCamera :position="new THREE.Vector3(mapCenter[0], mapCenter[2], -mapCenter[1])" :fov="60" :near="1"
-			:far="1e8" :look-at="[mapCenter[0], 0, -mapCenter[1]]" :up="[0, 1, 0]" />
 		<Suspense>
 			<tileMapMesh :bbox="[104.955976, 20.149765, 120.998419, 30.528687]" v-bind="tileMapState" />
 		</Suspense>
@@ -25,6 +23,11 @@ import { Pane } from 'tweakpane'
 import tileMapMesh from '../components/tileMapMesh.vue'
 import { lonLatToWebMerctor } from '../lib/threeSatelliteMap/index'
 
+//const mapCenter = webMercatorToLonLat(13222524.44100642, 3765560.203675016)
+const positionUtm = lonLatToWebMerctor(118.779958, 32.017136)
+
+const mapCenter = [positionUtm[0], positionUtm[1], 5000]
+
 const tileMapState = reactive({
 	opposite: true,
 	genBright: 1.3,
@@ -32,6 +35,7 @@ const tileMapState = reactive({
 	genSaturation: 1,
 	isMonochrome: true,
 	monochrome: '#4688b5',
+	mapCenter
 })
 
 const paneControl = new Pane({ title: '参数' })
@@ -63,9 +67,4 @@ const state = reactive({
 	toneMapping: THREE.NoToneMapping,
 	precision: 'highp'
 })
-
-//const mapCenter = webMercatorToLonLat(13222524.44100642, 3765560.203675016)
-const positionUtm = lonLatToWebMerctor(118.779958, 32.017136)
-
-const mapCenter = [positionUtm[0], positionUtm[1], 5000]
 </script>
