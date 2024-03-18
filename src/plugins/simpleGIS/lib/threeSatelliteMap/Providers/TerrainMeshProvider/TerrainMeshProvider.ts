@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-02-26 18:58:32
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-03-14 22:30:06
+ * @LastEditTime: 2024-03-18 08:05:52
  */
 import { Box3Helper, BufferGeometry, Mesh, MeshBasicMaterial, MeshStandardMaterial, Texture, SRGBColorSpace, ShaderMaterial, Matrix4 } from 'three';
 import { TerrainMesh } from './TerrainMesh';
@@ -111,6 +111,7 @@ class TerrainMeshProvider implements Provider<Mesh> {
 
         if (this.filter) {
             material = new ShaderMaterial({
+                // side: 2,
                 wireframe: wireframe,
                 depthTest: true,
                 //开启多边形偏移

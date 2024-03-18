@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-02-28 14:45:57
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-03-16 12:12:14
+ * @LastEditTime: 2024-03-18 08:34:59
 -->
 <template>
 	<TresGroup>
@@ -31,6 +31,7 @@ const props = withDefaults(defineProps<{
 	topColor?: string
 	opacity?: number
 	gradient?: boolean
+	camera: THREE.PerspectiveCamera
 }>(), {
 	bulidingsColor: '#e523ff',
 	topColor: '#ffff00',
@@ -122,19 +123,19 @@ tiles.onLoadModel = (scene: any) => {
 }
 onLoadTileSetForCesium3Dtitles(tiles)
 
-const { camera, renderer, sizes } = useTresContext()
+const { renderer, sizes } = useTresContext()
 watchEffect(() => {
 	if (sizes.width.value) {
-		tiles.setCamera(camera.value)
-		tiles.setResolutionFromRenderer(camera.value, renderer.value)
+		tiles.setCamera(props.camera)
+		tiles.setResolutionFromRenderer(props.camera, renderer.value)
 	}
 })
 
 const { onBeforeLoop } = useRenderLoop()
 onBeforeLoop(({ delta }) => {
 	timeDelta.value += delta * 2.0
-	if (camera.value && sizes.width.value) {
-		camera.value.updateMatrixWorld()
+	if (props.camera && sizes.width.value) {
+		props.camera.updateMatrixWorld()
 		tiles.update()
 	}
 })

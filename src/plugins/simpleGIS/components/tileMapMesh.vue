@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-02-26 18:58:32
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-03-16 14:33:20
+ * @LastEditTime: 2024-03-18 08:34:08
 -->
 <template>
 	<primitive :object="map" :rotation="[-Math.PI / 2, 0, 0]" />
@@ -14,7 +14,7 @@
 import * as THREE from 'three'
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js'
 import { useTresContext, useRenderLoop } from '@tresjs/core'
-import { watchEffect, reactive, ref, watch } from 'vue'
+import { watchEffect, watch } from 'vue'
 import { Map, PlaneProvider, MapProvider, TerrainMeshProvider, MERC, MartiniTerrainProvider } from '../lib/threeSatelliteMap/index'
 
 const props = withDefaults(defineProps<{
@@ -27,6 +27,7 @@ const props = withDefaults(defineProps<{
 	monochrome?: string
 	isMonochrome?: boolean
 	mapCenter: Array<number>
+	camera: THREE.PerspectiveCamera
 }>(), {
 	bbox: [104.955976, 20.149765, 120.998419, 30.528687],
 	maxZoom: 20,
@@ -37,10 +38,7 @@ const props = withDefaults(defineProps<{
 	monochrome: '#fff',	//单色滤镜
 	isMonochrome: false,	//是否启用单色滤镜
 })
-const controlsState = reactive({
-	enableDamping: true,
-	dampingFactor: 0.05,
-})
+
 const { renderer, scene } = useTresContext()
 
 const planProvider = new PlaneProvider()
@@ -62,8 +60,8 @@ mapProvider.useWorker = true
 const meshProvider = new TerrainMeshProvider(martiniProvider, mapProvider)
 meshProvider.showBoundingBox = false
 meshProvider.wireframe = false
-meshProvider.flatShading = true
-meshProvider.useStandardMaterial = true
+meshProvider.flatShading = false
+meshProvider.useStandardMaterial = false
 meshProvider.filter = {
 	opposite: props.opposite,
 	monochrome: props.isMonochrome ? {
@@ -100,8 +98,9 @@ let orbitControl = null as any
 watchEffect(() => {
 	if (renderer.value) {
 		orbitControl = new OrbitControls(camera, renderer.value.domElement)
-		orbitControl.enableDamping = controlsState.enableDamping
-		orbitControl.dampingFactor = controlsState.dampingFactor
+		orbitControl.enableDamping = true
+		orbitControl.dampingFactor = 0.05
+		orbitControl.minDistance = 600 //避免 在搞得地图瓦片情况下 太近不显示瓦片的问题
 		orbitControl.position0.set(camera.position.x, camera.position.y, camera.position.z)
 		orbitControl.target.set(camera.position.x, 0, camera.position.z - 2000)
 	}
