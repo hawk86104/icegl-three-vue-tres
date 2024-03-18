@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-09 09:33:51
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-01-04 09:25:52
+ * @LastEditTime: 2024-03-18 17:40:52
  */
 import { BufferAttribute, Box3, Vector3, RepeatWrapping, Color, Mesh, PlaneGeometry, Vector2, DoubleSide, Material, MeshBasicMaterial, BufferGeometry, Matrix4 } from 'three'
 
@@ -140,4 +140,29 @@ export function reAnchorCenter (mesh) {
 	geometry.center();
 
 	mesh.position.applyMatrix4(m)
+}
+
+export function getcenterPoint (list) {
+	const points = []
+	for (let i = 0; i < list.length; i++) {
+		points.push(new Vector2(list[i].x, list[i].y))
+	}
+
+	// 初始化中心点
+	const centerPoint = new Vector2()
+
+	// 计算所有点的总和
+	for (let i = 0; i < points.length; i++) {
+		centerPoint.add(points[i])
+	}
+
+	// 计算平均值
+	centerPoint.divideScalar(points.length)
+
+	// 将点转换为相对于中心点的偏移坐标
+	for (let i = 0; i < points.length; i++) {
+		points[i].sub(centerPoint);
+	}
+
+	return { points, centerPoint }
 }

@@ -1,3 +1,11 @@
+<!--
+ * @Description: 
+ * @Version: 1.668
+ * @Autor: 地虎降天龙
+ * @Date: 2024-03-18 10:12:36
+ * @LastEditors: 地虎降天龙
+ * @LastEditTime: 2024-03-18 16:19:07
+-->
 <template>
 	<radraA color="#00c0ff" :radius="300" :size="300" :position="[cPosition[0], 8, -cPosition[1]]" />
 	<Suspense>
@@ -31,14 +39,22 @@
 	<Suspense>
 		<cloudMesh :cPosition="[cPosition[0], 600, -cPosition[1]]" />
 	</Suspense>
+
+	<rippleMesh :position-y="6"
+		:positionSrc="[{ x: p1[0], y: -p1[1] }, { x: p1[0], y: -p2[1] }, { x: p2[0], y: -p2[1] }, { x: p2[0], y: -p1[1] }, { x: p1[0], y: -p1[1] }]"
+		:height="220" color='#00ffdd' />
 </template>
 
 <script setup lang="ts">
-import { radraA, radraB, precipitation, cloudMesh, markA, fireA, fireB, smokeA } from 'PLS/digitalCity'
+import { lonLatToUtm } from '../lib/threeSatelliteMap/index'
+import { radraA, radraB, precipitation, cloudMesh, markA, fireA, fireB, smokeA, rippleMesh } from 'PLS/digitalCity'
 
 const props = withDefaults(defineProps<{
 	cPosition: Array<number>
 }>(), {
 })
+
+const p1 = lonLatToUtm(113.9456, 22.5385, 50)
+const p2 = lonLatToUtm(113.9498, 22.5364, 50)
 
 </script>

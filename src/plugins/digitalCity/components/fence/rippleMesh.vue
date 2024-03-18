@@ -4,10 +4,10 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-02-02 10:15:51
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-02-02 12:22:58
+ * @LastEditTime: 2024-03-18 17:57:24
 -->
 <template>
-	<TresMesh :renderOrder="2000">
+	<TresMesh :renderOrder="2200" ref="tresMeshRef">
 		<TresBufferGeometry :position="[positionArray, 3]" :uv="[uvArray, 2]" />
 		<TresShaderMaterial v-bind="rippleShader" />
 	</TresMesh>
@@ -15,12 +15,13 @@
 
 <script setup lang="ts">
 import * as THREE from 'three'
-import { watchEffect } from 'vue'
+import { watchEffect, ref } from 'vue'
 import { useRenderLoop } from '@tresjs/core'
+import { getcenterPoint } from '../../common/utils'
 
 const props = withDefaults(
 	defineProps<{
-		positionSrc?: Array<number>
+		positionSrc?: Array<Object>
 		color?: string
 		opacity?: number
 		height?: number
@@ -36,6 +37,8 @@ const props = withDefaults(
 		speed: 0.15
 	},
 )
+
+const tresMeshRef = ref<THREE.Mesh>()
 
 const rippleShader = {
 	side: THREE.DoubleSide,
@@ -104,9 +107,9 @@ void main() {
 	}
 }
 
-let positionArray = null
-let uvArray = null
-function getRippleGeometry(points = [] as Array<any>, height) {
+let positionArray = null as any
+let uvArray = null as any
+function getRippleGeometry(points = [] as Array<any>, height: number) {
 	const positions = [] as Array<any>
 	const uvs = [] as Array<any>
 	for (let i = 0, j = positions.length, t = uvs.length; i < points.length - 1; i++) {
@@ -152,7 +155,12 @@ function getRippleGeometry(points = [] as Array<any>, height) {
 	positionArray = new Float32Array(positions)
 	uvArray = new Float32Array(uvs)
 }
-getRippleGeometry(props.positionSrc, props.height)
+
+// //  不能直接根据坐标点上围墙，因为会出现深度问题 导致闪烁
+//首先找到所有点的中心点 然后更改每个点对应中心点的偏移量
+const { centerPoint, points } = getcenterPoint(props.positionSrc)
+
+getRippleGeometry(points, props.height)
 
 const { onLoop } = useRenderLoop()
 onLoop(({ delta }) => {
@@ -170,6 +178,9 @@ watchEffect(() => {
 	}
 	if (props.speed) {
 		rippleShader.uniforms.speed.value = props.speed
+	}
+	if (tresMeshRef.value) {
+		tresMeshRef.value.position.set(centerPoint.x, tresMeshRef.value.position.y, centerPoint.y)
 	}
 })
 

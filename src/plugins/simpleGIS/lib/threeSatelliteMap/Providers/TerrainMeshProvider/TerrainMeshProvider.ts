@@ -114,6 +114,7 @@ class TerrainMeshProvider implements Provider<Mesh> {
                 // side: 2,
                 wireframe: wireframe,
                 depthTest: true,
+                depthWrite: false,
                 //开启多边形偏移
                 polygonOffset: false,
                 //当两个参数都为负值（深度减小）时，网格将被拉向摄影机（因此，位于前面）。
