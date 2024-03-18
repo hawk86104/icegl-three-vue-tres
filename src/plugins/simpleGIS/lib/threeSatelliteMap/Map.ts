@@ -4,12 +4,13 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-02-26 18:58:32
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-03-18 08:10:29
+ * @LastEditTime: 2024-03-18 15:00:48
  */
-import { Camera, Frustum, Matrix4, Object3D, Vector3 } from 'three';
+import { Camera, Frustum, Matrix4, Object3D, Vector3, BufferGeometry, Mesh } from 'three';
 import { Provider } from './Providers/Provider';
 import { Tile } from './Tile';
 import { bboxToTile, getChildren } from '@mapbox/tilebelt';
+import { computeBoundsTree, disposeBoundsTree, acceleratedRaycast } from 'three-mesh-bvh'
 
 /**
  * 地图对象
@@ -30,6 +31,17 @@ class Map extends Object3D {
 
     rootTiles: Tile[] = [];
     lastUpdateTime = 0;
+
+    constructor() {
+        super()
+        if (!BufferGeometry.prototype.computeBoundsTree) {
+            BufferGeometry.prototype.computeBoundsTree = computeBoundsTree
+        }
+        if (!BufferGeometry.prototype.disposeBoundsTree) {
+            BufferGeometry.prototype.disposeBoundsTree = disposeBoundsTree
+        }
+        Mesh.prototype.raycast = acceleratedRaycast
+    }
 
     private initRootTiles() {
         if (this.rootForward > 3) {

@@ -14,8 +14,8 @@
 		<tilesBuildings :position="[buildsPosition[0], 1, -buildsPosition[1] + 228]" :camera="camera" />
 
 		<Suspense>
-			<tileMapBuildingsMesh :bbox="[104.955976, 20.149765, 120.998419, 30.528687]" :mapCenter="mapCenter"
-				:camera="camera" />
+			<tileMapBuildingsMesh ref="tileMapBuildingsMeshRef" :bbox="[104.955976, 20.149765, 120.998419, 30.528687]"
+				:mapCenter="mapCenter" :camera="camera" />
 		</Suspense>
 
 		<Suspense>
@@ -25,21 +25,23 @@
 		<TresGridHelper :args="[10000, 10]" />
 		<TresAxesHelper :args="[100000]" />
 	</TresCanvas>
+	<raycasterEvent :tileMapRef="tileMapBuildingsMeshRef" />
 </template>
 
 
 <script setup lang="ts">
-import { reactive } from 'vue'
+import { reactive, shallowRef } from 'vue'
 import { TresCanvas } from '@tresjs/core'
 import * as THREE from 'three'
 import { tilesBuildings, tileMapBuildingsMesh } from 'PLS/simpleGIS'
 import { lonLatToUtm } from '../lib/threeSatelliteMap/index'
 import mapBuildingsMoreMeshes from '../components/mapBuildingsMoreMeshes.vue'
-
+import raycasterEvent from '../components/raycasterEvent.vue'
 
 // const wud = utmToLonLat(185500.52598346426, 2494899.945635518)
 const buildsPosition = lonLatToUtm(113.942639739199, 22.53171672540276, 50)
 
+const tileMapBuildingsMeshRef = shallowRef()
 const state = reactive({
 	clearColor: '#000000',
 	disableRender: true,
