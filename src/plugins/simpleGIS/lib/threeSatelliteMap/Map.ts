@@ -1,3 +1,11 @@
+/*
+ * @Description: 
+ * @Version: 1.668
+ * @Autor: 地虎降天龙
+ * @Date: 2024-02-26 18:58:32
+ * @LastEditors: 地虎降天龙
+ * @LastEditTime: 2024-03-18 08:10:29
+ */
 import { Camera, Frustum, Matrix4, Object3D, Vector3 } from 'three';
 import { Provider } from './Providers/Provider';
 import { Tile } from './Tile';
@@ -35,7 +43,7 @@ class Map extends Object3D {
         const rootTileNos = [];
         let tileNos = [bboxToTile(this.bbox)];
         let rootForward = this.rootForward;
-        while(rootForward > 0) {
+        while (rootForward > 0) {
             const tileNosCopy = [...tileNos];
             tileNos = [];
             tileNosCopy.forEach(t => {
@@ -45,7 +53,7 @@ class Map extends Object3D {
             rootForward--;
         }
         rootTileNos.push(...tileNos);
-        
+
         rootTileNos.forEach(no => {
             const tile = new Tile();
             tile.init(no, this);
@@ -62,7 +70,7 @@ class Map extends Object3D {
         if (now - this.lastUpdateTime < 300) {
             return;
         }
-    
+
         if (this.rootTiles.length === 0) {
             this.initRootTiles()
             return;

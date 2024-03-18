@@ -4,18 +4,17 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-02-26 18:58:32
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-03-15 22:10:10
+ * @LastEditTime: 2024-03-18 08:34:08
 -->
 <template>
-	<OrbitControls v-bind="controlsState" ref="orbitControlRef" />
 	<primitive :object="map" :rotation="[-Math.PI / 2, 0, 0]" />
 </template>
 
 <script lang="ts" setup>
 import * as THREE from 'three'
-import { OrbitControls } from '@tresjs/cientos'
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js'
 import { useTresContext, useRenderLoop } from '@tresjs/core'
-import { watchEffect, reactive, ref, watch } from 'vue'
+import { watchEffect, watch } from 'vue'
 import { Map, PlaneProvider, MapProvider, TerrainMeshProvider, MERC, MartiniTerrainProvider } from '../lib/threeSatelliteMap/index'
 
 const props = withDefaults(defineProps<{
@@ -27,6 +26,8 @@ const props = withDefaults(defineProps<{
 	genSaturation?: number
 	monochrome?: string
 	isMonochrome?: boolean
+	mapCenter: Array<number>
+	camera: THREE.PerspectiveCamera
 }>(), {
 	bbox: [104.955976, 20.149765, 120.998419, 30.528687],
 	maxZoom: 20,
@@ -37,12 +38,8 @@ const props = withDefaults(defineProps<{
 	monochrome: '#fff',	//单色滤镜
 	isMonochrome: false,	//是否启用单色滤镜
 })
-const controlsState = reactive({
-	enableDamping: true,
-	dampingFactor: 0.05,
-})
-const orbitControlRef = ref()
-const { camera, renderer, scene } = useTresContext()
+
+const { renderer, scene } = useTresContext()
 
 const planProvider = new PlaneProvider()
 planProvider.coordType = MERC
@@ -63,8 +60,8 @@ mapProvider.useWorker = true
 const meshProvider = new TerrainMeshProvider(martiniProvider, mapProvider)
 meshProvider.showBoundingBox = false
 meshProvider.wireframe = false
-meshProvider.flatShading = true
-meshProvider.useStandardMaterial = true
+meshProvider.flatShading = false
+meshProvider.useStandardMaterial = false
 meshProvider.filter = {
 	opposite: props.opposite,
 	monochrome: props.isMonochrome ? {
@@ -91,18 +88,21 @@ map.provider = meshProvider
 map.bbox = props.bbox
 map.maxZoom = props.maxZoom
 
-let firstCamera = false
-let firstOrbitControlRef = false
+const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 1e7 * 10)
+camera.up = new THREE.Vector3(0, 1, 0)
+camera.position.set(props.mapCenter[0], props.mapCenter[2], -props.mapCenter[1])
+camera.lookAt(new THREE.Vector3(camera.position.x, 0, camera.position.z - 2000))
+map.camera = camera
+
+let orbitControl = null as any
 watchEffect(() => {
-	if (camera.value && !firstCamera) {
-		firstCamera = true
-		map.camera = camera.value
-	}
-	if (orbitControlRef.value && !firstOrbitControlRef) {
-		firstOrbitControlRef = true
-		orbitControlRef.value.value.target.x = camera.value.position.x
-		orbitControlRef.value.value.target.y = 0
-		orbitControlRef.value.value.target.z = camera.value.position.z
+	if (renderer.value) {
+		orbitControl = new OrbitControls(camera, renderer.value.domElement)
+		orbitControl.enableDamping = true
+		orbitControl.dampingFactor = 0.05
+		orbitControl.minDistance = 600 //避免 在搞得地图瓦片情况下 太近不显示瓦片的问题
+		orbitControl.position0.set(camera.position.x, camera.position.y, camera.position.z)
+		orbitControl.target.set(camera.position.x, 0, camera.position.z - 2000)
 	}
 	if (props.genBright) {
 		meshProvider.filter.genBright = props.genBright
@@ -138,15 +138,16 @@ watch(() => props.isMonochrome, (value) => {
 const { onLoop } = useRenderLoop()
 onLoop(() => {
 	if (renderer.value) {
-		const far = Math.abs(camera.value.position.y) * 50
-		camera.value.far = far + 5000
-		camera.value.updateProjectionMatrix()
-
-		if (orbitControlRef.value) {
-			orbitControlRef.value.value.target.y = 0
+		if (orbitControl) {
+			orbitControl.update()
 		}
 		map.update()
-		renderer.value.render(scene.value, camera.value)
+
+		const far = Math.abs(camera.position.y) * 50
+		camera.far = far + 5000
+		camera.updateProjectionMatrix()
+		orbitControl.target.y = 0
+		renderer.value.render(scene.value, camera)
 	}
 
 })

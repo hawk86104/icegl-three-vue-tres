@@ -4,12 +4,18 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-10-27 16:43:05
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-02-06 17:04:41
+ * @LastEditTime: 2024-03-18 09:13:15
 -->
 <script setup lang="ts">
 import { useTexture, useRenderLoop } from '@tresjs/core'
 import * as THREE from 'three'
 import { default as SPE } from '../../common/ShaderParticleEngine/build/SPE'
+
+const props = withDefaults(defineProps<{
+	cPosition: Array<number>
+}>(), {
+	cPosition: [0, 200, 0]
+})
 
 const { map: pTexture } = await useTexture({
 	map: './plugins/digitalCity/image/cloud.png'
@@ -74,5 +80,5 @@ onLoop(({ dt }) => {
 </script>
 
 <template>
-	<primitive :object="objCloud" :position="[0, 200, 0]" :renderOrder="3000" />
+	<primitive :object="objCloud" :position="cPosition" :renderOrder="3000" />
 </template>

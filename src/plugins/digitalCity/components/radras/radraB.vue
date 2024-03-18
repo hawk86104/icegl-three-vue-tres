@@ -38,7 +38,7 @@ const shader = {
 	color: props.color,
 	opacity: props.opacity,
 	transparent: true,
-	depthWrite: true,
+	depthWrite: false,
 	depthTest: true,
 	side: DoubleSide,
 	vertexShader: `
