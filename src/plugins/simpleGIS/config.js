@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-02-23 16:40:14
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-03-12 10:45:49
+ * @LastEditTime: 2024-03-18 10:08:47
  */
 
 export default {
@@ -32,6 +32,6 @@ export default {
 			"src": "plugins/simpleGIS/preview/renderer3DTiles.png", "type": "img", "name": "renderer3DTiles", "title": "3DTiles展示",
 			referenceSource: { title: 'nasa-ammos', url: 'https://nasa-ammos.github.io/3DTilesRendererJS/' }
 		},
-		{ "src": "plugins/simpleGIS/preview/mapBuildings.png", "type": "img", "name": "mapBuildings", "title": "地图和3DTiles结合" },
+		{ "src": "plugins/simpleGIS/preview/mapBuildings.gif", "type": "img", "name": "mapBuildings", "title": "地图和3DTiles结合" },
 	]
 }

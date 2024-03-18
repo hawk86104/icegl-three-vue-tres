@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-10-16 10:53:09
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-03-12 09:39:34
+ * @LastEditTime: 2024-03-18 10:06:11
  */
 // import { resolve } from 'path';
 import { join } from 'path';
@@ -45,16 +45,16 @@ export default defineBuildConfig({
             }),
             glsl()
         ],
-        // server: {
-        //     host: "0.0.0.0",
-        //     proxy: {
-        //         '/cosv2': {
-        //             target: 'https://opensource-1314935952.cos.ap-nanjing.myqcloud.com',
-        //             changeOrigin: true,
-        //             rewrite: (path) => path.replace(/^\/cosv2/, '')
-        //         },
-        //     },
-        // },
+        server: {
+            // host: "0.0.0.0",
+            //     proxy: {
+            //         '/cosv2': {
+            //             target: 'https://opensource-1314935952.cos.ap-nanjing.myqcloud.com',
+            //             changeOrigin: true,
+            //             rewrite: (path) => path.replace(/^\/cosv2/, '')
+            //         },
+            //     },
+        },
     },
     alias: { PLS: join(__dirname, './src/plugins') },
     // { find: 'pls', replacement: resolve(__dirname, './src/plugins') },

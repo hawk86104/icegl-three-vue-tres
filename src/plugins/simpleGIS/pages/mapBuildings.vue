@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-02-29 18:51:13
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-03-18 08:55:05
+ * @LastEditTime: 2024-03-18 09:03:11
 -->
 
 <template>
@@ -17,9 +17,10 @@
 			<tileMapBuildingsMesh :bbox="[104.955976, 20.149765, 120.998419, 30.528687]" :mapCenter="mapCenter"
 				:camera="camera" />
 		</Suspense>
-		<radraA color="#00c0ff" :radius="300" :size="300" :position="[buildsPosition[0], 8, -buildsPosition[1]]" />
-		<radraB :position="[buildsPosition[0] + 700, 10, -buildsPosition[1] + 300]" color="#ffff00" :height="180"
-			:maxRadius="400" />
+
+		<Suspense>
+			<mapBuildingsMoreMeshes :cPosition="buildsPosition" />
+		</Suspense>
 
 		<TresGridHelper :args="[10000, 10]" />
 		<TresAxesHelper :args="[100000]" />
@@ -32,8 +33,8 @@ import { reactive } from 'vue'
 import { TresCanvas } from '@tresjs/core'
 import * as THREE from 'three'
 import { tilesBuildings, tileMapBuildingsMesh } from 'PLS/simpleGIS'
-import { radraA, radraB } from 'PLS/digitalCity'
 import { lonLatToUtm } from '../lib/threeSatelliteMap/index'
+import mapBuildingsMoreMeshes from '../components/mapBuildingsMoreMeshes.vue'
 
 
 // const wud = utmToLonLat(185500.52598346426, 2494899.945635518)
