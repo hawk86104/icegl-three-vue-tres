@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-02-26 18:58:32
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-03-18 08:05:52
+ * @LastEditTime: 2024-03-18 15:03:46
  */
 import { Box3Helper, BufferGeometry, Mesh, MeshBasicMaterial, MeshStandardMaterial, Texture, SRGBColorSpace, ShaderMaterial, Matrix4 } from 'three';
 import { TerrainMesh } from './TerrainMesh';
@@ -114,6 +114,7 @@ class TerrainMeshProvider implements Provider<Mesh> {
                 // side: 2,
                 wireframe: wireframe,
                 depthTest: true,
+                depthWrite: false,
                 //开启多边形偏移
                 polygonOffset: false,
                 //当两个参数都为负值（深度减小）时，网格将被拉向摄影机（因此，位于前面）。
@@ -171,6 +172,8 @@ class TerrainMeshProvider implements Provider<Mesh> {
         geometry.boundingBox!.getCenter(mesh.center);
         geometry.center();
         geometry.computeBoundingSphere();
+
+        geometry.computeBoundsTree()
 
         mesh.position.copy(mesh.center);
 

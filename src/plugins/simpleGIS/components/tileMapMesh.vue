@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-02-26 18:58:32
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-03-18 08:34:08
+ * @LastEditTime: 2024-03-18 15:16:07
 -->
 <template>
 	<primitive :object="map" :rotation="[-Math.PI / 2, 0, 0]" />
@@ -27,7 +27,6 @@ const props = withDefaults(defineProps<{
 	monochrome?: string
 	isMonochrome?: boolean
 	mapCenter: Array<number>
-	camera: THREE.PerspectiveCamera
 }>(), {
 	bbox: [104.955976, 20.149765, 120.998419, 30.528687],
 	maxZoom: 20,
@@ -150,6 +149,11 @@ onLoop(() => {
 		renderer.value.render(scene.value, camera)
 	}
 
+})
+
+
+defineExpose({
+	camera, map
 })
 
 </script>

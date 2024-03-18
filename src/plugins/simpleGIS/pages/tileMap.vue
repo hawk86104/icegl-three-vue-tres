@@ -4,30 +4,33 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-02-24 10:03:05
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-03-16 14:35:45
+ * @LastEditTime: 2024-03-18 15:18:44
 -->
 <template>
 	<TresCanvas v-bind="state" window-size>
 		<Suspense>
-			<tileMapMesh :bbox="[104.955976, 20.149765, 120.998419, 30.528687]" v-bind="tileMapState" />
+			<tileMapMesh v-bind="tileMapState" ref="tileMapMeshRef" :bbox="[104.955976, 20.149765, 120.998419, 30.528687]" />
 		</Suspense>
 	</TresCanvas>
+	<raycasterEvent :tileMapRef="tileMapMeshRef" />
 </template>
 
 
 <script setup lang="ts">
-import { reactive } from 'vue'
+import { reactive, shallowRef } from 'vue'
 import { TresCanvas } from '@tresjs/core'
 import * as THREE from 'three'
 import { Pane } from 'tweakpane'
 import tileMapMesh from '../components/tileMapMesh.vue'
 import { lonLatToWebMerctor } from '../lib/threeSatelliteMap/index'
+import raycasterEvent from '../components/raycasterEvent.vue'
 
 //const mapCenter = webMercatorToLonLat(13222524.44100642, 3765560.203675016)
 const positionUtm = lonLatToWebMerctor(118.779958, 32.017136)
 
 const mapCenter = [positionUtm[0], positionUtm[1], 5000]
 
+const tileMapMeshRef = shallowRef()
 const tileMapState = reactive({
 	opposite: true,
 	genBright: 1.3,

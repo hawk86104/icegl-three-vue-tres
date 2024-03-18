@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-02-29 10:48:53
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-03-18 08:52:23
+ * @LastEditTime: 2024-03-18 15:31:17
 -->
 <template>
 	<primitive :object="map" :rotation="[-Math.PI / 2, 0, 0]" />
@@ -107,4 +107,7 @@ onLoop(() => {
 
 })
 
+defineExpose({
+	camera: props.camera, map
+})
 </script>
