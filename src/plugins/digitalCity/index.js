@@ -15,5 +15,6 @@ import fireA from './components/fire/fireA.vue'
 import fireB from './components/fire/fireB.vue'
 import smokeA from './components/smoke/smokeA.vue'
 import rippleMesh from './components/fence/rippleMesh.vue'
+import roadLightByLonLat from './components/roads/roadLightByLonLat.vue'
 
-export { radraA, radraB, precipitation, cloudMesh, markA, fireA, fireB, smokeA, rippleMesh }
+export { radraA, radraB, precipitation, cloudMesh, markA, fireA, fireB, smokeA, rippleMesh, roadLightByLonLat }

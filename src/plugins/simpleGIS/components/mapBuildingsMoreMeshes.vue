@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-03-18 10:12:36
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-03-18 16:19:07
+ * @LastEditTime: 2024-03-18 20:47:48
 -->
 <template>
 	<radraA color="#00c0ff" :radius="300" :size="300" :position="[cPosition[0], 8, -cPosition[1]]" />
@@ -32,8 +32,8 @@
 	</Suspense>
 
 	<Suspense>
-		<precipitation :speed="12" :size="20" :count="26000" color="#fff" type="snow"
-			:position="[cPosition[0], 0, -cPosition[1]]" :areaX="6000" :areaY="3000" :areaZ="6000" />
+		<precipitation :speed="12" :size="20" :count="20000" color="#fff" type="snow"
+			:position="[cPosition[0], 300, -cPosition[1]]" :areaX="5000" :areaY="600" :areaZ="5000" />
 	</Suspense>
 
 	<Suspense>
@@ -43,11 +43,16 @@
 	<rippleMesh :position-y="6"
 		:positionSrc="[{ x: p1[0], y: -p1[1] }, { x: p1[0], y: -p2[1] }, { x: p2[0], y: -p2[1] }, { x: p2[0], y: -p1[1] }, { x: p1[0], y: -p1[1] }]"
 		:height="220" color='#00ffdd' />
+
+	<Suspense>
+		<roadLightByLonLat :position="[500, 0, 340]" :radius="5.0"
+			geoJson="plugins/digitalCity/geojson/shenzhen2.geojson" />
+	</Suspense>
 </template>
 
 <script setup lang="ts">
 import { lonLatToUtm } from '../lib/threeSatelliteMap/index'
-import { radraA, radraB, precipitation, cloudMesh, markA, fireA, fireB, smokeA, rippleMesh } from 'PLS/digitalCity'
+import { radraA, radraB, precipitation, cloudMesh, markA, fireA, fireB, smokeA, rippleMesh, roadLightByLonLat } from 'PLS/digitalCity'
 
 const props = withDefaults(defineProps<{
 	cPosition: Array<number>
