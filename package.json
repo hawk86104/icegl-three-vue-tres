@@ -46,6 +46,7 @@
     "compressing": "^1.10.0",
     "core-js": "3.35.1",
     "d3-geo": "^3.1.0",
+    "echarts": "^5.5.0",
     "gl-matrix": "^3.4.3",
     "gsap": "3.12.5",
     "heatmap.js-fix": "^1.0.0",

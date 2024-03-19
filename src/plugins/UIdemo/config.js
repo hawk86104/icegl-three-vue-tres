@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-03-12 11:16:41
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-03-12 15:08:10
+ * @LastEditTime: 2024-03-19 08:32:31
  */
 export default {
 	"name": "UIdemo",
@@ -16,10 +16,11 @@ export default {
 	"state": "active",
 	"require": [],
 	"creatTime": "2024-01-12",
-	"updateTime": "2024-03-11",
+	"updateTime": "2024-03-19",
 	"preview": [
 		{ "src": "plugins/UIdemo/preview/divSample.png", "type": "img", "name": "divSample", "title": "简单DIV" },
 		{ "src": "plugins/UIdemo/preview/divIllustrate.png", "type": "img", "name": "divIllustrate", "title": "DIV说明样例" },
+		{ "src": "plugins/UIdemo/preview/echartSample.png", "type": "img", "name": "echartSample", "title": "Echart表格样例" },
 		{ "src": "plugins/UIdemo/preview/sizeMark.png", "type": "img", "name": "sizeMark", "title": "尺寸样式" },
 		{
 			"src": "plugins/UIdemo/preview/scrollPartical.png", "type": "img", "name": "scrollPartical", "title": "滚动粒子",

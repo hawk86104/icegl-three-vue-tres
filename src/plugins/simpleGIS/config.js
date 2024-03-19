@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-02-23 16:40:14
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-03-18 10:08:47
+ * @LastEditTime: 2024-03-19 08:32:13
  */
 
 export default {
@@ -17,7 +17,7 @@ export default {
 	"state": "active",
 	"require": [],
 	"creatTime": "2024-02-12",
-	"updateTime": "2024-03-10",
+	"updateTime": "2024-03-19",
 	"preview": [
 		{ "src": "plugins/simpleGIS/preview/chinaMap.png", "type": "img", "name": "chinaMap", "title": "中国地图展示" },
 		{
