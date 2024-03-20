@@ -8,7 +8,7 @@
 -->
 <template>
 	<div v-if="!hasFinishLoading"
-		class="absolute bg-grey-600 t-0 l-0 w-full h-full z-20 flex justify-center items-center text-black font-mono bg-black">
+		class="absolute bg-grey-600 t-0 l-0 w-full h-full z-999999 flex justify-center items-center text-black font-mono bg-black">
 		<div class=" text-white">
 			<div class="g-container">
 				<div class="g-circle"></div>

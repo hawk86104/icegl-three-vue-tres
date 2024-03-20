@@ -34,6 +34,7 @@ let bloomPass = null as any
 const darkMaterial = new MeshBasicMaterial({ color: 'black' })
 watchEffect(() => {
 	if (camera.value) {
+		renderer.value.setPixelRatio(window.devicePixelRatio)
 		scene.value.add(lineGroup)
 		const { finalComposer: F,
 			effectComposer: B,

@@ -10,7 +10,7 @@
 	<!-- <Transition name="fade-overlay" enter-active-class="opacity-1 transition-opacity duration-100"
 		leave-active-class="opacity-0 transition-opacity duration-200"> -->
 	<div v-if="!hasFinishLoading"
-		class="absolute bg-grey-600 t-0 l-0 w-full h-full z-20 flex justify-center items-center text-black font-mono bg-black">
+		class="absolute bg-grey-600 t-0 l-0 w-full h-full z-999999 flex justify-center items-center text-black font-mono bg-black">
 		<div class="w-200px text-white">
 			载入中... {{ progress }} %
 			<LoadingOutlined class="text-yellow" />

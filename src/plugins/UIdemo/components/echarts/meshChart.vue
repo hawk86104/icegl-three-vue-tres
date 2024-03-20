@@ -4,12 +4,13 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-03-19 16:05:04
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-03-19 18:15:58
+ * @LastEditTime: 2024-03-20 08:34:26
 -->
 <script lang="ts" setup>
 import * as echarts from "echarts"
 import * as THREE from "three"
 import { createVNode, render } from 'vue'
+import { useRenderLoop } from '@tresjs/core'
 
 const width = 1024
 const height = 768
@@ -22,6 +23,9 @@ const option = {
 	legend: {
 		top: 'bottom',
 		padding: [0, 0, 30, 0]
+	},
+	tooltip: {
+		trigger: 'item'
 	},
 	series: [
 		{
@@ -47,9 +51,37 @@ const option = {
 	]
 }
 pieChart.setOption(option)
+let isFinished = false
 const chartTexture = new THREE.CanvasTexture(chartNode.el)
 pieChart.on('finished', () => {
+	isFinished = true
 	chartTexture.needsUpdate = true
+})
+
+const { onLoop } = useRenderLoop()
+const dataLength = option.series[0].data.length
+let currentIndex = 0
+let deltaCount = 0
+onLoop(() => {
+	if (isFinished && deltaCount++ % 60 === 0) {
+		pieChart.dispatchAction({
+			type: 'downplay',
+			seriesIndex: 0,
+			dataIndex: currentIndex
+		})
+		currentIndex = (currentIndex + 1) % dataLength
+		pieChart.dispatchAction({
+			type: 'highlight',
+			seriesIndex: 0,
+			dataIndex: currentIndex,
+		})
+		pieChart.dispatchAction({
+			type: 'showTip',
+			seriesIndex: 0,
+			dataIndex: currentIndex
+		})
+		chartTexture.needsUpdate = true
+	}
 })
 </script>
 

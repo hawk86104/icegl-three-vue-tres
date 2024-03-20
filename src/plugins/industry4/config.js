@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-10 16:11:27
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-01-05 20:57:24
+ * @LastEditTime: 2024-03-20 10:41:36
  */
 
 export default {
@@ -16,9 +16,11 @@ export default {
 	"website": "https://gitee.com/hawk86104",
 	"state": "active",
 	"require": [],
+	"creatTime": "2023-11-12",
+	"updateTime": "2024-03-20",
 	"preview": [
 		{ "src": "plugins/industry4/preview/deviceLight.png", "type": "img", "name": "deviceLight", "title": "设备发光" },
-		{ "src": "plugins/industry4/preview/deviceLightReflector.png", "type": "img", "name": "deviceLightReflector", "title": "设备发光+镜面" },
+		{ "src": "plugins/industry4/preview/deviceLightReflector.png", "type": "img", "name": "deviceLightReflector", "title": "设备发光+镜面+表格说明" },
 		{ "src": "plugins/industry4/preview/planeClipping.png", "type": "img", "name": "planeClipping", "title": "飞机剖面" },
 		// { "src": "plugins/industry4/preview/deviceLight.png", "type": "img", "name": "deviceLightByComposerTres", "title": "发光后期useTres" },
 	]
