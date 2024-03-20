@@ -4,11 +4,11 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-03-13 18:46:19
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-03-13 19:44:52
+ * @LastEditTime: 2024-03-20 10:14:37
 -->
 <template>
 	<div v-if="!hasFinishLoading"
-		class="absolute bg-grey-600 t-0 l-0 w-full h-full z-20 flex justify-center items-center text-black font-mono bg-black">
+		class="absolute bg-grey-600 t-0 l-0 w-full h-full z-999999 flex justify-center items-center text-black font-mono bg-black">
 		<div class=" text-white">
 			<div class="stars flex-wrap">
 				<span v-for="index in 12" :key="index" :style="`--i: ${index + 1}`">

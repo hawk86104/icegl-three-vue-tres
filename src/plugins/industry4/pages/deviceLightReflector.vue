@@ -4,19 +4,23 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-18 08:51:19
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-03-13 20:56:54
+ * @LastEditTime: 2024-03-20 10:26:59
 -->
 <template>
 	<loading />
 	<TresCanvas v-bind="state" window-size>
-		<TresPerspectiveCamera :position="[5, 5, 5]" :fov="45" :near="1" :far="1000" />
+		<TresPerspectiveCamera :position="[-4, 5, 4]" :fov="45" :near="1" :far="1000" />
 		<OrbitControls v-bind="controlsState" />
 		<Suspense>
 			<device v-bind="deviceState" />
 		</Suspense>
 		<Suspense>
-			<reflectorShaderMesh v-bind="configState" :position="[0, -1, 0]" />
+			<reflectorShaderMesh v-bind="configState" :position="[0, 0, 0]" />
 		</Suspense>
+
+		<divContent />
+		<useHtmlComChart :position="[-0.5, -0.001, 2.25]" :rotation="[-Math.PI / 2, 0, -Math.PI / 2]" />
+		<!-- <divChart :position="[-0.5, -0.001, 1.75]" :rotation="[-Math.PI / 2, 0, -Math.PI / 2]" /> -->
 	</TresCanvas>
 </template>
 
@@ -28,6 +32,9 @@ import { TresCanvas } from '@tresjs/core'
 import { OrbitControls } from '@tresjs/cientos'
 import reflectorShaderMesh from 'PLS/floor/components/reflectorShaderMesh.vue'
 import { randomLoading as loading } from 'PLS/UIdemo'
+import divContent from 'PLS/industry4/components/divContent.vue'
+// import divChart from 'PLS/industry4/components/divChart.vue'
+import useHtmlComChart from 'PLS/industry4/components/useHtmlComChart.vue'
 import device from '../components/device.vue'
 
 const configState = reactive({
