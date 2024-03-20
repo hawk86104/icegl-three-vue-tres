@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-09 09:33:51
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-03-18 17:40:52
+ * @LastEditTime: 2024-03-20 17:43:01
  */
 import { BufferAttribute, Box3, Vector3, RepeatWrapping, Color, Mesh, PlaneGeometry, Vector2, DoubleSide, Material, MeshBasicMaterial, BufferGeometry, Matrix4 } from 'three'
 
@@ -15,6 +15,7 @@ import { computeBoundsTree, disposeBoundsTree, acceleratedRaycast } from 'three-
 import { useTexture } from '@tresjs/core'
 import { Water } from 'three/addons/objects/Water2'
 
+//重置UV
 export const resetUV = (geometry) => {
 	geometry.computeBoundingBox()
 	const { max, min } = geometry.boundingBox;
