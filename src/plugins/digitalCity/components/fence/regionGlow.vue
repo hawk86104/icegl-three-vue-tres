@@ -4,15 +4,22 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-02-02 10:15:51
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-03-20 17:55:51
+ * @LastEditTime: 2024-03-21 08:42:27
 -->
 <template>
-	<primitive :object="fakeGlowMesh" :renderOrder="9999" :rotation-x="Math.PI / 2" />
+	<TresGroup>
+		<primitive :object="fakeGlowMesh" :renderOrder="9999" :rotation-x="Math.PI / 2" />
+		<primitive :object="line2Mesh" :renderOrder="9999" :rotation-x="Math.PI / 2" />
+	</TresGroup>
 </template>
 
 <script setup lang="ts">
 import * as THREE from 'three'
+import { Line2 } from 'three/addons/lines/Line2.js'
+import { LineGeometry } from 'three/addons/lines/LineGeometry.js'
+import { LineMaterial } from 'three/addons/lines/LineMaterial.js'
 import { resetUV } from '../../common/utils'
+import { watchEffect } from 'vue'
 
 const props = withDefaults(
 	defineProps<{
@@ -44,13 +51,13 @@ const material = new THREE.ShaderMaterial({
 		uniform vec3 color;
     void main() {
 			// 计算距离四条边的最小距离
-        float distance = min(min(vUv.x, 1.0 - vUv.x), min(vUv.y, 1.0 - vUv.y));
+        float distance = max(max(vUv.x, -vUv.x), max(vUv.y, -vUv.y));
 
         // 将距离映射到透明度（从边缘到中心逐渐变透明）
-        float alpha = smoothstep(0.0, 0.1, distance);
+        float alpha = smoothstep(0.1, 0.9, distance*1.1);
 
         // 设置最终颜色和透明度
-        gl_FragColor = vec4(color, 1.0-alpha);
+        gl_FragColor = vec4(color, alpha);
     }
   `,
 	transparent: true,
@@ -66,10 +73,7 @@ const material = new THREE.ShaderMaterial({
 })
 
 let geometry = new THREE.ShapeGeometry(shape)
-// let geometry = new THREE.PlaneGeometry(50, 50)
-debugger
-resetUV(geometry)
-debugger
+resetUV(geometry, true)
 const fakeGlowMesh = new THREE.Mesh(
 	geometry,
 	material
@@ -80,6 +84,17 @@ const fakeGlowMesh = new THREE.Mesh(
 	// }),
 )
 
+const linePoints = shape.getPoints()
+const lineGeometry = new LineGeometry()
+lineGeometry.setPositions(linePoints.flatMap(p => [p.x, p.y, 0]))
 
+var lineMaterial = new LineMaterial({
+	color: new THREE.Color(props.color), linewidth: 0.002
+})
+const line2Mesh = new Line2(lineGeometry, lineMaterial)
 
+watchEffect(() => {
+	material.uniforms.color.value = new THREE.Color(props.color)
+	lineMaterial.color = new THREE.Color(props.color)
+})
 </script>
