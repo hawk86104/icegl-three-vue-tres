@@ -8,7 +8,7 @@
 -->
 
 <script setup lang="ts">
-import { TresCanvas } from '@tresjs/core'
+
 import { OrbitControls } from '@tresjs/cientos'
 import divS1 from '../components/divS1.vue'
 import divS2 from '../components/divS2.vue'
@@ -28,5 +28,3 @@ import divSprite from '../components/divSprite.vue'
 		</TresMesh>
 	</TresCanvas>
 </template>
-
-

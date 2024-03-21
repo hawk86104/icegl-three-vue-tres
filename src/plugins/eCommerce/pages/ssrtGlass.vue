@@ -36,7 +36,7 @@
 
 import { randomLoading as loading } from 'PLS/UIdemo'
 import * as THREE from "three"
-import { TresCanvas } from '@tresjs/core'
+
 import { OrbitControls } from '@tresjs/cientos'
 import whiteFloorMesh from 'PLS/floor/components/whiteFloorMesh.vue'
 import skyBox from 'PLS/skyBox/components/skyBoxAmesh.vue'

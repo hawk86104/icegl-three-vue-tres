@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-10-23 15:48:35
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-10-25 14:40:05
+ * @LastEditTime: 2024-03-22 07:48:29
 -->
 <script setup lang="ts">
 import { ref, watch, defineExpose, watchEffect } from 'vue';
@@ -125,7 +125,6 @@ watchEffect(() => {
 		// 	console.log('props.radius', rotateX.value)
 		// 	rotateX.value += 0.01
 
-		// 	debugger
 		// const rotateMatrix = new Matrix4().makeRotationX(-Math.PI / 180 * 90)
 		// TresCircleGeometryRef.value.applyMatrix4(rotateMatrix)
 		// TresCircleGeometryRef.value.rotateY(-Math.PI / 180 * 90)

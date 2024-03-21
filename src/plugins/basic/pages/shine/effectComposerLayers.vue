@@ -19,7 +19,7 @@
 </template>
 
 <script setup lang="ts">
-import { TresCanvas } from '@tresjs/core'
+
 import { OrbitControls } from '@tresjs/cientos'
 import ecLayers from '../../components/ecLayers.vue'
 import { watchEffect, ref } from 'vue'

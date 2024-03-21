@@ -29,7 +29,7 @@
 
 <script setup lang="ts">
 
-import { TresCanvas } from '@tresjs/core'
+
 import { OrbitControls } from '@tresjs/cientos'
 import buildingsMode from '../components/newBuildingsModel/buildingsMode.vue'
 import roadLight from '../components/roads/roadLight.vue'

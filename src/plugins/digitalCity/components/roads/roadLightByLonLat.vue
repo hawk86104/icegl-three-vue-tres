@@ -1,3 +1,11 @@
+<!--
+ * @Description: 
+ * @Version: 1.668
+ * @Autor: 地虎降天龙
+ * @Date: 2024-03-18 20:49:45
+ * @LastEditors: 地虎降天龙
+ * @LastEditTime: 2024-03-22 07:46:54
+-->
 <script setup lang="ts">
 import { useRenderLoop, useTexture } from '@tresjs/core'
 import { CatmullRomCurve3, Vector3, RepeatWrapping, BackSide } from 'three'
@@ -48,9 +56,8 @@ for (var i = 0; i < linePrimary.length; i++) {
 	curve.push({ cr3: new CatmullRomCurve3(points), color: oneColor })
 }
 
-debugger
 const { onLoop } = useRenderLoop()
-onLoop(({ delta }) => {
+onLoop(() => {
 	pTexture.offset.x -= Math.random() / 20 * props.speed
 })
 

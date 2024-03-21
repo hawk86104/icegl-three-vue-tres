@@ -1,4 +1,3 @@
-
 <script setup lang="ts">
 import { useRenderLoop } from '@tresjs/core'
 // import { CustomShaderMaterial } from '@tresjs/cientos'
@@ -20,7 +19,6 @@ const props = withDefaults(defineProps<{
 	gradient: true
 })
 const CITY_UNTRIANGULATED = props.model.city
-//debugger
 props.model.model.children[0].material = new THREE.MeshBasicMaterial({ color: '#ffff00' })
 
 CITY_UNTRIANGULATED.renderOrder = 1001

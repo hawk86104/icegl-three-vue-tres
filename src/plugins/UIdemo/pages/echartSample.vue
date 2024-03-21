@@ -8,7 +8,7 @@
 -->
 
 <script setup lang="ts">
-import { TresCanvas } from '@tresjs/core'
+
 import { OrbitControls } from '@tresjs/cientos'
 
 // import debugChart from '../components/echarts/debugChart.vue'

@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-10-17 09:35:18
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-10-27 17:38:35
+ * @LastEditTime: 2024-03-22 07:48:10
 -->
 <script setup lang="ts">
 import { onMounted, onUnmounted, inject, defineExpose, ref } from 'vue'
@@ -22,7 +22,6 @@ onUnmounted(() => {
 
 })
 onMounted(() => {
-	// debugger
 	// const showbuildingsLines = inject('showbuildingsLines')
 })
 // const count = ref(123456)

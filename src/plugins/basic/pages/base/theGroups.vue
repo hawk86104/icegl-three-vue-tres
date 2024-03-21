@@ -7,7 +7,7 @@
  * @LastEditTime: 2023-11-03 16:35:27
 -->
 <script setup lang="ts">
-import { TresCanvas, useRenderLoop } from '@tresjs/core'
+import { useRenderLoop } from '@tresjs/core'
 import { ref } from 'vue'
 import { OrbitControls } from '@tresjs/cientos'
 

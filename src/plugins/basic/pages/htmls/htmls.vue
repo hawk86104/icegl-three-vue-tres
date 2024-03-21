@@ -9,7 +9,7 @@
 
 <script setup lang="ts">
 import { ref, reactive } from 'vue'
-import { TresCanvas } from '@tresjs/core'
+
 import { BasicShadowMap, SRGBColorSpace, NoToneMapping } from 'three'
 
 import { OrbitControls, Html } from '@tresjs/cientos'

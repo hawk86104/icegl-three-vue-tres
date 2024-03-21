@@ -8,7 +8,8 @@
 -->
 <template>
     <TresCanvas v-bind="state" window-size>
-        <TresPerspectiveCamera ref="perspectiveCameraRef" :position="[600, 750, -1221]" :fov="45" :near="1" :far="10000" />
+        <TresPerspectiveCamera ref="perspectiveCameraRef" :position="[600, 750, -1221]" :fov="45" :near="1"
+            :far="10000" />
         <OrbitControls />
         <TresAmbientLight color="#ffffff" />
         <TresDirectionalLight :position="[400, 400, 400]" :intensity="1" color="red" />
@@ -19,7 +20,7 @@
 </template>
 
 <script setup lang="ts">
-import { TresCanvas, useRenderLoop, useTresContextProvider, useTresContext, useTexture } from '@tresjs/core';
+import { useRenderLoop, useTresContextProvider, useTresContext, useTexture } from '@tresjs/core';
 import { OrbitControls } from '@tresjs/cientos';
 import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass';
 import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass';

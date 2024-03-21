@@ -22,7 +22,7 @@
 
 <script setup lang="ts">
 import { reactive, watchEffect } from 'vue'
-import { TresCanvas } from '@tresjs/core'
+
 import { OrbitControls, Environment } from '@tresjs/cientos'
 import * as THREE from 'three'
 import { Pane } from 'tweakpane'

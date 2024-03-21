@@ -7,7 +7,7 @@
  * @LastEditTime: 2023-11-06 10:10:51
 -->
 <script setup lang="ts">
-import { TresCanvas } from '@tresjs/core'
+
 import { BasicShadowMap, NoToneMapping } from 'three'
 import { PointerLockControls, KeyboardControls, Stats } from '@tresjs/cientos'
 
@@ -33,4 +33,3 @@ const isActive = (state: boolean) => console.log(state)
     <TresAmbientLight :intensity="1" />
   </TresCanvas>
 </template>
-

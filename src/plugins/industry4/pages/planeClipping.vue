@@ -25,7 +25,7 @@
 
 <script setup lang="ts">
 import { shallowRef, watchEffect, reactive } from 'vue'
-import { TresCanvas } from '@tresjs/core'
+
 import { OrbitControls } from '@tresjs/cientos'
 import reflectorMesh from 'PLS/floor/components/reflectorMesh.vue'
 import { randomLoading as loading } from 'PLS/UIdemo'

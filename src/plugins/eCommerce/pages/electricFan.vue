@@ -4,11 +4,10 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-01-16 08:58:24
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-03-13 20:51:03
+ * @LastEditTime: 2024-03-22 07:43:30
 -->
 <script setup lang="ts">
 import { OrbitControls } from '@tresjs/cientos'
-import { TresCanvas } from "@tresjs/core"
 import { reactive, ref } from "vue"
 import { BasicShadowMap, SRGBColorSpace } from 'three'
 import eFan from '../components/eFan.vue'

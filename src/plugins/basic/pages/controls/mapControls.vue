@@ -4,10 +4,9 @@
  * @Autor: Hawk
  * @Date: 2023-10-11 10:51:25
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-11-06 10:00:17
+ * @LastEditTime: 2024-03-22 07:36:42
 -->
 <script setup lang="ts">
-import { TresCanvas } from '@tresjs/core'
 import { MapControls, Sphere } from '@tresjs/cientos'
 import { SRGBColorSpace, NoToneMapping } from 'three'
 

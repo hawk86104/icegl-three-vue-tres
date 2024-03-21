@@ -1,6 +1,7 @@
 <template>
     <TresCanvas v-bind="state" window-size>
-        <TresPerspectiveCamera ref="perspectiveCameraRef" :position="[300, 250, -122]" :fov="45" :near="1" :far="10000" />
+        <TresPerspectiveCamera ref="perspectiveCameraRef" :position="[300, 250, -122]" :fov="45" :near="1"
+            :far="10000" />
         <OrbitControls v-bind="controlsState" />
         <TresAmbientLight color="#ffffff" />
         <TresDirectionalLight :position="[100, 100, 0]" :intensity="0.5" color="#ffffff" />
@@ -12,7 +13,7 @@
 
 <script setup lang="ts">
 import { reactive, onMounted } from 'vue';
-import { TresCanvas, useRenderLoop, useTexture } from '@tresjs/core';
+import { useRenderLoop, useTexture } from '@tresjs/core';
 import { OrbitControls } from '@tresjs/cientos';
 import { DoubleSide, Mesh, Vector2, BoxGeometry, Group, PlaneGeometry, TorusKnotGeometry } from 'three';
 import ShaderToyMaterial from '../common/ShaderToyMaterial.js';

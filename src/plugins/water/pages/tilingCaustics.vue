@@ -1,4 +1,3 @@
-
 <template>
 	<TresCanvas v-bind="gl" window-size>
 		<TresPerspectiveCamera :position="[10, 10, 10]" />
@@ -10,7 +9,7 @@
 </template>
 
 <script setup lang="ts">
-import { TresCanvas } from '@tresjs/core'
+
 import { OrbitControls } from '@tresjs/cientos'
 import { reactive } from 'vue';
 import tilingCaustics from '../components/tilingCaustics.vue'

@@ -20,7 +20,8 @@
 		</TresMesh>
 
 		<Suspense>
-			<skyBox texture="https://cdn.polyhaven.com/asset_img/primary/kloofendal_48d_partly_cloudy_puresky.png?width=1920" />
+			<skyBox
+				texture="https://cdn.polyhaven.com/asset_img/primary/kloofendal_48d_partly_cloudy_puresky.png?width=1920" />
 			<!-- ./plugins/skyBox/image/workshop_blur.jpg -->
 		</Suspense>
 	</TresCanvas>
@@ -29,7 +30,7 @@
 
 <script setup lang="ts">
 import * as THREE from "three"
-import { TresCanvas } from '@tresjs/core'
+
 import { OrbitControls, Box } from '@tresjs/cientos'
 
 import skyBox from 'PLS/skyBox/components/skyBoxAmesh.vue'

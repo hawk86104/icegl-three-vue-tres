@@ -7,7 +7,7 @@
  * @LastEditTime: 2024-03-13 20:42:34
 -->
 <script setup lang="ts">
-import { TresCanvas } from '@tresjs/core'
+
 import { BasicShadowMap, SRGBColorSpace, NoToneMapping } from 'three'
 import { OrbitControls } from '@tresjs/cientos'
 import { randomLoading as loading } from 'PLS/UIdemo'

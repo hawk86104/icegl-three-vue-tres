@@ -20,7 +20,7 @@
 </template>
 
 <script setup lang="ts">
-import { TresCanvas } from '@tresjs/core'
+
 import { OrbitControls } from '@tresjs/cientos'
 import MaskPass from '../../components/MaskPass.vue'
 

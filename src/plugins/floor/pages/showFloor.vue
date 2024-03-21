@@ -29,7 +29,7 @@
 
 
 <script setup lang="ts">
-import { TresCanvas } from '@tresjs/core'
+
 import { OrbitControls } from '@tresjs/cientos'
 import sfm from '../components/sciFiModular.vue'
 

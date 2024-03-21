@@ -9,7 +9,7 @@
 <!-- eslint-disable no-console -->
 <script setup lang="ts">
 import { reactive, shallowRef } from 'vue'
-import { TresCanvas } from '@tresjs/core'
+
 import { CameraControls, useTweakPane } from '@tresjs/cientos'
 import { MathUtils, BasicShadowMap, SRGBColorSpace, NoToneMapping } from 'three'
 

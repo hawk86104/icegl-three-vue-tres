@@ -35,7 +35,6 @@ showbuildingsLines.value = true
 
 // watchEffect(() => {
 // 	if (pagesShowRef.value) {
-// 		debugger
 // 		pagesShowRef.value.$refs.tcRef.value.context.value.scene.value.fog = true;
 // 	}
 // })

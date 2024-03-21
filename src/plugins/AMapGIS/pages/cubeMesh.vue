@@ -23,7 +23,7 @@
 
 <script setup lang="ts">
 import { reactive } from 'vue'
-import { TresCanvas } from '@tresjs/core'
+
 import mapContainer from "../components/mapContainer.vue"
 import mergeTres from "../components/mergeTres.vue"
 

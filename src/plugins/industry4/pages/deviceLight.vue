@@ -24,7 +24,7 @@
 <script setup lang="ts">
 import { SRGBColorSpace, BasicShadowMap, NoToneMapping } from 'three'
 import { reactive } from 'vue'
-import { TresCanvas } from '@tresjs/core'
+
 import { OrbitControls } from '@tresjs/cientos'
 import { Pane } from 'tweakpane'
 import { randomLoading as loading } from 'PLS/UIdemo'

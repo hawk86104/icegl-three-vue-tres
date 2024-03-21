@@ -8,7 +8,7 @@
 -->
 <script setup>
 import { watchEffect, ref } from 'vue'
-import { TresCanvas, useRenderLoop, useSeek } from '@tresjs/core'
+import { useRenderLoop, useSeek } from '@tresjs/core'
 import { OrbitControls } from '@tresjs/cientos'
 import { Fog, Color } from 'three';
 import { initCountryPosition, addImgEarth, XRayearth } from '../../common/makeList'

@@ -18,7 +18,7 @@
 </template>
 
 <script setup lang="ts">
-import { TresCanvas } from '@tresjs/core'
+
 import { OrbitControls } from '@tresjs/cientos'
 import ecLayerShaderPass from '../../components/ecLayerShaderPass.vue'
 import { watchEffect, ref } from 'vue'

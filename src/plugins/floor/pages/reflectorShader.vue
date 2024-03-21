@@ -25,11 +25,11 @@
 </template>
 
 <script setup lang="ts">
-import { TresCanvas } from '@tresjs/core'
+
 import { OrbitControls, Box } from '@tresjs/cientos'
-import reflectorShaderMesh from '../components/reflectorShaderMesh.vue'
 import { reactive } from 'vue'
 import { Pane } from 'tweakpane'
+import reflectorShaderMesh from '../components/reflectorShaderMesh.vue'
 
 const configState = reactive({
 	reflectivity: 0.49,

@@ -4,11 +4,11 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-01 09:57:06
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-11-02 20:16:28
+ * @LastEditTime: 2024-03-22 07:48:35
 -->
 <script setup lang="ts">
 import { watchEffect, ref } from 'vue'
-import { TresCanvas, useRenderLoop, useTexture } from '@tresjs/core'
+import { useRenderLoop, useTexture } from '@tresjs/core'
 import { OrbitControls } from '@tresjs/cientos'
 import { AdditiveBlending, DoubleSide, Fog, Color } from 'three';
 
@@ -43,7 +43,6 @@ watchEffect(() => {
 		scene.fog = new Fog(0xfff, 100, 1000);
 	}
 	if (quanMeshRef.value) {
-		// debugger
 		// quanMeshRef.value.material.emissive = new Color(0xffffff);
 		// quanMeshRef.value.material.emissiveIntensity = 2;
 	}

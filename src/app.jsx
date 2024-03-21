@@ -4,12 +4,13 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-10-16 10:53:09
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-11-16 15:28:31
+ * @LastEditTime: 2024-03-22 07:36:29
  */
 import { defineRuntimeConfig, useModel } from '@fesjs/fes'
-import { FMenu } from '@fesjs/fes-design';
-import PageLoading from '@/components/pageLoading.vue';
-import UserCenter from '@/components/userCenter.vue';
+import { FMenu } from '@fesjs/fes-design'
+import Tres from '@tresjs/core'
+import PageLoading from '@/components/pageLoading.vue'
+import UserCenter from '@/components/userCenter.vue'
 
 // add by 地虎降天龙
 import 'uno.css';
@@ -38,7 +39,8 @@ export default defineRuntimeConfig({
 });
 
 export function onAppCreated ({ app }) {
-    app.use(FMenu);
+    app.use(FMenu)
+    app.use(Tres)
 }
 
 const findStringBetween = (str) => {

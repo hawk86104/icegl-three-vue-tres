@@ -1,7 +1,7 @@
 <template></template>
 
 <script setup lang="ts">
-import { TresCanvas, useRenderLoop, useTresContext, useTexture } from '@tresjs/core'; //useRenderLoop
+import { useRenderLoop, useTresContext, useTexture } from '@tresjs/core'; //useRenderLoop
 import { OrbitControls } from '@tresjs/cientos';
 import * as THREE from 'three';
 import { postComposer } from '../common/postComposer.js';

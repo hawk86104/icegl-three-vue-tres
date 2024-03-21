@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-02-29 18:51:13
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-03-18 09:03:11
+ * @LastEditTime: 2024-03-22 07:37:49
 -->
 
 <template>
@@ -31,7 +31,6 @@
 
 <script setup lang="ts">
 import { reactive, shallowRef } from 'vue'
-import { TresCanvas } from '@tresjs/core'
 import * as THREE from 'three'
 import { tilesBuildings, tileMapBuildingsMesh } from 'PLS/simpleGIS'
 import { lonLatToUtm } from '../lib/threeSatelliteMap/index'

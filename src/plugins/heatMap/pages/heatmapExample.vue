@@ -8,7 +8,7 @@
 -->
 
 <script setup lang="ts">
-import { TresCanvas, useRenderLoop } from '@tresjs/core'
+import { useRenderLoop } from '@tresjs/core'
 import { OrbitControls } from '@tresjs/cientos'
 import { Pane } from 'tweakpane';
 import { PCFSoftShadowMap, SRGBColorSpace } from 'three'

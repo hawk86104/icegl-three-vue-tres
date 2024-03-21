@@ -33,7 +33,7 @@
 </template>
 
 <script setup lang="ts">
-import { TresCanvas, useTexture } from '@tresjs/core'
+import { useTexture } from '@tresjs/core'
 import { OrbitControls, Box } from '@tresjs/cientos'
 import * as THREE from 'three'
 import { reactive, ref } from 'vue';
@@ -97,4 +97,3 @@ paneControl.addBinding(shineState, 'blending', {
 	},
 })
 </script>
-

@@ -22,7 +22,7 @@
 
 <script setup lang="ts">
 import { reactive, watchEffect, shallowRef } from 'vue'
-import { TresCanvas, useRenderLoop } from '@tresjs/core'
+import { useRenderLoop } from '@tresjs/core'
 import { OrbitControls } from '@tresjs/cientos'
 import tilesMesh from '../components/tilesMesh.vue'
 

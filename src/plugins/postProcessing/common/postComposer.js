@@ -1,6 +1,7 @@
-import { loadShader, processShader } from './utils.js';
 import * as THREE from 'three'
 import copyfs from '../shaders/copy-fs.glsl?raw';
+import { loadShader, processShader } from './utils.js';
+
 class postComposer {
   constructor(renderer, settings) {
     this.width = 1;
@@ -43,21 +44,20 @@ class postComposer {
     };
   }
   //添加后处理通道
-  addPass(shaderName, shaderPass, params, uuid) {
+  addPass (shaderName, shaderPass, params, uuid) {
     this.loadShadervf(shaderPass);
-    var passItem = {
-      shaderName: shaderName,
-      params: params,
-      uuid: uuid,
+    const passItem = {
+      shaderName,
+      params,
+      uuid,
       shader: this.shader
     };
     this.Stack.passItems.push(passItem);
   };
   //移除后处理通道
-  removePass(uuid) {
+  removePass (uuid) {
 
     for (let i = this.Stack.passItems.length - 1; i >= 0; i--) {
-      debugger
       if (this.Stack.passItems[i].uuid === parseInt(uuid)) {
         this.Stack.passItems.splice(i, 1); // 移除满足条件的对象
       }
@@ -66,27 +66,27 @@ class postComposer {
     console.log(this.Stack.passItems);
 
   }
-  CopyPass() {
+  CopyPass () {
 
     this.Pass.call(this);
-    let shader = this.loadShadervf(copyfs);
+    const shader = this.loadShadervf(copyfs);
     // console.log(copyfs);
     // console.log(self.shader);
     return shader;
   }
-  loadShadervf(fs) {
-    var vs = 'varying vec2 vUv; void main() { vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 ); }';
+  loadShadervf (fs) {
+    const vs = 'varying vec2 vUv; void main() { vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 ); }';
     this.shader = processShader(vs, fs);
     //self.mapUniforms( self.shader.uniforms );
     return this.shader;
   };
-  Pass(shaderobj) {
+  Pass (shaderobj) {
 
     this.shader = null;
     this.params = {};
 
   }
-  Reset() {
+  Reset () {
     this.read = this.front;
     this.write = this.back;
 
@@ -94,19 +94,19 @@ class postComposer {
     // this.input = this.read;
 
   };
-  onWindowResize(renderer, camera) {
+  onWindowResize (renderer, camera) {
 
-    var s = 1,
+    const s = 1,
       w = window.innerWidth,
       h = window.innerHeight;
 
     renderer.setSize(s * w, s * h);
     camera.projectionMatrix.makePerspective(70, w / h, camera.near, camera.far);
     this.setSize(w, h);
-    let depthTexture = this.getOfflineTexture(w, h, true);
+    const depthTexture = this.getOfflineTexture(w, h, true);
     return depthTexture;
   }
-  setSize(w, h) {
+  setSize (w, h) {
 
     this.width = w;
     this.height = h;
@@ -116,9 +116,9 @@ class postComposer {
     this.back.setSize(w, h);
 
   };
-  getOfflineTexture(w, h, useRGBA) {
+  getOfflineTexture (w, h, useRGBA) {
 
-    var rtTexture = new THREE.WebGLRenderTarget(w, h, {
+    const rtTexture = new THREE.WebGLRenderTarget(w, h, {
       minFilter: THREE.LinearFilter,
       magFilter: THREE.LinearFilter,
       format: useRGBA ? THREE.RGBAFormat : THREE.RGBFormat
@@ -127,7 +127,7 @@ class postComposer {
     return rtTexture;
 
   };
-  render(scene, camera, keep, output) {
+  render (scene, camera, keep, output) {
 
     // if (this.copyPass.isLoaded()) {
     //   if (keep) this.swapBuffers();
@@ -137,28 +137,28 @@ class postComposer {
     // }
 
   };
-  swapBuffers() {
+  swapBuffers () {
 
     // this.output = this.write;
     // this.input = this.read;
 
-    var t = this.write;
+    const t = this.write;
     this.write = this.read;
     this.read = t;
 
   };
-  pass() {
+  pass () {
 
     for (let index = 0; index < this.Stack.passItems.length; index++) {
-      let pass = this.Stack.passItems[index].shader;
-      let params = this.Stack.passItems[index].params;
+      const pass = this.Stack.passItems[index].shader;
+      const params = this.Stack.passItems[index].params;
       this.renderer.setRenderTarget(this.write);
       if (pass instanceof THREE.ShaderMaterial) {
         this.quad.material = pass;
         this.quad.material.uniforms.tInput.value = this.read.texture;
         this.quad.material.uniforms.resolution.value.set(this.width, this.height);
         this.quad.material.uniforms.time.value = 0.001 * (Date.now() - this.startTime);
-        for (let key in params) {
+        for (const key in params) {
 
           this.quad.material.uniforms[key].value = params[key];
         }
@@ -168,7 +168,7 @@ class postComposer {
     }
   }
 
-  toScreen(scene, camera) {
+  toScreen (scene, camera) {
     this.renderer.setRenderTarget(null);
     this.quad.material = this.copyPass;
     this.quad.material.uniforms.tInput.value = this.read.texture;

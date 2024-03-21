@@ -33,7 +33,7 @@
 <script setup lang="ts">
 import { randomLoading as loading } from 'PLS/UIdemo'
 import { reactive } from 'vue'
-import { TresCanvas } from '@tresjs/core'
+
 import { OrbitControls } from '@tresjs/cientos'
 
 import reflectorShaderMesh from 'PLS/floor/components/reflectorShaderMesh.vue'

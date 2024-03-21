@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-02-02 10:15:51
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-03-21 08:42:27
+ * @LastEditTime: 2024-03-22 07:30:25
 -->
 <template>
 	<TresGroup>
@@ -15,9 +15,9 @@
 
 <script setup lang="ts">
 import * as THREE from 'three'
-import { Line2 } from 'three/addons/lines/Line2.js'
-import { LineGeometry } from 'three/addons/lines/LineGeometry.js'
-import { LineMaterial } from 'three/addons/lines/LineMaterial.js'
+import { Line2 } from 'three/examples/jsm/lines/Line2.js'
+import { LineGeometry } from 'three/examples/jsm/lines/LineGeometry.js'
+import { LineMaterial } from 'three/examples/jsm/lines/LineMaterial.js'
 import { resetUV } from '../../common/utils'
 import { watchEffect } from 'vue'
 
