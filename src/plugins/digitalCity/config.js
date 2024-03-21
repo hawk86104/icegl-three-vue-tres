@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-10-26 09:20:42
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-02-19 16:26:29
+ * @LastEditTime: 2024-03-20 15:04:12
  */
 export default {
 	"name": "digitalCity",
@@ -37,6 +37,7 @@ export default {
 		{ "src": "plugins/digitalCity/preview/buildingsMarkA.png", "type": "img", "name": "buildingsMarkA", "title": "建筑物标记A" },
 		{ "src": "plugins/digitalCity/preview/roadLines.png", "type": "img", "name": "roadLines", "title": "道路飞线" },
 		{ "src": "plugins/digitalCity/preview/fence.png", "type": "img", "name": "fence", "title": "围栏" },
+		{ "src": "plugins/digitalCity/preview/regionGlow.png", "type": "img", "name": "regionGlow", "title": "区域内发光" },
 		{ "src": "plugins/digitalCity/preview/city2.gif", "type": "img", "name": "city2", "title": "城市新模型" },
 	]
 }

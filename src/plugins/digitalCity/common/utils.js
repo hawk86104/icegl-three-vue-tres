@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-09 09:33:51
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-03-18 17:40:52
+ * @LastEditTime: 2024-03-21 08:10:00
  */
 import { BufferAttribute, Box3, Vector3, RepeatWrapping, Color, Mesh, PlaneGeometry, Vector2, DoubleSide, Material, MeshBasicMaterial, BufferGeometry, Matrix4 } from 'three'
 
@@ -15,7 +15,8 @@ import { computeBoundsTree, disposeBoundsTree, acceleratedRaycast } from 'three-
 import { useTexture } from '@tresjs/core'
 import { Water } from 'three/addons/objects/Water2'
 
-export const resetUV = (geometry) => {
+//重置UV 是否从中点 还是左上角的点
+export const resetUV = (geometry, isCenter = false) => {
 	geometry.computeBoundingBox()
 	const { max, min } = geometry.boundingBox;
 	geometry.deleteAttribute('uv')
@@ -23,8 +24,13 @@ export const resetUV = (geometry) => {
 	const roomY = max.y - min.y
 	const PuvList = []
 	for (let i = 0; i < geometry.attributes.position.count; i++) {
-		PuvList.push((geometry.attributes.position.getX(i) - min.x) / roomX)
-		PuvList.push((geometry.attributes.position.getY(i) - min.y) / roomY)
+		if (isCenter) {
+			PuvList.push((geometry.attributes.position.getX(i) - (min.x + max.x) / 2) / roomX)
+			PuvList.push((geometry.attributes.position.getY(i) - (min.y + max.y) / 2) / roomY)
+		} else {
+			PuvList.push((geometry.attributes.position.getX(i) - min.x) / roomX)
+			PuvList.push((geometry.attributes.position.getY(i) - min.y) / roomY)
+		}
 	}
 	const Puvs = new Float32Array(PuvList)
 	geometry.setAttribute('uv', new BufferAttribute(Puvs, 2));
