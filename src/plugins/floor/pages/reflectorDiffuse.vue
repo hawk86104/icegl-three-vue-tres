@@ -25,7 +25,7 @@
 </template>
 
 <script setup lang="ts">
-import { TresCanvas } from '@tresjs/core'
+
 import { OrbitControls, Box, vLightHelper } from '@tresjs/cientos'
 
 import { reactive } from 'vue'

@@ -7,7 +7,7 @@
  * @LastEditTime: 2023-11-05 08:17:12
 -->
 <script setup lang="ts">
-import { TresCanvas } from '@tresjs/core'
+
 import { BasicShadowMap, SRGBColorSpace, NoToneMapping } from 'three'
 import { OrbitControls } from '@tresjs/cientos'
 

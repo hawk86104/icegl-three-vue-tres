@@ -7,7 +7,7 @@
  * @LastEditTime: 2023-11-05 08:55:42
 -->
 <script lang="ts" setup>
-import { TresCanvas } from '@tresjs/core'
+
 import { OrbitControls, Html } from '@tresjs/cientos'
 import { ref } from 'vue'
 import { Pane } from 'tweakpane';

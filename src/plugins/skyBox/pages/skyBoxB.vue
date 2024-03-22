@@ -33,7 +33,7 @@
 
 <script setup lang="ts">
 import * as THREE from "three"
-import { TresCanvas } from '@tresjs/core'
+
 import { OrbitControls, Box } from '@tresjs/cientos'
 
 import skyBox from 'PLS/skyBox/components/skyBoxBmesh.vue'

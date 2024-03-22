@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-02-24 10:03:05
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-02-24 11:23:18
+ * @LastEditTime: 2024-03-22 07:39:29
 -->
 <template>
 	<TresCanvas v-bind="state" window-size>
@@ -20,7 +20,7 @@
 
 <script setup lang="ts">
 import { reactive, watchEffect } from 'vue'
-import { TresCanvas, useRenderLoop } from '@tresjs/core'
+import { useRenderLoop } from '@tresjs/core'
 import { OrbitControls } from '@tresjs/cientos'
 import chinaMapMesh from '../components/chinaMapMesh.vue'
 

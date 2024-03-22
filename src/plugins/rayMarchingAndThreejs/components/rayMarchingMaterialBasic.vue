@@ -14,7 +14,7 @@
 </template>
 
 <script setup lang="ts">
-import { TresCanvas, useRenderLoop, useTresContextProvider, useTresContext, useTexture } from '@tresjs/core';
+import { useRenderLoop, useTresContextProvider, useTresContext, useTexture } from '@tresjs/core';
 import { OrbitControls } from '@tresjs/cientos';
 import { AdditiveBlending, DoubleSide, Vector2, LinearFilter, RGBAFormat, WebGLRenderTarget, Color } from 'three';
 import { ref, watch, defineExpose, watchEffect } from 'vue';
@@ -49,10 +49,10 @@ function onMouseMove(e) {
     mouseY = e.clientY - windowHalfY;
 }
 document.addEventListener('mousemove', onMouseMove, false);
-watchEffect(() => {});
+watchEffect(() => { });
 onLoop(({ elapsed }) => {
     shader.uniforms.u_time.value += 0.001;
     shader.uniforms.u_mouse.value = new Vector2(mouseX, mouseY);
 });
-onAfterLoop(() => {});
+onAfterLoop(() => { });
 </script>

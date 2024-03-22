@@ -47,7 +47,6 @@ const setEffectMaterial = () => {
 	geometry.computeBoundingSphere()
 	const { max, min } = geometry.boundingBox;
 	// CITY_UNTRIANGULATED.material.transparent = true
-	// debugger
 	// return
 	CITY_UNTRIANGULATED.material.dispose()
 

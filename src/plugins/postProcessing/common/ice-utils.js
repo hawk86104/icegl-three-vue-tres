@@ -9,8 +9,8 @@
  * @param fshader 
  * @return true
  */
-export function initShaders(gl, vshader, fshader) {
-  var program = createProgram(gl, vshader, fshader);
+export function initShaders (gl, vshader, fshader) {
+  const program = createProgram(gl, vshader, fshader);
   if (!program) {
     console.log('创建项目失败！');
     return false;
@@ -29,16 +29,15 @@ export function initShaders(gl, vshader, fshader) {
  * @param fshader 
  * @return program
  */
-function createProgram(gl, vshader, fshader) {
-  debugger
-  var vertexShader = loadShader(gl, gl.VERTEX_SHADER, vshader);
-  var fragmentShader = loadShader(gl, gl.FRAGMENT_SHADER, fshader);
+function createProgram (gl, vshader, fshader) {
+  const vertexShader = loadShader(gl, gl.VERTEX_SHADER, vshader);
+  const fragmentShader = loadShader(gl, gl.FRAGMENT_SHADER, fshader);
   if (!vertexShader || !fragmentShader) {
     return null;
   }
 
 
-  var program = gl.createProgram();
+  const program = gl.createProgram();
   if (!program) {
     return null;
   }
@@ -51,10 +50,10 @@ function createProgram(gl, vshader, fshader) {
   gl.linkProgram(program);
 
 
-  var linked = gl.getProgramParameter(program, gl.LINK_STATUS);
+  const linked = gl.getProgramParameter(program, gl.LINK_STATUS);
   if (!linked) {
-    var error = gl.getProgramInfoLog(program);
-    console.log('Failed to link program: ' + error);
+    const error = gl.getProgramInfoLog(program);
+    console.log(`Failed to link program: ${error}`);
     gl.deleteProgram(program);
     gl.deleteShader(fragmentShader);
     gl.deleteShader(vertexShader);
@@ -70,9 +69,9 @@ function createProgram(gl, vshader, fshader) {
  * @param source
  * @return shaderobj
  */
-function loadShader(gl, type, source) {
+function loadShader (gl, type, source) {
 
-  var shader = gl.createShader(type);
+  const shader = gl.createShader(type);
   if (shader == null) {
     console.log('unable to create shader');
     return null;
@@ -84,10 +83,10 @@ function loadShader(gl, type, source) {
 
   gl.compileShader(shader);
 
-  var compiled = gl.getShaderParameter(shader, gl.COMPILE_STATUS);
+  const compiled = gl.getShaderParameter(shader, gl.COMPILE_STATUS);
   if (!compiled) {
-    var error = gl.getShaderInfoLog(shader);
-    console.log('Failed to compile shader: ' + error);
+    const error = gl.getShaderInfoLog(shader);
+    console.log(`Failed to compile shader: ${error}`);
     gl.deleteShader(shader);
     return null;
   }
@@ -101,8 +100,8 @@ function loadShader(gl, type, source) {
  * @param opt_debug
  * @return 
  */
-function getWebGLContext(canvas, opt_debug) {
-  var gl = WebGLUtils.setupWebGL(canvas);
+function getWebGLContext (canvas, opt_debug) {
+  let gl = WebGLUtils.setupWebGL(canvas);
   if (!gl) return null;
   if (arguments.length < 2 || opt_debug) {
     gl = WebGLDebugUtils.makeDebugContext(gl);
@@ -111,13 +110,13 @@ function getWebGLContext(canvas, opt_debug) {
   return gl;
 }
 
-function angleToRadian (angle){
-return angle/180*Math.PI
+function angleToRadian (angle) {
+  return angle / 180 * Math.PI
 }
-function multiplyMVP(m1,m2,m3){
-  let mvpMatrix = glMatrix.mat4.create();
-  let mvMatrix = glMatrix.mat4.create();
-  glMatrix.mat4.multiply(mvpMatrix,m1,glMatrix.mat4.multiply(mvMatrix,m2,m3));
+function multiplyMVP (m1, m2, m3) {
+  const mvpMatrix = glMatrix.mat4.create();
+  const mvMatrix = glMatrix.mat4.create();
+  glMatrix.mat4.multiply(mvpMatrix, m1, glMatrix.mat4.multiply(mvMatrix, m2, m3));
   return mvpMatrix;
 }
 /**
@@ -127,7 +126,7 @@ function multiplyMVP(m1,m2,m3){
  * @param {*} viewWH 
  * @returns 
  */
-function screenToWorld(screenPosition, InverseMVPMatrix, viewWH) {
+function screenToWorld (screenPosition, InverseMVPMatrix, viewWH) {
   let worldPosition = glMatrix.vec4.create();
   screenPosition[0] = screenPosition[0] / viewWH[0];
   screenPosition[1] = (viewWH[1] - screenPosition[1]) / viewWH[1];
@@ -150,11 +149,11 @@ function screenToWorld(screenPosition, InverseMVPMatrix, viewWH) {
  * @param {*} viewWH         视口宽高
  * @returns 
  */
-function worldToScreen(worldPosition, MVPMatrix, viewWH) {
+function worldToScreen (worldPosition, MVPMatrix, viewWH) {
   let screenPosition = glMatrix.vec4.create();
   worldPosition = glMatrix.mat4.multiply(screenPosition, MVPMatrix, worldPosition);
-  for (let i = 0; i < screenPosition.length ; i++) {
-    screenPosition[i] /= screenPosition[screenPosition.length ];
+  for (let i = 0; i < screenPosition.length; i++) {
+    screenPosition[i] /= screenPosition[screenPosition.length];
     screenPosition[i] = screenPosition[i] * 0.5 + 0.5;
   }
   screenPosition[0] = screenPosition[0] * viewWH[0];
@@ -171,19 +170,19 @@ function worldToScreen(worldPosition, MVPMatrix, viewWH) {
  * @param {画布宽高} viewWH 
  * @returns 
  */
-function getModelSelectPosition(screen,inverseMVPMatrix,viewWH) {
-  var minWorld =  glMatrix.vec4.create();
-  var maxWorld = glMatrix.vec4.create();
-  var screen1 =screen.slice(0)
-  screen1[2] = screen1[2]+1;
+function getModelSelectPosition (screen, inverseMVPMatrix, viewWH) {
+  let minWorld = glMatrix.vec4.create();
+  let maxWorld = glMatrix.vec4.create();
+  const screen1 = screen.slice(0)
+  screen1[2] = screen1[2] + 1;
 
   minWorld = screenToWorld(screen, inverseMVPMatrix, viewWH);
   maxWorld = screenToWorld(screen1, inverseMVPMatrix, viewWH);
-  var dir =  glMatrix.vec3.create();
+  const dir = glMatrix.vec3.create();
   glMatrix.vec3.subtract(dir, maxWorld, minWorld);
-  glMatrix.vec3.normalize(dir,dir);
-  var tm = Math.abs((minWorld[1]) / dir[1]);
-  var target = new Float32Array(3);
+  glMatrix.vec3.normalize(dir, dir);
+  const tm = Math.abs((minWorld[1]) / dir[1]);
+  const target = new Float32Array(3);
   target[0] = minWorld[0] + tm * dir[0];
   target[1] = minWorld[1] + tm * dir[1];
   target[2] = minWorld[2] + tm * dir[2];
@@ -195,10 +194,10 @@ function getModelSelectPosition(screen,inverseMVPMatrix,viewWH) {
  * @param {*} 图片地址 
  * @returns 
  */
- function initTexture(gl, imageFile,name) {
+function initTexture (gl, imageFile, name) {
   return new Promise((resolve, reject) => {
-    var uniformTexture = gl.getUniformLocation(gl.program, name);
-    var texture;
+    const uniformTexture = gl.getUniformLocation(gl.program, name);
+    let texture;
     texture = gl.createTexture();
     texture.image = new Image();
     texture.image.src = imageFile;
@@ -206,8 +205,8 @@ function getModelSelectPosition(screen,inverseMVPMatrix,viewWH) {
       handleLoadedTexture(gl, texture);
       console.log(2);
       resolve(texture);
-      texture.uniformTexture =uniformTexture; 
-    
+      texture.uniformTexture = uniformTexture;
+
     }
   })
 
@@ -216,7 +215,7 @@ function getModelSelectPosition(screen,inverseMVPMatrix,viewWH) {
 * 
 * @param {*} 纹理
 */
-function handleLoadedTexture(gl, texture) {
+function handleLoadedTexture (gl, texture) {
 
   gl.bindTexture(gl.TEXTURE_2D, texture);
   //https://developer.mozilla.org/zh-CN/docs/Web/API/WebGLRenderingContext/texImage2D
@@ -275,10 +274,10 @@ function handleLoadedTexture(gl, texture) {
  * @returns 
  */
 
-function initArrayBuffer(gl, data, num, type, attribute) {
-  let attributeobj = gl.getAttribLocation(gl.program, attribute);
+function initArrayBuffer (gl, data, num, type, attribute) {
+  const attributeobj = gl.getAttribLocation(gl.program, attribute);
   // 先创建一个缓冲区对象
-  let buffer = gl.createBuffer();
+  const buffer = gl.createBuffer();
   // 把数据写入到缓冲区中
   gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
   gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(data), gl.STATIC_DRAW);
@@ -299,9 +298,9 @@ function initArrayBuffer(gl, data, num, type, attribute) {
  * @param {*} numberOfItems 
  * @returns 
  */
-function initIndexArrayBuffer(gl, data) {
+function initIndexArrayBuffer (gl, data) {
   // 先创建一个缓冲区对象
-  let buffer = gl.createBuffer();
+  const buffer = gl.createBuffer();
   // 把数据写入到缓冲区中
   gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, buffer);
   gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(data), gl.STATIC_DRAW);
@@ -312,18 +311,18 @@ function initIndexArrayBuffer(gl, data) {
 }
 
 
-export function resizeCanvasToDisplaySize(canvas, multiplier) {
+export function resizeCanvasToDisplaySize (canvas, multiplier) {
   multiplier = multiplier || 1;
-  const width  = canvas.clientWidth  * multiplier | 0;
+  const width = canvas.clientWidth * multiplier | 0;
   const height = canvas.clientHeight * multiplier | 0;
-  if (canvas.width !== width ||  canvas.height !== height) {
-    canvas.width  = width;
+  if (canvas.width !== width || canvas.height !== height) {
+    canvas.width = width;
     canvas.height = height;
     return true;
   }
   return false;
 }
 
-export function degToRad(d) {
+export function degToRad (d) {
   return (d * Math.PI) / 180;
 }

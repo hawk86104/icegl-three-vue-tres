@@ -1,4 +1,3 @@
-
 <script setup lang="ts">
 import { useRenderLoop } from '@tresjs/core'
 // import { CustomShaderMaterial } from '@tresjs/cientos'
@@ -23,7 +22,6 @@ const props = withDefaults(defineProps<{
 })
 const timeDelta = ref(0)
 const CITY_UNTRIANGULATED = props.model.city
-//debugger
 //props.model.model.children[0].material = new THREE.MeshBasicMaterial({ color: '#ffff00' })
 
 CITY_UNTRIANGULATED.renderOrder = 1001
@@ -34,7 +32,7 @@ const setColorMaterial = (type: any, param: string) => {
 	} else if (type === 'land') {
 		// 设置城市地面（mesh物体），材质基本颜色
 		materials = Array.isArray(LANDMASS.material) ? LANDMASS.material : [LANDMASS.material]
-		materials.forEach((material:any) => {
+		materials.forEach((material: any) => {
 			material[param].setStyle(props.landColor);
 			material.side = THREE.DoubleSide //双面渲染
 		})

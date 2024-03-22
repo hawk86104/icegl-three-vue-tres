@@ -7,8 +7,8 @@
 
 <script setup lang="ts">
 import { useTexture } from '@tresjs/core'
+
 const pTexture = await useTexture(
 	['./plugins/industry4/image/circle.png']
 )
-debugger
 </script>

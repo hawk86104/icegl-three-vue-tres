@@ -33,7 +33,7 @@
 <script setup lang="ts">
 import { SRGBColorSpace, BasicShadowMap, NoToneMapping } from 'three'
 import { reactive, watchEffect, ref } from 'vue'
-import { TresCanvas } from '@tresjs/core'
+
 import { OrbitControls } from '@tresjs/cientos'
 import otherScene from '../../components/otherScene.vue'
 
@@ -56,7 +56,7 @@ const tcRef = ref()
 
 watchEffect(() => {
 	if (tcRef.value) {
-		let renderer = tcRef.value.context.renderer.value
+		const renderer = tcRef.value.context.renderer.value
 		renderer.autoClear = false
 	}
 })

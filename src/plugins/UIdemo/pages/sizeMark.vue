@@ -10,7 +10,7 @@
 <script setup lang="ts">
 import { randomLoading as loading } from 'PLS/UIdemo'
 import { shallowRef, watchEffect } from 'vue'
-import { TresCanvas } from '@tresjs/core'
+
 import { OrbitControls } from '@tresjs/cientos'
 import modelVue from '../components/model.vue'
 import floorText from '../components/floorText.vue'

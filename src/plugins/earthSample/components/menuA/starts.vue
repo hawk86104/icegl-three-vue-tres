@@ -8,7 +8,7 @@
 -->
 <script setup lang="ts">
 import { ref, watchEffect } from 'vue'
-import { TresCanvas, useRenderLoop } from '@tresjs/core';
+import { useRenderLoop } from '@tresjs/core';
 import * as THREE from 'three'
 
 const gl = {

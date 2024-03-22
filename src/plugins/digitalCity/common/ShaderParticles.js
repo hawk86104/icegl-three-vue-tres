@@ -322,7 +322,7 @@ ShaderParticleGroup.prototype = {
 		// them from its tick function.
 		emitter.verticesIndex = parseFloat(start);
 		emitter.attributes = that.attributes
-		debugger
+
 		emitter.vertices = that.geometry.getAttribute('position')
 		emitter.maxAge = that.maxAge;
 

@@ -8,7 +8,7 @@
 -->
 <script setup lang="ts">
 import { ref, shallowRef, watch } from 'vue'
-import { TresCanvas } from '@tresjs/core'
+
 import { OrbitControls, MeshGlassMaterial, Box, Sphere } from '@tresjs/cientos'
 import { BasicShadowMap, SRGBColorSpace, NoToneMapping, DoubleSide } from 'three'
 

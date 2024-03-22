@@ -7,7 +7,7 @@
  * @LastEditTime: 2023-11-05 11:32:05
 -->
 <script setup lang="ts">
-import { TresCanvas } from '@tresjs/core'
+
 import { OrbitControls, MeshWobbleMaterial } from '@tresjs/cientos'
 import { BasicShadowMap, SRGBColorSpace, NoToneMapping } from 'three'
 import { ref } from 'vue'

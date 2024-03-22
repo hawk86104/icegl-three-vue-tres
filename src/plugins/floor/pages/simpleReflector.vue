@@ -12,7 +12,7 @@
 		<TresPerspectiveCamera :position="[15, 15, 15]" :fov="45" :near="0.1" :far="10000" :look-at="[0, 0, 0]" />
 		<OrbitControls enableDamping />
 		<TresAmbientLight :intensity="10.0" />
-		<TresDirectionalLight :position="[0, 10, 0]" :intensity="10" v-light-helper color="#ffffff" />
+		<TresDirectionalLight v-light-helper :position="[0, 10, 0]" :intensity="10" color="#ffffff" />
 		<Box :args="[1, 1, 1]" color="orange" :position="[3, 2, 1]" />
 		<TresMesh :position="[0, 2, -4]">
 			<TresBoxGeometry :args="[1, 1, 1]" />
@@ -24,12 +24,12 @@
 
 
 <script setup lang="ts">
-import { TresCanvas } from '@tresjs/core'
+
 import { OrbitControls, vLightHelper, Box } from '@tresjs/cientos'
-import reflectorMesh from '../components/reflectorMesh.vue'
 
 import { reactive } from 'vue'
 import { Pane } from 'tweakpane'
+import reflectorMesh from '../components/reflectorMesh.vue'
 
 const configState = reactive({
 	mirrorSize: 16,

@@ -7,7 +7,7 @@
  * @LastEditTime: 2024-03-12 19:54:32
 -->
 <script setup lang="ts">
-import { TresCanvas, useRenderLoop } from '@tresjs/core'
+import { useRenderLoop } from '@tresjs/core'
 import { OrbitControls, Stars } from '@tresjs/cientos'
 import { PCFSoftShadowMap, SRGBColorSpace } from 'three'
 import { shallowRef } from 'vue'

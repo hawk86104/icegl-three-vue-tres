@@ -9,7 +9,7 @@
 
 <script setup lang="ts">
 import { ref, watchEffect } from 'vue'
-import { TresCanvas } from '@tresjs/core'
+
 import { OrbitControls } from '@tresjs/cientos'
 import { Plane, Vector3, DoubleSide, MathUtils } from 'three'
 import { Pane } from 'tweakpane'
@@ -75,9 +75,8 @@ paneControl.addBinding(clipPlanes[2], 'constant', {
 			<TresMesh v-for="i in meshList " :key="i">
 				<TresSphereGeometry :args="[i / 30, 48, 24]" />
 				<TresMeshLambertMaterial :color="[MathUtils.randInt(0.1, 1), MathUtils.randInt(0, 1), MathUtils.randInt(0, 1)]"
-					:side="DoubleSide" :clippingPlanes="clipPlanes" :clipIntersection="params.clipIntersection"
-/>
+					:side="DoubleSide" :clippingPlanes="clipPlanes" :clipIntersection="params.clipIntersection" />
 			</TresMesh>
 		</TresGroup>
-</TresCanvas>
+	</TresCanvas>
 </template>

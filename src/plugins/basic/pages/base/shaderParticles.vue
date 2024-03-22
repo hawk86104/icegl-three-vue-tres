@@ -8,7 +8,7 @@
 -->
 <script setup lang="ts">
 import { OrbitControls } from '@tresjs/cientos'
-import { TresCanvas, useRenderLoop } from '@tresjs/core'
+import { useRenderLoop } from '@tresjs/core'
 import { AdditiveBlending } from 'three'
 import { reactive } from 'vue'
 

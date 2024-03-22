@@ -9,7 +9,7 @@
 
 <script setup lang="ts">
 // import { ref } from 'vue';
-import { TresCanvas, useRenderLoop } from '@tresjs/core'
+import { useRenderLoop } from '@tresjs/core'
 import { OrbitControls } from '@tresjs/cientos'
 import { PCFSoftShadowMap, SRGBColorSpace, DoubleSide } from 'three'
 import { getAlphaScaleMap, getPaletteMap } from '../common/simpleExampleGetTexture'

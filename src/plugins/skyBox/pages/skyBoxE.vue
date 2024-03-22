@@ -20,7 +20,7 @@
 
 		<TresMesh :position="[0, 0, 0]">
 			<TorusKnotGeometry :args="[3, 1, 64, 8, 2, 3]" />
-			<MeshStandardMaterial color="0xffffff" :metalness='1' :roughness="0.14" />
+			<MeshStandardMaterial color="0xffffff" :metalness="1" :roughness="0.14" />
 		</TresMesh>
 
 		<Suspense>
@@ -31,7 +31,7 @@
 
 <script setup lang="ts">
 import * as THREE from "three"
-import { TresCanvas } from '@tresjs/core'
+
 import { OrbitControls, Box } from '@tresjs/cientos'
 
 import skyBox from 'PLS/skyBox/components/skyBoxEmesh.vue'

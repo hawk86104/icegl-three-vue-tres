@@ -7,7 +7,7 @@
  * @LastEditTime: 2024-03-13 20:51:44
 -->
 <script setup>
-import { TresCanvas } from '@tresjs/core'
+
 import { OrbitControls } from '@tresjs/cientos'
 import skyBox from 'PLS/skyBox/components/skyBoxDmesh.vue'
 import { randomLoading as loading } from 'PLS/UIdemo'

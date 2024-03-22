@@ -24,7 +24,7 @@
 </template>
 
 <script setup lang="ts">
-import { TresCanvas, useTexture } from '@tresjs/core'
+import { useTexture } from '@tresjs/core'
 import { OrbitControls } from '@tresjs/cientos'
 import { AdditiveBlending } from 'three'
 import { reactive } from 'vue';

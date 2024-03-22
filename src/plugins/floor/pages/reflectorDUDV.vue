@@ -29,11 +29,11 @@
 </template>
 
 <script setup lang="ts">
-import { TresCanvas } from '@tresjs/core'
+
 import { OrbitControls } from '@tresjs/cientos'
-import reflectorDUDV from '../components/reflectorDUDV.vue'
 import { reactive } from 'vue'
 import { Pane } from 'tweakpane'
+import reflectorDUDV from '../components/reflectorDUDV.vue'
 
 const configState = reactive({
 	reflectivity: 2.6,

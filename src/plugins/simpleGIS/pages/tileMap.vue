@@ -18,7 +18,7 @@
 
 <script setup lang="ts">
 import { reactive, shallowRef } from 'vue'
-import { TresCanvas } from '@tresjs/core'
+
 import * as THREE from 'three'
 import { Pane } from 'tweakpane'
 import tileMapMesh from '../components/tileMapMesh.vue'

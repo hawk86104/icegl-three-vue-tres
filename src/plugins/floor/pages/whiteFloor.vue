@@ -12,7 +12,8 @@
 		<TresPerspectiveCamera :position="[15, 15, 15]" :fov="45" :near="0.1" :far="10000" :look-at="[0, 0, 0]" />
 		<OrbitControls enableDamping />
 		<TresAmbientLight :intensity="10.0" />
-		<TresDirectionalLight ref="TDirectionalLight" v-light-helper :position="[0, 10, 10]" :intensity="1" color="#ffffff" cast-shadow />
+		<TresDirectionalLight ref="TDirectionalLight" v-light-helper :position="[0, 10, 10]" :intensity="1" color="#ffffff"
+			cast-shadow />
 		<Box :args="[1, 1, 1]" color="orange" :position="[3, 2, 1]" cast-shadow />
 		<TresMesh :position="[0, 2, -4]" cast-shadow>
 			<TresBoxGeometry :args="[1, 1, 1]" />
@@ -32,7 +33,7 @@
 
 <script setup lang="ts">
 import * as THREE from "three"
-import { TresCanvas } from '@tresjs/core'
+
 import { OrbitControls, vLightHelper, Box } from '@tresjs/cientos'
 import skyBox from 'PLS/skyBox/components/skyBoxAmesh.vue'
 import { shallowRef, watchEffect, reactive } from 'vue'

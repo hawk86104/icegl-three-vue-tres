@@ -21,7 +21,7 @@
 </template>
 
 <script setup lang="ts">
-import { TresCanvas } from '@tresjs/core'
+
 import { Sky, OrbitControls } from '@tresjs/cientos'
 import { reactive } from 'vue'
 import { Pane } from 'tweakpane'

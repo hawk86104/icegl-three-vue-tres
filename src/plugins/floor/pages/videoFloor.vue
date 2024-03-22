@@ -33,17 +33,17 @@
 
 <script setup lang="ts">
 import { reactive } from 'vue'
-import { TresCanvas } from '@tresjs/core'
+
 import { OrbitControls } from '@tresjs/cientos'
+import { Pane } from 'tweakpane'
 import videoFloorCom from '../components/videoFloor.vue'
 import reflectorDUDV from '../components/reflectorDUDV.vue'
+
 const reflectorState = reactive({
 	reflectivity: 2.6,
 	showGridHelper: false,
 	scale: 4
 })
-
-import { Pane } from 'tweakpane'
 const configState = reactive({
 	color: "#fff",
 	opacity: 0.95,

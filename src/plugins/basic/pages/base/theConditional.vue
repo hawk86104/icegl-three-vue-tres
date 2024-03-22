@@ -10,7 +10,7 @@
 import { BasicShadowMap, MeshPhongMaterial, NoToneMapping, SRGBColorSpace } from 'three'
 import { reactive, ref, onMounted, onUnmounted, watch, getCurrentInstance } from 'vue'
 import { OrbitControls } from '@tresjs/cientos'
-import { TresCanvas } from '@tresjs/core'
+
 import { Pane } from 'tweakpane';
 
 const state = reactive({

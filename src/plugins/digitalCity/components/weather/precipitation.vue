@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-10-27 16:43:05
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-10-30 17:49:59
+ * @LastEditTime: 2024-03-22 07:48:40
 -->
 <script setup lang="ts">
 import { reactive, ref, watchEffect, watch } from 'vue'
@@ -53,7 +53,6 @@ watchEffect(async () => {
 	// }
 	// if (props.type) {
 	// 	console.log(props, texture)
-	// 	debugger
 	// 	if (texture.value) {
 	// 		texture.value.map.dispose()
 	// 		texture.value = await useTexture({ map: imgList[props.type] })

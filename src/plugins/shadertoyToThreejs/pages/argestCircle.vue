@@ -1,6 +1,7 @@
 <template>
     <TresCanvas v-bind="state" window-size>
-        <TresPerspectiveCamera ref="perspectiveCameraRef" :position="[600, 750, -1221]" :fov="45" :near="1" :far="10000" />
+        <TresPerspectiveCamera ref="perspectiveCameraRef" :position="[600, 750, -1221]" :fov="45" :near="1"
+            :far="10000" />
         <OrbitControls v-bind="controlsState" />
         <TresAmbientLight color="#ffffff" />
         <TresDirectionalLight :position="[100, 100, 0]" :intensity="0.5" color="#ffffff" />
@@ -14,7 +15,7 @@
 </template>
 
 <script setup lang="ts">
-import { TresCanvas, useRenderLoop } from '@tresjs/core'; //useRenderLoop
+import { useRenderLoop } from '@tresjs/core'; //useRenderLoop
 import { OrbitControls } from '@tresjs/cientos';
 import { AdditiveBlending, DoubleSide } from 'three';
 import stringVertex from '../shaders/argestCircle.vert?raw'

@@ -22,7 +22,7 @@
 <script setup lang="ts">
 import { SRGBColorSpace, BasicShadowMap, NoToneMapping } from 'three'
 import { reactive } from 'vue'
-import { TresCanvas } from '@tresjs/core'
+
 import { OrbitControls } from '@tresjs/cientos'
 import ByComposerTres from '../components/ByComposerTres.vue'
 import { Pane } from 'tweakpane';

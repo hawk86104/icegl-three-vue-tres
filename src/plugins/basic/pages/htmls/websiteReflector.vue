@@ -8,7 +8,7 @@
 -->
 <script setup lang="ts">
 import { randomLoading as loading } from 'PLS/UIdemo'
-import { TresCanvas } from '@tresjs/core'
+
 import { OrbitControls } from '@tresjs/cientos'
 import reflectorDUDV from 'PLS/floor/components/reflectorDUDV.vue'
 import laptop from '../../components/laptop.vue'

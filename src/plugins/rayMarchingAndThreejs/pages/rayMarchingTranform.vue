@@ -12,7 +12,7 @@
 
 <script setup lang="ts">
 import { reactive, onMounted } from 'vue';
-import { TresCanvas, useRenderLoop, useTexture } from '@tresjs/core';
+import { useRenderLoop, useTexture } from '@tresjs/core';
 import { OrbitControls } from '@tresjs/cientos';
 import rayMarchingMaterialTranform from '../components/rayMarchingMaterialTranform.vue';
 import { Pane } from 'tweakpane';
@@ -26,6 +26,6 @@ const state = {
 const controlsState = { autoRotate: false, enableDamping: true };
 
 const { onLoop } = useRenderLoop();
-onLoop(({ delta }) => {});
-onMounted(() => {});
+onLoop(({ delta }) => { });
+onMounted(() => { });
 </script>
