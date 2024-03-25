@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-18 22:17:49
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-03-25 11:34:53
+ * @LastEditTime: 2024-03-25 21:17:24
 -->
 <template>
     <div class="flex h-full">
@@ -138,6 +138,7 @@ function filterObjects(obj: any, searchString: string) {
     return result
 }
 let filteredData = ref(pluginsConfig)
+
 watch(filterFixedInputValue, (newValue: any) => {
     filteredData.value = filterObjects(pluginsConfig, newValue.toLocaleLowerCase())
     if (!newValue) {
