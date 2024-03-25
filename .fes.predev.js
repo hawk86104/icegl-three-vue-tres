@@ -4,9 +4,10 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-10-16 10:53:09
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-03-05 08:47:57
+ * @LastEditTime: 2024-03-25 21:06:01
  */
-import { defineBuildConfig } from '@fesjs/fes';
+import { defineBuildConfig } from '@fesjs/fes'
+import addExtraScriptPlugin from './src/common/addExtraScriptPlugin'
 
 export default defineBuildConfig({
     layout: {
@@ -75,5 +76,10 @@ export default defineBuildConfig({
                 title: '💫 关于我们'
             }
         ],
+    },
+    viteOption: {
+        plugins: [
+            addExtraScriptPlugin()
+        ]
     },
 });
