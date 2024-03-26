@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-18 22:17:49
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-03-26 12:09:29
+ * @LastEditTime: 2024-03-26 15:07:45
 -->
 <template>
     <div class="flex h-full w-full">
@@ -65,7 +65,7 @@
 import { ref, provide, watch } from 'vue'
 import { defineRouteMeta, useModel } from '@fesjs/fes'
 import { AppstoreOutlined, PictureOutlined, EditOutlined, UpCircleOutlined } from '@fesjs/fes-design/icon'
-import { getPluginsConfig } from '../common/utils'
+import { getPluginsConfig, getOnlinePluginConfig } from '../common/utils'
 import cardList from '../components/forPreview/cardList.vue'
 import filterComFixed from '../components/forPreview/filterComFixed.vue'
 
@@ -75,7 +75,9 @@ defineRouteMeta({
 })
 
 const tabListRef = ref([])
-let pluginsConfig = getPluginsConfig() as any
+const pluginsConfig = ref({})
+pluginsConfig.value = getPluginsConfig() as any
+getOnlinePluginConfig(pluginsConfig)
 const goto = (value: string) => {
     tabListRef.value[value.value]?.scrollIntoView({ behavior: 'smooth', block: 'center', inline: "nearest" })
 }
@@ -138,10 +140,10 @@ const filterObjects = (obj: any, searchString: string): any => {
     }
     return result
 }
-let filteredData = ref(pluginsConfig)
+let filteredData = ref(pluginsConfig.value)
 
 watch(filterFixedInputValue, (newValue: any) => {
-    filteredData.value = filterObjects(pluginsConfig, newValue.toLocaleLowerCase())
+    filteredData.value = filterObjects(pluginsConfig.value, newValue.toLocaleLowerCase())
     if (!newValue) {
         expandedKeys.value = ['1', '2']
     }
@@ -151,8 +153,8 @@ const { menuSetup } = useModel('forPreview')
 
 function filterMenuSetup(msFilter: any) {
     if (msFilter.length === 0) {
-        return pluginsConfig
-        // return filterObjects(pluginsConfig, filterFixedInputValue.value.toLocaleLowerCase())
+        return pluginsConfig.value
+        // return filterObjects(pluginsConfig.value, filterFixedInputValue.value.toLocaleLowerCase())
     }
     const result = {} as any
     msFilter.forEach((tag: any) => {
@@ -162,13 +164,13 @@ function filterMenuSetup(msFilter: any) {
                     for (const key2 in menuSetup.value[key]) {
                         if (menuSetup.value[key].hasOwnProperty(key2)) {
                             if (menuSetup.value[key][key2].taglist === tag) {
-                                if (pluginsConfig[key]?.preview) {
-                                    const filteredPreview = pluginsConfig[key].preview.filter((item: any) => item.name === key2)
+                                if (pluginsConfig.value[key]?.preview) {
+                                    const filteredPreview = pluginsConfig.value[key].preview.filter((item: any) => item.name === key2)
                                     if (filteredPreview) {
                                         if (result[key]) {
                                             result[key].preview = result[key].preview.concat(filteredPreview)
                                         } else {
-                                            result[key] = { ...pluginsConfig[key], preview: filteredPreview }
+                                            result[key] = { ...pluginsConfig.value[key], preview: filteredPreview }
                                         }
                                     }
                                 }
