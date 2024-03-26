@@ -10,11 +10,11 @@
     <div class="right">{{ userModel.user.userName }}</div>
 </template>
 <script>
-import { useModel } from '@fesjs/fes';
+import { useModel } from '@fesjs/fes'
 
 export default {
     setup () {
-        const userModel = useModel('user');
+        const userModel = useModel('forPreview')
         return {
             userModel,
         };

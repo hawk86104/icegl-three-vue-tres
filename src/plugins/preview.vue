@@ -4,10 +4,10 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-18 22:17:49
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-03-25 21:17:24
+ * @LastEditTime: 2024-03-26 12:09:29
 -->
 <template>
-    <div class="flex h-full">
+    <div class="flex h-full w-full">
         <div class="w-50" style="background-color: #0f1222;">
             <f-menu mode="vertical" :defaultExpandAll="true" :expandedKeys="expandedKeys" :inverted="true"
                 @select="goto">
@@ -40,7 +40,8 @@
                 </f-sub-menu>
             </f-menu>
         </div>
-        <div class="flex-1 overflow-scroll mt-10 relative right-page-list" style="height: calc(100vh - 42px - 52px);">
+        <div class="overflow-scroll mt-10 relative right-page-list"
+            style="height: calc(100vh - 42px - 52px);width: 100%;">
             <filterComFixed />
             <template v-for="( onePlugin, pkey ) in  filteredData " :key="pkey">
                 <template v-if="pkey === 'basic'">
@@ -62,7 +63,7 @@
 
 <script setup lang="ts">
 import { ref, provide, watch } from 'vue'
-import { defineRouteMeta } from '@fesjs/fes'
+import { defineRouteMeta, useModel } from '@fesjs/fes'
 import { AppstoreOutlined, PictureOutlined, EditOutlined, UpCircleOutlined } from '@fesjs/fes-design/icon'
 import { getPluginsConfig } from '../common/utils'
 import cardList from '../components/forPreview/cardList.vue'
@@ -103,9 +104,9 @@ const expandedKeys = ref(['1', '2'])
 const filterFixedInputValue = ref('')
 provide('filterFixedInputValue', filterFixedInputValue)
 
-function filterObjects(obj: any, searchString: string) {
+const filterObjects = (obj: any, searchString: string): any => {
     if (!searchString) {
-        return pluginsConfig
+        return filterMenuSetup(menuSetupFilter.value)
     }
     const result = {} as any;
     for (const key in obj) {
@@ -145,6 +146,47 @@ watch(filterFixedInputValue, (newValue: any) => {
         expandedKeys.value = ['1', '2']
     }
 })
+
+const { menuSetup } = useModel('forPreview')
+
+function filterMenuSetup(msFilter: any) {
+    if (msFilter.length === 0) {
+        return pluginsConfig
+        // return filterObjects(pluginsConfig, filterFixedInputValue.value.toLocaleLowerCase())
+    }
+    const result = {} as any
+    msFilter.forEach((tag: any) => {
+        if (menuSetup.value) {
+            for (const key in menuSetup.value) {
+                if (menuSetup.value.hasOwnProperty(key)) {
+                    for (const key2 in menuSetup.value[key]) {
+                        if (menuSetup.value[key].hasOwnProperty(key2)) {
+                            if (menuSetup.value[key][key2].taglist === tag) {
+                                if (pluginsConfig[key]?.preview) {
+                                    const filteredPreview = pluginsConfig[key].preview.filter((item: any) => item.name === key2)
+                                    if (filteredPreview) {
+                                        if (result[key]) {
+                                            result[key].preview = result[key].preview.concat(filteredPreview)
+                                        } else {
+                                            result[key] = { ...pluginsConfig[key], preview: filteredPreview }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    })
+
+    return result
+}
+const menuSetupFilter = ref([])
+provide('menuSetupFilter', menuSetupFilter)
+watch(menuSetupFilter, (newValue: any) => {
+    filteredData.value = filterMenuSetup(newValue)
+})
 </script>
 
 <style lang="less">
@@ -170,6 +212,15 @@ watch(filterFixedInputValue, (newValue: any) => {
 
 .fes-menu.is-vertical.is-inverted::-webkit-scrollbar {
     display: none;
+}
+
+.main-layout .layout-header {
+    overflow: hidden;
+}
+
+.fes-checkbox-group {
+    margin-bottom: 5px;
+    margin-right: 20px;
 }
 </style>
 <style lang="less" scoped>

@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-03 16:02:49
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-03-12 19:16:04
+ * @LastEditTime: 2024-03-26 11:15:56
 -->
 <template>
 	<FDivider titlePlacement="left">{{ props.onePlugin.title + ' - ' + props.onePlugin.name }}</FDivider>
@@ -20,7 +20,10 @@
 		<FText class="ml-13" tag="i" size="small">{{ props.onePlugin.intro }}</FText>
 	</FSpace>
 	<div class="flex flex-wrap flex-justify-start content-start mt-6 pl-6">
-		<div class="w-80 mr-10 mb-10 overflow-hidden" v-for="(onePreview, okey) in onePlugin.preview" :key="okey">
+		<div class="w-80 mr-10 mb-10 overflow-hidden relative" v-for="(onePreview, okey) in onePlugin.preview" :key="okey">
+			<div v-if="hasStyle(props.onePlugin, onePreview.name)" class="tag-sheared" :class="classText(props.onePlugin,
+		onePreview.name)">{{ hasStyle(props.onePlugin,
+		onePreview.name) }}</div>
 			<FCard :header="onePreview.title" shadow="hover">
 				<video controls class="w-full max-h-70 h-14em" v-if="onePreview.type === 'video'">
 					<source :src="publicPath + onePreview.src" type="video/mp4" autoplay="true" loop="true" />
@@ -39,7 +42,7 @@
 </template>
 <script setup lang="ts">
 import { FCard, FDivider, FSpace, FText, FImage } from '@fesjs/fes-design'
-import { useRouter } from '@fesjs/fes' //fesJS的路由被他自己封装了
+import { useRouter, useModel } from '@fesjs/fes' //fesJS的路由被他自己封装了
 import { UserOutlined } from '@fesjs/fes-design/icon'
 const props = withDefaults(
 	defineProps<{
@@ -47,7 +50,7 @@ const props = withDefaults(
 	}>(),
 	{},
 )
-
+const { menuSetup } = useModel('forPreview')
 let publicPath = process.env.BASE_URL
 
 const router = useRouter()
@@ -61,6 +64,24 @@ const toPage = (plugin: any, value: any) => {
 	});
 	window.open(routeUrl.href, '_blank');
 }
+
+const hasStyle = (plugin: any, value: any) => {
+	if (menuSetup.value) {
+		if (menuSetup.value[plugin.name] && menuSetup.value[plugin.name][value]) {
+			return menuSetup.value[plugin.name][value].taglist_text
+		}
+	}
+	return ''
+}
+const classText = (plugin: any, value: any) => {
+	if (menuSetup.value) {
+		if (menuSetup.value[plugin.name] && menuSetup.value[plugin.name][value]) {
+			return menuSetup.value[plugin.name][value].taglist
+		}
+	}
+	return ''
+}
+
 </script>
 
 <style>
@@ -81,5 +102,28 @@ const toPage = (plugin: any, value: any) => {
 	white-space: nowrap;
 	text-overflow: ellipsis;
 	overflow: hidden;
+}
+</style>
+<style lang="less" scoped>
+.tag-sheared {
+	background-color: #063667;
+	color: white;
+	width: 100%;
+	height: 12%;
+	line-height: 246%;
+	text-align: center;
+	margin-left: 41%;
+	margin-top: 4%;
+	position: absolute;
+	font-size: 1.1em;
+	transform: rotate(45deg);
+
+	&.recommend {
+		background-color: #e6698b;
+	}
+
+	&.hot {
+		background-color: #b51c22;
+	}
 }
 </style>
