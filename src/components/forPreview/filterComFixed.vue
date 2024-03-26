@@ -4,16 +4,28 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-03 16:02:49
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-03-25 10:18:06
+ * @LastEditTime: 2024-03-26 11:23:40
 -->
 <template>
 	<div class="filterFixed">
-		<FInput v-model="inputValue" class="FInput-input" placeholder="查找的功能，如：城市" clearable @input="textChange">
+		<FInput v-model="inputValue" class="FInput-input" placeholder="查找的功能，如：城市" clearable>
 			<template #prepend> 检索 </template>
 			<template #suffix>
 				<SearchOutlined />
 			</template>
 		</FInput>
+
+		<FCheckboxGroup v-model="menuSetupFilter">
+			<FCheckbox value="hot">
+				热
+			</FCheckbox>
+			<FCheckbox value="new">
+				新
+			</FCheckbox>
+			<FCheckbox value="recommend">
+				荐
+			</FCheckbox>
+		</FCheckboxGroup>
 
 		<a target="_black" href="https://gitee.com/ice-gl/icegl-three-vue-tres">
 			<img src="https://gitee.com/ice-gl/icegl-three-vue-tres/badge/star.svg?theme=dark" alt="gitee-starts">
@@ -26,14 +38,11 @@
 </template>
 <script setup lang="ts">
 import { inject } from 'vue'
-import { FInput } from '@fesjs/fes-design'
+import { FInput, FCheckbox, FCheckboxGroup } from '@fesjs/fes-design'
 import { SearchOutlined } from '@fesjs/fes-design/icon'
 
-const textChange = (e: string) => {
-	// console.log('[input.event] [textChange] e:', e);
-}
-
 const inputValue = inject('filterFixedInputValue')
+const menuSetupFilter = inject('menuSetupFilter')
 
 </script>
 
@@ -45,7 +54,7 @@ const inputValue = inject('filterFixedInputValue')
 	padding: 8px 10px 6px;
 	z-index: 999;
 	box-shadow: -1px 3px 10px rgba(0, 0, 0, 0.2);
-	width: calc(100% - 200px - 34px);
+	width: calc(100% - 200px);
 	display: flex;
 	align-items: flex-end;
 

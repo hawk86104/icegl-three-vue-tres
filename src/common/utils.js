@@ -4,9 +4,12 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-10-16 10:53:09
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-03-12 10:02:02
+ * @LastEditTime: 2024-03-26 16:28:44
  */
 // 放工具函数
+import { request } from '@fesjs/fes'
+import { format } from 'echarts';
+
 const findStringBetween = (str) => {
 	const regex = /\/([^/]+)(?=\/[^/]*$)/;
 	const match = str.match(regex);
@@ -28,6 +31,59 @@ export const getPluginsConfig = () => {
 	}
 	return config
 }
+const formatMenu = (online, local) => {
+	const result = local
+	for (const olKey of Object.keys(online)) {
+		if (olKey === 'basic') {
+			continue
+		}
+		let hasItem = false
+		for (const loKey of Object.keys(local)) {
+			if (olKey === loKey) {
+				hasItem = true
+				// 如果存在第一层目录 ，则对比preview
+				const olItem = online[olKey]
+				const loItem = local[loKey]
+				for (let i = 0; i < olItem.preview.length; i++) {
+					let hasPreview = false
+					for (let j = 0; j < loItem.preview.length; j++) {
+						if (olItem.preview[i].name === loItem.preview[j].name) {
+							hasPreview = true
+							// 如果存在preview 则无需更改
+						}
+					}
+					if (!hasPreview) {
+						// 如果不存在preview，则添加
+						olItem.preview[i].waitForGit = true
+						result[olKey].preview.push(olItem.preview[i])
+					}
+				}
+			}
+		}
+		if (!hasItem) {
+			// 如果第一层目录不存在，则添加
+			online[olKey].waitForGit = true
+			result[olKey] = online[olKey]
+		}
+	}
+	return result
+}
+export const getOnlinePluginConfig = (plConfig) => {
+	request(
+		'https://www.icegl.cn/addons/tvt/index/getRelaseMenuList', {},
+		{
+			method: 'get',
+		},
+	)
+		.then((res) => {
+			plConfig.value = formatMenu(res.code.menuList.configs, plConfig.value)
+		})
+		.catch((err) => {
+			// 处理异常
+			console.log(err, '请连接网络，获得插件的菜单更新')
+		})
+}
+
 export const getOnePluginConfig = (pName, oName, cName) => {
 	// 获得插件列表 根据插件目录
 	const modulePaths = import.meta.glob('PLS/**/config.js', { eager: true })

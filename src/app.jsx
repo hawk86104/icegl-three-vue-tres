@@ -4,24 +4,25 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-10-16 10:53:09
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-03-22 07:36:29
+ * @LastEditTime: 2024-03-26 09:20:55
  */
 import { defineRuntimeConfig, useModel } from '@fesjs/fes'
 import { FMenu } from '@fesjs/fes-design'
 import Tres from '@tresjs/core'
 import PageLoading from '@/components/pageLoading.vue'
-import UserCenter from '@/components/userCenter.vue'
+import UserCenter from '@/components/forPreview/userCenter.vue'
 
 // add by 地虎降天龙
-import 'uno.css';
+import 'uno.css'
 
 export default defineRuntimeConfig({
     beforeRender: {
         loading: <PageLoading />,
         action () {
-            const { signin } = useModel('user');
-            signin();
-            // const { setRole } = access;
+            const { signin,getMenu } = useModel('forPreview')
+            signin()
+            getMenu()
+            
             // return new Promise((resolve) => {
             //     setTimeout(() => {
             //         setRole('admin');
