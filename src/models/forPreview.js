@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-10-21 15:34:19
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-03-26 10:55:43
+ * @LastEditTime: 2024-03-26 17:20:38
  */
 import { reactive } from 'vue'
 import { access, request } from '@fesjs/fes'
@@ -25,7 +25,7 @@ export default function userModel () {
 
 	const getMenu = () => {
 		request(
-			'http://www.icegl.cn/addons/tvt/index/getMenuSetup', {},
+			'https://www.icegl.cn/addons/tvt/index/getMenuSetup', {},
 			{
 				method: 'get',
 			},
