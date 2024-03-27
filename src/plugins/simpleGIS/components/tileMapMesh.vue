@@ -95,7 +95,7 @@ map.camera = camera
 
 let orbitControl = null as any
 watchEffect(() => {
-	if (renderer.value) {
+	if (renderer.value && !orbitControl) {
 		orbitControl = new OrbitControls(camera, renderer.value.domElement)
 		orbitControl.enableDamping = true
 		orbitControl.dampingFactor = 0.05
