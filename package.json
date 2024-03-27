@@ -51,6 +51,7 @@
     "gl-matrix": "^3.4.3",
     "gsap": "3.12.5",
     "heatmap.js-fix": "^1.0.0",
+    "lamina": "^1.1.23",
     "oimophysics": "^1.2.2",
     "patch-package": "^8.0.0",
     "pinia": "^2.1.7",
