@@ -4,14 +4,15 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-03-27 10:38:54
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-03-27 21:59:23
+ * @LastEditTime: 2024-03-28 10:22:18
 -->
 <template>
 	<primitive :object="scene" />
+	<ContactShadows :opacity="0.6" :blur="0.5" :position="[0, -0.7, 0]" :frames="100" :scale="10" :far="100" />
 </template>
 
 <script setup>
-import { useGLTF } from '@tresjs/cientos'
+import { useGLTF, ContactShadows } from '@tresjs/cientos'
 import * as THREE from 'three'
 // import { loadHDR } from 'PLS/skyBox/common/utils'
 
