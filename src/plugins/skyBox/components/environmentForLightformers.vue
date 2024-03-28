@@ -1,21 +1,28 @@
 <template></template>
-<script setup>
+<script setup lang="ts">
 import { watchEffect } from 'vue'
 import * as THREE from 'three'
 import { useTresContext, useRenderLoop } from '@tresjs/core'
 import { LayerMaterial, Depth, Color } from 'lamina/vanilla'
 import { lightFormer } from '../common/lightFormer'
+import { NumberInputPlugin } from '@tweakpane/core'
 
-// 离屏材质渲染器
-let pmremGenerator = null
+const props = withDefaults(defineProps<{
+	resolution?: number
+	near?: number
+	far?: number
+}>(), {
+	resolution: 256,
+	near: 1,
+	far: 1000,
+})
 
-// 外层的环境包围盒
-// const environmentMesh = new THREE.Mesh(
-// 	new THREE.BoxGeometry(100, 100, 100),
-// 	new THREE.MeshBasicMaterial(),
-// )
+const fbo = new THREE.WebGLCubeRenderTarget(props.resolution)
+fbo.texture.type = THREE.HalfFloatType
+const cubeCamera = new THREE.CubeCamera(props.near, props.far, fbo)
+const virtualScene = new THREE.Scene()
+
 const environmentMesh = new THREE.Group()
-
 const envObject = new lightFormer()
 envObject.mesh.scale.set(10, 10, 1)
 envObject.mesh.position.set(0, 5, -9)
@@ -73,7 +80,7 @@ const backgroundMaterial = new LayerMaterial({
 		new Depth({
 			colorA: 'blue',
 			colorB: 'black',
-			alpha: 0.5,
+			alpha: 0.8,
 			mode: 'normal',
 			near: 0,
 			far: 300,
@@ -85,19 +92,24 @@ const backgroundMesh = new THREE.Mesh(backgroundGeometry, backgroundMaterial)
 backgroundMesh.scale.set(100, 100, 100)
 environmentMesh.add(backgroundMesh)
 
+// const backgroundMesh2 = backgroundMesh.clone()
+// backgroundMesh2.scale.set(10, 10, 10)
+
 const { scene, renderer, sizes } = useTresContext()
 watchEffect(() => {
 	if (sizes.width.value) {
-		pmremGenerator = new THREE.PMREMGenerator(renderer.value)
-		pmremGenerator.compileCubemapShader()
+		virtualScene.add(environmentMesh)
+
+		// scene.value.background = backgroundMaterial.texture
+		// scene.value.add(backgroundMesh2)
 	}
 })
 const { onBeforeLoop } = useRenderLoop()
 onBeforeLoop(({ delta }) => {
 	if (scene.value) {
 		(lightFormerGroup.position.z += delta * 10) > 20 && (lightFormerGroup.position.z = -60)
-		scene.value.environment = pmremGenerator.fromScene(environmentMesh).texture
-		// scene.value.background = scene.value.environment
+		cubeCamera.update(renderer.value, virtualScene)
+		scene.value.environment = fbo.texture
 	}
 })
 </script>

@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-18 08:51:19
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-03-27 21:56:36
+ * @LastEditTime: 2024-03-28 10:24:22
 -->
 <template>
 	<loading />
@@ -12,9 +12,8 @@
 		<TresPerspectiveCamera :position="[5, 1, 5]" :fov="30" :near="1" :far="1000" />
 		<OrbitControls v-bind="controlsState" />
 		<TresAmbientLight color="#ffffff" intensity="2.5" />
-		<!-- <TresDirectionalLight color="#ffffff" intensity="10.5" position="[-1, 1, 1]" /> -->
-
-		<!-- <TresSpotLight :position="[0, 5, 0]" :angle="0.3" :penumbra="1" castShadow :intensity="2" :shadowBias="-0.0001" /> -->
+		<!-- <TresDirectionalLight color="#ffffff" intensity="5" castShadow v-light-helper :position="[0, 3, 0]" /> -->
+		<TresSpotLight ref="spotLight" :position="[0, 15, 0]" :angle="0.3" :penumbra="1" castShadow :intensity="2" />
 		<Suspense>
 			<carModel />
 		</Suspense>
@@ -28,15 +27,25 @@
 
 
 <script setup lang="ts">
-import { reactive } from 'vue'
-import { OrbitControls } from '@tresjs/cientos'
+import { reactive, ref, watchEffect } from 'vue'
+import { OrbitControls, vLightHelper } from '@tresjs/cientos'
+import * as THREE from 'three'
 
 import reflectorShaderMesh from 'PLS/floor/components/reflectorShaderMesh.vue'
 import { randomLoading as loading } from 'PLS/UIdemo'
 import { environmentForLightformers } from 'PLS/skyBox'
 import carModel from '../components/carModel.vue'
 
-
+const spotLight = ref(null as THREE.SpotLight | null)
+watchEffect(() => {
+	if (spotLight.value) {
+		spotLight.value.shadow.mapSize.width = 1024
+		spotLight.value.shadow.mapSize.height = 1024
+		spotLight.value.shadow.camera.near = 1
+		spotLight.value.shadow.camera.far = 100
+		spotLight.value.shadow.bias = -0.0001
+	}
+})
 
 const configState = reactive({
 	reflectivity: 0.1,
@@ -46,8 +55,15 @@ const configState = reactive({
 })
 
 const state = reactive({
-	clearColor: '#000',
+	clearColor: '#82839f',
 	shadows: true,
+	alpha: false,
+	antialias: true,
+	pixelRatio: window.devicePixelRatio,
+	shadowMapType: THREE.BasicShadowMap,
+	outputColorSpace: THREE.SRGBColorSpace,
+	toneMapping: THREE.AgXToneMapping,
+	useLegacyLights: true
 })
 const controlsState = reactive({
 	autoRotate: true,
