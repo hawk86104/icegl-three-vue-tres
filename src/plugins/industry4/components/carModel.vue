@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-03-27 10:38:54
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-03-28 10:22:18
+ * @LastEditTime: 2024-03-28 10:32:51
 -->
 <template>
 	<primitive :object="scene" />
@@ -34,13 +34,13 @@ materials.window.roughness = 0
 materials.window.clearcoat = 0.1
 
 materials.coat.envMapIntensity = 4
-materials.coat.roughness = 0.5
+materials.coat.roughness = 0.4
 materials.coat.metalness = 1
 
-materials.paint.envMapIntensity = 2
-materials.paint.roughness = 0.45
-materials.paint.metalness = 0.8
-materials.paint.color = new THREE.Color('#555')
+materials.paint.envMapIntensity = 2.6
+materials.paint.roughness = 0.345
+materials.paint.metalness = 0.9
+materials.paint.color = new THREE.Color('#666')
 
 // const pTexture = await loadHDR("https://opensource-1314935952.cos.ap-nanjing.myqcloud.com/images/skyBox/desert_1k.hdr")
 // Object.values(materials).forEach((ma) => {
