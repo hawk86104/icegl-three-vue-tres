@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-03-05 12:42:04
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-03-29 14:58:12
+ * @LastEditTime: 2024-03-29 22:22:32
 -->
 <template>
 	<TresCanvas v-bind="state" window-size>
@@ -31,13 +31,14 @@ import jiangSuMapMesh from '../components/jiangSuMapMesh.vue'
 const state = reactive({
 	clearColor: '#ffdbd1',
 	alpha: true,
-	antialias: true
+	antialias: true,
+	disableRender: true,
 })
 
 const controlsState = reactive({
 	enableDamping: true,
 	dampingFactor: 0.05,
-	makeDefault: true
+	makeDefault: true,
 })
 
 </script>

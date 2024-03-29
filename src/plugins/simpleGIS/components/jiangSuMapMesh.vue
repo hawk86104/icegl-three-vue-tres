@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-03-05 09:36:24
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-03-29 14:57:37
+ * @LastEditTime: 2024-03-29 16:59:42
 -->
 
 <template>
@@ -147,12 +147,12 @@ const pLeave = (intersection) => {
 	intersection.material.opacity = 1
 }
 
-const { camera, controls } = useTresContext()
+const { renderer, camera, controls, scene } = useTresContext()
 const pClick = (intersection, pointerEvent) => {
 	// camera.value.up = new THREE.Vector3(0, 1, 0)
 	console.log('click', intersection, pointerEvent)
 	const targetPosition = new THREE.Vector3()
-	debugger
+	// debugger
 	// targetPosition.x = intersection.object.pCenter[0] + tgRef.value.position.x
 	targetPosition.x = intersection.point.x
 
@@ -162,9 +162,14 @@ const pClick = (intersection, pointerEvent) => {
 	targetPosition.z = intersection.point.z
 	flyTo2(camera, targetPosition, controls)
 }
-const { onBeforeLoop } = useRenderLoop()
+const { onBeforeLoop, onLoop } = useRenderLoop()
 onBeforeLoop(() => {
 	TWEEN.update()
+})
+onLoop(() => {
+	if (renderer.value) {
+		renderer.value.render(scene.value, camera.value)
+	}
 })
 const htmlState = {
 	wrapperClass: 'wrapper',
