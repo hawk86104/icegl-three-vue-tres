@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-03-05 12:42:04
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-03-05 18:53:47
+ * @LastEditTime: 2024-03-29 14:58:12
 -->
 <template>
 	<TresCanvas v-bind="state" window-size>
@@ -15,7 +15,7 @@
 		<TresDirectionalLight :position="[0, 10, -5]" :intensity="0.2" />
 		<TresDirectionalLight :position="[5, 10, 0]" :intensity="0.2" />
 		<TresDirectionalLight :position="[-5, 10, 0]" :intensity="0.2" />
-		<!-- <TresGridHelper /> -->
+		<TresGridHelper />
 		<Suspense>
 			<jiangSuMapMesh />
 		</Suspense>
@@ -37,6 +37,7 @@ const state = reactive({
 const controlsState = reactive({
 	enableDamping: true,
 	dampingFactor: 0.05,
+	makeDefault: true
 })
 
 </script>

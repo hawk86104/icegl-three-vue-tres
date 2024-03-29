@@ -4,23 +4,26 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-03-05 09:36:24
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-03-05 12:39:12
+ * @LastEditTime: 2024-03-29 14:57:37
 -->
 
 <template>
 	<TresGroup ref="tgRef">
 		<template v-for="(item, index) in areaList " :key="`${index}`">
 			<Html v-if="item.type === 'Html'" v-bind="htmlState" :position="item.position">
-					<span>
-						{{item.name}}
-					</span>
+			<span>
+				{{ item.name }}
+			</span>
+
 			</Html>
 			<TresSprite v-if="item.type === 'Sprite'" :position="item.position" :scale="0.3" :renderOrder="1000">
 				<TresSpriteMaterial :color="0xff0000" :blending="THREE.NormalBlending" :map="pTexture" />
 			</TresSprite>
-			<TresMesh v-if="item.type === 'Shape'" :name="item.name" :renderOrder="index" @pointer-enter="pEnter" @pointer-leave="pLeave">
-				<TresExtrudeGeometry :args="[item.shape, {depth: item.depth, bevelEnabled: false}]" />
-				<TresMeshStandardMaterial :color="item.color" :emissive="0x000000" :roughness="0.45" :metalness="0.8" :transparent="true" :side="THREE.DoubleSide" />
+			<TresMesh v-if="item.type === 'Shape'" :name="item.name" :renderOrder="index" :pCenter="item.pCenter"
+				@pointer-enter="pEnter" @pointer-leave="pLeave" @click="pClick">
+				<TresExtrudeGeometry :args="[item.shape, { depth: item.depth, bevelEnabled: false }]" />
+				<TresMeshStandardMaterial :color="item.color" :emissive="0x000000" :roughness="0.45" :metalness="0.8"
+					:transparent="true" :side="THREE.DoubleSide" />
 			</TresMesh>
 			<template v-if="item.type === 'Line'">
 				<TresLine :renderOrder="index" :position-z="item.depth + 0.0001">
@@ -42,8 +45,10 @@ import * as D3 from "d3-geo"
 import * as THREE from "three"
 import { loadGeojson } from 'PLS/digitalCity/common/utils'
 import { Html } from '@tresjs/cientos'
-import { useTexture } from '@tresjs/core'
+import { useTexture, useTresContext, useRenderLoop } from '@tresjs/core'
 import { computeBoundsTree, disposeBoundsTree, acceleratedRaycast } from 'three-mesh-bvh'
+import * as TWEEN from '@tweenjs/tween.js'
+import { flyTo, flyTo2 } from '../common/utils'
 
 const initMeshBvh = () => {
 	THREE.BufferGeometry.prototype.computeBoundsTree = computeBoundsTree
@@ -69,21 +74,21 @@ const makeAreaPrimary = () => {
 		const depth = Math.random() * 0.3 + 0.3
 
 		// 关于文字和图标 待会儿制作
-		const { centroid, oneCenter,center : Cc, name } = feature.properties
+		const { centroid, oneCenter, center: Cc, name } = feature.properties
 		const { coordinates, type } = feature.geometry
-		const point = centroid || oneCenter ||Cc|| [0, 0]
+		const point = centroid || oneCenter || Cc || [0, 0]
 
 		const htmlPosition = offsetXY(point)
 		htmlPosition[1] = -htmlPosition[1]
-		htmlPosition[2]= depth
-		areaList.push({type:'Html',position:htmlPosition, name})
+		htmlPosition[2] = depth
+		areaList.push({ type: 'Html', position: htmlPosition, name })
 
 
 		const spritePosition = offsetXY(point)
-		spritePosition[1] = -spritePosition[1]+ 0.2
-		spritePosition[2]= depth+ 0.22
+		spritePosition[1] = -spritePosition[1] + 0.2
+		spritePosition[2] = depth + 0.22
 
-		areaList.push({type:'Sprite',position:spritePosition})
+		areaList.push({ type: 'Sprite', position: spritePosition })
 
 		coordinates.forEach((coordinate) => {
 			function fn (crdinate) {
@@ -95,7 +100,7 @@ const makeAreaPrimary = () => {
 					if (idx === 0) shape.moveTo(x, -y)
 					else shape.lineTo(x, -y)
 				})
-				areaList.push({type:'Shape',shape, name, color, depth})
+				areaList.push({ type: 'Shape', shape, name, color, depth, pCenter: spritePosition })
 
 				// 制作边界线
 				const points = []
@@ -103,7 +108,7 @@ const makeAreaPrimary = () => {
 					const [x, y] = offsetXY(item)
 					points.push(x, -y, 0)
 				})
-				areaList.push({type:'Line',points:new Float32Array(points), depth})
+				areaList.push({ type: 'Line', points: new Float32Array(points), depth })
 			}
 
 			if (type === "MultiPolygon") coordinate.forEach((item) => fn(item))
@@ -115,20 +120,20 @@ const makeAreaPrimary = () => {
 makeAreaPrimary()
 
 const setCenter = (map) => {
-  map.rotation.x = -Math.PI / 2
-  const box = new THREE.Box3().setFromObject(map)
-  const centerMap = box.getCenter(new THREE.Vector3())
+	map.rotation.x = -Math.PI / 2
+	const box = new THREE.Box3().setFromObject(map)
+	const centerMap = box.getCenter(new THREE.Vector3())
 
-  const offset = [0, 0]
-  map.position.x = map.position.x - centerMap.x - offset[0]
-  map.position.z = map.position.z - centerMap.z - offset[1]
+	const offset = [0, 0]
+	map.position.x = map.position.x - centerMap.x - offset[0]
+	map.position.z = map.position.z - centerMap.z - offset[1]
 }
 const tgRef = ref()
 watchEffect(() => {
 	if (tgRef.value) {
 		setCenter(tgRef.value)
 		tgRef.value.children.forEach((item) => {
-			if(item.type === 'Mesh'){
+			if (item.type === 'Mesh') {
 				item.geometry.computeBoundsTree()
 			}
 		})
@@ -142,13 +147,32 @@ const pLeave = (intersection) => {
 	intersection.material.opacity = 1
 }
 
+const { camera, controls } = useTresContext()
+const pClick = (intersection, pointerEvent) => {
+	// camera.value.up = new THREE.Vector3(0, 1, 0)
+	console.log('click', intersection, pointerEvent)
+	const targetPosition = new THREE.Vector3()
+	debugger
+	// targetPosition.x = intersection.object.pCenter[0] + tgRef.value.position.x
+	targetPosition.x = intersection.point.x
+
+	targetPosition.y = intersection.point.y + 10
+
+	// targetPosition.z = intersection.object.pCenter[1] + tgRef.value.position.z
+	targetPosition.z = intersection.point.z
+	flyTo2(camera, targetPosition, controls)
+}
+const { onBeforeLoop } = useRenderLoop()
+onBeforeLoop(() => {
+	TWEEN.update()
+})
 const htmlState = {
 	wrapperClass: 'wrapper',
 	as: 'div',
 	center: true,
-	sprite:true,
-	prepend:true,
-	transform:true
+	sprite: true,
+	prepend: true,
+	transform: true
 }
 </script>
 
@@ -157,8 +181,9 @@ const htmlState = {
 	#inner {
 		user-select: none;
 		pointer-events: none !important;
-		span{
-			text-shadow:1px 1px 2px #c92704;
+
+		span {
+			text-shadow: 1px 1px 2px #c92704;
 			color: #fff;
 			font-size: 12px;
 		}

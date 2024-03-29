@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-18 08:51:19
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-03-28 10:24:22
+ * @LastEditTime: 2024-03-28 10:36:41
 -->
 <template>
 	<loading />
@@ -62,7 +62,7 @@ const state = reactive({
 	pixelRatio: window.devicePixelRatio,
 	shadowMapType: THREE.BasicShadowMap,
 	outputColorSpace: THREE.SRGBColorSpace,
-	toneMapping: THREE.AgXToneMapping,
+	toneMapping: THREE.ACESFilmic,
 	useLegacyLights: true
 })
 const controlsState = reactive({
