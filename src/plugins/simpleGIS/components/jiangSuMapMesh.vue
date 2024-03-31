@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-03-05 09:36:24
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-03-29 16:59:42
+ * @LastEditTime: 2024-03-31 12:10:56
 -->
 
 <template>
@@ -48,7 +48,7 @@ import { Html } from '@tresjs/cientos'
 import { useTexture, useTresContext, useRenderLoop } from '@tresjs/core'
 import { computeBoundsTree, disposeBoundsTree, acceleratedRaycast } from 'three-mesh-bvh'
 import * as TWEEN from '@tweenjs/tween.js'
-import { flyTo, flyTo2 } from '../common/utils'
+import { flyTo } from '../common/utils'
 
 const initMeshBvh = () => {
 	THREE.BufferGeometry.prototype.computeBoundsTree = computeBoundsTree
@@ -147,29 +147,18 @@ const pLeave = (intersection) => {
 	intersection.material.opacity = 1
 }
 
-const { renderer, camera, controls, scene } = useTresContext()
+const { camera, controls } = useTresContext()
 const pClick = (intersection, pointerEvent) => {
-	// camera.value.up = new THREE.Vector3(0, 1, 0)
 	console.log('click', intersection, pointerEvent)
 	const targetPosition = new THREE.Vector3()
-	// debugger
-	// targetPosition.x = intersection.object.pCenter[0] + tgRef.value.position.x
 	targetPosition.x = intersection.point.x
-
 	targetPosition.y = intersection.point.y + 10
-
-	// targetPosition.z = intersection.object.pCenter[1] + tgRef.value.position.z
 	targetPosition.z = intersection.point.z
-	flyTo2(camera, targetPosition, controls)
+	flyTo(camera, targetPosition, controls)
 }
-const { onBeforeLoop, onLoop } = useRenderLoop()
+const { onBeforeLoop } = useRenderLoop()
 onBeforeLoop(() => {
 	TWEEN.update()
-})
-onLoop(() => {
-	if (renderer.value) {
-		renderer.value.render(scene.value, camera.value)
-	}
 })
 const htmlState = {
 	wrapperClass: 'wrapper',
