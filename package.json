@@ -42,6 +42,7 @@
     "@mapbox/tilebelt": "^1.0.2",
     "@tresjs/cientos": "3.7.0",
     "@tresjs/core": "3.7.0",
+    "@tweenjs/tween.js": "^23.1.1",
     "axios": "1.6.7",
     "cannon-es": "^0.20.0",
     "compressing": "^1.10.0",

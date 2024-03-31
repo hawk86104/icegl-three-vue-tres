@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-18 22:17:49
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-03-26 15:07:45
+ * @LastEditTime: 2024-03-31 13:36:27
 -->
 <template>
     <div class="flex h-full w-full">
@@ -31,9 +31,15 @@
                     <template v-for="(onePlugin, pkey) in  filteredData ">
                         <f-menu-item v-if="pkey !== 'basic'" :value="pkey">
                             <template #label>
-                                <EditOutlined style="position: absolute;left: 13px;top: 20px;"
-                                    v-if="isNew(onePlugin.updateTime)" :size="12" :rotate="135" color="#ffffff" />{{
-                onePlugin.title }}
+                                <div class="flex absolute" style="left: 1px;flex-direction: column;top: 2px;">
+                                    <template v-for="(lbItem, lbKey) in getleftMenuBadge(onePlugin.name)">
+                                        <f-badge v-if="lbItem.show" :value="lbItem.text" class="tag-fbdge"
+                                            type="primary" size="small" />
+                                    </template>
+                                </div>
+                                {{ onePlugin.title }}
+                                <FBadge :value="onePlugin.preview.length" class="count-fbdge" type="primary"
+                                    size="small" />
                             </template>
                         </f-menu-item>
                     </template>
@@ -64,7 +70,8 @@
 <script setup lang="ts">
 import { ref, provide, watch } from 'vue'
 import { defineRouteMeta, useModel } from '@fesjs/fes'
-import { AppstoreOutlined, PictureOutlined, EditOutlined, UpCircleOutlined } from '@fesjs/fes-design/icon'
+import { FBadge } from '@fesjs/fes-design'
+import { AppstoreOutlined, PictureOutlined, UpCircleOutlined } from '@fesjs/fes-design/icon'
 import { getPluginsConfig, getOnlinePluginConfig } from '../common/utils'
 import cardList from '../components/forPreview/cardList.vue'
 import filterComFixed from '../components/forPreview/filterComFixed.vue'
@@ -147,6 +154,7 @@ watch(filterFixedInputValue, (newValue: any) => {
     if (!newValue) {
         expandedKeys.value = ['1', '2']
     }
+    // console.log('filterFixedInputValue filteredData', filteredData.value)
 })
 
 const { menuSetup } = useModel('forPreview')
@@ -188,7 +196,24 @@ const menuSetupFilter = ref([])
 provide('menuSetupFilter', menuSetupFilter)
 watch(menuSetupFilter, (newValue: any) => {
     filteredData.value = filterMenuSetup(newValue)
+    // console.log('menuSetupFilter filteredData', filteredData.value)
 })
+
+const getleftMenuBadge = (name: string) => {
+    const tagOne = {
+        'recommend': { show: false, text: '荐' },
+        'new': { show: false, text: '新' },
+        'hot': { show: false, text: '热' },
+    } as any
+    if (menuSetup.value[name]) {
+        const tmpOne = menuSetup.value[name]
+        for (const key in tmpOne) {
+            tagOne[tmpOne[key].taglist].show = true
+        }
+    }
+    console.log(tagOne)
+    return tagOne
+}
 </script>
 
 <style lang="less">
@@ -224,6 +249,19 @@ watch(menuSetupFilter, (newValue: any) => {
     margin-bottom: 5px;
     margin-right: 20px;
 }
+
+.count-fbdge {
+    span {
+        border-radius: 3px !important;
+    }
+}
+
+.tag-fbdge {
+    span {
+        border-radius: 2px !important;
+        padding: 0px !important;
+    }
+}
 </style>
 <style lang="less" scoped>
 .toTop {
@@ -234,5 +272,16 @@ watch(menuSetupFilter, (newValue: any) => {
     font-weight: bold;
     color: #0f1222;
     cursor: pointer;
+}
+
+.count-fbdge {
+    position: absolute;
+    right: 13px;
+    top: 18.8px;
+}
+
+.tag-fbdge {
+    scale: 0.8;
+    margin-right: -3px
 }
 </style>
