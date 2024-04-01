@@ -4,11 +4,13 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-02-26 18:58:32
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-03-18 15:03:46
+ * @LastEditTime: 2024-04-01 14:49:52
  */
 import { Box3Helper, BufferGeometry, Mesh, MeshBasicMaterial, MeshStandardMaterial, Texture, SRGBColorSpace, ShaderMaterial, Matrix4 } from 'three';
+import * as THREE from 'three';
 import { TerrainMesh } from './TerrainMesh';
 import { Provider } from '../Provider';
+import CustomShaderMaterial from 'three-custom-shader-material/vanilla'
 // import { Completer } from '../Utils/PromiseUtils';
 
 class TerrainMeshProvider implements Provider<Mesh> {
@@ -109,18 +111,57 @@ class TerrainMeshProvider implements Provider<Mesh> {
         let material = null
         const renderOrder = tileNo[0] + tileNo[1] + tileNo[2]
 
+        material = this.useStandardMaterial
+            ? new MeshStandardMaterial({ map: texture, wireframe, flatShading })
+            : new MeshBasicMaterial({ map: texture, wireframe })
         if (this.filter) {
-            material = new ShaderMaterial({
-                // side: 2,
-                wireframe: wireframe,
-                depthTest: true,
-                depthWrite: false,
-                //开启多边形偏移
-                polygonOffset: false,
-                //当两个参数都为负值（深度减小）时，网格将被拉向摄影机（因此，位于前面）。
-                //当两个参数都为正值（增加深度）时，网格将被推离摄影机（因此，被推到后面）。
-                polygonOffsetFactor: 0,
-                polygonOffsetUnits: 1.0,
+            material = new CustomShaderMaterial({
+                baseMaterial: material,
+                vertexShader: `
+                varying vec2 vUv;    //顶点纹理坐标
+                void main () {
+                    vUv = uv;
+                    // gl_Position = projectionMatrix * viewMatrix * modelMatrix * vec4( position, 1.0 ); 着色器会抖动
+                    // gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+                    csm_Position = position * vec3(1.0);
+                }
+                `,
+                fragmentShader: `
+                uniform sampler2D e_Texture;     //纹理图像
+                varying vec2 vUv;               //片元纹理坐标
+                uniform mat4 t_Matrix;     //接收变换矩阵
+                void main () {
+                    // gl_FragColor = texture2D( e_Texture, vUv );
+
+                    // vec4 textureColor = texture2D( e_Texture, vUv );
+                    // //计算加权平均值
+                    // float w_a = textureColor.r * 0.3 + textureColor.g * 0.6 + textureColor.b * 0.1;
+                    // gl_FragColor = vec4(w_a, w_a, w_a, 1.0);
+
+                    vec4 textureColor = texture2D( e_Texture, vUv );
+                    //变换矩阵乘以 vec4(R,G,B,1)    --->vec4(R,G,B,1) 是齐次坐标，原本是n维的向量用一个n+1维向量来表示
+                    //vec4(R,G,B,1)第四个分量不是透明度
+                    vec4 transColor =  vec4(textureColor.r, textureColor.g, textureColor.b, 1.0)*t_Matrix; 
+                    //设置透明度
+                    transColor.a = 1.0;
+                    csm_FragColor = transColor;
+
+                    // if(vUv.x==0.0 || vUv.x==1.0 || vUv.y==0.0 || vUv.y==1.0){
+                    //     gl_FragColor.a = 0.0;
+                    // }
+                }`,
+                silent: true, // Disables the default warning if true
+                flatShading: flatShading,
+                // side: THREE.FrontSide,
+                // wireframe: wireframe,
+                // depthTest: true,
+                // depthWrite: false,
+                // //开启多边形偏移
+                // polygonOffset: true,
+                // //当两个参数都为负值（深度减小）时，网格将被拉向摄影机（因此，位于前面）。
+                // //当两个参数都为正值（增加深度）时，网格将被推离摄影机（因此，被推到后面）。
+                // polygonOffsetFactor: 0,
+                // polygonOffsetUnits: 1.0,
                 uniforms: {
                     e_Texture: {
                         value: texture
@@ -129,42 +170,9 @@ class TerrainMeshProvider implements Provider<Mesh> {
                         value: this.getTranMatrix()
                     }
                 },
-                // 顶点着色器
-                vertexShader: `
-                varying vec2 v_Uv;    //顶点纹理坐标
-                void main () {
-                    v_Uv = uv;
-                    // gl_Position = projectionMatrix * viewMatrix * modelMatrix * vec4( position, 1.0 ); 着色器会抖动
-                    gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-                }
-                `,
-                // 片元着色器
-                fragmentShader: `
-                uniform sampler2D e_Texture;     //纹理图像
-                varying vec2 v_Uv;               //片元纹理坐标
-                uniform mat4 t_Matrix;     //接收变换矩阵
-                void main () {
-                    // gl_FragColor = texture2D( e_Texture, v_Uv );
-
-                    // vec4 textureColor = texture2D( e_Texture, v_Uv );
-                    // //计算加权平均值
-                    // float w_a = textureColor.r * 0.3 + textureColor.g * 0.6 + textureColor.b * 0.1;
-                    // gl_FragColor = vec4(w_a, w_a, w_a, 1.0);
-
-                    vec4 textureColor = texture2D( e_Texture, v_Uv );
-                    //变换矩阵乘以 vec4(R,G,B,1)    --->vec4(R,G,B,1) 是齐次坐标，原本是n维的向量用一个n+1维向量来表示
-                    //vec4(R,G,B,1)第四个分量不是透明度
-                    vec4 transColor =  vec4(textureColor.r, textureColor.g, textureColor.b, 1.0)*t_Matrix; 
-                    //设置透明度
-                    transColor.a = 1.0;
-                    gl_FragColor = transColor;
-                }`
             })
-        } else {
-            material = this.useStandardMaterial
-                ? new MeshStandardMaterial({ map: texture, wireframe, flatShading })
-                : new MeshBasicMaterial({ map: texture, wireframe })
         }
+
         const mesh = new TerrainMesh();
         mesh.renderOrder = renderOrder
         geometry.computeBoundingBox();
