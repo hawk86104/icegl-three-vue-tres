@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-02-26 18:58:32
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-03-18 15:16:07
+ * @LastEditTime: 2024-04-01 14:36:26
 -->
 <template>
 	<primitive :object="map" :rotation="[-Math.PI / 2, 0, 0]" />
@@ -12,6 +12,7 @@
 
 <script lang="ts" setup>
 import * as THREE from 'three'
+import * as TWEEN from '@tweenjs/tween.js'
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js'
 import { useTresContext, useRenderLoop } from '@tresjs/core'
 import { watchEffect, watch } from 'vue'
@@ -72,12 +73,15 @@ meshProvider.filter = {
 	genContrast: props.genContrast,	//对比度
 	genSaturation: props.genSaturation,	//饱和度
 }
+// meshProvider.filter = null
 if (props.monochrome) {
 	let color = new THREE.Color(props.monochrome)
-	meshProvider.filter.monochrome = {
-		r: color.r,
-		g: color.g,
-		b: color.b,
+	if (meshProvider.filter) {
+		meshProvider.filter.monochrome = {
+			r: color.r,
+			g: color.g,
+			b: color.b,
+		}
 	}
 }
 
@@ -103,16 +107,16 @@ watchEffect(() => {
 		orbitControl.position0.set(camera.position.x, camera.position.y, camera.position.z)
 		orbitControl.target.set(camera.position.x, 0, camera.position.z - 2000)
 	}
-	if (props.genBright) {
+	if (props.genBright && meshProvider.filter) {
 		meshProvider.filter.genBright = props.genBright
 	}
-	if (props.genContrast) {
+	if (props.genContrast && meshProvider.filter) {
 		meshProvider.filter.genContrast = props.genContrast
 	}
-	if (props.genSaturation) {
+	if (props.genSaturation && meshProvider.filter) {
 		meshProvider.filter.genSaturation = props.genSaturation
 	}
-	if (props.isMonochrome && props.monochrome) {
+	if (props.isMonochrome && props.monochrome && meshProvider.filter) {
 		let color = new THREE.Color(props.monochrome)
 		meshProvider.filter.monochrome = {
 			r: color.r,
@@ -123,20 +127,25 @@ watchEffect(() => {
 })
 
 watch(() => props.opposite, (value) => {
-	meshProvider.filter.opposite = value
+	if (meshProvider.filter) {
+		meshProvider.filter.opposite = value
+	}
 })
 watch(() => props.isMonochrome, (value) => {
 	let color = new THREE.Color(props.monochrome)
-	meshProvider.filter.monochrome = value ? {
-		r: color.r,
-		g: color.g,
-		b: color.b,
-	} : null
+	if (meshProvider.filter) {
+		meshProvider.filter.monochrome = value ? {
+			r: color.r,
+			g: color.g,
+			b: color.b,
+		} : null
+	}
 })
 
 const { onLoop } = useRenderLoop()
 onLoop(() => {
 	if (renderer.value) {
+		TWEEN.update()
 		if (orbitControl) {
 			orbitControl.update()
 		}
@@ -153,7 +162,7 @@ onLoop(() => {
 
 
 defineExpose({
-	camera, map
+	camera, map, orbitControl
 })
 
 </script>
