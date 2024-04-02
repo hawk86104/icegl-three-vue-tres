@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-18 22:17:49
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-04-01 15:07:49
+ * @LastEditTime: 2024-04-01 15:39:18
 -->
 <template>
     <div class="flex h-full w-full">
@@ -37,7 +37,7 @@
                                             type="primary" size="small" />
                                     </template>
                                 </div>
-                                {{ onePlugin.title }}
+                                <span class="left-m-text">{{ onePlugin.title }}</span>
                                 <FBadge :value="onePlugin.preview.length" class="count-fbdge" type="primary"
                                     size="small" />
                             </template>
@@ -88,21 +88,21 @@ getOnlinePluginConfig(pluginsConfig)
 const goto = (value: string) => {
     tabListRef.value[value.value]?.scrollIntoView({ behavior: 'smooth', block: 'center', inline: "nearest" })
 }
-const isNew = ((time: string) => {
-    if (time) {
-        const targetDate = new Date(time)
-        const currentDate = new Date()
-        const targetTimestamp = targetDate.getTime()
-        const currentTimestamp = currentDate.getTime()
-        const timeDifference = currentTimestamp - targetTimestamp
-        const millisecondsPerDay = 1000 * 60 * 60 * 24 // 每天的毫秒数
-        const daysDifference = Math.floor(timeDifference / millisecondsPerDay)
-        if (daysDifference < 7) { //小于七天 算新插件
-            return true
-        }
-    }
-    return false
-})
+// const isNew = ((time: string) => {
+//     if (time) {
+//         const targetDate = new Date(time)
+//         const currentDate = new Date()
+//         const targetTimestamp = targetDate.getTime()
+//         const currentTimestamp = currentDate.getTime()
+//         const timeDifference = currentTimestamp - targetTimestamp
+//         const millisecondsPerDay = 1000 * 60 * 60 * 24 // 每天的毫秒数
+//         const daysDifference = Math.floor(timeDifference / millisecondsPerDay)
+//         if (daysDifference < 7) { //小于七天 算新插件
+//             return true
+//         }
+//     }
+//     return false
+// })
 
 const scrollToTop = () => {
     document.querySelector('.right-page-list')?.scrollTo({ top: 0, behavior: 'smooth' })
@@ -205,7 +205,7 @@ const getleftMenuBadge = (name: string) => {
         'new': { show: false, text: '新' },
         'hot': { show: false, text: '热' },
     } as any
-    if (menuSetup.value&&menuSetup.value[name]) {
+    if (menuSetup.value && menuSetup.value[name]) {
         const tmpOne = menuSetup.value[name]
         for (const key in tmpOne) {
             tagOne[tmpOne[key].taglist].show = true
@@ -253,6 +253,11 @@ const getleftMenuBadge = (name: string) => {
 .count-fbdge {
     span {
         border-radius: 3px !important;
+        background-color: #0f1222 !important;
+        border: white 1px solid;
+        scale: 0.8;
+        padding: 1px 1px 0 !important;
+        margin-top: 2px;
     }
 }
 
@@ -261,6 +266,10 @@ const getleftMenuBadge = (name: string) => {
         border-radius: 2px !important;
         padding: 0px !important;
     }
+}
+
+.fes-menu.is-vertical .fes-menu-item-wrapper {
+    height: 46px !important;
 }
 </style>
 <style lang="less" scoped>
@@ -277,11 +286,20 @@ const getleftMenuBadge = (name: string) => {
 .count-fbdge {
     position: absolute;
     right: 13px;
-    top: 18.8px;
+    top: 13.8px;
 }
 
 .tag-fbdge {
     scale: 0.8;
-    margin-right: -3px
+    margin-bottom: -3px;
+    margin-top: 1px;
+}
+
+.left-m-text {
+    width: 95%;
+    display: block;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
 </style>
