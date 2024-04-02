@@ -23,6 +23,7 @@
     "@webank/eslint-config-webank": "1.3.1",
     "cross-env": "^7.0.3",
     "esm": "^3.2.25",
+    "typescript": "^5.4.3",
     "vite-plugin-glsl": "0.2.2"
   },
   "dependencies": {
