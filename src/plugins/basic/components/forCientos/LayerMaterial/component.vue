@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-04-02 15:07:33
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-04-02 21:22:09
+ * @LastEditTime: 2024-04-03 09:56:46
 -->
 <script setup lang="ts">
 import { shallowRef, onMounted } from 'vue'
@@ -19,9 +19,6 @@ const { extend } = useTresContext()
 extend({ LayerMaterialCom })
 
 defineExpose({ LayerMaterialClass })
-// const slots = useSlots()
-// args.layers = slots.default() || slots.default
-// const args = Object.assign({}, props)
 onMounted(() => {
   LayerMaterialClass.value.init(LayerMaterialClass.value.__vnode.children)
 })

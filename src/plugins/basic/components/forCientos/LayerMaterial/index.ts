@@ -1,3 +1,4 @@
+/* eslint-disable import/no-unresolved */
 import LayerMaterial from './component.vue'
 import Color from './color.vue'
 import Depth from './depth.vue'

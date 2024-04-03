@@ -45,6 +45,8 @@
 
 ## 🏕 点击预览：[🌏opensource.icegl.cn](https://opensource.icegl.cn)
 
+如果访问太慢，请访问镜像站点：[🌏ice-gl.gitee.io/icegl-three-vue-tres](https://ice-gl.gitee.io/icegl-three-vue-tres/)
+
 ```shell
 因项目经常更新编译，如发现访问错误，请清空浏览器缓存。
 ```

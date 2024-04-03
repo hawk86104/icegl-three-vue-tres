@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-18 08:51:19
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-04-02 21:41:11
+ * @LastEditTime: 2024-04-03 08:30:46
 -->
 <template>
 	<loading />
@@ -20,17 +20,7 @@
 		<Suspense>
 			<reflectorShaderMesh v-bind="configState" :position="[0, -0.6, 0]" />
 		</Suspense>
-
 		<environmentForLightformers />
-
-		<TresMesh :scale="1" :position="[-4, 0, 0]">
-			<TresSphereGeometry :args="[1, 500, 500]" />
-			<LayerMaterial color="blue" lighting="physical">
-				<Color color='#444' mode="normal" :alpha="1" />
-				<Depth colorA="blue" colorB="black" :alpha="0.5" mode="normal" :near="0" :far="300"
-					:origin="new THREE.Vector3(100, 100, 100)" />
-			</LayerMaterial>
-		</TresMesh>
 	</TresCanvas>
 </template>
 
@@ -38,7 +28,6 @@
 import { reactive, ref, watchEffect } from 'vue'
 import { OrbitControls } from '@tresjs/cientos'
 import * as THREE from 'three'
-import { LayerMaterial, Color, Depth } from '@/components/forCientos/LayerMaterial'
 
 import reflectorShaderMesh from 'PLS/floor/components/reflectorShaderMesh.vue'
 import { randomLoading as loading } from 'PLS/UIdemo'
