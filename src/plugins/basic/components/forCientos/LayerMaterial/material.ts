@@ -8,7 +8,7 @@ class LayerMaterialCom extends LayerMaterial {
 	init() {
 		const keysWithPrefix = Object.keys(this).filter(key => key.startsWith('layercoms_'))
 		const valuesWithPrefix = keysWithPrefix.map((key: any) => this[key])
-		this.layers = valuesWithPrefix//slots[0].children.map((slot: any) => slot.el)
+		this.layers = valuesWithPrefix
 		this.refresh()
 	}
 }
