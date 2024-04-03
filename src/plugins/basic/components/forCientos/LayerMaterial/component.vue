@@ -4,10 +4,10 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-04-02 15:07:33
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-04-03 09:56:46
+ * @LastEditTime: 2024-04-03 14:58:27
 -->
 <script setup lang="ts">
-import { shallowRef, onMounted } from 'vue'
+import { shallowRef, onMounted, useSlots } from 'vue'
 import { useTresContext } from '@tresjs/core'
 import { LayerMaterialParameters } from 'lamina/types'
 import { LayerMaterialCom } from './material'
@@ -20,7 +20,7 @@ extend({ LayerMaterialCom })
 
 defineExpose({ LayerMaterialClass })
 onMounted(() => {
-  LayerMaterialClass.value.init(LayerMaterialClass.value.__vnode.children)
+  LayerMaterialClass.value.init() //LayerMaterialClass.value.__vnode.children
 })
 </script>
 
