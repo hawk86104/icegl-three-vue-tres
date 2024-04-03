@@ -80,7 +80,7 @@ const backgroundMaterial = new LayerMaterial({
 		new Depth({
 			colorA: 'blue',
 			colorB: 'black',
-			alpha: 0.8,
+			alpha: 0.5,
 			mode: 'normal',
 			near: 0,
 			far: 300,
@@ -110,6 +110,8 @@ onBeforeLoop(({ delta }) => {
 		(lightFormerGroup.position.z += delta * 10) > 20 && (lightFormerGroup.position.z = -60)
 		cubeCamera.update(renderer.value, virtualScene)
 		scene.value.environment = fbo.texture
+		scene.value.background = fbo.texture
+		scene.value.backgroundBlurriness = 1.0
 	}
 })
 </script>

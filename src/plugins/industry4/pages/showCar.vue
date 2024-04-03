@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-18 08:51:19
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-03-28 10:36:41
+ * @LastEditTime: 2024-04-03 08:30:46
 -->
 <template>
 	<loading />
@@ -20,15 +20,13 @@
 		<Suspense>
 			<reflectorShaderMesh v-bind="configState" :position="[0, -0.6, 0]" />
 		</Suspense>
-
 		<environmentForLightformers />
 	</TresCanvas>
 </template>
 
-
 <script setup lang="ts">
 import { reactive, ref, watchEffect } from 'vue'
-import { OrbitControls, vLightHelper } from '@tresjs/cientos'
+import { OrbitControls } from '@tresjs/cientos'
 import * as THREE from 'three'
 
 import reflectorShaderMesh from 'PLS/floor/components/reflectorShaderMesh.vue'
