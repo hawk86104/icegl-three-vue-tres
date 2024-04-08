@@ -16,7 +16,10 @@ const props = withDefaults(defineProps<EnvironmentOptions>(), {
   files: [],
   path: '',
   preset: undefined,
-  resolution: 256
+  resolution: 256,
+  near: 1,
+  far: 1000,
+  frames: Infinity
 })
 
 const texture: Ref<Texture | CubeTexture | null> = ref(null)
@@ -32,7 +35,7 @@ if (useSlots().default !== undefined) {
   slots = useSlots().default()
   fbo = new THREE.WebGLCubeRenderTarget(props.resolution)
   fbo.texture.type = THREE.HalfFloatType
-  cubeCamera = new THREE.CubeCamera(1, 10000, fbo)
+  cubeCamera = new THREE.CubeCamera(props.near, props.far, fbo)
 }
 const envSence = ref<EnvSence | null>(null)
 onUnmounted(() => {
@@ -40,9 +43,13 @@ onUnmounted(() => {
   fbo?.dispose()
 })
 const { onBeforeLoop } = useRenderLoop()
+let count = 1
 onBeforeLoop(() => {
   if (cubeCamera && envSence.value) {
-    cubeCamera.update(renderer.value, toRaw(envSence.value.virtualScene))
+    if (props.frames === Infinity || count < props.frames) {
+      cubeCamera.update(renderer.value, toRaw(envSence.value.virtualScene))
+      count++
+    }
   }
 })
 //@ts-ignore

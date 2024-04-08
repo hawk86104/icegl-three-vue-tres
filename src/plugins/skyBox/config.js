@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-01-26 16:14:33
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-04-07 14:30:13
+ * @LastEditTime: 2024-04-08 14:19:32
  */
 
 export default {
@@ -23,6 +23,6 @@ export default {
 		{ "src": "plugins/skyBox/preview/skyBox.png", "type": "img", "name": "skyBoxC", "title": "单张:HDR渲染:scene:env/background" },
 		{ "src": "plugins/skyBox/preview/skyBox.png", "type": "img", "name": "skyBoxE", "title": "多张:矩形图:scene:env/background" },
 		{ "src": "plugins/skyBox/preview/skyBox.png", "type": "img", "name": "skyBoxF", "title": "多张:HDR渲染:scene:env/background" },
-		{ "src": "plugins/skyBox/preview/newEnvironment.png", "type": "img", "name": "newEnvironment", "title": "多张:HDR渲染:scene:env/background" },
+		{ "src": "plugins/skyBox/preview/newEnvironment.png", "type": "img", "name": "newEnvironment", "title": "移植R3F的Environment" },
 	]
 }

@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-04-07 11:36:45
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-04-08 11:56:25
+ * @LastEditTime: 2024-04-08 12:59:12
  */
 
 export interface EnvironmentOptions {
@@ -46,9 +46,30 @@ export interface EnvironmentOptions {
   * The resolution of the WebGLCubeRenderTarget.
   *
   * @type {number}
-  * @default 0
+  * @default 256
   */
   resolution?: number
+  /**
+  * The near of the CubeCamera.
+  *
+  * @type {number}
+  * @default 1
+  */
+  near?: number
+  /**
+  * The far of the CubeCamera.
+  *
+  * @type {number}
+  * @default 1000
+  */
+  far?: number
+  /**
+  * The frames of the cubeCamera.update.
+  *
+  * @type {number}
+  * @default Infinity
+  */
+  frames?: number
 }
 
 export const environmentPresets = {
