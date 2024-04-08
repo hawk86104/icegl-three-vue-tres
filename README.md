@@ -1,4 +1,5 @@
 # 🧊🧊🧊 icegl-three-vue-tres 🧊🧊🧊
+
 ## 🎉🎉🎊 三维可视化项目快速落地の开源框架 🎊🎉🎉
 
 <p align="center">
@@ -8,82 +9,103 @@
     <a target="_black" href="https://gitee.com/ice-gl/icegl-three-vue-tres">
       <img src="https://gitee.com/ice-gl/icegl-three-vue-tres/badge/star.svg?theme=dark" alt="gitee-starts" />
     </a>
+    <a target="_black" href="https://afdian.net/@tvt_js">
+      <img src="https://img.shields.io/badge/爱发电-ICEGL-blue.svg?style=flat-square&color=027afd&logo=github-sponsors" alt="爱发电" />
+    </a>
 </p>
 
-## 🧊🧊🧊🧊🧊🧊🧊🧊🧊🧊🧊🧊🧊🧊🧊🧊🧊🧊🧊🧊 
+## 🧊🧊🧊🧊🧊🧊🧊🧊🧊🧊🧊🧊🧊🧊🧊🧊🧊🧊🧊🧊
 
-```shell 
+```shell
 如果对您有帮助，您可以点右上角 “Star” 收藏一下 ，您的star就是我开发的动力，感谢！
 ```
 
 # 生态 `@ThreeJS-@Vue3.x-@TresJS`
-> icegl出品，永久开源且免费商用，持续更新ing，请点击右上角start⭐关注
+
+> icegl 出品，永久开源且免费商用，持续更新 ing，请点击右上角 start⭐ 关注
 
 本项目融合于三大生态系统中：
-- 🎲 ThreeJS * [点击详情](https://threejs.org)
-<a href="https://www.npmjs.com/package/three">
-<img src="https://img.shields.io/npm/v/three?label=three">
-</a>
-ThreeJS大名鼎鼎的基于浏览器渲染，JavaScript语言的3D库。<br/><br/>
 
-- 🍀 Vue3.x * [点击详情](https://cn.vuejs.org)
-<a href="https://www.npmjs.com/package/vue">
-<img src="https://img.shields.io/npm/v/vue?label=vue&color=%2342b883">
-</a>
-易学易用，性能出色，适用场景丰富的 Web 前端框架。<br/><br/>
+-   🎲 ThreeJS \* [点击详情](https://threejs.org)
+    <a href="https://www.npmjs.com/package/three">
+    <img src="https://img.shields.io/npm/v/three?label=three">
+    </a>
+    ThreeJS 大名鼎鼎的基于浏览器渲染，JavaScript 语言的 3D 库。<br/><br/>
 
-- ⚡ TresJS * [点击详情](https://tresjs.org)
+-   🍀 Vue3.x \* [点击详情](https://cn.vuejs.org)
+    <a href="https://www.npmjs.com/package/vue">
+    <img src="https://img.shields.io/npm/v/vue?label=vue&color=%2342b883">
+    </a>
+    易学易用，性能出色，适用场景丰富的 Web 前端框架。<br/><br/>
+
+-   ⚡ TresJS \* [点击详情](https://tresjs.org)
 
 <a href="https://www.npmjs.com/package/@tresjs/core"><img src="https://img.shields.io/npm/v/@tresjs/core?color=%2382DBCA&label=%40tresjs%2Fcore&logo=data:image/svg%2bxml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTExLjY4NTQgMy40MjkxNkMxMi4wNzM4IDIuNzgxODIgMTMuMDEyIDIuNzgxODIgMTMuNDAwNCAzLjQyOTE1TDE5LjE3NzEgMTMuMDU2OUMxOS41NzcgMTMuNzIzNSAxOS4wOTY5IDE0LjU3MTQgMTguMzE5NiAxNC41NzE0SDYuNzY2MjRDNS45ODg5NCAxNC41NzE0IDUuNTA4ODMgMTMuNzIzNSA1LjkwODc1IDEzLjA1NjlMMTEuNjg1NCAzLjQyOTE2WiIgZmlsbD0iIzgyREJDNSIvPgo8cGF0aCBkPSJNMTUuNjg1NyAxMC41NDI5QzE1LjY4NTcgOS45OTA1OSAxNi4xMzM0IDkuNTQyODggMTYuNjg1NyA5LjU0Mjg4SDI2QzI2LjU1MjIgOS41NDI4OCAyNyA5Ljk5MDU5IDI3IDEwLjU0MjlWMTkuODU3MkMyNyAyMC40MDk0IDI2LjU1MjIgMjAuODU3MiAyNiAyMC44NTcySDE2LjY4NTdDMTYuMTMzNCAyMC44NTcyIDE1LjY4NTcgMjAuNDA5NCAxNS42ODU3IDE5Ljg1NzJWMTAuNTQyOVoiIGZpbGw9IiM0RjRGNEYiLz4KPGNpcmNsZSBjeD0iMTYiIGN5PSIyMiIgcj0iNiIgZmlsbD0iI0VGQUMzNSIvPgo8L3N2Zz4K" alt="npm package"></a>
-使用Vue3.x组件实现声明式的ThreeJS，做属于前端的三维项目。<br/><br/>
+使用 Vue3.x 组件实现声明式的 ThreeJS，做属于前端的三维项目。<br/><br/>
 
-## 🏕点击预览：[🌏opensource.icegl.cn](http://opensource.icegl.cn)
-![展示](./preview/数字城市1.gif)
-![展示](./preview/地球2.gif)
+## 🏕 点击预览：[🌏opensource.icegl.cn](https://opensource.icegl.cn)
+
+如果访问太慢，请访问镜像站点：[🌏ice-gl.gitee.io/icegl-three-vue-tres](https://ice-gl.gitee.io/icegl-three-vue-tres/)
+
+```shell
+因项目经常更新编译，如发现访问错误，请清空浏览器缓存。
+```
+
+![展示](./public/plugins/simpleGIS/preview/mapBuildings.gif)
+![展示](./preview/数字城市2.gif)
+![展示](./public/plugins/digitalCity/preview/city2.gif)
 ![展示](./preview/地球3.gif)
+![展示](./preview/热力图2.gif)
 ![展示](./preview/热力图.gif)
+![展示](./preview/models.gif)
+![展示](./preview/数字大脑.gif)
+![展示](./preview/shadertoyMaterial.gif)
 
 更多演示请进入预览页面
 
 # 优势
-- 🌈 前端の基本素养 * FesJS [点击详情](https://fesjs.mumblefe.cn)
-<a href="https://www.npmjs.com/package/@fesjs/fes">
-<img src="https://img.shields.io/npm/v/%40fesjs%2Ffes?label=%40fesjs%2Ffes">
-</a>
-集成封装项目落地的常用库：图标、多语言、API接口调用、Vuex/Pinia、model数据封装、页面layout/权限access、路由管理等。<br/>
 
-- 🌠 像写Vue3.x一样写三维可视化项目[点击详情](https://tresjs.org/guide)
+-   🌈 前端の基本素养 \* FesJS [点击详情](https://fesjs.mumblefe.cn)
+    <a href="https://www.npmjs.com/package/@fesjs/fes">
+    <img src="https://img.shields.io/npm/v/%40fesjs%2Ffes?label=%40fesjs%2Ffes">
+    </a>
+    集成封装项目落地的常用库：图标、多语言、API 接口调用、Vuex/Pinia、model 数据封装、页面 layout/权限 access、路由管理等。<br/>
 
-![npm](https://img.shields.io/npm/v/%40tresjs%2Fcientos?label=%40tresjs%2Fcientos)全功能版本追溯保持threeJS最新版本 * TresJS 
-最新Vue3.x的语法糖写法，TS/JS通吃，让你以最新最爽快的方式构建三维可视化项目
+-   🌠 像写 Vue3.x 一样写三维可视化项目[点击详情](https://tresjs.org/guide)
+
+![npm](https://img.shields.io/npm/v/%40tresjs%2Fcientos?label=%40tresjs%2Fcientos)全功能版本追溯保持 threeJS 最新版本 \* TresJS
+最新 Vue3.x 的语法糖写法，TS/JS 通吃，让你以最新最爽快的方式构建三维可视化项目
 
 ```html
 <template>
-  <TresCanvas window-size>
-    <TresPerspectiveCamera />
-    <TresMesh>
-      <TresTorusGeometry :args="[1, 0.5, 16, 32]" />
-      <TresMeshBasicMaterial color="orange" />
-    </TresMesh>
-  </TresCanvas>
+    <TresCanvas window-size>
+        <TresPerspectiveCamera />
+        <TresMesh>
+            <TresTorusGeometry :args="[1, 0.5, 16, 32]" />
+            <TresMeshBasicMaterial color="orange" />
+        </TresMesh>
+    </TresCanvas>
 </template>
 <script setup lang="ts">
-  import { useRenderLoop, useTexture } from '@tresjs/core'
-  //读取材质
-  const pTexture = await useTexture(['./**.jpg', './**.png'])
-  const { onLoop } = useRenderLoop()
-  onLoop(({ delta }) => {
-    //循环render
-  })
+    import { useRenderLoop, useTexture } from '@tresjs/core';
+    //读取材质
+    const pTexture = await useTexture(['./**.jpg', './**.png']);
+    const { onLoop } = useRenderLoop();
+    onLoop(({ delta }) => {
+        //循环render
+    });
 </script>
 ```
-- 🧩 丰富的插件应用市场<br/>
-插件中心包含各式各样的项目场景和功能。插件是ICE社区生态中重要的一环，在应用市场中完整应用和普通插件统一称为插件。
+
+-   🧩 丰富的插件应用市场<br/>
+    插件中心包含各式各样的项目场景和功能。插件是 ICE 社区生态中重要的一环，在应用市场中完整应用和普通插件统一称为插件。
 
 ### 我们将会逐一把落地的项目以插件的形式加入到此开源框中...
-### 敬请右上角一键三连: 关注💛 点赞⭐ fork👣
+
+### 敬请右上角一键三连: 关注 💛 点赞 ⭐ fork👣
 
 # ✅ 快速开始
+
 ```
 1、git clone 或者 直接下载 本项目
 
@@ -99,20 +121,23 @@ ThreeJS大名鼎鼎的基于浏览器渲染，JavaScript语言的3D库。<br/><b
 
 7、yarn build	//自己项目 下的编译打包
 ```
+
 ![展示](./preview/compileMode.png)
 
 # 📖 文档
-## 使用说明：[🌏docs.icegl.cn](http://docs.icegl.cn/)
+
+## 使用说明：[🌏docs.icegl.cn](https://docs.icegl.cn/)
 
 # ❓ 问题反馈
+
 在使用中有任何问题，请使用以下联系方式联系我们
 
-- 问答社区: [图形学社区icegl.cn](https://www.icegl.cn/ask)
+-   问答社区: [图形学社区 icegl.cn](https://www.icegl.cn/ask)
 <p align = "left">   
 <img src="https://icegl-1314935952.cos.ap-beijing.myqcloud.com/uploads/20230421/QQ20230421-121209.png" width="680" />
 </p>
 
-- 欢迎大家也加入微信群，已有几个群已满，一起学习讨论webgl。加微信我拉进群
+-   欢迎大家也加入微信群，已有几个群已满，一起学习讨论 webgl。加微信我拉进群
 <p align = "left">    
 <img src="https://icegl-1314935952.cos.ap-beijing.myqcloud.com/uploads/20230731/17d59bab46815cce1f4f1e09dcbb6ccc.png" width="300" />
 </p>
@@ -127,6 +152,6 @@ ThreeJS大名鼎鼎的基于浏览器渲染，JavaScript语言的3D库。<br/><b
 
 本项目包含的第三方源码和二进制文件之版权信息另行标注。
 
-版权所有Copyright © 2022-2025 by 🧊icegl (https://www.icegl.cn)
+版权所有 Copyright © 2022-2025 by 🧊icegl (https://www.icegl.cn)
 
 All rights reserved。
