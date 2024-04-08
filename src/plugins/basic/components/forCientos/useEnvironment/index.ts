@@ -31,7 +31,7 @@ import { environmentPresets } from './const'
 
 // eslint-disable-next-line max-len
 const PRESET_ROOT = 'https://raw.githubusercontent.com/Tresjs/assets/main/textures/hdr/'
-export async function useEnvironment(options: Partial<EnvironmentOptions>): Promise<Texture | CubeTexture> {
+export function useEnvironment(options: Partial<EnvironmentOptions>): Promise<Texture | CubeTexture> {
   const { scene } = useTresContext()
 
   const {
@@ -126,6 +126,5 @@ export async function useEnvironment(options: Partial<EnvironmentOptions>): Prom
   }, {
     immediate: true,
   })
-
   return { texture }
 }

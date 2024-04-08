@@ -1,3 +1,11 @@
+/*
+ * @Description: 
+ * @Version: 1.668
+ * @Autor: 地虎降天龙
+ * @Date: 2024-04-03 16:58:21
+ * @LastEditors: 地虎降天龙
+ * @LastEditTime: 2024-04-08 11:02:08
+ */
 import { LayerMaterial, Depth, Color, Fresnel, Gradient, Noise, Matcap, Texture, Displace, Normal } from 'lamina/vanilla'
 import { LayerMaterialParameters, ColorProps, DepthProps, FresnelProps, GradientProps, NoiseProps, MatcapProps, TextureProps, DisplaceProps, NormalProps } from 'lamina/types'
 
