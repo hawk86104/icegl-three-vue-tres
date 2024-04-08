@@ -45,7 +45,8 @@
 
 ## 🏕 点击预览：[🌏opensource.icegl.cn](https://opensource.icegl.cn)
 
-如果访问太慢，请访问镜像站点：[🌏ice-gl.gitee.io/icegl-three-vue-tres](https://ice-gl.gitee.io/icegl-three-vue-tres/)
+-   如果访问太慢，请访问镜像站点：[🌏 ice-gl.gitee.io/icegl-three-vue-tres](https://ice-gl.gitee.io/icegl-three-vue-tres/)
+-   如果有条件翻墙，也可直接访问 github 的镜像站:[🌏 https://hawk86104.github.io](https://hawk86104.github.io/)
 
 ```shell
 因项目经常更新编译，如发现访问错误，请清空浏览器缓存。
@@ -144,11 +145,13 @@
 
 # ™️ 版权信息
 
-本项目遵循Apache2开源协议发布，并提供永久免费使用以及商用。
-> 如果您将此项目用于商业用途，请遵守Apache2.0协议并保留作者技术支持声明。
-- 二次开发如用于商业性质或开源竞品请不要删除和修改TvT.js源码头部的版权与作者声明及出处
-- 允许进行商用，但是不允许二次开源出来并进行收费
-- 我们已在申请相关的软件著作权和相关登记
+本项目遵循 Apache2 开源协议发布，并提供永久免费使用以及商用。
+
+> 如果您将此项目用于商业用途，请遵守 Apache2.0 协议并保留作者技术支持声明。
+
+-   二次开发如用于商业性质或开源竞品请不要删除和修改 TvT.js 源码头部的版权与作者声明及出处
+-   允许进行商用，但是不允许二次开源出来并进行收费
+-   我们已在申请相关的软件著作权和相关登记
 
 本项目包含的第三方源码和二进制文件之版权信息另行标注。
 
