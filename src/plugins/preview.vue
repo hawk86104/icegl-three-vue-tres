@@ -4,21 +4,19 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-18 22:17:49
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-04-01 15:39:18
+ * @LastEditTime: 2024-04-07 09:27:04
 -->
 <template>
     <div class="flex h-full w-full">
         <div class="w-50" style="background-color: #0f1222;">
-            <f-menu mode="vertical" :defaultExpandAll="true" :expandedKeys="expandedKeys" :inverted="true"
-                @select="goto">
+            <f-menu mode="vertical" :defaultExpandAll="true" :expandedKeys="expandedKeys" :inverted="true" @select="goto">
                 <f-sub-menu value="1">
                     <template #icon>
                         <AppstoreOutlined />
                     </template>
                     <template #label>基础功能展示</template>
                     <template v-for="(bP, pkey) in filteredData">
-                        <f-menu-item v-if="pkey === 'basic'" v-for="(onePlugin, okey) in bP.child"
-                            :value="onePlugin.name">
+                        <f-menu-item v-if="pkey === 'basic'" v-for="(onePlugin, okey) in bP.child" :value="onePlugin.name">
                             <template #label>{{ onePlugin.title }}</template>
                         </f-menu-item>
                     </template>
@@ -33,21 +31,19 @@
                             <template #label>
                                 <div class="flex absolute" style="left: 1px;flex-direction: column;top: 2px;">
                                     <template v-for="(lbItem, lbKey) in getleftMenuBadge(onePlugin.name)">
-                                        <f-badge v-if="lbItem.show" :value="lbItem.text" class="tag-fbdge"
-                                            type="primary" size="small" />
+                                        <f-badge v-if="lbItem.show" :value="lbItem.text" class="tag-fbdge" type="primary"
+                                            size="small" />
                                     </template>
                                 </div>
                                 <span class="left-m-text">{{ onePlugin.title }}</span>
-                                <FBadge :value="onePlugin.preview.length" class="count-fbdge" type="primary"
-                                    size="small" />
+                                <FBadge :value="onePlugin.preview.length" class="count-fbdge" type="primary" size="small" />
                             </template>
                         </f-menu-item>
                     </template>
                 </f-sub-menu>
             </f-menu>
         </div>
-        <div class="overflow-scroll mt-10 relative right-page-list"
-            style="height: calc(100vh - 42px - 52px);width: 100%;">
+        <div class="overflow-scroll mt-10 relative right-page-list" style="height: calc(100vh - 42px - 52px);width: 100%;">
             <filterComFixed />
             <template v-for="( onePlugin, pkey ) in  filteredData " :key="pkey">
                 <template v-if="pkey === 'basic'">
@@ -256,8 +252,9 @@ const getleftMenuBadge = (name: string) => {
         background-color: #0f1222 !important;
         border: white 1px solid;
         scale: 0.8;
-        padding: 1px 1px 0 !important;
+        padding: 1px !important;
         margin-top: 2px;
+        height: 15px;
     }
 }
 

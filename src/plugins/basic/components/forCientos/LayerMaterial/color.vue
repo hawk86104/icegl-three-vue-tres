@@ -4,11 +4,10 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-04-02 18:51:33
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-04-03 16:45:10
+ * @LastEditTime: 2024-04-08 13:09:29
 -->
 <script setup lang="ts">
-import { defineProps, watchEffect, ref, onMounted, onBeforeMount } from 'vue'
-import * as THREE from 'three'
+import { defineProps, watchEffect, ref } from 'vue'
 import { useTresContext } from '@tresjs/core'
 import { ColorProps } from 'lamina/types'
 import { Color } from './material'
@@ -20,7 +19,7 @@ const colorRef = ref<any>()
 watchEffect(() => {
 	if (colorRef.value) {
 		if (props.color) {
-			colorRef.value.color = new THREE.Color(props.color)
+			colorRef.value.color.setStyle(props.color).convertLinearToSRGB() // 注意 material.color.set('#444') 如果值不同 请 convertLinearToSRGB()
 		}
 		if (props.alpha) {
 			colorRef.value.alpha = props.alpha

@@ -4,14 +4,13 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-04-02 21:09:18
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-04-03 11:09:56
+ * @LastEditTime: 2024-04-08 13:09:46
 -->
 <script setup lang="ts">
 import { defineProps, ref, watchEffect } from 'vue'
 import { useTresContext } from '@tresjs/core'
 import { DepthProps } from 'lamina/types'
 import { Depth } from './material'
-import * as THREE from 'three'
 
 const props = defineProps<DepthProps>()
 const { extend } = useTresContext()
@@ -21,10 +20,10 @@ const instanceRef = ref<any>()
 watchEffect(() => {
 	if (instanceRef.value) {
 		if (props.colorA) {
-			instanceRef.value.colorA = new THREE.Color(props.colorA)
+			instanceRef.value.colorA.set(props.colorA)//.convertLinearToSRGB()
 		}
 		if (props.colorB) {
-			instanceRef.value.colorB = new THREE.Color(props.colorB)
+			instanceRef.value.colorB.set(props.colorB)//.convertLinearToSRGB()
 		}
 		if (props.alpha) {
 			instanceRef.value.alpha = props.alpha

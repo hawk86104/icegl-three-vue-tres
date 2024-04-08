@@ -1,3 +1,11 @@
+/*
+ * @Description: 
+ * @Version: 1.668
+ * @Autor: 地虎降天龙
+ * @Date: 2024-04-03 16:58:21
+ * @LastEditors: 地虎降天龙
+ * @LastEditTime: 2024-04-08 11:02:08
+ */
 import { LayerMaterial, Depth, Color, Fresnel, Gradient, Noise, Matcap, Texture, Displace, Normal } from 'lamina/vanilla'
 import { LayerMaterialParameters, ColorProps, DepthProps, FresnelProps, GradientProps, NoiseProps, MatcapProps, TextureProps, DisplaceProps, NormalProps } from 'lamina/types'
 
@@ -8,7 +16,7 @@ class LayerMaterialCom extends LayerMaterial {
 	init() {
 		const keysWithPrefix = Object.keys(this).filter(key => key.startsWith('layercoms_'))
 		const valuesWithPrefix = keysWithPrefix.map((key: any) => this[key])
-		this.layers = valuesWithPrefix//slots[0].children.map((slot: any) => slot.el)
+		this.layers = valuesWithPrefix
 		this.refresh()
 	}
 }

@@ -60,6 +60,6 @@ paneControl.addBinding(paneState, 'styleNum', {
 
 <style>
 .tp-dfwv {
-	z-index: 999;
+	z-index: 999999;
 }
 </style>

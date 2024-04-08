@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-18 08:51:19
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-04-03 08:30:46
+ * @LastEditTime: 2024-04-08 14:17:16
 -->
 <template>
 	<loading />
@@ -20,7 +20,7 @@
 		<Suspense>
 			<reflectorShaderMesh v-bind="configState" :position="[0, -0.6, 0]" />
 		</Suspense>
-		<environmentForLightformers />
+		<envLightForCar />
 	</TresCanvas>
 </template>
 
@@ -31,7 +31,7 @@ import * as THREE from 'three'
 
 import reflectorShaderMesh from 'PLS/floor/components/reflectorShaderMesh.vue'
 import { randomLoading as loading } from 'PLS/UIdemo'
-import { environmentForLightformers } from 'PLS/skyBox'
+import envLightForCar from '../components/envLightForCar.vue'
 import carModel from '../components/carModel.vue'
 
 const spotLight = ref(null as THREE.SpotLight | null)
