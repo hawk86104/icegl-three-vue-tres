@@ -1,3 +1,11 @@
+/*
+ * @Description: 
+ * @Version: 1.668
+ * @Autor: 地虎降天龙
+ * @Date: 2024-04-07 11:36:45
+ * @LastEditors: 地虎降天龙
+ * @LastEditTime: 2024-04-08 11:56:25
+ */
 
 export interface EnvironmentOptions {
   /**
@@ -34,6 +42,13 @@ export interface EnvironmentOptions {
    * @type {EnvironmentPresetsType}
    */
   preset?: EnvironmentPresetsType
+  /**
+  * The resolution of the WebGLCubeRenderTarget.
+  *
+  * @type {number}
+  * @default 0
+  */
+  resolution?: number
 }
 
 export const environmentPresets = {

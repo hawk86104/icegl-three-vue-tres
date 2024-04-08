@@ -20,10 +20,10 @@ const instanceRef = ref<any>()
 watchEffect(() => {
 	if (instanceRef.value) {
 		if (props.colorA) {
-			instanceRef.value.colorA.set(props.colorA).convertLinearToSRGB()
+			instanceRef.value.colorA.set(props.colorA)//.convertLinearToSRGB()
 		}
 		if (props.colorB) {
-			instanceRef.value.colorB.set(props.colorB).convertLinearToSRGB()
+			instanceRef.value.colorB.set(props.colorB)//.convertLinearToSRGB()
 		}
 		if (props.alpha) {
 			instanceRef.value.alpha = props.alpha

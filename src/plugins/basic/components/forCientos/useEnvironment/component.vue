@@ -16,6 +16,7 @@ const props = withDefaults(defineProps<EnvironmentOptions>(), {
   files: [],
   path: '',
   preset: undefined,
+  resolution: 256
 })
 
 const texture: Ref<Texture | CubeTexture | null> = ref(null)
@@ -29,7 +30,7 @@ if (useSlots().default !== undefined) {
   extend({ EnvSence })
   //@ts-ignore
   slots = useSlots().default()
-  fbo = new THREE.WebGLCubeRenderTarget(256)
+  fbo = new THREE.WebGLCubeRenderTarget(props.resolution)
   fbo.texture.type = THREE.HalfFloatType
   cubeCamera = new THREE.CubeCamera(1, 10000, fbo)
 }
@@ -45,9 +46,9 @@ onBeforeLoop(() => {
   }
 })
 //@ts-ignore
-const useEnvironmentTexture = useEnvironment(props).texture
+const useEnvironmentTexture = await useEnvironment(props).texture
 watch(useEnvironmentTexture, (value) => {
-  if (value && fbo) {
+  if (fbo) {
     scene.value.environment = fbo.texture
     if (props.background) {
       scene.value.background = fbo.texture

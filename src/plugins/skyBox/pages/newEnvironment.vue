@@ -4,13 +4,13 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-04-07 14:29:57
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-04-08 11:52:44
+ * @LastEditTime: 2024-04-08 12:16:04
 -->
 <template>
 	<TresCanvas v-bind="tcConfig">
 		<TresPerspectiveCamera :position="[15, 15, 15]" :fov="45" :near="0.1" :far="10000" :look-at="[0, 0, 0]" />
 		<OrbitControls enableDamping />
-		<TresAmbientLight :intensity="10.0" />
+		<TresAmbientLight :intensity="0.5" />
 
 		<TresMesh :position="[3, 2, 1]" cast-shadow>
 			<TresBoxGeometry :args="[3, 3, 3]" />
@@ -23,8 +23,7 @@
 		</TresMesh>
 
 		<Suspense>
-			<Environment files="https://opensource-1314935952.cos.ap-nanjing.myqcloud.com/images/skyBox/desert_1k.hdr"
-				background>
+			<Environment :blur="1" background>
 				<TresMesh :scale="[100, 100, 100]">
 					<TresSphereGeometry :args="[1, 64, 64]" />
 					<LayerMaterial :side="THREE.BackSide">

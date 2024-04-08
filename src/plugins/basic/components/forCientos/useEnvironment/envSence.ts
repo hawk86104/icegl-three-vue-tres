@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-04-07 18:13:49
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-04-08 11:41:43
+ * @LastEditTime: 2024-04-08 12:00:23
  */
 
 import * as THREE from 'three'
@@ -14,7 +14,7 @@ class EnvSence extends THREE.Object3D {
 	virtualScene = null as unknown as THREE.Scene
 	// parent = null as unknown as THREE.Object3D
 	constructor() {
-		console.log('EnvSence constructor')
+		// console.log('EnvSence constructor')
 		super()
 		this.virtualScene = new THREE.Scene()
 	}
@@ -32,7 +32,7 @@ class EnvSence extends THREE.Object3D {
 			}
 		})
 		this.virtualScene = null as unknown as THREE.Scene
-		console.log('EnvSence destructor')
+		// console.log('EnvSence destructor')
 	}
 }
 
