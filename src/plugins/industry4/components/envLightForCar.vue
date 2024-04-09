@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-04-07 14:29:57
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-04-08 14:16:28
+ * @LastEditTime: 2024-04-09 08:48:07
 -->
 <template>
 	<Suspense>
@@ -44,8 +44,7 @@ import { useRenderLoop } from '@tresjs/core'
 import { LayerMaterial, Color, Depth } from 'PLS/basic/components/forCientos/LayerMaterial'
 import { Levioso } from '@tresjs/cientos'
 
-import Environment from 'PLS/basic/components/forCientos/useEnvironment/component.vue'
-import Lightformer from 'PLS/basic/components/forCientos/Lightformer/index.vue'
+import { Environment, Lightformer } from 'PLS/basic'
 
 const lightFormerPositions = [2, 0, 2, 0, 2, 0, 2, 0]
 const group = ref(null)

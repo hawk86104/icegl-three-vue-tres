@@ -4,11 +4,12 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-10-16 10:53:09
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-03-26 16:28:44
+ * @LastEditTime: 2024-04-09 08:35:22
  */
 // 放工具函数
 import { request } from '@fesjs/fes'
-import { format } from 'echarts';
+// import { format } from 'echarts'
+import { FMessage } from '@fesjs/fes-design'
 
 const findStringBetween = (str) => {
 	const regex = /\/([^/]+)(?=\/[^/]*$)/;
@@ -34,6 +35,7 @@ export const getPluginsConfig = () => {
 const formatMenu = (online, local) => {
 	const result = local
 	for (const olKey of Object.keys(online)) {
+		let hasWaitForGit = false
 		if (olKey === 'basic') {
 			continue
 		}
@@ -56,6 +58,7 @@ const formatMenu = (online, local) => {
 						// 如果不存在preview，则添加
 						olItem.preview[i].waitForGit = true
 						result[olKey].preview.push(olItem.preview[i])
+						hasWaitForGit = true
 					}
 				}
 			}
@@ -64,6 +67,14 @@ const formatMenu = (online, local) => {
 			// 如果第一层目录不存在，则添加
 			online[olKey].waitForGit = true
 			result[olKey] = online[olKey]
+			hasWaitForGit = true
+		}
+		if(hasWaitForGit){
+			FMessage.warning?.({
+				content: `官网已经更新的插件功能，请git 更新代码!`,
+				colorful:true,
+				duration:5,
+			})
 		}
 	}
 	return result
