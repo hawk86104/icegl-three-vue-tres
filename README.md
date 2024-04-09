@@ -59,7 +59,7 @@
 ![展示](./preview/热力图2.gif)
 ![展示](./preview/热力图.gif)
 ![展示](./preview/models.gif)
-![展示](./preview/数字大脑.gif)
+![展示](./preview/incar.gif)
 ![展示](./preview/shadertoyMaterial.gif)
 
 更多演示请进入预览页面
