@@ -35,20 +35,6 @@ const shineBox = ref()
 const filmBox = ref()
 
 let effectComposer = null as any
-watchEffect(() => {
-	if (normalBox.value) {
-		normalBox.value.value.layers.set(0)
-	}
-	if (shineBox.value) {
-		shineBox.value.layers.set(1)
-	}
-	if (filmBox.value) {
-		filmBox.value.layers.set(2)
-	}
-	if (sizes.width.value) {
-		bloomPassEffect(scene.value, camera.value as any, renderer.value, sizes.width.value, sizes.height.value)
-	}
-})
 const params = {
 	threshold: 0,
 	strength: 0.972,    // 强度
@@ -78,7 +64,20 @@ const bloomPassEffect = (scene: THREE.Scene, camera: THREE.PerspectiveCamera, re
 // 	effectComposer2.addPass(filmPass)
 // }
 // filmPassEffect(scene.value, camera.value as any, renderer.value, sizes.width.value, sizes.height.value)
-
+watchEffect(() => {
+	if (normalBox.value) {
+		normalBox.value.value.layers.set(0)
+	}
+	if (shineBox.value) {
+		shineBox.value.layers.set(1)
+	}
+	if (filmBox.value) {
+		filmBox.value.layers.set(2)
+	}
+	if (sizes.width.value) {
+		bloomPassEffect(scene.value, camera.value as any, renderer.value, sizes.width.value, sizes.height.value)
+	}
+})
 const { onLoop } = useRenderLoop()
 onLoop(() => {
 	if (effectComposer && camera.value) {
