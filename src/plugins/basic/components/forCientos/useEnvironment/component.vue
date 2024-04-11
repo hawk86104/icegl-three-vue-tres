@@ -1,25 +1,23 @@
 <script setup lang="ts">
 import type { Ref } from 'vue'
 import { ref, useSlots, onUnmounted, watch, toRaw } from 'vue'
+import { WebGLCubeRenderTarget, CubeCamera, HalfFloatType } from 'three'
 import type { CubeTexture, Texture } from 'three'
-//@ts-ignore
 import { useTresContext, useRenderLoop } from '@tresjs/core'
 import type { EnvironmentOptions } from './const'
-import { useEnvironment } from '.'
 import EnvSence from './envSence'
-import * as THREE from 'three'
+import { useEnvironment } from '.'
 
 const props = withDefaults(defineProps<EnvironmentOptions>(), {
   background: false,
   blur: 0,
-  //@ts-ignore
   files: [],
   path: '',
   preset: undefined,
   resolution: 256,
   near: 1,
   far: 1000,
-  frames: Infinity
+  frames: Infinity,
 })
 
 const texture: Ref<Texture | CubeTexture | null> = ref(null)
@@ -27,45 +25,65 @@ defineExpose({ texture })
 
 const { extend, renderer, scene } = useTresContext()
 let slots = null as any
-let fbo = null as null | THREE.WebGLCubeRenderTarget
-let cubeCamera = null as null | THREE.CubeCamera
-if (useSlots().default !== undefined) {
-  extend({ EnvSence })
-  //@ts-ignore
-  slots = useSlots().default()
-  fbo = new THREE.WebGLCubeRenderTarget(props.resolution)
-  fbo.texture.type = THREE.HalfFloatType
-  cubeCamera = new THREE.CubeCamera(props.near, props.far, fbo)
-}
+let fbo = ref(null as null | WebGLCubeRenderTarget)
+let cubeCamera = null as null | CubeCamera
+
 const envSence = ref<EnvSence | null>(null)
 onUnmounted(() => {
   envSence.value?.destructor()
-  fbo?.dispose()
+  fbo.value?.dispose()
 })
 const { onBeforeLoop } = useRenderLoop()
 let count = 1
 onBeforeLoop(() => {
-  if (cubeCamera && envSence.value) {
+  if (cubeCamera && envSence.value && fbo.value) {
     if (props.frames === Infinity || count < props.frames) {
       cubeCamera.update(renderer.value, toRaw(envSence.value.virtualScene))
       count++
     }
   }
 })
-//@ts-ignore
-const useEnvironmentTexture = await useEnvironment(props).texture
-watch(useEnvironmentTexture, (value) => {
+const useEnvironmentTexture = (await useEnvironment(props, fbo as any)).texture
+const setTextureEnvAndBG = (fbo: WebGLCubeRenderTarget | null) => {
   if (fbo) {
     scene.value.environment = fbo.texture
     if (props.background) {
       scene.value.background = fbo.texture
     }
+  } else {
+    scene.value.environment = useEnvironmentTexture.value
+    if (props.background) {
+      scene.value.background = useEnvironmentTexture.value
+    }
+  }
+}
+watch(useEnvironmentTexture, (value) => {
+  if (fbo.value) {
+    setTextureEnvAndBG(fbo.value)
   }
 }, { immediate: true, deep: true })
 
+watch(useSlots().default, (value) => {
+  if (value) {
+    slots = value
+    if (Array.isArray(slots)&&slots.length>0) {
+      if (typeof slots[0]?.type !== 'symbol') {
+        extend({ EnvSence })
+        fbo.value = new WebGLCubeRenderTarget(props.resolution)
+        fbo.value.texture.type = HalfFloatType
+        cubeCamera = new CubeCamera(props.near, props.far, fbo.value)
+        setTextureEnvAndBG(fbo.value)
+        return
+      }
+    }
+  }
+  fbo.value?.dispose()
+  fbo.value = null
+  setTextureEnvAndBG(null)
+}, { immediate: true, deep: true })
 texture.value = useEnvironmentTexture
-
 </script>
+
 <template>
   <TresEnvSence v-if="fbo" ref="envSence">
     <slot />

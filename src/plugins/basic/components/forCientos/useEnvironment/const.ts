@@ -1,12 +1,3 @@
-/*
- * @Description: 
- * @Version: 1.668
- * @Autor: 地虎降天龙
- * @Date: 2024-04-07 11:36:45
- * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-04-08 12:59:12
- */
-
 export interface EnvironmentOptions {
   /**
    * If true, the environment will be set as the scene's background.

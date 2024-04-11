@@ -1,3 +1,11 @@
+<!--
+ * @Description: 
+ * @Version: 1.668
+ * @Autor: 地虎降天龙
+ * @Date: 2024-04-09 15:38:12
+ * @LastEditors: 地虎降天龙
+ * @LastEditTime: 2024-04-10 15:04:10
+-->
 <template></template>
 
 <script setup lang="ts">
@@ -9,7 +17,7 @@ import { OutputPass } from 'three/examples/jsm/postprocessing/OutputPass.js'
 import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass'
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer'
 import { LUTPass } from 'three/examples/jsm/postprocessing/LUTPass.js'
-import { LUTCubeLoader } from 'three/addons/loaders/LUTCubeLoader.js'
+import { LUTCubeLoader } from 'three/examples/jsm/loaders/LUTCubeLoader.js'
 
 const { camera, renderer, scene, sizes } = useTresContext()
 const params = {
