@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-04-07 14:29:57
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-04-11 11:12:37
+ * @LastEditTime: 2024-04-11 14:03:08
 -->
 <template>
 	<TresCanvas v-bind="tcConfig">
@@ -60,9 +60,7 @@ import { ref } from "vue"
 import * as THREE from "three"
 import { useRenderLoop } from '@tresjs/core'
 import { LayerMaterial, Color, Depth } from 'PLS/basic/components/forCientos/LayerMaterial'
-import { OrbitControls, Levioso } from '@tresjs/cientos'
-
-import { Environment, Lightformer } from 'PLS/basic'
+import { OrbitControls, Levioso,Environment, Lightformer } from '@tresjs/cientos'
 
 const tcConfig = {
 	clearColor: "#201919",
