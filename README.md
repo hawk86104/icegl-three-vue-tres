@@ -23,8 +23,12 @@
 ## 🧊🧊🧊🧊🧊🧊🧊🧊🧊🧊🧊🧊🧊🧊🧊🧊🧊🧊🧊🧊
 
 ```shell
-如果对您有帮助，您可以点右上角 “Star” 收藏一下 ，您的star就是我开发的动力，感谢！
+如果对您有帮助，您可以点右上角 “Star⭐” 收藏一下 ，您的star就是我开发的动力，感谢！
 ```
+
+> B 站上对此项目的视频说明点击下方 👇🏻 跳转
+
+<a href="https://www.bilibili.com/video/BV1LH4y1p7Yn"><img src="./preview/bilibili.gif" alt="tres.js webgl"></a>
 
 # 生态 `@ThreeJS-@Vue3.x-@TresJS`
 
