@@ -19,6 +19,7 @@ const findStringBetween = (str) => {
 	}
 	return null;
 }
+
 export const getPluginsConfig = () => {
 	// 获得插件列表 根据插件目录
 	const modulePaths = import.meta.glob('PLS/**/config.js', { eager: true })
@@ -32,53 +33,51 @@ export const getPluginsConfig = () => {
 	}
 	return config
 }
+
 const formatMenu = (online, local) => {
-	const result = local
-	for (const olKey of Object.keys(online)) {
-		let hasWaitForGit = false
+	// 复制本地菜单
+	const result = { ...local };
+
+	for (const olKey in online) {
 		if (olKey === 'basic') {
-			continue
+			continue; 
 		}
-		let hasItem = false
-		for (const loKey of Object.keys(local)) {
-			if (olKey === loKey) {
-				hasItem = true
-				// 如果存在第一层目录 ，则对比preview
-				const olItem = online[olKey]
-				const loItem = local[loKey]
-				for (let i = 0; i < olItem.preview.length; i++) {
-					let hasPreview = false
-					for (let j = 0; j < loItem.preview.length; j++) {
-						if (olItem.preview[i].name === loItem.preview[j].name) {
-							hasPreview = true
-							// 如果存在preview 则无需更改
-						}
-					}
-					if (!hasPreview) {
-						// 如果不存在preview，则添加
-						olItem.preview[i].waitForGit = true
-						result[olKey].preview.push(olItem.preview[i])
-						hasWaitForGit = true
-					}
+
+		const olItem = online[olKey];
+		const loItem = local[olKey];
+
+		//  如果在线和本地都存在该键，比较它们的预览项
+		if (loItem) {
+			const localPreviews = new Map(loItem.preview.map(item => [item.name, item]));
+
+			// 检查并添加在线中缺少的预览到结果中
+			olItem.preview.forEach(preview => {
+				if (!localPreviews.has(preview.name)) {
+					preview.waitForGit = true; 
+					result[olKey].preview.push(preview);
+					showWarning();
 				}
-			}
-		}
-		if (!hasItem) {
-			// 如果第一层目录不存在，则添加
-			online[olKey].waitForGit = true
-			result[olKey] = online[olKey]
-			hasWaitForGit = true
-		}
-		if(hasWaitForGit){
-			FMessage.warning?.({
-				content: `官网已经更新的插件功能，请git 更新代码!`,
-				colorful:true,
-				duration:5,
-			})
+			});
+		} else {
+			//如果本地不存在该键，则从在线添加整个部分
+			olItem.waitForGit = true;
+			result[olKey] = olItem;
+			showWarning();
 		}
 	}
-	return result
+
+	return result;
+};
+
+// 警告函数
+function showWarning() {
+	FMessage.warning?.({
+		content: '官网已经更新的插件功能，请git 更新代码!',
+		colorful: true,
+		duration: 5,
+	});
 }
+
 export const getOnlinePluginConfig = (plConfig) => {
 	request(
 		'https://www.icegl.cn/addons/tvt/index/getRelaseMenuList', {},
@@ -96,34 +95,44 @@ export const getOnlinePluginConfig = (plConfig) => {
 }
 
 export const getOnePluginConfig = (pName, oName, cName) => {
-	// 获得插件列表 根据插件目录
-	const modulePaths = import.meta.glob('PLS/**/config.js', { eager: true })
-	for (const path of Object.keys(modulePaths)) {
-		const name = findStringBetween(path)
-		if (name === pName) {
-			if (oName && modulePaths[path].default.preview) {
-				// 如果存在该插件中 对应的页面参数
-				for (let i = 0; i < modulePaths[path].default.preview.length; i++) {
-					if (modulePaths[path].default.preview[i].name === oName) {
-						return modulePaths[path].default.preview[i]
+	// 获得所有插件配置
+	const modulePaths = import.meta.glob('PLS/**/config.js', { eager: true });
+
+	// 遍历插件配置路径
+	for (const path in modulePaths) {
+			const config = modulePaths[path].default;
+			const pluginName = findStringBetween(path);
+
+			// 匹配插件名称
+			if (pluginName === pName) {
+					// 根据页面参数名查找预览配置
+					if (oName && config.preview) {
+							const preview = findPreviewByName(config.preview, oName);
+							if (preview) return preview;
 					}
-				}
-			} else {
-				if (cName && modulePaths[path].default.child) {
-					for (let i = 0; i < modulePaths[path].default.child.length; i++) {
-						if (modulePaths[path].default.child[i].name === oName) {
-							const mpd = modulePaths[path].default.child[i].preview
-							for (let j = 0; j < mpd.length; j++) {
-								if (mpd[j].name === cName) {
-									return mpd[j]
-								}
-							}
-						}
+					// 根据子页面参数名查找子配置
+					else if (cName && config.child) {
+							const childPreview = findChildPreviewByName(config.child, oName, cName);
+							if (childPreview) return childPreview;
 					}
-				}
-				return modulePaths[path].default
+					// 如果没有找到具体配置，返回默认配置
+					return config;
 			}
-		}
 	}
-	return null
+	// 如果没有找到匹配的插件配置，返回null
+	return null;
+}
+
+// 通过名称查找预览配置
+function findPreviewByName(previews, name) {
+	return previews.find(preview => preview.name === name);
+}
+
+// 在子配置中查找预览配置
+function findChildPreviewByName(children, childName, previewName) {
+	const child = children.find(child => child.name === childName);
+	if (child && child.preview) {
+			return child.preview.find(preview => preview.name === previewName);
+	}
+	return null;
 }
