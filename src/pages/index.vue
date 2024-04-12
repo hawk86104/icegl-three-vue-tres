@@ -25,7 +25,7 @@
         <TresDirectionalLight ref="TDirectionalLight" :position="[10, 8, 4]" :intensity="1" cast-shadow />
         <TresDirectionalLight :position="[10, 2, 4]" :intensity="1" cast-shadow />
 
-        <TresGridHelper />
+        <TresGridHelper :position-y="0.1"/>
     </TresCanvas>
     <h1 class="text-center text-white w-full absolute"> 若需查看插件中心，请运行：npm run pre.dev</h1>
 </template>
