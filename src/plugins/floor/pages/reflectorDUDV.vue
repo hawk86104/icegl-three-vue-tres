@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-12-22 08:09:35
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-12-27 08:58:03
+ * @LastEditTime: 2024-04-14 22:11:32
 -->
 
 <template>
@@ -17,21 +17,26 @@
 			<TresMeshNormalMaterial :wireframe="true" />
 		</TresMesh>
 
-		<TresMesh :position="[0, 2, 4]">
+		<TresMesh :position="[0, 2, 4]" ref="cube">
 			<TresBoxGeometry :args="[1, 1, 1]" />
 			<TresMeshNormalMaterial />
 		</TresMesh>
 
 		<Suspense>
-			<reflectorDUDV v-bind="configState" />
+			<reflectorDUDV v-bind="configState" :ignoreObjects="[]" />
 		</Suspense>
+
+		<TresMesh :position="[3, -1.5, 2]">
+			<TresBoxGeometry :args="[2, 2, 2]" />
+			<TresMeshNormalMaterial />
+		</TresMesh>
 	</TresCanvas>
 </template>
 
 <script setup lang="ts">
 
 import { OrbitControls } from '@tresjs/cientos'
-import { reactive } from 'vue'
+import { reactive, ref } from 'vue'
 import { Pane } from 'tweakpane'
 import reflectorDUDV from '../components/reflectorDUDV.vue'
 
@@ -51,4 +56,6 @@ paneControl.addBinding(configState, 'reflectivity', {
 	step: 0.1,
 })
 paneControl.addBinding(configState, 'showGridHelper', { label: '显示网格' })
+
+const cube = ref(null)
 </script>
