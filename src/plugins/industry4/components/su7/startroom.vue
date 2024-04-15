@@ -4,10 +4,11 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-03-27 10:38:54
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-04-15 09:26:24
+ * @LastEditTime: 2024-04-15 11:34:26
 -->
 <template>
     <primitive :object="scene" ref="tresMesh" />
+    <reflectorMipMap ref="reflectorMipMapRef" :parent="floor" :ignoreObjects="[light, floor]" />
 </template>
 
 <script setup lang="ts">
@@ -17,11 +18,7 @@ import * as THREE from 'three'
 import { flatModel } from './utils'
 import { defineExpose, ref, watch } from 'vue'
 import { makeCustomShaderMaterial } from 'PLS/floor/common/reflectorCustomMaterial'
-const props = withDefaults(defineProps<{
-    reflector?: THREE.Object3D
-}>(), {
-    reflector: null
-})
+import { reflectorMipMap } from 'PLS/floor'
 
 const { scene } = await useGLTF('./plugins/industry4/model/su7_startroom.raw.glb', { draco: true, decoderPath: './draco/' })
 
@@ -65,16 +62,13 @@ floorMat.envMapIntensity = 0
 floor.name = 'floorBtm'
 // floor.visible = false
 
+const reflectorMipMapRef = ref(null)
 watch(
-    () => props.reflector,
-    async (newVal) => {
-        debugger
-        if (newVal.reflector) {
-            floor.material = await makeCustomShaderMaterial(floor, newVal.reflector) as any
-        }
-
+    () => reflectorMipMapRef,
+    (newVal) => {
+        floor.material = makeCustomShaderMaterial(floor, newVal.value) as any
     },
-    { immediate: true }
+    { deep: true }
 )
 
 const tresMesh = ref<THREE.Mesh>()

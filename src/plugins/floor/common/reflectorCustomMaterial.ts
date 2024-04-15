@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-04-15 08:21:22
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-04-15 09:38:19
+ * @LastEditTime: 2024-04-15 11:43:10
  */
 import {useTexture} from '@tresjs/core'
 import * as THREE from 'three'
@@ -13,14 +13,14 @@ import CustomShaderMaterial from 'three-custom-shader-material/vanilla'
 import fragmentShader from '../shaders/reflectorCustomMaterial.frag'
 import vertexShader from '../shaders/reflectorCustomMaterial.vert'
 
-const makeCustomShaderMaterial = async (mirror: THREE.Mesh,reflector: any) => {
+const makeCustomShaderMaterial = (mirror: THREE.Mesh,reflector: any) => {
   const floorUniforms = {
     uColor: { type: "c", value: new THREE.Color('white') },
     uReflectMatrix: { type: "m4", value:new THREE.Matrix4()},
     uReflectTexture: { type: "t", value:new THREE.Texture()},
     uReflectIntensity: { type: "f", value: 15 },
     uIntensity: { type: "f", value: 1 },
-    uLevel: { type: "f", value: 0 },
+    uLevel: { type: "f", value: 2.5 },
     uResolution: { type: "v2", value: new THREE.Vector2() },
     uTime: { type: "f", value: 0 },
   }
@@ -34,8 +34,12 @@ const makeCustomShaderMaterial = async (mirror: THREE.Mesh,reflector: any) => {
   })
 
   floorUniforms.uReflectTexture.value = reflector.renderTarget.texture
-  floorUniforms.uReflectMatrix.value = reflector.textureMatrixUniform.value
+  floorUniforms.uReflectMatrix.value = reflector.matrix
 
+  floorUniforms.uResolution.value.set(
+    reflector.renderTarget.width,
+    reflector.renderTarget.height
+  )
   return material
 }
 
