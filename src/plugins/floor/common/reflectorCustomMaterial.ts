@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-04-15 08:21:22
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-04-15 11:43:10
+ * @LastEditTime: 2024-04-15 11:56:56
  */
 import {useTexture} from '@tresjs/core'
 import * as THREE from 'three'
@@ -20,7 +20,7 @@ const makeCustomShaderMaterial = (mirror: THREE.Mesh,reflector: any) => {
     uReflectTexture: { type: "t", value:new THREE.Texture()},
     uReflectIntensity: { type: "f", value: 15 },
     uIntensity: { type: "f", value: 1 },
-    uLevel: { type: "f", value: 2.5 },
+    uLevel: { type: "f", value: 3.5 },
     uResolution: { type: "v2", value: new THREE.Vector2() },
     uTime: { type: "f", value: 0 },
   }

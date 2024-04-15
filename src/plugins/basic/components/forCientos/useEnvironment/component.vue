@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { Ref } from 'vue'
 import { ref, useSlots, onUnmounted, watch, toRaw } from 'vue'
-import { WebGLCubeRenderTarget, CubeCamera, HalfFloatType } from 'three'
+import { WebGLCubeRenderTarget, CubeCamera, HalfFloatType, UnsignedByteType, NearestFilter } from 'three'
 import type { CubeTexture, Texture } from 'three'
 import { useTresContext, useRenderLoop } from '@tresjs/core'
 import type { EnvironmentOptions } from './const'
@@ -18,6 +18,7 @@ const props = withDefaults(defineProps<EnvironmentOptions>(), {
   near: 1,
   far: 1000,
   frames: Infinity,
+  useDefaultScene: false
 })
 
 const texture: Ref<Texture | CubeTexture | null> = ref(null)
@@ -38,7 +39,11 @@ let count = 1
 onBeforeLoop(() => {
   if (cubeCamera && envSence.value && fbo.value) {
     if (props.frames === Infinity || count < props.frames) {
-      cubeCamera.update(renderer.value, toRaw(envSence.value.virtualScene))
+      if (props.useDefaultScene) {
+        cubeCamera.update(renderer.value, scene.value)
+      } else {
+        cubeCamera.update(renderer.value, toRaw(envSence.value.virtualScene))
+      }
       count++
     }
   }
@@ -57,23 +62,26 @@ const setTextureEnvAndBG = (fbo: WebGLCubeRenderTarget | null) => {
     }
   }
 }
+
 watch(useEnvironmentTexture, (value) => {
   if (fbo.value) {
     setTextureEnvAndBG(fbo.value)
   }
 }, { immediate: true, deep: true })
-
-watch(useSlots().default, (value) => {
+extend({ EnvSence })
+watch(() => useSlots().default, (value) => {
   if (value) {
-    slots = value
-    if (Array.isArray(slots)&&slots.length>0) {
-      if (typeof slots[0]?.type !== 'symbol') {
-        extend({ EnvSence })
-        fbo.value = new WebGLCubeRenderTarget(props.resolution)
-        fbo.value.texture.type = HalfFloatType
-        cubeCamera = new CubeCamera(props.near, props.far, fbo.value)
-        setTextureEnvAndBG(fbo.value)
-        return
+    if (!fbo.value || fbo.value.texture.type !== HalfFloatType) {
+      slots = value()
+      if (Array.isArray(slots) && slots.length > 0) {
+        if (typeof slots[0]?.type !== 'symbol') {
+          fbo.value?.dispose()
+          fbo.value = new WebGLCubeRenderTarget(props.resolution)
+          fbo.value.texture.type = HalfFloatType
+          cubeCamera = new CubeCamera(props.near, props.far, fbo.value)
+          setTextureEnvAndBG(fbo.value)
+          return
+        }
       }
     }
   }
@@ -82,6 +90,21 @@ watch(useSlots().default, (value) => {
   setTextureEnvAndBG(null)
 }, { immediate: true, deep: true })
 texture.value = useEnvironmentTexture
+
+watch(() => props.useDefaultScene, (newValue) => {
+  if (newValue) {
+    if (!fbo.value || fbo.value.texture.type !== UnsignedByteType) {
+      fbo.value?.dispose()
+      fbo.value = new WebGLCubeRenderTarget(props.resolution)
+      cubeCamera = new CubeCamera(props.near, props.far, fbo.value)
+      fbo.value.texture.type = UnsignedByteType
+      fbo.value.texture.generateMipmaps = false
+      fbo.value.texture.minFilter = NearestFilter
+      fbo.value.texture.magFilter = NearestFilter
+      setTextureEnvAndBG(fbo.value)
+    }
+  }
+}, { immediate: true })
 </script>
 
 <template>

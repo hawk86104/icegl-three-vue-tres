@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-03-27 10:38:54
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-04-15 11:34:26
+ * @LastEditTime: 2024-04-15 20:39:45
 -->
 <template>
     <primitive :object="scene" ref="tresMesh" />
@@ -20,7 +20,16 @@ import { defineExpose, ref, watch } from 'vue'
 import { makeCustomShaderMaterial } from 'PLS/floor/common/reflectorCustomMaterial'
 import { reflectorMipMap } from 'PLS/floor'
 
-const { scene } = await useGLTF('./plugins/industry4/model/su7_startroom.raw.glb', { draco: true, decoderPath: './draco/' })
+const props = withDefaults(
+    defineProps<{
+        hide?: boolean
+    }>(),
+    {
+        hide: false,
+    },
+)
+
+const { scene } = await useGLTF('./plugins/industry4/model/su7_car/su7_startroom.raw.glb', { draco: true, decoderPath: './draco/' })
 
 const pTexture = await useTexture([
     './plugins/industry4/texture/t_startroom_light.raw.jpg',
@@ -69,6 +78,19 @@ watch(
         floor.material = makeCustomShaderMaterial(floor, newVal.value) as any
     },
     { deep: true }
+)
+
+watch(
+    () => props.hide,
+    (newVal) => {
+        if (newVal) {
+            floorMat.envMapIntensity = 0.5
+            lightMat.opacity = 0
+        } else {
+            floorMat.envMapIntensity = 0
+            lightMat.opacity = 1
+        }
+    }
 )
 
 const tresMesh = ref<THREE.Mesh>()

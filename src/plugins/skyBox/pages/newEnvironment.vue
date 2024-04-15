@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-04-07 14:29:57
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-04-11 14:03:08
+ * @LastEditTime: 2024-04-15 16:24:24
 -->
 <template>
 	<TresCanvas v-bind="tcConfig">
@@ -23,7 +23,7 @@
 		</TresMesh>
 
 		<Suspense>
-			<Environment :blur="1" background :far="10000" preset="city" >
+			<Environment :blur="1" background :far="10000" preset="city">
 				<TresGroup v-if="true">
 					<Lightformer :intensity="0.75" :rotation-x="Math.PI / 2" :position="[0, 5, -9]" :scale="[10, 10, 1]" />
 					<Lightformer :intensity="4" :rotation-y="Math.PI / 2" :position="[-5, 1, -1]" :scale="[20, 0.1, 1]" />
@@ -60,7 +60,8 @@ import { ref } from "vue"
 import * as THREE from "three"
 import { useRenderLoop } from '@tresjs/core'
 import { LayerMaterial, Color, Depth } from 'PLS/basic/components/forCientos/LayerMaterial'
-import { OrbitControls, Levioso,Environment, Lightformer } from '@tresjs/cientos'
+import { OrbitControls, Levioso } from '@tresjs/cientos'
+import { Environment, Lightformer } from 'PLS/basic'
 
 const tcConfig = {
 	clearColor: "#201919",

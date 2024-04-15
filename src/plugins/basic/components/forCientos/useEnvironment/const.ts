@@ -1,3 +1,11 @@
+/*
+ * @Description: 
+ * @Version: 1.668
+ * @Autor: 地虎降天龙
+ * @Date: 2024-04-08 14:23:31
+ * @LastEditors: 地虎降天龙
+ * @LastEditTime: 2024-04-15 15:24:56
+ */
 export interface EnvironmentOptions {
   /**
    * If true, the environment will be set as the scene's background.
@@ -61,6 +69,10 @@ export interface EnvironmentOptions {
   * @default Infinity
   */
   frames?: number
+  /**
+  * If true, the default scene will be used.
+  */
+  useDefaultScene?: boolean
 }
 
 export const environmentPresets = {
