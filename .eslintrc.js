@@ -1,12 +1,5 @@
-/*
- * @Description: 
- * @Version: 1.668
- * @Autor: 地虎降天龙
- * @Date: 2023-10-16 10:53:09
- * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-03-07 10:07:04
- */
 module.exports = {
+    // parser: 'babel-eslint',
     extends: ['@webank/eslint-config-webank/vue.js'],
     overrides: [
         {
@@ -30,9 +23,9 @@ module.exports = {
     // },
     rules: {
         'prettier/prettier': 'off',
-        "vue/space-unary-ops": "off",
-        "vue/comma-dangle": "off",
-        "no-debugger": "off",
+        'vue/space-unary-ops': 'off',
+        'vue/comma-dangle': 'off',
+        'no-debugger': 'off',
         // "semi": "off",
         // "init-declarations": "off",
         // "space-unary-ops": "off",

@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-18 08:51:19
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-11-18 08:52:25
+ * @LastEditTime: 2024-04-12 09:48:40
 -->
 <template>
 	<TresCanvas v-bind="state" window-size>
@@ -22,7 +22,7 @@
 		<TresDirectionalLight ref="TDirectionalLight" :position="[10, 8, 4]" :intensity="1" cast-shadow />
 		<TresDirectionalLight :position="[10, 2, 4]" :intensity="1" cast-shadow />
 
-		<TresGridHelper />
+		<TresGridHelper :position-y="0.1"/>
 	</TresCanvas>
 </template>
 

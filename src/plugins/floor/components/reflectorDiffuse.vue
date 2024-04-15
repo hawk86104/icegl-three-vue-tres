@@ -1,11 +1,11 @@
-
-
 <template>
-	<TresMesh ref="tmRef" :rotation-x="-Math.PI / 2" :position-y="-0.1">
-		<TresPlaneGeometry ref="tpgRef" :args="[10, 10]" />
-		<TresMeshStandardMaterial ref="tmsmRef" v-bind="tmsMaterialConfig" />
-	</TresMesh>
-	<primitive :object="gridHelp" />
+	<TresGroup>
+		<TresMesh ref="tmRef" :rotation-x="-Math.PI / 2" :position-y="-0.1">
+			<TresPlaneGeometry ref="tpgRef" :args="[10, 10]" />
+			<TresMeshStandardMaterial ref="tmsmRef" v-bind="tmsMaterialConfig" />
+		</TresMesh>
+		<primitive :object="gridHelp" />
+	</TresGroup>
 </template>
 
 <script lang="ts" setup>

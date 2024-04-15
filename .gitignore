@@ -17,3 +17,4 @@
 #!/node_modules/oimophysics/
 yarn.lock
 yarn-error.log
+package-lock.json

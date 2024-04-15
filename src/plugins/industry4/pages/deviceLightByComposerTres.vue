@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-29 08:34:17
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-11-29 09:36:28
+ * @LastEditTime: 2024-04-15 14:37:04
 -->
 <template>
 	<TresCanvas v-bind="state" window-size>
@@ -24,8 +24,8 @@ import { SRGBColorSpace, BasicShadowMap, NoToneMapping } from 'three'
 import { reactive } from 'vue'
 
 import { OrbitControls } from '@tresjs/cientos'
+import { Pane } from 'tweakpane'
 import ByComposerTres from '../components/ByComposerTres.vue'
-import { Pane } from 'tweakpane';
 
 const state = reactive({
 	clearColor: '#000',
