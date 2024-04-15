@@ -1,0 +1,158 @@
+{
+  "asset": {
+    "generator": "glTF-Transform v3.10.1",
+    "version": "2.0"
+  },
+  "accessors": [
+    {
+      "type": "SCALAR",
+      "componentType": 5123,
+      "count": 2592,
+      "normalized": false,
+      "byteOffset": 0,
+      "bufferView": 0
+    },
+    {
+      "type": "VEC2",
+      "componentType": 5126,
+      "count": 586,
+      "normalized": false,
+      "byteOffset": 0,
+      "bufferView": 1
+    },
+    {
+      "type": "VEC3",
+      "componentType": 5120,
+      "count": 586,
+      "normalized": true,
+      "byteOffset": 0,
+      "bufferView": 2
+    },
+    {
+      "type": "VEC3",
+      "componentType": 5122,
+      "count": 586,
+      "max": [
+        32767,
+        892,
+        1800
+      ],
+      "min": [
+        -32767,
+        -892,
+        -1800
+      ],
+      "normalized": true,
+      "byteOffset": 4688,
+      "bufferView": 1
+    }
+  ],
+  "bufferViews": [
+    {
+      "buffer": 0,
+      "byteOffset": 0,
+      "byteLength": 5184,
+      "target": 34963,
+      "extensions": {
+        "EXT_meshopt_compression": {
+          "buffer": 0,
+          "byteOffset": 0,
+          "byteLength": 986,
+          "mode": "TRIANGLES",
+          "byteStride": 2,
+          "count": 2592
+        }
+      }
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 5184,
+      "byteLength": 2164,
+      "target": 34962,
+      "byteStride": 8,
+      "extensions": {
+        "EXT_meshopt_compression": {
+          "buffer": 0,
+          "byteOffset": 988,
+          "byteLength": 5541,
+          "mode": "ATTRIBUTES",
+          "byteStride": 8,
+          "count": 1172
+        }
+      }
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 7348,
+      "byteLength": 0,
+      "target": 34962,
+      "byteStride": 4,
+      "extensions": {
+        "EXT_meshopt_compression": {
+          "buffer": 0,
+          "byteOffset": 6532,
+          "byteLength": 814,
+          "mode": "ATTRIBUTES",
+          "filter": "OCTAHEDRAL",
+          "byteStride": 4,
+          "count": 586
+        }
+      }
+    }
+  ],
+  "buffers": [
+    {
+      "uri": "sm_speedup_data.bin",
+      "byteLength": 7348
+    }
+  ],
+  "meshes": [
+    {
+      "name": "Plane.032",
+      "primitives": [
+        {
+          "attributes": {
+            "TEXCOORD_0": 1,
+            "NORMAL": 2,
+            "POSITION": 3
+          },
+          "mode": 4,
+          "indices": 0
+        }
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "name": "加速.002",
+      "translation": [
+        0,
+        3.334592640399933,
+        -0.0000049173831939697266
+      ],
+      "scale": [
+        115.93985748291016,
+        115.93985748291016,
+        115.93985748291016
+      ],
+      "mesh": 0
+    }
+  ],
+  "scenes": [
+    {
+      "name": "Scene",
+      "nodes": [
+        0
+      ]
+    }
+  ],
+  "scene": 0,
+  "extensionsUsed": [
+    "KHR_mesh_quantization",
+    "EXT_meshopt_compression"
+  ],
+  "extensionsRequired": [
+    "KHR_mesh_quantization",
+    "EXT_meshopt_compression"
+  ]
+}
