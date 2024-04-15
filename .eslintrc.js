@@ -1,13 +1,5 @@
-/*
- * @Description:
- * @Version: 1.668
- * @Autor: 地虎降天龙
- * @Date: 2023-10-16 10:53:09
- * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-04-10 15:01:11
- */
 module.exports = {
-    parser: 'babel-eslint',
+    // parser: 'babel-eslint',
     extends: ['@webank/eslint-config-webank/vue.js'],
     overrides: [
         {

@@ -4,10 +4,8 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-12-25 11:41:13
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-04-14 22:31:34
+ * @LastEditTime: 2024-04-15 09:54:01
 -->
-
-
 <template>
 	<TresGroup :scale="props.scale">
 		<primitive :object="mirror" :position-y="-0.01" />
@@ -16,8 +14,9 @@
 </template>
 
 <script lang="ts" setup>
+import * as THREE from 'three'
 import { Mesh, PlaneGeometry, RepeatWrapping, GridHelper } from "three"
-import { useTexture, useTresContext } from '@tresjs/core'
+import { useTexture } from '@tresjs/core'
 import { Reflector, ReflectorDudvMaterial } from '../lib/alienJS/all.three.js'
 
 import { watchEffect, watch } from 'vue'
@@ -43,9 +42,9 @@ map.wrapS = RepeatWrapping
 map.wrapT = RepeatWrapping
 map.repeat.set(6, 3)
 const material = new ReflectorDudvMaterial({
-	map: map,
-	reflectivity: props.reflectivity
-});
+	map: map as any,
+	reflectivity: props.reflectivity as any,
+})
 material.uniforms.tReflect = { value: reflector.renderTarget.texture }
 material.uniforms.tReflectBlur = reflector.renderTargetUniform
 material.uniforms.uMatrix = reflector.textureMatrixUniform
@@ -53,19 +52,10 @@ material.uniforms.uMatrix = reflector.textureMatrixUniform
 const mirror = new Mesh(new PlaneGeometry(props.size[0], props.size[1]), material)
 mirror.rotation.x = -Math.PI / 2
 mirror.add(reflector)
-// material.opacity = 0.1
-// material.transparent = true
 
-// reflector.blurMaterial.opacity = 0.1
-// reflector.blurMaterial.transparent = true
-
-// reflector.screen.material.opacity = 0.1
-// reflector.screen.material.transparent = true
-
-const { renderer, scene, camera } = useTresContext()
 mirror.onBeforeRender = (rendererSelf: any, sceneSelf: any, cameraSelf: any) => {
 	mirror.visible = false
-	props.ignoreObjects.forEach((child) => {
+	props.ignoreObjects.forEach((child: any) => {
 		if (child.isMesh) {
 			child.visible = false
 		}
@@ -74,7 +64,7 @@ mirror.onBeforeRender = (rendererSelf: any, sceneSelf: any, cameraSelf: any) => 
 		}
 	})
 	reflector.update(rendererSelf, sceneSelf, cameraSelf)
-	props.ignoreObjects.forEach((child) => {
+	props.ignoreObjects.forEach((child: any) => {
 		if (child.isMesh) {
 			child.visible = true
 		}
@@ -96,4 +86,8 @@ watch(
 		gridHelp.visible = newVal
 	}
 )
+
+defineExpose({
+	reflector
+})
 </script>

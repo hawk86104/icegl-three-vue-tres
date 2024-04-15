@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-18 08:51:19
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-04-14 22:34:03
+ * @LastEditTime: 2024-04-15 09:54:26
 -->
 <template>
 	<!-- <loading /> -->
@@ -15,7 +15,7 @@
 		<TresDirectionalLight :position="[0, 2, -4]" :intensity="1" /> -->
 
 		<Suspense>
-			<startroom ref="startroomRef" />
+			<startroom ref="startroomRef" :reflector="reflectorDUDVRef" />
 		</Suspense>
 
 		<Suspense>
@@ -23,8 +23,8 @@
 		</Suspense>
 
 		<Suspense>
-			<reflectorDUDV :reflectivity="0.1" :showGridHelper="false" :position-y=".02" :size="[8, 6]"
-				:ignoreObjects="startroomRef?.meshList" />
+			<reflectorDUDV ref="reflectorDUDVRef" :reflectivity="10.1" :showGridHelper="false" :position-y=".01"
+				:size="[10, 10]" :ignoreObjects="startroomRef?.meshList" />
 		</Suspense>
 	</TresCanvas>
 </template>
@@ -32,16 +32,12 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
 import { OrbitControls } from '@tresjs/cientos'
+import { reflectorDUDV } from 'PLS/floor'
 import startroom from '../components/su7/startroom.vue'
 import car from '../components/su7/car.vue'
 
-import { reflectorDUDV } from 'PLS/floor'
-// import { Environment, Lightformer } from 'PLS/basic'
 // import * as THREE from 'three'
 // import { randomLoading as loading } from 'PLS/UIdemo'
-// import { reflectorDUDV } from 'PLS/floor'
-// import lamboModel from '../components/lamboModel.vue'
-// import lamboEffect from '../components/lamboEffect.vue'
 
 const state = reactive({
 	clearColor: '#000',
@@ -50,9 +46,10 @@ const state = reactive({
 	disableRender: false
 })
 const controlsState = reactive({
-	autoRotate: true,
+	// autoRotate: true,
 })
 
 const startroomRef = ref(null)
+const reflectorDUDVRef = ref(null)
 
 </script>

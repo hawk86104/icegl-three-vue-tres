@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-12-22 08:09:35
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-04-14 22:11:32
+ * @LastEditTime: 2024-04-15 08:10:12
 -->
 
 <template>
@@ -23,7 +23,7 @@
 		</TresMesh>
 
 		<Suspense>
-			<reflectorDUDV v-bind="configState" :ignoreObjects="[]" />
+			<reflectorDUDV v-bind="configState" :ignoreObjects="[cube]" />
 		</Suspense>
 
 		<TresMesh :position="[3, -1.5, 2]">

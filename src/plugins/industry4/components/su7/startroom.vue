@@ -4,10 +4,10 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-03-27 10:38:54
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-04-14 22:17:31
+ * @LastEditTime: 2024-04-15 09:26:24
 -->
 <template>
-    <primitive :object="scene" />
+    <primitive :object="scene" ref="tresMesh" />
 </template>
 
 <script setup lang="ts">
@@ -15,10 +15,15 @@ import { useTexture } from '@tresjs/core'
 import { useGLTF } from '@tresjs/cientos'
 import * as THREE from 'three'
 import { flatModel } from './utils'
-import { defineExpose, ref } from 'vue'
+import { defineExpose, ref, watch } from 'vue'
+import { makeCustomShaderMaterial } from 'PLS/floor/common/reflectorCustomMaterial'
+const props = withDefaults(defineProps<{
+    reflector?: THREE.Object3D
+}>(), {
+    reflector: null
+})
 
-
-const { scene, nodes, materials } = await useGLTF('./plugins/industry4/model/su7_startroom.raw.glb', { draco: true, decoderPath: './draco/' })
+const { scene } = await useGLTF('./plugins/industry4/model/su7_startroom.raw.glb', { draco: true, decoderPath: './draco/' })
 
 const pTexture = await useTexture([
     './plugins/industry4/texture/t_startroom_light.raw.jpg',
@@ -56,11 +61,25 @@ floorMat.normalMap = pTexture[3]
 floorMat.aoMap = pTexture[1]
 floorMat.lightMap = pTexture[0]
 floorMat.envMapIntensity = 0
-floor.name = 'floorBtm'
-floor.visible = false
 
-const tresMesh = ref<Mesh>()
+floor.name = 'floorBtm'
+// floor.visible = false
+
+watch(
+    () => props.reflector,
+    async (newVal) => {
+        debugger
+        if (newVal.reflector) {
+            floor.material = await makeCustomShaderMaterial(floor, newVal.reflector) as any
+        }
+
+    },
+    { immediate: true }
+)
+
+const tresMesh = ref<THREE.Mesh>()
 defineExpose({
-    meshList: [light, floor]
+    meshList: [light, floor],
+    tresMesh
 })
 </script>
