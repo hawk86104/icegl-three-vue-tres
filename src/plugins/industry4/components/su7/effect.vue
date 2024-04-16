@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-04-09 15:38:12
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-04-16 08:32:01
+ * @LastEditTime: 2024-04-16 09:11:13
 -->
 <template></template>
 
@@ -16,7 +16,7 @@ import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass'
 import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass'
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer'
 
-import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass.js'
+// import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass.js'
 import { AfterimagePass } from "three/examples/jsm/postprocessing/AfterimagePass.js"
 
 const props = withDefaults(
