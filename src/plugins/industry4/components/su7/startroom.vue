@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-03-27 10:38:54
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-04-15 20:39:45
+ * @LastEditTime: 2024-04-16 08:34:07
 -->
 <template>
     <primitive :object="scene" ref="tresMesh" />
@@ -67,6 +67,7 @@ floorMat.normalMap = pTexture[3]
 floorMat.aoMap = pTexture[1]
 floorMat.lightMap = pTexture[0]
 floorMat.envMapIntensity = 0
+floorMat.transparent = true
 
 floor.name = 'floorBtm'
 // floor.visible = false
@@ -84,10 +85,11 @@ watch(
     () => props.hide,
     (newVal) => {
         if (newVal) {
-            floorMat.envMapIntensity = 0.5
+            floor.material.envMapIntensity = 0.5
+            floor.material.opacity = 0
             lightMat.opacity = 0
         } else {
-            floorMat.envMapIntensity = 0
+            floor.material.envMapIntensity = 0
             lightMat.opacity = 1
         }
     }
