@@ -4,12 +4,12 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-04-16 09:37:06
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-04-16 12:01:45
+ * @LastEditTime: 2024-04-16 12:09:10
 -->
 <template>
 	<div v-show="su7Store.showColorList" class="colorList">
 		<div v-for="(item, index) in resImg" :key="index" :class="{ 'color-item': su7Store.selColorIndex === index }"
-    	:style="{ backgroundImage: `url(@/../../plugins/industry4/icon/${item.src})`, width: '32px', height: '32px', borderRadius: '50%', margin: '8px', backgroundSize: '100% 100%', cursor: 'pointer' }"
+    	:style="{ backgroundImage: `url(@/../plugins/industry4/icon/${item.src})`, width: '32px', height: '32px', borderRadius: '50%', margin: '8px', backgroundSize: '100% 100%', cursor: 'pointer' }"
 			@click="clickColor(index)"
 >
   	</div>
