@@ -4,12 +4,14 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-18 08:51:19
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-04-16 07:59:19
+ * @LastEditTime: 2024-04-16 11:51:28
 -->
 <template>
 	<loading />
 	<TresCanvas v-bind="state" window-size>
-		<TresPerspectiveCamera :position="[0, 5, 8]" :fov="45" :near="0.1" :far="500" />
+		<Levioso :speed="showSpeedup ? 46 : 0" :rotationFactor="0.1" :floatFactor="0.1" :range="[-0.3, 0.2]">
+			<TresPerspectiveCamera :position="[0, 5, 8]" :fov="45" :near="0.1" :far="500" />
+		</Levioso>
 		<OrbitControls v-bind="controlsState" />
 		<!-- <TresAmbientLight color="#ffffff" intensity="10" />
 		<TresDirectionalLight :position="[0, 2, -4]" :intensity="1" /> -->
@@ -34,18 +36,21 @@
 
 		<su7Effect :hide="showSpeedup" />
 	</TresCanvas>
+	<UIcarSkin />
 </template>
 
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
-import { OrbitControls } from '@tresjs/cientos'
+import { OrbitControls,Levioso } from '@tresjs/cientos'
 import { randomLoading as loading } from 'PLS/UIdemo'
 import { Pane } from 'tweakpane'
 import { Environment, Lightformer } from 'PLS/basic'
+import { useSu7Store } from 'PLS/industry4/stores/su7'
 import startroom from '../components/su7/startroom.vue'
 import car from '../components/su7/car.vue'
 import speedup from '../components/su7/speedup.vue'
 import su7Effect from '../components/su7/effect.vue'
+import UIcarSkin from '../components/su7/UIcarSkin.vue'
 
 const state = reactive({
 	clearColor: '#000',
@@ -54,19 +59,23 @@ const state = reactive({
 	disableRender: true
 })
 const controlsState = reactive({
-	autoRotate: true,
+	// autoRotate: true,
 })
 
 const showSpeedup = ref(false)
 const paneControl = new Pane({ title: '参数', })
-const btn = paneControl.addButton({
-	title: '启动',
-	label: '流光模式',
-})
+paneControl.addBinding(showSpeedup, 'value', { label: '流光模式' })
 
-// let count = 0
-btn.on('click', () => {
-	showSpeedup.value = !showSpeedup.value
-	btn.title = showSpeedup.value ? '停止' : '启动'
-})
+const su7Store = useSu7Store()
+paneControl.addBinding(su7Store, 'showColorList', { label: '选择皮肤' })
+// const btn = paneControl.addButton({
+// 	title: '启动',
+// 	label: '流光模式',
+// })
+
+// // let count = 0
+// btn.on('click', () => {
+// 	showSpeedup.value = !showSpeedup.value
+// 	btn.title = showSpeedup.value ? '停止' : '启动'
+// })
 </script>
