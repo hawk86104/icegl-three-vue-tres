@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-01-16 08:58:24
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-02-05 11:56:33
+ * @LastEditTime: 2024-04-17 17:40:44
  */
 
 export default {
@@ -28,6 +28,10 @@ export default {
 		{
 			"src": "plugins/eCommerce/preview/stencilMask.png", "type": "img", "name": "stencilMask", "title": "多重门",
 			referenceSource: { title: 'jaimetorrealba', url: 'https://lab.jaimetorrealba.com/stencilmask_demos' }
+		},
+		{
+			"src": "plugins/eCommerce/preview/sticker.png", "type": "img", "name": "sticker", "title": "镭射塑料袋",
+			referenceSource: { title: 'nikuscs', url: 'https://nikuscs.com/crafts/hybridly-sticker-effect/' }
 		},
 	]
 }
