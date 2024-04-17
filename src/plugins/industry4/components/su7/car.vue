@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-04-14 17:59:21
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-04-16 11:38:31
+ * @LastEditTime: 2024-04-16 16:11:44
 -->
 <template>
 	<primitive :object="scene" :rotation-y="Math.PI" />
@@ -18,6 +18,7 @@ import * as THREE from 'three'
 import { flatModel } from './utils'
 import { MeshoptDecoder } from 'three/examples/jsm/libs/meshopt_decoder.module.js'
 import { useSu7Store } from 'PLS/industry4/stores/su7'
+import gsap from "gsap"
 
 const su7Store = useSu7Store()
 
@@ -29,12 +30,12 @@ const props = withDefaults(
 		run: false,
 	},
 )
-const { scene,materials } = await useGLTF('./plugins/industry4/model/su7_car/sm_car.gltf', { draco: false }, (gltfLoader) => { gltfLoader.setMeshoptDecoder(MeshoptDecoder) })
+const { scene, materials } = await useGLTF('./plugins/industry4/model/su7_car/sm_car.gltf', { draco: false }, (gltfLoader) => { gltfLoader.setMeshoptDecoder(MeshoptDecoder) })
 
 const pTexture = await useTexture([
-    './plugins/industry4/texture/t_car_body_AO.raw.jpg',
-    './plugins/industry4/texture/t_cat_car_body_bc.webp',
-    './plugins/industry4/texture/t_gm_car_body_bc.webp'
+	'./plugins/industry4/texture/t_car_body_AO.raw.jpg',
+	'./plugins/industry4/texture/t_cat_car_body_bc.webp',
+	'./plugins/industry4/texture/t_gm_car_body_bc.webp'
 ])
 pTexture[0].colorSpace = THREE.LinearSRGBColorSpace
 pTexture[0].minFilter = THREE.NearestFilter
@@ -93,23 +94,41 @@ watch(
 		}
 	}
 )
-
+const carColor = {
+	color: new THREE.Color(),
+	targetColor: new THREE.Color(),
+}
 watch(
 	() => su7Store.selColorData,
 	(newVal) => {
+		gsap.killTweensOf(carColor)
 		if (newVal === 'c8.webp') {
 			materials.Car_body.color.set('#ffffff')
 			materials.Car_body.map = pTexture[1]
 			materials.Car_body.envMapIntensity = 2
-		}else if (newVal === 'c9.webp') {
+		} else if (newVal === 'c9.webp') {
 			materials.Car_body.color.set('#ffffff')
 			materials.Car_body.map = pTexture[2]
 			materials.Car_body.envMapIntensity = 2
-		}	
+		}
 		else {
-			materials.Car_body.color.set(newVal)
 			materials.Car_body.map = null
-			materials.Car_body.envMapIntensity = 5
+			carColor.color = materials.Car_body.color
+			carColor.targetColor = new THREE.Color(newVal)
+			gsap.to(carColor.color, {
+				duration: 0.66,
+				ease: "power1.out",
+				r: carColor.targetColor.r,
+				g: carColor.targetColor.g,
+				b: carColor.targetColor.b,
+				onUpdate: () => {
+					materials.Car_body.color.set(carColor.color)
+				},
+				onComplete: () => {
+					materials.Car_body.envMapIntensity = 5
+					materials.Car_body.needsUpdate = true
+				}
+			})
 		}
 		materials.Car_body.needsUpdate = true
 	}
