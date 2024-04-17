@@ -4,12 +4,12 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-18 08:51:19
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-04-16 11:51:28
+ * @LastEditTime: 2024-04-17 17:32:44
 -->
 <template>
 	<loading />
 	<TresCanvas v-bind="state" window-size>
-		<Levioso :speed="showSpeedup ? 46 : 0" :rotationFactor="0.1" :floatFactor="0.1" :range="[-0.3, 0.2]">
+		<Levioso :speed="showSpeedup ? 66 : 0" :rotationFactor="0.1" :floatFactor="0.1" :range="[-0.2, 0.1]">
 			<TresPerspectiveCamera :position="[0, 5, 8]" :fov="45" :near="0.1" :far="500" />
 		</Levioso>
 		<OrbitControls v-bind="controlsState" />

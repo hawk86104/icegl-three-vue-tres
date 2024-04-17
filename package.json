@@ -41,6 +41,7 @@
     "@fesjs/plugin-sass": "^3.0.0",
     "@here/quantized-mesh-decoder": "^1.2.8",
     "@mapbox/tilebelt": "^1.0.2",
+    "@pmndrs/vanilla": "^1.16.0",
     "@tresjs/cientos": "3.8.0",
     "@tresjs/core": "3.8.0",
     "@tweenjs/tween.js": "^23.1.1",

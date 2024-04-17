@@ -15,7 +15,8 @@
 			<primitive :object="fakeGlowMesh" />
 		</TresGroup>
 		<Suspense>
-			<Environment preset="city" />
+			<Environment :files="['pos-x.jpg', 'neg-x.jpg', 'pos-y.jpg', 'neg-y.jpg', 'pos-z.jpg', 'neg-z.jpg']"
+                path="https://opensource-1314935952.cos.ap-nanjing.myqcloud.com/images/skyBox/6jpg/"/>
 		</Suspense>
 	</TresCanvas>
 </template>
