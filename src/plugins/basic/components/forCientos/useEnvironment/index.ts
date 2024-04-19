@@ -83,8 +83,12 @@ export async function useEnvironment(options: Partial<EnvironmentOptions>, fbo: 
 
   watch(() => [background.value, texture.value], ([_background, _texture]) => {
     if (scene.value) {
-      let bTexture = fbo?.value? fbo.value.texture : _texture
-      scene.value.background = _background ? bTexture : undefined as unknown as Texture
+      let bTexture = fbo?.value ? fbo.value.texture : _texture
+      let backBackground = scene.value.background
+      if (!backBackground?.isColor) {
+        backBackground = undefined as unknown as Texture
+      }
+      scene.value.background = _background ? bTexture : backBackground
     }
   }, {
     immediate: true,

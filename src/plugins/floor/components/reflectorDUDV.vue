@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-12-25 11:41:13
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-04-15 09:54:01
+ * @LastEditTime: 2024-04-18 11:21:44
 -->
 <template>
 	<TresGroup :scale="props.scale">
@@ -25,7 +25,7 @@ const props = withDefaults(defineProps<{
 	showGridHelper?: boolean
 	scale?: Number
 	ignoreObjects?: THREE.Object3D[]
-	size: Array<number>
+	size?: Array<number>
 }>(), {
 	reflectivity: 0.8,
 	scale: 1.0,
