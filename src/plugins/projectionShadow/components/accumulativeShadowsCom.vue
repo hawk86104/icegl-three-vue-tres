@@ -4,69 +4,74 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-04-18 11:23:10
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-04-19 09:35:34
+ * @LastEditTime: 2024-04-19 11:24:33
 -->
 <template>
-    <!-- <TresMesh receive-shadow ref="gPlane" :scale="10" :rotate-x="-Math.PI / 2">
+    <TresMesh receive-shadow ref="gPlane" :scale="10" :rotate-x="-Math.PI / 2">
         <TresPlaneGeometry :args="[1, 1]" />
         <TresSoftShadowMaterial v-bind="ssConfig" />
-    </TresMesh> -->
+    </TresMesh>
 </template>
 
 <script setup lang="ts">
 import * as THREE from 'three'
-import { ref, watch } from 'vue'
-import { useTresContext, useRenderLoop } from '@tresjs/core'
+import { ref, watch, watchEffect } from 'vue'
+import { useTresContext } from '@tresjs/core'
 import { ProgressiveLightMap, SoftShadowMaterial } from '@pmndrs/vanilla'
 
-let gPlane = null
+const props = withDefaults(
+    defineProps<{
+        opacity?: number
+        alphaTest?: number
+        color?: string
+        blend?: number
+        lightPosition?: any
+        frames?: number
+        blendWindow?: number
+        ambient?: number
+    }>(),
+    {
+        opacity: 0.8,
+        alphaTest: 0.9,
+        color: '#000000',
+        blend: 2,
+        lightPosition: { x: 3, y: 5, z: 3 },
+        frames: 60,
+        blendWindow: 100,
+        ambient: 0.5,
+    },
+)
+
+let gPlane = ref<THREE.Mesh>()
 
 const { extend, scene, renderer, camera } = useTresContext()
-debugger
+
 extend({ SoftShadowMaterial })
-
-const plm = new ProgressiveLightMap(renderer.value, scene.value, 1024)
-
-const ssConfig = {
-    map: plm.progressiveLightMap2.texture,
-    transparent: true,
-    depthWrite: false,
-    toneMapped: true,
-    blend: 40, // ColorBlend, how much colors turn to black, 0 is black, 2
-    alphaTest: 0.75,
-    opacity: 0.8,
-}
-const shadowMaterial = new SoftShadowMaterial({
-    map: plm.progressiveLightMap2.texture,
-    transparent: true,
-    depthWrite: false,
-    toneMapped: true,
-    blend: 40,
-    alphaTest: 0.8,
-})
-gPlane = new THREE.Mesh(new THREE.PlaneGeometry(1, 1).rotateX(-Math.PI / 2), shadowMaterial)
-gPlane.scale.setScalar(10)
-gPlane.receiveShadow = true
-debugger
-scene.value.add(gPlane)
-plm.configure(gPlane)
-plm.clear()
 const lightParams = {
     /** Light position */
-    position: new THREE.Vector3(3, 5, 3),
+    position: new THREE.Vector3().set(props.lightPosition.x, props.lightPosition.y, props.lightPosition.z),
     /** Radius of the jiggle, higher values make softer light */
     radius: 1,
     /** Amount of lights*/
     amount: 8,
     /** Light intensity */
-    intensity: parseInt(THREE.REVISION.replace(/\D+/g, '')) >= 155 ? Math.PI : 1,
-    /** Ambient occlusion, lower values mean less AO, hight more, you can mix AO and directional light */
-    ambient: 0.5,
+    intensity: Math.PI,
     bias: 0.001, //shadow bias
     mapSize: 1024, // shadow map res
     size: 8, // shadow camera top,bottom,left,right
     near: 0.5, // shadow camera near
     far: 200, // shadow camera far
+}
+const plm = new ProgressiveLightMap(renderer.value, scene.value, lightParams.mapSize)
+const ssConfig = {
+    map: plm.progressiveLightMap2.texture,
+    transparent: true,
+    depthWrite: false,
+    toneMapped: true,
+    blend: props.blend,
+    alphaTest: props.alphaTest,
+    opacity: props.opacity,
+    color: props.color,
 }
 const gLights = new THREE.Group()
 for (let l = 0; l < lightParams.amount; l++) {
@@ -83,12 +88,11 @@ for (let l = 0; l < lightParams.amount; l++) {
     dirLight.shadow.mapSize.height = lightParams.mapSize
     gLights.add(dirLight)
 }
-
 const randomiseLightPositions = () => {
     const vLength = lightParams.position.length()
     for (let i = 0; i < gLights.children.length; i++) {
         const light = gLights.children[i]
-        if (Math.random() > lightParams.ambient) {
+        if (Math.random() > props.ambient) {
             light.position.set(
                 lightParams.position.x + THREE.MathUtils.randFloatSpread(lightParams.radius),
                 lightParams.position.y + THREE.MathUtils.randFloatSpread(lightParams.radius),
@@ -102,48 +106,64 @@ const randomiseLightPositions = () => {
     }
 }
 const renderShadows = (frames = 1) => {
-    // shadowMaterial
-    // debugger
-    shadowMaterial.opacity = 1.0
-    shadowMaterial.alphaTest = 0.8
     scene.value.add(gLights)
     plm.prepare()
     for (let i = 0; i < frames; i++) {
         randomiseLightPositions()
-        plm.update(camera.value as THREE.Camera, 40)
+        plm.update(camera.value as THREE.Camera, props.blendWindow)
+        console.log('shadows plm update', i)
     }
     scene.value.remove(gLights)
     plm.finish()
 }
-let count = 0
-// watch(
-//     () => gPlane.value,
-//     (value) => {
-//         if (value) {
-//             plm.configure(value)
-//             console.log('plm.configure(value)')
-//             // renderShadows()
-//             debugger
-//         }
-//     },
-// )
 watch(
     () => gPlane.value,
     (value) => {
         if (value) {
             plm.configure(value)
-            console.log('plm.configure(value)')
-            // renderShadows()
-            debugger
+            plm.clear()
+            console.log('shadows render start')
+            renderShadows(props.frames)
+            console.log('shadows render end')
         }
     },
 )
-const { onLoop } = useRenderLoop() //onAfterLoop
-onLoop(() => {
-    if (gPlane && count++ < 40) {
-        renderShadows()
-        console.log('renderShadows')
+const reset = () => {
+    plm.clear()
+    renderShadows(props.frames)
+}
+watchEffect(() => {
+    if (gPlane.value) {
+        if (props.opacity) {
+            gPlane.value.material.opacity = props.opacity
+        }
+        if (props.alphaTest) {
+            gPlane.value.material.alphaTest = props.alphaTest
+        }
+        if (props.color) {
+            gPlane.value.material.color.set(props.color)
+        }
+        if (props.blend) {
+            gPlane.value.material.blend = props.blend
+        }
     }
-    // renderShadows()
 })
+
+watch(
+    () => props.lightPosition,
+    (value) => {
+        if (value) {
+            console.log(props.lightPosition)
+            lightParams.position.set(value.x, value.y, value.z)
+            reset()
+        }
+    },
+    { deep: true },
+)
+watch(
+    () => [props.frames, props.blendWindow, props.ambient],
+    () => {
+        reset()
+    },
+)
 </script>

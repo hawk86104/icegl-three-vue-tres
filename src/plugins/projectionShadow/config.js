@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-04-18 10:22:49
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-04-18 10:26:56
+ * @LastEditTime: 2024-04-19 11:29:06
  */
 export default {
 	"name": "projectionShadow",
@@ -18,6 +18,6 @@ export default {
 	"updateTime": "2024-04-18",
 	"require": [],
 	"preview": [
-		{ "src": "plugins/basic/base/preview/theBasic.png", "type": "img", "name": "accumulativeShadows", "title": "软阴影" },
+		{ "src": "plugins/projectionShadow/preview/accumulativeShadows.png", "type": "img", "name": "accumulativeShadows", "title": "软阴影" },
 	]
 }
