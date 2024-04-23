@@ -1,1 +1,0 @@
-import{aI as r,cr as i}from"./vendor.KaB9nKOc1713775263683.js";import{R as n}from"./RGBELoader.ovr-kA271713775263683.js";const d=e=>new Promise((o,l)=>{new n().load(e,(a,p)=>{a.minFilter=r,a.magFilter=r,a.mapping=i,a.needsUpdate=!0,o(a)})});export{d as l};

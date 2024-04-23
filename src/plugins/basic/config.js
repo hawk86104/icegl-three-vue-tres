@@ -40,6 +40,7 @@ export default {
 				{ "src": "plugins/basic/materials/preview/wobbleMaterial.png", "type": "img", "name": "wobbleMaterial", "title": "流体波动" },
 				{ "src": "plugins/basic/materials/preview/clippingMaterial.png", "type": "img", "name": "clippingMaterial", "title": "材质裁剪" },
 				{ "src": "plugins/basic/materials/preview/layerMaterial.png", "type": "img", "name": "layerMaterial", "title": "图层材质" },
+				{ "src": "plugins/basic/materials/preview/outline.png", "type": "img", "name": "outline", "title": "outline" },
 			]
 		}, {
 			"name": "controls",
