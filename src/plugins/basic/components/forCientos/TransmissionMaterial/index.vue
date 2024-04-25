@@ -1,11 +1,3 @@
-<!--
- * @Description: 24
- * @Version: 1.668
- * @Autor: 地虎降天龙
- * @Date: 2024-04-17 19:19:06
- * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-04-25 17:17:49
--->
 <script setup lang="ts">
 import { shallowRef, nextTick, onMounted, Ref } from 'vue'
 import { MeshTransmissionMaterial, MeshDiscardMaterial } from '@pmndrs/vanilla'
@@ -23,7 +15,7 @@ const backside = true
 const backsideThickness = 0
 const thickness = 0
 const backsideEnvMapIntensity = 0
-const fboResolution = 1024
+const fboResolution = 256
 
 extend({ MeshTransmissionMaterial })
 

@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-04-15 11:08:17
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-04-15 11:28:53
+ * @LastEditTime: 2024-04-25 16:49:52
  */
 import { useRenderLoop, useTresContext } from '@tresjs/core'
 import type { Camera, WebGLRenderTargetOptions } from 'three'
@@ -61,7 +61,6 @@ export function useFBO(options: FboOptions) {
 
   watchEffect(() => {
     target.value?.dispose()
-
     target.value = new WebGLRenderTarget(width?.value || sizes.width.value, height?.value || sizes.height.value, {
       minFilter: LinearFilter,
       magFilter: LinearFilter,
@@ -79,7 +78,7 @@ export function useFBO(options: FboOptions) {
   })
 
   onLoop(() => {
-    if(isLoop){
+    if (isLoop?.value) {
       renderer.value.setRenderTarget(target.value)
       renderer.value.clear()
       renderer.value.render(scene.value, camera.value as Camera)
