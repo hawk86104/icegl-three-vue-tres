@@ -13,17 +13,10 @@ import { DoubleSide } from 'three'
 const texture = await useTexture(['logo.png'])
 </script>
 <template>
-	<suspense>
-		<TresMesh>
-			<TresPlaneGeometry />
-			<TresMeshPhysicalMaterial
-				:map="texture"
-				:transparent="true"
-				:clearcoat="1"
-				:roughness="1"
-				:metalness="0.8"
-				:side="DoubleSide"
-			/>
-		</TresMesh>
-	</suspense>
+    <suspense>
+        <TresMesh>
+            <TresPlaneGeometry />
+            <TresMeshPhysicalMaterial :map="texture" :transparent="true" :clearcoat="1" :roughness="1" :metalness="0.8" :side="DoubleSide" />
+        </TresMesh>
+    </suspense>
 </template>
