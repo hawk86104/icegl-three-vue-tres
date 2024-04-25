@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-04-25 10:54:10
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-04-25 17:02:07
+ * @LastEditTime: 2024-04-25 18:02:39
 -->
 <template>
     <TresCanvas v-bind="state" window-size>
@@ -15,12 +15,12 @@
 
         <TresMesh :position="[0, 1.9, 0]" name="torus">
             <TresTorusKnotGeometry :args="[1, 0.35, 100, 32]" />
-            <TresMeshStandardMaterial color="#ff33ff" :roughness="0" :metalness="1" />
+            <TransmissionMaterial v-bind="materialState" />
         </TresMesh>
 
         <TresMesh :position="[-2.5, 1.5, 2.5]" receive-shadow cast-shadow name="cube">
             <TresCylinderGeometry :args="[1.5, 1.5, 2]" />
-            <TransmissionMaterial />
+            <TresMeshStandardMaterial color="#ff33ff" :roughness="0" :metalness="1" />
         </TresMesh>
 
         <gridPlus :args="[3, 3]" />
@@ -57,23 +57,83 @@ const controlsState = reactive({
     autoRotate: false,
 })
 
-const outlineState = reactive({
-    color: '#ff00ae',
-    thickness: 0.1,
-    screenspace: false,
+const materialState = reactive({
+    color: '#ffffff',
+    roughness: 0,
+    reflectivity: 0.5,
+    attenuationColor: '#ffffff',
+    attenuationDistance: 2,
+    chromaticAberration: 0.05,
+    anisotropicBlur: 0.1,
+    distortion: 0,
+    temporalDistortion: 0,
+    backside: true,
+    thickness: 1,
+    backsideThickness: 0.5,
 })
 
 const paneControl = new Pane()
-paneControl.addBinding(outlineState, 'color', {
+paneControl.addBinding(materialState, 'color', {
     label: '颜色',
 })
-paneControl.addBinding(outlineState, 'thickness', {
-    label: 'thickness',
+paneControl.addBinding(materialState, 'roughness', {
+    label: 'roughness',
+    min: 0,
+    max: 1,
+    step: 0.01,
+})
+paneControl.addBinding(materialState, 'reflectivity', {
+    label: 'reflectivity',
+    min: 0,
+    max: 1,
+    step: 0.01,
+})
+paneControl.addBinding(materialState, 'attenuationColor', {
+    label: 'attenuationColor',
+})
+paneControl.addBinding(materialState, 'attenuationDistance', {
+    label: 'attenuationDistance',
     min: 0,
     max: 2,
     step: 0.01,
 })
-paneControl.addBinding(outlineState, 'screenspace', {
-    label: 'space',
+paneControl.addBinding(materialState, 'chromaticAberration', {
+    label: 'chromaticAberration',
+    min: 0,
+    max: 2,
+    step: 0.01,
+})
+paneControl.addBinding(materialState, 'anisotropicBlur', {
+    label: 'anisotropicBlur',
+    min: 0,
+    max: 10,
+    step: 0.01,
+})
+paneControl.addBinding(materialState, 'distortion', {
+    label: 'distortion',
+    min: 0,
+    max: 10,
+    step: 0.01,
+})
+paneControl.addBinding(materialState, 'temporalDistortion', {
+    label: 'temporalDistortion',
+    min: 0,
+    max: 1,
+    step: 0.01,
+})
+paneControl.addBinding(materialState, 'backside', {
+    label: 'backside',
+})
+paneControl.addBinding(materialState, 'thickness', {
+    label: 'thickness',
+    min: 0,
+    max: 4,
+    step: 0.01,
+})
+paneControl.addBinding(materialState, 'backsideThickness', {
+    label: 'backsideThickness',
+    min: 0,
+    max: 4,
+    step: 0.01,
 })
 </script>

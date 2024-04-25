@@ -11,11 +11,22 @@ const MeshTransmissionMaterialClass = shallowRef()
 const { extend, scene, renderer, camera } = useTresContext()
 const parent = shallowRef<TresObject>()
 
-const backside = true
-const backsideThickness = 0
-const thickness = 0
+const props = withDefaults(
+    defineProps<{
+        backside?: boolean
+        thickness?: number
+        backsideThickness?: number
+        fboResolution?: number
+    }>(),
+    {
+        backside: true,
+        thickness: 1,
+        backsideThickness: 0.5,
+        fboResolution: 256,
+    },
+)
+
 const backsideEnvMapIntensity = 0
-const fboResolution = 256
 
 extend({ MeshTransmissionMaterial })
 
@@ -31,11 +42,10 @@ function findMeshByMaterialUuid(scene: TresObject, materialUuid: string): TresOb
 const discardMaterial = new MeshDiscardMaterial()
 const { onBeforeLoop } = useRenderLoop()
 
-const fboBack = useFBO({ width: fboResolution, height: fboResolution, isLoop: false }) as unknown as Ref<WebGLRenderTarget<Texture>>
-const fboMain = useFBO({ width: fboResolution, height: fboResolution, isLoop: false }) as unknown as Ref<WebGLRenderTarget<Texture>>
+const fboBack = useFBO({ width: props.fboResolution, height: props.fboResolution, isLoop: false }) as unknown as Ref<WebGLRenderTarget<Texture>>
+const fboMain = useFBO({ width: props.fboResolution, height: props.fboResolution, isLoop: false }) as unknown as Ref<WebGLRenderTarget<Texture>>
 onMounted(async () => {
     await nextTick()
-    MeshTransmissionMaterialClass.value.buffer = fboMain.value.texture
     parent.value = findMeshByMaterialUuid(scene.value as unknown as TresObject, MeshTransmissionMaterialClass.value.uuid)
 })
 let oldBg
@@ -53,11 +63,11 @@ onBeforeLoop(({ elapsed }) => {
 
             parent.value.material = discardMaterial
 
-            if (backside) {
+            if (props.backside) {
                 renderer.value.setRenderTarget(fboBack.value)
                 renderer.value.render(scene.value, camera.value as Camera)
                 parent.value.material = MeshTransmissionMaterialClass.value
-                parent.value.material.thickness = backsideThickness
+                parent.value.material.thickness = props.backsideThickness
                 parent.value.material.buffer = fboBack.value.texture
                 parent.value.material.side = BackSide
                 parent.value.material.envMapIntensity = backsideEnvMapIntensity
@@ -66,10 +76,8 @@ onBeforeLoop(({ elapsed }) => {
             renderer.value.render(scene.value, camera.value as Camera)
             parent.value.material.buffer = fboMain.value.texture
             parent.value.material = MeshTransmissionMaterialClass.value
-            parent.value.material.thickness = thickness
+            parent.value.material.thickness = props.thickness
             parent.value.material.side = oldSide
-
-            // parent.value.material.buffer = fboMain.value.texture
             parent.value.material.envMapIntensity = oldEnvMapIntensity
 
             scene.value.background = oldBg
@@ -85,10 +93,7 @@ defineExpose({ root: MeshTransmissionMaterialClass, constructor: MeshTransmissio
 <template>
     <TresMeshTransmissionMaterial
         ref="MeshTransmissionMaterialClass"
-        :transmission="0"
-        :_transmission="1"
-        :anisotropic-blur="0.1"
-        :thickness="0"
+        :buffer="fboMain.texture"
         :side="DoubleSide"
     />
 </template>
