@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-04-26 08:13:26
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-04-26 08:26:56
+ * @LastEditTime: 2024-04-26 10:37:39
 -->
 <template>
     <Suspense>
@@ -26,14 +26,23 @@
             <Lightformer :intensity="0.5" :rotation-y="Math.PI / 2" :position="[-5, -1, -1]" :scale="[50, 2, 1]" />
             <Lightformer :intensity="0.5" :rotation-y="-Math.PI / 2" :position="[10, 1, 0]" :scale="[50, 2, 1]" />
 
-            <TresGroup ref="refgroup">
+            <TresGroup ref="refgroup" :rotation-x="Math.PI / 2">
                 <Lightformer form="ring" color="red" :rotation-y="Math.PI / 2" :intensity="5" :scale="[10, 10, 1]" :position="[-5, 2, -1]" />
             </TresGroup>
         </Environment>
     </Suspense>
 </template>
 <script setup lang="ts">
+import { ref } from 'vue'
 import { Environment, Lightformer } from 'PLS/basic'
+import { useRenderLoop } from '@tresjs/core'
 
+const refgroup = ref(null)
+const { onLoop } = useRenderLoop()
+onLoop(({ delta }) => {
+    if (refgroup.value) {
+        refgroup.value.rotation.z += delta
+    }
+})
 const lightList = [2, -2, 2, -4, 2, -5, 2, -9]
 </script>
