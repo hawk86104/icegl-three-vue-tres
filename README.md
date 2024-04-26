@@ -56,6 +56,7 @@
 ## 🏕 点击预览：[🌏opensource.icegl.cn](https://opensource.icegl.cn)
 
 -   如果访问太慢，请访问镜像站点：[🌏 ice-gl.gitee.io/icegl-three-vue-tres](https://ice-gl.gitee.io/icegl-three-vue-tres/)
+-   如果还不行，来镜像站点 2：[🌏 http://myhome.217dan.com:8899](http://myhome.217dan.com:8899/)
 -   如果有条件翻墙，也可直接访问 github 的镜像站:[🌏 https://hawk86104.github.io](https://hawk86104.github.io/)
 
 ```shell
@@ -98,13 +99,13 @@
     </TresCanvas>
 </template>
 <script setup lang="ts">
-    import { useRenderLoop, useTexture } from '@tresjs/core';
+    import { useRenderLoop, useTexture } from '@tresjs/core'
     //读取材质
-    const pTexture = await useTexture(['./**.jpg', './**.png']);
-    const { onLoop } = useRenderLoop();
+    const pTexture = await useTexture(['./**.jpg', './**.png'])
+    const { onLoop } = useRenderLoop()
     onLoop(({ delta }) => {
         //循环render
-    });
+    })
 </script>
 ```
 
