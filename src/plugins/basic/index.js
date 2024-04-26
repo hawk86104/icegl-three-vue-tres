@@ -11,5 +11,6 @@ import Environment from './components/forCientos/useEnvironment/component.vue'
 import Lightformer from './components/forCientos/Lightformer/index.vue'
 import { useFBO } from './components/forCientos/useFBO/index.ts'
 import TransmissionMaterial from './components/forCientos/TransmissionMaterial/index.vue'
+import Center from './components/forCientos/Center/index.vue'
 
-export { Environment, Lightformer, useFBO, TransmissionMaterial }
+export { Environment, Lightformer, useFBO, TransmissionMaterial,Center }
