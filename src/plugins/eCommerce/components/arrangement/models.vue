@@ -4,12 +4,12 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-01-16 09:39:49
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-04-26 10:24:02
+ * @LastEditTime: 2024-04-26 11:24:12
 -->
 <script setup lang="ts">
 import * as THREE from 'three'
 import { useGLTF } from '@tresjs/cientos'
-import { Center, TransmissionMaterial } from 'PLS/basic'
+import { Center, TransmissionMaterial, Caustics } from 'PLS/basic'
 import { AccumulativeShadows } from 'PLS/projectionShadow'
 import { Pane } from 'tweakpane'
 import { reactive } from 'vue'
@@ -120,6 +120,61 @@ paneControl.addBinding(materialState, 'backsideThickness', {
     max: 4,
     step: 0.01,
 })
+
+const causticsState = reactive({
+    color: 'rgb(255,200, 200)',
+    ior: 0.97,
+    backsideIOR: 0.98,
+    far: 30,
+    worldRadius: 0.394,
+    intensity: 0.02,
+    causticsOnly: false,
+    lightSource: { x: -0.05, y: 1, z: 1 },
+})
+const paneControl2 = new Pane({ title: '参数' })
+paneControl2.hidden = true
+paneControl2.addBinding(causticsState, 'color', {
+    label: '颜色',
+})
+paneControl2.addBinding(causticsState, 'ior', {
+    label: '折射系数',
+    min: 0.6,
+    max: 1.3,
+    step: 0.01,
+})
+paneControl2.addBinding(causticsState, 'backsideIOR', {
+    label: '折射系数2',
+    min: 0.6,
+    max: 1.3,
+    step: 0.01,
+})
+paneControl2.addBinding(causticsState, 'far', {
+    label: '可视距离',
+    min: 0,
+    max: 30,
+    step: 1,
+})
+paneControl2.addBinding(causticsState, 'worldRadius', {
+    label: '材质大小',
+    min: 0.001,
+    max: 0.5,
+    step: 0.001,
+})
+paneControl2.addBinding(causticsState, 'intensity', {
+    label: '强度',
+    min: 0,
+    max: 1,
+    step: 0.01,
+})
+paneControl2.addBinding(causticsState, 'causticsOnly', {
+    label: '只显示投射',
+})
+paneControl2.addBinding(causticsState, 'lightSource', {
+    label: '光源位置',
+    x: { min: -1, max: 1 },
+    y: { min: -1, max: 1 },
+    z: { min: -1, max: 1 },
+})
 </script>
 
 <template>
@@ -137,9 +192,11 @@ paneControl.addBinding(materialState, 'backsideThickness', {
 
         <TresMesh castShadow :geometry="nodes.fork.geometry" :material="materials.ForkAndKnivesSet001_1K" material-color="#999" />
 
-        <TresMesh castShadow receiveShadow :geometry="nodes.glass.geometry">
-            <TransmissionMaterial v-bind="materialState" />
-        </TresMesh>
+        <Caustics v-bind="causticsState">
+            <TresMesh castShadow receiveShadow :geometry="nodes.glass.geometry">
+                <TransmissionMaterial v-bind="materialState" />
+            </TresMesh>
+        </Caustics>
 
         <TresMesh :geometry="nodes.glass_back.geometry" :material="innerMaterial" :scale="[0.95, 1, 0.95]" />
         <TresMesh :geometry="nodes.glass_inner.geometry" :material="innerMaterial" />
