@@ -21,6 +21,7 @@ export default {
         { src: 'plugins/digitalCity/preview/radars.png', type: 'img', name: 'radars', title: '雷达' },
         { src: 'plugins/digitalCity/preview/weather.png', type: 'img', name: 'weather', title: '天气' },
         { src: 'plugins/digitalCity/preview/clouds.png', type: 'img', name: 'clouds', title: '云☁️' },
+        { src: 'plugins/digitalCity/preview/clouds2.png', type: 'img', name: 'clouds2', title: '云彩2☁️' },
         { src: 'plugins/digitalCity/preview/fog.png', type: 'img', name: 'fog', title: '迷雾' },
         { src: 'plugins/digitalCity/preview/smoke.png', type: 'img', name: 'smoke', title: '烟' },
         {

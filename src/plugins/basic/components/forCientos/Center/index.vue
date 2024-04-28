@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-04-26 09:05:47
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-04-26 09:16:20
+ * @LastEditTime: 2024-04-26 11:45:42
 -->
 <template>
     <TresGroup ref="gref">
@@ -18,7 +18,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
-import { Box3, Vector3, Sphere, Group, Object3D } from 'three'
+import { Box3, Vector3, Sphere } from 'three'
 
 const props = withDefaults(
     defineProps<{
