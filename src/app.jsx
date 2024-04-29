@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-10-16 10:53:09
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-04-16 09:09:13
+ * @LastEditTime: 2024-04-29 16:57:29
  */
 import { defineRuntimeConfig, useModel } from '@fesjs/fes'
 import { FMenu } from '@fesjs/fes-design'
@@ -57,7 +57,6 @@ export function onAppCreated ({ app }) {
         `))
         console.log(chalk.hex('#5384ff').bold('· 二次开发如用于商业性质或开源竞品请不要删除和修改 TvT.js 源码头部的版权与作者声明及出处。'))
         console.log(chalk.hex('#5384ff').bold('· 本项目遵循 Apache2 开源协议发布，并提供永久免费使用以及商用，但是不允许二次开源出来并进行收费。'))
-        console.log(chalk.hex('#5384ff').bold('· 我们已在申请相关的软件著作权和相关登记。'))
         console.log(chalk.hex('#1c86e5').bold('版权所有 Copyright © 2022-2025 by 🧊icegl (https://www.icegl.cn)'))
     // }
 }

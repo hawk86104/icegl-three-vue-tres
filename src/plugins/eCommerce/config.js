@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-01-16 08:58:24
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-04-26 08:05:53
+ * @LastEditTime: 2024-04-29 15:38:23
  */
 
 export default {
@@ -51,6 +51,13 @@ export default {
             name: 'arrangement',
             title: '桌面陈设',
             referenceSource: { title: 'react-three-fiber', url: 'https://codesandbox.io/p/sandbox/caustics-szj6p7' },
+        },
+        {
+            src: 'plugins/eCommerce/preview/roomup.png',
+            type: 'img',
+            name: 'roomup',
+            title: '日式会厅',
+            referenceSource: { title: 'react-three-fiber', url: 'https://codesandbox.io/p/sandbox/room-with-soft-shadows-ykfpw' },
         },
     ],
 }
