@@ -1,7 +1,15 @@
+<!--
+ * @Description: 
+ * @Version: 1.668
+ * @Autor: 地虎降天龙
+ * @Date: 2024-04-29 17:32:18
+ * @LastEditors: 地虎降天龙
+ * @LastEditTime: 2024-04-30 16:11:56
+-->
 <script setup lang="ts">
 import { useGLTF } from '@tresjs/cientos'
 
-const { nodes, materials } = await useGLTF('./plugins/eCommerce/model/room-transformed.glb', { draco: true, decoderPath: './draco/' })
+const { nodes, materials } = await useGLTF('./plugins/visualArts/model/room-transformed.glb', { draco: true, decoderPath: './draco/' })
 </script>
 
 <template>
