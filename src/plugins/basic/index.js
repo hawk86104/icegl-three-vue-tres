@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-04-09 11:27:03
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-04-29 16:51:19
+ * @LastEditTime: 2024-04-30 10:29:07
  */
 
 import Environment from './components/forCientos/useEnvironment/component.vue'
@@ -14,5 +14,7 @@ import TransmissionMaterial from './components/forCientos/TransmissionMaterial/i
 import Center from './components/forCientos/Center/index.vue'
 import Caustics from './components/forCientos/Caustics/index.vue'
 import Pcss from './components/forCientos/Pcss/index.vue'
+import meshReflectionMaterial from './components/forCientos/meshReflectionMaterial/index.vue'
+import CubeCamera from './components/forCientos/CubeCamera/index.vue'
 
-export { Environment, Lightformer, useFBO, TransmissionMaterial, Center, Caustics, Pcss }
+export { Environment, Lightformer, useFBO, TransmissionMaterial, Center, Caustics, Pcss, meshReflectionMaterial, CubeCamera }

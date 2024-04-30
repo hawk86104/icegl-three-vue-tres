@@ -61,6 +61,7 @@
     "patch-package": "^8.0.0",
     "pinia": "^2.1.7",
     "postinstall-postinstall": "^2.1.0",
+    "postprocessing": "^6.35.4",
     "three": "0.162.0",
     "three-bvh-csg": "^0.0.16",
     "three-mesh-bvh": "0.7.3",
