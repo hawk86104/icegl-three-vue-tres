@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-12-20 17:01:37
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-04-25 08:27:16
+ * @LastEditTime: 2024-05-06 08:22:09
  */
 export default {
     name: 'floor',
@@ -25,5 +25,12 @@ export default {
         { src: 'plugins/floor/preview/canvasFloor.png', type: 'img', name: 'canvasFloor', title: 'canvas动态底座' },
         { src: 'plugins/floor/preview/whiteFloor.png', type: 'img', name: 'whiteFloor', title: '白色边缘模糊' },
         { src: 'plugins/floor/preview/gridPlus.png', type: 'img', name: 'gridPlus', title: '网格扩展' },
+        {
+            src: 'plugins/floor/preview/grass.png',
+            type: 'img',
+            name: 'grass',
+            title: '草地',
+            referenceSource: { title: 'react-three-fiber', url: 'https://codesandbox.io/s/5xho4' },
+        },
     ],
 }
