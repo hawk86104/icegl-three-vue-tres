@@ -4,18 +4,39 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-05-06 16:35:42
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-05-08 17:49:33
+ * @LastEditTime: 2024-05-08 21:26:17
 -->
 <template>
     <primitive :object="model" cast-shadow receive-shadow :position="[13.5, 0, -45]" :scale="[0.2, 0.3, 0.2]" name="办公大厅" :rotation-y="Math.PI" />
+    <TresMesh
+        ref="tooltipRef"
+        :scale="[0.05, 0.02, 0.004]"
+        :rotation="[0, Math.PI / 2, 0]"
+        :position="[12, 25, -35]"
+        :geometry="tooltips.getObjectByName('Arctic_Tooltip_lambert4_0').geometry"
+        :material="tooltipMaterial"
+    >
+        <Html :center="true" transform>
+            <h1
+                class="text-xs p-0.5 rounded -mt-10 text-white font-bold"
+                style="font-size: 78rem; width: 5em; text-align: center; margin-top: 1em; scale: 0.7 1.5"
+            >
+                楼宇分层
+            </h1>
+        </Html>
+    </TresMesh>
 </template>
 <script lang="ts" setup>
 import { useTresContext } from '@tresjs/core'
-import { useGLTF } from '@tresjs/cientos'
+import { useGLTF, Html } from '@tresjs/cientos'
 import * as THREE from 'three'
 import { gsap } from 'gsap'
+import { ref, watchEffect } from 'vue'
 
-const { scene: model } = await useGLTF('./plugins/digitalPark/model/officeBuild.glb', { draco: true, decoderPath: './draco/' })
+const { scene: model } = await useGLTF('https://opensource-1314935952.cos.ap-nanjing.myqcloud.com/model/digitalPark/officeBuild.glb', {
+    draco: true,
+    decoderPath: './draco/',
+})
 const { scene, raycaster, camera } = useTresContext()
 model.traverse((child) => {
     if (child.isMesh) {
@@ -117,6 +138,30 @@ window.addEventListener('click', (e) => {
             },
         })
         curClickFloorName = 'runing'
+    }
+})
+const tooltipMaterial = new THREE.MeshPhysicalMaterial({
+    roughness: 0.3,
+    metalness: 0.05,
+    color: '#3a4f75',
+    envMapIntensity: 0.75,
+    clearcoatRoughness: 0,
+    clearcoat: 1,
+})
+const { scene: tooltips } = await useGLTF('./plugins/digitalPark/model/arctic_tooltip.glb', {
+    draco: true,
+    decoderPath: './draco/',
+})
+const tooltipRef = ref(null)
+watchEffect(() => {
+    if (tooltipRef.value) {
+        gsap.to(tooltipRef.value.rotation, {
+            y: Math.PI * 2.5,
+            duration: 3,
+            ease: 'power1.inOut',
+            repeat: -1,
+            yoyo: true,
+        })
     }
 })
 </script>

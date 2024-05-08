@@ -1,18 +1,50 @@
 <!--
- * @Description: 
+ * @Description:        :material="nodes.yellow_WhiteCar_0.material"
  * @Version: 1.668
  * @Autor: 地虎降天龙
  * @Date: 2024-05-08 14:23:31
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-05-08 15:51:40
+ * @LastEditTime: 2024-05-08 18:50:37
 -->
 <template>
     <primitive :object="model" :scale="0.02" :rotation="[0, Math.PI / 2, 0]" :position="[10, 1.5, 35]" />
+    <TresMesh
+        ref="tooltipRef"
+        :scale="[0.03, 0.02, 0.004]"
+        :rotation="[0, Math.PI / 2, 0]"
+        :position="[10, 6, 35]"
+        :geometry="tooltips.getObjectByName('Arctic_Tooltip_lambert4_0').geometry"
+    >
+        <Html :center="true" transform>
+            <h1 class="text-xs p-0.5 rounded -mt-10 text-#ffff99 font-bold" style="font-size: 78rem; width: 4em; text-align: center; margin-top: 1em">
+                别追我
+            </h1>
+        </Html>
+        <TransmissionMaterial v-bind="materialState" />
+    </TresMesh>
 </template>
 <script setup>
 import { useTresContext, useRenderLoop } from '@tresjs/core'
-import { useGLTF } from '@tresjs/cientos'
+import { useGLTF, Html } from '@tresjs/cientos'
 import * as THREE from 'three'
+import { ref, watchEffect } from 'vue'
+import { gsap } from 'gsap'
+import { TransmissionMaterial } from 'PLS/basic'
+
+const materialState = {
+    color: '#ffda99',
+    roughness: 0.21,
+    reflectivity: 1,
+    attenuationColor: '#ffda35',
+    attenuationDistance: 2,
+    chromaticAberration: 0.05,
+    anisotropicBlur: 0.1,
+    distortion: 1.8,
+    temporalDistortion: 0,
+    backside: false,
+    thickness: 1,
+    backsideThickness: 0.5,
+}
 
 const { scene } = useTresContext()
 
@@ -65,6 +97,11 @@ Object.values(nodes).forEach((node) => {
     }
 })
 
+const { scene: tooltips } = await useGLTF('./plugins/digitalPark/model/arctic_tooltip.glb', {
+    draco: true,
+    decoderPath: './draco/',
+})
+
 const curve = new THREE.CatmullRomCurve3([
     new THREE.Vector3(10, 1.5, 35),
     new THREE.Vector3(35, 1.5, 35),
@@ -87,6 +124,7 @@ curve.tension = 0.2 // 设置线的张力，0为无弧度折线
 // curveObject.position.y = 2
 // scene.value.add(curveObject)
 
+const tooltipRef = ref(null)
 let progress = 0
 const velocity = 0.0006 // 移动速度
 const moveOnCurve = () => {
@@ -96,6 +134,7 @@ const moveOnCurve = () => {
             const pointBox = curve.getPointAt(progress + velocity)
 
             if (point && pointBox) {
+                tooltipRef.value.position.set(point.x, point.y + 6, point.z)
                 model.position.set(point.x, point.y, point.z)
                 model.lookAt(pointBox.x, pointBox.y, pointBox.z)
 
@@ -113,8 +152,18 @@ const moveOnCurve = () => {
         }
     }
 }
+watchEffect(() => {
+    if (tooltipRef.value) {
+        gsap.to(tooltipRef.value.rotation, {
+            y: Math.PI * 2.5,
+            duration: 3,
+            ease: 'power1.inOut',
+            repeat: -1,
+            yoyo: true,
+        })
+    }
+})
 const { onLoop } = useRenderLoop()
-
 onLoop(() => {
     moveOnCurve()
 })

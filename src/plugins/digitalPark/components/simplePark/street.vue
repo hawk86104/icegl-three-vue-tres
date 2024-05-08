@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-05-08 10:57:34
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-05-08 15:33:27
+ * @LastEditTime: 2024-05-08 21:25:57
 -->
 <template>
     <!-- <primitive :object="nodes.Sketchfab_model" cast-shadow receive-shadow :position="[0, 0, -500]" :scale="[0.5, 0.5, 0.5]" /> -->
@@ -65,7 +65,10 @@
 import { useGLTF } from '@tresjs/cientos'
 import * as THREE from 'three'
 
-const { nodes } = await useGLTF('./plugins/digitalPark/model/low_poly_street_v3.glb', { draco: true, decoderPath: './draco/' })
+const { nodes } = await useGLTF('https://opensource-1314935952.cos.ap-nanjing.myqcloud.com/model/digitalPark/low_poly_street_v3.glb', {
+    draco: true,
+    decoderPath: './draco/',
+})
 
 const Cube497_530 = nodes.Sketchfab_model.getObjectByName('Cube497_530')
 Cube497_530.children[0].receiveShadow = true

@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-05-07 15:53:08
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-05-08 10:37:55
+ * @LastEditTime: 2024-05-08 21:13:41
 -->
 <template>
     <primitive cast-shadow receive-shadow :object="model" name="主场景" />
@@ -12,7 +12,6 @@
 <script lang="ts" setup>
 import { useTresContext } from '@tresjs/core'
 import { useGLTF } from '@tresjs/cientos'
-import * as THREE from 'three'
 
 const { scene: model } = await useGLTF('./plugins/digitalPark/model/vr_sculpture_park/scene.gltf', { draco: true, decoderPath: './draco/' })
 const { scene } = useTresContext()
