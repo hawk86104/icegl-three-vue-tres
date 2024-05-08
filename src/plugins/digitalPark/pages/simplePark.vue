@@ -12,7 +12,7 @@
         <TresPerspectiveCamera :position="[40, 30, 82]" :fov="45" :near="0.1" :far="1000" />
         <OrbitControls v-bind="controlsState" />
         <Levioso>
-            <TresDirectionalLight ref="TDirectionalLight" :position="[100, 100, -10]" :intensity="3.0" :castShadow="true" />
+            <TresDirectionalLight ref="TDirectionalLight" :position="[80, 80, -8]" :intensity="3.0" :castShadow="true" />
         </Levioso>
 
         <Suspense>

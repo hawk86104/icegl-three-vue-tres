@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-05-08 14:23:31
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-05-08 15:29:29
+ * @LastEditTime: 2024-05-08 15:51:40
 -->
 <template>
     <primitive :object="model" :scale="0.02" :rotation="[0, Math.PI / 2, 0]" :position="[10, 1.5, 35]" />
@@ -57,6 +57,7 @@ Object.values(nodes).forEach((node) => {
             node.material.color = new THREE.Color('#ddd')
         }
         node.castShadow = true
+        node.receiveShadow = true
         node.material.emissive = node.material.color
         node.material.emissiveMap = node.material.map
         node.material.emissiveIntensity = 0.1
