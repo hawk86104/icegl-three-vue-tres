@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-10 16:11:27
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-04-14 17:05:18
+ * @LastEditTime: 2024-05-07 16:29:56
  */
 
 export default {
@@ -43,6 +43,12 @@ export default {
             title: '来吧，小米su7',
             referenceSource: { title: 'gamemcu', url: 'https://gamemcu.com/su7/' },
         },
+        {
+            src: 'plugins/industry4/preview/collectTriangles.png',
+            type: 'img',
+            name: 'collectTriangles',
+            title: '喷漆收集三角形',
+        },
         // { "src": "plugins/industry4/preview/deviceLight.png", "type": "img", "name": "deviceLightByComposerTres", "title": "发光后期useTres" },
     ],
-};
+}
