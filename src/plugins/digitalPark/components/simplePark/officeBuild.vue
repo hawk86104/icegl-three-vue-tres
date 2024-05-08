@@ -4,10 +4,10 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-05-06 16:35:42
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-05-07 15:31:11
+ * @LastEditTime: 2024-05-08 14:37:03
 -->
 <template>
-    <primitive :object="model" cast-shadow receive-shadow :position="[16, 0, -5]" :scale="[0.2, 0.2, 0.2]" name="办公大厅" :rotation-y="Math.PI" />
+    <primitive :object="model" cast-shadow receive-shadow :position="[13.5, 0, -45]" :scale="[0.2, 0.3, 0.2]" name="办公大厅" :rotation-y="Math.PI" />
 </template>
 <script lang="ts" setup>
 import { useTresContext } from '@tresjs/core'
