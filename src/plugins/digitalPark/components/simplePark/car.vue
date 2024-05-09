@@ -1,13 +1,13 @@
 <!--
- * @Description:        :material="nodes.yellow_WhiteCar_0.material"
+ * @Description:
  * @Version: 1.668
  * @Autor: 地虎降天龙
  * @Date: 2024-05-08 14:23:31
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-05-08 18:50:37
+ * @LastEditTime: 2024-05-09 14:14:40
 -->
 <template>
-    <primitive :object="model" :scale="0.02" :rotation="[0, Math.PI / 2, 0]" :position="[10, 1.5, 35]" />
+    <primitive :object="model" />
     <TresMesh
         ref="tooltipRef"
         :scale="[0.03, 0.02, 0.004]"
@@ -27,9 +27,16 @@
 import { useTresContext, useRenderLoop } from '@tresjs/core'
 import { useGLTF, Html } from '@tresjs/cientos'
 import * as THREE from 'three'
-import { ref, watchEffect } from 'vue'
+import { ref, watch } from 'vue'
 import { gsap } from 'gsap'
 import { TransmissionMaterial } from 'PLS/basic'
+
+const props = defineProps({
+    darkModel: {
+        type: Boolean,
+        default: false,
+    },
+})
 
 const materialState = {
     color: '#ffda99',
@@ -56,7 +63,7 @@ const {
     draco: true,
     decoderPath: './draco/',
 })
-
+model.children[0].scale.setScalar(0.02)
 nodes.glass_003.scale.setScalar(2.7)
 materials.FrameBlack.roughness = 0
 materials.FrameBlack.metalness = 0.75
@@ -90,12 +97,28 @@ Object.values(nodes).forEach((node) => {
         }
         node.castShadow = true
         node.receiveShadow = true
-        node.material.emissive = node.material.color
+        // node.material.emissive = node.material.color
         node.material.emissiveMap = node.material.map
         node.material.emissiveIntensity = 0.1
         node.material.envmap = scene.value.background
     }
 })
+const spotLight = new THREE.SpotLight(0xffffff)
+model.add(spotLight)
+model.add(spotLight.target)
+spotLight.angle = Math.PI / 4
+spotLight.position.set(0, 2, 5)
+spotLight.target.position.set(0, 1, 7)
+spotLight.penumbra = 0.1
+spotLight.decay = 0.01
+spotLight.intensity = 3
+spotLight.castShadow = true
+spotLight.shadow.mapSize.width = 1024
+spotLight.shadow.mapSize.height = 1024
+spotLight.shadow.camera.near = 0.1
+spotLight.shadow.camera.far = 1000
+spotLight.shadow.camera.bias = 0.005 // 去除摩尔纹、伪影
+spotLight.visible = true
 
 const { scene: tooltips } = await useGLTF('./plugins/digitalPark/model/arctic_tooltip.glb', {
     draco: true,
@@ -126,7 +149,7 @@ curve.tension = 0.2 // 设置线的张力，0为无弧度折线
 
 const tooltipRef = ref(null)
 let progress = 0
-const velocity = 0.0006 // 移动速度
+const velocity = 0.0003 // 移动速度
 const moveOnCurve = () => {
     if (curve) {
         if (progress <= 1 - velocity) {
@@ -152,8 +175,8 @@ const moveOnCurve = () => {
         }
     }
 }
-watchEffect(() => {
-    if (tooltipRef.value) {
+watch(tooltipRef, (value) => {
+    if (value) {
         gsap.to(tooltipRef.value.rotation, {
             y: Math.PI * 2.5,
             duration: 3,
@@ -163,6 +186,16 @@ watchEffect(() => {
         })
     }
 })
+
+watch(
+    () => props.darkModel,
+    (value) => {
+        if (spotLight) {
+            spotLight.visible = value
+        }
+    },
+    { immediate: true },
+)
 const { onLoop } = useRenderLoop()
 onLoop(() => {
     moveOnCurve()
