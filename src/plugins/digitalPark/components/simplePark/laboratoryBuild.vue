@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-05-06 16:35:42
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-05-08 18:58:28
+ * @LastEditTime: 2024-05-09 14:39:25
 -->
 <template>
     <primitive :object="meshMerged" cast-shadow receive-shadow :position="[-33, 0, 7]" :scale="[0.7, 1.2, 0.7]" name="实验楼" :rotation-y="Math.PI / 2" />
@@ -40,7 +40,7 @@ model.traverse((child) => {
         child.geometry.applyMatrix4(child.matrixWorld)
         geometryArr.push(child.geometry)
 
-        child.material.emissive = child.material.color
+        // child.material.emissive = child.material.color
         child.material.emissiveMap = child.material.map
         child.material.emissiveIntensity = 0.1
         child.material.envmap = scene.value.background
