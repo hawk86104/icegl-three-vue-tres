@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-05-10 10:11:04
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-05-10 17:13:18
+ * @LastEditTime: 2024-05-10 18:11:05
 -->
 <template>
     <TresCanvas v-bind="state" window-size>
@@ -20,6 +20,7 @@
 
         <TresGridHelper />
     </TresCanvas>
+    <input id="fileInput" type="file" accept=".zip" style="display: none" />
 </template>
 
 <script setup lang="ts">
@@ -44,9 +45,16 @@ const controlsState = reactive({
     dampingFactor: 0.05,
 })
 
+// const fileInput = shallowRef(null)
+// //@ts-ignore
+// const handleFileChange = (event) => {
+//     const file = event.target.files[0]
+//     debugger
+// }
 const TDirectionalLight = shallowRef(null)
 watchEffect(() => {
     if (TDirectionalLight.value) {
+        //
     }
 })
 </script>
