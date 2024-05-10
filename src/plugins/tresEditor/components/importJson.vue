@@ -4,14 +4,16 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-05-10 10:25:14
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-05-10 11:56:33
+ * @LastEditTime: 2024-05-10 16:59:23
 -->
 <template></template>
 
 <script lang="ts" setup>
 import * as THREE from 'three'
-import { loadJson, initEvents } from '../common/utils'
+import { loadJson, initEvents, exporterJsonZip } from '../common/utils'
 import { useTresContext } from '@tresjs/core'
+import { Pane } from 'tweakpane'
+
 var loader = new THREE.ObjectLoader()
 
 const { scene, renderer, camera } = useTresContext()
@@ -29,4 +31,15 @@ setScene(loader.parse(files.scene))
 
 initEvents(renderer.value, scene.value, camera.value, files.scripts)
 // initEvents = (renderer, scene, camera, scriptsObg)
+
+// exporterJsonZip(files.camera)
+
+const paneControl = new Pane()
+const btn = paneControl.addButton({
+    title: '导出分解场景Json',
+    label: 'JsonZip',
+})
+btn.on('click', () => {
+    exporterJsonZip(files)
+})
 </script>

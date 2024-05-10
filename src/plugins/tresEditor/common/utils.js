@@ -6,10 +6,12 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-05-10 10:32:35
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-05-10 12:00:43
+ * @LastEditTime: 2024-05-10 18:00:50
  */
 import { request } from '@fesjs/fes'
 import * as THREE from 'three'
+import JSZip from 'jszip'
+import { saveAs } from 'file-saver'
 
 window.THREE = THREE // Used by APP Scripts.
 
@@ -51,7 +53,6 @@ export const initEvents = (renderer, scene, camera, scriptsObg) => {
     }
 
     const scriptWrapResult = JSON.stringify(scriptWrapResultObj).replace(/\"/g, '')
-    debugger
     // eslint-disable-next-line block-scoped-var
     for (const uuid in scriptsObg) {
         const object = scene.getObjectByProperty('uuid', uuid, true)
@@ -83,4 +84,64 @@ export const initEvents = (renderer, scene, camera, scriptsObg) => {
     }
 
     dispatch(events.init, null) //arguments
+}
+
+function getImageFormat(base64Data) {
+    const header = base64Data.substring(0, 15)
+    const jpgHeader = 'data:image/jpeg;base64,'
+    const pngHeader = 'data:image/png;base64,'
+    const gifHeader = 'data:image/gif;base64,'
+    const webpHeader = 'data:image/webp;base64,'
+
+    if (jpgHeader.startsWith(header)) {
+        return 'JPEG'
+    }
+    if (pngHeader.startsWith(header)) {
+        return 'PNG'
+    }
+    if (gifHeader.startsWith(header)) {
+        return 'GIF'
+    }
+    if (webpHeader.startsWith(header)) {
+        return 'WEBP'
+    }
+    return 'Unknown'
+}
+export const exporterJsonZip = (jsonObjct) => {
+    const geometrieList = []
+    if (jsonObjct.scene.geometries) {
+        jsonObjct.scene.geometries.forEach((geometry) => {
+            if (geometry.type === 'BufferGeometry') {
+                geometrieList.push({ uuid: geometry.uuid, data: geometry.data })
+                geometry.data = 'zip'
+            }
+        })
+    }
+    const imagesList = []
+    if (jsonObjct.scene.images) {
+        jsonObjct.scene.images.forEach((image) => {
+            if (image.url) {
+                imagesList.push({ uuid: image.uuid, url: image.url })
+                image.url = 'zip'
+            }
+        })
+    }
+    const zip = new JSZip()
+    if (geometrieList.length) {
+        const geometrieZip = zip.folder('geometries')
+        geometrieList.forEach((geometry) => {
+            geometrieZip.file(`${geometry.uuid}.json`, JSON.stringify(geometry.data))
+        })
+    }
+    if (imagesList.length) {
+        const imagesZip = zip.folder('images')
+        imagesList.forEach((image) => {
+            imagesZip.file(`${image.uuid}.${getImageFormat(image.url)}`, image.url.split(';base64,').pop(), { base64: true })
+        })
+    }
+    const json = JSON.stringify(jsonObjct)
+    zip.file('app.json', json)
+    return zip.generateAsync({ type: 'blob' }).then((blob) => {
+        saveAs(blob, 'config.zip')
+    })
 }
