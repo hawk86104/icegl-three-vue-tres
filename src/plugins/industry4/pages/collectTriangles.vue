@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-18 08:51:19
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-05-07 20:00:54
+ * @LastEditTime: 2024-05-10 10:06:49
 -->
 <template>
     <loading />
@@ -45,10 +45,10 @@ const controlsRef = ref(null)
 </script>
 
 <style lang="less">
-.fpsStats {
-    display: none !important;
-}
-#app > button {
-    display: none !important;
-}
+// .fpsStats {
+//     display: none !important;
+// }
+// #app > button {
+//     display: none !important;
+// }
 </style>
