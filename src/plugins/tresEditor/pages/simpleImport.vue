@@ -4,15 +4,15 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-05-10 10:11:04
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-05-10 18:11:05
+ * @LastEditTime: 2024-05-11 09:38:23
 -->
 <template>
     <TresCanvas v-bind="state" window-size>
         <TresPerspectiveCamera :position="[15, 15, 15]" :fov="45" :near="0.1" :far="1000" :look-at="[0, 0, 0]" />
 
         <OrbitControls v-bind="controlsState" />
-        <TresAmbientLight :intensity="0.5" />
-        <TresDirectionalLight ref="TDirectionalLight" :position="[6.058, 5.8, -2]" :intensity="10" color="#ff0000" cast-shadow />
+        <!-- <TresAmbientLight :intensity="0.5" /> -->
+        <!-- <TresDirectionalLight ref="TDirectionalLight" :position="[6.058, 5.8, -2]" :intensity="10" color="#ff0000" cast-shadow /> -->
 
         <Suspense>
             <importJson />
