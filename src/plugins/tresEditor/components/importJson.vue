@@ -4,16 +4,17 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-05-10 10:25:14
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-05-11 11:31:42
+ * @LastEditTime: 2024-05-11 15:45:54
 -->
 <template></template>
 
 <script lang="ts" setup>
 import * as THREE from 'three'
-import { initEvents, registerEvent, unregisterEvent, updateEvents, exporterJsonZip } from '../common/utils'
+import { exporterJsonZip, importJsonZip } from '../common/utils'
+import { initEvents, registerEvent, unregisterEvent, updateEvents } from '../common/event'
 import { useTresContext, useRenderLoop } from '@tresjs/core'
 import { Pane } from 'tweakpane'
-import { onMounted, watch } from 'vue'
+import { onMounted } from 'vue'
 import { FMessage } from '@fesjs/fes-design'
 
 let fileInput: any
@@ -47,6 +48,7 @@ const clearScene = () => {
 }
 const setScene = (value: any) => {
     clearScene()
+    unregisterEvent()
     group = new THREE.Group()
     if (value.children) {
         group.children = value.children
@@ -84,7 +86,6 @@ const inputB = paneControl.addButton({
 inputB.on('click', () => {
     if (fileInput) {
         fileInput.accept = '.json'
-        // 清除文件输入框的值
         fileInput.value = null
         fileInput.click()
     }
@@ -103,6 +104,31 @@ btn.on('click', () => {
         })
     }
 })
+const importZipB = paneControl.addButton({
+    title: '导入分解场景Zip',
+    label: 'ZipJson',
+})
+importZipB.on('click', () => {
+    if (jsonData) {
+        FMessage.warning?.({
+            content: '先清空场景',
+            colorful: true,
+        })
+    } else {
+        if (fileInput) {
+            fileInput.accept = '.zip'
+            fileInput.value = null
+            fileInput.click()
+        }
+    }
+})
+const initSceneFromJsonData = (jd: any) => {
+    jsonData = jd
+    setScene(loader.parse(jsonData.scene))
+
+    initEvents(renderer.value, scene.value, camera.value, sizes, jsonData)
+    registerEvent()
+}
 onMounted(() => {
     fileInput = document.getElementById('fileInput')
     if (!fileInput) {
@@ -110,18 +136,17 @@ onMounted(() => {
     }
     fileInput.onchange = (event: any) => {
         const file = event.target.files[0]
-        const reader = new FileReader()
-
-        reader.onload = (e: any) => {
-            const contents = e.target.result
-            jsonData = JSON.parse(contents)
-            setScene(loader.parse(jsonData.scene))
-
-            initEvents(renderer.value, scene.value, camera.value, sizes, jsonData)
-            registerEvent()
+        if (fileInput.accept === '.json') {
+            const reader = new FileReader()
+            reader.onload = (e: any) => {
+                const contents = e.target.result
+                initSceneFromJsonData(JSON.parse(contents))
+            }
+            reader.readAsText(file)
         }
-
-        reader.readAsText(file)
+        if (fileInput.accept === '.zip') {
+            importJsonZip(file, initSceneFromJsonData)
+        }
     }
 })
 const { onLoop } = useRenderLoop()
