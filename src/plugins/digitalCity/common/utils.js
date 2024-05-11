@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-09 09:33:51
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-03-21 08:10:00
+ * @LastEditTime: 2024-05-10 10:33:50
  */
 import {
     BufferAttribute,
@@ -93,7 +93,7 @@ export const loadGeojson = (filepath, dataType) =>
             })
             .catch((err) => {
                 console.error(err)
-                reject(error)
+                reject(err)
             })
     })
 
