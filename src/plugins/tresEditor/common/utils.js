@@ -24,23 +24,38 @@ export const loadJson = (filepath) =>
             })
     })
 
-function getImageFormat(base64Data) {
+export const convertImageToBase64 = async (imageUrl) => {
+    const response = await fetch(imageUrl)
+    const blob = await response.blob()
+    return await new Promise((resolve, reject) => {
+      const reader = new FileReader()
+      reader.onloadend = () => resolve(reader.result)
+      reader.onerror = reject
+      reader.readAsDataURL(blob)
+    })
+  }
+
+export const getImageFormat = (base64Data) => {
     const header = base64Data.substring(0, 15)
     const jpgHeader = 'data:image/jpeg;base64,'
+    const jpg2Header = 'data:image/JPEG;base64,'
     const pngHeader = 'data:image/png;base64,'
+    const png2Header = 'data:image/PNG;base64,'
     const gifHeader = 'data:image/gif;base64,'
+    const gif2Header = 'data:image/GIF;base64,'
     const webpHeader = 'data:image/webp;base64,'
+    const webp2Header = 'data:image/WEBP;base64,'
 
-    if (jpgHeader.startsWith(header)) {
+    if (jpgHeader.startsWith(header)||jpg2Header.startsWith(header)) {
         return 'JPEG'
     }
-    if (pngHeader.startsWith(header)) {
+    if (pngHeader.startsWith(header)||png2Header.startsWith(header)) {
         return 'PNG'
     }
-    if (gifHeader.startsWith(header)) {
+    if (gifHeader.startsWith(header)||gif2Header.startsWith(header)) {
         return 'GIF'
     }
-    if (webpHeader.startsWith(header)) {
+    if (webpHeader.startsWith(header||webp2Header.startsWith(header))) {
         return 'WEBP'
     }
     return 'Unknown'
@@ -60,7 +75,7 @@ export const exporterJsonZip = (jsonObjct) => {
         jsonObjct.scene.images.forEach((image) => {
             if (image.url) {
                 imagesList.push({ uuid: image.uuid, url: image.url })
-                image.url = 'zip'
+                image.url = 'zip.' + getImageFormat(image.url)
             }
         })
     }
@@ -93,7 +108,6 @@ export const importJsonZip = (file, handler) => {
     let gJson = null
     JSZip.loadAsync(file).then(
         (zip) => {
-            console.log(zip)
             if (!zip.files['app.json']) {
                 console.error(`非标准文件：不存在 app.json`)
                 return
@@ -115,7 +129,7 @@ export const importJsonZip = (file, handler) => {
                     }
                 })
                 gJson.scene.images?.forEach((image) => {
-                    if (image.url === 'zip') {
+                    if (image.url.startsWith('zip')) {
                         const matchingKeys = getMatchingKeys(zip.files, `images/${image.uuid}`)
                         if (matchingKeys.length) {
                             zip.files[matchingKeys[0]].async('base64').then((idata) => {

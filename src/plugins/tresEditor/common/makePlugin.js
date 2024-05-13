@@ -1,5 +1,6 @@
 import JSZip from 'jszip'
 import { saveAs } from 'file-saver'
+import { getImageFormat } from './utils'
 
 const codeForStructure = (code, project, camera, pluginState) => {
     // const cameraClone = camera ? JSON.parse(JSON.stringify(camera.object)) : null
@@ -99,12 +100,46 @@ const codeForConfig = (pluginName) => {
 		]
 	}`
 }
+const codeForJson = (publicFolder, scene) => {
+	const geometrieList = []
+    if (scene.geometries) {
+        scene.geometries.forEach((geometry) => {
+            if (geometry.type === 'BufferGeometry') {
+                geometrieList.push({ uuid: geometry.uuid, data: geometry.data })
+                geometry.data = 'zip'
+            }
+        })
+    }
+    const imagesList = []
+    if (scene.images) {
+        scene.images.forEach((image) => {
+            if (image.url) {
+                imagesList.push({ uuid: image.uuid, url: image.url })
+                image.url = 'zip.' + getImageFormat(image.url)
+            }
+        })
+    }
+		if (geometrieList.length) {
+			const geometrieZip = publicFolder.folder('geometries')
+			geometrieList.forEach((geometry) => {
+					geometrieZip.file(`${geometry.uuid}.json`, JSON.stringify(geometry.data))
+			})
+		}
+		if (imagesList.length) {
+				const imagesZip = publicFolder.folder('images')
+				imagesList.forEach((image) => {
+						imagesZip.file(`${image.uuid}.${getImageFormat(image.url)}`, image.url.split(';base64,').pop(), { base64: true })
+				})
+		}
+	publicFolder.file(`json/scene.json`, JSON.stringify(scene))
+}
 export function makePluginZip(jsonData, pluginState) {
     const pluginName = 'testEditor'
 
     const zip = new JSZip()
-    const publicFolder = zip.folder(`public/plugins/${pluginName}/json`)
-    publicFolder.file(`scene.json`, JSON.stringify(jsonData.scene))
+    const publicFolder = zip.folder(`public/plugins/${pluginName}`)
+		codeForJson(publicFolder, jsonData.scene)
+    // publicFolder.file(`scene.json`, JSON.stringify(jsonData.scene))
     const srcFolder = zip.folder(`src/plugins/${pluginName}`)
     srcFolder.file(`config.js`, codeForConfig(pluginName))
     const srcFolderComponents = srcFolder.folder('components')

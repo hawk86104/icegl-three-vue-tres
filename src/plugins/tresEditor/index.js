@@ -6,6 +6,6 @@
  * @LastEditors: 地虎降天龙
  * @LastEditTime: 2024-05-13 14:20:10
  */
-import { loadJson } from './common/utils'
+import { loadJson, convertImageToBase64 } from './common/utils'
 
-export { loadJson }
+export { loadJson, convertImageToBase64 }
