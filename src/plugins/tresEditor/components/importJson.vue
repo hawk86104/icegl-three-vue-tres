@@ -137,9 +137,13 @@ importZipB.on('click', () => {
 const pluginState = {
     orbitControls: true,
     gridHelper: true,
+    pluginName: 'testEditor',
 }
 const f2 = paneControl.addFolder({
     title: 'TvT插件包',
+})
+f2.addBinding(pluginState, 'pluginName', {
+    label: '插件名称',
 })
 f2.addBinding(pluginState, 'orbitControls', {
     label: '默认控制器',
@@ -153,7 +157,14 @@ const exporterB = f2.addButton({
 })
 exporterB.on('click', () => {
     if (jsonData) {
-        makePluginZip(jsonData, pluginState)
+        if(!pluginState.pluginName){
+            FMessage.warning?.({
+                content: '请正确填写插件名称',
+                colorful: true,
+            })
+        } else {
+            makePluginZip(jsonData, pluginState)
+        }
     } else {
         FMessage.warning?.({
             content: '场景内无物体',

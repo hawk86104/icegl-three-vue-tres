@@ -1,6 +1,7 @@
 import JSZip from 'jszip'
 import { saveAs } from 'file-saver'
 import { getImageFormat } from './utils'
+import { codeForEventScript } from './makePluginScripts'
 
 const codeForStructure = (code, project, camera, pluginState) => {
     // const cameraClone = camera ? JSON.parse(JSON.stringify(camera.object)) : null
@@ -27,6 +28,7 @@ import sceneCom from '../components/scene.vue'
 const state = reactive({
 	clearColor: '#201919',
 	windowSize:true,
+	antialias: true,
 	shadows: ${project.shadows ? 'true' : 'false'},
 	shadowMapType: ${project.shadowType ? project.shadowType : 'THREE.PCFShadowMap'},
 	toneMapping: ${project.toneMapping ? project.toneMapping : 'THREE.NoToneMapping'},
@@ -46,34 +48,57 @@ watch(
 </script>
 	`
 }
-const codeForSence = (srcFolderComponents, pluginName) => {
-    srcFolderComponents.file(
-        `scene.vue`,
-        `
-	<template>
+const codeForSence = (srcFolder, pluginName) => {
+    srcFolder.file(
+        `components/scene.vue`,
+        `<template>
 	<TresGroup ref="group" />
 </template>
 <script setup lang="ts">
 import { ref, watch } from 'vue'
 import * as THREE from 'three'
-import { loadJson } from 'PLS/tresEditor'
+import { loadJson, convertImageToBase64 } from 'PLS/tresEditor'
+import { useTresContext, useRenderLoop } from '@tresjs/core'
+import player from '../common/eventScript'
+const { scene: tresScene, renderer, camera, sizes } = useTresContext()
+player.init(tresScene, renderer, camera, sizes)
 
 const loader = new THREE.ObjectLoader()
 const scene = await loadJson('./plugins/${pluginName}/json/scene.json')
+
+for (const geometry of scene.geometries) {
+	if (geometry.data === 'zip') {
+			geometry.data = await loadJson(\`./plugins/${pluginName}/geometries/\${geometry.uuid}.json\`)
+	}
+}
+for (const image of scene.images) {
+	if (image.url.startsWith('zip')) {
+			image.url = await convertImageToBase64(\`./plugins/${pluginName}/images/\${image.uuid}.\${image.url.split('.')[1]}\`)
+	}
+}
+
 const group = ref(null) as any
 watch(
 	() => group.value,
 	(newVal) => {
 			if (newVal) {
 					newVal.add(loader.parse(scene))
+					player.load()
+					player.play()
 			}
 	},
 )
+const { onLoop } = useRenderLoop()
+onLoop(({ delta, elapsed }) => {
+    if (player.renderer) {
+        player.render(elapsed * 1000, delta * 1000)
+    }
+})
 </script>`,
     )
     return `<Suspense>
-	<sceneCom />
-</Suspense>`
+			<sceneCom />
+		</Suspense>`
 }
 
 const codeForConfig = (pluginName) => {
@@ -101,7 +126,7 @@ const codeForConfig = (pluginName) => {
 	}`
 }
 const codeForJson = (publicFolder, scene) => {
-	const geometrieList = []
+    const geometrieList = []
     if (scene.geometries) {
         scene.geometries.forEach((geometry) => {
             if (geometry.type === 'BufferGeometry') {
@@ -115,37 +140,35 @@ const codeForJson = (publicFolder, scene) => {
         scene.images.forEach((image) => {
             if (image.url) {
                 imagesList.push({ uuid: image.uuid, url: image.url })
-                image.url = 'zip.' + getImageFormat(image.url)
+                image.url = `zip.${getImageFormat(image.url)}`
             }
         })
     }
-		if (geometrieList.length) {
-			const geometrieZip = publicFolder.folder('geometries')
-			geometrieList.forEach((geometry) => {
-					geometrieZip.file(`${geometry.uuid}.json`, JSON.stringify(geometry.data))
-			})
-		}
-		if (imagesList.length) {
-				const imagesZip = publicFolder.folder('images')
-				imagesList.forEach((image) => {
-						imagesZip.file(`${image.uuid}.${getImageFormat(image.url)}`, image.url.split(';base64,').pop(), { base64: true })
-				})
-		}
-	publicFolder.file(`json/scene.json`, JSON.stringify(scene))
+    if (geometrieList.length) {
+        const geometrieZip = publicFolder.folder('geometries')
+        geometrieList.forEach((geometry) => {
+            geometrieZip.file(`${geometry.uuid}.json`, JSON.stringify(geometry.data))
+        })
+    }
+    if (imagesList.length) {
+        const imagesZip = publicFolder.folder('images')
+        imagesList.forEach((image) => {
+            imagesZip.file(`${image.uuid}.${getImageFormat(image.url)}`, image.url.split(';base64,').pop(), { base64: true })
+        })
+    }
+    publicFolder.file(`json/scene.json`, JSON.stringify(scene))
 }
 export function makePluginZip(jsonData, pluginState) {
-    const pluginName = 'testEditor'
+    const pluginName = pluginState.pluginName
 
     const zip = new JSZip()
     const publicFolder = zip.folder(`public/plugins/${pluginName}`)
-		codeForJson(publicFolder, jsonData.scene)
-    // publicFolder.file(`scene.json`, JSON.stringify(jsonData.scene))
+    codeForJson(publicFolder, jsonData.scene)
     const srcFolder = zip.folder(`src/plugins/${pluginName}`)
     srcFolder.file(`config.js`, codeForConfig(pluginName))
-    const srcFolderComponents = srcFolder.folder('components')
-    const pageCode = codeForStructure(codeForSence(srcFolderComponents, pluginName), jsonData.project, jsonData.camera, pluginState)
-    const srcFolderPages = srcFolder.folder('pages')
-    srcFolderPages.file('index.vue', pageCode)
+    const pageCode = codeForStructure(codeForSence(srcFolder, pluginName), jsonData.project, jsonData.camera, pluginState)
+    srcFolder.file('pages/index.vue', pageCode)
+    srcFolder.file('common/eventScript.js', codeForEventScript(jsonData.scripts))
     return zip.generateAsync({ type: 'blob' }).then((blob) => {
         saveAs(blob, `${pluginName}.zip`)
     })
