@@ -67,13 +67,21 @@ const loader = new THREE.ObjectLoader()
 const scene = await loadJson('./plugins/${pluginName}/json/scene.json')
 
 for (const geometry of scene.geometries) {
-	if (geometry.data === 'zip') {
-			geometry.data = await loadJson(\`./plugins/${pluginName}/geometries/\${geometry.uuid}.json\`)
+	if (geometry.data.startsWith('url:')) {
+			let url = geometry.data.slice(4)
+      if (url.startsWith('geometries/')) {
+          url = \`./plugins/${pluginName}/\${url}\`
+      }
+      geometry.data = await loadJson(url)
 	}
 }
 for (const image of scene.images) {
-	if (image.url.startsWith('zip')) {
-			image.url = await convertImageToBase64(\`./plugins/${pluginName}/images/\${image.uuid}.\${image.url.split('.')[1]}\`)
+	if (image.url.startsWith('url:')) {
+			let url = image.url.slice(4)
+      if (url.startsWith('images/')) {
+         url = \`./plugins/${pluginName}/\${url}\`
+      }
+      image.url = await convertImageToBase64(url)
 	}
 }
 
@@ -82,7 +90,11 @@ watch(
 	() => group.value,
 	(newVal) => {
 			if (newVal) {
-					newVal.add(loader.parse(scene))
+					const sceneObject = loader.parse(scene)
+					newVal.add(...sceneObject.children)
+					tresScene.value.background = sceneObject.background
+					tresScene.value.environment = sceneObject.environment
+					tresScene.value.fog = sceneObject.fog
 					player.load()
 					player.play()
 			}
@@ -131,7 +143,7 @@ const codeForJson = (publicFolder, scene) => {
         scene.geometries.forEach((geometry) => {
             if (geometry.type === 'BufferGeometry') {
                 geometrieList.push({ uuid: geometry.uuid, data: geometry.data })
-                geometry.data = 'zip'
+                geometry.data = `url:geometries/${geometry.uuid}.json`
             }
         })
     }
@@ -140,7 +152,7 @@ const codeForJson = (publicFolder, scene) => {
         scene.images.forEach((image) => {
             if (image.url) {
                 imagesList.push({ uuid: image.uuid, url: image.url })
-                image.url = `zip.${getImageFormat(image.url)}`
+                image.url = `url:images/${image.uuid}.${getImageFormat(image.url)}`
             }
         })
     }
