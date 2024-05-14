@@ -66,23 +66,27 @@ player.init(tresScene, renderer, camera, sizes)
 const loader = new THREE.ObjectLoader()
 const scene = await loadJson('./plugins/${pluginName}/json/scene.json')
 
-for (const geometry of scene.geometries) {
-	if (geometry.data.startsWith('url:')) {
-			let url = geometry.data.slice(4)
-      if (url.startsWith('geometries/')) {
-          url = \`./plugins/${pluginName}/\${url}\`
-      }
-      geometry.data = await loadJson(url)
-	}
+if (scene.geometries) {
+    for (const geometry of scene.geometries) {
+        if (geometry.data && geometry.data.startsWith('url:')) {
+            let url = geometry.data.slice(4)
+            if (url.startsWith('geometries/')) {
+                url = \`./plugins/${pluginName}/\${url}\`
+            }
+            geometry.data = await loadJson(url)
+        }
+    }
 }
-for (const image of scene.images) {
-	if (image.url.startsWith('url:')) {
-			let url = image.url.slice(4)
-      if (url.startsWith('images/')) {
-         url = \`./plugins/${pluginName}/\${url}\`
-      }
-      image.url = await convertImageToBase64(url)
-	}
+if (scene.images) {
+    for (const image of scene.images) {
+        if (image.url && image.url.startsWith('url:')) {
+            let url = image.url.slice(4)
+            if (url.startsWith('images/')) {
+                url = \`./plugins/${pluginName}/\${url}\`
+            }
+            image.url = await convertImageToBase64(url)
+        }
+    }
 }
 
 const group = ref(null) as any
@@ -95,7 +99,7 @@ watch(
 					tresScene.value.background = sceneObject.background
 					tresScene.value.environment = sceneObject.environment
 					tresScene.value.fog = sceneObject.fog
-					player.load()
+					player.load(sceneObject)
 					player.play()
 			}
 	},

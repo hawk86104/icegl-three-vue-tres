@@ -39,7 +39,7 @@ const player = {
 			Grscwh.camera = camera
 			Grscwh.sizes = sizes
 	},
-	load() {
+	load(sceneObject) {
 		${scriptsJson}
 		this.events = {
 				init: [],
@@ -61,9 +61,14 @@ const player = {
 		}
 		const scriptWrapResult = JSON.stringify(scriptWrapResultObj).replace(/\\"/g, '')
 		for (const uuid in scriptsJson) {
-				const object = this.scene.getObjectByProperty('uuid', uuid, true)
+				let curUuid = uuid
+				//这里解决一个问题 目前并没有把 主场景scene直接替换而是通过group 加进入的，所以 如果事件是基于主场景scene 那么替换这个uuid为现在tres主场景的uuid
+				if (uuid === sceneObject.uuid) {
+						curUuid = this.scene.uuid
+				}
+				const object = this.scene.getObjectByProperty('uuid', curUuid, true)
 				if (object === undefined) {
-						console.warn('player: Script without object.', uuid)
+						console.warn('player: Script without object.', curUuid)
 						continue
 				}
 				const scripts = scriptsJson[uuid]
