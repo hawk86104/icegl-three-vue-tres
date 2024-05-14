@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-05-10 10:25:14
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-05-13 09:26:20
+ * @LastEditTime: 2024-05-14 12:00:09
 -->
 <template></template>
 
@@ -54,6 +54,9 @@ const setScene = (value: any) => {
     if (value.children) {
         group.children = value.children
         scene.value.add(group)
+        scene.value.background = value.background
+        scene.value.environment = value.environment
+        scene.value.fog = value.fog
     }
 }
 
@@ -157,7 +160,7 @@ const exporterB = f2.addButton({
 })
 exporterB.on('click', () => {
     if (jsonData) {
-        if(!pluginState.pluginName){
+        if (!pluginState.pluginName) {
             FMessage.warning?.({
                 content: '请正确填写插件名称',
                 colorful: true,
