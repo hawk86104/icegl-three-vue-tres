@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-05-10 10:25:14
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-05-11 15:45:54
+ * @LastEditTime: 2024-05-14 12:00:09
 -->
 <template></template>
 
@@ -12,6 +12,7 @@
 import * as THREE from 'three'
 import { exporterJsonZip, importJsonZip } from '../common/utils'
 import { initEvents, registerEvent, unregisterEvent, updateEvents } from '../common/event'
+import { makePluginZip } from '../common/makePlugin'
 import { useTresContext, useRenderLoop } from '@tresjs/core'
 import { Pane } from 'tweakpane'
 import { onMounted } from 'vue'
@@ -53,6 +54,9 @@ const setScene = (value: any) => {
     if (value.children) {
         group.children = value.children
         scene.value.add(group)
+        scene.value.background = value.background
+        scene.value.environment = value.environment
+        scene.value.fog = value.fog
     }
 }
 
@@ -84,15 +88,26 @@ const inputB = paneControl.addButton({
     label: 'srcJson',
 })
 inputB.on('click', () => {
+    if (jsonData) {
+        FMessage.warning?.({
+            content: '先清空场景',
+            colorful: true,
+        })
+        return
+    }
     if (fileInput) {
         fileInput.accept = '.json'
         fileInput.value = null
         fileInput.click()
     }
 })
-const btn = paneControl.addButton({
-    title: '导出分解场景Zip',
-    label: 'JsonZip',
+
+const f1 = paneControl.addFolder({
+    title: '分解场景[中间件 测试用]',
+})
+const btn = f1.addButton({
+    title: '生成分解场景Zip',
+    label: 'Json2Zip',
 })
 btn.on('click', () => {
     if (jsonData) {
@@ -104,9 +119,9 @@ btn.on('click', () => {
         })
     }
 })
-const importZipB = paneControl.addButton({
+const importZipB = f1.addButton({
     title: '导入分解场景Zip',
-    label: 'ZipJson',
+    label: 'Zip2Json',
 })
 importZipB.on('click', () => {
     if (jsonData) {
@@ -120,6 +135,44 @@ importZipB.on('click', () => {
             fileInput.value = null
             fileInput.click()
         }
+    }
+})
+const pluginState = {
+    orbitControls: true,
+    gridHelper: true,
+    pluginName: 'testEditor',
+}
+const f2 = paneControl.addFolder({
+    title: 'TvT插件包',
+})
+f2.addBinding(pluginState, 'pluginName', {
+    label: '插件名称',
+})
+f2.addBinding(pluginState, 'orbitControls', {
+    label: '默认控制器',
+})
+f2.addBinding(pluginState, 'gridHelper', {
+    label: '默认网格',
+})
+const exporterB = f2.addButton({
+    title: '生成插件包',
+    label: 'MakePlugin',
+})
+exporterB.on('click', () => {
+    if (jsonData) {
+        if (!pluginState.pluginName) {
+            FMessage.warning?.({
+                content: '请正确填写插件名称',
+                colorful: true,
+            })
+        } else {
+            makePluginZip(jsonData, pluginState)
+        }
+    } else {
+        FMessage.warning?.({
+            content: '场景内无物体',
+            colorful: true,
+        })
     }
 })
 const initSceneFromJsonData = (jd: any) => {

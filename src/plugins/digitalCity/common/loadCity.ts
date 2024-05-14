@@ -6,11 +6,11 @@
  * @LastEditors: 地虎降天龙
  * @LastEditTime: 2023-12-27 14:57:03
  */
-import { useFBX } from '@tresjs/cientos';
+import { useFBX } from '@tresjs/cientos'
 
 export const loadCityFBX = async () => {
-	const path = './plugins/digitalCity/model/shanghai.FBX';
-	const model = await useFBX(path);
+	const path = './plugins/digitalCity/model/shanghai.FBX'
+	const model = await useFBX(path)
 	let CITY_UNTRIANGULATED = null
 	let LANDMASS = null
 	let roads = null

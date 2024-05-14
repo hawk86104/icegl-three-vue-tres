@@ -1,3 +1,5 @@
+/* eslint-disable no-undefined */
+/* eslint-disable guard-for-in */
 import * as THREE from 'three'
 
 window.THREE = THREE // Used by APP Scripts.

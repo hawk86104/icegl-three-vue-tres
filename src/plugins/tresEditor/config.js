@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-05-10 10:11:04
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-05-11 16:16:08
+ * @LastEditTime: 2024-05-13 09:58:17
  */
 export default {
     name: 'tresEditor',
@@ -32,6 +32,6 @@ export default {
             type: 'text',
             name: 'simpleImport',
             title: '导入/出JsonZip',
-        },
+        }
     ],
 }

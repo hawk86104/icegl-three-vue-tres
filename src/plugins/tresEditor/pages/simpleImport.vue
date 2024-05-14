@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-05-10 10:11:04
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-05-11 09:38:23
+ * @LastEditTime: 2024-05-13 08:37:32
 -->
 <template>
     <TresCanvas v-bind="state" window-size>
@@ -45,12 +45,6 @@ const controlsState = reactive({
     dampingFactor: 0.05,
 })
 
-// const fileInput = shallowRef(null)
-// //@ts-ignore
-// const handleFileChange = (event) => {
-//     const file = event.target.files[0]
-//     debugger
-// }
 const TDirectionalLight = shallowRef(null)
 watchEffect(() => {
     if (TDirectionalLight.value) {
