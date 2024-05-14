@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-03-27 10:38:54
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-05-07 20:03:52
+ * @LastEditTime: 2024-05-14 15:49:17
 -->
 <template>
     <TresMesh ref="targetMesh" :geometry="geometry" :scale="0.005" :material="material" />
