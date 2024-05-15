@@ -27,7 +27,7 @@ module.exports = {
         'vue/comma-dangle': 'off',
         'no-debugger': 'off',
         'guard-for-in': 'off',
-        // "semi": "off",
+        semi: ['error', 'never'],
         // "init-declarations": "off",
         // "space-unary-ops": "off",
         'import/no-unresolved': [
