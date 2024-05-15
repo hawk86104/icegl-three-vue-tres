@@ -26,6 +26,7 @@ module.exports = {
         'vue/space-unary-ops': 'off',
         'vue/comma-dangle': 'off',
         'no-debugger': 'off',
+        'guard-for-in': 'off',
         // "semi": "off",
         // "init-declarations": "off",
         // "space-unary-ops": "off",
@@ -36,4 +37,4 @@ module.exports = {
             },
         ],
     },
-};
+}
