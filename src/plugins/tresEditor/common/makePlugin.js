@@ -11,6 +11,7 @@ const codeForStructure = (code, project, camera, pluginState) => {
     cameraClone.object = cameraObject
     return `
 <template>
+    <loading />
 	<TresCanvas v-bind="state">
 		${pluginState.orbitControls ? '<OrbitControls />' : ''}
 		${camera ? `<Tres${camera.object.type}  ref="cameraRef" uuid="${camera.object.uuid}" name="${camera.object.name}" />` : ''}
@@ -24,6 +25,7 @@ import { reactive, watch, ref } from 'vue'
 import { TresCanvas } from '@tresjs/core'
 import { OrbitControls } from '@tresjs/cientos'
 import sceneCom from '../components/scene.vue'
+import { loading2 as loading } from 'PLS/UIdemo'
 
 const state = reactive({
 	clearColor: '#201919',
