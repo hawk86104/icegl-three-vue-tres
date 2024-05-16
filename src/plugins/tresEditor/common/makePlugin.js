@@ -57,14 +57,14 @@ const codeForSence = (srcFolder, pluginName) => {
 <script setup lang="ts">
 import { ref, watch } from 'vue'
 import * as THREE from 'three'
-import { loadJson, convertImageToBase64 } from 'PLS/tresEditor'
+import { loadImageToBase64, loadJsonFile } from 'PLS/tresEditor'
 import { useTresContext, useRenderLoop } from '@tresjs/core'
 import player from '../common/eventScript'
 const { scene: tresScene, renderer, camera, sizes } = useTresContext()
 player.init(tresScene, renderer, camera, sizes)
 
 const loader = new THREE.ObjectLoader()
-const scene = await loadJson('./plugins/${pluginName}/json/scene.json')
+const scene = await loadJsonFile('./plugins/${pluginName}/json/scene.json')
 
 if (scene.geometries) {
     for (const geometry of scene.geometries) {
@@ -73,7 +73,7 @@ if (scene.geometries) {
             if (url.startsWith('geometries/')) {
                 url = \`./plugins/${pluginName}/\${url}\`
             }
-            geometry.data = await loadJson(url)
+            geometry.data = await loadJsonFile(url)
         }
     }
 }
@@ -84,7 +84,7 @@ if (scene.images) {
             if (url.startsWith('images/')) {
                 url = \`./plugins/${pluginName}/\${url}\`
             }
-            image.url = await convertImageToBase64(url)
+            image.url = await loadImageToBase64(url)
         }
     }
 }
