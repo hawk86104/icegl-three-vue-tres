@@ -96,7 +96,7 @@ watch(
 	() => group.value,
 	(newVal) => {
 			if (newVal) {
-					const sceneObject = loader.parse(scene)
+					const sceneObject = loader.parse(scene) as any
 					newVal.add(...sceneObject.children)
 					tresScene.value.background = sceneObject.background
 					tresScene.value.environment = sceneObject.environment
