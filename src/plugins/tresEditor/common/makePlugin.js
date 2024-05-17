@@ -3,14 +3,14 @@ import { saveAs } from 'file-saver'
 import { getImageFormat } from './utils'
 import { codeForEventScript } from './makePluginScripts'
 
+let childComponentFileList = []
 const codeForStructure = (code, project, camera, pluginState) => {
-    // const cameraClone = camera ? JSON.parse(JSON.stringify(camera.object)) : null
-    // delete cameraClone.uuid
     const { uuid, ...cameraObject } = camera.object
     const cameraClone = JSON.parse(JSON.stringify(camera))
     cameraClone.object = cameraObject
     return `
 <template>
+    <loading />
 	<TresCanvas v-bind="state">
 		${pluginState.orbitControls ? '<OrbitControls />' : ''}
 		${camera ? `<Tres${camera.object.type}  ref="cameraRef" uuid="${camera.object.uuid}" name="${camera.object.name}" />` : ''}
@@ -24,6 +24,7 @@ import { reactive, watch, ref } from 'vue'
 import { TresCanvas } from '@tresjs/core'
 import { OrbitControls } from '@tresjs/cientos'
 import sceneCom from '../components/scene.vue'
+import { loading2 as loading } from 'PLS/UIdemo'
 
 const state = reactive({
 	clearColor: '#201919',
@@ -48,32 +49,103 @@ watch(
 </script>
 	`
 }
-const codeForSence = (srcFolder, pluginName) => {
+const commentOutALineOfComponent = (item) => {
+    return `<!-- name:${item.name} uuid:${item.uuid} type:${item.type} -->`
+}
+const codeForLevelFile = (folder, name, item) => {
+    let listStr = ''
+    item.forEach((child, index) => {
+        listStr += commentOutALineOfComponent(child)
+        listStr += `
+        <primitive :object="object[${index}]" />
+        `
+    })
+    let strCode = `<template>
+    ${listStr}
+</template>
+
+<script setup lang="ts">
+const props = withDefaults(
+    defineProps<{
+        object: any
+    }>(),
+    {},
+)
+</script>
+`
+    folder.file(`${name.fileName}`, strCode)
+    childComponentFileList.push(name)
+}
+const importFromchildComponentFileList = () => {
+    let str = ''
+    childComponentFileList.forEach((item) => {
+        str += `import ${item.comName} from './childComponent/${item.fileName}'\n`
+    })
+    return str
+}
+const childComponentLevelName = (level, uuid) => {
+    const l = level - 1
+    const ln = ['firstLevel', 'secondLevel', 'thirdLevel']
+    const uuidLast = uuid.split('-').pop()
+    return { fileName: `${ln[l]}-${uuidLast}.vue`, comName: `${ln[l]}${uuidLast}` }
+}
+const codeForChildComponent = (childComponentFolder, pluginState, item, index, curLevel) => {
+    if (pluginState.childLevel >= curLevel) {
+        //
+    }
+    let primitiveCode = `${commentOutALineOfComponent(item)}
+    <primitive :object="sceneObject.children[${index}]">
+    `
+    if (item.children && item.children.length) {
+        const clName = childComponentLevelName(curLevel, item.uuid)
+        primitiveCode += `<${clName.comName} :object="sceneObject.children[${index}].children" />`
+        codeForLevelFile(childComponentFolder, clName, item.children)
+    }
+    primitiveCode += `
+    </primitive>
+`
+    return primitiveCode
+}
+const codeForSence = (srcFolder, pluginState, scene) => {
+    let primitiveListCode = ''
+    const childComponentFolder = srcFolder.folder(`components/childComponent`)
+    if (scene.object && scene.object.children && scene.object.children.length) {
+        scene.object.children.forEach((child, index) => {
+            if (pluginState.childLevel > 0 && child.children && child.children.length) {
+                primitiveListCode += codeForChildComponent(childComponentFolder, pluginState, child, index, 1)
+            } else {
+                primitiveListCode += `    ${commentOutALineOfComponent(child)}
+    <primitive :object="sceneObject.children[${index}]" />
+    `
+            }
+        })
+    }
     srcFolder.file(
         `components/scene.vue`,
         `<template>
-	<TresGroup ref="group" />
-</template>
+        ${primitiveListCode}</template>
 <script setup lang="ts">
-import { ref, watch } from 'vue'
+import { onMounted } from 'vue'
 import * as THREE from 'three'
-import { loadJson, convertImageToBase64 } from 'PLS/tresEditor'
+import { loadImageToBase64, loadJsonFile } from 'PLS/tresEditor'
 import { useTresContext, useRenderLoop } from '@tresjs/core'
 import player from '../common/eventScript'
+${importFromchildComponentFileList()}
+
 const { scene: tresScene, renderer, camera, sizes } = useTresContext()
 player.init(tresScene, renderer, camera, sizes)
 
 const loader = new THREE.ObjectLoader()
-const scene = await loadJson('./plugins/${pluginName}/json/scene.json')
+const scene = await loadJsonFile('./plugins/${pluginState.pluginName}/json/scene.json')
 
 if (scene.geometries) {
     for (const geometry of scene.geometries) {
         if (geometry.data && geometry.data.startsWith('url:')) {
             let url = geometry.data.slice(4)
             if (url.startsWith('geometries/')) {
-                url = \`./plugins/${pluginName}/\${url}\`
+                url = \`./plugins/${pluginState.pluginName}/\${url}\`
             }
-            geometry.data = await loadJson(url)
+            geometry.data = await loadJsonFile(url)
         }
     }
 }
@@ -82,28 +154,21 @@ if (scene.images) {
         if (image.url && image.url.startsWith('url:')) {
             let url = image.url.slice(4)
             if (url.startsWith('images/')) {
-                url = \`./plugins/${pluginName}/\${url}\`
+                url = \`./plugins/${pluginState.pluginName}/\${url}\`
             }
-            image.url = await convertImageToBase64(url)
+            image.url = await loadImageToBase64(url)
         }
     }
 }
 
-const group = ref(null) as any
-watch(
-	() => group.value,
-	(newVal) => {
-			if (newVal) {
-					const sceneObject = loader.parse(scene)
-					newVal.add(...sceneObject.children)
-					tresScene.value.background = sceneObject.background
-					tresScene.value.environment = sceneObject.environment
-					tresScene.value.fog = sceneObject.fog
-					player.load(sceneObject)
-					player.play()
-			}
-	},
-)
+const sceneObject = loader.parse(scene) as any
+onMounted(() => {
+    tresScene.value.background = sceneObject.background
+    tresScene.value.environment = sceneObject.environment
+    tresScene.value.fog = sceneObject.fog
+    player.load(sceneObject)
+    player.play()
+})
 const { onLoop } = useRenderLoop()
 onLoop(({ delta, elapsed }) => {
     if (player.renderer) {
@@ -175,6 +240,7 @@ const codeForJson = (publicFolder, scene) => {
     publicFolder.file(`json/scene.json`, JSON.stringify(scene))
 }
 export function makePluginZip(jsonData, pluginState) {
+    childComponentFileList = []
     const pluginName = pluginState.pluginName
 
     const zip = new JSZip()
@@ -182,7 +248,7 @@ export function makePluginZip(jsonData, pluginState) {
     codeForJson(publicFolder, jsonData.scene)
     const srcFolder = zip.folder(`src/plugins/${pluginName}`)
     srcFolder.file(`config.js`, codeForConfig(pluginName))
-    const pageCode = codeForStructure(codeForSence(srcFolder, pluginName), jsonData.project, jsonData.camera, pluginState)
+    const pageCode = codeForStructure(codeForSence(srcFolder, pluginState, jsonData.scene), jsonData.project, jsonData.camera, pluginState)
     srcFolder.file('pages/index.vue', pageCode)
     srcFolder.file('common/eventScript.js', codeForEventScript(jsonData.scripts))
     return zip.generateAsync({ type: 'blob' }).then((blob) => {

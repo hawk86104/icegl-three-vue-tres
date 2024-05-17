@@ -6,11 +6,62 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-05-10 10:32:35
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-05-14 15:12:17
+ * @LastEditTime: 2024-05-16 16:21:49
  */
 import { request } from '@fesjs/fes'
 import JSZip from 'jszip'
 import { saveAs } from 'file-saver'
+import * as THREE from 'three'
+
+// 启用缓存
+THREE.Cache.enabled = true
+export async function loadJsonFile(url) {
+    const loader = new THREE.FileLoader()
+
+    return new Promise((resolve, reject) => {
+        loader.load(
+            url,
+            (data) => resolve(JSON.parse(data)), // 成功回调
+            undefined, // 进度回调（可选）
+            (error) => reject(error), // 错误回调
+        )
+    })
+}
+function getMimeTypeFromUrl(url) {
+    const extension = url.split('.').pop().toLowerCase()
+    const mimeTypes = {
+        jpg: 'image/jpeg',
+        jpeg: 'image/jpeg',
+        png: 'image/png',
+        gif: 'image/gif',
+        bmp: 'image/bmp',
+        webp: 'image/webp',
+    }
+    return mimeTypes[extension] || 'application/octet-stream'
+}
+export async function loadImageToBase64(url) {
+    const loader = new THREE.FileLoader()
+    return new Promise((resolve, reject) => {
+        loader.setResponseType('blob')
+        loader.load(
+            url,
+            (data) => {
+                const reader = new FileReader()
+                reader.onloadend = () => {
+                    const mimeType = getMimeTypeFromUrl(url)
+                    const base64Data = reader.result.split(',')[1]
+                    resolve(`data:${mimeType};base64,${base64Data}`)
+                }
+                reader.onerror = (error) => {
+                    reject(error)
+                }
+                reader.readAsDataURL(data)
+            },
+            undefined, // 进度回调（可选）
+            (error) => reject(error),
+        )
+    })
+}
 
 export const loadJson = (filepath) =>
     new Promise((resolve, reject) => {

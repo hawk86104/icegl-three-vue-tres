@@ -2,9 +2,9 @@
   "compilerOptions": {
     "outDir": "build/dist",
     "module": "esnext",
-    "target": "esnext",
+    "target": "es2017",
     "types": [
-      "./common/vite-plugin-glsl/vite-plugin-glsl-ext.d.ts"
+      "./src/common/vite-plugin-glsl-ext.d.ts"
     ],
     "lib": [
       "esnext",

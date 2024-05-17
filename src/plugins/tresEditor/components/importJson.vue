@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-05-10 10:25:14
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-05-14 12:00:09
+ * @LastEditTime: 2024-05-17 09:40:03
 -->
 <template></template>
 
@@ -141,6 +141,7 @@ const pluginState = {
     orbitControls: true,
     gridHelper: true,
     pluginName: 'testEditor',
+    childLevel: 1,
 }
 const f2 = paneControl.addFolder({
     title: 'TvT插件包',
