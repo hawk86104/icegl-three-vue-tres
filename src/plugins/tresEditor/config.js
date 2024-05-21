@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-05-10 10:11:04
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-05-17 16:29:58
+ * @LastEditTime: 2024-05-21 10:42:16
  */
 export default {
     name: 'tresEditor',
@@ -27,11 +27,10 @@ export default {
             title: 'three原生Editor',
         },
         {
-            src: `1、载入原生Three.js编辑器的Json文件</br>
-            2、导出拆解Json的Zip包【测试用】</br>
-            3、载入拆解后的Zip包了【测试用】</br>
-            4、--- 生成插件包【ZIP格式】---</br>
-            5、按照文档中的方法安装插件：<a style="color: #5384ff;" href="https://docs.icegl.cn/docs/three-vue-tres/plugin/manage.html#创建插件" target="_blank">插件管理</a></br>`,
+            src: `<a style="color: #5384ff;" href="https://docs.icegl.cn/docs/three-vue-tres/editor/totvt.html" target="_blank">使用教程详见:导出/安装TvT插件包</a></br>
+            1、载入原生Three.js编辑器的Json文件</br>
+            2、--- 生成插件包【ZIP格式】---</br>
+            3、按照文档中的方法安装插件：<a style="color: #5384ff;" href="https://docs.icegl.cn/docs/three-vue-tres/plugin/manage.html#创建插件" target="_blank">插件管理</a></br>`,
             type: 'text',
             name: 'simpleImport',
             title: '插件生成器',
