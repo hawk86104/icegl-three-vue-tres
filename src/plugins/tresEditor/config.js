@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-05-10 10:11:04
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-05-21 10:42:16
+ * @LastEditTime: 2024-05-22 08:36:48
  */
 export default {
     name: 'tresEditor',
@@ -36,5 +36,6 @@ export default {
             title: '插件生成器',
         },
         { src: 'plugins/tresEditor/preview/coffeeDemo.png', type: 'img', name: 'coffeeDemo', title: '编辑器直出咖啡☕️' },
+        { src: 'plugins/tresEditor/preview/svelteMachine.png', type: 'img', name: 'svelteMachine', title: '编辑器半出Svelte机械' },
     ],
 }
