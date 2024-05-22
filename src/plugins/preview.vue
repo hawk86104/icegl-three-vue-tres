@@ -4,12 +4,39 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-18 22:17:49
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-04-07 09:27:04
+ * @LastEditTime: 2024-05-22 21:16:25
 -->
 <template>
+    <div class="absolute menuSelf">
+        <div class="btn-just" @click="openTopMune"><MoreCircleOutlined /></div>
+    </div>
+    <FDrawer v-model:show="showTopMune" placement="top" title="" @ok="showTopMune = false">
+        <f-menu mode="vertical" :collapsed="false" inverted @select="menuGoto">
+            <template v-for="(item, index) in layoutConfigMenus" :key="index">
+                <f-sub-menu v-if="item.children" :value="index">
+                    <template #label>{{ item.title }}</template>
+                    <template v-for="(oneo, pkey) in item.children">
+                        <f-menu-item :value="index * 10 + pkey">
+                            <template #label>{{ oneo.title }}</template>
+                        </f-menu-item>
+                    </template>
+                </f-sub-menu>
+                <f-menu-item v-else :value="index">
+                    <template #label>{{ item.title }}</template>
+                </f-menu-item>
+            </template>
+        </f-menu>
+    </FDrawer>
     <div class="flex h-full w-full">
-        <div class="w-50" style="background-color: #0f1222;">
-            <f-menu mode="vertical" :defaultExpandAll="true" :expandedKeys="expandedKeys" :inverted="true" @select="goto">
+        <div style="background-color: #0f1222">
+            <FMenu
+                mode="vertical"
+                expandTrigger="click"
+                :defaultExpandAll="detectDeviceType() === 'PC'"
+                :collapsed="detectDeviceType() !== 'PC'"
+                :inverted="true"
+                @select="goto"
+            >
                 <f-sub-menu value="1">
                     <template #icon>
                         <AppstoreOutlined />
@@ -26,13 +53,12 @@
                         <PictureOutlined />
                     </template>
                     <template #label>插件中心</template>
-                    <template v-for="(onePlugin, pkey) in  filteredData ">
+                    <template v-for="(onePlugin, pkey) in filteredData">
                         <f-menu-item v-if="pkey !== 'basic'" :value="pkey">
                             <template #label>
-                                <div class="flex absolute" style="left: 1px;flex-direction: column;top: 2px;">
+                                <div class="flex absolute" style="left: 1px; flex-direction: column; top: 2px">
                                     <template v-for="(lbItem, lbKey) in getleftMenuBadge(onePlugin.name)">
-                                        <f-badge v-if="lbItem.show" :value="lbItem.text" class="tag-fbdge" type="primary"
-                                            size="small" />
+                                        <f-badge v-if="lbItem.show" :value="lbItem.text" class="tag-fbdge" type="primary" size="small" />
                                     </template>
                                 </div>
                                 <span class="left-m-text">{{ onePlugin.title }}</span>
@@ -41,20 +67,23 @@
                         </f-menu-item>
                     </template>
                 </f-sub-menu>
-            </f-menu>
+            </FMenu>
         </div>
-        <div class="overflow-scroll mt-10 relative right-page-list" style="height: calc(100vh - 42px - 52px);width: 100%;">
-            <filterComFixed />
-            <template v-for="( onePlugin, pkey ) in  filteredData " :key="pkey">
+        <div
+            class="overflow-scroll relative right-page-list"
+            :class="{ 'mt-10': detectDeviceType() === 'PC' }"
+            style="height: calc(100vh - 42px - 52px); width: 100%"
+        >
+            <filterComFixed v-show="detectDeviceType() === 'PC'" />
+            <template v-for="(onePlugin, pkey) in filteredData" :key="pkey">
                 <template v-if="pkey === 'basic'">
-                    <div style="background-color: #f1f1f2;" v-for="( one, opkey ) in  onePlugin.child " :key="opkey"
-                        :ref="el => tabListRef[one.name] = el">
+                    <div style="background-color: #f1f1f2" v-for="(one, opkey) in onePlugin.child" :key="opkey" :ref="(el) => (tabListRef[one.name] = el)">
                         <cardList :onePlugin="one" />
                     </div>
                 </template>
             </template>
-            <template v-for="( onePlugin, pkey ) in  filteredData " :key="pkey">
-                <div style="background-color: #f1f1f2;" v-if="pkey !== 'basic'" :ref="el => tabListRef[pkey] = el">
+            <template v-for="(onePlugin, pkey) in filteredData" :key="pkey">
+                <div style="background-color: #f1f1f2" v-if="pkey !== 'basic'" :ref="(el) => (tabListRef[pkey] = el)">
                     <cardList :onePlugin="onePlugin" />
                 </div>
             </template>
@@ -66,8 +95,8 @@
 <script setup lang="ts">
 import { ref, provide, watch } from 'vue'
 import { defineRouteMeta, useModel } from '@fesjs/fes'
-import { FBadge } from '@fesjs/fes-design'
-import { AppstoreOutlined, PictureOutlined, UpCircleOutlined } from '@fesjs/fes-design/icon'
+import { FBadge, FDrawer, FMenu, FSubMenu, FMenuItem } from '@fesjs/fes-design'
+import { AppstoreOutlined, PictureOutlined, UpCircleOutlined, MoreCircleOutlined } from '@fesjs/fes-design/icon'
 import { getPluginsConfig, getOnlinePluginConfig } from '../common/utils'
 import cardList from '../components/forPreview/cardList.vue'
 import filterComFixed from '../components/forPreview/filterComFixed.vue'
@@ -77,12 +106,25 @@ defineRouteMeta({
     title: '开源框架展示',
 })
 
+// console.log(window.layoutConfig)
+const layoutConfigMenus = window.layoutConfig.menus
+const menuGoto = (value: any) => {
+    console.log(value)
+    if (value.value >= 10) {
+        const i1 = Math.floor(value.value / 10)
+        const i2 = value.value % 10
+        window.location.assign(layoutConfigMenus[i1].children[i2].path)
+    } else {
+        window.location.assign(layoutConfigMenus[value.value].path)
+    }
+}
+
 const tabListRef = ref([])
 const pluginsConfig = ref({})
 pluginsConfig.value = getPluginsConfig() as any
 getOnlinePluginConfig(pluginsConfig)
 const goto = (value: string) => {
-    tabListRef.value[value.value]?.scrollIntoView({ behavior: 'smooth', block: 'center', inline: "nearest" })
+    tabListRef.value[value.value]?.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'nearest' })
 }
 // const isNew = ((time: string) => {
 //     if (time) {
@@ -113,10 +155,10 @@ const filterObjects = (obj: any, searchString: string): any => {
     if (!searchString) {
         return filterMenuSetup(menuSetupFilter.value)
     }
-    const result = {} as any;
+    const result = {} as any
     for (const key in obj) {
         if (obj.hasOwnProperty(key)) {
-            const item = obj[key];
+            const item = obj[key]
             if (typeof item === 'object') {
                 if (key === 'basic') {
                     const bItem = Object.values(filterObjects(item.child, searchString))
@@ -126,16 +168,20 @@ const filterObjects = (obj: any, searchString: string): any => {
                     }
                     continue
                 }
-                const hasMatchInTitleOrName = (item.title && item.title.toLocaleLowerCase().includes(searchString)) || (item.name && item.name.toLocaleLowerCase().includes(searchString));
+                const hasMatchInTitleOrName =
+                    (item.title && item.title.toLocaleLowerCase().includes(searchString)) || (item.name && item.name.toLocaleLowerCase().includes(searchString))
                 if (hasMatchInTitleOrName) {
                     result[key] = item
                     continue
                 } else {
                     const filteredPreview = item.preview.filter((previewItem: any) => {
-                        return (previewItem.name && previewItem.name.toLocaleLowerCase().includes(searchString)) || (previewItem.title && previewItem.title.toLocaleLowerCase().includes(searchString));
-                    });
+                        return (
+                            (previewItem.name && previewItem.name.toLocaleLowerCase().includes(searchString)) ||
+                            (previewItem.title && previewItem.title.toLocaleLowerCase().includes(searchString))
+                        )
+                    })
                     if (filteredPreview.length > 0) {
-                        result[key] = { ...item, preview: filteredPreview };
+                        result[key] = { ...item, preview: filteredPreview }
                     }
                 }
             }
@@ -197,9 +243,9 @@ watch(menuSetupFilter, (newValue: any) => {
 
 const getleftMenuBadge = (name: string) => {
     const tagOne = {
-        'recommend': { show: false, text: '荐' },
-        'new': { show: false, text: '新' },
-        'hot': { show: false, text: '热' },
+        recommend: { show: false, text: '荐' },
+        new: { show: false, text: '新' },
+        hot: { show: false, text: '热' },
     } as any
     if (menuSetup.value && menuSetup.value[name]) {
         const tmpOne = menuSetup.value[name]
@@ -210,12 +256,86 @@ const getleftMenuBadge = (name: string) => {
     // console.log(tagOne)
     return tagOne
 }
+function detectDeviceType() {
+    const ua = navigator.userAgent
+    const width = window.innerWidth
+
+    // 基于用户代理字符串的初步判断
+    const isMobileUA = /Mobi|Android|iPhone/i.test(ua)
+    const isTabletUA = /iPad|Tablet|Nexus 7|Nexus 10|KFAPWI/i.test(ua)
+
+    if (isMobileUA) {
+        return isTabletUA ? 'Tablet' : 'Mobile'
+    } else {
+        // 基于屏幕尺寸的进一步判断
+        if (width <= 480) {
+            return 'Mobile'
+        } else if (width <= 900) {
+            return 'Tablet'
+        } else {
+            return 'PC'
+        }
+    }
+}
+console.log(detectDeviceType())
+const showTopMune = ref(false)
+const openTopMune = () => {
+    showTopMune.value = true
+}
 </script>
 
 <style lang="less">
+@media (max-width: 900px) {
+    #app > section > div > header > div.fes-menu.is-horizontal.is-inverted.layout-menu {
+        display: none;
+    }
+    .fes-layout-container {
+        z-index: 9999;
+        position: absolute;
+        overflow: visible !important;
+    }
+    .menuSelf {
+        z-index: 99999;
+        right: 0px;
+        top: -40px;
+        .btn-just {
+            color: #fff;
+            width: 1.5em;
+            font-size: 1.5em;
+            cursor: pointer;
+            display: flex;
+        }
+    }
+    body > div.fes-drawer.fes-drawer-top > {
+        div.fes-drawer-mask {
+            z-index: 9999 !important;
+        }
+        .fes-drawer-container {
+            z-index: 9999 !important;
+            .fes-drawer-wrapper {
+                width: 100%;
+                height: 520px;
+                background: #ff000000;
+                padding-top: 50px;
+                .fes-drawer-close {
+                    margin-top: 7px;
+                    padding-right: 13px;
+                    color: white;
+                }
+            }
+            .fes-drawer-body-container {
+                background: #0f1222;
+            }
+        }
+    }
+    .fes-popper-wrapper {
+        z-index: 9999 !important;
+    }
+}
 .layout-logo {
     /* margin-right: 6.2em !important; */
     width: 12.5rem !important;
+    max-width: 181px;
     padding: 0 !important;
     justify-content: center !important;
     margin: 0 !important;

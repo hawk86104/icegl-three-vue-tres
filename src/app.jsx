@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-10-16 10:53:09
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-04-29 16:57:29
+ * @LastEditTime: 2024-05-22 16:44:52
  */
 import { defineRuntimeConfig, useModel } from '@fesjs/fes'
 import { FMenu } from '@fesjs/fes-design'
@@ -25,7 +25,6 @@ export default defineRuntimeConfig({
             if (process.env.FES_APP_PLUGINS === 'true') { 
                 getMenu()
             }
-            
             // return new Promise((resolve) => {
             //     setTimeout(() => {
             //         setRole('admin');
@@ -37,10 +36,21 @@ export default defineRuntimeConfig({
             // });
         },
     },
-    layout: {
+    // layout: {
+    //     renderCustom: () => <UserCenter />,
+    // },
+})
+
+export function layout(layoutConfig) {
+    return {
         renderCustom: () => <UserCenter />,
-    },
-});
+        ...layoutConfig,
+        menus: () => {
+            window.layoutConfig = layoutConfig
+            return layoutConfig.menus
+        }
+    }
+}
 
 export function onAppCreated ({ app }) {
     app.use(FMenu)

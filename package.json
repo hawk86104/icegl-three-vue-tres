@@ -31,7 +31,7 @@
     "@amap/amap-jsapi-loader": "^1.0.1",
     "@fesjs/builder-vite": "4.0.2",
     "@fesjs/fes": "3.1.10",
-    "@fesjs/fes-design": "0.8.42",
+    "@fesjs/fes-design": "^0.8.49",
     "@fesjs/plugin-access": "3.1.4",
     "@fesjs/plugin-enums": "^3.0.1",
     "@fesjs/plugin-layout": "5.1.10",
