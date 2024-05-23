@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-10 16:11:27
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-05-14 15:48:51
+ * @LastEditTime: 2024-05-23 10:31:23
  */
 
 export default {
@@ -48,6 +48,12 @@ export default {
             type: 'img',
             name: 'collectTriangles',
             title: '喷漆收集三角形',
+        },
+        {
+            src: 'plugins/industry4/preview/dissolveEffect.png',
+            type: 'img',
+            name: 'dissolveEffect',
+            title: '溶解特效',
         },
         // { "src": "plugins/industry4/preview/deviceLight.png", "type": "img", "name": "deviceLightByComposerTres", "title": "发光后期useTres" },
     ],
