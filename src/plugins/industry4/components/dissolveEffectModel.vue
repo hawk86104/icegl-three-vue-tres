@@ -4,17 +4,32 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-05-23 08:36:48
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-05-23 15:03:58
+ * @LastEditTime: 2024-05-23 15:49:35
 -->
 <template>
-    <TresGroup ref="contactShadowsRef">
-        <primitive :object="scene" :scale="0.015" :rotation="[0, Math.PI / 1.5, 0]" />
-    </TresGroup>
+    <primitive :object="scene" :scale="0.015" :rotation="[0, Math.PI / 1.5, 0]" />
 </template>
 <script setup>
 import { useGLTF } from '@tresjs/cientos'
 import { useTexture, useRenderLoop } from '@tresjs/core'
+import { watchEffect, ref, defineExpose } from 'vue'
 import * as THREE from 'three'
+
+const props = defineProps({
+    edgeColor: {
+        default: 0x111111,
+    },
+    edgeWidth: {
+        default: 0.03,
+    },
+    dissolveSpeed: {
+        default: 0.003,
+    },
+    funRef: {
+        appear: null,
+        disappear: null,
+    },
+})
 
 const { scene, nodes, materials } = await useGLTF('https://opensource-1314935952.cos.ap-nanjing.myqcloud.com/model/industry4/lambo.glb', {
     draco: true,
@@ -65,20 +80,15 @@ const pTexture = await useTexture(['./plugins/digitalCity/image/smokeparticle.pn
 let shaders = []
 let isDissolving = false
 let params = {
-    edgeColor: 0x111111,
-    edgeWidth: 0.03,
-    dissolveSpeed: 0.003,
     dissolveProgress: 0,
     noiseTexture: pTexture[0],
     edgeColorTexture: pTexture[1],
-    // appear: appear,
-    // disappear: disappear,
 }
-let signedDissolveSpeed = params.dissolveSpeed
+let signedDissolveSpeed = props.dissolveSpeed
 const appear = () => {
     if (isDissolving) return
     isDissolving = true
-    signedDissolveSpeed = params.dissolveSpeed
+    signedDissolveSpeed = props.dissolveSpeed
 
     for (let shader of shaders) {
         shader.uniforms.dissolveSpeed = { value: signedDissolveSpeed }
@@ -88,12 +98,18 @@ const appear = () => {
 const disappear = () => {
     if (isDissolving) return
     isDissolving = true
-    signedDissolveSpeed = -params.dissolveSpeed
+    signedDissolveSpeed = -props.dissolveSpeed
     for (let shader of shaders) {
         shader.uniforms.dissolveSpeed = { value: signedDissolveSpeed }
         shader.uniforms.dissolveProgress = { value: 1 }
     }
 }
+props.funRef.appear = appear
+props.funRef.disappear = disappear
+defineExpose({
+    appear,
+    disappear,
+})
 Object.values(nodes).forEach((node) => {
     if (node.isMesh) {
         node.frustumCulled = false
@@ -102,9 +118,9 @@ Object.values(nodes).forEach((node) => {
 
         material.onBeforeCompile = (shader) => {
             shaders.push(shader)
-            shader.uniforms.edgeColor = { value: new THREE.Color(params.edgeColor) }
-            shader.uniforms.edgeWidth = { value: params.edgeWidth }
-            shader.uniforms.dissolveSpeed = { value: params.dissolveSpeed }
+            shader.uniforms.edgeColor = { value: new THREE.Color(props.edgeColor) }
+            shader.uniforms.edgeWidth = { value: props.edgeWidth }
+            shader.uniforms.dissolveSpeed = { value: props.dissolveSpeed }
             shader.uniforms.dissolveProgress = { value: params.dissolveProgress }
             shader.uniforms.noiseTexture = { value: params.noiseTexture }
             shader.uniforms.edgeColorTexture = { value: params.edgeColorTexture }
@@ -155,5 +171,22 @@ onLoop(({ dt }) => {
         }
     }
 })
-disappear()
+
+watchEffect(() => {
+    if (props.dissolveSpeed) {
+        for (let shader of shaders) {
+            shader.uniforms.dissolveSpeed.value = props.dissolveSpeed
+        }
+    }
+    if (props.edgeColor) {
+        for (let shader of shaders) {
+            shader.uniforms.edgeColor.value = new THREE.Color(props.edgeColor)
+        }
+    }
+    if (props.edgeWidth) {
+        for (let shader of shaders) {
+            shader.uniforms.edgeWidth.value = props.edgeWidth
+        }
+    }
+})
 </script>

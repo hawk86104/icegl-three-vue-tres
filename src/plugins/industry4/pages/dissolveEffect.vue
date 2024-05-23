@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-05-23 07:51:19
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-05-23 15:04:09
+ * @LastEditTime: 2024-05-23 15:53:57
 -->
 <template>
     <loading />
@@ -14,7 +14,7 @@
         <TresHemisphereLight :intensity="0.5" />
 
         <Suspense>
-            <lamboModel />
+            <dissolveEffectModel v-bind="frjState" ref="dissolveEffectModelRef" />
         </Suspense>
 
         <Suspense>
@@ -50,14 +50,15 @@
 </template>
 
 <script setup lang="ts">
-import { reactive } from 'vue'
+import { reactive, ref } from 'vue'
 import { OrbitControls } from '@tresjs/cientos'
 import { Environment, Lightformer } from 'PLS/basic'
 import * as THREE from 'three'
 import { bubbleLoading as loading } from 'PLS/UIdemo'
 import { reflectorDUDV } from 'PLS/floor'
 import lamboEffect from '../components/lamboEffect.vue'
-import lamboModel from '../components/dissolveEffectModel.vue'
+import dissolveEffectModel from '../components/dissolveEffectModel.vue'
+import { Pane } from 'tweakpane'
 
 const state = reactive({
     clearColor: '#15151a',
@@ -66,5 +67,56 @@ const state = reactive({
 })
 const controlsState = reactive({
     autoRotate: true,
+})
+
+const paneControl = new Pane({
+    title: '溶解参数',
+    expanded: true,
+})
+
+const frjState = reactive({
+    edgeColor: '#111111',
+    edgeWidth: 0.03,
+    dissolveSpeed: 0.003,
+    funRef: {
+        appear: null,
+        disappear: null,
+    },
+})
+paneControl.addBinding(frjState, 'edgeColor', {
+    label: '颜色',
+})
+paneControl.addBinding(frjState, 'edgeWidth', {
+    label: '宽度',
+    min: 0,
+    max: 0.13,
+    step: 0.01,
+})
+paneControl.addBinding(frjState, 'dissolveSpeed', {
+    label: '速度',
+    min: 0.001,
+    max: 0.01,
+    step: 0.001,
+})
+const btn1 = paneControl.addButton({
+    title: '显示',
+    label: '模型',
+})
+const dissolveEffectModelRef = ref(null)
+btn1.on('click', () => {
+    //@ts-ignore
+    if (dissolveEffectModelRef.value.appear) dissolveEffectModelRef.value.appear()
+    //@ts-ignore
+    else dissolveEffectModelRef.value.funRef.appear()
+})
+const btn2 = paneControl.addButton({
+    title: '消失',
+    label: '模型',
+})
+btn2.on('click', () => {
+    //@ts-ignore
+    if (dissolveEffectModelRef.value.appear) dissolveEffectModelRef.value.disappear()
+    //@ts-ignore
+    else dissolveEffectModelRef.value.funRef.disappear()
 })
 </script>
