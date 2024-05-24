@@ -17,5 +17,18 @@ import Pcss from './components/forCientos/Pcss/index.vue'
 import meshReflectionMaterial from './components/forCientos/meshReflectionMaterial/index.vue'
 import CubeCamera from './components/forCientos/CubeCamera/index.vue'
 import { CientosShaderMaterial } from './components/forCientos/ShaderMaterial/index.ts'
+import ClearcoatMaterial from './components/forCientos/ClearcoatMaterial/index.vue'
 
-export { Environment, Lightformer, useFBO, TransmissionMaterial, Center, Caustics, Pcss, meshReflectionMaterial, CubeCamera, CientosShaderMaterial }
+export {
+    Environment,
+    Lightformer,
+    useFBO,
+    TransmissionMaterial,
+    Center,
+    Caustics,
+    Pcss,
+    meshReflectionMaterial,
+    CubeCamera,
+    CientosShaderMaterial,
+    ClearcoatMaterial,
+}

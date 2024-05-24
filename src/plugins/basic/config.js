@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-03 15:07:09
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-04-03 08:30:12
+ * @LastEditTime: 2024-05-24 18:23:50
  */
 export default {
     name: 'basic',
@@ -43,6 +43,7 @@ export default {
                 { src: 'plugins/basic/materials/preview/clippingMaterial.png', type: 'img', name: 'clippingMaterial', title: '材质裁剪' },
                 { src: 'plugins/basic/materials/preview/layerMaterial.png', type: 'img', name: 'layerMaterial', title: '图层材质' },
                 { src: 'plugins/basic/materials/preview/outline.png', type: 'img', name: 'outline', title: 'outline' },
+                { src: 'plugins/basic/materials/preview/clearcoat.png', type: 'img', name: 'clearcoat', title: '反光漆图层' },
             ],
         },
         {
