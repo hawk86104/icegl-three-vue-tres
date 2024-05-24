@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-18 22:17:49
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-05-22 21:16:25
+ * @LastEditTime: 2024-05-24 09:57:44
 -->
 <template>
     <div class="absolute menuSelf">
@@ -277,7 +277,7 @@ function detectDeviceType() {
         }
     }
 }
-console.log(detectDeviceType())
+// console.log(detectDeviceType())
 const showTopMune = ref(false)
 const openTopMune = () => {
     showTopMune.value = true

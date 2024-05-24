@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-10-16 10:53:09
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-05-15 08:20:09
+ * @LastEditTime: 2024-05-24 09:52:10
  */
 // 放工具函数
 import { request } from '@fesjs/fes'
@@ -119,15 +119,15 @@ export const getOnePluginConfig = (pName, oName, cName) => {
             // 根据页面参数名查找预览配置
             if (oName && config.preview) {
                 const preview = findPreviewByName(config.preview, oName)
-                if (preview) return preview
+                if (preview) return { config, preview: preview }
             }
             // 根据子页面参数名查找子配置
             else if (cName && config.child) {
                 const childPreview = findChildPreviewByName(config.child, oName, cName)
-                if (childPreview) return childPreview
+                if (childPreview) return { config, preview: childPreview }
             }
             // 如果没有找到具体配置，返回默认配置
-            return config
+            return { config }
         }
     }
     // 如果没有找到匹配的插件配置，返回null

@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-10 16:11:27
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-05-23 10:31:23
+ * @LastEditTime: 2024-05-24 09:55:21
  */
 
 export default {
@@ -48,6 +48,8 @@ export default {
             type: 'img',
             name: 'collectTriangles',
             title: '喷漆收集三角形',
+            disableFPSGraph: true,
+            disableSrcBtn: true,
         },
         {
             src: 'plugins/industry4/preview/dissolveEffect.png',

@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-05-23 08:36:48
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-05-23 15:49:35
+ * @LastEditTime: 2024-05-23 17:52:54
 -->
 <template>
     <primitive :object="scene" :scale="0.015" :rotation="[0, Math.PI / 1.5, 0]" />
