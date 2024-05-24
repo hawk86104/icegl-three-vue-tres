@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-03 16:02:49
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-05-11 16:06:35
+ * @LastEditTime: 2024-05-24 10:09:18
 -->
 <template>
     <FDivider titlePlacement="left">{{ props.onePlugin.title + ' - ' + props.onePlugin.name }}</FDivider>
@@ -15,7 +15,7 @@
                 {{ props.onePlugin.author }}
             </FText>
         </a>
-        <FText class="ml-13" tag="i" size="small">{{ props.onePlugin.intro }}</FText>
+        <div class="p-2 ml-13" style="" v-html="props.onePlugin.intro"></div>
     </FSpace>
     <div class="flex flex-wrap flex-justify-start content-start mt-6 pl-6">
         <div class="w-80 mr-10 mb-10 overflow-hidden relative" v-for="(onePreview, okey) in onePlugin.preview" :key="okey">
