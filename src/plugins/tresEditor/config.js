@@ -4,12 +4,12 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-05-10 10:11:04
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-05-24 08:35:37
+ * @LastEditTime: 2024-05-24 10:10:19
  */
 export default {
     name: 'tresEditor',
     title: 'tres3D编辑器',
-    intro: '利用Three.js的原生编辑器，导入到本TvT.js快速完成项目落地。',
+    intro: '利用Three.js的原生编辑器，导入到本TvT.js快速完成项目落地。整体文档和视频教程详见：<a style="color: #5384ff;" href="https://docs.icegl.cn/docs/three-vue-tres/editor/threeeditor.html" target="_blank">编辑器教程</a>',
     version: '0.0.1',
     author: '地虎降天龙',
     website: 'https://gitee.com/hawk86104',
