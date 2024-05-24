@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-10-16 10:53:09
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-05-22 16:44:52
+ * @LastEditTime: 2024-05-24 09:58:10
  */
 import { defineRuntimeConfig, useModel } from '@fesjs/fes'
 import { FMenu } from '@fesjs/fes-design'
@@ -116,7 +116,7 @@ export function patchRoutes ({ routes }) {
 
 export function modifyRoute (memo) {
     if (process.env.FES_APP_PREINDEX === 'true') {
-        console.log('预览模式下 直接替换index的路由为 plugins/preview.vue')
+        console.log('预览模式下 已经自动替换index的路由为 plugins/preview.vue')
         let indexRoute = memo.routes.find(route => route.path === '/')
         if (indexRoute) {
             indexRoute = indexRoute.children.find(route => route.path === '/')
@@ -130,7 +130,7 @@ export function modifyRoute (memo) {
         }
     }
     if (process.env.FES_APP_PLUGINS === 'false') {
-        console.log('项目开发模式: 默认路由 去除layout')
+        console.log('项目开发模式: 默认路由 去除layout模式')
         const indexRoute = memo.routes.find(route => route.path === '/')
         if (indexRoute) {
             indexRoute.component = null

@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-05-23 07:51:19
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-05-23 15:53:57
+ * @LastEditTime: 2024-05-24 08:50:19
 -->
 <template>
     <loading />
@@ -64,6 +64,7 @@ const state = reactive({
     clearColor: '#15151a',
     antialias: false,
     logarithmicDepthBuffer: true,
+    disableRender: true,
 })
 const controlsState = reactive({
     autoRotate: true,
