@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-10-16 10:53:09
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-05-27 15:50:16
+ * @LastEditTime: 2024-05-27 18:38:02
  */
 // import { resolve } from 'path';
 import { join } from 'path'
@@ -14,6 +14,10 @@ import { templateCompilerOptions } from '@tresjs/core'
 import UnoCSS from 'unocss/vite'
 // eslint-disable-next-line import/no-extraneous-dependencies
 import glsl from 'vite-plugin-glsl'
+
+const combinedIsCustomElement = (tag) => {
+    return tag.startsWith('iconify-icon') || templateCompilerOptions.template.compilerOptions.isCustomElement(tag)
+}
 
 export default defineBuildConfig({
     title: 'TvT.js',
@@ -35,7 +39,11 @@ export default defineBuildConfig({
     },
     //add by 地虎降天龙
     viteVuePlugin: {
-        ...templateCompilerOptions,
+        template: {
+            compilerOptions: {
+                isCustomElement: (tag) => combinedIsCustomElement(tag),
+            },
+        },
     },
     viteOption: {
         base: './',

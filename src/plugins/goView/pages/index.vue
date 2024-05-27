@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-05-27 11:22:46
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-05-27 18:03:54
+ * @LastEditTime: 2024-05-27 19:13:19
 -->
 <template>
     <div :class="`go-preview ${chartEditStore.editCanvasConfig.previewScaleType}`" @mousedown="dragCanvas">
@@ -27,6 +27,9 @@ import { useComInstall } from '../lib/hooks/useComInstall.hook'
 import { getFilterStyle } from '../lib/utils/global'
 
 import { PreviewRenderList } from '../components/PreviewRenderList'
+
+import naive from 'naive-ui'
+window['$vue'].use(naive)
 
 // @ts-ignore
 await getSessionStorageInfo()

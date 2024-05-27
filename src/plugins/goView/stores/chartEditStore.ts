@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-05-27 11:39:08
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-05-27 17:22:46
+ * @LastEditTime: 2024-05-27 18:08:58
  */
 import { defineStore } from 'pinia'
 import { globalThemeJson } from '../lib/settings'
@@ -78,4 +78,30 @@ export const useChartEditStore = defineStore({
         // 图表数组（需存储给后端）
         componentList: [],
     }),
+    getters: {
+        getMousePosition(): any {
+          return this.mousePosition
+        },
+        getRightMenuShow(): boolean {
+          return this.rightMenuShow
+        },
+        getEditCanvas(): any {
+          return this.editCanvas
+        },
+        getEditCanvasConfig(): any {
+          return this.editCanvasConfig
+        },
+        getTargetChart(): any {
+          return this.targetChart
+        },
+        getRecordChart(): any | undefined {
+          return this.recordChart
+        },
+        getRequestGlobalConfig(): any {
+          return this.requestGlobalConfig
+        },
+        getComponentList(): any {
+          return this.componentList
+        }
+      },
 })

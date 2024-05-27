@@ -9,8 +9,8 @@
 import { useChartEditStore } from '../../stores/chartEditStore'
 
 //@ts-ignore
-import dataJson from './test.json'
-// import dataJson from './1716775459252.json'
+// import dataJson from './test.json'
+import dataJson from './1716775459252.json'
 
 const chartEditStore = useChartEditStore()
 
