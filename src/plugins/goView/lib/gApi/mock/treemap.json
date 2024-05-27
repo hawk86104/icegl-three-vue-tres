@@ -1,0 +1,50 @@
+[
+  {
+    "name": "@name",
+    "value": "@integer(0, 1000)",
+    "children": [
+      {
+        "name": "@name",
+        "value": "@integer(0, 500)"
+      },
+      {
+        "name": "@name",
+        "value": "@integer(0, 500)"
+      }
+    ]
+  },
+  {
+    "name": "@name",
+    "value": "@integer(0, 1000)",
+    "children": [
+      {
+        "name": "@name",
+        "value": "@integer(0, 00)"
+      },
+      {
+        "name": "@name",
+        "value": "@integer(0, 500)"
+      }
+    ]
+  },
+  {
+    "name": "@name",
+    "value": "@integer(0, 1000)",
+    "children": [
+      {
+        "name": "@name",
+        "value": "@integer(0, 1000)"
+      }
+    ]
+  },
+  {
+    "name": "@name",
+    "value": "@integer(0, 1000)",
+    "children": [
+      {
+        "name": "@name",
+        "value": "@integer(0, 1000)"
+      }
+    ]
+  }
+]

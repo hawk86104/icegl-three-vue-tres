@@ -1,5 +1,5 @@
-import { PickCreateComponentType } from '@/packages/index.d'
-import { EditCanvasConfigType } from '@/store/modules/chartEditStore/chartEditStore.d'
+import { PickCreateComponentType } from 'PLS/goView/lib/packages/index.d'
+import { EditCanvasConfigType } from 'PLS/goView/stores/chartEditStore.d'
 
 type AttrType = PickCreateComponentType<'attr'>
 type StatusType = PickCreateComponentType<'status'>
@@ -55,4 +55,45 @@ export const getEditCanvasConfigStyle = (canvas: EditCanvasConfigType) => {
     height: canvas.height ? `${canvas.height}px` : '100%',
     ...computedBackground
   }
+}
+
+export const animationsClass = (animations: string[]) => {
+  if (animations.length) {
+    return `animate__animated  animate__${animations[0]}`
+  }
+  return ''
+}
+
+export const getTransformStyle = (styles: any) => {
+  const { rotateZ, rotateX, rotateY, skewX, skewY } = styles
+  return {
+    transform: `rotateZ(${rotateZ || 0}deg) rotateX(${rotateX || 0}deg) rotateY(${rotateY || 0}deg) skewX(${
+      skewX || 0
+    }deg) skewY(${skewY || 0}deg)`
+  }
+}
+
+export const getBlendModeStyle = (styles: any) => {
+  if (!styles || !styles.filterShow) return {}
+  const { blendMode } = styles
+  return {
+    'mix-blend-mode': blendMode
+  }
+}
+import { chartColors } from 'PLS/goView/lib/gSettings/chartThemes/index'
+export const colorCustomMerge = (customColor?: any) => {
+  type FormateCustomColorType = {
+    [T: string]: {
+      color: string[]
+      name: string
+    }
+  }
+  const formateCustomColor: FormateCustomColorType = {}
+  customColor?.forEach(item => {
+    formateCustomColor[item.id] = {
+      color: item.color,
+      name: item.name
+    }
+  })
+  return { ...formateCustomColor, ...chartColors }
 }

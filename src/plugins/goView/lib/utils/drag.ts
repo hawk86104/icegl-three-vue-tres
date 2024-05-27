@@ -4,10 +4,10 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-05-27 11:33:03
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-05-27 12:00:10
+ * @LastEditTime: 2024-05-27 14:44:06
  */
 // import { listen } from 'dom-helpers'
-import throttle from 'lodash/throttle'
+// import throttle from 'lodash/throttle'
 
 let prevMoveXValue = [0, 0]
 let prevMoveYValue = [0, 0]
@@ -54,10 +54,10 @@ export const dragCanvas = (e: MouseEvent) => {
   //   }, 20)
   // )
 
-  const listenMouseup = listen(window, 'mouseup', () => {
-    prevMoveXValue = [0, 0]
-    prevMoveYValue = [0, 0]
-    // listenMousemove()
-    listenMouseup()
-  })
+  // const listenMouseup = listen(window, 'mouseup', () => {
+  //   prevMoveXValue = [0, 0]
+  //   prevMoveYValue = [0, 0]
+  //   listenMousemove()
+  //   listenMouseup()
+  // })
 }

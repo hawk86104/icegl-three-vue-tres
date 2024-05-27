@@ -1,0 +1,87 @@
+// 颜色
+$--color-red: #fc625d;
+$--color-warn: #fcbc40;
+$--color-success: #34c749;
+
+// 文字
+$--color-text: #1d2129;
+$--color-text-1: #4e5969;
+$--color-text-2: #86909c;
+$--color-text-3: #c9cdd4;
+$--color-text-4: #f2f3f5;
+
+//.mt-1 => margin top
+//spacing
+$spacing-base-size: 1em;
+
+$spacing-types: (
+  m: margin,
+  p: padding,
+);
+
+$spacing-directions: (
+  t: top,
+  r: right,
+  b: bottom,
+  l: left,
+);
+
+$spacing-sizes: (
+  0: 0,
+  1: 0.25,
+  2: 0.5,
+  3: 1,
+  4: 1.5,
+  5: 2.5,
+);
+
+// 变亮值
+$--light-shalow: 2%;
+
+// 白色
+$--color-light-bg: #fff;
+$--color-light-bg-1: #fafafc;
+$--color-light-bg-1-shallow: lighten($--color-light-bg-1, $--light-shalow);
+$--color-light-bg-2: #f2f3f5;
+$--color-light-bg-2-shallow: lighten($--color-light-bg-2, $--light-shalow);
+$--color-light-bg-3: #e5e6eb;
+$--color-light-bg-3-shallow: lighten($--color-light-bg-3, $--light-shalow);
+$--color-light-bg-4: #e3e3e4;
+$--color-light-bg-4-shallow: lighten($--color-light-bg-4, $--light-shalow);
+$--color-light-bg-5: #bebebe;
+$--color-light-bg-5-shallow: lighten($--color-light-bg-5, $--light-shalow);
+
+// 变暗值
+$--dark-shalow: 2%;
+
+// 黑色
+$--color-dark-black: #000;
+$--color-dark-bg-1: #18181c;
+$--color-dark-bg-1-shallow: darken($--color-dark-bg-1, $--dark-shalow);
+$--color-dark-bg-2: #232324;
+$--color-dark-bg-2-shallow: darken($--color-dark-bg-2, $--dark-shalow);
+$--color-dark-bg-3: #2a2a2b;
+$--color-dark-bg-3-shallow: darken($--color-dark-bg-3, $--dark-shalow);
+$--color-dark-bg-4: #313132;
+$--color-dark-bg-4-shallow: darken($--color-dark-bg-4, $--dark-shalow);
+$--color-dark-bg-5: #373739;
+$--color-dark-bg-5-shallow: darken($--color-dark-bg-5, $--dark-shalow);
+
+// 最大宽度
+$--max-width: 1920px;
+// 顶部距离
+$--header-height: 60px;
+// 底部距离
+$--footer-height: 50px;
+// 模糊
+$--filter-blur-base: blur(20px);
+// 毛玻璃
+$--filter-color-login-dark: rgba(35,35,36, 0.7);
+$--filter-color-login-dark-shallow: rgba(35,35,36, 0.3);
+$--filter-color-login-light: rgba(240, 240, 240, 0.7);
+$--filter-color-login-light-shallow: rgba(240, 240, 240, 0.3);
+
+// 边框
+$--border-radius-base: 8px;
+// 阴影
+$--border-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);

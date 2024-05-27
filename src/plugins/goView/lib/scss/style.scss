@@ -1,0 +1,127 @@
+@import "./var.scss";
+@import "./format.scss";
+@import "./animation.scss";
+@import "./mixins/mixins.scss";
+
+// 过度
+.go-transition {
+  transition: all 0.4s;
+}
+
+.go-transition-quick {
+  transition: all 0.2s;
+}
+
+.go-flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.go-flex-items-center {
+  display: flex;
+  align-items: center;
+  text-align: center;
+}
+
+.go-flex-no-wrap {
+  flex-wrap: nowrap !important;
+}
+
+.go-absolute-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+// cursor 小手
+.go-cursor-pointer {
+  cursor: pointer;
+}
+
+// IE盒模型
+.go-boderbox {
+  box-sizing: border-box;
+}
+
+// 毛玻璃
+.go-background-filter {
+  backdrop-filter: $--filter-blur-base;
+  @include fetch-bg-color("filter-color");
+  box-shadow: $--border-shadow;
+}
+
+// 毛玻璃
+.go-background-filter-shallow {
+  backdrop-filter: $--filter-blur-base;
+  @include fetch-bg-color("filter-color-shallow");
+  box-shadow: $--border-shadow;
+}
+
+// 边框圆角
+.go-border-radius {
+  border-radius: $--border-radius-base;
+  overflow: hidden;
+}
+
+// 背景斑点需配合 @mixin background-image 使用
+.go-point-bg {
+  @include fetch-theme-custom("background-color", "background-color1");
+  background-size: 15px 15px, 15px 15px;
+}
+
+// 省略号
+.go-ellipsis-1 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  word-break: break-all;
+}
+
+// class:m-1 => margin：1em
+// class:mt-1 => margin-top：1em
+// m-0|mt-0|mx-0|my-0|p-0|pt-0|...
+
+@each $typekey, $type in $spacing-types {
+  //.m-1
+  @each $sizekey, $size in $spacing-sizes {
+    .go-#{$typekey}-#{$sizekey} {
+      #{$type}: $size * $spacing-base-size;
+    }
+  }
+
+  //.mx-1
+  @each $sizekey, $size in $spacing-sizes {
+    .go-#{$typekey}x-#{$sizekey} {
+      #{$type}-left: $size * $spacing-base-size;
+      #{$type}-right: $size * $spacing-base-size;
+    }
+
+    .go-#{$typekey}y-#{$sizekey} {
+      #{$type}-top: $size * $spacing-base-size;
+      #{$type}-bottom: $size * $spacing-base-size;
+    }
+  }
+
+  //.mt-1
+  @each $directionkey, $direction in $spacing-directions {
+    @each $sizekey, $size in $spacing-sizes {
+      .go-#{$typekey}#{$directionkey}-#{$sizekey} {
+        #{$type}-#{$direction}: $size * $spacing-base-size;
+      }
+    }
+  }
+
+  .go-#{$typekey} {
+    #{$type}: 0 !important;
+  }
+}
+
+.go-d-inline-block {
+  display: inline-block;
+}
+.go-d-block {
+  display: block;
+}

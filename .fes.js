@@ -4,10 +4,10 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-10-16 10:53:09
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-03-25 15:37:42
+ * @LastEditTime: 2024-05-27 15:50:16
  */
 // import { resolve } from 'path';
-import { join } from 'path';
+import { join } from 'path'
 import { defineBuildConfig } from '@fesjs/fes'
 import { templateCompilerOptions } from '@tresjs/core'
 // eslint-disable-next-line import/no-unresolved
@@ -38,13 +38,22 @@ export default defineBuildConfig({
         ...templateCompilerOptions,
     },
     viteOption: {
-        base: "./",
+        base: './',
         plugins: [
             UnoCSS({
                 /* options */
             }),
-            glsl()
+            glsl(),
         ],
+        // 全局 css 注册
+        css: {
+            preprocessorOptions: {
+                scss: {
+                    javascriptEnabled: true,
+                    additionalData: `@import "src/plugins/goView/lib/scss/style.scss";`,
+                },
+            },
+        },
         server: {
             // host: "0.0.0.0",
             //     proxy: {
@@ -59,5 +68,4 @@ export default defineBuildConfig({
     alias: { PLS: join(__dirname, './src/plugins') },
     // { find: 'pls', replacement: resolve(__dirname, './src/plugins') },
     // { '@': join(__dirname, '/src') }
-});
-
+})

@@ -1,0 +1,60 @@
+{
+  "dimensions": [
+    {
+      "title": "产品名称",
+      "key": "productName"
+    },
+    {
+      "title": "产品销量（万）",
+      "key": "totalSum"
+    },
+    {
+      "title": "销售额（万）",
+      "key": "totalAmount"
+    }
+  ],
+  "source": [
+    {
+      "key": 0,
+      "productName": "产品A1",
+      "totalSum": 10,
+      "totalAmount": 10
+    },
+    {
+      "key": 1,
+      "productName": "产品B1",
+      "totalSum": 10,
+      "totalAmount": 10
+    },
+    {
+      "key": 2,
+      "productName": "产品C1",
+      "totalSum": 10,
+      "totalAmount": 10
+    },
+    {
+      "key": 3,
+      "productName": "产品D1",
+      "totalSum": 10,
+      "totalAmount": 10
+    },
+    {
+      "key": 4,
+      "productName": "产品A2",
+      "totalSum": 10,
+      "totalAmount": 10
+    },
+    {
+      "key": 5,
+      "productName": "产品D2",
+      "totalSum": 10,
+      "totalAmount": 10
+    },
+    {
+      "key": 6,
+      "productName": "产品A3",
+      "totalSum": 10,
+      "totalAmount": 10
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+export { setupNaive } from 'PLS/goView/lib/gPlugins//naive'
+export { setupDirectives } from 'PLS/goView/lib/gPlugins//directives'
+export { setupCustomComponents } from 'PLS/goView/lib/gPlugins//customComponents'
+export { icon } from 'PLS/goView/lib/gPlugins//icon'
+export { initFunction } from 'PLS/goView/lib/gPlugins//initFunction'

@@ -1,0 +1,30 @@
+[
+  {
+    "CMYK": [62, 0, 21, 16],
+    "RGB": [81, 214, 169],
+    "hex": "#51d6a9",
+    "name": "碧空绿",
+    "pinyin": "bikonlv"
+  },
+  {
+    "CMYK": [73, 17, 20, 1],
+    "RGB": [102, 169, 201],
+    "hex": "#66a9c9",
+    "name": "涧石蓝",
+    "pinyin": "jianshilan"
+  },
+  {
+    "CMYK": [4, 13, 67, 0],
+    "RGB": [248, 223, 114],
+    "hex": "#f8df72",
+    "name": "茉莉黄",
+    "pinyin": "molihuang"
+  },
+  {
+    "CMYK": [76, 51, 0, 0],
+    "RGB": [60, 126, 255],
+    "hex": "#3c7eff",
+    "name": "深海蓝",
+    "pinyin": "shenhailan"
+  }
+]
