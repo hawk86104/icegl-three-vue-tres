@@ -1,0 +1,424 @@
+{
+  "editCanvasConfig": {
+    "projectName": "1",
+    "width": 1920,
+    "height": 1080,
+    "filterShow": false,
+    "hueRotate": 0,
+    "saturate": 1,
+    "contrast": 1,
+    "brightness": 1,
+    "opacity": 1,
+    "rotateZ": 0,
+    "rotateX": 0,
+    "rotateY": 0,
+    "skewX": 0,
+    "skewY": 0,
+    "blendMode": "normal",
+    "background": null,
+    "backgroundImage": null,
+    "selectColor": true,
+    "chartThemeColor": "dark",
+    "chartCustomThemeColorInfo": null,
+    "chartThemeSetting": {
+      "title": {
+        "show": true,
+        "textStyle": {
+          "color": "#BFBFBF",
+          "fontSize": 18
+        },
+        "subtextStyle": {
+          "color": "#A2A2A2",
+          "fontSize": 14
+        }
+      },
+      "xAxis": {
+        "show": true,
+        "name": "",
+        "nameGap": 15,
+        "nameTextStyle": {
+          "color": "#B9B8CE",
+          "fontSize": 12
+        },
+        "inverse": false,
+        "axisLabel": {
+          "show": true,
+          "fontSize": 12,
+          "color": "#B9B8CE",
+          "rotate": 0
+        },
+        "position": "bottom",
+        "axisLine": {
+          "show": true,
+          "lineStyle": {
+            "color": "#B9B8CE",
+            "width": 1
+          },
+          "onZero": true
+        },
+        "axisTick": {
+          "show": true,
+          "length": 5
+        },
+        "splitLine": {
+          "show": false,
+          "lineStyle": {
+            "color": "#484753",
+            "width": 1,
+            "type": "solid"
+          }
+        }
+      },
+      "yAxis": {
+        "show": true,
+        "name": "",
+        "nameGap": 15,
+        "nameTextStyle": {
+          "color": "#B9B8CE",
+          "fontSize": 12
+        },
+        "inverse": false,
+        "axisLabel": {
+          "show": true,
+          "fontSize": 12,
+          "color": "#B9B8CE",
+          "rotate": 0
+        },
+        "position": "left",
+        "axisLine": {
+          "show": true,
+          "lineStyle": {
+            "color": "#B9B8CE",
+            "width": 1
+          },
+          "onZero": true
+        },
+        "axisTick": {
+          "show": true,
+          "length": 5
+        },
+        "splitLine": {
+          "show": true,
+          "lineStyle": {
+            "color": "#484753",
+            "width": 1,
+            "type": "solid"
+          }
+        }
+      },
+      "legend": {
+        "show": true,
+        "type": "scroll",
+        "x": "center",
+        "y": "top",
+        "icon": "circle",
+        "orient": "horizontal",
+        "textStyle": {
+          "color": "#B9B8CE",
+          "fontSize": 18
+        },
+        "itemHeight": 15,
+        "itemWidth": 15,
+        "pageTextStyle": {
+          "color": "#B9B8CE"
+        }
+      },
+      "grid": {
+        "show": false,
+        "left": "10%",
+        "top": "60",
+        "right": "10%",
+        "bottom": "60"
+      },
+      "dataset": null,
+      "renderer": "svg"
+    },
+    "previewScaleType": "fit"
+  },
+  "componentList": [
+    {
+      "id": "2vymqzeqvq8000",
+      "isGroup": false,
+      "attr": {
+        "x": 549,
+        "y": 71,
+        "w": 500,
+        "h": 300,
+        "offsetX": 0,
+        "offsetY": 0,
+        "zIndex": -1
+      },
+      "styles": {
+        "filterShow": false,
+        "hueRotate": 0,
+        "saturate": 1,
+        "contrast": 1,
+        "brightness": 1,
+        "opacity": 1,
+        "rotateZ": 0,
+        "rotateX": 0,
+        "rotateY": 0,
+        "skewX": 0,
+        "skewY": 0,
+        "blendMode": "normal",
+        "animations": []
+      },
+      "preview": {
+        "overFlowHidden": false
+      },
+      "status": {
+        "lock": false,
+        "hide": false
+      },
+      "request": {
+        "requestDataType": 0,
+        "requestHttpType": "get",
+        "requestUrl": "",
+        "requestInterval": null,
+        "requestIntervalUnit": "second",
+        "requestContentType": 0,
+        "requestParamsBodyType": "none",
+        "requestSQLContent": {
+          "sql": "select * from  where"
+        },
+        "requestParams": {
+          "Body": {
+            "form-data": {},
+            "x-www-form-urlencoded": {},
+            "json": "",
+            "xml": ""
+          },
+          "Header": {},
+          "Params": {}
+        }
+      },
+      "filter": null,
+      "events": {
+        "baseEvent": {
+          "click": null,
+          "dblclick": null,
+          "mouseenter": null,
+          "mouseleave": null
+        },
+        "advancedEvents": {
+          "vnodeMounted": null,
+          "vnodeBeforeMount": null
+        },
+        "interactEvents": []
+      },
+      "key": "BarCommon",
+      "chartConfig": {
+        "key": "BarCommon",
+        "chartKey": "VBarCommon",
+        "conKey": "VCBarCommon",
+        "title": "柱状图",
+        "category": "Bars",
+        "categoryName": "柱状图",
+        "package": "Charts",
+        "chartFrame": "echarts",
+        "image": "bar_x.png"
+      },
+      "option": {
+        "legend": {
+          "show": true,
+          "type": "scroll",
+          "x": "center",
+          "y": "top",
+          "icon": "circle",
+          "orient": "horizontal",
+          "textStyle": {
+            "color": "#B9B8CE",
+            "fontSize": 18
+          },
+          "itemHeight": 15,
+          "itemWidth": 15,
+          "pageTextStyle": {
+            "color": "#B9B8CE"
+          }
+        },
+        "xAxis": {
+          "show": true,
+          "name": "",
+          "nameGap": 15,
+          "nameTextStyle": {
+            "color": "#B9B8CE",
+            "fontSize": 12
+          },
+          "inverse": false,
+          "axisLabel": {
+            "show": true,
+            "fontSize": 12,
+            "color": "#B9B8CE",
+            "rotate": 0
+          },
+          "position": "bottom",
+          "axisLine": {
+            "show": true,
+            "lineStyle": {
+              "color": "#B9B8CE",
+              "width": 1
+            },
+            "onZero": true
+          },
+          "axisTick": {
+            "show": true,
+            "length": 5
+          },
+          "splitLine": {
+            "show": false,
+            "lineStyle": {
+              "color": "#484753",
+              "width": 1,
+              "type": "solid"
+            }
+          },
+          "type": "category"
+        },
+        "yAxis": {
+          "show": true,
+          "name": "",
+          "nameGap": 15,
+          "nameTextStyle": {
+            "color": "#B9B8CE",
+            "fontSize": 12
+          },
+          "inverse": false,
+          "axisLabel": {
+            "show": true,
+            "fontSize": 12,
+            "color": "#B9B8CE",
+            "rotate": 0
+          },
+          "position": "left",
+          "axisLine": {
+            "show": true,
+            "lineStyle": {
+              "color": "#B9B8CE",
+              "width": 1
+            },
+            "onZero": true
+          },
+          "axisTick": {
+            "show": true,
+            "length": 5
+          },
+          "splitLine": {
+            "show": true,
+            "lineStyle": {
+              "color": "#484753",
+              "width": 1,
+              "type": "solid"
+            }
+          },
+          "type": "value"
+        },
+        "grid": {
+          "show": false,
+          "left": "10%",
+          "top": "60",
+          "right": "10%",
+          "bottom": "60"
+        },
+        "tooltip": {
+          "show": true,
+          "trigger": "axis",
+          "axisPointer": {
+            "show": true,
+            "type": "shadow"
+          }
+        },
+        "dataset": {
+          "dimensions": [
+            "product",
+            "data1",
+            "data2"
+          ],
+          "source": [
+            {
+              "product": "Mon",
+              "data1": 120,
+              "data2": 130
+            },
+            {
+              "product": "Tue",
+              "data1": 200,
+              "data2": 130
+            },
+            {
+              "product": "Wed",
+              "data1": 150,
+              "data2": 312
+            },
+            {
+              "product": "Thu",
+              "data1": 80,
+              "data2": 268
+            },
+            {
+              "product": "Fri",
+              "data1": 70,
+              "data2": 155
+            },
+            {
+              "product": "Sat",
+              "data1": 110,
+              "data2": 117
+            },
+            {
+              "product": "Sun",
+              "data1": 130,
+              "data2": 160
+            }
+          ]
+        },
+        "series": [
+          {
+            "type": "bar",
+            "barWidth": 15,
+            "label": {
+              "show": true,
+              "position": "top",
+              "color": "#fff",
+              "fontSize": 12
+            },
+            "itemStyle": {
+              "color": null,
+              "borderRadius": 2
+            }
+          },
+          {
+            "type": "bar",
+            "barWidth": 15,
+            "label": {
+              "show": true,
+              "position": "top",
+              "color": "#fff",
+              "fontSize": 12
+            },
+            "itemStyle": {
+              "color": null,
+              "borderRadius": 2
+            }
+          }
+        ],
+        "backgroundColor": "rgba(0,0,0,0)"
+      }
+    }
+  ],
+  "requestGlobalConfig": {
+    "requestDataPond": [],
+    "requestOriginUrl": "",
+    "requestInterval": 30,
+    "requestIntervalUnit": "second",
+    "requestParams": {
+      "Body": {
+        "form-data": {},
+        "x-www-form-urlencoded": {},
+        "json": "",
+        "xml": ""
+      },
+      "Header": {},
+      "Params": {}
+    }
+  }
+}
