@@ -4,13 +4,13 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-05-22 20:54:09
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-05-27 11:59:33
+ * @LastEditTime: 2024-05-28 14:19:39
  */
 import { useChartEditStore } from '../../stores/chartEditStore'
 
 //@ts-ignore
 // import dataJson from './test.json'
-import dataJson from './1716775459252.json'
+import dataJson from './1716877101106.json'
 
 const chartEditStore = useChartEditStore()
 

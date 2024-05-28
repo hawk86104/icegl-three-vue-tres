@@ -1,3 +1,11 @@
+/*
+ * @Description: 
+ * @Version: 1.668
+ * @Autor: 地虎降天龙
+ * @Date: 2024-05-28 12:11:05
+ * @LastEditors: 地虎降天龙
+ * @LastEditTime: 2024-05-28 14:39:20
+ */
 import { LangEnum, PreviewScaleEnum } from 'PLS/goView/lib/enums/styleEnum'
 import { RequestHttpIntervalEnum } from 'PLS/goView/lib/enums/httpEnum'
 import designColor from './designColor.json'

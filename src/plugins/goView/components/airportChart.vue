@@ -4,10 +4,10 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-05-27 11:22:46
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-05-28 15:04:52
+ * @LastEditTime: 2024-05-28 14:58:10
 -->
 <template>
-    <div :class="`go-preview ${chartEditStore.editCanvasConfig.previewScaleType}`" @mousedown="dragCanvas">
+    <div :class="`go-preview ${chartEditStore.editCanvasConfig.previewScaleType}`" style="pointer-events: none" @mousedown="dragCanvas">
         <div ref="previewRef" class="go-preview-scale">
             <div :style="previewRefStyle" v-if="show">
                 <!-- 渲染层 -->
@@ -79,6 +79,13 @@ const { show } = useComInstall(chartEditStore)
     }
     .go-preview-entity {
         overflow: hidden;
+    }
+}
+</style>
+<style lang="less">
+.go-preview {
+    .chart-item {
+        pointer-events: all;
     }
 }
 </style>

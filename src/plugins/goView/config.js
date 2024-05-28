@@ -1,3 +1,11 @@
+/*
+ * @Description:
+ * @Version: 1.668
+ * @Autor: 地虎降天龙
+ * @Date: 2024-05-28 12:11:05
+ * @LastEditors: 地虎降天龙
+ * @LastEditTime: 2024-05-28 15:13:18
+ */
 export default {
     name: 'goView',
     title: 'goView低代码UI',
@@ -10,6 +18,6 @@ export default {
     updateTime: '2024-05-27',
     require: [],
     preview: [
-        { src: 'plugins/basic/base/preview/theBasic.png', type: 'img', name: 'index', disableFPSGraph: true, disableSrcBtn: true, title: '载入配置json' },
+        { src: 'plugins/goView/preview/goViewPlugin.png', type: 'img', name: 'index', disableFPSGraph: true, disableSrcBtn: true, title: '载入配置json' },
     ],
 }

@@ -16,6 +16,7 @@
             <sceneCom />
         </Suspense>
     </TresCanvas>
+    <airportChart />
 </template>
 <script setup lang="ts">
 import * as THREE from 'three'
@@ -24,6 +25,7 @@ import { TresCanvas } from '@tresjs/core'
 import { OrbitControls } from '@tresjs/cientos'
 import sceneCom from '../components/alternator/scene.vue'
 import { loading2 as loading } from 'PLS/UIdemo'
+import airportChart from 'PLS/goView/components/airportChart.vue'
 
 const state = reactive({
     clearColor: '#201919',
