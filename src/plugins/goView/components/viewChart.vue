@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-05-27 11:22:46
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-05-28 14:58:10
+ * @LastEditTime: 2024-05-28 18:28:00
 -->
 <template>
     <div :class="`go-preview ${chartEditStore.editCanvasConfig.previewScaleType}`" style="pointer-events: none" @mousedown="dragCanvas">
@@ -28,11 +28,17 @@ import { getFilterStyle } from '../lib/utils/global'
 
 import { PreviewRenderList } from '../components/PreviewRenderList'
 
+const props = withDefaults(
+    defineProps<{
+        dataJson: any
+    }>(),
+    {},
+)
+
 import naive from 'naive-ui'
 window['$vue'].use(naive)
 
-// @ts-ignore
-await getSessionStorageInfo()
+getSessionStorageInfo(props.dataJson)
 const chartEditStore = useChartEditStore() as any
 
 const previewRefStyle = computed(() => {

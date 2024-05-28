@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-05-28 09:23:39
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-05-28 12:07:29
+ * @LastEditTime: 2024-05-28 18:30:18
 -->
 <template>
     <!-- name:AmbientLight uuid:4a88f8db-06d0-47b4-ad5f-aad9885c3b29 type:AmbientLight -->
@@ -23,7 +23,7 @@
 <script setup lang="ts">
 import { onMounted } from 'vue'
 import * as THREE from 'three'
-import { loadImageToBase64, loadJsonFile, loadRemoteZip } from 'PLS/tresEditor'
+import { loadJsonFile, loadRemoteZip } from 'PLS/tresEditor'
 import { useTresContext, useRenderLoop } from '@tresjs/core'
 import player from './eventScript'
 import firstLevel86e5869a71b5 from './childComponent/firstLevel-86e5869a71b5.vue'

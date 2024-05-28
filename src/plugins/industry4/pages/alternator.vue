@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-05-28 09:22:40
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-05-28 09:24:17
+ * @LastEditTime: 2024-05-28 18:28:43
 -->
 
 <template>
@@ -16,7 +16,7 @@
             <sceneCom />
         </Suspense>
     </TresCanvas>
-    <airportChart />
+    <viewChart :dataJson="dataJson"/>
 </template>
 <script setup lang="ts">
 import * as THREE from 'three'
@@ -25,7 +25,8 @@ import { TresCanvas } from '@tresjs/core'
 import { OrbitControls } from '@tresjs/cientos'
 import sceneCom from '../components/alternator/scene.vue'
 import { loading2 as loading } from 'PLS/UIdemo'
-import airportChart from 'PLS/goView/components/airportChart.vue'
+import viewChart from 'PLS/goView/components/viewChart.vue'
+import dataJson from '../components/alternator/1716877101106.json'
 
 const state = reactive({
     clearColor: '#201919',
