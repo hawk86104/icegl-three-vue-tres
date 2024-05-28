@@ -1,0 +1,9 @@
+{
+  "markers|50": [
+    {
+      "name": "某某地市",
+      "value": "@integer(2, 20)",
+      "position": ["@float(115, 117, 1, 6)", "@float(38, 40, 1, 6)"]
+    }
+  ]
+}

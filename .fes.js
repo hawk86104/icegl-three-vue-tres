@@ -4,10 +4,10 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-10-16 10:53:09
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-03-25 21:24:53
+ * @LastEditTime: 2024-05-28 15:19:04
  */
 // import { resolve } from 'path';
-import { join } from 'path';
+import { join } from 'path'
 import { defineBuildConfig } from '@fesjs/fes'
 import { templateCompilerOptions } from '@tresjs/core'
 // eslint-disable-next-line import/no-unresolved
@@ -15,8 +15,11 @@ import UnoCSS from 'unocss/vite'
 // eslint-disable-next-line import/no-extraneous-dependencies
 import glsl from 'vite-plugin-glsl'
 
-
 const timeStamp = new Date().getTime()
+const combinedIsCustomElement = (tag) => {
+    return tag.startsWith('iconify-icon') || templateCompilerOptions.template.compilerOptions.isCustomElement(tag)
+}
+
 export default defineBuildConfig({
     title: 'TvT.js',
     publicPath: './',
@@ -37,15 +40,19 @@ export default defineBuildConfig({
     },
     //add by 地虎降天龙
     viteVuePlugin: {
-        ...templateCompilerOptions,
+        template: {
+            compilerOptions: {
+                isCustomElement: (tag) => combinedIsCustomElement(tag),
+            },
+        },
     },
     viteOption: {
-        base: "./", //     ./     /icegl-three-vue-tres/
+        base: './', //     ./     /icegl-three-vue-tres/
         plugins: [
             UnoCSS({
                 /* options */
             }),
-            glsl()
+            glsl(),
         ],
         build: {
             rollupOptions: {
@@ -54,24 +61,22 @@ export default defineBuildConfig({
                     entryFileNames: `js/[name].[hash]${timeStamp}.js`,
                     assetFileNames: `[ext]/[name].[hash]${timeStamp}.[ext]`,
                 },
-            }
+            },
+        },
+        // 全局 css 注册
+        css: {
+            preprocessorOptions: {
+                scss: {
+                    javascriptEnabled: true,
+                    additionalData: `@import "src/plugins/goView/lib/scss/style.scss";`,
+                },
+            },
         },
         server: {
-            host: "0.0.0.0"
+            host: '0.0.0.0',
         },
-        // server: {
-        //     host: "0.0.0.0",
-        //     proxy: {
-        //         '/cosv2': {
-        //             target: 'https://opensource-1314935952.cos.ap-nanjing.myqcloud.com',
-        //             changeOrigin: true,
-        //             rewrite: (path) => path.replace(/^\/cosv2/, '')
-        //         },
-        //     },
-        // },
     },
     alias: { PLS: join(__dirname, './src/plugins') },
     // { find: 'pls', replacement: resolve(__dirname, './src/plugins') },
     // { '@': join(__dirname, '/src') }
-});
-
+})

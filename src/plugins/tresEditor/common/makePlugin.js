@@ -156,7 +156,11 @@ if (scene.images) {
             if (url.startsWith('images/')) {
                 url = \`./plugins/${pluginState.pluginName}/\${url}\`
             }
-            image.url = await loadImageToBase64(url)
+            if (url.endsWith(".json")) {
+                image.url = await loadJsonFile(url)
+            } else {
+                image.url = await loadImageToBase64(url)
+            }
         }
     }
 }
@@ -221,7 +225,11 @@ const codeForJson = (publicFolder, scene) => {
         scene.images.forEach((image) => {
             if (image.url) {
                 imagesList.push({ uuid: image.uuid, url: image.url })
-                image.url = `url:images/${image.uuid}.${getImageFormat(image.url)}`
+                if (image.url.type) {
+                    image.url = `url:images/${image.uuid}.${image.url.type}.json`
+                } else {
+                    image.url = `url:images/${image.uuid}.${getImageFormat(image.url)}`
+                }
             }
         })
     }
@@ -234,7 +242,11 @@ const codeForJson = (publicFolder, scene) => {
     if (imagesList.length) {
         const imagesZip = publicFolder.folder('images')
         imagesList.forEach((image) => {
-            imagesZip.file(`${image.uuid}.${getImageFormat(image.url)}`, image.url.split(';base64,').pop(), { base64: true })
+            if (image.url.type) {
+                imagesZip.file(`${image.uuid}.${image.url.type}.json`, JSON.stringify(image.url))
+            } else {
+                imagesZip.file(`${image.uuid}.${getImageFormat(image.url)}`, image.url.split(';base64,').pop(), { base64: true })
+            }
         })
     }
     publicFolder.file(`json/scene.json`, JSON.stringify(scene))

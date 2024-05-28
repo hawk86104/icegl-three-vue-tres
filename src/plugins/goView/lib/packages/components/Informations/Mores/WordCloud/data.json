@@ -1,0 +1,90 @@
+[
+  {
+    "name": "数据可视化",
+    "value": 8000,
+    "textStyle": {
+      "color": "#78fbb2"
+    },
+    "emphasis": {
+      "textStyle": {
+        "color": "red"
+      }
+    }
+  },
+  {
+    "name": "GO VIEW",
+    "value": 6181
+  },
+  {
+    "name": "低代码",
+    "value": 4386
+  },
+  {
+    "name": "Vue3",
+    "value": 4055
+  },
+  {
+    "name": "TypeScript4",
+    "value": 2467
+  },
+  {
+    "name": "Vite2",
+    "value": 2244
+  },
+  {
+    "name": "NaiveUI",
+    "value": 1898
+  },
+  {
+    "name": "ECharts5",
+    "value": 1484
+  },
+  {
+    "name": "Axios",
+    "value": 1112
+  },
+  {
+    "name": "Pinia2",
+    "value": 965
+  },
+  {
+    "name": "PlopJS",
+    "value": 847
+  },
+  {
+    "name": "sfc",
+    "value": 582
+  },
+  {
+    "name": "SCSS",
+    "value": 555
+  },
+  {
+    "name": "pnpm",
+    "value": 550
+  },
+  {
+    "name": "eslint",
+    "value": 462
+  },
+  {
+    "name": "json",
+    "value": 366
+  },
+  {
+    "name": "图表",
+    "value": 360
+  },
+  {
+    "name": "地图",
+    "value": 282
+  },
+  {
+    "name": "时钟",
+    "value": 273
+  },
+  {
+    "name": "标题",
+    "value": 265
+  }
+]

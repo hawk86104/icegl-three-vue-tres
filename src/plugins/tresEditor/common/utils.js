@@ -6,7 +6,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-05-10 10:32:35
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-05-16 16:21:49
+ * @LastEditTime: 2024-05-28 11:54:39
  */
 import { request } from '@fesjs/fes'
 import JSZip from 'jszip'
@@ -56,6 +56,21 @@ export async function loadImageToBase64(url) {
                     reject(error)
                 }
                 reader.readAsDataURL(data)
+            },
+            undefined, // 进度回调（可选）
+            (error) => reject(error),
+        )
+    })
+}
+
+export const loadRemoteZip = (url) => {
+    const loader = new THREE.FileLoader()
+    loader.setResponseType('blob')
+    return new Promise((resolve, reject) => {
+        loader.load(
+            url,
+            async (data) => {
+                resolve(await JSZip.loadAsync(data))
             },
             undefined, // 进度回调（可选）
             (error) => reject(error),
@@ -126,7 +141,11 @@ export const exporterJsonZip = (jsonObjct) => {
         jsonObjct.scene.images.forEach((image) => {
             if (image.url) {
                 imagesList.push({ uuid: image.uuid, url: image.url })
-                image.url = `url:images/${image.uuid}.${getImageFormat(image.url)}`
+                if (image.url.type) {
+                    image.url = `url:images/${image.uuid}.${image.url.type}.json`
+                } else {
+                    image.url = `url:images/${image.uuid}.${getImageFormat(image.url)}`
+                }
             }
         })
     }
@@ -140,7 +159,11 @@ export const exporterJsonZip = (jsonObjct) => {
     if (imagesList.length) {
         const imagesZip = zip.folder('images')
         imagesList.forEach((image) => {
-            imagesZip.file(`${image.uuid}.${getImageFormat(image.url)}`, image.url.split(';base64,').pop(), { base64: true })
+            if (image.url.type) {
+                imagesZip.file(`${image.uuid}.${image.url.type}.json`, JSON.stringify(image.url))
+            } else {
+                imagesZip.file(`${image.uuid}.${getImageFormat(image.url)}`, image.url.split(';base64,').pop(), { base64: true })
+            }
         })
     }
     const json = JSON.stringify(jsonObjct)
@@ -196,13 +219,21 @@ export const importJsonZip = (file, handler) => {
                 gJson.scene.images?.forEach((image) => {
                     if (image.url.startsWith('url:')) {
                         const imgName = image.url.slice(4)
-                        zip.files[imgName].async('base64').then((idata) => {
-                            const fileNameParts = imgName.split('.')
-                            const extension = fileNameParts[fileNameParts.length - 1].toUpperCase()
-                            image.url = `data:image/${extension};base64,${idata}`
-                            resourceNum.images--
-                            checkFinishImportJson(resourceNum, gJson, handler)
-                        })
+                        if (imgName.endsWith('.json')) {
+                            zip.files[imgName].async('string').then((gdata) => {
+                                image.url = JSON.parse(gdata)
+                                resourceNum.images--
+                                checkFinishImportJson(resourceNum, gJson, handler)
+                            })
+                        } else {
+                            zip.files[imgName].async('base64').then((idata) => {
+                                const fileNameParts = imgName.split('.')
+                                const extension = fileNameParts[fileNameParts.length - 1].toUpperCase()
+                                image.url = `data:image/${extension};base64,${idata}`
+                                resourceNum.images--
+                                checkFinishImportJson(resourceNum, gJson, handler)
+                            })
+                        }
                     }
                 })
             })

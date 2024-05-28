@@ -1,0 +1,36 @@
+@import './var.scss';
+
+$dark: (
+  // 文字颜色
+    color: $--color-text-4,
+  //背景
+    background-color: $--color-dark-bg-1,
+    background-color1: $--color-dark-bg-1,
+    background-color1-shallow: $--color-dark-bg-1-shallow,
+    background-color2: $--color-dark-bg-2,
+    background-color2-shallow: $--color-dark-bg-2-shallow,
+    background-color3: $--color-dark-bg-3,
+    background-color3-shallow: $--color-dark-bg-3-shallow,
+    background-color4: $--color-dark-bg-4,
+    background-color4-shallow: $--color-dark-bg-4-shallow,
+    background-color5: $--color-dark-bg-5,
+    background-color5-shallow: $--color-dark-bg-5-shallow,
+  // 毛玻璃背景
+    filter-color: $--filter-color-login-dark,
+    filter-color-shallow: $--filter-color-login-dark-shallow,
+  //渐变背景
+    background-image:
+    linear-gradient(120deg, $--color-dark-bg-1 0%, $--color-dark-bg-1 100%),
+  // 斑点背景
+    background-point:
+    (
+      linear-gradient($--color-dark-bg-1 14px, transparent 0),
+      linear-gradient(90deg, transparent 14px, $--color-text-2 0)
+    ),
+  // hover 边框颜色
+    hover-border-color: $--color-dark-bg-5,
+    hover-border-color-shallow: $--color-dark-bg-3,
+  // 阴影
+    box-shadow: 0 8px 10px #1e1e1e1f
+    
+);

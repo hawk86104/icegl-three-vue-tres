@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-10 16:11:27
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-05-24 09:55:21
+ * @LastEditTime: 2024-05-28 15:07:25
  */
 
 export default {
@@ -56,6 +56,14 @@ export default {
             type: 'img',
             name: 'dissolveEffect',
             title: '溶解特效',
+        },
+        {
+            src: 'plugins/industry4/preview/alternator.png',
+            type: 'img',
+            name: 'alternator',
+            title: '发电机展示',
+            disableFPSGraph: true,
+            disableSrcBtn: true,
         },
         // { "src": "plugins/industry4/preview/deviceLight.png", "type": "img", "name": "deviceLightByComposerTres", "title": "发光后期useTres" },
     ],

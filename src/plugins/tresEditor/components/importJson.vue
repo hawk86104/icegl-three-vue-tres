@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-05-10 10:25:14
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-05-17 09:40:03
+ * @LastEditTime: 2024-05-28 09:28:35
 -->
 <template></template>
 
@@ -104,6 +104,7 @@ inputB.on('click', () => {
 
 const f1 = paneControl.addFolder({
     title: '分解场景[中间件 测试用]',
+    expanded: false,
 })
 const btn = f1.addButton({
     title: '生成分解场景Zip',

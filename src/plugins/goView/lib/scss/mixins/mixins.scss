@@ -1,0 +1,84 @@
+@import './config.scss';
+@import './function.scss';
+@import '../theme.scss';
+
+@mixin go($block) {
+  $B: $namespace + '-' + $block;
+  .#{$B} {
+    @content;
+  }
+}
+
+@mixin dark {
+  [data-theme='dark'] {
+    @content;
+  }
+}
+
+@mixin goId($block) {
+  $B: $namespace + '-' + $block;
+  ##{$B} {
+    @content;
+  }
+}
+
+@mixin deep() {
+  :deep() {
+    @content;
+  }
+}
+
+@mixin when($state) {
+  @at-root {
+    &.#{$state-prefix + $state} {
+      @content;
+    }
+  }
+}
+
+@mixin themeify {
+  @each $theme-name, $theme-map in $themes {
+    $theme-map: $theme-map !global;
+    [data-theme='#{$theme-name}'] & {
+      @content;
+    }
+  }
+}
+
+@mixin fetch-theme($param) {
+  @include themeify {
+    #{$param}: themed($param);
+  }
+}
+
+@mixin fetch-theme-custom ($key, $value) {
+  @include themeify {
+    #{$key}: themed($value);
+  }
+}
+
+//获取背景颜色
+@mixin fetch-bg-color($target) {
+  @include themeify {
+    background-color: themed($target);
+  }
+}
+
+//获取背景渐变颜色
+@mixin background-image($target) {
+  @include themeify {
+    background-image: themed($target);
+  }
+}
+
+//设置边框颜色
+@mixin fetch-border-color($target) {
+  @include themeify {
+    border-color: themed($target);
+  }
+}
+@mixin hover-border-color($target) {
+  @include themeify {
+    border: 1px solid themed($target);
+  }
+}

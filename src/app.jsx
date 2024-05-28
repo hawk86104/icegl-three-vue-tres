@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-10-16 10:53:09
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-05-24 09:58:10
+ * @LastEditTime: 2024-05-27 17:52:17
  */
 import { defineRuntimeConfig, useModel } from '@fesjs/fes'
 import { FMenu } from '@fesjs/fes-design'
@@ -55,6 +55,8 @@ export function layout(layoutConfig) {
 export function onAppCreated ({ app }) {
     app.use(FMenu)
     app.use(Tres)
+
+    window['$vue'] = app
     // if (process.env.FES_APP_PLUGINS === 'true') { 
         console.log(chalk.hex('#1c86e5')(`
      ░▒▓████████▓▒░ ░▒▓█▓▒░░▒▓█▓▒░ ░▒▓████████▓▒░                 ░▒▓█▓▒░  ░▒▓███████▓▒░ 

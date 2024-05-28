@@ -1,0 +1,40 @@
+{
+  "dimensions": ["product", "data1", "data2"],
+  "source": [
+    {
+      "product": "1月",
+      "data1": 104,
+      "data2": 30
+    },
+    {
+      "product": "2月",
+      "data1": 56,
+      "data2": 56
+    },
+    {
+      "product": "3月",
+      "data1": 136,
+      "data2": 36
+    },
+    {
+      "product": "4月",
+      "data1": 86,
+      "data2": 6
+    },
+    {
+      "product": "5月",
+      "data1": 98,
+      "data2": 10
+    },
+    {
+      "product": "6月",
+      "data1": 86,
+      "data2": 70
+    },
+    {
+      "product": "7月",
+      "data1": 77,
+      "data2": 57
+    }
+  ]
+}

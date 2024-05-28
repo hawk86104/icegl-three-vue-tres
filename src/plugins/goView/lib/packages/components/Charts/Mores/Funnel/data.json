@@ -1,0 +1,10 @@
+{
+  "dimensions": ["product", "dataOne"],
+  "source": [
+    { "product": "data1", "dataOne": 20 },
+    { "product": "data2", "dataOne": 40 },
+    { "product": "data3", "dataOne": 60 },
+    { "product": "data4", "dataOne": 80 },
+    { "product": "data5", "dataOne": 100 }
+  ]
+}

@@ -1,0 +1,100 @@
+{
+    "nodes": [
+      {
+        "id": "0",
+        "name": "Myriel",
+        "symbolSize": "@integer(0, 50)",
+        "x": -266.82776,
+        "y": 299.6904,
+        "value": "@integer(0, 50)",
+        "category": 3
+      },
+      {
+        "id": "1",
+        "name": "Napoleon",
+        "symbolSize": "@integer(0, 50)",
+        "x": -418.08344,
+        "y": 446.8853,
+        "value": "@integer(0, 50)",
+        "category": 5
+      },
+      {
+        "id": "2",
+        "name": "MlleBaptistine",
+        "symbolSize": "@integer(0, 50)",
+        "x": -212.76357,
+        "y": 245.29176,
+        "value": "@integer(0, 50)",
+        "category": 1
+      },
+      {
+        "id": "3",
+        "name": "MmeMagloire",
+        "symbolSize": "@integer(0, 50)",
+        "x": -242.82404,
+        "y": 235.26283,
+        "value": "@integer(0, 50)",
+        "category": 1
+      },
+      {
+        "id": "4",
+        "name": "CountessDeLo",
+        "symbolSize": "@integer(0, 50)",
+        "x": -379.30386,
+        "y": 429.06424,
+        "value": "@integer(0, 50)",
+        "category": 0
+      }
+    ],
+    "links": [
+      {
+        "source": "1",
+        "target": "@integer(2, 4)"
+      },
+      {
+        "source": "2",
+        "target": "@integer(3, 4)"
+      },
+      {
+        "source": "3",
+        "target": "@integer(0, 2)"
+      },
+      {
+        "source": "3",
+        "target": "@integer(0, 1)"
+      },
+      {
+        "source": "4",
+        "target": "@integer(0, 3)"
+      }
+    ],
+    "categories": [
+      {
+        "name": "A"
+      },
+      {
+        "name": "B"
+      },
+      {
+        "name": "C"
+      },
+      {
+        "name": "D"
+      },
+      {
+        "name": "E"
+      },
+      {
+        "name": "F"
+      },
+      {
+        "name": "G"
+      },
+      {
+        "name": "H"
+      },
+      {
+        "name": "I"
+      }
+    ]
+  }

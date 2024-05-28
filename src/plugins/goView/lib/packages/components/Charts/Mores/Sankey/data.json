@@ -1,0 +1,86 @@
+{
+  "label": [
+    {
+      "name": "a"
+    },
+    {
+      "name": "b"
+    },
+    {
+      "name": "a1"
+    },
+    {
+      "name": "a2"
+    },
+    {
+      "name": "b1"
+    },
+    {
+      "name": "b2"
+    }
+  ],
+  "links": [
+    {
+      "source": "a",
+      "target": "a1",
+      "value": 5
+    },
+    {
+      "source": "a",
+      "target": "a2",
+      "value": 3
+    },
+    {
+      "source": "b",
+      "target": "b1",
+      "value": 8
+    },
+    {
+      "source": "a",
+      "target": "b1",
+      "value": 3
+    },
+    {
+      "source": "b1",
+      "target": "a1",
+      "value": 1
+    },
+    {
+      "source": "b1",
+      "target": "b2",
+      "value": 2
+    }
+  ],
+  "levels": [
+    {
+      "depth": 0,
+      "itemStyle": {
+        "color": "#decbe4"
+      },
+      "lineStyle": {
+        "color": "source",
+        "opacity": 0.9
+      }
+    },
+    {
+      "depth": 1,
+      "itemStyle": {
+        "color": "#b3cde3"
+      },
+      "lineStyle": {
+        "color": "source",
+        "opacity": 0.6
+      }
+    },
+    {
+      "depth": 2,
+      "itemStyle": {
+        "color": "#ccebc5"
+      },
+      "lineStyle": {
+        "color": "source",
+        "opacity": 0.6
+      }
+    }
+  ]
+}
