@@ -6,7 +6,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-05-10 10:32:35
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-05-28 09:35:59
+ * @LastEditTime: 2024-05-28 11:54:39
  */
 import { request } from '@fesjs/fes'
 import JSZip from 'jszip'
@@ -56,6 +56,21 @@ export async function loadImageToBase64(url) {
                     reject(error)
                 }
                 reader.readAsDataURL(data)
+            },
+            undefined, // 进度回调（可选）
+            (error) => reject(error),
+        )
+    })
+}
+
+export const loadRemoteZip = (url) => {
+    const loader = new THREE.FileLoader()
+    loader.setResponseType('blob')
+    return new Promise((resolve, reject) => {
+        loader.load(
+            url,
+            async (data) => {
+                resolve(await JSZip.loadAsync(data))
             },
             undefined, // 进度回调（可选）
             (error) => reject(error),
