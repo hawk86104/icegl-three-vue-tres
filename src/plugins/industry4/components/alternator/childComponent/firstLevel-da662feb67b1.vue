@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-05-28 15:17:41
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-05-29 09:20:36
+ * @LastEditTime: 2024-05-29 18:59:26
 -->
 <template>
     <!-- name:103 uuid:f3ddf9ae-40de-4416-aa55-de0df5267f60 type:Mesh -->
@@ -80,20 +80,51 @@ const props = withDefaults(
 )
 
 import { useRenderLoop } from '@tresjs/core'
+import * as THREE from 'three'
+import { Reflector, ReflectorMaterial } from 'PLS/floor/lib/alienJS/all.three.js'
 
-props.object[25]
 props.object[25].material.color.setHex(0x009194)
 props.object[25].material.emissive.setHex(0x000000)
-
 props.object[13].children[3].material.color.setHex(0x0053fa)
-
 props.object[11].children[1].material.color.setHex(0x004d47)
-debugger
+
+const ob = props.object[26].children[1]
+const reflector = new Reflector({
+    width: 1024,
+    height: 1024,
+})
+
+const material = new ReflectorMaterial({
+    reflectivity: 0.6, //反射率
+    mirror: 10.88,
+    mixStrength: 6,
+    color: new THREE.Color('#666'),
+    normalMap: ob.material.normalMap.clone(),
+    normalScale: new THREE.Vector2(0.3, -0.3),
+    dithering: true,
+})
+material.uniforms.tReflect = reflector.renderTargetUniform
+// material.uniforms.tReflect = { value: reflector.renderTarget.texture }
+// material.uniforms.tReflectBlur = reflector.renderTargetUniform
+
+material.uniforms.uMatrix = reflector.textureMatrixUniform
+
+const geometry = ob.geometry.clone()
+geometry.rotateX(Math.PI / 2)
+const meshOB = new THREE.Mesh(geometry, material)
+
+// meshOB.rotateX(-Math.PI / 2)
+meshOB.rotateX(Math.PI / 2)
+
+meshOB.add(reflector)
+meshOB.onBeforeRender = (rendererSelf, sceneSelf, cameraSelf) => {
+    meshOB.visible = false
+    reflector.update(rendererSelf, sceneSelf, cameraSelf)
+    meshOB.visible = true
+}
+props.object[26].remove(ob)
+props.object[26].add(meshOB)
 
 const { onLoop } = useRenderLoop()
-onLoop(({ delta, elapsed }) => {
-    // if (props.object[9]) {
-    //     props.object[9].rotation.x += 1 * delta
-    // }
-})
+onLoop(({ delta, elapsed }) => {})
 </script>

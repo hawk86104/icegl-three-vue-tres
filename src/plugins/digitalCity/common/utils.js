@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-09 09:33:51
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-05-29 10:47:53
+ * @LastEditTime: 2024-05-29 10:51:49
  */
 import {
     BufferAttribute,
@@ -121,6 +121,7 @@ export const objectToSceneCenter = (mesh) => {
     mesh.position.copy(position)
 }
 
+//自适应 几何中心 外面要再包一层
 export const adjustGroupCenter = (group) => {
     const box = new THREE.Box3().setFromObject(group)
     // 计算 Group 的几何中心

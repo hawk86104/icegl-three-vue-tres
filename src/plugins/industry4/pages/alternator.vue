@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-05-28 09:22:40
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-05-28 18:41:33
+ * @LastEditTime: 2024-05-29 18:47:54
 -->
 
 <template>
@@ -15,6 +15,8 @@
         <Suspense>
             <sceneCom />
         </Suspense>
+
+        <leffect />
     </TresCanvas>
     <!-- <viewChart :dataJson="dataJson"/> -->
 </template>
@@ -25,6 +27,7 @@ import { TresCanvas } from '@tresjs/core'
 import { OrbitControls } from '@tresjs/cientos'
 import sceneCom from '../components/alternator/scene.vue'
 import { loading2 as loading } from 'PLS/UIdemo'
+import leffect from '../components/alternator/effect.vue'
 // import viewChart from 'PLS/goView/components/viewChart.vue'
 // import dataJson from '../components/alternator/1716877101106.json'
 
@@ -36,6 +39,7 @@ const state = reactive({
     shadowMapType: 1,
     toneMapping: 4,
     toneMappingExposure: 1,
+    disableRender: true,
 })
 
 const cameraConfig = {

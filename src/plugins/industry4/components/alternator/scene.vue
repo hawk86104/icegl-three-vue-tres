@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-05-28 09:23:39
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-05-29 10:46:11
+ * @LastEditTime: 2024-05-29 18:53:13
 -->
 <template>
     <!-- name:AmbientLight uuid:4a88f8db-06d0-47b4-ad5f-aad9885c3b29 type:AmbientLight -->
@@ -24,7 +24,7 @@
 </template>
 <script setup lang="ts">
 import { onMounted } from 'vue'
-import { useAnimations } from '@tresjs/cientos'
+// import { useAnimations } from '@tresjs/cientos'
 import * as THREE from 'three'
 import { loadJsonFile, loadRemoteZip } from 'PLS/tresEditor'
 import { useTresContext, useRenderLoop } from '@tresjs/core'
@@ -73,11 +73,9 @@ adjustGroupCenter(sceneObject.children[2])
 
 sceneObject.children[2].rotation.x = Math.PI
 
-// objectToSceneCenter(sceneObject.children[2])
-// objectToSceneCenter(sceneObject.children[1])
 // const animations = loader.parseAnimations(scene.animations)
 // const { actions } = useAnimations([animations['500410ba-1a32-40b9-a8db-5db7c9d0be6b'], animations['ee5fa32b-1e08-414f-bbfb-c3fa6d1e6883']], sceneObject)
-// const currentAction = actions.fangai //fangai chaifen
+// const currentAction = actions.chaifen //fangai chaifen
 // currentAction.loop = THREE.LoopOnce
 // currentAction.clampWhenFinished = true
 // currentAction.play()
