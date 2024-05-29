@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-09 09:33:51
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-05-10 10:33:50
+ * @LastEditTime: 2024-05-29 09:35:48
  */
 import {
     BufferAttribute,
@@ -112,6 +112,13 @@ export const getBoxInfo = (mesh) => {
 export const toMeshSceneCenter = (mesh) => {
     const { center, size } = getBoxInfo(mesh)
     mesh.position.copy(center.negate().setY(0))
+}
+export const objectToSceneCenter = (mesh) => {
+    const { center, size } = getBoxInfo(mesh)
+    const position = center.negate().setY(0)
+    position.x = -position.x
+    position.z = -position.z
+    mesh.position.copy(position)
 }
 export const initMeshBvh = () => {
     BufferGeometry.prototype.computeBoundsTree = computeBoundsTree

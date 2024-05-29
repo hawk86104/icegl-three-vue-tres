@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-05-28 09:23:39
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-05-28 19:18:48
+ * @LastEditTime: 2024-05-29 10:42:28
 -->
 <template>
     <!-- name:AmbientLight uuid:4a88f8db-06d0-47b4-ad5f-aad9885c3b29 type:AmbientLight -->
@@ -13,10 +13,12 @@
     <primitive :object="sceneObject.children[1]">
         <firstLevel86e5869a71b5 :object="sceneObject.children[1].children" />
     </primitive>
-    <!-- name:fdj .glb uuid:192ca4fd-3655-414f-a95d-da662feb67b1 type:Group -->
-    <primitive :object="sceneObject.children[2]">
-        <firstLevelda662feb67b1 :object="sceneObject.children[2].children" />
-    </primitive>
+    <!-- name:fdj .glb uuid:192ca4fd-3655-414f-a95d-da662feb67b1 type:Group :rotation="[-Math.PI, 0, 0]"  :position="[-2.2829428261014804, 0.10302746578115585, 0.8980185643838392]"-->
+    <TresGroup :position="[2.2829428261014804, -0.08, -0.8980185643838392]">
+        <primitive :object="sceneObject.children[2]">
+            <firstLevelda662feb67b1 :object="sceneObject.children[2].children" />
+        </primitive>
+    </TresGroup>
     <!-- name:DirectionalLight uuid:76d3cd67-1b53-40f5-b5b6-59a9be50ec03 type:DirectionalLight -->
     <primitive :object="sceneObject.children[3]" />
 </template>
@@ -29,6 +31,7 @@ import { useTresContext, useRenderLoop } from '@tresjs/core'
 import player from './eventScript'
 import firstLevel86e5869a71b5 from './childComponent/firstLevel-86e5869a71b5.vue'
 import firstLevelda662feb67b1 from './childComponent/firstLevel-da662feb67b1.vue'
+// import { objectToSceneCenter } from 'PLS/digitalCity'
 
 const { scene: tresScene, renderer, camera, sizes } = useTresContext()
 player.init(tresScene, renderer, camera, sizes)
@@ -63,13 +66,33 @@ if (scene.images) {
 }
 
 const sceneObject = loader.parse(scene) as any
-const animations = loader.parseAnimations(scene.animations)
-const { actions } = useAnimations([animations['500410ba-1a32-40b9-a8db-5db7c9d0be6b'], animations['ee5fa32b-1e08-414f-bbfb-c3fa6d1e6883']], sceneObject)
-const currentAction = actions.fangai //fangai chaifen
-currentAction.loop = THREE.LoopOnce
-currentAction.clampWhenFinished = true
+debugger
 
-currentAction.play()
+sceneObject.children[2].position.set(0, -0.13, 0)
+
+const tempgroup = sceneObject.children[2]
+const box = new THREE.Box3().setFromObject(tempgroup)
+// 计算 Group 的几何中心
+const center = new THREE.Vector3()
+box.getCenter(center)
+// 调整每个子物体的位置，使 Group 的几何中心位于原点
+tempgroup.children.forEach((child) => {
+    child.position.sub(center)
+})
+// 移动整个 Group 使几何中心对齐
+tempgroup.position.copy(center.negate())
+
+tempgroup.rotation.x = Math.PI
+
+// sceneObject.children[2].rotation.y = Math.PI / 4
+// objectToSceneCenter(sceneObject.children[2])
+// objectToSceneCenter(sceneObject.children[1])
+// const animations = loader.parseAnimations(scene.animations)
+// const { actions } = useAnimations([animations['500410ba-1a32-40b9-a8db-5db7c9d0be6b'], animations['ee5fa32b-1e08-414f-bbfb-c3fa6d1e6883']], sceneObject)
+// const currentAction = actions.fangai //fangai chaifen
+// currentAction.loop = THREE.LoopOnce
+// currentAction.clampWhenFinished = true
+// currentAction.play()
 
 onMounted(() => {
     tresScene.value.background = sceneObject.background
