@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-09 09:33:51
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-05-10 10:33:50
+ * @LastEditTime: 2024-05-29 10:51:49
  */
 import {
     BufferAttribute,
@@ -113,6 +113,28 @@ export const toMeshSceneCenter = (mesh) => {
     const { center, size } = getBoxInfo(mesh)
     mesh.position.copy(center.negate().setY(0))
 }
+export const objectToSceneCenter = (mesh) => {
+    const { center, size } = getBoxInfo(mesh)
+    const position = center.negate().setY(0)
+    position.x = -position.x
+    position.z = -position.z
+    mesh.position.copy(position)
+}
+
+//自适应 几何中心 外面要再包一层
+export const adjustGroupCenter = (group) => {
+    const box = new THREE.Box3().setFromObject(group)
+    // 计算 Group 的几何中心
+    const center = new THREE.Vector3()
+    box.getCenter(center)
+    // 调整每个子物体的位置，使 Group 的几何中心位于原点
+    group.children.forEach((child) => {
+        child.position.sub(center)
+    })
+    // 移动整个 Group 使几何中心对齐
+    group.position.copy(center.negate())
+}
+
 export const initMeshBvh = () => {
     BufferGeometry.prototype.computeBoundsTree = computeBoundsTree
     BufferGeometry.prototype.disposeBoundsTree = disposeBoundsTree

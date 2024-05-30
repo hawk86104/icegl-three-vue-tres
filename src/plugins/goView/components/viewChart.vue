@@ -1,0 +1,125 @@
+<!--
+ * @Description: 
+ * @Version: 1.668
+ * @Autor: 地虎降天龙
+ * @Date: 2024-05-27 11:22:46
+ * @LastEditors: 地虎降天龙
+ * @LastEditTime: 2024-05-30 19:03:47
+-->
+<template>
+    <div v-show="showAllComRef" :class="`go-preview ${chartEditStore.editCanvasConfig.previewScaleType}`" style="pointer-events: none" @mousedown="dragCanvas">
+        <div ref="previewRef" class="go-preview-scale">
+            <div :style="previewRefStyle" v-if="showAllComRef && show">
+                <!-- 渲染层 -->
+                <preview-render-list></preview-render-list>
+                <!-- 遮罩层 -->
+                <div class="go-preview-mask"></div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script setup lang="ts">
+import { computed, watch, ref } from 'vue'
+import { useChartEditStore } from '../stores/chartEditStore'
+import { getSessionStorageInfo, dragCanvas, getEditCanvasConfigStyle } from '../lib/utils'
+import { useScale } from '../lib/hooks/useScale.hook'
+import { useStore } from '../lib/hooks/useStore.hook'
+import { useComInstall } from '../lib/hooks/useComInstall.hook'
+import { getFilterStyle } from '../lib/utils/global'
+
+import { PreviewRenderList } from '../components/PreviewRenderList'
+
+const props = withDefaults(
+    defineProps<{
+        dataJson: any
+        showAllCom?: boolean
+    }>(),
+    {
+        showAllCom: true,
+    },
+)
+
+import naive from 'naive-ui'
+window['$vue'].use(naive)
+
+getSessionStorageInfo(props.dataJson)
+const chartEditStore = useChartEditStore() as any
+
+const previewRefStyle = computed(() => {
+    return {
+        overflow: 'hidden',
+        ...getEditCanvasConfigStyle(chartEditStore.editCanvasConfig),
+        ...getFilterStyle(chartEditStore.editCanvasConfig),
+    }
+})
+
+useStore(chartEditStore)
+
+const { previewRef } = useScale(chartEditStore)
+const { show } = useComInstall(chartEditStore)
+
+const showAllComRef = ref(false)
+watch(
+    () => props.showAllCom,
+    (newValue) => {
+        if (newValue) {
+            setTimeout(() => {
+                if (props.showAllCom) {
+                    console.log('1.6秒不变化再谈')
+                    showAllComRef.value = true
+                }
+            }, 1600)
+        }
+    },
+    { immediate: true },
+)
+</script>
+
+<style lang="scss" scoped>
+@import '../lib/scss/style.scss';
+@include go('preview') {
+    position: relative;
+    height: 100vh;
+    width: 100vw;
+    @include background-image('background-image');
+    &.fit,
+    &.full {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        .go-preview-scale {
+            transform-origin: center center;
+        }
+    }
+    &.scrollY {
+        overflow-x: hidden;
+        .go-preview-scale {
+            transform-origin: left top;
+        }
+    }
+    &.scrollX {
+        overflow-y: hidden;
+        .go-preview-scale {
+            transform-origin: left top;
+        }
+    }
+    .go-preview-entity {
+        overflow: hidden;
+    }
+}
+
+.go-preview-mask {
+    width: 500px;
+    height: 100%;
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0));
+}
+</style>
+<style lang="less">
+.go-preview {
+    .chart-item {
+        pointer-events: all;
+    }
+}
+</style>

@@ -4,81 +4,37 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-05-27 11:22:46
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-05-28 15:04:52
+ * @LastEditTime: 2024-05-28 18:38:02
 -->
 <template>
-    <div :class="`go-preview ${chartEditStore.editCanvasConfig.previewScaleType}`" @mousedown="dragCanvas">
-        <div ref="previewRef" class="go-preview-scale">
-            <div :style="previewRefStyle" v-if="show">
-                <!-- 渲染层 -->
-                <preview-render-list></preview-render-list>
-            </div>
-        </div>
-    </div>
+    <TresCanvas window-size>
+        <TresPerspectiveCamera :position="[10, 10, 10]" :fov="45" :near="0.1" :far="1000" />
+        <OrbitControls />
+        <TresAmbientLight :intensity="0.5" />
+        <TresDirectionalLight :position="[15, 15, 15]" :intensity="1" />
+
+        <TresMesh :position="[0, 2, 0]" name="torus">
+            <TresTorusKnotGeometry :args="[1, 0.35, 100, 32]" />
+            <TresMeshStandardMaterial color="#ff33ff" :roughness="0" :metalness="1" />
+        </TresMesh>
+
+        <gridPlus :args="[3, 3]" />
+        <Suspense>
+            <Environment
+                :files="['pos-x.jpg', 'neg-x.jpg', 'pos-y.jpg', 'neg-y.jpg', 'pos-z.jpg', 'neg-z.jpg']"
+                path="https://opensource-1314935952.cos.ap-nanjing.myqcloud.com/images/skyBox/6jpg/"
+            />
+        </Suspense>
+    </TresCanvas>
+    <viewChart :dataJson="dataJson" />
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
-import { useChartEditStore } from '../stores/chartEditStore'
-import { getSessionStorageInfo, dragCanvas, getEditCanvasConfigStyle } from '../lib/utils'
-import { useScale } from '../lib/hooks/useScale.hook'
-import { useStore } from '../lib/hooks/useStore.hook'
-import { useComInstall } from '../lib/hooks/useComInstall.hook'
-import { getFilterStyle } from '../lib/utils/global'
+import { TresCanvas } from '@tresjs/core'
+import { OrbitControls } from '@tresjs/cientos'
+import { Environment } from 'PLS/basic'
+import { gridPlus } from 'PLS/floor'
 
-import { PreviewRenderList } from '../components/PreviewRenderList'
-
-import naive from 'naive-ui'
-window['$vue'].use(naive)
-
-// @ts-ignore
-await getSessionStorageInfo()
-const chartEditStore = useChartEditStore() as any
-
-const previewRefStyle = computed(() => {
-    return {
-        overflow: 'hidden',
-        ...getEditCanvasConfigStyle(chartEditStore.editCanvasConfig),
-        ...getFilterStyle(chartEditStore.editCanvasConfig),
-    }
-})
-
-useStore(chartEditStore)
-const { previewRef } = useScale(chartEditStore)
-const { show } = useComInstall(chartEditStore)
+import viewChart from 'PLS/goView/components/viewChart.vue'
+import dataJson from '../common/1716877101106.json'
 </script>
-
-<style lang="scss" scoped>
-@import '../lib/scss/style.scss';
-@include go('preview') {
-    position: relative;
-    height: 100vh;
-    width: 100vw;
-    @include background-image('background-image');
-    &.fit,
-    &.full {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        overflow: hidden;
-        .go-preview-scale {
-            transform-origin: center center;
-        }
-    }
-    &.scrollY {
-        overflow-x: hidden;
-        .go-preview-scale {
-            transform-origin: left top;
-        }
-    }
-    &.scrollX {
-        overflow-y: hidden;
-        .go-preview-scale {
-            transform-origin: left top;
-        }
-    }
-    .go-preview-entity {
-        overflow: hidden;
-    }
-}
-</style>
