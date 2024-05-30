@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-05-28 09:23:39
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-05-29 18:53:13
+ * @LastEditTime: 2024-05-30 18:30:11
 -->
 <template>
     <!-- name:AmbientLight uuid:4a88f8db-06d0-47b4-ad5f-aad9885c3b29 type:AmbientLight -->
@@ -32,6 +32,11 @@ import player from './eventScript'
 import firstLevel86e5869a71b5 from './childComponent/firstLevel-86e5869a71b5.vue'
 import firstLevelda662feb67b1 from './childComponent/firstLevel-da662feb67b1.vue'
 import { adjustGroupCenter } from 'PLS/digitalCity'
+
+// import { useProgress } from '@tresjs/cientos'
+// const { hasFinishLoading, progress } = await useProgress()
+// hasFinishLoading.value = true
+// progress.value = 100
 
 const { scene: tresScene, renderer, camera, sizes } = useTresContext()
 player.init(tresScene, renderer, camera, sizes)

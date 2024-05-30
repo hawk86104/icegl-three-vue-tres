@@ -4,21 +4,23 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-05-27 11:22:46
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-05-28 18:28:00
+ * @LastEditTime: 2024-05-30 19:03:47
 -->
 <template>
-    <div :class="`go-preview ${chartEditStore.editCanvasConfig.previewScaleType}`" style="pointer-events: none" @mousedown="dragCanvas">
+    <div v-show="showAllComRef" :class="`go-preview ${chartEditStore.editCanvasConfig.previewScaleType}`" style="pointer-events: none" @mousedown="dragCanvas">
         <div ref="previewRef" class="go-preview-scale">
-            <div :style="previewRefStyle" v-if="show">
+            <div :style="previewRefStyle" v-if="showAllComRef && show">
                 <!-- 渲染层 -->
                 <preview-render-list></preview-render-list>
+                <!-- 遮罩层 -->
+                <div class="go-preview-mask"></div>
             </div>
         </div>
     </div>
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, watch, ref } from 'vue'
 import { useChartEditStore } from '../stores/chartEditStore'
 import { getSessionStorageInfo, dragCanvas, getEditCanvasConfigStyle } from '../lib/utils'
 import { useScale } from '../lib/hooks/useScale.hook'
@@ -31,8 +33,11 @@ import { PreviewRenderList } from '../components/PreviewRenderList'
 const props = withDefaults(
     defineProps<{
         dataJson: any
+        showAllCom?: boolean
     }>(),
-    {},
+    {
+        showAllCom: true,
+    },
 )
 
 import naive from 'naive-ui'
@@ -50,8 +55,25 @@ const previewRefStyle = computed(() => {
 })
 
 useStore(chartEditStore)
+
 const { previewRef } = useScale(chartEditStore)
 const { show } = useComInstall(chartEditStore)
+
+const showAllComRef = ref(false)
+watch(
+    () => props.showAllCom,
+    (newValue) => {
+        if (newValue) {
+            setTimeout(() => {
+                if (props.showAllCom) {
+                    console.log('1.6秒不变化再谈')
+                    showAllComRef.value = true
+                }
+            }, 1600)
+        }
+    },
+    { immediate: true },
+)
 </script>
 
 <style lang="scss" scoped>
@@ -86,6 +108,12 @@ const { show } = useComInstall(chartEditStore)
     .go-preview-entity {
         overflow: hidden;
     }
+}
+
+.go-preview-mask {
+    width: 500px;
+    height: 100%;
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0));
 }
 </style>
 <style lang="less">

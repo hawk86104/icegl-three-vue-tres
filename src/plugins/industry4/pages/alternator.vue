@@ -4,11 +4,13 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-05-28 09:22:40
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-05-29 18:47:54
+ * @LastEditTime: 2024-05-30 18:01:04
 -->
 
 <template>
-    <loading />
+    <Suspense>
+        <loading ref="loadingRef" />
+    </Suspense>
     <TresCanvas v-bind="state">
         <OrbitControls />
         <TresPerspectiveCamera ref="cameraRef" uuid="1c22773e-eb46-4708-b3bd-2baf29ac5cb3" name="Camera" />
@@ -18,7 +20,7 @@
 
         <leffect />
     </TresCanvas>
-    <!-- <viewChart :dataJson="dataJson"/> -->
+    <viewChart :dataJson="dataJson" :showAllCom="loadingRef?.hasFinishLoading" />
 </template>
 <script setup lang="ts">
 import * as THREE from 'three'
@@ -28,8 +30,8 @@ import { OrbitControls } from '@tresjs/cientos'
 import sceneCom from '../components/alternator/scene.vue'
 import { loading2 as loading } from 'PLS/UIdemo'
 import leffect from '../components/alternator/effect.vue'
-// import viewChart from 'PLS/goView/components/viewChart.vue'
-// import dataJson from '../components/alternator/1716877101106.json'
+import viewChart from 'PLS/goView/components/viewChart.vue'
+import dataJson from '../components/alternator/alternatorGoView.json'
 
 const state = reactive({
     clearColor: '#201919',
@@ -66,6 +68,7 @@ const cameraConfig = {
 const loader = new THREE.ObjectLoader()
 const cameraObject = loader.parse(cameraConfig)
 const cameraRef = ref(null)
+const loadingRef = ref(null)
 watch(
     () => cameraRef.value,
     (val) => {

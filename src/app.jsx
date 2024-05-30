@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-10-16 10:53:09
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-05-27 17:52:17
+ * @LastEditTime: 2024-05-30 18:11:48
  */
 import { defineRuntimeConfig, useModel } from '@fesjs/fes'
 import { FMenu } from '@fesjs/fes-design'
@@ -15,6 +15,7 @@ import UserCenter from '@/components/forPreview/userCenter.vue'
 
 // add by 地虎降天龙
 import 'uno.css'
+import 'animate.css/animate.min.css'
 
 export default defineRuntimeConfig({
     beforeRender: {
