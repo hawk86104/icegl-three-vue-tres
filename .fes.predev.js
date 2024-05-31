@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-10-16 10:53:09
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-05-20 21:33:11
+ * @LastEditTime: 2024-05-31 11:45:17
  */
 import { defineBuildConfig } from '@fesjs/fes'
 import addExtraScriptPlugin from './src/common/addExtraScriptPlugin'

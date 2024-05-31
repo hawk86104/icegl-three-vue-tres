@@ -96,7 +96,7 @@ export const useScale = (localStorageInfo: any) => {
 
         break
       case PreviewScaleEnum.SCROLL_X:
-        ;(() => {
+        ; (() => {
           const { calcRate, windowResize, unWindowResize } = usePreviewScrollXScale(
             width.value as number,
             height.value as number,

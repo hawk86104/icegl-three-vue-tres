@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-05-28 15:17:41
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-05-29 18:59:26
+ * @LastEditTime: 2024-05-31 13:15:18
 -->
 <template>
     <!-- name:103 uuid:f3ddf9ae-40de-4416-aa55-de0df5267f60 type:Mesh -->
@@ -75,11 +75,13 @@
 const props = withDefaults(
     defineProps<{
         object: any
+        reflectorRotateX: any
     }>(),
-    {},
+    {
+        reflectorRotateX: null,
+    },
 )
-
-import { useRenderLoop } from '@tresjs/core'
+import { watch } from 'vue'
 import * as THREE from 'three'
 import { Reflector, ReflectorMaterial } from 'PLS/floor/lib/alienJS/all.three.js'
 
@@ -114,7 +116,8 @@ geometry.rotateX(Math.PI / 2)
 const meshOB = new THREE.Mesh(geometry, material)
 
 // meshOB.rotateX(-Math.PI / 2)
-meshOB.rotateX(Math.PI / 2)
+meshOB.rotateX(props.reflectorRotateX.value)
+// console.log(props.reflectorRotateX.value)
 
 meshOB.add(reflector)
 meshOB.onBeforeRender = (rendererSelf, sceneSelf, cameraSelf) => {
@@ -125,6 +128,10 @@ meshOB.onBeforeRender = (rendererSelf, sceneSelf, cameraSelf) => {
 props.object[26].remove(ob)
 props.object[26].add(meshOB)
 
-const { onLoop } = useRenderLoop()
-onLoop(({ delta, elapsed }) => {})
+watch(
+    () => props.reflectorRotateX.value,
+    (newVal) => {
+        meshOB.rotation.x = newVal
+    },
+)
 </script>

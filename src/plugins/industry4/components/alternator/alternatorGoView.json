@@ -133,7 +133,7 @@
       "dataset": null,
       "renderer": "svg"
     },
-    "previewScaleType": "full"
+    "previewScaleType": "scrollX"
   },
   "componentList": [
     {

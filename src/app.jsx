@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-10-16 10:53:09
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-05-30 18:11:48
+ * @LastEditTime: 2024-05-31 11:46:51
  */
 import { defineRuntimeConfig, useModel } from '@fesjs/fes'
 import { FMenu } from '@fesjs/fes-design'
@@ -16,6 +16,15 @@ import UserCenter from '@/components/forPreview/userCenter.vue'
 // add by 地虎降天龙
 import 'uno.css'
 import 'animate.css/animate.min.css'
+
+// 注册图标 iconify goview
+import { addCollection } from 'iconify-icon'
+import uimIcons from '@iconify/json/json/uim.json'
+import lineMdIcons from '@iconify/json/json/line-md.json'
+import wiIcons from '@iconify/json/json/wi.json'
+addCollection(uimIcons)
+addCollection(lineMdIcons)
+addCollection(wiIcons)
 
 export default defineRuntimeConfig({
     beforeRender: {

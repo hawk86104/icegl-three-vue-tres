@@ -20,7 +20,7 @@
 
         <leffect />
     </TresCanvas>
-    <viewChart :dataJson="dataJson" :showAllCom="loadingRef?.hasFinishLoading" />
+    <viewChart :dataJson="dataJson" :showAllCom="loadingRef?.hasFinishLoading" :delay="1600" :maskWidth="560" />
 </template>
 <script setup lang="ts">
 import * as THREE from 'three'
