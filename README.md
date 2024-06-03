@@ -63,13 +63,11 @@
 ```
 
 ![展示](./public/plugins/simpleGIS/preview/mapBuildings.gif)
-![展示](./preview/数字城市2.gif)
-![展示](./public/plugins/digitalCity/preview/city2.gif)
-![展示](./preview/地球3.gif)
-![展示](./preview/热力图2.gif)
-![展示](./preview/热力图.gif)
+![展示](./preview/数字城市3.gif)
 ![展示](./preview/models.gif)
 ![展示](./preview/incar.gif)
+![展示](./preview/工业2.gif)
+![展示](./preview/艺术效果.gif)
 ![展示](./preview/shadertoyMaterial.gif)
 
 更多演示请进入预览页面
@@ -138,6 +136,14 @@
 # 📖 文档
 
 ## 使用说明：[🌏docs.icegl.cn](https://docs.icegl.cn/)
+
+## 三维编辑器：[📊 原生编辑器＋插件生成器](https://docs.icegl.cn/docs/three-vue-tres/editor/threeeditor.html)
+
+![展示](https://docs.icegl.cn/editor.png)
+
+## UI 编辑器：[📊 GoView 导出＋配置导入组件](https://docs.icegl.cn/docs/three-vue-tres/editor/goview.html)
+
+![展示](./public/plugins/goView/preview/goViewPlugin.png)
 
 # ❓ 问题反馈
 
