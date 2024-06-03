@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-05-28 09:22:40
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-05-30 18:01:04
+ * @LastEditTime: 2024-06-03 12:29:41
 -->
 
 <template>
@@ -30,7 +30,7 @@ import { OrbitControls } from '@tresjs/cientos'
 import sceneCom from '../components/alternator/scene.vue'
 import { loading2 as loading } from 'PLS/UIdemo'
 import leffect from '../components/alternator/effect.vue'
-import viewChart from 'PLS/goView/components/viewChart.vue'
+import { viewChart } from 'PLS/goView'
 import dataJson from '../components/alternator/alternatorGoView.json'
 
 const state = reactive({

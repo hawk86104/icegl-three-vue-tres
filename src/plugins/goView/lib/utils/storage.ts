@@ -4,17 +4,19 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-05-22 20:54:09
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-05-28 18:27:24
+ * @LastEditTime: 2024-06-01 09:41:13
  */
 import { useChartEditStore } from '../../stores/chartEditStore'
 
-//@ts-ignore
-// import dataJson from './test.json'
-// import dataJson from './1716877101106.json'
-const chartEditStore = useChartEditStore()
-
+const getChartEditStore = () => { 
+    return window['$vue']?useChartEditStore():null
+}
+let chartEditStore = getChartEditStore()
 export const getSessionStorageInfo = (dataJson: any) => {
     const { editCanvasConfig, requestGlobalConfig, componentList } = dataJson as any
+    if (!chartEditStore) {
+        chartEditStore = getChartEditStore()
+    }
     chartEditStore.editCanvasConfig = editCanvasConfig
     chartEditStore.requestGlobalConfig = requestGlobalConfig
     chartEditStore.componentList = componentList

@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-05-27 11:22:46
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-05-31 12:20:37
+ * @LastEditTime: 2024-06-01 09:10:37
 -->
 <template>
     <div v-show="showAllComRef" :class="`go-preview ${chartEditStore.editCanvasConfig.previewScaleType}`" style="pointer-events: none" @mousedown="dragCanvas">
@@ -52,7 +52,7 @@ const props = withDefaults(
         dataJson: any // 图表数据 goview配置文件
         showAllCom?: boolean // 是否 显示所有组件 可接入全局等待loading结果
         delay?: number // 延迟显示时间 单位毫秒 用于在three中读取完模型后 载入的延迟配置
-        maskWidth: number // 遮罩层宽度 默认500px
+        maskWidth?: number // 遮罩层宽度 默认500px
     }>(),
     {
         showAllCom: true,

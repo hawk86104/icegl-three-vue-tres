@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-05-28 09:23:39
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-05-31 13:10:20
+ * @LastEditTime: 2024-06-03 12:31:27
 -->
 <template>
     <!-- name:AmbientLight uuid:4a88f8db-06d0-47b4-ad5f-aad9885c3b29 type:AmbientLight -->
@@ -105,7 +105,6 @@ watch(
             x: target,
         })
         gsap.killTweensOf(reflectorRotateX)
-        debugger
         const targetReflectorRotateX = newVal ? -Math.PI / 2 : Math.PI / 2
         gsap.to(reflectorRotateX, {
             duration: 0.66,
