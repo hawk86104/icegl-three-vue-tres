@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-05-27 11:22:46
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-05-28 18:38:02
+ * @LastEditTime: 2024-06-03 12:29:35
 -->
 <template>
     <TresCanvas window-size>
@@ -35,6 +35,6 @@ import { OrbitControls } from '@tresjs/cientos'
 import { Environment } from 'PLS/basic'
 import { gridPlus } from 'PLS/floor'
 
-import viewChart from 'PLS/goView/components/viewChart.vue'
+import { viewChart } from 'PLS/goView'
 import dataJson from '../common/1716877101106.json'
 </script>
