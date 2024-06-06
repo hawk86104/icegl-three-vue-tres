@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-03 15:07:09
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-05-24 18:23:50
+ * @LastEditTime: 2024-06-05 16:36:20
  */
 export default {
     name: 'basic',
@@ -44,6 +44,12 @@ export default {
                 { src: 'plugins/basic/materials/preview/layerMaterial.png', type: 'img', name: 'layerMaterial', title: '图层材质' },
                 { src: 'plugins/basic/materials/preview/outline.png', type: 'img', name: 'outline', title: 'outline' },
                 { src: 'plugins/basic/materials/preview/clearcoat.png', type: 'img', name: 'clearcoat', title: '反光漆图层' },
+                {
+                    src: 'plugins/basic/materials/preview/instancedMeshCustomShaderMaterial.png',
+                    type: 'img',
+                    name: 'instancedMeshCustomShaderMaterial',
+                    title: 'instanced和继承材质',
+                },
             ],
         },
         {
