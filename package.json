@@ -63,6 +63,7 @@
     "echarts-wordcloud": "^2.1.0",
     "file-saver": "^2.0.5",
     "gl-matrix": "^3.4.3",
+    "gl-noise": "^1.6.1",
     "gsap": "3.12.5",
     "heatmap.js-fix": "^1.0.0",
     "iconify-icon": "^2.1.0",

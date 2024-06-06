@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-10 16:11:27
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-06-06 08:51:23
+ * @LastEditTime: 2024-06-06 11:14:12
  */
 
 export default {
@@ -20,5 +20,12 @@ export default {
         { src: 'plugins/water/preview/tilingCaustics.png', type: 'img', name: 'tilingCaustics', title: '波纹A' },
         { src: 'plugins/water/preview/waterGlass.png', type: 'img', name: 'waterGlass', title: '波浪B' },
         { src: 'plugins/water/preview/threeExampleOcean.png', type: 'img', name: 'threeExampleOcean', title: 'three例子-海洋' },
+        {
+            src: 'plugins/water/preview/customWater.png',
+            type: 'img',
+            name: 'customWater',
+            title: '自定义水',
+            referenceSource: { title: 'CustomShaderMaterial', url: 'https://github.com/FarazzShaikh/THREE-CustomShaderMaterial' },
+        },
     ],
 }
