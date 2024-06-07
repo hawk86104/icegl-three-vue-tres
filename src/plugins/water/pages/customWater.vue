@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-06-06 08:56:34
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-06-06 11:11:28
+ * @LastEditTime: 2024-06-07 10:42:40
 -->
 <template>
     <TresCanvas v-bind="state" window-size>
@@ -106,7 +106,7 @@ paneControl.addBlade({
     value: customWaterState.baseMaterial,
 })
 paneControl.on('change', (e: any) => {
-    if (e.target.key === 'baseMaterial') {
+    if (e.target.label === '材质') {
         customWaterState.baseMaterial = e.value
     }
 })
