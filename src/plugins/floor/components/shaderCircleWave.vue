@@ -4,27 +4,43 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-06-06 15:54:46
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-06-06 17:07:32
+ * @LastEditTime: 2024-06-07 08:20:36
 -->
 <template>
-    <TresMesh ref="tmRef" :rotation-x="-Math.PI / 2">
-        <TresPlaneGeometry :args="[10, 10]" />
+    <TresMesh ref="tmRef" :rotation-x="-Math.PI / 2" :scale="scale">
+        <TresPlaneGeometry :args="[1, 1]" />
         <TresShaderMaterial v-bind="tmsMaterial" />
     </TresMesh>
 </template>
 
 <script lang="ts" setup>
 import * as THREE from 'three'
-import { reactive, ref } from 'vue'
+import { reactive, ref, watchEffect } from 'vue'
 import { useRenderLoop, useTexture } from '@tresjs/core'
+
+const props = withDefaults(
+    defineProps<{
+        color?: string
+        colorDark?: string
+        speed?: number
+        scale?: number
+    }>(),
+    {
+        color: '#ffffff',
+        colorDark: '#000000',
+        speed: 1,
+        scale: 2,
+    },
+)
+
 const tmRef = ref()
 const { onLoop } = useRenderLoop()
 onLoop(({ delta }) => {
     if (tmRef.value) {
-        tmRef.value.material.uniforms.uTime.value += delta
+        tmRef.value.material.uniforms.uTime.value += delta * props.speed
     }
 })
-const texture = await useTexture(['https://s2.loli.net/2023/02/14/TEoCpsiV8xG9nUv.png'])
+const texture = await useTexture(['./plugins/floor/image/scan.png'])
 texture.wrapS = THREE.RepeatWrapping
 texture.wrapT = THREE.RepeatWrapping
 const tmsMaterial = reactive({
@@ -33,12 +49,19 @@ const tmsMaterial = reactive({
     blending: THREE.AdditiveBlending,
     flatShading: true,
     depthTest: false,
-    color: '#fff',
     uniforms: {
         uTime: { type: 'f', value: 0.0 },
         uScanTex: {
             type: 't',
             value: texture,
+        },
+        uScanColor: {
+            type: 'v3',
+            value: new THREE.Color(props.color),
+        },
+        uScanColorDark: {
+            type: 'v3',
+            value: new THREE.Color(props.colorDark),
         },
     },
     vertexShader: `
@@ -52,19 +75,18 @@ void main(){
 `,
     fragmentShader: `
 #define uScanOrigin vec3(0.,0.,0.)
-#define uScanSpeed 1.
-#define uScanWaveRatio1 1.6/4.0 //2.0
-#define uScanWaveRatio2 1.4/4.0 //2.0
-#define uScanColorDark vec3(.48,1.,.94)
-#define uScanColor vec3(0.,.85,1.)
+#define uScanWaveRatio1 3.2
+#define uScanWaveRatio2 2.8
 
 uniform float uTime;
 uniform sampler2D uScanTex;
 varying vec2 vUv;
 varying vec3 vPosition;
+uniform vec3 uScanColor;
+uniform vec3 uScanColorDark;
 
 float circleWave(vec3 p,vec3 origin,float distRatio){
-    float t=uTime*uScanSpeed;
+    float t=uTime;
     float dist=distance(p,origin)*distRatio;
     float radialMove=fract(dist-t);
     float fadeOutMask=1.-smoothstep(1.,3.,dist);
@@ -109,5 +131,12 @@ void main()
     gl_FragColor=vec4(col,1.);
 }
 `,
+})
+
+watchEffect(() => {
+    if (tmRef.value) {
+        tmRef.value.material.uniforms.uScanColor.value = new THREE.Color(props.color)
+        tmRef.value.material.uniforms.uScanColorDark.value = new THREE.Color(props.colorDark)
+    }
 })
 </script>

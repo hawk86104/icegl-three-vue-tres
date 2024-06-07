@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-12-20 17:01:37
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-06-06 15:50:42
+ * @LastEditTime: 2024-06-07 08:28:49
  */
 export default {
     name: 'floor',
@@ -32,6 +32,6 @@ export default {
             title: '草地',
             referenceSource: { title: 'react-three-fiber', url: 'https://codesandbox.io/s/5xho4' },
         },
-        { src: 'plugins/floor/preview/shaderCircleWave.png', type: 'img', name: 'circleWave', title: 'shaderCircleWave' },
+        { src: 'plugins/floor/preview/circleWave.png', type: 'img', name: 'circleWave', title: 'shaderCircleWave' },
     ],
 }
