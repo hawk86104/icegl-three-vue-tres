@@ -7,7 +7,7 @@
  * @LastEditTime: 2024-05-30 17:51:33
 -->
 <template>
-    <div v-if="!hasFinishLoading" class="absolute bg-grey-600 t-0 l-0 w-full h-full z-999999 flex justify-center items-center text-black font-mono bg-black">
+    <div v-if="!hasFinishLoading" class="absolute bg-grey-600 t-0 l-0 w-full h-full z-99999999 flex justify-center items-center text-black font-mono bg-black">
         <div class="text-center text-white">
             <div class="loader1" v-if="props.styleNum === 0"></div>
             <div class="loader2" v-else-if="props.styleNum === 1"></div>
