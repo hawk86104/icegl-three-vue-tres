@@ -159,6 +159,17 @@
 <img src="https://icegl-1314935952.cos.ap-beijing.myqcloud.com/uploads/20230731/17d59bab46815cce1f4f1e09dcbb6ccc.png" width="300" />
 </p>
 
+# ⭐ 点星历史
+
+<a href="https://star-history.com/#hawk86104/icegl-three-vue-tres&Date">
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=hawk86104/icegl-three-vue-tres&type=Date&theme=dark" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=hawk86104/icegl-three-vue-tres&type=Date" />
+   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=hawk86104/icegl-three-vue-tres&type=Date" />
+ </picture>
+</a>
+
+
 # ™️ 版权信息
 
 本项目遵循 Apache2 开源协议发布，并提供永久免费使用以及商用。
