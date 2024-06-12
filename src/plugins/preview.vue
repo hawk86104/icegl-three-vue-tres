@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-18 22:17:49
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-05-24 09:57:44
+ * @LastEditTime: 2024-06-12 09:12:11
 -->
 <template>
     <div class="absolute menuSelf">
@@ -41,10 +41,20 @@
                     <template #icon>
                         <AppstoreOutlined />
                     </template>
-                    <template #label>基础功能展示</template>
+                    <template #label
+                        >基础功能 <FBadge :max="999" :value="getMenusCount(true)" class="count-fbdge big-cf" type="primary" size="small"
+                    /></template>
                     <template v-for="(bP, pkey) in filteredData">
                         <f-menu-item v-if="pkey === 'basic'" v-for="(onePlugin, okey) in bP.child" :value="onePlugin.name">
-                            <template #label>{{ onePlugin.title }}</template>
+                            <template #label>
+                                <div class="flex absolute" style="left: 1px; flex-direction: column; top: 2px">
+                                    <template v-for="(lbItem, lbKey) in getleftMenuBadge(onePlugin.name)">
+                                        <f-badge v-if="lbItem.show" :value="lbItem.text" class="tag-fbdge" type="primary" size="small" />
+                                    </template>
+                                </div>
+                                <span class="left-m-text">{{ onePlugin.title }}</span>
+                                <FBadge :value="onePlugin.preview.length" class="count-fbdge" type="primary" size="small"
+                            /></template>
                         </f-menu-item>
                     </template>
                 </f-sub-menu>
@@ -52,7 +62,7 @@
                     <template #icon>
                         <PictureOutlined />
                     </template>
-                    <template #label>插件中心</template>
+                    <template #label>插件中心 <FBadge :max="999" :value="getMenusCount()" class="count-fbdge big-cf" type="primary" size="small" /></template>
                     <template v-for="(onePlugin, pkey) in filteredData">
                         <f-menu-item v-if="pkey !== 'basic'" :value="pkey">
                             <template #label>
@@ -241,6 +251,26 @@ watch(menuSetupFilter, (newValue: any) => {
     // console.log('menuSetupFilter filteredData', filteredData.value)
 })
 
+const getMenusCount = (isBasic = false) => {
+    let count = 0
+    for (const key in filteredData.value) {
+        if (filteredData.value.hasOwnProperty(key)) {
+            if ((key === 'basic') === isBasic) {
+                if (isBasic) {
+                    for (const key2 in filteredData.value[key].child) {
+                        if (filteredData.value[key].child.hasOwnProperty(key2)) {
+                            count += filteredData.value[key].child[key2].preview.length
+                        }
+                    }
+                } else {
+                    count += filteredData.value[key].preview.length
+                }
+            }
+        }
+    }
+    return count
+}
+
 const getleftMenuBadge = (name: string) => {
     const tagOne = {
         recommend: { show: false, text: '荐' },
@@ -404,6 +434,12 @@ const openTopMune = () => {
     position: absolute;
     right: 13px;
     top: 13.8px;
+}
+&.big-cf {
+    position: relative;
+    left: -2px;
+    right: auto;
+    top: 0px;
 }
 
 .tag-fbdge {

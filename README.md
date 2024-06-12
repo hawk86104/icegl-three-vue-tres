@@ -159,6 +159,10 @@
 <img src="https://icegl-1314935952.cos.ap-beijing.myqcloud.com/uploads/20230731/17d59bab46815cce1f4f1e09dcbb6ccc.png" width="300" />
 </p>
 
+# ⭐ 点星历史
+
+[![Star History Chart](https://api.star-history.com/svg?repos=hawk86104/icegl-three-vue-tres,hawk86104/vue3-ts-cesium-map-show&type=Date)](https://star-history.com/#hawk86104/icegl-three-vue-tres&hawk86104/vue3-ts-cesium-map-show&Date)
+
 # ™️ 版权信息
 
 本项目遵循 Apache2 开源协议发布，并提供永久免费使用以及商用。
