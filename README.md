@@ -161,7 +161,7 @@
 
 # ⭐ 点星历史
 
-[![Star History Chart](https://api.star-history.com/svg?repos=hawk86104/icegl-three-vue-tres&type=Date)](https://star-history.com/#hawk86104/icegl-three-vue-tres&Date)
+[![Star History Chart](https://api.star-history.com/svg?repos=hawk86104/icegl-three-vue-tres,hawk86104/vue3-ts-cesium-map-show&type=Date)](https://star-history.com/#hawk86104/icegl-three-vue-tres&hawk86104/vue3-ts-cesium-map-show&Date)
 
 # ™️ 版权信息
 
