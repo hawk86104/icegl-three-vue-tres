@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-04-22 15:53:24
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-04-22 16:39:01
+ * @LastEditTime: 2024-06-13 18:38:44
 -->
 <template>
     <primitive :object="FlameSpriteAnimator.group" :renderOrder="9999" />
@@ -31,6 +31,7 @@ FlameSpriteAnimator.group.children[0].material.map.colorSpace = THREE.SRGBColorS
 // FlameSpriteAnimator.group.children[0].material.depthWrite = false
 // FlameSpriteAnimator.group.children[0].material.blending = THREE.NormalBlending
 // FlameSpriteAnimator.group.children[0].material.color.setHex(0xff0000)
+FlameSpriteAnimator.group.children[0].geometry.translate(0, 0.344, 0) // 偏移
 const { onLoop } = useRenderLoop()
 onLoop(() => {
     FlameSpriteAnimator.update()
