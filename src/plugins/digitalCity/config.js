@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-10-26 09:20:42
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-04-22 15:52:20
+ * @LastEditTime: 2024-06-14 08:58:33
  */
 export default {
     name: 'digitalCity',
@@ -20,6 +20,7 @@ export default {
         { src: 'plugins/digitalCity/preview/buildings.png', type: 'img', name: 'buildings', title: '建筑物' },
         { src: 'plugins/digitalCity/preview/radars.png', type: 'img', name: 'radars', title: '雷达' },
         { src: 'plugins/digitalCity/preview/weather.png', type: 'img', name: 'weather', title: '天气' },
+        { src: 'plugins/digitalCity/preview/lightningStorm.png', type: 'img', name: 'lightningStorm', title: '闪电' },
         { src: 'plugins/digitalCity/preview/clouds.png', type: 'img', name: 'clouds', title: '云☁️' },
         { src: 'plugins/digitalCity/preview/clouds2.png', type: 'img', name: 'clouds2', title: '云彩2☁️' },
         { src: 'plugins/digitalCity/preview/fog.png', type: 'img', name: 'fog', title: '迷雾' },
