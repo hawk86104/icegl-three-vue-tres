@@ -45,6 +45,7 @@
     "@pmndrs/vanilla": "^1.16.0",
     "@tresjs/cientos": "3.8.0",
     "@tresjs/core": "3.8.0",
+    "@tresjs/leches": "^0.14.0",
     "@tweenjs/tween.js": "^23.1.1",
     "@vicons/carbon": "^0.12.0",
     "@vicons/ionicons5": "^0.12.0",
