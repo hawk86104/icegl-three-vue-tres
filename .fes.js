@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-10-16 10:53:09
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-05-31 11:45:58
+ * @LastEditTime: 2024-06-15 11:17:09
  */
 // import { resolve } from 'path';
 import { join } from 'path'
@@ -14,6 +14,7 @@ import { templateCompilerOptions } from '@tresjs/core'
 import UnoCSS from 'unocss/vite'
 // eslint-disable-next-line import/no-extraneous-dependencies
 import glsl from 'vite-plugin-glsl'
+import obfuscatorPlugin from 'vite-plugin-javascript-obfuscator'
 
 const timeStamp = new Date().getTime()
 const combinedIsCustomElement = (tag) => {
@@ -53,15 +54,39 @@ export default defineBuildConfig({
                 /* options */
             }),
             glsl(),
+            process.env.NODE_ENV === 'production' &&
+                obfuscatorPlugin({
+                    debugger: false,
+                    // include: ['src/plugins/'],
+                    // exclude: ['/node_modules/', '/src/.fes/', '/src/app.jsx', /index.jsx$/],
+                    // apply: 'build',
+                    options: {
+                        // 配置项，根据需要进行调整
+                        optionsPreset: 'default',
+                        // identifierNamesGenerator: 'mangled',
+                        debugProtection: true,
+                        disableConsoleOutput: true,
+                        reservedStrings: ['suspenseLayout.vue', '/plugins'],
+                        // ...  [See more options](https://github.com/javascript-obfuscator/javascript-obfuscator)
+                    },
+                }),
         ],
         build: {
+            chunkSizeWarningLimit: 1000, // 单位为KB
             rollupOptions: {
                 output: {
+                    manualChunks(id) {
+                        // 自定义拆分策略，例如将特定的第三方库拆分为单独的 chunk
+                        if (id.includes('node_modules')) {
+                            return id.toString().split('node_modules/')[1].split('/')[0]
+                        }
+                    },
                     chunkFileNames: `js/[name].[hash]${timeStamp}.js`,
                     entryFileNames: `js/[name].[hash]${timeStamp}.js`,
                     assetFileNames: `[ext]/[name].[hash]${timeStamp}.[ext]`,
                 },
             },
+            minify: process.env.NODE_ENV === 'production' ? 'terser' : false,
         },
         // 全局 css 注册
         css: {
