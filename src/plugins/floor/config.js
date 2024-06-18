@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-12-20 17:01:37
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-06-12 17:25:39
+ * @LastEditTime: 2024-06-18 14:32:02
  */
 export default {
     name: 'floor',
@@ -34,5 +34,6 @@ export default {
             referenceSource: { title: 'react-three-fiber', url: 'https://codesandbox.io/s/5xho4' },
         },
         { src: 'plugins/floor/preview/circleWave.png', type: 'img', name: 'circleWave', title: 'shaderCircleWave' },
+        { src: 'plugins/floor/preview/cartoonMagicZone.png', type: 'img', name: 'cartoonMagicZone', title: '卡通能量圈' },
     ],
 }
