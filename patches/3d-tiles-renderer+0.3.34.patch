@@ -1,0 +1,3841 @@
+diff --git a/node_modules/3d-tiles-renderer/README.md b/node_modules/3d-tiles-renderer/README.md
+index 349e630..d12144d 100644
+--- a/node_modules/3d-tiles-renderer/README.md
++++ b/node_modules/3d-tiles-renderer/README.md
+@@ -5,7 +5,7 @@
+ 
+ ![](./images/header-mars.png)
+ 
+-Three.js renderer implementation for the [3D Tiles format](https://github.com/AnalyticalGraphicsInc/3d-tiles/blob/master/specification/). The renderer supports most of the 3D Tiles spec features with a few exceptions. See [Issue #15](https://github.com/NASA-AMMOS/3DTilesRendererJS/issues/15) for information on which features are not yet implemented.
++Three.js renderer implementation for the [3D Tiles format](https://github.com/AnalyticalGraphicsInc/3d-tiles/blob/master/specification/). The renderer supports most of the 3D Tiles spec features with a few exceptions. See the [Feature Complete Milestone](https://github.com/NASA-AMMOS/3DTilesRendererJS/milestone/1) for information on which features are not yet implemented.
+ 
+ If a tile set or geometry does not load or render properly please make an issue! Example data is needed for adding and testing features.
+ 
+@@ -66,6 +66,15 @@ import { TilesRenderer } from '3d-tiles-renderer';
+ const tilesRenderer = new TilesRenderer( './path/to/tileset.json' );
+ tilesRenderer.setCamera( camera );
+ tilesRenderer.setResolutionFromRenderer( camera, renderer );
++tilesRenderer.addEventListener( 'load-tile-set', () => {
++
++	// optionally center the tile set in case it's far off center
++	const sphere = new Sphere();
++	tilesRenderer.getBoundingSphere( sphere );
++	tilesRenderer.position.copy( sphere.center ).multiplyScalar( - 1 );
++
++} );
++
+ scene.add( tilesRenderer.group );
+ 
+ renderLoop();
+diff --git a/node_modules/3d-tiles-renderer/src/base/B3DMLoaderBase.d.ts b/node_modules/3d-tiles-renderer/src/base/loaders/B3DMLoaderBase.d.ts
+similarity index 78%
+rename from node_modules/3d-tiles-renderer/src/base/B3DMLoaderBase.d.ts
+rename to node_modules/3d-tiles-renderer/src/base/loaders/B3DMLoaderBase.d.ts
+index a16255d..37195e5 100644
+--- a/node_modules/3d-tiles-renderer/src/base/B3DMLoaderBase.d.ts
++++ b/node_modules/3d-tiles-renderer/src/base/loaders/B3DMLoaderBase.d.ts
+@@ -1,4 +1,4 @@
+-import { FeatureTable, BatchTable } from '../utilities/FeatureTable';
++import { FeatureTable, BatchTable } from '../../utilities/FeatureTable';
+ 
+ export interface B3DMBaseResult {
+ 
+diff --git a/node_modules/3d-tiles-renderer/src/base/B3DMLoaderBase.js b/node_modules/3d-tiles-renderer/src/base/loaders/B3DMLoaderBase.js
+similarity index 93%
+rename from node_modules/3d-tiles-renderer/src/base/B3DMLoaderBase.js
+rename to node_modules/3d-tiles-renderer/src/base/loaders/B3DMLoaderBase.js
+index 215a7d1..4c09d8a 100644
+--- a/node_modules/3d-tiles-renderer/src/base/B3DMLoaderBase.js
++++ b/node_modules/3d-tiles-renderer/src/base/loaders/B3DMLoaderBase.js
+@@ -1,9 +1,9 @@
+ // B3DM File Format
+ // https://github.com/CesiumGS/3d-tiles/blob/master/specification/TileFormats/Batched3DModel/README.md
+ 
+-import { FeatureTable, BatchTable } from '../utilities/FeatureTable.js';
++import { FeatureTable, BatchTable } from '../../utilities/FeatureTable.js';
+ import { LoaderBase } from './LoaderBase.js';
+-import { readMagicBytes } from '../utilities/readMagicBytes.js';
++import { readMagicBytes } from '../../utilities/readMagicBytes.js';
+ 
+ export class B3DMLoaderBase extends LoaderBase {
+ 
+diff --git a/node_modules/3d-tiles-renderer/src/base/CMPTLoaderBase.d.ts b/node_modules/3d-tiles-renderer/src/base/loaders/CMPTLoaderBase.d.ts
+similarity index 100%
+rename from node_modules/3d-tiles-renderer/src/base/CMPTLoaderBase.d.ts
+rename to node_modules/3d-tiles-renderer/src/base/loaders/CMPTLoaderBase.d.ts
+diff --git a/node_modules/3d-tiles-renderer/src/base/CMPTLoaderBase.js b/node_modules/3d-tiles-renderer/src/base/loaders/CMPTLoaderBase.js
+similarity index 95%
+rename from node_modules/3d-tiles-renderer/src/base/CMPTLoaderBase.js
+rename to node_modules/3d-tiles-renderer/src/base/loaders/CMPTLoaderBase.js
+index 969fd66..3c3f433 100644
+--- a/node_modules/3d-tiles-renderer/src/base/CMPTLoaderBase.js
++++ b/node_modules/3d-tiles-renderer/src/base/loaders/CMPTLoaderBase.js
+@@ -1,7 +1,7 @@
+ // CMPT File Format
+ // https://github.com/CesiumGS/3d-tiles/blob/master/specification/TileFormats/Composite/README.md
+ import { LoaderBase } from './LoaderBase.js';
+-import { readMagicBytes } from '../utilities/readMagicBytes.js';
++import { readMagicBytes } from '../../utilities/readMagicBytes.js';
+ 
+ export class CMPTLoaderBase extends LoaderBase {
+ 
+diff --git a/node_modules/3d-tiles-renderer/src/base/I3DMLoaderBase.d.ts b/node_modules/3d-tiles-renderer/src/base/loaders/I3DMLoaderBase.d.ts
+similarity index 82%
+rename from node_modules/3d-tiles-renderer/src/base/I3DMLoaderBase.d.ts
+rename to node_modules/3d-tiles-renderer/src/base/loaders/I3DMLoaderBase.d.ts
+index 37975ec..f273ec3 100644
+--- a/node_modules/3d-tiles-renderer/src/base/I3DMLoaderBase.d.ts
++++ b/node_modules/3d-tiles-renderer/src/base/loaders/I3DMLoaderBase.d.ts
+@@ -1,4 +1,4 @@
+-import { FeatureTable, BatchTable } from '../utilities/FeatureTable';
++import { FeatureTable, BatchTable } from '../../utilities/FeatureTable';
+ 
+ export interface I3DMBaseResult {
+ 
+diff --git a/node_modules/3d-tiles-renderer/src/base/I3DMLoaderBase.js b/node_modules/3d-tiles-renderer/src/base/loaders/I3DMLoaderBase.js
+similarity index 92%
+rename from node_modules/3d-tiles-renderer/src/base/I3DMLoaderBase.js
+rename to node_modules/3d-tiles-renderer/src/base/loaders/I3DMLoaderBase.js
+index d61bbae..049bef1 100644
+--- a/node_modules/3d-tiles-renderer/src/base/I3DMLoaderBase.js
++++ b/node_modules/3d-tiles-renderer/src/base/loaders/I3DMLoaderBase.js
+@@ -1,10 +1,10 @@
+ // I3DM File Format
+ // https://github.com/CesiumGS/3d-tiles/blob/master/specification/TileFormats/Instanced3DModel/README.md
+ 
+-import { FeatureTable, BatchTable } from '../utilities/FeatureTable.js';
+-import { arrayToString } from '../utilities/arrayToString.js';
++import { FeatureTable, BatchTable } from '../../utilities/FeatureTable.js';
++import { arrayToString } from '../../utilities/arrayToString.js';
+ import { LoaderBase } from './LoaderBase.js';
+-import { readMagicBytes } from '../utilities/readMagicBytes.js';
++import { readMagicBytes } from '../../utilities/readMagicBytes.js';
+ 
+ export class I3DMLoaderBase extends LoaderBase {
+ 
+diff --git a/node_modules/3d-tiles-renderer/src/base/LoaderBase.d.ts b/node_modules/3d-tiles-renderer/src/base/loaders/LoaderBase.d.ts
+similarity index 100%
+rename from node_modules/3d-tiles-renderer/src/base/LoaderBase.d.ts
+rename to node_modules/3d-tiles-renderer/src/base/loaders/LoaderBase.d.ts
+diff --git a/node_modules/3d-tiles-renderer/src/base/LoaderBase.js b/node_modules/3d-tiles-renderer/src/base/loaders/LoaderBase.js
+similarity index 100%
+rename from node_modules/3d-tiles-renderer/src/base/LoaderBase.js
+rename to node_modules/3d-tiles-renderer/src/base/loaders/LoaderBase.js
+diff --git a/node_modules/3d-tiles-renderer/src/base/PNTSLoaderBase.d.ts b/node_modules/3d-tiles-renderer/src/base/loaders/PNTSLoaderBase.d.ts
+similarity index 78%
+rename from node_modules/3d-tiles-renderer/src/base/PNTSLoaderBase.d.ts
+rename to node_modules/3d-tiles-renderer/src/base/loaders/PNTSLoaderBase.d.ts
+index 0307e91..3c0a030 100644
+--- a/node_modules/3d-tiles-renderer/src/base/PNTSLoaderBase.d.ts
++++ b/node_modules/3d-tiles-renderer/src/base/loaders/PNTSLoaderBase.d.ts
+@@ -1,4 +1,4 @@
+-import { FeatureTable, BatchTable } from '../utilities/FeatureTable';
++import { FeatureTable, BatchTable } from '../../utilities/FeatureTable';
+ 
+ export interface PNTSBaseResult {
+ 
+diff --git a/node_modules/3d-tiles-renderer/src/base/PNTSLoaderBase.js b/node_modules/3d-tiles-renderer/src/base/loaders/PNTSLoaderBase.js
+similarity index 92%
+rename from node_modules/3d-tiles-renderer/src/base/PNTSLoaderBase.js
+rename to node_modules/3d-tiles-renderer/src/base/loaders/PNTSLoaderBase.js
+index cd1913a..fa2ce4f 100644
+--- a/node_modules/3d-tiles-renderer/src/base/PNTSLoaderBase.js
++++ b/node_modules/3d-tiles-renderer/src/base/loaders/PNTSLoaderBase.js
+@@ -1,8 +1,8 @@
+ // PNTS File Format
+ // https://github.com/CesiumGS/3d-tiles/blob/master/specification/TileFormats/PointCloud/README.md
+ 
+-import { FeatureTable, BatchTable } from '../utilities/FeatureTable.js';
+-import { readMagicBytes } from '../utilities/readMagicBytes.js';
++import { FeatureTable, BatchTable } from '../../utilities/FeatureTable.js';
++import { readMagicBytes } from '../../utilities/readMagicBytes.js';
+ import { LoaderBase } from './LoaderBase.js';
+ 
+ export class PNTSLoaderBase extends LoaderBase {
+diff --git a/node_modules/3d-tiles-renderer/src/index.d.ts b/node_modules/3d-tiles-renderer/src/index.d.ts
+index 1ee9a98..0919cec 100644
+--- a/node_modules/3d-tiles-renderer/src/index.d.ts
++++ b/node_modules/3d-tiles-renderer/src/index.d.ts
+@@ -13,12 +13,12 @@ export {
+ } from './three/DebugTilesRenderer';
+ export { TilesRenderer } from './three/TilesRenderer';
+ export { TilesGroup } from './three/TilesGroup';
+-export { B3DMLoader } from './three/B3DMLoader';
+-export { I3DMLoader } from './three/I3DMLoader';
+-export { PNTSLoader } from './three/PNTSLoader';
+-export { CMPTLoader } from './three/CMPTLoader';
+-export { GLTFCesiumRTCExtension } from './three/GLTFCesiumRTCExtension';
+-export { GLTFExtensionLoader } from './three/GLTFExtensionLoader';
++export { B3DMLoader } from './three/loaders/B3DMLoader';
++export { I3DMLoader } from './three/loaders/I3DMLoader';
++export { PNTSLoader } from './three/loaders/PNTSLoader';
++export { CMPTLoader } from './three/loaders/CMPTLoader';
++export { GLTFCesiumRTCExtension } from './three/loaders/gltf/GLTFCesiumRTCExtension';
++export { GLTFExtensionLoader } from './three/loaders/GLTFExtensionLoader';
+ export { Ellipsoid } from './three/math/Ellipsoid';
+ export { EllipsoidRegion } from './three/math/EllipsoidRegion';
+ export * as GeoUtils from './three/math/GeoUtils';
+@@ -30,11 +30,11 @@ export { TilesRendererBase } from './base/TilesRendererBase';
+ export { Tile } from './base/Tile';
+ export { TileBase } from './base/TileBase';
+ export { Tileset } from './base/Tileset';
+-export { B3DMLoaderBase } from './base/B3DMLoaderBase';
+-export { I3DMLoaderBase } from './base/I3DMLoaderBase';
+-export { PNTSLoaderBase } from './base/PNTSLoaderBase';
+-export { CMPTLoaderBase } from './base/CMPTLoaderBase';
+-export { LoaderBase } from './base/LoaderBase';
++export { B3DMLoaderBase } from './base/loaders/B3DMLoaderBase';
++export { I3DMLoaderBase } from './base/loaders/I3DMLoaderBase';
++export { PNTSLoaderBase } from './base/loaders/PNTSLoaderBase';
++export { CMPTLoaderBase } from './base/loaders/CMPTLoaderBase';
++export { LoaderBase } from './base/loaders/LoaderBase';
+ export * from './base/constants';
+ 
+ export { LRUCache } from './utilities/LRUCache';
+diff --git a/node_modules/3d-tiles-renderer/src/index.js b/node_modules/3d-tiles-renderer/src/index.js
+index c6a766d..f0353d3 100644
+--- a/node_modules/3d-tiles-renderer/src/index.js
++++ b/node_modules/3d-tiles-renderer/src/index.js
+@@ -2,12 +2,14 @@ export * from './three/DebugTilesRenderer.js';
+ 
+ // three.js
+ export { TilesRenderer } from './three/TilesRenderer.js';
+-export { B3DMLoader } from './three/B3DMLoader.js';
+-export { PNTSLoader } from './three/PNTSLoader.js';
+-export { I3DMLoader } from './three/I3DMLoader.js';
+-export { CMPTLoader } from './three/CMPTLoader.js';
+-export { GLTFCesiumRTCExtension } from './three/GLTFCesiumRTCExtension.js';
+-export { GLTFExtensionLoader } from './three/GLTFExtensionLoader.js';
++export { B3DMLoader } from './three/loaders/B3DMLoader.js';
++export { PNTSLoader } from './three/loaders/PNTSLoader.js';
++export { I3DMLoader } from './three/loaders/I3DMLoader.js';
++export { CMPTLoader } from './three/loaders/CMPTLoader.js';
++export { GLTFCesiumRTCExtension } from './three/loaders/gltf/GLTFCesiumRTCExtension.js';
++export { GLTFStructuralMetadataExtension } from './three/loaders/gltf/GLTFStructuralMetadataExtension.js';
++export { GLTFMeshFeaturesExtension } from './three/loaders/gltf/GLTFMeshFeaturesExtension.js';
++export { GLTFExtensionLoader } from './three/loaders/GLTFExtensionLoader.js';
+ export { EllipsoidRegionHelper, EllipsoidRegionLineHelper } from './three/objects/EllipsoidRegionHelper.js';
+ export { SphereHelper } from './three/objects/SphereHelper.js';
+ export { Ellipsoid } from './three/math/Ellipsoid.js';
+@@ -23,11 +25,11 @@ export { EnvironmentControls } from './three/controls/EnvironmentControls.js';
+ 
+ // common
+ export { TilesRendererBase } from './base/TilesRendererBase.js';
+-export { LoaderBase } from './base/LoaderBase.js';
+-export { B3DMLoaderBase } from './base/B3DMLoaderBase.js';
+-export { I3DMLoaderBase } from './base/I3DMLoaderBase.js';
+-export { PNTSLoaderBase } from './base/PNTSLoaderBase.js';
+-export { CMPTLoaderBase } from './base/CMPTLoaderBase.js';
++export { LoaderBase } from './base/loaders/LoaderBase.js';
++export { B3DMLoaderBase } from './base/loaders/B3DMLoaderBase.js';
++export { I3DMLoaderBase } from './base/loaders/I3DMLoaderBase.js';
++export { PNTSLoaderBase } from './base/loaders/PNTSLoaderBase.js';
++export { CMPTLoaderBase } from './base/loaders/CMPTLoaderBase.js';
+ export * from './base/constants.js';
+ 
+ export { LRUCache } from './utilities/LRUCache.js';
+diff --git a/node_modules/3d-tiles-renderer/src/three/DebugTilesRenderer.js b/node_modules/3d-tiles-renderer/src/three/DebugTilesRenderer.js
+index 4c21400..9127211 100644
+--- a/node_modules/3d-tiles-renderer/src/three/DebugTilesRenderer.js
++++ b/node_modules/3d-tiles-renderer/src/three/DebugTilesRenderer.js
+@@ -95,7 +95,7 @@ export class DebugTilesRenderer extends TilesRenderer {
+ 			.then( () => {
+ 
+ 				// defer to after the loaded tileset has been initialized
+-				Promise.resolve().then( () => {
++				queueMicrotask( () => {
+ 
+ 					this.initExtremes();
+ 
+diff --git a/node_modules/3d-tiles-renderer/src/three/GLTFCesiumRTCExtension.d.ts b/node_modules/3d-tiles-renderer/src/three/GLTFCesiumRTCExtension.d.ts
+deleted file mode 100644
+index dcee765..0000000
+--- a/node_modules/3d-tiles-renderer/src/three/GLTFCesiumRTCExtension.d.ts
++++ /dev/null
+@@ -1,8 +0,0 @@
+-import { GLTF } from 'three/examples/jsm/loaders/GLTFLoader';
+-
+-export class GLTFCesiumRTCExtension{
+-	name: 'CESIUM_RTC';
+-
+-	afterRoot(result: GLTF): null
+-
+-}
+diff --git a/node_modules/3d-tiles-renderer/src/three/TilesGroup.js b/node_modules/3d-tiles-renderer/src/three/TilesGroup.js
+index 86e32ba..23a67ed 100644
+--- a/node_modules/3d-tiles-renderer/src/three/TilesGroup.js
++++ b/node_modules/3d-tiles-renderer/src/three/TilesGroup.js
+@@ -16,12 +16,16 @@ export class TilesGroup extends Group {
+ 
+ 	raycast( raycaster, intersects ) {
+ 
++		// returning "false" ends raycast traversal
+ 		if ( this.tilesRenderer.optimizeRaycast ) {
+ 
+ 			this.tilesRenderer.raycast( raycaster, intersects );
++			return false;
+ 
+ 		}
+ 
++		return true;
++
+ 	}
+ 
+ 	updateMatrixWorld( force ) {
+diff --git a/node_modules/3d-tiles-renderer/src/three/TilesRenderer.js b/node_modules/3d-tiles-renderer/src/three/TilesRenderer.js
+index 1a1aaf6..5dca45f 100644
+--- a/node_modules/3d-tiles-renderer/src/three/TilesRenderer.js
++++ b/node_modules/3d-tiles-renderer/src/three/TilesRenderer.js
+@@ -1,9 +1,9 @@
+ import { TilesRendererBase } from '../base/TilesRendererBase.js';
+-import { B3DMLoader } from './B3DMLoader.js';
+-import { PNTSLoader } from './PNTSLoader.js';
+-import { I3DMLoader } from './I3DMLoader.js';
+-import { CMPTLoader } from './CMPTLoader.js';
+-import { GLTFExtensionLoader } from './GLTFExtensionLoader.js';
++import { B3DMLoader } from './loaders/B3DMLoader.js';
++import { PNTSLoader } from './loaders/PNTSLoader.js';
++import { I3DMLoader } from './loaders/I3DMLoader.js';
++import { CMPTLoader } from './loaders/CMPTLoader.js';
++import { GLTFExtensionLoader } from './loaders/GLTFExtensionLoader.js';
+ import { TilesGroup } from './TilesGroup.js';
+ import {
+ 	Matrix4,
+@@ -11,12 +11,15 @@ import {
+ 	Vector2,
+ 	LoadingManager,
+ 	EventDispatcher,
++	REVISION,
+ } from 'three';
+ import { raycastTraverse, raycastTraverseFirstHit } from './raycastTraverse.js';
+ import { readMagicBytes } from '../utilities/readMagicBytes.js';
+ import { TileBoundingVolume } from './math/TileBoundingVolume.js';
+ import { ExtendedFrustum } from './math/ExtendedFrustum.js';
+ 
++// In three.js r165 and higher raycast traversal can be ended early
++const REVISION_165 = parseInt( REVISION ) < 165;
+ const INITIAL_FRUSTUM_CULLED = Symbol( 'INITIAL_FRUSTUM_CULLED' );
+ const tempMat = new Matrix4();
+ const tempMat2 = new Matrix4();
+@@ -92,18 +95,22 @@ export class TilesRenderer extends TilesRendererBase {
+ 		} );
+ 		this.manager = manager;
+ 
+-		// Setting up the override raycasting function to be used by
+-		// 3D objects created by this renderer
+-		const tilesRenderer = this;
+-		this._overridenRaycast = function ( raycaster, intersects ) {
++		if ( REVISION_165 ) {
+ 
+-			if ( ! tilesRenderer.optimizeRaycast ) {
++			// Setting up the override raycasting function to be used by
++			// 3D objects created by this renderer
++			const tilesRenderer = this;
++			this._overridenRaycast = function ( raycaster, intersects ) {
+ 
+-				Object.getPrototypeOf( this ).raycast.call( this, raycaster, intersects );
++				if ( ! tilesRenderer.optimizeRaycast ) {
+ 
+-			}
++					Object.getPrototypeOf( this ).raycast.call( this, raycaster, intersects );
+ 
+-		};
++				}
++
++			};
++
++		}
+ 
+ 	}
+ 
+@@ -336,7 +343,7 @@ export class TilesRenderer extends TilesRendererBase {
+ 			// Push this onto the end of the event stack to ensure this runs
+ 			// after the base renderer has placed the provided json where it
+ 			// needs to be placed and is ready for an update.
+-			Promise.resolve().then( () => {
++			queueMicrotask( () => {
+ 
+ 				this.dispatchEvent( {
+ 					type: 'load-tile-set',
+@@ -353,6 +360,10 @@ export class TilesRenderer extends TilesRendererBase {
+ 			} );
+ 
+ 
++		} ).catch( () => {
++
++			// error is logged internally
++
+ 		} );
+ 		return pr;
+ 
+@@ -477,10 +488,6 @@ export class TilesRenderer extends TilesRendererBase {
+ 
+ 			}
+ 
+-		} else {
+-
+-			transform.identity();
+-
+ 		}
+ 
+ 		if ( parentTile ) {
+@@ -522,7 +529,8 @@ export class TilesRenderer extends TilesRendererBase {
+ 
+ 			scene: null,
+ 			geometry: null,
+-			material: null,
++			materials: null,
++			textures: null,
+ 
+ 		};
+ 
+@@ -558,10 +566,6 @@ export class TilesRenderer extends TilesRendererBase {
+ 				upAdjustment.makeRotationAxis( X_AXIS, Math.PI / 2 );
+ 				break;
+ 
+-			case 'z':
+-				upAdjustment.identity();
+-				break;
+-
+ 		}
+ 
+ 		const fileType = ( readMagicBytes( buffer ) || extension ).toLowerCase();
+@@ -678,12 +682,16 @@ export class TilesRenderer extends TilesRendererBase {
+ 			} );
+ 			updateFrustumCulled( scene, ! this.autoDisableRendererCulling );
+ 
+-			// We handle raycasting in a custom way so remove it from here
+-			scene.traverse( c => {
++			if ( REVISION_165 ) {
+ 
+-				c.raycast = this._overridenRaycast;
++				// We handle raycasting in a custom way so remove it from here
++				scene.traverse( c => {
+ 
+-			} );
++					c.raycast = this._overridenRaycast;
++
++				} );
++
++			}
+ 
+ 			const materials = [];
+ 			const geometry = [];
+@@ -749,6 +757,23 @@ export class TilesRenderer extends TilesRendererBase {
+ 			const textures = cached.textures;
+ 			const parent = cached.scene.parent;
+ 
++			// dispose of any textures required by the mesh features extension
++			cached.scene.traverse( child => {
++
++				if ( child.userData.meshFeatures ) {
++
++					child.userData.meshFeatures.dispose();
++
++				}
++
++				if ( child.userData.structuralMetadata ) {
++
++					child.userData.structuralMetadata.dispose();
++
++				}
++
++			} );
++
+ 			for ( let i = 0, l = geometry.length; i < l; i ++ ) {
+ 
+ 				geometry[ i ].dispose();
+@@ -781,7 +806,6 @@ export class TilesRenderer extends TilesRendererBase {
+ 
+ 			}
+ 
+-
+ 			this.dispatchEvent( {
+ 				type: 'dispose-model',
+ 				scene: cached.scene,
+diff --git a/node_modules/3d-tiles-renderer/src/three/controls/EnvironmentControls.js b/node_modules/3d-tiles-renderer/src/three/controls/EnvironmentControls.js
+index 81d17dc..2cd777f 100644
+--- a/node_modules/3d-tiles-renderer/src/three/controls/EnvironmentControls.js
++++ b/node_modules/3d-tiles-renderer/src/three/controls/EnvironmentControls.js
+@@ -29,6 +29,8 @@ const _rotationAxis = new Vector3();
+ const _quaternion = new Quaternion();
+ const _plane = new Plane();
+ const _localUp = new Vector3();
++const _mouseBefore = new Vector3();
++const _mouseAfter = new Vector3();
+ 
+ const _pointer = new Vector2();
+ const _prevPointer = new Vector2();
+@@ -44,7 +46,7 @@ export class EnvironmentControls extends EventDispatcher {
+ 
+ 	get enabled() {
+ 
+-		return this._enabled || true;
++		return this._enabled;
+ 
+ 	}
+ 
+@@ -71,13 +73,16 @@ export class EnvironmentControls extends EventDispatcher {
+ 		// settings
+ 		this._enabled = true;
+ 		this.state = NONE;
+-		this.pinchState = NONE;
+ 		this.cameraRadius = 5;
+-		this.rotationSpeed = 5;
++		this.rotationSpeed = 1;
+ 		this.minAltitude = 0;
+ 		this.maxAltitude = 0.45 * Math.PI;
+-		this.minZoomDistance = 10;
+-		this.maxZoomDistance = Infinity;
++		this.minDistance = 10;
++		this.maxDistance = Infinity;
++		this.minZoom = 0;
++		this.maxZoom = Infinity;
++		this.zoomSpeed = 1;
++
+ 		this.reorientOnDrag = true;
+ 		this.reorientOnZoom = false;
+ 		this.adjustHeight = true;
+@@ -87,11 +92,7 @@ export class EnvironmentControls extends EventDispatcher {
+ 		this.needsUpdate = false;
+ 		this.actionHeightOffset = 0;
+ 
+-		this.dragPointSet = false;
+-		this.dragPoint = new Vector3();
+-
+-		this.rotationPointSet = false;
+-		this.rotationPoint = new Vector3();
++		this.pivotPoint = new Vector3();
+ 
+ 		this.zoomDirectionSet = false;
+ 		this.zoomPointSet = false;
+@@ -194,7 +195,7 @@ export class EnvironmentControls extends EventDispatcher {
+ 
+ 			// handle cases where we need to capture the pointer or
+ 			// reset state when we have too many pointers
+-			if ( pointerTracker.getPointerType() === 'touch' ) {
++			if ( pointerTracker.isPointerTouch() ) {
+ 
+ 				pivotMesh.visible = false;
+ 
+@@ -214,9 +215,18 @@ export class EnvironmentControls extends EventDispatcher {
+ 			// the "pointer" for zooming and rotating should be based on the center point
+ 			pointerTracker.getCenterPoint( _pointer );
+ 			mouseToCoords( _pointer.x, _pointer.y, domElement, _pointer );
++			raycaster.setFromCamera( _pointer, camera );
++
++			// prevent the drag distance from getting too severe by limiting the drag point
++			// to a reasonable angle and reasonable distance with the drag plane
++			const dot = Math.abs( raycaster.ray.direction.dot( up ) );
++			if ( dot < DRAG_PLANE_THRESHOLD || dot < DRAG_UP_THRESHOLD ) {
++
++				return;
++
++			}
+ 
+ 			// find the hit point
+-			raycaster.setFromCamera( _pointer, camera );
+ 			const hit = this._raycast( raycaster );
+ 			if ( hit ) {
+ 
+@@ -228,10 +238,9 @@ export class EnvironmentControls extends EventDispatcher {
+ 					pointerTracker.isLeftClicked() && shiftClicked
+ 				) {
+ 
+-					this.setState( ROTATE );
+-					this.rotationPoint.copy( hit.point );
+-					this.rotationPointSet = true;
++					this.setState( pointerTracker.isPointerTouch() ? WAITING : ROTATE );
+ 
++					this.pivotPoint.copy( hit.point );
+ 					this.pivotMesh.position.copy( hit.point );
+ 					this.pivotMesh.updateMatrixWorld();
+ 					this.scene.add( this.pivotMesh );
+@@ -239,17 +248,12 @@ export class EnvironmentControls extends EventDispatcher {
+ 				} else if ( pointerTracker.isLeftClicked() ) {
+ 
+ 					// if the clicked point is coming from below the plane then don't perform the drag
+-					if ( raycaster.ray.direction.dot( up ) < 0 ) {
+-
+-						this.setState( DRAG );
+-						this.dragPoint.copy( hit.point );
+-						this.dragPointSet = true;
+-
+-						this.pivotMesh.position.copy( hit.point );
+-						this.pivotMesh.updateMatrixWorld();
+-						this.scene.add( this.pivotMesh );
++					this.setState( DRAG );
++					this.pivotPoint.copy( hit.point );
+ 
+-					}
++					this.pivotMesh.position.copy( hit.point );
++					this.pivotMesh.updateMatrixWorld();
++					this.scene.add( this.pivotMesh );
+ 
+ 				}
+ 
+@@ -275,72 +279,62 @@ export class EnvironmentControls extends EventDispatcher {
+ 
+ 			}
+ 
+-			if ( pointerTracker.getPointerType() === 'touch' ) {
++			if ( pointerTracker.isPointerTouch() && pointerTracker.getPointerCount() === 2 ) {
+ 
+-				if ( pointerTracker.getPointerCount() === 2 ) {
++				// We queue this event to ensure that all pointers have been updated
++				if ( ! _pointerMoveQueued ) {
+ 
+-					if ( this.state === DRAG ) {
++					_pointerMoveQueued = true;
++					queueMicrotask( () => {
+ 
+-						this.setState( NONE, WAITING, false );
++						_pointerMoveQueued = false;
+ 
+-					}
++						// adjust the pointer position to be the center point
++						pointerTracker.getCenterPoint( _centerPoint );
+ 
+-					// We queue this event to ensure that all pointers have been updated
+-					if ( ! _pointerMoveQueued ) {
++						// detect zoom transition
++						const startDist = pointerTracker.getStartPointerDistance();
++						const pointerDist = pointerTracker.getPointerDistance();
++						const separateDelta = pointerDist - startDist;
++						if ( this.state === NONE || this.state === WAITING ) {
+ 
+-						_pointerMoveQueued = true;
+-						queueMicrotask( () => {
+-
+-							_pointerMoveQueued = false;
+-
+-							// adjust the pointer position to be the center point
++							// check which direction was moved in first - if the pointers are pinching then
++							// it's a zoom. But if they move in parallel it's a rotation
+ 							pointerTracker.getCenterPoint( _centerPoint );
++							pointerTracker.getStartCenterPoint( _startCenterPoint );
+ 
+-							// detect zoom transition
+-							const startDist = pointerTracker.getStartPointerDistance();
+-							const pointerDist = pointerTracker.getPointerDistance();
+-							const separateDelta = pointerDist - startDist;
+-							if ( this.pinchState === NONE || this.pinchState === WAITING ) {
+-
+-								// check which direction was moved in first - if the pointers are pinching then
+-								// it's a zoom. But if they move in parallel it's a rotation
+-								pointerTracker.getCenterPoint( _centerPoint );
+-								pointerTracker.getStartCenterPoint( _startCenterPoint );
+-
+-								// adjust the drag requirement by the dpr
+-								const dpr = window.devicePixelRatio;
+-								const parallelDelta = _centerPoint.distanceTo( _startCenterPoint );
+-								if ( Math.abs( separateDelta ) > dpr || parallelDelta > dpr ) {
++							// adjust the drag requirement by the dpr
++							const dragThreshold = 2.0 * window.devicePixelRatio;
++							const parallelDelta = _centerPoint.distanceTo( _startCenterPoint );
++							if ( Math.abs( separateDelta ) > dragThreshold || parallelDelta > dragThreshold ) {
+ 
+-									if ( Math.abs( separateDelta ) > parallelDelta ) {
++								if ( Math.abs( separateDelta ) > parallelDelta ) {
+ 
+-										this.setState( NONE, ZOOM );
+-										this.zoomDirectionSet = false;
++									this.setState( ZOOM );
++									this.zoomDirectionSet = false;
+ 
+-									} else {
++								} else {
+ 
+-										this.setState( NONE, ROTATE );
+-
+-									}
++									this.setState( ROTATE );
+ 
+ 								}
+ 
+ 							}
+ 
+-							if ( this.pinchState === ZOOM ) {
++						}
+ 
+-								const previousDist = pointerTracker.getPreviousPointerDistance();
+-								this.zoomDelta += pointerDist - previousDist;
++						if ( this.state === ZOOM ) {
+ 
+-							} else if ( this.pinchState === ROTATE ) {
++							const previousDist = pointerTracker.getPreviousPointerDistance();
++							this.zoomDelta += pointerDist - previousDist;
+ 
+-								this.pivotMesh.visible = true;
++						} else if ( this.state === ROTATE ) {
+ 
+-							}
++							this.pivotMesh.visible = true;
+ 
+-						} );
++						}
+ 
+-					}
++					} );
+ 
+ 				}
+ 
+@@ -372,6 +366,10 @@ export class EnvironmentControls extends EventDispatcher {
+ 
+ 			e.preventDefault();
+ 
++			const { pointerTracker } = this;
++			pointerTracker.setHoverEvent( e );
++			pointerTracker.updatePointer( e );
++
+ 			this.dispatchEvent( _startEvent );
+ 
+ 			let delta;
+@@ -460,38 +458,34 @@ export class EnvironmentControls extends EventDispatcher {
+ 
+ 	resetState() {
+ 
+-		if ( this.state !== NONE || this.pinchState !== NONE ) {
++		if ( this.state !== NONE ) {
+ 
+ 			this.dispatchEvent( _endEvent );
+ 
+ 		}
+ 
+ 		this.state = NONE;
+-		this.pinchState = NONE;
+-		this.dragPointSet = false;
+-		this.rotationPointSet = false;
+ 		this.scene.remove( this.pivotMesh );
+ 		this.pivotMesh.visible = true;
+ 		this.actionHeightOffset = 0;
+ 
+ 	}
+ 
+-	setState( state = this.state, pinchState = this.pinchState, fireEvent = true ) {
++	setState( state = this.state, fireEvent = true ) {
+ 
+-		if ( this.state === state && this.pinchState === pinchState ) {
++		if ( this.state === state ) {
+ 
+ 			return;
+ 
+ 		}
+ 
+-		if ( this.state === NONE && this.pinchState === NONE && fireEvent ) {
++		if ( this.state === NONE && fireEvent ) {
+ 
+ 			this.dispatchEvent( _startEvent );
+ 
+ 		}
+ 
+ 		this.state = state;
+-		this.pinchState = pinchState;
+ 
+ 	}
+ 
+@@ -506,17 +500,16 @@ export class EnvironmentControls extends EventDispatcher {
+ 		const {
+ 			camera,
+ 			cameraRadius,
+-			dragPoint,
++			pivotPoint,
+ 			up,
+ 			state,
+-			pinchState,
+ 			adjustHeight,
+ 		} = this;
+ 
+ 		// update the actions
+ 		if ( this.needsUpdate ) {
+ 
+-			const action = state || pinchState;
++			const action = state;
+ 			const zoomDelta = this.zoomDelta;
+ 			if ( action === DRAG ) {
+ 
+@@ -567,7 +560,7 @@ export class EnvironmentControls extends EventDispatcher {
+ 
+ 			const { actionHeightOffset } = this;
+ 			camera.position.addScaledVector( up, - actionHeightOffset );
+-			dragPoint.addScaledVector( up, - actionHeightOffset );
++			pivotPoint.addScaledVector( up, - actionHeightOffset );
+ 
+ 			// adjust the height
+ 			if ( hit ) {
+@@ -587,7 +580,7 @@ export class EnvironmentControls extends EventDispatcher {
+ 
+ 				const delta = cameraRadius - dist;
+ 				camera.position.addScaledVector( up, delta );
+-				dragPoint.addScaledVector( up, delta );
++				pivotPoint.addScaledVector( up, delta );
+ 				this.actionHeightOffset = delta;
+ 
+ 			}
+@@ -611,11 +604,14 @@ export class EnvironmentControls extends EventDispatcher {
+ 			zoomPoint,
+ 			zoomDirection,
+ 			camera,
+-			minZoomDistance,
+-			maxZoomDistance,
++			minDistance,
++			maxDistance,
+ 			raycaster,
+ 			pointerTracker,
+ 			domElement,
++			minZoom,
++			maxZoom,
++			zoomSpeed,
+ 		} = this;
+ 
+ 		let scale = this.zoomDelta;
+@@ -628,49 +624,74 @@ export class EnvironmentControls extends EventDispatcher {
+ 
+ 		}
+ 
+-		// initialize the zoom direction
+-		mouseToCoords( _pointer.x, _pointer.y, domElement, _pointer );
+-		raycaster.setFromCamera( _pointer, camera );
+-		zoomDirection.copy( raycaster.ray.direction ).normalize();
+-		this.zoomDirectionSet = true;
++		if ( camera.isOrthographicCamera ) {
+ 
+-		// track the zoom direction we're going to use
+-		const finalZoomDirection = _vec.copy( zoomDirection );
++			// get the mouse position before zoom
++			mouseToCoords( _pointer.x, _pointer.y, domElement, _mouseBefore );
++			_mouseBefore.unproject( camera );
+ 
+-		// always update the zoom target point in case the tiles are changing
+-		if ( this._updateZoomPoint() ) {
++			// zoom the camera
++			const normalizedDelta = Math.pow( 0.95, Math.abs( scale * 0.05 ) );
++			const scaleFactor = scale > 0 ? 1 / Math.abs( normalizedDelta ) : normalizedDelta;
+ 
+-			const dist = zoomPoint.distanceTo( camera.position );
++			camera.zoom = Math.max( minZoom, Math.min( maxZoom, camera.zoom * scaleFactor * zoomSpeed ) );
++			camera.updateProjectionMatrix();
+ 
+-			// scale the distance based on how far there is to move
+-			if ( scale < 0 ) {
++			// get the mouse position after zoom
++			mouseToCoords( _pointer.x, _pointer.y, domElement, _mouseAfter );
++			_mouseAfter.unproject( camera );
+ 
+-				const remainingDistance = Math.min( 0, dist - maxZoomDistance );
+-				scale = scale * dist * 0.01;
+-				scale = Math.max( scale, remainingDistance );
++			// shift the camera on the near plane so the mouse is in the same spot
++			camera.position.sub( _mouseAfter ).add( _mouseBefore );
++			camera.updateMatrixWorld();
+ 
+-			} else {
++		} else {
+ 
+-				const remainingDistance = Math.max( 0, dist - minZoomDistance );
+-				scale = scale * ( dist - minZoomDistance ) * 0.01;
+-				scale = Math.min( scale, remainingDistance );
++			// initialize the zoom direction
++			mouseToCoords( _pointer.x, _pointer.y, domElement, _pointer );
++			raycaster.setFromCamera( _pointer, camera );
++			zoomDirection.copy( raycaster.ray.direction ).normalize();
++			this.zoomDirectionSet = true;
+ 
+-			}
++			// track the zoom direction we're going to use
++			const finalZoomDirection = _vec.copy( zoomDirection );
+ 
+-			camera.position.addScaledVector( zoomDirection, scale );
+-			camera.updateMatrixWorld();
++			// always update the zoom target point in case the tiles are changing
++			if ( this._updateZoomPoint() ) {
+ 
+-		} else {
++				const dist = zoomPoint.distanceTo( camera.position );
+ 
+-			// if we're zooming into nothing then use the distance from the ground to scale movement
+-			const hit = this._getPointBelowCamera();
+-			if ( hit ) {
++				// scale the distance based on how far there is to move
++				if ( scale < 0 ) {
++
++					const remainingDistance = Math.min( 0, dist - maxDistance );
++					scale = scale * dist * zoomSpeed * 0.0025;
++					scale = Math.max( scale, remainingDistance );
+ 
+-				const dist = hit.distance;
+-				finalZoomDirection.set( 0, 0, - 1 ).transformDirection( camera.matrixWorld );
+-				camera.position.addScaledVector( finalZoomDirection, scale * dist * 0.01 );
++				} else {
++
++					const remainingDistance = Math.max( 0, dist - minDistance );
++					scale = scale * ( dist - minDistance ) * zoomSpeed * 0.0025;
++					scale = Math.min( scale, remainingDistance );
++
++				}
++
++				camera.position.addScaledVector( zoomDirection, scale );
+ 				camera.updateMatrixWorld();
+ 
++			} else {
++
++				// if we're zooming into nothing then use the distance from the ground to scale movement
++				const hit = this._getPointBelowCamera();
++				if ( hit ) {
++
++					const dist = hit.distance;
++					finalZoomDirection.set( 0, 0, - 1 ).transformDirection( camera.matrixWorld );
++					camera.position.addScaledVector( finalZoomDirection, scale * dist * 0.01 );
++					camera.updateMatrixWorld();
++
++				}
++
+ 			}
+ 
+ 		}
+@@ -734,7 +755,7 @@ export class EnvironmentControls extends EventDispatcher {
+ 		const {
+ 			raycaster,
+ 			camera,
+-			dragPoint,
++			pivotPoint,
+ 			up,
+ 			pointerTracker,
+ 			domElement,
+@@ -744,12 +765,12 @@ export class EnvironmentControls extends EventDispatcher {
+ 		pointerTracker.getCenterPoint( _pointer );
+ 		mouseToCoords( _pointer.x, _pointer.y, domElement, _pointer );
+ 
+-		_plane.setFromNormalAndCoplanarPoint( up, dragPoint );
++		_plane.setFromNormalAndCoplanarPoint( up, pivotPoint );
+ 		raycaster.setFromCamera( _pointer, camera );
+ 
+ 		// prevent the drag distance from getting too severe by limiting the drag point
+ 		// to a reasonable angle with the drag plane
+-		if ( - raycaster.ray.direction.dot( up ) < DRAG_PLANE_THRESHOLD ) {
++		if ( Math.abs( raycaster.ray.direction.dot( up ) ) < DRAG_PLANE_THRESHOLD ) {
+ 
+ 			// rotate the pointer direction down to the correct angle for horizontal dragging
+ 			const angle = Math.acos( DRAG_PLANE_THRESHOLD );
+@@ -771,8 +792,8 @@ export class EnvironmentControls extends EventDispatcher {
+ 
+ 		// if we drag to a point that's near the edge of the earth then we want to prevent it
+ 		// from wrapping around and causing unexpected rotations
+-		this.getUpDirection( dragPoint, _localUp );
+-		if ( - raycaster.ray.direction.dot( _localUp ) < DRAG_UP_THRESHOLD ) {
++		this.getUpDirection( pivotPoint, _localUp );
++		if ( Math.abs( raycaster.ray.direction.dot( _localUp ) ) < DRAG_UP_THRESHOLD ) {
+ 
+ 			const angle = Math.acos( DRAG_UP_THRESHOLD );
+ 
+@@ -790,7 +811,7 @@ export class EnvironmentControls extends EventDispatcher {
+ 		// find the point on the plane that we should drag to
+ 		if ( raycaster.ray.intersectPlane( _plane, _vec ) ) {
+ 
+-			_delta.subVectors( dragPoint, _vec );
++			_delta.subVectors( pivotPoint, _vec );
+ 			this.camera.position.add( _delta );
+ 			this.camera.updateMatrixWorld();
+ 
+@@ -802,10 +823,9 @@ export class EnvironmentControls extends EventDispatcher {
+ 
+ 		const {
+ 			camera,
+-			rotationPoint,
++			pivotPoint,
+ 			minAltitude,
+ 			maxAltitude,
+-			up,
+ 			pointerTracker,
+ 			rotationSpeed,
+ 		} = this;
+@@ -813,7 +833,7 @@ export class EnvironmentControls extends EventDispatcher {
+ 		// get the rotation motion and scale the rotation based on pixel ratio for consistency
+ 		pointerTracker.getCenterPoint( _pointer );
+ 		pointerTracker.getPreviousCenterPoint( _prevPointer );
+-		_deltaPointer.subVectors( _pointer, _prevPointer ).multiplyScalar( 0.01 / devicePixelRatio );
++		_deltaPointer.subVectors( _pointer, _prevPointer ).multiplyScalar( 0.02 / devicePixelRatio );
+ 
+ 		const azimuth = - _deltaPointer.x * rotationSpeed;
+ 		let altitude = _deltaPointer.y * rotationSpeed;
+@@ -824,13 +844,13 @@ export class EnvironmentControls extends EventDispatcher {
+ 			.transformDirection( camera.matrixWorld )
+ 			.multiplyScalar( - 1 );
+ 
+-		this.getUpDirection( rotationPoint, _localUp );
++		this.getUpDirection( pivotPoint, _localUp );
+ 
+ 		// get the signed angle relative to the top down view
+-		_vec.crossVectors( up, _forward ).normalize();
++		_vec.crossVectors( _localUp, _forward ).normalize();
+ 		_right.set( 1, 0, 0 ).transformDirection( camera.matrixWorld ).normalize();
+ 		const sign = Math.sign( _vec.dot( _right ) );
+-		const angle = sign * up.angleTo( _forward );
++		const angle = sign * _localUp.angleTo( _forward );
+ 
+ 		// clamp the rotation to be within the provided limits
+ 		// clamp to 0 here, as well, so we don't "pop" to the the value range
+@@ -848,14 +868,14 @@ export class EnvironmentControls extends EventDispatcher {
+ 
+ 		// rotate around the up axis
+ 		_quaternion.setFromAxisAngle( _localUp, azimuth );
+-		makeRotateAroundPoint( rotationPoint, _quaternion, _rotMatrix );
++		makeRotateAroundPoint( pivotPoint, _quaternion, _rotMatrix );
+ 		camera.matrixWorld.premultiply( _rotMatrix );
+ 
+ 		// get a rotation axis for altitude and rotate
+ 		_rotationAxis.set( - 1, 0, 0 ).transformDirection( camera.matrixWorld );
+ 
+ 		_quaternion.setFromAxisAngle( _rotationAxis, altitude );
+-		makeRotateAroundPoint( rotationPoint, _quaternion, _rotMatrix );
++		makeRotateAroundPoint( pivotPoint, _quaternion, _rotMatrix );
+ 		camera.matrixWorld.premultiply( _rotMatrix );
+ 
+ 		// update the transform members
+@@ -866,16 +886,28 @@ export class EnvironmentControls extends EventDispatcher {
+ 	// sets the "up" axis for the current surface of the tile set
+ 	_setFrame( newUp, pivot ) {
+ 
+-		const { up, camera, state, pinchState, zoomPoint, zoomDirection } = this;
++		const {
++			up,
++			camera,
++			state,
++			zoomPoint,
++			zoomDirection,
++			zoomDirectionSet,
++			zoomPointSet,
++			reorientOnDrag,
++			reorientOnZoom
++		} = this;
++
+ 		camera.updateMatrixWorld();
+ 
+ 		// get the amount needed to rotate
+ 		_quaternion.setFromUnitVectors( up, newUp );
+ 
+-		const action = state || pinchState;
+-		if ( this.zoomDirectionSet && ( this.zoomPointSet || this._updateZoomPoint() ) ) {
++		// If we're zooming then reorient around the zoom point
++		const action = state;
++		if ( zoomDirectionSet && ( zoomPointSet || this._updateZoomPoint() ) ) {
+ 
+-			if ( this.reorientOnZoom ) {
++			if ( reorientOnZoom ) {
+ 
+ 				// rotates the camera position around the point being zoomed in to
+ 				makeRotateAroundPoint( zoomPoint, _quaternion, _rotMatrix );
+@@ -886,7 +918,9 @@ export class EnvironmentControls extends EventDispatcher {
+ 
+ 			}
+ 
+-		} else if ( action === NONE || action === DRAG && this.reorientOnDrag ) {
++		} else if ( action === DRAG && reorientOnDrag ) {
++
++			// If we're dragging then reorient around the drag point
+ 
+ 			// NOTE: We used to derive the pivot point here by getting the point below the camera
+ 			// but decided to pass it in via "update" to avoid multiple ray casts
+diff --git a/node_modules/3d-tiles-renderer/src/three/controls/GlobeControls.js b/node_modules/3d-tiles-renderer/src/three/controls/GlobeControls.js
+index e50524c..cc7bcc5 100644
+--- a/node_modules/3d-tiles-renderer/src/three/controls/GlobeControls.js
++++ b/node_modules/3d-tiles-renderer/src/three/controls/GlobeControls.js
+@@ -113,7 +113,7 @@ export class GlobeControls extends EnvironmentControls {
+ 
+ 	update() {
+ 
+-		if ( ! this.tilesGroup || ! this.camera ) {
++		if ( ! this.enabled || ! this.tilesGroup || ! this.camera ) {
+ 
+ 			return;
+ 
+@@ -142,7 +142,12 @@ export class GlobeControls extends EnvironmentControls {
+ 
+ 		// if we're outside the transition threshold then we toggle some reorientation behavior
+ 		// when adjusting the up frame while moving hte camera
+-		if ( distanceToCenter > GLOBE_TRANSITION_THRESHOLD ) {
++		if ( this._isNearControls() ) {
++
++			this.reorientOnDrag = true;
++			this.reorientOnZoom = false;
++
++		} else {
+ 
+ 			if ( this.state !== NONE && this._dragMode !== 1 && this._rotationMode !== 1 ) {
+ 
+@@ -152,11 +157,6 @@ export class GlobeControls extends EnvironmentControls {
+ 			this.reorientOnDrag = false;
+ 			this.reorientOnZoom = true;
+ 
+-		} else {
+-
+-			this.reorientOnDrag = true;
+-			this.reorientOnZoom = false;
+-
+ 		}
+ 
+ 		// update the projection matrix
+@@ -192,22 +192,9 @@ export class GlobeControls extends EnvironmentControls {
+ 
+ 	}
+ 
+-	// animate the frame to align to an up direction
+-	setFrame( ...args ) {
+-
+-		super.setFrame( ...args );
+-
+-		if ( this.getDistanceToCenter() < GLOBE_TRANSITION_THRESHOLD ) {
+-
+-			this._alignCameraUp( this.up );
+-
+-		}
+-
+-	}
+-
+ 	_updatePosition( ...args ) {
+ 
+-		if ( this._dragMode === 1 || this.getDistanceToCenter() < GLOBE_TRANSITION_THRESHOLD ) {
++		if ( this._dragMode === 1 || this._isNearControls() ) {
+ 
+ 			this._dragMode = 1;
+ 
+@@ -222,7 +209,7 @@ export class GlobeControls extends EnvironmentControls {
+ 				rotationSpeed,
+ 				camera,
+ 				pivotMesh,
+-				dragPoint,
++				pivotPoint,
+ 				tilesGroup,
+ 			} = this;
+ 
+@@ -233,7 +220,7 @@ export class GlobeControls extends EnvironmentControls {
+ 			pointerTracker.getPreviousCenterPoint( _prevPointer );
+ 			_deltaPointer
+ 				.subVectors( _pointer, _prevPointer )
+-				.multiplyScalar( camera.position.distanceTo( dragPoint ) * 1e-10 / devicePixelRatio );
++				.multiplyScalar( camera.position.distanceTo( pivotPoint ) * 5 * 1e-10 / devicePixelRatio );
+ 
+ 			const azimuth = - _deltaPointer.x * rotationSpeed;
+ 			const altitude = - _deltaPointer.y * rotationSpeed;
+@@ -259,12 +246,14 @@ export class GlobeControls extends EnvironmentControls {
+ 
+ 		}
+ 
++		this._alignCameraUp( this.up );
++
+ 	}
+ 
+ 	// disable rotation once we're outside the control transition
+ 	_updateRotation( ...args ) {
+ 
+-		if ( this._rotationMode === 1 || this.getDistanceToCenter() < GLOBE_TRANSITION_THRESHOLD ) {
++		if ( this._rotationMode === 1 || this._isNearControls() ) {
+ 
+ 			this._rotationMode = 1;
+ 			super._updateRotation( ...args );
+@@ -276,12 +265,14 @@ export class GlobeControls extends EnvironmentControls {
+ 
+ 		}
+ 
++		this._alignCameraUp( this.up );
++
+ 	}
+ 
+ 	_updateZoom() {
+ 
+ 		const scale = this.zoomDelta;
+-		if ( this.getDistanceToCenter() < GLOBE_TRANSITION_THRESHOLD || scale > 0 ) {
++		if ( this._isNearControls() || scale > 0 ) {
+ 
+ 			super._updateZoom();
+ 
+@@ -289,8 +280,8 @@ export class GlobeControls extends EnvironmentControls {
+ 
+ 			// orient the camera to focus on the earth during the zoom
+ 			const alpha = MathUtils.mapLinear( this.getDistanceToCenter(), GLOBE_TRANSITION_THRESHOLD, MAX_GLOBE_DISTANCE, 0, 1 );
+-			this._tiltTowardsCenter( MathUtils.lerp( 1, 0.8, alpha ) );
+-			this._alignCameraUpToNorth( MathUtils.lerp( 1, 0.9, alpha ) );
++			this._tiltTowardsCenter( MathUtils.lerp( 0, 0.2, alpha ) );
++			this._alignCameraUpToNorth( MathUtils.lerp( 0, 0.1, alpha ) );
+ 
+ 			// zoom out directly from the globe center
+ 			this.getVectorToCenter( _vec );
+@@ -301,6 +292,10 @@ export class GlobeControls extends EnvironmentControls {
+ 
+ 		}
+ 
++		// TODO: we should consider rotating the camera about the zoom point in this case
++		// Possibly for drag, too?
++		this._alignCameraUp( this.up );
++
+ 	}
+ 
+ 	// tilt the camera to align with north
+@@ -320,13 +315,17 @@ export class GlobeControls extends EnvironmentControls {
+ 		_right.set( - 1, 0, 0 ).transformDirection( camera.matrixWorld );
+ 		_targetRight.crossVectors( up, _forward );
+ 
++		// compute the alpha based on how far away from boresight the up vector is
++		// so we can ease into the correct orientation
+ 		if ( alpha === null ) {
+ 
+-			alpha = Math.abs( _forward.dot( up ) );
++			alpha = 1 - Math.abs( _forward.dot( up ) );
++			alpha = MathUtils.mapLinear( alpha, 0, 1, - 0.01, 1 );
++			alpha = MathUtils.clamp( alpha, 0, 1 ) ** 2;
+ 
+ 		}
+ 
+-		_targetRight.lerp( _right, alpha ).normalize();
++		_targetRight.lerp( _right, 1 - alpha ).normalize();
+ 
+ 		_quaternion.setFromUnitVectors( _right, _targetRight );
+ 		camera.quaternion.premultiply( _quaternion );
+@@ -344,7 +343,7 @@ export class GlobeControls extends EnvironmentControls {
+ 
+ 		_forward.set( 0, 0, - 1 ).transformDirection( camera.matrixWorld ).normalize();
+ 		_vec.setFromMatrixPosition( tilesGroup.matrixWorld ).sub( camera.position ).normalize();
+-		_vec.lerp( _forward, alpha ).normalize();
++		_vec.lerp( _forward, 1 - alpha ).normalize();
+ 
+ 		_quaternion.setFromUnitVectors( _forward, _vec );
+ 		camera.quaternion.premultiply( _quaternion );
+@@ -352,4 +351,34 @@ export class GlobeControls extends EnvironmentControls {
+ 
+ 	}
+ 
++	_isNearControls() {
++
++		return this.getDistanceToCenter() < GLOBE_TRANSITION_THRESHOLD;
++
++		// const camera = this.camera;
++
++		// if ( camera.isPerspectiveCamera ) {
++
++		// 	// TODO:
++		// 	// - must recalculate the max zoom out distance based on camera fov
++		// 	// - must adjust use of GLOBE_TRANSITION_THRESHOLD above
++
++		// 	// https://physicsforums.com/threads/need-an-equation-for-converting-vertical-to-horizontal-fov.981179/
++		// 	const fovHoriz = 2 * Math.atan( Math.tan( MathUtils.DEG2RAD * camera.fov * 0.5 ) * camera.aspect );
++
++		// 	const size = Math.max( ...this.ellipsoid.radius );
++		// 	const distVert = size / Math.tan( MathUtils.DEG2RAD * camera.fov * 0.5 );
++		// 	const distHoriz = size / Math.tan( fovHoriz * 0.5 );
++		// 	const dist = Math.max( distVert, distHoriz );
++
++		// 	return this.getDistanceToCenter() < dist * 0.7;
++
++		// } else {
++
++		//	return this.getDistanceToCenter() < GLOBE_TRANSITION_THRESHOLD;
++
++		// }
++
++	}
++
+ }
+diff --git a/node_modules/3d-tiles-renderer/src/three/controls/PointerTracker.js b/node_modules/3d-tiles-renderer/src/three/controls/PointerTracker.js
+index ef64260..b295ad8 100644
+--- a/node_modules/3d-tiles-renderer/src/three/controls/PointerTracker.js
++++ b/node_modules/3d-tiles-renderer/src/three/controls/PointerTracker.js
+@@ -219,6 +219,12 @@ export class PointerTracker {
+ 
+ 	}
+ 
++	isPointerTouch() {
++
++		return this.getPointerType() === 'touch';
++
++	}
++
+ 	getPointerButtons() {
+ 
+ 		return this.buttons;
+diff --git a/node_modules/3d-tiles-renderer/src/three/controls/utils.js b/node_modules/3d-tiles-renderer/src/three/controls/utils.js
+index 9fb6e02..5cbe7b6 100644
+--- a/node_modules/3d-tiles-renderer/src/three/controls/utils.js
++++ b/node_modules/3d-tiles-renderer/src/three/controls/utils.js
+@@ -23,4 +23,10 @@ export function mouseToCoords( clientX, clientY, element, target ) {
+ 	target.x = ( ( clientX - element.offsetLeft ) / element.clientWidth ) * 2 - 1;
+ 	target.y = - ( ( clientY - element.offsetTop ) / element.clientHeight ) * 2 + 1;
+ 
++	if ( target.isVector3 ) {
++
++		target.z = 0;
++
++	}
++
+ }
+diff --git a/node_modules/3d-tiles-renderer/src/three/B3DMLoader.d.ts b/node_modules/3d-tiles-renderer/src/three/loaders/B3DMLoader.d.ts
+similarity index 76%
+rename from node_modules/3d-tiles-renderer/src/three/B3DMLoader.d.ts
+rename to node_modules/3d-tiles-renderer/src/three/loaders/B3DMLoader.d.ts
+index f4f9f74..891156c 100644
+--- a/node_modules/3d-tiles-renderer/src/three/B3DMLoader.d.ts
++++ b/node_modules/3d-tiles-renderer/src/three/loaders/B3DMLoader.d.ts
+@@ -1,5 +1,5 @@
+-import { B3DMBaseResult } from '../base/B3DMLoaderBase';
+-import { FeatureTable, BatchTable } from '../utilities/FeatureTable';
++import { B3DMBaseResult } from '../../base/loaders/B3DMLoaderBase';
++import { FeatureTable, BatchTable } from '../../utilities/FeatureTable';
+ import { LoadingManager, Group } from 'three';
+ import { GLTF } from 'three/examples/jsm/loaders/GLTFLoader';
+ 
+diff --git a/node_modules/3d-tiles-renderer/src/three/B3DMLoader.js b/node_modules/3d-tiles-renderer/src/three/loaders/B3DMLoader.js
+similarity index 96%
+rename from node_modules/3d-tiles-renderer/src/three/B3DMLoader.js
+rename to node_modules/3d-tiles-renderer/src/three/loaders/B3DMLoader.js
+index ef691d0..17c6855 100644
+--- a/node_modules/3d-tiles-renderer/src/three/B3DMLoader.js
++++ b/node_modules/3d-tiles-renderer/src/three/loaders/B3DMLoader.js
+@@ -1,4 +1,4 @@
+-import { B3DMLoaderBase } from '../base/B3DMLoaderBase.js';
++import { B3DMLoaderBase } from '../../base/loaders/B3DMLoaderBase.js';
+ import { DefaultLoadingManager, Matrix4 } from 'three';
+ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+ 
+diff --git a/node_modules/3d-tiles-renderer/src/three/CMPTLoader.d.ts b/node_modules/3d-tiles-renderer/src/three/loaders/CMPTLoader.d.ts
+similarity index 62%
+rename from node_modules/3d-tiles-renderer/src/three/CMPTLoader.d.ts
+rename to node_modules/3d-tiles-renderer/src/three/loaders/CMPTLoader.d.ts
+index 047a4f3..aba7a48 100644
+--- a/node_modules/3d-tiles-renderer/src/three/CMPTLoader.d.ts
++++ b/node_modules/3d-tiles-renderer/src/three/loaders/CMPTLoader.d.ts
+@@ -1,6 +1,6 @@
+-import { B3DMBaseResult } from '../base/B3DMLoaderBase';
+-import { I3DMBaseResult } from '../base/I3DMLoaderBase';
+-import { PNTSBaseResult } from '../base/PNTSLoaderBase';
++import { B3DMBaseResult } from '../../base/loaders/B3DMLoaderBase';
++import { I3DMBaseResult } from '../../base/loaders/I3DMLoaderBase';
++import { PNTSBaseResult } from '../../base/loaders/PNTSLoaderBase';
+ import { Group, LoadingManager } from 'three';
+ 
+ export interface CMPTResult {
+diff --git a/node_modules/3d-tiles-renderer/src/three/CMPTLoader.js b/node_modules/3d-tiles-renderer/src/three/loaders/CMPTLoader.js
+similarity index 96%
+rename from node_modules/3d-tiles-renderer/src/three/CMPTLoader.js
+rename to node_modules/3d-tiles-renderer/src/three/loaders/CMPTLoader.js
+index 0fb06e2..583d2af 100644
+--- a/node_modules/3d-tiles-renderer/src/three/CMPTLoader.js
++++ b/node_modules/3d-tiles-renderer/src/three/loaders/CMPTLoader.js
+@@ -1,5 +1,5 @@
+ import { Group, DefaultLoadingManager, Matrix4 } from 'three';
+-import { CMPTLoaderBase } from '../base/CMPTLoaderBase.js';
++import { CMPTLoaderBase } from '../../base/loaders/CMPTLoaderBase.js';
+ import { B3DMLoader } from './B3DMLoader.js';
+ import { PNTSLoader } from './PNTSLoader.js';
+ import { I3DMLoader } from './I3DMLoader.js';
+diff --git a/node_modules/3d-tiles-renderer/src/three/GLTFExtensionLoader.d.ts b/node_modules/3d-tiles-renderer/src/three/loaders/GLTFExtensionLoader.d.ts
+similarity index 61%
+rename from node_modules/3d-tiles-renderer/src/three/GLTFExtensionLoader.d.ts
+rename to node_modules/3d-tiles-renderer/src/three/loaders/GLTFExtensionLoader.d.ts
+index 2c8daed..724f8f8 100644
+--- a/node_modules/3d-tiles-renderer/src/three/GLTFExtensionLoader.d.ts
++++ b/node_modules/3d-tiles-renderer/src/three/loaders/GLTFExtensionLoader.d.ts
+@@ -1,6 +1,6 @@
+ 
+-import { GLTF } from 'three/examples/jsm/loaders/GLTFLoader.js';
+-import { LoaderBase } from '../base/LoaderBase';
++import { GLTF } from 'three/examples/jsm/loaders/GLTFLoader';
++import { LoaderBase } from '../../base/loaders/LoaderBase';
+ import { LoadingManager } from 'three';
+ 
+ export class GLTFExtensionLoader extends LoaderBase {
+diff --git a/node_modules/3d-tiles-renderer/src/three/GLTFExtensionLoader.js b/node_modules/3d-tiles-renderer/src/three/loaders/GLTFExtensionLoader.js
+similarity index 69%
+rename from node_modules/3d-tiles-renderer/src/three/GLTFExtensionLoader.js
+rename to node_modules/3d-tiles-renderer/src/three/loaders/GLTFExtensionLoader.js
+index 4eb78c8..64fd255 100644
+--- a/node_modules/3d-tiles-renderer/src/three/GLTFExtensionLoader.js
++++ b/node_modules/3d-tiles-renderer/src/three/loaders/GLTFExtensionLoader.js
+@@ -1,7 +1,7 @@
+ import { DefaultLoadingManager } from 'three';
+ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+-import { LoaderBase } from '../base/LoaderBase.js';
+-import { GLTFCesiumRTCExtension } from './GLTFCesiumRTCExtension.js';
++import { LoaderBase } from '../../base/loaders/LoaderBase.js';
++import { GLTFCesiumRTCExtension } from './gltf/GLTFCesiumRTCExtension.js';
+ 
+ export class GLTFExtensionLoader extends LoaderBase {
+ 
+@@ -25,23 +25,24 @@ export class GLTFExtensionLoader extends LoaderBase {
+ 				loader = new GLTFLoader( manager );
+ 
+ 				loader.register( () => new GLTFCesiumRTCExtension() );
+-				if ( fetchOptions.credentials === 'include' && fetchOptions.mode === 'cors' ) {
+ 
+-					loader.setCrossOrigin( 'use-credentials' );
++			}
++
++			if ( fetchOptions.credentials === 'include' && fetchOptions.mode === 'cors' ) {
+ 
+-				}
++				loader.setCrossOrigin( 'use-credentials' );
+ 
+-				if ( 'credentials' in fetchOptions ) {
++			}
+ 
+-					loader.setWithCredentials( fetchOptions.credentials === 'include' );
++			if ( 'credentials' in fetchOptions ) {
+ 
+-				}
++				loader.setWithCredentials( fetchOptions.credentials === 'include' );
+ 
+-				if ( fetchOptions.headers ) {
++			}
+ 
+-					loader.setRequestHeader( fetchOptions.headers );
++			if ( fetchOptions.headers ) {
+ 
+-				}
++				loader.setRequestHeader( fetchOptions.headers );
+ 
+ 			}
+ 
+diff --git a/node_modules/3d-tiles-renderer/src/three/I3DMLoader.d.ts b/node_modules/3d-tiles-renderer/src/three/loaders/I3DMLoader.d.ts
+similarity index 76%
+rename from node_modules/3d-tiles-renderer/src/three/I3DMLoader.d.ts
+rename to node_modules/3d-tiles-renderer/src/three/loaders/I3DMLoader.d.ts
+index ae9bed9..e6e2009 100644
+--- a/node_modules/3d-tiles-renderer/src/three/I3DMLoader.d.ts
++++ b/node_modules/3d-tiles-renderer/src/three/loaders/I3DMLoader.d.ts
+@@ -1,5 +1,5 @@
+-import { I3DMBaseResult } from '../base/I3DMLoaderBase';
+-import { FeatureTable, BatchTable } from '../utilities/FeatureTable';
++import { I3DMBaseResult } from '../../base/loaders/I3DMLoaderBase';
++import { FeatureTable, BatchTable } from '../../utilities/FeatureTable';
+ import { GLTF } from 'three/examples/jsm/loaders/GLTFLoader';
+ import { Group, LoadingManager } from 'three';
+ 
+diff --git a/node_modules/3d-tiles-renderer/src/three/I3DMLoader.js b/node_modules/3d-tiles-renderer/src/three/loaders/I3DMLoader.js
+similarity index 98%
+rename from node_modules/3d-tiles-renderer/src/three/I3DMLoader.js
+rename to node_modules/3d-tiles-renderer/src/three/loaders/I3DMLoader.js
+index bfbad89..54abb5f 100644
+--- a/node_modules/3d-tiles-renderer/src/three/I3DMLoader.js
++++ b/node_modules/3d-tiles-renderer/src/three/loaders/I3DMLoader.js
+@@ -1,4 +1,4 @@
+-import { I3DMLoaderBase } from '../base/I3DMLoaderBase.js';
++import { I3DMLoaderBase } from '../../base/loaders/I3DMLoaderBase.js';
+ import { DefaultLoadingManager, Matrix4, InstancedMesh, Vector3, Quaternion } from 'three';
+ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+ 
+diff --git a/node_modules/3d-tiles-renderer/src/three/PNTSLoader.d.ts b/node_modules/3d-tiles-renderer/src/three/loaders/PNTSLoader.d.ts
+similarity index 73%
+rename from node_modules/3d-tiles-renderer/src/three/PNTSLoader.d.ts
+rename to node_modules/3d-tiles-renderer/src/three/loaders/PNTSLoader.d.ts
+index a2b8c96..3727694 100644
+--- a/node_modules/3d-tiles-renderer/src/three/PNTSLoader.d.ts
++++ b/node_modules/3d-tiles-renderer/src/three/loaders/PNTSLoader.d.ts
+@@ -1,5 +1,5 @@
+-import { PNTSBaseResult, PNTSLoaderBase } from '../base/PNTSLoaderBase';
+-import { FeatureTable } from '../utilities/FeatureTable';
++import { PNTSBaseResult, PNTSLoaderBase } from '../../base/loaders/PNTSLoaderBase';
++import { FeatureTable } from '../../utilities/FeatureTable';
+ import { Points, LoadingManager } from 'three';
+ 
+ interface PNTSScene extends Points {
+diff --git a/node_modules/3d-tiles-renderer/src/three/PNTSLoader.js b/node_modules/3d-tiles-renderer/src/three/loaders/PNTSLoader.js
+similarity index 95%
+rename from node_modules/3d-tiles-renderer/src/three/PNTSLoader.js
+rename to node_modules/3d-tiles-renderer/src/three/loaders/PNTSLoader.js
+index eb3632d..b9cd131 100644
+--- a/node_modules/3d-tiles-renderer/src/three/PNTSLoader.js
++++ b/node_modules/3d-tiles-renderer/src/three/loaders/PNTSLoader.js
+@@ -1,4 +1,4 @@
+-import { PNTSLoaderBase } from '../base/PNTSLoaderBase.js';
++import { PNTSLoaderBase } from '../../base/loaders/PNTSLoaderBase.js';
+ import {
+ 	Points,
+ 	PointsMaterial,
+@@ -8,7 +8,7 @@ import {
+ 	Vector3,
+ 	Color,
+ } from 'three';
+-import { rgb565torgb } from '../utilities/rgb565torgb.js';
++import { rgb565torgb } from '../../utilities/rgb565torgb.js';
+ 
+ const DRACO_ATTRIBUTE_MAP = {
+ 	RGB: 'color',
+@@ -28,7 +28,7 @@ export class PNTSLoader extends PNTSLoaderBase {
+ 
+ 		return super.parse( buffer ).then( async ( result ) => {
+ 
+-			const { featureTable } = result;
++			const { featureTable, batchTable } = result;
+ 
+ 			const material = new PointsMaterial();
+ 			const extensions = featureTable.header.extensions;
+@@ -182,6 +182,7 @@ export class PNTSLoader extends PNTSLoaderBase {
+ 			object.position.copy( translationOffset );
+ 			result.scene = object;
+ 			result.scene.featureTable = featureTable;
++			result.scene.batchTable = batchTable;
+ 
+ 			const rtcCenter = featureTable.getData( 'RTC_CENTER' );
+ 			if ( rtcCenter ) {
+diff --git a/node_modules/3d-tiles-renderer/src/three/loaders/gltf/GLTFCesiumRTCExtension.d.ts b/node_modules/3d-tiles-renderer/src/three/loaders/gltf/GLTFCesiumRTCExtension.d.ts
+new file mode 100644
+index 0000000..c3413f7
+--- /dev/null
++++ b/node_modules/3d-tiles-renderer/src/three/loaders/gltf/GLTFCesiumRTCExtension.d.ts
+@@ -0,0 +1,5 @@
++export class GLTFCesiumRTCExtension{
++
++	name: 'CESIUM_RTC';
++
++}
+diff --git a/node_modules/3d-tiles-renderer/src/three/GLTFCesiumRTCExtension.js b/node_modules/3d-tiles-renderer/src/three/loaders/gltf/GLTFCesiumRTCExtension.js
+similarity index 100%
+rename from node_modules/3d-tiles-renderer/src/three/GLTFCesiumRTCExtension.js
+rename to node_modules/3d-tiles-renderer/src/three/loaders/gltf/GLTFCesiumRTCExtension.js
+diff --git a/node_modules/3d-tiles-renderer/src/three/loaders/gltf/GLTFMeshFeaturesExtension.d.ts b/node_modules/3d-tiles-renderer/src/three/loaders/gltf/GLTFMeshFeaturesExtension.d.ts
+new file mode 100644
+index 0000000..394ccbe
+--- /dev/null
++++ b/node_modules/3d-tiles-renderer/src/three/loaders/gltf/GLTFMeshFeaturesExtension.d.ts
+@@ -0,0 +1,30 @@
++import { Vector3 } from 'three';
++
++export class GLTFMeshFeaturesExtension {
++
++	name: 'EXT_mesh_features';
++
++}
++
++export class MeshFeatures {
++
++	getFeatures( triangle: Number, barycoord: Vector3 ): Array<Number>;
++	getFeaturesAsync( triangle: Number, barycoord: Vector3 ): Promise<Array<Number>>;
++	getFeaturesInfo(): Array<{ label: String, propertyTable: Number, nullFeatureId: Number | null }>;
++	dispose(): void;
++
++}
++
++declare module 'three' {
++
++	export interface Object3D {
++
++		userData: {
++
++			meshFeatures?: MeshFeatures;
++
++		}
++
++	}
++
++}
+diff --git a/node_modules/3d-tiles-renderer/src/three/loaders/gltf/GLTFMeshFeaturesExtension.js b/node_modules/3d-tiles-renderer/src/three/loaders/gltf/GLTFMeshFeaturesExtension.js
+new file mode 100644
+index 0000000..89e8f76
+--- /dev/null
++++ b/node_modules/3d-tiles-renderer/src/three/loaders/gltf/GLTFMeshFeaturesExtension.js
+@@ -0,0 +1,68 @@
++import { MeshFeatures } from './metadata/classes/MeshFeatures.js';
++
++// https://github.com/CesiumGS/glTF/tree/3d-tiles-next/extensions/2.0/Vendor/EXT_mesh_features
++
++const EXT_NAME = 'EXT_mesh_features';
++
++function forEachPrimitiveExtension( scene, parser, callback ) {
++
++	scene.traverse( c => {
++
++		if ( parser.associations.has( c ) ) {
++
++			// check if this object has extension references
++			const { meshes, primitives } = parser.associations.get( c );
++			const primitive = parser.json.meshes[ meshes ].primitives[ primitives ];
++
++			if ( primitive && primitive.extensions && primitive.extensions[ EXT_NAME ] ) {
++
++				callback( c, primitive.extensions[ EXT_NAME ] );
++
++			}
++
++		}
++
++	} );
++
++}
++
++export class GLTFMeshFeaturesExtension {
++
++	constructor( parser ) {
++
++		this.parser = parser;
++		this.name = EXT_NAME;
++
++	}
++
++	async afterRoot( { scene, parser } ) {
++
++		// get fetch the relevant textures are loaded
++		const textureCount = parser.json.textures?.length || 0;
++		const promises = new Array( textureCount ).fill( null );
++		forEachPrimitiveExtension( scene, parser, ( child, { featureIds } ) => {
++
++			featureIds.forEach( info => {
++
++				if ( info.texture && promises[ info.texture.index ] === null ) {
++
++					const index = info.texture.index;
++					promises[ index ] = parser.loadTexture( index );
++
++				}
++
++			} );
++
++		} );
++
++		// initialize mesh features on each primitive
++		const textures = await Promise.all( promises );
++		forEachPrimitiveExtension( scene, parser, ( child, extension ) => {
++
++			child.userData.meshFeatures = new MeshFeatures( child.geometry, textures, extension );
++
++		} );
++
++	}
++
++}
+diff --git a/node_modules/3d-tiles-renderer/src/three/loaders/gltf/GLTFStructuralMetadataExtension.d.ts b/node_modules/3d-tiles-renderer/src/three/loaders/gltf/GLTFStructuralMetadataExtension.d.ts
+new file mode 100644
+index 0000000..4a0b2e3
+--- /dev/null
++++ b/node_modules/3d-tiles-renderer/src/three/loaders/gltf/GLTFStructuralMetadataExtension.d.ts
+@@ -0,0 +1,49 @@
++import { Vector3 } from 'three';
++
++export class GLTFStructuralMetadataExtension {
++
++	name: 'EXT_structural_metadata';
++
++}
++
++class StructuralMetadata {
++
++	textures: Array<Texture | null>;
++
++	getPropertyTableData( tableIndices: Array<Number>, ids: Array<Number>, target: Array = [] ): Array<any>;
++	getPropertyTableInfo( tableIndices: Array<Number> | null = null ): Array<{ name: String, className: string }>;
++
++	getPropertyTextureData( triangle: Number, barycoord: Vector3, target: Array = [] ): Array<any>;
++	getPropertyTextureDataAsync( triangle: Number, barycoord: Vector3, target: Array = [] ): Promise<Array<any>>;
++	getPropertyTextureInfo(): Array<{
++		name: String,
++		className: string,
++		properties: {
++			[key]: {
++				index: Number,
++				texCoord: Number,
++				channels: Array<Number>,
++			}
++		}
++	}>;
++
++	getPropertyAttributeData( attributeIndex: Number, target: Array = [] ): Array<any>;
++	getPropertyAttributeInfo(): Array<{ name: String, className: string }>;
++
++	dispose(): void;
++
++}
++
++declare module 'three' {
++
++	export interface Object3D {
++
++		userData: {
++
++			structuralMetadata?: StructuralMetadata;
++
++		}
++
++	}
++
++}
+diff --git a/node_modules/3d-tiles-renderer/src/three/loaders/gltf/GLTFStructuralMetadataExtension.js b/node_modules/3d-tiles-renderer/src/three/loaders/gltf/GLTFStructuralMetadataExtension.js
+new file mode 100644
+index 0000000..fdccb7a
+--- /dev/null
++++ b/node_modules/3d-tiles-renderer/src/three/loaders/gltf/GLTFStructuralMetadataExtension.js
+@@ -0,0 +1,144 @@
++
++// https://github.com/CesiumGS/glTF/tree/3d-tiles-next/extensions/2.0/Vendor/EXT_structural_metadata
++
++import { FileLoader } from 'three';
++import { StructuralMetadata } from './metadata/classes/StructuralMetadata.js';
++
++const EXT_NAME = 'EXT_structural_metadata';
++function getRelevantTextures( parser, propertyTextures = [] ) {
++
++	const textureCount = parser.json.textures?.length || 0;
++	const result = new Array( textureCount ).fill( null );
++
++	propertyTextures.forEach( ( { properties } ) => {
++
++		for ( const key in properties ) {
++
++			const { index } = properties[ key ];
++			if ( result[ index ] === null ) {
++
++				result[ index ] = parser.loadTexture( index );
++
++			}
++
++		}
++
++	} );
++
++	return Promise.all( result );
++
++}
++
++function getRelevantBuffers( parser, propertyTables = [] ) {
++
++	const textureCount = parser.json.bufferViews?.length || 0;
++	const result = new Array( textureCount ).fill( null );
++
++	propertyTables.forEach( ( { properties } ) => {
++
++		for ( const key in properties ) {
++
++			const { values, arrayOffsets, stringOffsets } = properties[ key ];
++			if ( result[ values ] === null ) {
++
++				result[ values ] = parser.loadBufferView( values );
++
++			}
++
++			if ( result[ arrayOffsets ] === null ) {
++
++				result[ arrayOffsets ] = parser.loadBufferView( arrayOffsets );
++
++			}
++
++			if ( result[ stringOffsets ] === null ) {
++
++				result[ stringOffsets ] = parser.loadBufferView( stringOffsets );
++
++			}
++
++		}
++
++	} );
++
++	return Promise.all( result );
++
++}
++
++export class GLTFStructuralMetadataExtension {
++
++	constructor( parser ) {
++
++		this.parser = parser;
++		this.name = EXT_NAME;
++
++	}
++
++	async afterRoot( { scene, parser } ) {
++
++		const extensions = parser.json.extensions;
++		let rootExtension = extensions && extensions[ EXT_NAME ];
++		if ( ! rootExtension ) {
++
++			return;
++
++		}
++
++		// load the remote schema definition if present
++		let schemaPromise = null;
++		if ( rootExtension.schemaUri ) {
++
++			// TODO: cache the loaded schema so we can share it and dispose of it when the
++			// extension is no longer available
++			const { manager, path, requestHeader, crossOrigin } = parser.options;
++			const finalUri = new URL( rootExtension.schemaUri, path ).toString();
++			const fileLoader = new FileLoader( manager );
++			fileLoader.setCrossOrigin( crossOrigin );
++			fileLoader.setResponseType( 'json' );
++			fileLoader.setRequestHeader( requestHeader );
++
++			schemaPromise = fileLoader.loadAsync( finalUri )
++				.then( schema => {
++
++					rootExtension = { ...rootExtension, schema };
++
++				} );
++
++		}
++
++		// prep the textures and buffers
++		const [ textures, buffers ] = await Promise.all( [
++			getRelevantTextures( parser, rootExtension.propertyTextures ),
++			getRelevantBuffers( parser, rootExtension.propertyTables ),
++			schemaPromise,
++		] );
++
++		// initialize the extension
++		const rootMetadata = new StructuralMetadata( rootExtension, textures, buffers );
++		scene.userData.structuralMetadata = rootMetadata;
++
++		scene.traverse( child => {
++
++			if ( parser.associations.has( child ) ) {
++
++				// check if this object has extension references
++				const { meshes, primitives } = parser.associations.get( child );
++				const primitive = parser.json.meshes[ meshes ].primitives[ primitives ];
++				if ( primitive && primitive.extensions && primitive.extensions[ EXT_NAME ] ) {
++
++					const extension = primitive.extensions[ EXT_NAME ];
++					child.userData.structuralMetadata = new StructuralMetadata( rootExtension, textures, buffers, extension, child );
++
++				} else {
++
++					child.userData.structuralMetadata = rootMetadata;
++
++				}
++
++			}
++
++		} );
++
++	}
++
++}
+diff --git a/node_modules/3d-tiles-renderer/src/three/loaders/gltf/metadata/classes/ClassProperty.js b/node_modules/3d-tiles-renderer/src/three/loaders/gltf/metadata/classes/ClassProperty.js
+new file mode 100644
+index 0000000..f24e93d
+--- /dev/null
++++ b/node_modules/3d-tiles-renderer/src/three/loaders/gltf/metadata/classes/ClassProperty.js
+@@ -0,0 +1,133 @@
++import {
++	initializeFromProperty,
++	adjustValueScaleOffset,
++	getField,
++	isNumericType,
++	resolveDefaultElement,
++	resolveNoData,
++	resolveDefault,
++} from '../utilities/ClassPropertyHelpers.js';
++
++export class ClassProperty {
++
++	constructor( enums, property, accessorProperty = null ) {
++
++		this.type = property.type;
++		this.componentType = property.componentType || null;
++		this.enumType = property.enumType || null;
++		this.array = property.array || false;
++		this.count = property.count || 0;
++		this.normalized = property.normalized || false;
++		this.offset = property.offset || 0;
++		this.scale = getField( property, 'scale', 1 );
++		this.max = getField( property, 'max', Infinity );
++		this.min = getField( property, 'min', - Infinity );
++		this.required = property.required || false;
++		this.noData = getField( property, 'noData', null );
++		this.default = getField( property, 'default', null );
++		this.semantic = getField( property, 'semantic', null );
++		this.enumSet = null;
++		this.accessorProperty = accessorProperty;
++
++		if ( accessorProperty ) {
++
++			this.offset = getField( accessorProperty, 'offset', this.offset );
++			this.scale = getField( accessorProperty, 'scale', this.scale );
++			this.max = getField( accessorProperty, 'max', this.max );
++			this.min = getField( accessorProperty, 'min', this.min );
++
++		}
++
++		if ( property.type === 'ENUM' ) {
++
++			this.enumSet = enums[ this.enumType ];
++			if ( this.componentType === null ) {
++
++				this.componentType = getField( this.enumSet, 'valueType', 'UINT16' );
++
++			}
++
++		}
++
++	}
++
++	shapeToProperty( target, countOverride = null ) {
++
++		return initializeFromProperty( this, target, countOverride );
++
++	}
++
++	resolveDefaultElement( target ) {
++
++		return resolveDefaultElement( this, target );
++
++	}
++
++	resolveDefault( target ) {
++
++		return resolveDefault( this, target );
++
++	}
++
++	resolveNoData( target ) {
++
++		return resolveNoData( this, target );
++
++	}
++
++	resolveEnumsToStrings( target ) {
++
++		const enumSet = this.enumSet;
++		if ( this.type === 'ENUM' ) {
++
++			if ( Array.isArray( target ) ) {
++
++				for ( let i = 0, l = target.length; i < l; i ++ ) {
++
++					target[ i ] = getEnumName( target[ i ] );
++
++				}
++
++			} else {
++
++				target = getEnumName( target );
++
++			}
++
++
++		}
++
++		return target;
++
++		function getEnumName( index ) {
++
++			const match = enumSet.values.find( e => e.value === index );
++			if ( match === null ) {
++
++				return null;
++
++			} else {
++
++				return match.name;
++
++			}
++
++		}
++
++	}
++
++	adjustValueScaleOffset( target ) {
++
++		if ( isNumericType( this.type ) ) {
++
++			return adjustValueScaleOffset( this, target );
++
++		} else {
++
++			return target;
++
++		}
++
++	}
++
++}
+diff --git a/node_modules/3d-tiles-renderer/src/three/loaders/gltf/metadata/classes/MeshFeatures.js b/node_modules/3d-tiles-renderer/src/three/loaders/gltf/metadata/classes/MeshFeatures.js
+new file mode 100644
+index 0000000..231cf51
+--- /dev/null
++++ b/node_modules/3d-tiles-renderer/src/three/loaders/gltf/metadata/classes/MeshFeatures.js
+@@ -0,0 +1,215 @@
++import { Vector2 } from 'three';
++import { TextureReadUtility } from '../utilities/TextureReadUtility.js';
++import { getTexCoord, getTexelIndices, getTriangleIndices } from '../utilities/TexCoordUtilities.js';
++
++const _uv = /* @__PURE__ */ new Vector2();
++const _pixel = /* @__PURE__ */ new Vector2();
++const _dstPixel = /* @__PURE__ */ new Vector2();
++
++// retrieve the appropriate UV attribute based on the tex coord index
++function getMaxBarycoordIndex( barycoord ) {
++
++	if ( barycoord.x > barycoord.y && barycoord.x > barycoord.z ) {
++
++		return 0;
++
++	} else if ( barycoord.y > barycoord.z ) {
++
++		return 1;
++
++	} else {
++
++		return 2;
++
++	}
++
++}
++
++export class MeshFeatures {
++
++	constructor( geometry, textures, data ) {
++
++		this.geometry = geometry;
++		this.textures = textures;
++		this.data = data;
++		this._asyncRead = false;
++
++		// fill out feature id default values
++		this.featureIds = data.featureIds.map( info => {
++
++			const { texture, ...rest } = info;
++			const result = {
++				label: null,
++				propertyTable: null,
++				nullFeatureId: null,
++				...rest,
++			};
++
++			if ( texture ) {
++
++				result.texture = {
++					texCoord: 0,
++					channels: [ 0 ],
++					...texture,
++				};
++
++			}
++
++			return result;
++
++		} );
++
++	}
++
++	// returns list of textures
++	getTextures() {
++
++		return this.textures;
++
++	}
++
++	// returns a set of info for each feature
++	getFeatureInfo() {
++
++		return this.featureIds;
++
++	}
++
++	// performs texture data read back asynchronously
++	getFeaturesAsync( ...args ) {
++
++		this._asyncRead = true;
++		const result = this.getFeatures( ...args );
++		this._asyncRead = false;
++		return result;
++
++	}
++
++	// returns all features for the given point on the given triangle
++	getFeatures( triangle, barycoord ) {
++
++		const { geometry, textures, featureIds } = this;
++		const result = new Array( featureIds.length ).fill( null );
++
++		// prep the canvas width
++		const width = featureIds.length;
++		TextureReadUtility.increaseSizeTo( width );
++
++		// get the attribute indices
++		const indices = getTriangleIndices( geometry, triangle );
++		const closestIndex = indices[ getMaxBarycoordIndex( barycoord ) ];
++		for ( let i = 0, l = featureIds.length; i < l; i ++ ) {
++
++			// the feature id from the closest point is returned
++			const featureId = featureIds[ i ];
++			const nullFeatureId = 'nullFeatureId' in featureId ? featureId.nullFeatureId : null;
++			if ( 'texture' in featureId ) {
++
++				const texture = textures[ featureId.texture.index ];
++
++				// get the attribute of the target tex coord and pixel
++				getTexCoord( geometry, featureId.texture.texCoord, barycoord, indices, _uv );
++				getTexelIndices( _uv, texture.image.width, texture.image.height, _pixel );
++				_dstPixel.set( i, 0 );
++
++				// draw the image
++				TextureReadUtility.renderPixelToTarget( textures[ featureId.texture.index ], _pixel, _dstPixel );
++
++			} else if ( 'attribute' in featureId ) {
++
++				const attr = geometry.getAttribute( `_feature_id_${ featureId.attribute }` );
++				const value = attr.getX( closestIndex );
++				if ( value !== nullFeatureId ) {
++
++					result[ i ] = value;
++
++				}
++
++			} else {
++
++				// implicit id is based on vertex attributes, see 3d-tiles#763
++				const value = closestIndex;
++				if ( value !== nullFeatureId ) {
++
++					result[ i ] = value;
++
++				}
++
++			}
++
++		}
++
++		// read the buffer data
++		const buffer = new Uint8Array( width * 4 );
++		if ( this._asyncRead ) {
++
++			return TextureReadUtility
++				.readDataAsync( buffer )
++				.then( () => {
++
++					readTextureSampleResults();
++					return result;
++
++				} );
++
++		} else {
++
++			TextureReadUtility.readData( buffer );
++			readTextureSampleResults();
++
++			return result;
++
++		}
++
++		function readTextureSampleResults() {
++
++			// get data based on the texture information
++			const readBuffer = new Uint32Array( 1 );
++			for ( let i = 0, l = featureIds.length; i < l; i ++ ) {
++
++				const featureId = featureIds[ i ];
++				const nullFeatureId = 'nullFeatureId' in featureId ? featureId.nullFeatureId : null;
++				if ( 'texture' in featureId ) {
++
++					// TODO: do we need to handle big-endian here?
++					const { channels } = featureId.texture;
++					const data = channels.map( c => buffer[ 4 * i + c ] );
++					new Uint8Array( readBuffer.buffer ).set( data );
++
++					const value = readBuffer[ 0 ];
++					if ( value !== nullFeatureId ) {
++
++						result[ i ] = value;
++
++					}
++
++				}
++
++			}
++
++		}
++
++	}
++
++	// dispose all of the texture data used
++	dispose() {
++
++		this.textures.forEach( texture => {
++
++			if ( texture ) {
++
++				texture.dispose();
++
++				if ( texture.image instanceof ImageBitmap ) {
++
++					texture.image.close();
++
++				}
++
++			}
++
++		} );
++
++	}
++
++}
+diff --git a/node_modules/3d-tiles-renderer/src/three/loaders/gltf/metadata/classes/PropertyAttributeAccessor.js b/node_modules/3d-tiles-renderer/src/three/loaders/gltf/metadata/classes/PropertyAttributeAccessor.js
+new file mode 100644
+index 0000000..9194f52
+--- /dev/null
++++ b/node_modules/3d-tiles-renderer/src/three/loaders/gltf/metadata/classes/PropertyAttributeAccessor.js
+@@ -0,0 +1,97 @@
++import { initializeFromClass, isMatrixType, isVectorType } from '../utilities/ClassPropertyHelpers.js';
++import { PropertySetAccessor } from './PropertySetAccessor.js';
++
++// TODO: is this only for points?
++// TODO: Test "no data" path
++export class PropertyAttributeAccessor extends PropertySetAccessor {
++
++	constructor( ...args ) {
++
++		super( ...args );
++
++		this.isPropertyAttributeAccessor = true;
++
++		this._initProperties();
++
++	}
++
++	getData( id, geometry, target = {} ) {
++
++		const properties = this.properties;
++		initializeFromClass( properties, target );
++
++		for ( const name in properties ) {
++
++			target[ name ] = this.getPropertyValue( name, id, geometry, target[ name ] );
++
++		}
++
++		return target;
++
++	}
++
++	getPropertyValue( name, id, geometry, target = null ) {
++
++		// NOTE: arrays are not supported via attribute accessors
++		if ( id >= this.count ) {
++
++			throw new Error( 'PropertyAttributeAccessor: Requested index is outside the range of the table.' );
++
++		}
++
++		// use a default of the texture accessor definition does not include the value
++		const property = this.properties[ name ];
++		const type = property.type;
++		if ( ! property ) {
++
++			throw new Error( 'PropertyAttributeAccessor: Requested property does not exist.' );
++
++		} else if ( ! this.definition.properties[ name ] ) {
++
++			return property.resolveDefault( target );
++
++		}
++
++		// initialize the array
++		target = property.shapeToProperty( target );
++
++		// Read the data values from the attribute
++		const attribute = geometry.getAttribute( property.attribute.toLowerCase() );
++		if ( isMatrixType( type ) ) {
++
++			const elements = target.elements;
++			for ( let i = 0, l = elements.length; i < l; i < l ) {
++
++				elements[ i ] = attribute.getComponent( id, i );
++
++			}
++
++		} else if ( isVectorType( type ) ) {
++
++			target.fromBufferAttribute( attribute, id );
++
++		} else if ( type === 'SCALAR' || type === 'ENUM' ) {
++
++			target = attribute.getX( id );
++
++		} else {
++
++			// BOOLEAN, STRING not supported
++			throw new Error( 'StructuredMetadata.PropertyAttributeAccessor: BOOLEAN and STRING types are not supported by property attributes.' );
++
++		}
++
++		// scale the numeric values
++		target = property.adjustValueScaleOffset( target );
++
++		// resolve to default values
++		target = property.resolveNoData( target );
++
++		// convert to enum strings
++		target = property.resolveEnumsToStrings( target );
++
++		return target;
++
++	}
++
++}
+diff --git a/node_modules/3d-tiles-renderer/src/three/loaders/gltf/metadata/classes/PropertySetAccessor.js b/node_modules/3d-tiles-renderer/src/three/loaders/gltf/metadata/classes/PropertySetAccessor.js
+new file mode 100644
+index 0000000..a1fe449
+--- /dev/null
++++ b/node_modules/3d-tiles-renderer/src/three/loaders/gltf/metadata/classes/PropertySetAccessor.js
+@@ -0,0 +1,45 @@
++import { ClassProperty } from './ClassProperty.js';
++
++export class PropertySetAccessor {
++
++	constructor( definition, classes = {}, enums = {}, data = null ) {
++
++		this.definition = definition;
++		this.class = classes[ definition.class ];
++		this.className = definition.class;
++		this.enums = enums;
++		this.data = data;
++		this.name = 'name' in definition ? definition.name : null;
++
++		this.properties = null;
++
++	}
++
++	getPropertyNames() {
++
++		return Object.keys( this.class.properties );
++
++	}
++
++	includesData( name ) {
++
++		return Boolean( this.definition.properties[ name ] );
++
++	}
++
++	dispose() {}
++
++	_initProperties( propertyClass = ClassProperty ) {
++
++		const properties = {};
++		for ( const key in this.class.properties ) {
++
++			properties[ key ] = new propertyClass( this.enums, this.class.properties[ key ], this.definition.properties[ key ] );
++
++		}
++
++		this.properties = properties;
++
++	}
++
++}
+diff --git a/node_modules/3d-tiles-renderer/src/three/loaders/gltf/metadata/classes/PropertyTableAccessor.js b/node_modules/3d-tiles-renderer/src/three/loaders/gltf/metadata/classes/PropertyTableAccessor.js
+new file mode 100644
+index 0000000..e081fe2
+--- /dev/null
++++ b/node_modules/3d-tiles-renderer/src/three/loaders/gltf/metadata/classes/PropertyTableAccessor.js
+@@ -0,0 +1,206 @@
++import { ClassProperty } from './ClassProperty.js';
++import { PropertySetAccessor } from './PropertySetAccessor.js';
++import {
++	initializeFromClass,
++	getArrayConstructorFromType,
++	readDataFromBufferToType,
++	getField,
++	isNumericType,
++} from '../utilities/ClassPropertyHelpers.js';
++
++class PropertyTableClassProperty extends ClassProperty {
++
++	constructor( enums, classProperty, tableProperty = null ) {
++
++		super( enums, classProperty, tableProperty );
++
++		this.valueLength = parseInt( this.type.replace( /[^0-9]/g, '' ) ) || 1;
++		this.values = tableProperty.values;
++		this.arrayOffsets = getField( tableProperty, 'arrayOffsets', null );
++		this.stringOffsets = getField( tableProperty, 'stringOffsets', null );
++		this.arrayOffsetType = getField( tableProperty, 'arrayOffsetType', 'UINT32' );
++		this.stringOffsetType = getField( tableProperty, 'stringOffsetType', 'UINT32' );
++
++	}
++
++	// returns the necessary array length based on the array offsets if present
++	getArrayLengthFromId( buffers, id ) {
++
++		let count = this.count;
++		if ( this.arrayOffsets !== null ) {
++
++			const { arrayOffsets, arrayOffsetType, type } = this;
++			const arr = new ( getArrayConstructorFromType( arrayOffsetType, type ) )( buffers[ arrayOffsets ] );
++			count = arr[ id + 1 ] - arr[ id ];
++
++		}
++
++		return count;
++
++	}
++
++	// returns the index offset into the data buffer for the given id based on the
++	// the array offsets if present
++	getIndexOffsetFromId( buffers, id ) {
++
++		let indexOffset = id;
++		if ( this.arrayOffsets ) {
++
++			const { arrayOffsets, arrayOffsetType, type } = this;
++			const arr = new ( getArrayConstructorFromType( arrayOffsetType, type ) )( buffers[ arrayOffsets ] );
++			indexOffset = arr[ indexOffset ];
++
++		} else if ( this.array ) {
++
++			// TODO: why do this? Revisit
++			indexOffset *= this.count;
++
++		}
++
++		return indexOffset;
++
++	}
++
++}
++
++export class PropertyTableAccessor extends PropertySetAccessor {
++
++	constructor( ...args ) {
++
++		super( ...args );
++
++		this.isPropertyTableAccessor = true;
++		this.count = this.definition.count;
++
++		this._initProperties( PropertyTableClassProperty );
++
++	}
++
++	getData( id, target = {} ) {
++
++		const properties = this.properties;
++		initializeFromClass( properties, target );
++
++		for ( const name in properties ) {
++
++			target[ name ] = this.getPropertyValue( name, id, target[ name ] );
++
++		}
++
++		return target;
++
++	}
++
++	// reads an individual element
++	_readValueAtIndex( name, id, index, target = null ) {
++
++		const property = this.properties[ name ];
++		const { componentType, type } = property;
++
++		const buffers = this.data;
++		const bufferView = buffers[ property.values ];
++		const dataArray = new ( getArrayConstructorFromType( componentType, type ) )( bufferView );
++
++		// TODO: is this correct?
++		let indexOffset = property.getIndexOffsetFromId( buffers, id );
++
++		if ( isNumericType( type ) || type === 'ENUM' ) {
++
++			// multiply the stride of the value type into the index
++			// TODO: is it correct to multiply it in here when array offsets are provided?
++			const valueLength = property.valueLength;
++			target = readDataFromBufferToType( dataArray, valueLength * ( index + indexOffset ), type, target );
++
++		} else if ( type === 'STRING' ) {
++
++			indexOffset += index;
++
++			// TODO: is this correct?
++			let stringLength = 0;
++			if ( property.stringOffsets !== null ) {
++
++				const { stringOffsets, stringOffsetType } = property;
++				const arr = new ( getArrayConstructorFromType( stringOffsetType, type ) )( buffers[ stringOffsets ] );
++				stringLength = arr[ indexOffset + 1 ] - arr[ indexOffset ];
++				indexOffset = arr[ indexOffset ];
++
++			}
++
++			const byteArray = new Uint8Array( dataArray.buffer, indexOffset, stringLength );
++			target = new TextDecoder().decode( byteArray );
++
++		} else if ( type === 'BOOLEAN' ) {
++
++			const offset = indexOffset + index;
++			const byteOffset = Math.floor( offset / 8 );
++			const bitOffset = offset % 8;
++			const byte = dataArray[ byteOffset ];
++
++			target = Boolean( byte & ( 1 << bitOffset ) );
++
++		}
++
++		return target;
++
++	}
++
++	// Reads the data for the given table index
++	getPropertyValue( name, id, target = null ) {
++
++		// check if the requested id is outside of the size of the table
++		if ( id >= this.count ) {
++
++			throw new Error( 'PropertyTableAccessor: Requested index is outside the range of the table.' );
++
++		}
++
++		// check to see if we skip this field since its not in the table
++		const property = this.properties[ name ];
++		if ( ! property ) {
++
++			throw new Error( 'PropertyTableAccessor: Requested property does not exist.' );
++
++		} else if ( ! this.definition.properties[ name ] ) {
++
++			return property.resolveDefault( target );
++
++		}
++
++		// TODO: is this correct?
++		// get the dynamic array count from the property buffer
++		const array = property.array;
++		const buffers = this.data;
++		const count = property.getArrayLengthFromId( buffers, id );
++
++		// initialize the array
++		target = property.shapeToProperty( target, count );
++
++		// read all data
++		if ( array ) {
++
++			for ( let i = 0, l = target.length; i < l; i ++ ) {
++
++				target[ i ] = this._readValueAtIndex( name, id, i, target[ i ] );
++
++			}
++
++		} else {
++
++			target = this._readValueAtIndex( name, id, 0, target );
++
++		}
++
++		// scale the numeric values
++		target = property.adjustValueScaleOffset( target );
++
++		// resolve to default values
++		target = property.resolveNoData( target );
++
++		// convert to enum strings
++		target = property.resolveEnumsToStrings( target );
++
++		return target;
++
++	}
++
++}
+diff --git a/node_modules/3d-tiles-renderer/src/three/loaders/gltf/metadata/classes/PropertyTextureAccessor.js b/node_modules/3d-tiles-renderer/src/three/loaders/gltf/metadata/classes/PropertyTextureAccessor.js
+new file mode 100644
+index 0000000..1a3b043
+--- /dev/null
++++ b/node_modules/3d-tiles-renderer/src/three/loaders/gltf/metadata/classes/PropertyTextureAccessor.js
+@@ -0,0 +1,227 @@
++import { Vector2 } from 'three';
++import { PropertySetAccessor } from './PropertySetAccessor.js';
++import { ClassProperty } from './ClassProperty.js';
++import { TextureReadUtility } from '../utilities/TextureReadUtility.js';
++import { getTexCoord, getTexelIndices, getTriangleIndices } from '../utilities/TexCoordUtilities.js';
++import {
++	initializeFromClass,
++	initializeFromProperty,
++	getArrayConstructorFromType,
++	readDataFromBufferToType,
++	getField
++} from '../utilities/ClassPropertyHelpers.js';
++
++const _uv = /* @__PURE__ */ new Vector2();
++const _pixel = /* @__PURE__ */ new Vector2();
++const _dstPixel = /* @__PURE__ */ new Vector2();
++
++class PropertyTextureClassProperty extends ClassProperty {
++
++	constructor( enums, classProperty, textureProperty = null ) {
++
++		super( enums, classProperty, textureProperty );
++
++		this.channels = getField( textureProperty, 'channels', [ 0 ] );
++		this.index = getField( textureProperty, 'index', null );
++		this.texCoord = getField( textureProperty, 'texCoord', null );
++		this.valueLength = parseInt( this.type.replace( /[^0-9]/g, '' ) ) || 1;
++
++	}
++
++	readDataFromBuffer( buffer, index, target = null ) {
++
++		const type = this.type;
++		if ( type === 'BOOLEAN' || type === 'STRING' ) {
++
++			throw new Error( 'PropertyTextureAccessor: BOOLEAN and STRING types not supported.' );
++
++		}
++
++		// TODO: is this correct?
++		return readDataFromBufferToType( buffer, index * this.valueLength, type, target );
++
++	}
++
++}
++
++// Reads and accesses data encoded to textures
++export class PropertyTextureAccessor extends PropertySetAccessor {
++
++	constructor( ...args ) {
++
++		super( ...args );
++
++		this.isPropertyTextureAccessor = true;
++		this._asyncRead = false;
++
++		this._initProperties( PropertyTextureClassProperty );
++
++	}
++
++	// Reads the full set of property data
++	getData( faceIndex, barycoord, geometry, target = {} ) {
++
++		const properties = this.properties;
++		initializeFromClass( properties, target );
++
++		const names = Object.keys( properties );
++		const results = names.map( n => target[ n ] );
++		this.getPropertyValuesAtTexel( names, faceIndex, barycoord, geometry, results );
++
++		names.forEach( ( n, i ) => target[ n ] = results[ i ] );
++		return target;
++
++	}
++
++	// Reads values asynchronously
++	getPropertyValuesAtTexelAsync( ...args ) {
++
++		this._asyncRead = true;
++		const result = this.getFeatures( ...args );
++		this._asyncRead = false;
++		return result;
++
++	}
++
++	// Reads values from the textures synchronously
++	getPropertyValuesAtTexel( names, faceIndex, barycoord, geometry, target = [] ) {
++
++		// resize our targets appropriately
++		while ( target.length < names.length ) target.push( null );
++		target.length = names.length;
++		TextureReadUtility.increaseSizeTo( target.length );
++
++		// get the attribute indices
++		const textures = this.data;
++		const accessorProperties = this.definition.properties;
++		const properties = this.properties;
++		const indices = getTriangleIndices( geometry, faceIndex );
++		for ( let i = 0, l = names.length; i < l; i ++ ) {
++
++			// skip any requested properties that are not provided
++			const name = names[ i ];
++			if ( ! accessorProperties[ name ] ) {
++
++				continue;
++
++			}
++
++			// get the attribute of the target tex coord
++			const property = properties[ name ];
++			const texture = textures[ property.index ];
++			getTexCoord( geometry, property.texCoord, barycoord, indices, _uv );
++			getTexelIndices( _uv, texture.image.width, texture.image.height, _pixel );
++			_dstPixel.set( i, 0 );
++
++			TextureReadUtility.renderPixelToTarget( texture, _pixel, _dstPixel );
++
++		}
++
++		// read the data
++		const buffer = new Uint8Array( names.length * 4 );
++		if ( this._asyncRead ) {
++
++			return TextureReadUtility
++				.readDataAsync( buffer )
++				.then( () => {
++
++					readTextureSampleResults.call( this );
++					return target;
++
++				} );
++
++		} else {
++
++			TextureReadUtility.readData( buffer );
++			readTextureSampleResults.call( this );
++
++			return target;
++
++		}
++
++		function readTextureSampleResults() {
++
++			for ( let i = 0, l = names.length; i < l; i ++ ) {
++
++				const name = names[ i ];
++				const property = properties[ name ];
++				const type = property.type;
++
++				// initialize the output value
++				target[ i ] = initializeFromProperty( property, target[ i ] );
++
++				// use a default of the texture accessor definition does not include the value
++				if ( ! property ) {
++
++					throw new Error( 'PropertyTextureAccessor: Requested property does not exist.' );
++
++				} else if ( ! accessorProperties[ name ] ) {
++
++					target[ i ] = property.resolveDefault( target );
++					continue;
++
++				}
++
++				// get the final array length to read all data based on used buffer data
++				const length = property.valueLength * ( property.count || 1 );
++
++				// set the data read back from the texture to the target type
++				const data = property.channels.map( c => buffer[ 4 * i + c ] );
++				const componentType = property.componentType;
++				const BufferCons = getArrayConstructorFromType( componentType, type );
++				const readBuffer = new BufferCons( length );
++				new Uint8Array( readBuffer.buffer ).set( data );
++
++				// read all the data
++				if ( property.array ) {
++
++					const arr = target[ i ];
++					for ( let j = 0, lj = arr.length; j < lj; lj ++ ) {
++
++						arr[ j ] = property.readDataFromBuffer( readBuffer, j, arr[ j ] );
++
++					}
++
++				} else {
++
++					target[ i ] = property.readDataFromBuffer( readBuffer, 0, target[ i ] );
++
++				}
++
++				// scale the numeric values
++				target[ i ] = property.adjustValueScaleOffset( target[ i ] );
++
++				// resolve to default values
++				target[ i ] = property.resolveNoData( target[ i ] );
++
++				// convert to enum strings
++				target[ i ] = property.resolveEnumsToStrings( target[ i ] );
++
++			}
++
++		}
++
++	}
++
++	// dispose all of the texture data used
++	dispose() {
++
++		this.data.forEach( texture => {
++
++			if ( texture ) {
++
++				texture.dispose();
++
++				if ( texture.image instanceof ImageBitmap ) {
++
++					texture.image.close();
++
++				}
++
++			}
++
++		} );
++
++	}
++
++}
+diff --git a/node_modules/3d-tiles-renderer/src/three/loaders/gltf/metadata/classes/StructuralMetadata.js b/node_modules/3d-tiles-renderer/src/three/loaders/gltf/metadata/classes/StructuralMetadata.js
+new file mode 100644
+index 0000000..435cb6e
+--- /dev/null
++++ b/node_modules/3d-tiles-renderer/src/three/loaders/gltf/metadata/classes/StructuralMetadata.js
+@@ -0,0 +1,189 @@
++import { PropertyAttributeAccessor } from './PropertyAttributeAccessor.js';
++import { PropertyTableAccessor } from './PropertyTableAccessor.js';
++import { PropertyTextureAccessor } from './PropertyTextureAccessor.js';
++
++// TODO: produce a function to help initialize / validate an object structure for a given class
++// to ensure the target values are well-formed
++export class StructuralMetadata {
++
++	constructor( definition, textures, buffers, nodeMetadata = null, object = null ) {
++
++		const {
++			schema,
++			propertyTables = [],
++			propertyTextures = [],
++			propertyAttributes = [],
++		} = definition;
++
++		const { enums, classes } = schema;
++		const tableAccessors = propertyTables.map( t => new PropertyTableAccessor( t, classes, enums, buffers ) );
++		let textureAccessors = [];
++		let attributeAccessors = [];
++
++		if ( nodeMetadata ) {
++
++			if ( nodeMetadata.propertyTextures ) {
++
++				textureAccessors = nodeMetadata.propertyTextures.map( i => new PropertyTextureAccessor( propertyTextures[ i ], classes, enums, textures ) );
++
++			}
++
++			if ( nodeMetadata.propertyAttributes ) {
++
++				attributeAccessors = nodeMetadata.propertyAttributes.map( i => new PropertyAttributeAccessor( propertyAttributes[ i ], classes, enums ) );
++
++			}
++
++		}
++
++		this.schema = schema;
++		this.tableAccessors = tableAccessors;
++		this.textureAccessors = textureAccessors;
++		this.attributeAccessors = attributeAccessors;
++		this.object = object;
++		this.textures = textures;
++		this.nodeMetadata = nodeMetadata;
++
++	}
++
++	// Property Tables
++	getPropertyTableData( tableIndices, ids, target = [] ) {
++
++		const length = Math.min( tableIndices.length, ids.length );
++		target.length = length;
++
++		for ( let i = 0; i < length; i ++ ) {
++
++			const table = this.tableAccessors[ tableIndices[ i ] ];
++			target[ i ] = table.getData( ids[ i ], target[ i ] );
++
++		}
++
++		return target;
++
++	}
++
++	getPropertyTableInfo( tableIndices = null ) {
++
++		if ( tableIndices === null ) {
++
++			return this.tableAccessors.map( acc => {
++
++				return {
++					name: acc.name,
++					className: acc.definition.class,
++				};
++
++			} );
++
++		} else {
++
++			return tableIndices.map( i => {
++
++				const table = this.tableAccessors[ i ];
++				return {
++					name: table.name,
++					className: table.definition.class,
++				};
++
++			} );
++
++		}
++
++	}
++
++	// Property Textures
++	getPropertyTextureData( triangle, barycoord, target = [] ) {
++
++		const textureAccessors = this.textureAccessors;
++		target.length = textureAccessors.length;
++
++		for ( let i = 0; i < textureAccessors.length; i ++ ) {
++
++			const accessor = textureAccessors[ i ];
++			target[ i ] = accessor.getData( triangle, barycoord, this.object.geometry, target[ i ] );
++
++		}
++
++		return target;
++
++	}
++
++	async getPropertyTextureDataAsync( triangle, barycoord, target = [] ) {
++
++		const textureAccessors = this.textureAccessors;
++		target.length = textureAccessors.length;
++
++		const promises = [];
++		for ( let i = 0; i < textureAccessors.length; i ++ ) {
++
++			const accessor = textureAccessors[ i ];
++			const promise = accessor
++				.getDataAsync( triangle, barycoord, this.object.geometry, target[ i ] )
++				.then( result => {
++
++					target[ i ] = result;
++
++				} );
++
++			promises.push( promise );
++
++		}
++
++		await Promise.all( promises );
++
++		return target;
++
++	}
++
++	getPropertyTextureInfo() {
++
++		return this.textureAccessors;
++
++	}
++
++	// Property Attributes
++	getPropertyAttributeData( attributeIndex, target = [] ) {
++
++		const attributeAccessors = this.attributeAccessors;
++		target.length = attributeAccessors.length;
++
++		for ( let i = 0; i < attributeAccessors.length; i ++ ) {
++
++			const accessor = attributeAccessors[ i ];
++			target[ i ] = accessor.getData( attributeIndex, this.object.geometry, target[ i ] );
++
++		}
++
++		return target;
++
++	}
++
++	getPropertyAttributeInfo() {
++
++		return this.attributeAccessors.map( acc => {
++
++			return {
++				name: acc.name,
++				className: acc.definition.class,
++			};
++
++		} );
++
++	}
++
++	dispose() {
++
++		[
++			...this.textureAccessors,
++			...this.tableAccessors,
++			...this.attributeAccessors,
++		].forEach( acc => {
++
++			acc.dispose();
++
++		} );
++
++	}
++
++}
+diff --git a/node_modules/3d-tiles-renderer/src/three/loaders/gltf/metadata/math/Matrix2.js b/node_modules/3d-tiles-renderer/src/three/loaders/gltf/metadata/math/Matrix2.js
+new file mode 100644
+index 0000000..5db2d8b
+--- /dev/null
++++ b/node_modules/3d-tiles-renderer/src/three/loaders/gltf/metadata/math/Matrix2.js
+@@ -0,0 +1,34 @@
++// Matrix2 definition since it doesn't exist in three.js
++export class Matrix2 {
++
++	constructor( n11, n12, n21, n22 ) {
++
++		Matrix2.prototype.isMatrix2 = true;
++
++		this.elements = [
++
++			1, 0,
++			0, 1,
++
++		];
++
++		if ( n11 !== undefined ) {
++
++			this.set( n11, n12, n21, n22 );
++
++		}
++
++	}
++
++	set( n11, n12, n21, n22 ) {
++
++		const te = this.elements;
++
++		te[ 0 ] = n11; te[ 1 ] = n21;
++		te[ 2 ] = n12; te[ 3 ] = n22;
++
++		return this;
++
++	}
++
++}
+diff --git a/node_modules/3d-tiles-renderer/src/three/loaders/gltf/metadata/utilities/ClassPropertyHelpers.js b/node_modules/3d-tiles-renderer/src/three/loaders/gltf/metadata/utilities/ClassPropertyHelpers.js
+new file mode 100644
+index 0000000..d52e524
+--- /dev/null
++++ b/node_modules/3d-tiles-renderer/src/three/loaders/gltf/metadata/utilities/ClassPropertyHelpers.js
+@@ -0,0 +1,468 @@
++import {
++	Vector2,
++	Vector3,
++	Vector4,
++	Matrix3,
++	Matrix4,
++} from 'three';
++import { Matrix2 } from '../math/Matrix2.js';
++
++// returns the field in the object with a resolved default
++export function getField( object, key, def ) {
++
++	return object && key in object ? object[ key ] : def;
++
++}
++
++// checks the structural metadata type
++export function isNumericType( type ) {
++
++	return type !== 'BOOLEAN' && type !== 'STRING' && type !== 'ENUM';
++
++}
++
++export function isFloatType( type ) {
++
++	return /^FLOAT/.test( type );
++
++}
++
++export function isVectorType( type ) {
++
++	return /^VEC/.test( type );
++
++}
++
++export function isMatrixType( type ) {
++
++	return /^MATRIX/.test( type );
++
++}
++
++// returns the max value of the given type
++export function getMaxValue( componentType ) {
++
++	const tokens = /([A-Z]+)([0-9]+)/.exec( componentType );
++	const unsigned = tokens[ 1 ] === 'UINT';
++	const bits = parseInt( tokens[ 2 ] );
++
++	if ( unsigned ) {
++
++		return ( 1 << bits ) - 1;
++
++	} else {
++
++		return ( 1 << ( bits - 1 ) ) - 1;
++
++	}
++
++}
++
++// returns a value from the given buffer of the given type
++export function readDataFromBufferToType( buffer, offset, type, target = null ) {
++
++	if ( isMatrixType( type ) ) {
++
++		const elements = target.elements;
++		for ( let i = 0, l = elements.length; i < l; i ++ ) {
++
++			elements[ i ] = buffer[ i + offset ];
++
++		}
++
++		return target;
++
++	} else if ( isVectorType( type ) ) {
++
++		target.x = buffer[ offset + 0 ];
++		target.y = buffer[ offset + 1 ];
++		if ( 'z' in target ) target.z = buffer[ offset + 2 ];
++		if ( 'w' in target ) target.w = buffer[ offset + 3 ];
++		return target;
++
++	} else {
++
++		return buffer[ offset ];
++
++	}
++
++}
++
++// gets a new instance of the given structural metadata type
++export function getTypeInstance( type ) {
++
++	switch ( type ) {
++
++		case 'SCALAR': return 0;
++		case 'VEC2': return new Vector2();
++		case 'VEC3': return new Vector3();
++		case 'VEC4': return new Vector4();
++		case 'MAT2': return new Matrix2();
++		case 'MAT3': return new Matrix3();
++		case 'MAT4': return new Matrix4();
++		case 'BOOLEAN': return false;
++		case 'STRING': return '';
++		case 'ENUM': return 0;
++
++	}
++
++}
++
++// returns false if the given value is not of "type"
++export function isTypeInstance( type, value ) {
++
++	if ( value === null || value === undefined ) {
++
++		return false;
++
++	}
++
++	switch ( type ) {
++
++		case 'SCALAR': return value instanceof Number;
++		case 'VEC2': return value.isVector2;
++		case 'VEC3': return value.isVector3;
++		case 'VEC4': return value.isVector4;
++		case 'MAT2': return value.isMatrix2;
++		case 'MAT3': return value.isMatrix3;
++		case 'MAT4': return value.isMatrix4;
++		case 'BOOLEAN': return value instanceof Boolean;
++		case 'STRING': return value instanceof String;
++		case 'ENUM': return value instanceof Number || value instanceof String;
++
++	}
++
++}
++
++// gets a new numeric array constructor from the given structural metadata type
++export function getArrayConstructorFromType( componentType, type ) {
++
++	switch ( componentType ) {
++
++		case 'INT8': return Int8Array;
++		case 'INT16': return Int16Array;
++		case 'INT32': return Int32Array;
++		case 'INT64': return BigInt64Array;
++
++		case 'UINT8': return Uint8Array;
++		case 'UINT16': return Uint16Array;
++		case 'UINT32': return Uint32Array;
++		case 'UINT64': return BigUint64Array;
++
++		case 'FLOAT32': return Float32Array;
++		case 'FLOAT64': return Float64Array;
++
++	}
++
++	switch ( type ) {
++
++		case 'BOOLEAN': return Uint8Array;
++		case 'STRING': return Uint8Array;
++
++	}
++
++}
++
++// resolve a full default value for the given property including arrays
++export function resolveDefault( property, target = null ) {
++
++	const array = property.array;
++	if ( array ) {
++
++		target = target && Array.isArray( target ) ? target : [];
++		target.length = property.count;
++		for ( let i = 0, l = target.length; i < l; i ++ ) {
++
++			target[ i ] = resolveDefaultElement( property, target[ i ] );
++
++		}
++
++	} else {
++
++		target = resolveDefaultElement( property, target );
++
++	}
++
++	return target;
++
++}
++
++// gets the default value of the given type
++export function resolveDefaultElement( property, target = null ) {
++
++	const defaultValue = property.default;
++	const type = property.type;
++
++	if ( defaultValue === null ) {
++
++		return null;
++
++	} else {
++
++		// TODO: make sure the default uses the same major order for matrices in three.js
++		target = target || getTypeInstance( type );
++		if ( isMatrixType( type ) ) {
++
++			const elements = target.elements;
++			for ( let i = 0, l = elements.length; i < l; i ++ ) {
++
++				elements[ i ] = defaultValue[ i ];
++
++			}
++
++		} else if ( isVectorType( type ) ) {
++
++			target.fromArray( defaultValue );
++
++		} else {
++
++			return defaultValue;
++
++		}
++
++	}
++
++}
++
++// check for of instances of "no data" in the given target value and adjust them to the
++// default value.
++export function resolveNoData( property, target ) {
++
++	if ( property.noData === null ) {
++
++		return target;
++
++	}
++
++	const noData = property.noData;
++	const type = property.type;
++	if ( Array.isArray( target ) ) {
++
++		for ( let i = 0, l = target.length; i < l; i ++ ) {
++
++			target[ i ] = performResolution( target[ i ] );
++
++		}
++
++	} else {
++
++		target = performResolution( target );
++
++	}
++
++	return target;
++
++	// replace the value with a default if no data is encountered
++	function performResolution( target ) {
++
++		if ( isNoDataEqual( target ) ) {
++
++			target = resolveDefaultElement( property, target );
++
++		}
++
++		return target;
++
++	}
++
++	// checks if the given value is equal to the no data value
++	function isNoDataEqual( value ) {
++
++		if ( isMatrixType( type ) ) {
++
++			const elements = value.elements;
++			for ( let i = 0, l = noData.length; i < l; i ++ ) {
++
++				if ( noData[ i ] !== elements[ i ] ) {
++
++					return false;
++
++				}
++
++			}
++
++			return true;
++
++		} else if ( isVectorType( type ) ) {
++
++			for ( let i = 0, l = noData.length; i < l; i ++ ) {
++
++				if ( noData[ i ] !== value.getComponent( i ) ) {
++
++					return false;
++
++				}
++
++			}
++
++			return true;
++
++		} else {
++
++			return noData === value;
++
++		}
++
++	}
++
++}
++
++// scales the value based on property settings
++// the provided target value is normalized, scaled, and then offset if numeric
++export function adjustValueScaleOffset( property, target ) {
++
++	const {
++		type,
++		componentType,
++		scale,
++		offset,
++		normalized,
++	} = property;
++
++	if ( Array.isArray( target ) ) {
++
++		for ( let i = 0, l = target.length; i < l; i ++ ) {
++
++			target[ i ] = adjustFromType( target[ i ] );
++
++		}
++
++	} else {
++
++		target = adjustFromType( target );
++
++	}
++
++	return target;
++
++	function adjustFromType( value ) {
++
++		if ( value === null ) {
++
++			return null;
++
++		}
++
++		if ( isMatrixType( type ) ) {
++
++			value = adjustMatrix( value );
++
++		} else if ( isVectorType( type ) ) {
++
++			value = adjustVector( value );
++
++		} else {
++
++			value = adjustScalar( value );
++
++		}
++
++		return value;
++
++	}
++
++	function adjustVector( value ) {
++
++		value.x = adjustScalar( value.x );
++		value.y = adjustScalar( value.y );
++		if ( 'z' in value ) value.z = adjustScalar( value.z );
++		if ( 'w' in value ) value.w = adjustScalar( value.w );
++		return value;
++
++	}
++
++	function adjustMatrix( value ) {
++
++		const elements = value.elements;
++		for ( let i = 0, l = elements.length; i < l; i ++ ) {
++
++			elements[ i ] = adjustScalar( elements[ i ] );
++
++		}
++
++		return value;
++
++	}
++
++	function adjustScalar( value ) {
++
++		if ( normalized ) {
++
++			value = value / getMaxValue( componentType );
++
++		}
++
++		if ( normalized || isFloatType( componentType ) ) {
++
++			// TODO: what order are these operations supposed to be performed in?
++			value = value * scale + offset;
++
++		}
++
++		return value;
++
++	}
++
++}
++
++// Shape the given target object based on the provided property. If overrideCount is
++// provided then it will be used to specify the array length.
++export function initializeFromProperty( property, target, overrideCount = null ) {
++
++	if ( property.array ) {
++
++		if ( ! Array.isArray( target ) ) {
++
++			target = new Array( property.count || 0 );
++
++		}
++
++		target.length = overrideCount !== null ? overrideCount : property.count;
++
++		for ( let i = 0, l = target.length; i < l; i ++ ) {
++
++			if ( ! isTypeInstance( property.type, target[ i ] ) ) {
++
++				target[ i ] = getTypeInstance( property.type );
++
++			}
++
++		}
++
++	} else {
++
++		if ( ! isTypeInstance( property.type, target ) ) {
++
++			target = getTypeInstance( property.type );
++
++		}
++
++	}
++
++	return target;
++
++}
++
++// Shape the "target" object based on the provided set of properties
++export function initializeFromClass( properties, target ) {
++
++	// remove unused fields
++	for ( const key in target ) {
++
++		if ( ! ( key in properties ) ) {
++
++			delete target[ key ];
++
++		}
++
++	}
++
++	// add and adjust any fields required by the set of properties
++	for ( const key in properties ) {
++
++		const prop = properties[ key ];
++		target[ key ] = initializeFromProperty( prop, target[ key ] );
++
++	}
++
++}
+diff --git a/node_modules/3d-tiles-renderer/src/three/loaders/gltf/metadata/utilities/TexCoordUtilities.js b/node_modules/3d-tiles-renderer/src/three/loaders/gltf/metadata/utilities/TexCoordUtilities.js
+new file mode 100644
+index 0000000..0bee9b8
+--- /dev/null
++++ b/node_modules/3d-tiles-renderer/src/three/loaders/gltf/metadata/utilities/TexCoordUtilities.js
+@@ -0,0 +1,66 @@
++import { Vector2 } from 'three';
++
++export function getTextureCoordAttribute( geometry, index ) {
++
++	if ( index === 0 ) {
++
++		return geometry.getAttribute( 'uv' );
++
++	} else {
++
++		return geometry.getAttribute( `uv${ index }` );
++
++	}
++
++}
++
++export function getTriangleIndices( geometry, faceIndex, target = new Array( 3 ) ) {
++
++	// get the attribute indices
++	let i0 = 3 * faceIndex;
++	let i1 = 3 * faceIndex + 1;
++	let i2 = 3 * faceIndex + 2;
++	if ( geometry.index ) {
++
++		i0 = geometry.index.getX( i0 );
++		i1 = geometry.index.getX( i1 );
++		i2 = geometry.index.getX( i2 );
++
++	}
++
++	target[ 0 ] = i0;
++	target[ 1 ] = i1;
++	target[ 2 ] = i2;
++	return target;
++
++}
++
++const _uv0 = new Vector2();
++const _uv1 = new Vector2();
++const _uv2 = new Vector2();
++export function getTexCoord( geometry, texCoord, barycoord, indices, target ) {
++
++	const [ i0, i1, i2 ] = indices;
++	const attr = getTextureCoordAttribute( geometry, texCoord );
++	_uv0.fromBufferAttribute( attr, i0 );
++	_uv1.fromBufferAttribute( attr, i1 );
++	_uv2.fromBufferAttribute( attr, i2 );
++
++	target
++		.set( 0, 0, 0 )
++		.addScaledVector( _uv0, barycoord.x )
++		.addScaledVector( _uv1, barycoord.y )
++		.addScaledVector( _uv2, barycoord.z );
++
++}
++
++export function getTexelIndices( uv, width, height, target ) {
++
++	const fx = uv.x - Math.floor( uv.x );
++	const fy = uv.y - Math.floor( uv.y );
++	const px = Math.floor( ( fx * width ) % width );
++	const py = Math.floor( ( fy * height ) % height );
++	target.set( px, py );
++	return target;
++
++}
+diff --git a/node_modules/3d-tiles-renderer/src/three/loaders/gltf/metadata/utilities/TextureReadUtility.js b/node_modules/3d-tiles-renderer/src/three/loaders/gltf/metadata/utilities/TextureReadUtility.js
+new file mode 100644
+index 0000000..4c48f5c
+--- /dev/null
++++ b/node_modules/3d-tiles-renderer/src/three/loaders/gltf/metadata/utilities/TextureReadUtility.js
+@@ -0,0 +1,148 @@
++import { WebGLRenderTarget, WebGLRenderer, Box2, Vector2, Vector4, ShaderMaterial, REVISION, CustomBlending, ZeroFactor, OneFactor } from 'three';
++import { FullScreenQuad } from 'three/examples/jsm/postprocessing/Pass.js';
++
++const REVISION_165 = parseInt( REVISION ) >= 165;
++const REVISION_166 = parseInt( REVISION ) >= 166;
++const _box = /* @__PURE__ */ new Box2();
++const _currentScissor = /* @__PURE__ */ new Vector4();
++const _pos = /* @__PURE__ */ new Vector2();
++
++export const TextureReadUtility = new ( class {
++
++	constructor() {
++
++		// TODO: is it possible for the textures to be a type other than UInt8?
++		this._renderer = new WebGLRenderer();
++		this._target = new WebGLRenderTarget( 1, 1 );
++		this._texTarget = new WebGLRenderTarget();
++		this._quad = new FullScreenQuad( new ShaderMaterial( {
++
++			blending: CustomBlending,
++			blendDst: ZeroFactor,
++			blendSrc: OneFactor,
++
++			uniforms: {
++
++				map: { value: null },
++				pixel: { value: new Vector2() }
++
++			},
++
++			vertexShader: /* glsl */`
++				void main() {
++
++					gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
++
++				}
++			`,
++
++			fragmentShader: /* glsl */`
++				uniform sampler2D map;
++				uniform ivec2 pixel;
++
++				void main() {
++
++					gl_FragColor = texelFetch( map, pixel, 0 );
++
++				}
++			`,
++
++		} ) );
++
++	}
++
++	increaseSizeTo( width ) {
++
++		this._target.setSize( Math.max( this._target.width, width ), 1 );
++
++	}
++
++	readDataAsync( buffer ) {
++
++		const { _renderer, _target } = this;
++		if ( REVISION_165 ) {
++
++			return _renderer.readRenderTargetPixelsAsync( _target, 0, 0, buffer.length / 4, 1, buffer );
++
++		} else {
++
++			return Promise.resolve().then( () => this.readData( buffer ) );
++
++		}
++
++	}
++
++	readData( buffer ) {
++
++		const { _renderer, _target } = this;
++		_renderer.readRenderTargetPixels( _target, 0, 0, buffer.length / 4, 1, buffer );
++
++	}
++
++	// render a single pixel from the source at the destination point on the
++	// render target
++	renderPixelToTarget( texture, pixel, dstPixel ) {
++
++		const { _quad, _renderer, _target, _texTarget } = this;
++
++		if ( REVISION_166 ) {
++
++			_box.min.copy( pixel );
++			_box.max.copy( pixel );
++			_box.max.x += 1;
++			_box.max.y += 1;
++			_renderer.initRenderTarget( _target );
++			_renderer.copyTextureToTexture( texture, _target.texture, _box, dstPixel, 0 );
++
++		} else {
++
++			// save state
++			const currentAutoClear = _renderer.autoClear;
++			const currentTarget = _renderer.getRenderTarget();
++			const currentScissorTest = _renderer.getScissorTest();
++			_renderer.getScissor( _currentScissor );
++
++			// initialize the render target
++			_texTarget.setSize( texture.image.width, texture.image.height );
++			_renderer.setRenderTarget( _texTarget );
++
++			// render the data
++			_pos.set( 0, 0 );
++			if ( REVISION_165 ) {
++
++				_renderer.copyTextureToTexture( texture, _texTarget.texture, null, _pos );
++
++			} else {
++
++				_renderer.copyTextureToTexture( _pos, texture, _texTarget.texture );
++
++			}
++
++			_quad.material.uniforms.map.value = _texTarget.texture;
++			_quad.material.uniforms.pixel.value.copy( pixel );
++
++			// if we set the render target after setting scissor state it is reset
++			_renderer.setRenderTarget( _target );
++
++			// init state
++			_renderer.setScissorTest( true );
++			_renderer.setScissor( dstPixel.x, dstPixel.y, 1, 1 );
++			_renderer.autoClear = false;
++
++			// render
++			_quad.render( _renderer );
++
++			// reset state
++			_renderer.setScissorTest( currentScissorTest );
++			_renderer.setScissor( _currentScissor );
++			_renderer.setRenderTarget( currentTarget );
++			_renderer.autoClear = currentAutoClear;
++
++			// remove the memory
++			_texTarget.dispose();
++
++		}
++
++	}
++
++} )();
+diff --git a/node_modules/3d-tiles-renderer/src/three/math/Ellipsoid.js b/node_modules/3d-tiles-renderer/src/three/math/Ellipsoid.js
+index 985356c..827c90d 100644
+--- a/node_modules/3d-tiles-renderer/src/three/math/Ellipsoid.js
++++ b/node_modules/3d-tiles-renderer/src/three/math/Ellipsoid.js
+@@ -1,4 +1,4 @@
+-import { Vector3, Spherical, MathUtils } from 'three';
++import { Vector3, Spherical, MathUtils, Ray, Matrix4, Sphere } from 'three';
+ import { swapToGeoFrame, latitudeToSphericalPhi } from './GeoUtils.js';
+ 
+ const _spherical = new Spherical();
+@@ -6,12 +6,16 @@ const _norm = new Vector3();
+ const _vec = new Vector3();
+ const _vec2 = new Vector3();
+ const _vec3 = new Vector3();
++const _matrix = new Matrix4();
++const _sphere = new Sphere();
+ 
+ const _vecX = new Vector3();
+ const _vecY = new Vector3();
+ const _vecZ = new Vector3();
+ const _pos = new Vector3();
+ 
++const _ray = new Ray();
++
+ const EPSILON12 = 1e-12;
+ const CENTER_EPS = 0.1;
+ 
+@@ -23,6 +27,27 @@ export class Ellipsoid {
+ 
+ 	}
+ 
++	intersectRay( ray, target ) {
++
++		_matrix.makeScale( ...this.radius ).invert();
++		_sphere.center.set( 0, 0, 0 );
++		_sphere.radius = 1;
++
++		_ray.copy( ray ).applyMatrix4( _matrix );
++		if ( _ray.intersectSphere( _sphere, target ) ) {
++
++			_matrix.makeScale( ...this.radius );
++			target.applyMatrix4( _matrix );
++			return target;
++
++		} else {
++
++			return null;
++
++		}
++
++	}
++
+ 	// returns a frame with Z indicating altitude
+ 	// Y pointing north
+ 	// X pointing east
+diff --git a/node_modules/3d-tiles-renderer/src/three/raycastTraverse.js b/node_modules/3d-tiles-renderer/src/three/raycastTraverse.js
+index be59364..ed63935 100644
+--- a/node_modules/3d-tiles-renderer/src/three/raycastTraverse.js
++++ b/node_modules/3d-tiles-renderer/src/three/raycastTraverse.js
+@@ -1,5 +1,7 @@
+-import { Matrix4, Ray, Vector3 } from 'three';
++import { Matrix4, Ray, Vector3, REVISION } from 'three';
+ 
++// In three.js r165 and higher raycast traversal can be ended early
++const REVISION_165 = parseInt( REVISION ) < 165;
+ const _mat = new Matrix4();
+ const _localRay = new Ray();
+ const _vec = new Vector3();
+@@ -13,20 +15,28 @@ function distanceSort( a, b ) {
+ 
+ function intersectTileScene( scene, raycaster, intersects ) {
+ 
+-	// Don't intersect the box3 helpers because those are used for debugging
+-	scene.traverse( c => {
++	if ( REVISION_165 ) {
+ 
+-		// We set the default raycast function to empty so three.js doesn't automatically cast against it
+-		Object.getPrototypeOf( c ).raycast.call( c, raycaster, intersects );
++		// Don't intersect the box3 helpers because those are used for debugging
++		scene.traverse( c => {
+ 
+-	} );
++			// We set the default raycast function to empty so three.js doesn't automatically cast against it
++			Object.getPrototypeOf( c ).raycast.call( c, raycaster, intersects );
++
++		} );
++		_hitArray.sort( distanceSort );
++
++	} else {
++
++		raycaster.intersectObject( scene, true, intersects );
++
++	}
+ 
+ }
+ 
+ function intersectTileSceneFirstHist( scene, raycaster ) {
+ 
+ 	intersectTileScene( scene, raycaster, _hitArray );
+-	_hitArray.sort( distanceSort );
+ 
+ 	const hit = _hitArray[ 0 ] || null;
+ 	_hitArray.length = 0;
+diff --git a/node_modules/3d-tiles-renderer/src/utilities/LRUCache.js b/node_modules/3d-tiles-renderer/src/utilities/LRUCache.js
+index 3024030..1f614f3 100644
+--- a/node_modules/3d-tiles-renderer/src/utilities/LRUCache.js
++++ b/node_modules/3d-tiles-renderer/src/utilities/LRUCache.js
+@@ -1,10 +1,3 @@
+-// Fires at the end of the frame and before the next one
+-function enqueueMicrotask( callback ) {
+-
+-	Promise.resolve().then( callback );
+-
+-}
+-
+ class LRUCache {
+ 
+ 	constructor() {
+@@ -174,7 +167,7 @@ class LRUCache {
+ 		if ( ! this.scheduled ) {
+ 
+ 			this.scheduled = true;
+-			enqueueMicrotask( () => {
++			queueMicrotask( () => {
+ 
+ 				this.scheduled = false;
+ 				this.unloadUnusedContent();
+diff --git a/node_modules/3d-tiles-renderer/src/utilities/arrayToString.js b/node_modules/3d-tiles-renderer/src/utilities/arrayToString.js
+index 663fcce..d555efc 100644
+--- a/node_modules/3d-tiles-renderer/src/utilities/arrayToString.js
++++ b/node_modules/3d-tiles-renderer/src/utilities/arrayToString.js
+@@ -1,6 +1,7 @@
++const utf8decoder = new TextDecoder();
++
+ export function arrayToString( array ) {
+ 
+-	const utf8decoder = new TextDecoder();
+ 	return utf8decoder.decode( array );
+ 
+ }
