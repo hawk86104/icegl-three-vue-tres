@@ -174,6 +174,11 @@
 
 本项目包含的第三方源码和二进制文件之版权信息另行标注。
 
+关注我们的公众号获得最新讯息
+<p align = "left">    
+<img src="https://icegl-1314935952.cos.ap-beijing.myqcloud.com/uploads/20240619/de51c5e66dd5a8647100cc3b61171223.jpg" width="300" />
+</p>
+
 版权所有 Copyright © 2022-2025 by 🧊icegl (https://www.icegl.cn)
 
 All rights reserved。
