@@ -1,3 +1,11 @@
+<!--
+ * @Description: 
+ * @Version: 1.668
+ * @Autor: 地虎降天龙
+ * @Date: 2024-06-02 11:30:28
+ * @LastEditors: 地虎降天龙
+ * @LastEditTime: 2024-07-11 11:31:26
+-->
 <template>
     <TresCanvas v-bind="state" window-size>
         <TresPerspectiveCamera :position="[10, 10, 10]" :fov="45" :near="1" :far="1000" />

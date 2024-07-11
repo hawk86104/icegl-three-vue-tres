@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-10-27 16:43:05
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-03-18 09:13:15
+ * @LastEditTime: 2024-07-11 12:39:18
 -->
 <script setup lang="ts">
 import { useTexture, useRenderLoop } from '@tresjs/core'
@@ -12,7 +12,7 @@ import * as THREE from 'three'
 import { default as SPE } from '../../common/ShaderParticleEngine/build/SPE'
 
 const props = withDefaults(defineProps<{
-	cPosition: Array<number>
+	cPosition?: Array<number>
 }>(), {
 	cPosition: [0, 200, 0]
 })

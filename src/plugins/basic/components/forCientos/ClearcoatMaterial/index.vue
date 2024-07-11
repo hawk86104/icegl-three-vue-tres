@@ -4,12 +4,13 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-05-24 16:54:33
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-05-24 18:21:25
+ * @LastEditTime: 2024-07-11 11:52:25
 -->
 <script setup lang="ts">
 import * as THREE from 'three'
-import { C as CustomShaderMaterial } from './vanilla.esm.5.5.0.js'
-import { watchEffect } from 'vue'
+// import { C as CustomShaderMaterial } from './vanilla.esm.5.5.0.js'
+import { CustomShaderMaterial } from '@tresjs/cientos'
+import { watchEffect, ref } from 'vue'
 //@ts-ignore
 import perlin from './perlin.frag'
 //@ts-ignore
@@ -110,7 +111,7 @@ const materialProps = {
       float orangePeelFactorZ = pnoise(csm_vPosition * 1000.0 + 200.0);
       vec3 orangePeelFactor = vec3(orangePeelFactorX, orangePeelFactorY, orangePeelFactorZ);
 
-      csm_ClearcoatNormal = orangePeelFactor * 0.01 * (1.0 - normalizedDist);
+    //   csm_ClearcoatNormal = orangePeelFactor * 0.01 * (1.0 - normalizedDist);
       // csm_Clearcoat = 10.0;
       // csm_ClearcoatRoughness = 0.0;
 
@@ -119,17 +120,21 @@ const materialProps = {
 		`,
 }
 //@ts-ignore
-const material = new CustomShaderMaterial(materialProps)
+// const material = new CustomShaderMaterial(materialProps)
 
+const material = ref(null) as any
 watchEffect(() => {
-    material.color.setStyle(props.color)
-    material.metalness = props.metalness
-    material.roughness = props.roughness
-    material.clearcoat = props.clearcoat
-    material.clearcoatRoughness = props.clearcoatRoughness
+    if (material.value) {
+        material.value.value.color.setStyle(props.color)
+        material.value.value.metalness = props.metalness
+        material.value.value.roughness = props.roughness
+        material.value.value.clearcoat = props.clearcoat
+        material.value.value.clearcoatRoughness = props.clearcoatRoughness
+    }
 })
 </script>
 
 <template>
-    <primitive :object="material" />
+    <!-- <primitive :object="material" /> -->
+    <CustomShaderMaterial v-bind="materialProps" ref="material" />
 </template>

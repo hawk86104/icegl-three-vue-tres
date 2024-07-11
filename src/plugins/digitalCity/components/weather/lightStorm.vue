@@ -1,11 +1,13 @@
 <template>
-    <primitive :object="storm" :renderOrder="9999" />
+    <TresGroup ref="group">
+        <!-- <primitive :object="storm" :renderOrder="9999" /> -->
+    </TresGroup>
 </template>
 <script lang="ts" setup>
 import * as THREE from 'three'
 import { useRenderLoop } from '@tresjs/core'
 import { LightningStorm } from '../../common/lightningStorm/LightningStorm'
-import { watchEffect } from 'vue'
+import { watchEffect, ref, watch } from 'vue'
 
 const props = withDefaults(
     defineProps<{
@@ -108,6 +110,12 @@ watchEffect(() => {
 })
 
 const { onLoop } = useRenderLoop()
+const group = ref(null) as any
+watch(group, (newGroup) => {
+    if (newGroup) {
+        newGroup.add(storm)
+    }
+})
 onLoop(({ elapsed }) => {
     storm.update(elapsed)
 })

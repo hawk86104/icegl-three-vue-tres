@@ -1,20 +1,21 @@
 <!--
- * @Description: 
+ * @Description:
  * @Version: 1.668
  * @Autor: 地虎降天龙
  * @Date: 2024-01-09 17:15:51
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-04-23 20:20:17
+ * @LastEditTime: 2024-07-11 11:32:34
 -->
 <template>
-    <primitive :object="ol.group" />
+    <TresGroup ref="olref" />
 </template>
 
 <script setup lang="ts">
 import * as THREE from 'three'
 import { useTresContext } from '@tresjs/core'
 import { Outlines } from '@pmndrs/vanilla'
-import { onMounted, watchEffect } from 'vue'
+import { watchEffect } from 'vue'
+import { shallowRef, watch } from 'vue'
 
 const props = withDefaults(
     defineProps<{
@@ -37,8 +38,12 @@ const ol = Outlines({
     gl: renderer.value,
 })
 
-onMounted(() => {
-    ol.generate()
+const olref = shallowRef(null) as any
+watch(olref, () => {
+    if (olref.value && olref.value.parent) {
+        olref.value.parent.add(ol.group)
+        ol.generate()
+    }
 })
 
 watchEffect(() => {

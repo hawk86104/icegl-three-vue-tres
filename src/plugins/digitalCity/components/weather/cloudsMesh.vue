@@ -4,10 +4,10 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-10-27 16:43:05
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-04-28 15:48:30
+ * @LastEditTime: 2024-07-11 12:44:49
 -->
 <script setup lang="ts">
-import { watch, watchEffect } from 'vue'
+import { watch, watchEffect, ref } from 'vue'
 import { useTexture, useRenderLoop, useTresContext } from '@tresjs/core'
 import { Clouds, Cloud } from '@pmndrs/vanilla'
 import * as THREE from 'three'
@@ -97,8 +97,13 @@ watchEffect(() => {
     }
     cloud0.updateCloud()
 })
+const group = ref() as any
+watch(group, (value) => {
+    clouds.renderOrder = 3000
+    value.add(clouds)
+})
 </script>
 
 <template>
-    <primitive :object="clouds" :renderOrder="3000" />
+    <TresGroup ref="group"> </TresGroup>
 </template>
