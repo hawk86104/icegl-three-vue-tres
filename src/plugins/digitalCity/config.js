@@ -34,6 +34,7 @@ export default {
         },
         { src: 'plugins/digitalCity/preview/fireB.png', type: 'img', name: 'fireB', title: '火B🔥效果' },
         { src: 'plugins/digitalCity/preview/fireC.png', type: 'img', name: 'fireC', title: '火C🔥效果' },
+        { src: 'plugins/digitalCity/preview/fireD.png', type: 'img', name: 'fireD', title: '火D🔥效果' },
         { src: 'plugins/digitalCity/preview/fireBall.png', type: 'img', name: 'fireBall', title: '火球🔥效果' },
         { src: 'plugins/digitalCity/preview/heatmap.png', type: 'img', name: 'heatmap', title: '热力图' },
         { src: 'plugins/digitalCity/preview/heatmap2.png', type: 'img', name: 'heatmap2', title: '建筑物-热力图' },
