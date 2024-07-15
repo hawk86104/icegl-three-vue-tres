@@ -1,1 +1,0 @@
-import"./@amap.aVWyhucH1720750938663.js";var r,t;function e(){if(t)return r;return t=1,r=function(r){for(var t=0;t<r.length;t++){var e=r[t];if(e.property=!1,"ident"===e.type){for(var p=t;r[--p]&&"whitespace"===r[p].type;);r[p]&&"operator"===r[p].type&&"."===r[p].data&&(e.property=!0)}}return r}}export{e as r};
