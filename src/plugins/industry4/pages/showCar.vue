@@ -4,14 +4,14 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-18 08:51:19
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-07-18 11:42:46
+ * @LastEditTime: 2024-07-18 16:25:40
 -->
 <template>
     <loading />
     <TresCanvas v-bind="state" window-size>
         <TresPerspectiveCamera :position="[5, 1, 15]" :fov="30" :near="1" :far="1000" />
         <OrbitControls v-bind="controlsState" />
-        <TresAmbientLight :intensity="2" />
+        <TresAmbientLight :intensity="3" />
         <TresDirectionalLight color="#ffffff" :intensity="5" castShadow :position="[0, 3, 0]" />
         <TresSpotLight
             ref="spotLight"

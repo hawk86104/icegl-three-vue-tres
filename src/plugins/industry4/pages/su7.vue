@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-18 08:51:19
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-07-18 14:59:33
+ * @LastEditTime: 2024-07-18 16:58:18
 -->
 <template>
     <Suspense>
@@ -16,9 +16,6 @@
             <TresPerspectiveCamera :position="[0, 5, 8]" :fov="45" :near="0.1" :far="500" />
         </Levioso>
         <OrbitControls v-bind="controlsState" />
-        <!-- <TresAmbientLight color="#ffffff" :intensity="0.5" />
-        <TresDirectionalLight :position="[0, 2, -4]" :intensity="0.2" /> -->
-
         <Suspense>
             <car :run="showSpeedup" />
         </Suspense>
@@ -32,8 +29,8 @@
         </Suspense>
 
         <Suspense>
-            <Environment :blur="0" :far="1000" :useDefaultScene="showSpeedup">
-                <Lightformer :intensity="0.66" :rotation-x="Math.PI / 2" :position="[0, 5, 0]" :scale="[10, 10, 1]" />
+            <Environment :blur="0" :far="10000" :useDefaultScene="showSpeedup">
+                <Lightformer :intensity="6" :rotation-x="Math.PI / 2" :position="[0, 7, 0]" :scale="[10, 10, 2]" />
             </Environment>
         </Suspense>
 
