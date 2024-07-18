@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-18 08:51:19
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-07-18 11:49:27
+ * @LastEditTime: 2024-07-18 14:59:33
 -->
 <template>
     <Suspense>
@@ -33,7 +33,7 @@
 
         <Suspense>
             <Environment :blur="0" :far="1000" :useDefaultScene="showSpeedup">
-                <Lightformer :intensity="1" :rotation-x="Math.PI / 2" :position="[0, 5, 0]" :scale="[10, 10, 1]" />
+                <Lightformer :intensity="0.66" :rotation-x="Math.PI / 2" :position="[0, 5, 0]" :scale="[10, 10, 1]" />
             </Environment>
         </Suspense>
 
@@ -57,7 +57,8 @@ import UIcarSkin from '../components/su7/UIcarSkin.vue'
 
 const state = reactive({
     clearColor: '#000',
-    antialias: false,
+    antialias: true,
+    physicallyCorrectLights: true,
     logarithmicDepthBuffer: false, // 开启后，镜面反射底部会透明过来
     renderMode: 'manual',
 })

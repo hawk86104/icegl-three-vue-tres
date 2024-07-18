@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-03-27 10:38:54
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-07-18 11:58:55
+ * @LastEditTime: 2024-07-18 14:54:28
 -->
 <template>
     <primitive :object="scene" ref="tresMesh" />
@@ -35,7 +35,7 @@ const pTexture = await useTexture([
     './plugins/industry4/texture/t_startroom_light.raw.jpg',
     './plugins/industry4/texture/t_startroom_ao.raw.jpg',
     './plugins/industry4/texture/t_floor_roughness.webp',
-    './plugins/industry4/texture/t_floor_normal.webp',
+    './plugins/industry4/texture/t_floor_normal.webp'
 ])
 pTexture[2].colorSpace = THREE.LinearSRGBColorSpace
 pTexture[2].wrapS = pTexture[2].wrapT = THREE.RepeatWrapping
@@ -76,10 +76,9 @@ const reflectorMipMapRef = ref(null)
 watch(
     () => reflectorMipMapRef,
     (newVal) => {
-        debugger
         floor.material = makeCustomShaderMaterial(floor, newVal.value) as any
     },
-    { deep: true },
+    { deep: true }
 )
 
 watch(
@@ -93,12 +92,12 @@ watch(
             floor.material.envMapIntensity = 0
             lightMat.opacity = 1
         }
-    },
+    }
 )
 
 const tresMesh = ref<THREE.Mesh>()
 defineExpose({
     meshList: [light, floor],
-    tresMesh,
+    tresMesh
 })
 </script>
