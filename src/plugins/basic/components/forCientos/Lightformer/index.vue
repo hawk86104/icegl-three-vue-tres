@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-04-15 21:03:54
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-07-18 17:22:13
+ * @LastEditTime: 2024-07-18 17:24:53
 -->
 <script setup lang="ts">
 import { defineProps, ref, watchEffect, onMounted } from 'vue'
@@ -33,13 +33,11 @@ const props = withDefaults(
 const material = ref<MeshBasicMaterial>()
 watchEffect(() => {
     if (material.value) {
-        debugger
         material.value.color.multiplyScalar(props.intensity)
         material.value.needsUpdate = true
     }
 })
 onMounted(() => {
-    debugger
     // material.value.color.multiplyScalar(props.intensity)
 })
 </script>
