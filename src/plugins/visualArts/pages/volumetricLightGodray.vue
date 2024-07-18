@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-04-30 08:18:21
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-04-30 16:07:08
+ * @LastEditTime: 2024-07-18 11:35:18
 -->
 <template>
     <TresCanvas v-bind="state" window-size>
@@ -47,7 +47,7 @@ import effectComposer from '../components/volumetricLightGodray/effectComposer.v
 const state = reactive({
     clearColor: '#050505',
     antialias: false,
-    disableRender: true,
+    renderMode: 'manual',
 })
 
 const controlsState = reactive({

@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-05 08:42:01
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-11-05 08:55:42
+ * @LastEditTime: 2024-07-18 09:46:33
 -->
 <script lang="ts" setup>
 
@@ -29,7 +29,14 @@ pane.addBinding(boxOneBlocksPointerEvents, 'value', { label: 'Box2📦可点' })
 <template>
 	<TresCanvas window-size>
 		<TresPerspectiveCamera :look-at="[0, 4, 0]" />
-		<TresMesh :position="[0, 1, 0]" :blocks-pointer-events="!boxOneBlocksPointerEvents">
+		<TresMesh :position="[0, 1, 0]"  @click="
+                (event) => {
+                    console.log('pointer-down')
+                    if (!boxOneBlocksPointerEvents) {
+                        event.stopPropagation()
+                    }
+                }
+            ">
 			<TresBoxGeometry :args="[1, 1, 1]" />
 			<TresMeshNormalMaterial />
 		</TresMesh>

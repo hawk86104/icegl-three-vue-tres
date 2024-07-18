@@ -64,7 +64,7 @@ const state = reactive({
     clearColor: '#15151a',
     antialias: false,
     logarithmicDepthBuffer: true,
-    disableRender: true,
+    renderMode: 'manual',
 })
 const controlsState = reactive({
     autoRotate: true,

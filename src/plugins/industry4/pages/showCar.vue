@@ -4,27 +4,36 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-18 08:51:19
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-04-10 15:01:27
+ * @LastEditTime: 2024-07-18 16:25:40
 -->
 <template>
-	<loading />
-	<TresCanvas v-bind="state" window-size>
-		<TresPerspectiveCamera :position="[5, 1, 15]" :fov="30" :near="1" :far="1000" />
-		<OrbitControls v-bind="controlsState" />
-		<TresAmbientLight :intensity="0.5" />
-		<!-- <TresDirectionalLight color="#ffffff" intensity="5" castShadow v-light-helper :position="[0, 3, 0]" /> -->
-		<!-- <TresSpotLight ref="spotLight" :position="[0, 10, 0]" :angle="Math.PI / 4" :distance="20" v-light-helper
-			:penumbra="0.1" castShadow :intensity="60" :decay="1.5" :focus="0.5" /> -->
-		<TresSpotLight ref="spotLight" :position="[0, 10, 0]" :angle="Math.PI / 4" :distance="20" :penumbra="0.1" castShadow
-			:intensity="60" :decay="1.5" :focus="0.5" />
-		<Suspense>
-			<carModel />
-		</Suspense>
-		<Suspense>
-			<reflectorShaderMesh v-bind="configState" :position="[0, -1.17, 0]" />
-		</Suspense>
-		<envLightForCar />
-	</TresCanvas>
+    <loading />
+    <TresCanvas v-bind="state" window-size>
+        <TresPerspectiveCamera :position="[5, 1, 15]" :fov="30" :near="1" :far="1000" />
+        <OrbitControls v-bind="controlsState" />
+        <TresAmbientLight :intensity="3" />
+        <TresDirectionalLight color="#ffffff" :intensity="5" castShadow :position="[0, 3, 0]" />
+        <TresSpotLight
+            ref="spotLight"
+            :position="[0, 10, 0]"
+            :angle="Math.PI / 4"
+            :distance="20"
+            :penumbra="0.1"
+            castShadow
+            :intensity="60"
+            :decay="1.5"
+            :focus="0.5"
+        />
+        <Suspense>
+            <carModel />
+        </Suspense>
+        <Suspense>
+            <reflectorShaderMesh v-bind="configState" :position="[0, -1.17, 0]" />
+        </Suspense>
+        <Suspense>
+            <envLightForCar />
+        </Suspense>
+    </TresCanvas>
 </template>
 
 <script setup lang="ts">
@@ -39,35 +48,34 @@ import carModel from '../components/carModel.vue'
 
 const spotLight = ref(null as THREE.SpotLight | null)
 watchEffect(() => {
-	if (spotLight.value) {
-		// spotLight.value.shadow.mapSize.width = 1024
-		// spotLight.value.shadow.mapSize.height = 1024
-		// spotLight.value.shadow.camera.near = 1
-		// spotLight.value.shadow.camera.far = 100
-		spotLight.value.shadow.bias = -0.0001
-	}
+    if (spotLight.value) {
+        spotLight.value.shadow.mapSize.width = 1024
+        spotLight.value.shadow.mapSize.height = 1024
+        spotLight.value.shadow.camera.near = 1
+        spotLight.value.shadow.camera.far = 100
+        spotLight.value.shadow.bias = -0.0001
+    }
 })
 
 const configState = reactive({
-	reflectivity: 0.1,
-	mirror: 0.92,	// 去除纹理 镜面化 
-	mixStrength: 36,
-	showGridHelper: false,
+    reflectivity: 0.1,
+    mirror: 0.92, // 去除纹理 镜面化
+    mixStrength: 36,
+    showGridHelper: false,
 })
 
 const state = reactive({
-	clearColor: '#111111',
-	shadows: true,
-	alpha: false,
-	antialias: true,
-	pixelRatio: window.devicePixelRatio,
-	outputColorSpace: THREE.SRGBColorSpace,
-	// toneMapping: THREE.ACESFilmic,
-	useLegacyLights: true,
-	physicallyCorrectLights: true,
+    clearColor: '#111111',
+    shadows: true,
+    alpha: false,
+    antialias: true,
+    pixelRatio: window.devicePixelRatio,
+    outputColorSpace: THREE.SRGBColorSpace,
+    // toneMapping: THREE.ACESFilmic,
+    useLegacyLights: true,
+    physicallyCorrectLights: true,
 })
 const controlsState = reactive({
-	autoRotate: true,
+    autoRotate: true,
 })
-
 </script>
