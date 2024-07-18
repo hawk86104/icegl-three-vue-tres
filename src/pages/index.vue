@@ -4,14 +4,12 @@
         <OrbitControls v-bind="controlsState" />
         <TresAmbientLight :intensity="0.5" />
 
-        <TresMesh ref="sphereRef" :position="[0, 4, 0]" cast-shadow @pointer-enter="onPointerEnter"
-            @pointer-leave="onPointerLeave">
+        <TresMesh ref="sphereRef" :position="[0, 4, 0]" cast-shadow @pointer-enter="onPointerEnter" @pointer-leave="onPointerLeave">
             <TresSphereGeometry :args="[2, 32, 32]" />
             <TresMeshToonMaterial color="#006060" />
         </TresMesh>
 
-        <TresMesh ref="sphereRef2" :position="[4, 4, 0]" cast-shadow @pointer-enter="onPointerEnter"
-            @pointer-leave="onPointerLeave">
+        <TresMesh ref="sphereRef2" :position="[4, 4, 0]" cast-shadow @pointer-enter="onPointerEnter" @pointer-leave="onPointerLeave">
             <TresSphereGeometry :args="[2, 32, 32]" />
             <TresMeshToonMaterial color="#006060" />
         </TresMesh>
@@ -21,15 +19,13 @@
             <TresMeshToonMaterial />
         </TresMesh>
 
-
         <TresDirectionalLight ref="TDirectionalLight" :position="[10, 8, 4]" :intensity="1" cast-shadow />
         <TresDirectionalLight :position="[10, 2, 4]" :intensity="1" cast-shadow />
 
-        <TresGridHelper :position-y="0.1"/>
+        <TresGridHelper :position-y="0.1" />
     </TresCanvas>
-    <h1 class="text-center text-white w-full absolute"> 若需查看插件中心，请运行：npm run pre.dev</h1>
+    <h1 class="text-center text-white w-full absolute">若需查看插件中心，请运行：npm run pre.dev</h1>
 </template>
-
 
 <script setup lang="ts">
 import { SRGBColorSpace, BasicShadowMap, NoToneMapping } from 'three'
@@ -68,7 +64,6 @@ const controlsState = reactive({
     rotateSpeed: 1,
 })
 
-
 const sphereRef = ref()
 const sphereRef2 = ref()
 const TDirectionalLight = shallowRef()
@@ -90,7 +85,7 @@ function onPointerEnter(ev: any) {
 }
 function onPointerLeave(ev: any) {
     if (ev) {
-        ev.material.color.set('#006060')
+        ev.eventObject.material.color.set('#006060')
         // resume()
     }
 }
@@ -98,7 +93,7 @@ function onPointerLeave(ev: any) {
 watchEffect(() => {
     if (TDirectionalLight.value) {
         TDirectionalLight.value.shadow.mapSize.set(1000, 1000)
-        TDirectionalLight.value.shadow.camera.near = 0.5; // default
+        TDirectionalLight.value.shadow.camera.near = 0.5 // default
         // TDirectionalLight.value.shadow.camera.far = 50000; // default
         TDirectionalLight.value.shadow.camera.top = 20
         TDirectionalLight.value.shadow.camera.right = 20
@@ -106,6 +101,5 @@ watchEffect(() => {
         TDirectionalLight.value.shadow.camera.bottom = -20
     }
 })
-onMounted(() => {
-})
+onMounted(() => {})
 </script>
