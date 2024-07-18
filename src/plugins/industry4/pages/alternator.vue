@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-05-28 09:22:40
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-06-03 12:29:41
+ * @LastEditTime: 2024-07-18 11:22:10
 -->
 
 <template>
@@ -41,7 +41,7 @@ const state = reactive({
     shadowMapType: 1,
     toneMapping: 4,
     toneMappingExposure: 1,
-    disableRender: true,
+    renderMode: 'manual',
 })
 
 const cameraConfig = {

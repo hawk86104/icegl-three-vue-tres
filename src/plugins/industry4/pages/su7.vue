@@ -4,44 +4,47 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-18 08:51:19
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-04-17 17:32:44
+ * @LastEditTime: 2024-07-18 11:49:27
 -->
 <template>
-	<loading />
-	<TresCanvas v-bind="state" window-size>
-		<Levioso :speed="showSpeedup ? 66 : 0" :rotationFactor="0.1" :floatFactor="0.1" :range="[-0.2, 0.1]">
-			<TresPerspectiveCamera :position="[0, 5, 8]" :fov="45" :near="0.1" :far="500" />
-		</Levioso>
-		<OrbitControls v-bind="controlsState" />
-		<!-- <TresAmbientLight color="#ffffff" intensity="10" />
-		<TresDirectionalLight :position="[0, 2, -4]" :intensity="1" /> -->
+    <Suspense>
+        <loading />
+    </Suspense>
 
-		<Suspense>
-			<car :run="showSpeedup" />
-		</Suspense>
+    <TresCanvas v-bind="state" window-size>
+        <Levioso :speed="showSpeedup ? 66 : 0" :rotationFactor="0.1" :floatFactor="0.1" :range="[-0.2, 0.1]">
+            <TresPerspectiveCamera :position="[0, 5, 8]" :fov="45" :near="0.1" :far="500" />
+        </Levioso>
+        <OrbitControls v-bind="controlsState" />
+        <!-- <TresAmbientLight color="#ffffff" :intensity="0.5" />
+        <TresDirectionalLight :position="[0, 2, -4]" :intensity="0.2" /> -->
 
-		<Suspense>
-			<speedup :visible="showSpeedup" />
-		</Suspense>
+        <Suspense>
+            <car :run="showSpeedup" />
+        </Suspense>
 
-		<Suspense>
-			<startroom :hide="showSpeedup" />
-		</Suspense>
+        <Suspense>
+            <speedup :visible="showSpeedup" />
+        </Suspense>
 
-		<Suspense>
-			<Environment :blur="0" :far="1000" :useDefaultScene="showSpeedup">
-				<Lightformer :intensity="0.66" :rotation-x="Math.PI / 2" :position="[0, 5, 0]" :scale="[10, 10, 1]" />
-			</Environment>
-		</Suspense>
+        <Suspense>
+            <startroom :hide="showSpeedup" />
+        </Suspense>
 
-		<su7Effect :hide="showSpeedup" />
-	</TresCanvas>
-	<UIcarSkin />
+        <Suspense>
+            <Environment :blur="0" :far="1000" :useDefaultScene="showSpeedup">
+                <Lightformer :intensity="1" :rotation-x="Math.PI / 2" :position="[0, 5, 0]" :scale="[10, 10, 1]" />
+            </Environment>
+        </Suspense>
+
+        <su7Effect :hide="showSpeedup" />
+    </TresCanvas>
+    <UIcarSkin />
 </template>
 
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
-import { OrbitControls,Levioso } from '@tresjs/cientos'
+import { OrbitControls, Levioso } from '@tresjs/cientos'
 import { randomLoading as loading } from 'PLS/UIdemo'
 import { Pane } from 'tweakpane'
 import { Environment, Lightformer } from 'PLS/basic'
@@ -53,17 +56,17 @@ import su7Effect from '../components/su7/effect.vue'
 import UIcarSkin from '../components/su7/UIcarSkin.vue'
 
 const state = reactive({
-	clearColor: '#000',
-	antialias: false,
-	// logarithmicDepthBuffer: true, // 开启后，镜面反射底部会透明过来
-	disableRender: true
+    clearColor: '#000',
+    antialias: false,
+    logarithmicDepthBuffer: false, // 开启后，镜面反射底部会透明过来
+    renderMode: 'manual',
 })
 const controlsState = reactive({
-	// autoRotate: true,
+    // autoRotate: true,
 })
 
 const showSpeedup = ref(false)
-const paneControl = new Pane({ title: '参数', })
+const paneControl = new Pane({ title: '参数' })
 paneControl.addBinding(showSpeedup, 'value', { label: '流光模式' })
 
 const su7Store = useSu7Store()
