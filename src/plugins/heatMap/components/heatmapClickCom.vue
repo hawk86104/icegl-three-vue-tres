@@ -37,10 +37,11 @@ const initHeatmap = () => {
         container: heatmapCanvas,
         width: 256,
         height: 256,
-        blur: '.8',
+        blur: '0.8',
         radius: props.radius,
     })
     heatmap._renderer.canvas.style.border = '1px solid #5384ff'
+    // heatmap._renderer.canvas.style.scale = 0.1
     heatmap._renderer.canvas.onclick = function (ev: any) {
         heatmap.addData({
             x: ev.layerX,
