@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-04-30 08:18:21
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-04-30 16:12:30
+ * @LastEditTime: 2024-07-23 15:11:25
  */
 export default {
     name: 'visualArts',
@@ -31,6 +31,12 @@ export default {
             name: 'roomup',
             title: '日式会厅',
             referenceSource: { title: 'react-three-fiber', url: 'https://codesandbox.io/s/ykfpwf' },
+        },
+        {
+            src: 'plugins/visualArts/preview/windLine.png',
+            type: 'img',
+            name: 'windLine',
+            title: '流动风线',
         },
     ],
 }
