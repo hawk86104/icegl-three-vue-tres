@@ -84,7 +84,7 @@ export const setGeometryUVForm = (srcGeometry, toGeometry) => {
 }
 export const loadGeojson = (filepath, dataType) =>
     new Promise((resolve, reject) => {
-        request(filepath, {}, { method: 'get' })
+        request(filepath, {}, { method: 'get', mergeRequest: true })
             .then((res) => {
                 if (dataType) {
                     resolve(res[dataType])
