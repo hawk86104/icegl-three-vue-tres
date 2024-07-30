@@ -102,7 +102,6 @@ watch(
                 }
             }
         }
-        debugger
         fbo.value?.dispose()
         fbo.value = null
         setTextureEnvAndBG(null)

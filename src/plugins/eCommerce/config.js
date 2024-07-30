@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-01-16 08:58:24
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-04-30 16:10:39
+ * @LastEditTime: 2024-07-30 09:31:45
  */
 
 export default {
@@ -51,6 +51,13 @@ export default {
             name: 'arrangement',
             title: '桌面陈设',
             referenceSource: { title: 'react-three-fiber', url: 'https://codesandbox.io/s/szj6p7' },
+        },
+        {
+            src: 'plugins/eCommerce/preview/zipTopCan.png',
+            type: 'img',
+            name: 'zipTopCan',
+            title: '易拉罐',
+            referenceSource: { title: 'mohAmineBrs', url: 'https://tympanus.net/Development/TextureTransition/' },
         },
     ],
 }
