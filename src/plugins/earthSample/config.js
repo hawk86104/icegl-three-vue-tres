@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-01 09:49:28
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-07-01 11:00:14
+ * @LastEditTime: 2024-07-30 08:02:16
  */
 export default {
     name: 'earthSample',
@@ -21,5 +21,6 @@ export default {
         { src: 'plugins/earthSample/preview/lowpolyPlanet.png', type: 'img', name: 'lowpolyPlanet', title: '低像素多边形' },
         { src: 'plugins/earthSample/preview/pointsScan.png', type: 'img', name: 'pointsScan', title: '点扫描' },
         { src: 'plugins/earthSample/preview/highlightScan.png', type: 'img', name: 'highlightScan', title: '高光扫描' },
+        { src: 'plugins/earthSample/preview/smokeEarth.png', type: 'img', name: 'smokeEarth', title: '烟雾球' },
     ],
 }
