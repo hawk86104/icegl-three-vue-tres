@@ -12,6 +12,18 @@
     "test:unit": "fes test:unit",
     "postinstall": "patch-package"
   },
+  "keywords": [
+    "three.js",
+    "three",
+    "3D",
+    "三维可视化",
+    "TvT.js",
+    "数字孪生",
+    "tres.js",
+    "tres"
+  ],
+  "author": "地虎降天龙",
+  "license": "Apache-2.0",
   "publishConfig": {
     "access": "public"
   },
@@ -91,6 +103,5 @@
     "vue": "^3.4.32",
     "vue-echarts": "^6.7.3",
     "vue3-lazyload": "^0.3.8"
-  },
-  "private": true
+  }
 }
