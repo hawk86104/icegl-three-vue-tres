@@ -56,7 +56,7 @@
     "@mapbox/tilebelt": "^1.0.2",
     "@pmndrs/vanilla": "^1.19.0",
     "@tresjs/cientos": "3.8.0",
-    "@tresjs/core": "^4.2.1",
+    "@tresjs/core": "^4.2.5",
     "@tresjs/leches": "^0.14.0",
     "@tweenjs/tween.js": "^23.1.2",
     "@vicons/carbon": "^0.12.0",
