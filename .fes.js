@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-10-16 10:53:09
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-06-15 11:17:09
+ * @LastEditTime: 2024-08-11 18:22:40
  */
 // import { resolve } from 'path';
 import { join } from 'path'
@@ -17,9 +17,7 @@ import glsl from 'vite-plugin-glsl'
 import obfuscatorPlugin from 'vite-plugin-javascript-obfuscator'
 
 const timeStamp = new Date().getTime()
-const combinedIsCustomElement = (tag) => {
-    return tag.startsWith('iconify-icon') || templateCompilerOptions.template.compilerOptions.isCustomElement(tag)
-}
+const combinedIsCustomElement = (tag) => tag.startsWith('iconify-icon') || templateCompilerOptions.template.compilerOptions.isCustomElement(tag)
 
 export default defineBuildConfig({
     title: 'TvT.js',
@@ -55,27 +53,27 @@ export default defineBuildConfig({
             }),
             glsl(),
             process.env.NODE_ENV === 'production' &&
-                obfuscatorPlugin({
-                    debugger: false,
-                    // include: ['src/plugins/'],
-                    // exclude: ['/node_modules/', '/src/.fes/', '/src/app.jsx', /index.jsx$/],
-                    // apply: 'build',
-                    options: {
-                        // 配置项，根据需要进行调整
-                        optionsPreset: 'default',
-                        // identifierNamesGenerator: 'mangled',
-                        debugProtection: true,
-                        disableConsoleOutput: true,
-                        reservedStrings: ['suspenseLayout.vue', '/plugins'],
-                        // ...  [See more options](https://github.com/javascript-obfuscator/javascript-obfuscator)
-                    },
-                }),
+            obfuscatorPlugin({
+                debugger: false,
+                // include: ['src/plugins/'],
+                // exclude: ['/node_modules/', '/src/.fes/', '/src/app.jsx', /index.jsx$/],
+                // apply: 'build',
+                options: {
+                    // 配置项，根据需要进行调整
+                    optionsPreset: 'default',
+                    // identifierNamesGenerator: 'mangled',
+                    debugProtection: true,
+                    disableConsoleOutput: true,
+                    reservedStrings: ['suspenseLayout.vue', '/plugins'],
+                    // ...  [See more options](https://github.com/javascript-obfuscator/javascript-obfuscator)
+                },
+            }),
         ],
         build: {
             chunkSizeWarningLimit: 1000, // 单位为KB
             rollupOptions: {
                 output: {
-                    manualChunks(id) {
+                    manualChunks (id) {
                         // 自定义拆分策略，例如将特定的第三方库拆分为单独的 chunk
                         if (id.includes('node_modules')) {
                             return id.toString().split('node_modules/')[1].split('/')[0]

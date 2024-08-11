@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-10-16 10:53:09
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-05-24 09:52:10
+ * @LastEditTime: 2024-08-11 18:25:33
  */
 // 放工具函数
 import { request } from '@fesjs/fes'
@@ -21,16 +21,25 @@ const findStringBetween = (str) => {
 
 export const getPluginsConfig = () => {
     // 获得插件列表 根据插件目录
-    const modulePaths = import.meta.glob('PLS/*/config.js', { eager: true })
-    const config = {}
-    for (const path of Object.keys(modulePaths)) {
-        const name = findStringBetween(path)
-        if (!name) {
-            continue
+    if (!window.pluginsConfig) {
+        const modulePaths = import.meta.glob('PLS/*/config.js', { eager: true })
+        const config = {}
+        for (const path of Object.keys(modulePaths)) {
+            const name = findStringBetween(path)
+            if (!name) {
+                continue
+            }
+            config[name] = modulePaths[path].default
         }
-        config[name] = modulePaths[path].default
+        window.pluginsConfig = config
     }
-    return config
+    return window.pluginsConfig
+}
+
+export const hasPlugin = (name) => { 
+    const config = getPluginsConfig()
+    // eslint-disable-next-line no-undefined
+    return config[name] !== undefined
 }
 
 // 警告函数
@@ -119,7 +128,7 @@ export const getOnePluginConfig = (pName, oName, cName) => {
             // 根据页面参数名查找预览配置
             if (oName && config.preview) {
                 const preview = findPreviewByName(config.preview, oName)
-                if (preview) return { config, preview: preview }
+                if (preview) return { config, preview }
             }
             // 根据子页面参数名查找子配置
             else if (cName && config.child) {
