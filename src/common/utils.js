@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-10-16 10:53:09
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-08-12 16:20:52
+ * @LastEditTime: 2024-08-12 16:33:18
  */
 // 放工具函数
 import { request } from '@fesjs/fes'
@@ -41,7 +41,9 @@ export const getPluginsConfig = () => {
                 const re = window.pluginsConfig[req] !== undefined
                 if (!re) {
                     console.error(`${req}插件_未安装，请到插件市场下载安装:https://icegl.cn/tvtstore/${req}`)
-                    window.open(`https://icegl.cn/tvtstore/${req}`, '_blank')
+                    // window.open(`https://icegl.cn/tvtstore/${req}`, '_blank')
+                    const features = 'width=600,height=350' 
+                    window.open(`https://icegl.cn/tvtstore/${req}`, req, features)
                 }
             })
         }
