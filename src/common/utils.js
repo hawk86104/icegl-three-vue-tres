@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-10-16 10:53:09
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-08-12 11:04:54
+ * @LastEditTime: 2024-08-12 16:20:52
  */
 // 放工具函数
 import { request } from '@fesjs/fes'
@@ -33,15 +33,29 @@ export const getPluginsConfig = () => {
         }
         window.pluginsConfig = config
     }
+    //检查插件依赖关系
+    for (const name of Object.keys(window.pluginsConfig)) {
+        if (window.pluginsConfig[name].require) {
+            window.pluginsConfig[name].require.forEach((req) => {
+                // eslint-disable-next-line no-undefined
+                const re = window.pluginsConfig[req] !== undefined
+                if (!re) {
+                    console.error(`${req}插件_未安装，请到插件市场下载安装:https://icegl.cn/tvtstore/${req}`)
+                    window.open(`https://icegl.cn/tvtstore/${req}`, '_blank')
+                }
+            })
+        }
+    }
     return window.pluginsConfig
 }
 
-export const hasPlugin = (ename, cname, id) => {
+export const hasPlugin = (ename, cname) => {
     const config = getPluginsConfig()
     // eslint-disable-next-line no-undefined
     const re = config[ename] !== undefined
     if (!re) {
-        console.error(`${cname}_未安装，请到插件市场下载安装:https://icegl.cn/tvtstore/${id}`)
+        console.error(`${cname}_未安装，请到插件市场下载安装:https://icegl.cn/tvtstore/${cname}`)
+        window.open(`https://icegl.cn/tvtstore/${cname}`, '_blank')
     }
     return re
 }

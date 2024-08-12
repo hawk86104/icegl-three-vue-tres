@@ -50,7 +50,7 @@ let progress = null as any
 let hasFinishLoading = null as any
 
 if (props.useResourceManager) {
-    if (hasPlugin('resourceManager', '资源管理器插件', '173')) {
+    if (hasPlugin('resourceManager', '资源管理器插件')) {
         const modules = import.meta.glob('PLS/resourceManager/index.js')
         const { Resource } = await modules['/src/plugins/resourceManager/index.js']()
         progress = Resource.progress

@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-03-13 15:00:34
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-08-12 11:09:01
+ * @LastEditTime: 2024-08-12 16:19:33
 -->
 <template>
     <div v-if="!hasFinishLoading" class="absolute bg-grey-600 t-0 l-0 w-full h-full z-99999999 flex justify-center items-center text-black font-mono bg-black">
@@ -41,7 +41,7 @@ let progress = null as any
 let hasFinishLoading = null as any
 
 if (props.useResourceManager) {
-    if (hasPlugin('resourceManager', '资源管理器插件', '173')) {
+    if (hasPlugin('resourceManager', '资源管理器插件')) {
         const modules = import.meta.glob('PLS/resourceManager/index.js')
         const { Resource } = await modules['/src/plugins/resourceManager/index.js']()
         progress = Resource.progress
