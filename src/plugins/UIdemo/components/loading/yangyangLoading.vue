@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-03-13 17:14:11
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-08-11 18:46:05
+ * @LastEditTime: 2024-08-12 10:54:27
 -->
 <template>
     <div v-if="!hasFinishLoading" class="absolute bg-grey-600 t-0 l-0 w-full h-full z-99999999 flex justify-center items-center text-black font-mono bg-black">
@@ -54,7 +54,7 @@ if (props.useResourceManager) {
         progress = Resource.progress
         hasFinishLoading = Resource.hasAllFinished
     }else{
-        console.error('resourceManager插件未安装，请到插件市场安装:https://icegl.cn/tvtstore')
+        console.error('资源管理器插件_未安装，请到插件市场下载安装:https://icegl.cn/tvtstore/173')
     }
 } else {
     const uP = await useProgress()
