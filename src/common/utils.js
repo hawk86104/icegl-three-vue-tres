@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-10-16 10:53:09
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-08-11 18:25:33
+ * @LastEditTime: 2024-08-12 11:04:54
  */
 // 放工具函数
 import { request } from '@fesjs/fes'
@@ -36,14 +36,18 @@ export const getPluginsConfig = () => {
     return window.pluginsConfig
 }
 
-export const hasPlugin = (name) => { 
+export const hasPlugin = (ename, cname, id) => {
     const config = getPluginsConfig()
     // eslint-disable-next-line no-undefined
-    return config[name] !== undefined
+    const re = config[ename] !== undefined
+    if (!re) {
+        console.error(`${cname}_未安装，请到插件市场下载安装:https://icegl.cn/tvtstore/${id}`)
+    }
+    return re
 }
 
 // 警告函数
-function showWarning() {
+function showWarning () {
     FMessage.warning?.({
         content: '官网已经更新的插件功能，请git 更新代码!',
         colorful: true,
@@ -103,11 +107,11 @@ export const getOnlinePluginConfig = (plConfig) => {
 }
 
 // 通过名称查找预览配置
-function findPreviewByName(previews, name) {
+function findPreviewByName (previews, name) {
     return previews.find((preview) => preview.name === name)
 }
 // 在子配置中查找预览配置
-function findChildPreviewByName(children, childName, previewName) {
+function findChildPreviewByName (children, childName, previewName) {
     const child = children.find((chi) => chi.name === childName)
     if (child && child.preview) {
         return child.preview.find((preview) => preview.name === previewName)
