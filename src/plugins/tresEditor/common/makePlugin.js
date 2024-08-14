@@ -49,18 +49,14 @@ watch(
 </script>
 	`
 }
-const commentOutALineOfComponent = (item) => {
-    return `<!-- name:${item.name} uuid:${item.uuid} type:${item.type} -->`
-}
 const codeForLevelFile = (folder, name, item) => {
     let listStr = ''
     item.forEach((child, index) => {
-        listStr += commentOutALineOfComponent(child)
         listStr += `
-        <primitive :object="object[${index}]" />
+        <primitive :object="object[${index}]" name="${child.name}" uuid="${child.uuid}" type="${child.type}"/>
         `
     })
-    let strCode = `<template>
+    const strCode = `<template>
     ${listStr}
 </template>
 
@@ -93,8 +89,8 @@ const codeForChildComponent = (childComponentFolder, pluginState, item, index, c
     if (pluginState.childLevel >= curLevel) {
         //
     }
-    let primitiveCode = `${commentOutALineOfComponent(item)}
-    <primitive :object="sceneObject.children[${index}]">
+    let primitiveCode = `
+    <primitive :object="sceneObject.children[${index}]" name="${item.name}" uuid="${item.uuid}" type="${item.type}">
     `
     if (item.children && item.children.length) {
         const clName = childComponentLevelName(curLevel, item.uuid)
@@ -114,8 +110,8 @@ const codeForSence = (srcFolder, pluginState, scene) => {
             if (pluginState.childLevel > 0 && child.children && child.children.length) {
                 primitiveListCode += codeForChildComponent(childComponentFolder, pluginState, child, index, 1)
             } else {
-                primitiveListCode += `    ${commentOutALineOfComponent(child)}
-    <primitive :object="sceneObject.children[${index}]" />
+                primitiveListCode += `    
+    <primitive :object="sceneObject.children[${index}]" name="${child.name}" uuid="${child.uuid}" type="${child.type}"/>
     `
             }
         })
@@ -205,8 +201,9 @@ const codeForConfig = (pluginName) => {
 		"creatTime": "${formattedDate}",
 		"updateTime": "${formattedDate}",
 		"require": [],
+        "tvtstore": 'LOCAL',
 		"preview": [
-			{ "src": "plugins/basic/base/preview/theBasic.png", "type": "img", "name": "index", "title": "实例" },
+			{ "src": "plugins/basic/base/preview/theBasic.png", "type": "img", "name": "index", "title": "实例" ,"disableFPSGraph": false, "disableSrcBtn": false},
 		]
 	}`
 }
@@ -251,7 +248,7 @@ const codeForJson = (publicFolder, scene) => {
     }
     publicFolder.file(`json/scene.json`, JSON.stringify(scene))
 }
-export function makePluginZip(jsonData, pluginState) {
+export function makePluginZip (jsonData, pluginState) {
     childComponentFileList = []
     const pluginName = pluginState.pluginName
 
