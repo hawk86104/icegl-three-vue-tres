@@ -8,23 +8,20 @@ import { SelectionHelper } from 'three/examples/jsm/interactive/SelectionHelper'
 import { useTresContext, useRenderLoop } from '@tresjs/core'
 import { useGLTF } from '@tresjs/cientos'
 import { Pane } from 'tweakpane'
+import { abs } from 'three/examples/jsm/nodes/Nodes'
 // const { scene: model, nodes } = await useGLTF('/plugins/operationTool/model/湖中小亭/湖中小亭.gltf')
 const { camera, renderer, scene, sizes, raycaster, controls } = useTresContext()
 
 let mouse = new THREE.Vector2()
 let points = []
-let polygonMesh = null
 let MeshRef = ref(null)
 const planeGeometry = new THREE.PlaneGeometry(200, 200)
 const planeMaterial = new THREE.MeshBasicMaterial({ color: 0x00ff00, side: THREE.DoubleSide })
 const plane = new THREE.Mesh(planeGeometry, planeMaterial)
-plane.rotation.set(0, 0, Math.PI / 4)
+plane.rotation.set(0, 0, Math.PI / 2)
 scene.value.add(plane)
+let type = ''
 let initLine = function () {
-    //   <TresMesh :rotation="[-Math.PI / 2, 0, 0]" receive-shadow ref="MeshRef">
-    //         <TresPlaneGeometry :args="[200, 200]" />
-    //         <TresMeshToonMaterial />
-    //     </TresMesh>
     window.addEventListener('click', onMouseClick, false)
 }
 
@@ -42,14 +39,53 @@ let onMouseClick = function (event) {
     if (intersects.length > 0) {
         const point = intersects[0].point
         points.push(new THREE.Vector3(point.x, point.y, 0))
-        updatePolygon(intersects[0].normal)
+        switch (type) {
+            case 'line':
+                updatePolygonLine(intersects[0].normal)
+                break
+            case 'face':
+                debugger
+                updatePolygonFace(intersects[0].normal)
+                break
+        }
     }
 }
+let updatePolygonFace = function (normal) {
+    if (points.length == 2) {
+        const distance = points[0].distanceTo(points[1])
+        let geometry = null
+        debugger
+        if (Math.abs(points[1].x - points[0].x) > Math.abs(points[1].y - points[0].y)) {
+            geometry = new THREE.PlaneGeometry(distance, 2)
+        } else {
+            geometry = new THREE.PlaneGeometry(2, distance)
+        }
+        const material = new THREE.MeshBasicMaterial({ color: 0xff0000, side: THREE.DoubleSide }) // 绿色材质，双面可见
+        const rectangle = new THREE.Mesh(geometry, material)
+        const midpoint = new THREE.Vector3((points[0].x + points[1].x) / 2, (points[0].y + points[1].y) / 2, (points[0].z + points[1].z) / 2 + 0.1)
+        rectangle.position.copy(midpoint)
+        scene.value.add(rectangle)
 
-let updatePolygon = function (normal) {
-    if (polygonMesh != null) {
-        scene.value.remove(polygonMesh)
+        // 计算方向向量
+        const direction = new THREE.Vector3().subVectors(points[1], points[0]).normalize()
+
+        // 计算垂直向量 (假设在二维平面内)
+        const perpendicular = new THREE.Vector3(-direction.y, direction.x, 0)
+
+        // 将垂直向量缩放到5个单位长度
+        const offset = perpendicular.clone().multiplyScalar(5)
+
+        // 计算终点两边的两个点
+        const pointLeft = new THREE.Vector3().addVectors(points[1], offset)
+        const pointRight = new THREE.Vector3().subVectors(points[1], offset)
+        console.log(pointLeft,pointRight);
+        
+
+        // drawTriangle()
+        points.length = 0
     }
+}
+let updatePolygonLine = function (normal) {
     if (points.length == 2) {
         const path = new THREE.CatmullRomCurve3(points)
         const tubeGeometry = new THREE.TubeGeometry(path, 20, 2, 8, false)
@@ -103,7 +139,14 @@ let cloneTube = function (path, dir, angle) {
     // 将组添加到场景中
     return group
 }
-let initFace = function () {}
+let drawTriangle = function (pointA, pointB, pointC) {
+    const vertices = new Float32Array([pointA.x, pointA.y, pointA.z, pointB.x, pointB.y, pointB.z, pointC.x, pointC.y, pointC.z])
+    const geometry = new THREE.BufferGeometry()
+    geometry.setAttribute('position', new THREE.BufferAttribute(vertices, 3))
+    const material = new THREE.MeshBasicMaterial({ color: 0xff0000, side: THREE.DoubleSide })
+    const triangle = new THREE.Mesh(geometry, material)
+    return triangle
+}
 let initUI = function () {
     const paneControl = new Pane({
         title: '箭头',
@@ -120,6 +163,7 @@ let initUI = function () {
         label: '线箭头', // optional
     }).on('click', () => {
         window.removeEventListener('click', onMouseClick, false)
+        type = 'line'
         initLine()
     })
     f1.addButton({
@@ -127,7 +171,8 @@ let initUI = function () {
         label: '面箭头', // optional
     }).on('click', () => {
         window.removeEventListener('click', onMouseClick, false)
-        initFace()
+        type = 'face'
+        initLine()
     })
 }
 onMounted(() => {
