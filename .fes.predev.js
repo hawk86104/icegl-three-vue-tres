@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-10-16 10:53:09
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-05-31 11:45:17
+ * @LastEditTime: 2024-08-14 10:58:20
  */
 import { defineBuildConfig } from '@fesjs/fes'
 import addExtraScriptPlugin from './src/common/addExtraScriptPlugin'
@@ -48,12 +48,16 @@ export default defineBuildConfig({
                 ],
             },
             {
-                path: 'https://icegl.cn/',
-                title: '🧊 ICEGL官网',
+                path: 'https://www.bilibili.com/video/BV1LH4y1p7Yn',
+                title: '📀 TvT视频教程',
             },
             {
-                path: 'https://space.bilibili.com/410503457',
-                title: '🅱️ B站主页',
+                path: 'https://www.icegl.cn/tvtstore',
+                title: '🧩 插件市场',
+            },
+            {
+                path: 'https://icegl.cn/',
+                title: '🧊 ICEGL官网',
             },
             {
                 title: '👨‍🏫 课程中心',

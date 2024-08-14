@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-18 22:17:49
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-08-14 09:40:10
+ * @LastEditTime: 2024-08-14 10:51:05
 -->
 <template>
     <div class="absolute menuSelf">
@@ -29,14 +29,9 @@
     </FDrawer>
     <div class="flex h-full w-full">
         <div style="background-color: #0f1222">
-            <FMenu
-                mode="vertical"
-                expandTrigger="click"
-                :defaultExpandAll="detectDeviceType() === 'PC'"
-                :collapsed="detectDeviceType() !== 'PC'"
-                :inverted="true"
-                @select="goto"
-            >
+            <FMenu mode="vertical" expandTrigger="click"
+            :defaultExpandAll="detectDeviceType() === 'PC'"
+            :collapsed="detectDeviceType() !== 'PC'" :inverted="true" @select="goto">
                 <f-sub-menu value="1">
                     <template #icon>
                         <AppstoreOutlined />
@@ -77,6 +72,20 @@
                         </f-menu-item>
                     </template>
                 </f-sub-menu>
+                <f-sub-menu value="3">
+                    <template #icon>
+                        <ClusterOutlined />
+                    </template>
+                    <template #label>插件应用管理</template>
+                    <f-menu-item value="tvtPluginUrl">
+                        <template #label>
+                            <div class="flex absolute" style="left: 1px; flex-direction: column; top: 2px">
+                                <f-badge value="tvtstore" class="tag-fbdge" type="danger" size="small" />
+                            </div>
+                            <span class="left-m-text">插件应用市场</span>
+                        </template>
+                    </f-menu-item>
+                </f-sub-menu>
             </FMenu>
         </div>
         <div
@@ -106,7 +115,7 @@
 import { ref, provide, watch } from 'vue'
 import { defineRouteMeta, useModel } from '@fesjs/fes'
 import { FBadge, FDrawer, FMenu, FSubMenu, FMenuItem } from '@fesjs/fes-design'
-import { AppstoreOutlined, PictureOutlined, UpCircleOutlined, MoreCircleOutlined } from '@fesjs/fes-design/icon'
+import { AppstoreOutlined, PictureOutlined, UpCircleOutlined, MoreCircleOutlined, ClusterOutlined } from '@fesjs/fes-design/icon'
 import { getPluginsConfig, getOnlinePluginConfig } from '../common/utils'
 import cardList from '../components/forPreview/cardList.vue'
 import filterComFixed from '../components/forPreview/filterComFixed.vue'
@@ -116,7 +125,6 @@ defineRouteMeta({
     title: '开源框架展示',
 })
 
-// console.log(window.layoutConfig)
 const layoutConfigMenus = window.layoutConfig.menus
 const menuGoto = (value: any) => {
     console.log(value)
@@ -134,29 +142,18 @@ const pluginsConfig = ref({})
 pluginsConfig.value = getPluginsConfig() as any
 getOnlinePluginConfig(pluginsConfig)
 const goto = (value: string) => {
-    tabListRef.value[value.value]?.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'nearest' })
+    if (value.value === 'tvtPluginUrl') {
+        window.open('https://www.icegl.cn/tvtstore', '_blank')
+    } else {
+        tabListRef.value[value.value]?.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'nearest' })
+    }
 }
-// const isNew = ((time: string) => {
-//     if (time) {
-//         const targetDate = new Date(time)
-//         const currentDate = new Date()
-//         const targetTimestamp = targetDate.getTime()
-//         const currentTimestamp = currentDate.getTime()
-//         const timeDifference = currentTimestamp - targetTimestamp
-//         const millisecondsPerDay = 1000 * 60 * 60 * 24 // 每天的毫秒数
-//         const daysDifference = Math.floor(timeDifference / millisecondsPerDay)
-//         if (daysDifference < 7) { //小于七天 算新插件
-//             return true
-//         }
-//     }
-//     return false
-// })
 
 const scrollToTop = () => {
     document.querySelector('.right-page-list')?.scrollTo({ top: 0, behavior: 'smooth' })
 }
 
-const expandedKeys = ref(['1', '2'])
+// const expandedKeys = ref(['1','2','3'])
 
 const filterFixedInputValue = ref('')
 provide('filterFixedInputValue', filterFixedInputValue)
@@ -200,13 +197,12 @@ const filterObjects = (obj: any, searchString: string): any => {
     return result
 }
 let filteredData = ref(pluginsConfig.value)
-
 watch(filterFixedInputValue, (newValue: any) => {
     filteredData.value = filterObjects(pluginsConfig.value, newValue.toLocaleLowerCase())
-    if (!newValue) {
-        expandedKeys.value = ['1', '2']
-    }
-    // console.log('filterFixedInputValue filteredData', filteredData.value)
+    // if (!newValue) {
+    //     expandedKeys.value = ['1', '2', '3']
+    //     console.log('expandedKeys', expandedKeys.value)
+    // }
 })
 
 const { menuSetup } = useModel('forPreview')
@@ -286,6 +282,8 @@ const getleftMenuBadge = (name: string) => {
     // console.log(tagOne)
     return tagOne
 }
+
+//获取设备类型
 function detectDeviceType() {
     const ua = navigator.userAgent
     const width = window.innerWidth
