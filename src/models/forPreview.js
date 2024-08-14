@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-10-21 15:34:19
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-03-26 17:20:38
+ * @LastEditTime: 2024-08-14 09:41:19
  */
 import { reactive } from 'vue'
 import { access, request } from '@fesjs/fes'
@@ -43,7 +43,7 @@ export default function userModel () {
 			})
 			.catch((err) => {
 				// 处理异常
-				console.log(err, '请连接网络，获得插件的更新')
+				console.log(err, '请连接网络，获得样例的更新')
 			})
 	}
 

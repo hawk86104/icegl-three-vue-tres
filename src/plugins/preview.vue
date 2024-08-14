@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-18 22:17:49
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-06-12 09:12:11
+ * @LastEditTime: 2024-08-14 09:40:10
 -->
 <template>
     <div class="absolute menuSelf">
@@ -62,7 +62,7 @@
                     <template #icon>
                         <PictureOutlined />
                     </template>
-                    <template #label>插件中心 <FBadge :max="999" :value="getMenusCount()" class="count-fbdge big-cf" type="primary" size="small" /></template>
+                    <template #label>样例中心 <FBadge :max="999" :value="getMenusCount()" class="count-fbdge big-cf" type="primary" size="small" /></template>
                     <template v-for="(onePlugin, pkey) in filteredData">
                         <f-menu-item v-if="pkey !== 'basic'" :value="pkey">
                             <template #label>
