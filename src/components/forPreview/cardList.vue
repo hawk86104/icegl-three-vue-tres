@@ -28,7 +28,7 @@
                         class="w-full h-48 text-5 line-height-1.5em text-left mb-2 text-#5384ff"
                         style="background-color: rgb(55 56 61); overflow: hidden; border-radius: 10px"
                     >
-                        <div class="p-2">官网已经更新的插件功能，请git 更新代码!</div>
+                        <div class="p-2">官网已经更新样例功能，请git 更新代码!</div>
                     </div>
                     <div class="cursor-pointer text-right" style="margin-top: 6px; margin-bottom: -8px" @click="toPage(props.onePlugin, onePreview, true)">
                         点击查看演示

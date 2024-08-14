@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-18 22:17:49
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-06-12 09:12:11
+ * @LastEditTime: 2024-08-14 11:41:43
 -->
 <template>
     <div class="absolute menuSelf">
@@ -42,7 +42,7 @@
                         <AppstoreOutlined />
                     </template>
                     <template #label
-                        >基础功能 <FBadge :max="999" :value="getMenusCount(true)" class="count-fbdge big-cf" type="primary" size="small"
+                        >基础功能 <FBadge :max="999" :value="getMenusCount().basic" class="count-fbdge big-cf" type="primary" size="small"
                     /></template>
                     <template v-for="(bP, pkey) in filteredData">
                         <f-menu-item v-if="pkey === 'basic'" v-for="(onePlugin, okey) in bP.child" :value="onePlugin.name">
@@ -62,9 +62,36 @@
                     <template #icon>
                         <PictureOutlined />
                     </template>
-                    <template #label>插件中心 <FBadge :max="999" :value="getMenusCount()" class="count-fbdge big-cf" type="primary" size="small" /></template>
+                    <template #label>样例中心 <FBadge :max="999" :value="getMenusCount().case" class="count-fbdge big-cf" type="primary" size="small" /></template>
                     <template v-for="(onePlugin, pkey) in filteredData">
-                        <f-menu-item v-if="pkey !== 'basic'" :value="pkey">
+                        <f-menu-item v-if="pkey !== 'basic' && !isTvtstore(onePlugin)" :value="pkey">
+                            <template #label>
+                                <div class="flex absolute" style="left: 1px; flex-direction: column; top: 2px">
+                                    <template v-for="(lbItem, lbKey) in getleftMenuBadge(onePlugin.name)">
+                                        <f-badge v-if="lbItem.show" :value="lbItem.text" class="tag-fbdge" type="primary" size="small" />
+                                    </template>
+                                </div>
+                                <span class="left-m-text">{{ onePlugin.title }}</span>
+                                <FBadge :value="onePlugin.preview.length" class="count-fbdge" type="primary" size="small" />
+                            </template>
+                        </f-menu-item>
+                    </template>
+                </f-sub-menu>
+                <f-sub-menu value="3">
+                    <template #icon>
+                        <ClusterOutlined />
+                    </template>
+                    <template #label>插件应用管理 <FBadge :max="999" :value="getMenusCount().tvtstore" class="count-fbdge big-cf" type="primary" size="small" /></template>
+                    <f-menu-item value="tvtPluginUrl">
+                        <template #label>
+                            <div class="flex absolute" style="left: 1px; flex-direction: column; top: 2px">
+                                <f-badge value="tvtstore" class="tag-fbdge" type="danger" size="small" />
+                            </div>
+                            <span class="left-m-text">插件应用市场</span>
+                        </template>
+                    </f-menu-item>
+                    <template v-for="(onePlugin, pkey) in filteredData">
+                        <f-menu-item v-if="pkey !== 'basic' && isTvtstore(onePlugin)" :value="pkey">
                             <template #label>
                                 <div class="flex absolute" style="left: 1px; flex-direction: column; top: 2px">
                                     <template v-for="(lbItem, lbKey) in getleftMenuBadge(onePlugin.name)">
@@ -93,7 +120,12 @@
                 </template>
             </template>
             <template v-for="(onePlugin, pkey) in filteredData" :key="pkey">
-                <div style="background-color: #f1f1f2" v-if="pkey !== 'basic'" :ref="(el) => (tabListRef[pkey] = el)">
+                <div style="background-color: #f1f1f2" v-if="pkey !== 'basic' && !isTvtstore(onePlugin)" :ref="(el) => (tabListRef[pkey] = el)">
+                    <cardList :onePlugin="onePlugin" />
+                </div>
+            </template>
+            <template v-for="(onePlugin, pkey) in filteredData" :key="pkey">
+                <div style="background-color: #f1f1f2" v-if="pkey !== 'basic' && isTvtstore(onePlugin)" :ref="(el) => (tabListRef[pkey] = el)">
                     <cardList :onePlugin="onePlugin" />
                 </div>
             </template>
@@ -106,7 +138,7 @@
 import { ref, provide, watch } from 'vue'
 import { defineRouteMeta, useModel } from '@fesjs/fes'
 import { FBadge, FDrawer, FMenu, FSubMenu, FMenuItem } from '@fesjs/fes-design'
-import { AppstoreOutlined, PictureOutlined, UpCircleOutlined, MoreCircleOutlined } from '@fesjs/fes-design/icon'
+import { AppstoreOutlined, PictureOutlined, UpCircleOutlined, MoreCircleOutlined, ClusterOutlined } from '@fesjs/fes-design/icon'
 import { getPluginsConfig, getOnlinePluginConfig } from '../common/utils'
 import cardList from '../components/forPreview/cardList.vue'
 import filterComFixed from '../components/forPreview/filterComFixed.vue'
@@ -116,7 +148,6 @@ defineRouteMeta({
     title: '开源框架展示',
 })
 
-// console.log(window.layoutConfig)
 const layoutConfigMenus = window.layoutConfig.menus
 const menuGoto = (value: any) => {
     console.log(value)
@@ -134,29 +165,18 @@ const pluginsConfig = ref({})
 pluginsConfig.value = getPluginsConfig() as any
 getOnlinePluginConfig(pluginsConfig)
 const goto = (value: string) => {
-    tabListRef.value[value.value]?.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'nearest' })
+    if (value.value === 'tvtPluginUrl') {
+        window.open('https://www.icegl.cn/tvtstore', '_blank')
+    } else {
+        tabListRef.value[value.value]?.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'nearest' })
+    }
 }
-// const isNew = ((time: string) => {
-//     if (time) {
-//         const targetDate = new Date(time)
-//         const currentDate = new Date()
-//         const targetTimestamp = targetDate.getTime()
-//         const currentTimestamp = currentDate.getTime()
-//         const timeDifference = currentTimestamp - targetTimestamp
-//         const millisecondsPerDay = 1000 * 60 * 60 * 24 // 每天的毫秒数
-//         const daysDifference = Math.floor(timeDifference / millisecondsPerDay)
-//         if (daysDifference < 7) { //小于七天 算新插件
-//             return true
-//         }
-//     }
-//     return false
-// })
 
 const scrollToTop = () => {
     document.querySelector('.right-page-list')?.scrollTo({ top: 0, behavior: 'smooth' })
 }
 
-const expandedKeys = ref(['1', '2'])
+// const expandedKeys = ref(['1','2','3'])
 
 const filterFixedInputValue = ref('')
 provide('filterFixedInputValue', filterFixedInputValue)
@@ -199,14 +219,9 @@ const filterObjects = (obj: any, searchString: string): any => {
     }
     return result
 }
-let filteredData = ref(pluginsConfig.value)
-
+let filteredData = ref(pluginsConfig.value) as any
 watch(filterFixedInputValue, (newValue: any) => {
     filteredData.value = filterObjects(pluginsConfig.value, newValue.toLocaleLowerCase())
-    if (!newValue) {
-        expandedKeys.value = ['1', '2']
-    }
-    // console.log('filterFixedInputValue filteredData', filteredData.value)
 })
 
 const { menuSetup } = useModel('forPreview')
@@ -214,7 +229,6 @@ const { menuSetup } = useModel('forPreview')
 function filterMenuSetup(msFilter: any) {
     if (msFilter.length === 0) {
         return pluginsConfig.value
-        // return filterObjects(pluginsConfig.value, filterFixedInputValue.value.toLocaleLowerCase())
     }
     const result = {} as any
     msFilter.forEach((tag: any) => {
@@ -248,28 +262,7 @@ const menuSetupFilter = ref([])
 provide('menuSetupFilter', menuSetupFilter)
 watch(menuSetupFilter, (newValue: any) => {
     filteredData.value = filterMenuSetup(newValue)
-    // console.log('menuSetupFilter filteredData', filteredData.value)
 })
-
-const getMenusCount = (isBasic = false) => {
-    let count = 0
-    for (const key in filteredData.value) {
-        if (filteredData.value.hasOwnProperty(key)) {
-            if ((key === 'basic') === isBasic) {
-                if (isBasic) {
-                    for (const key2 in filteredData.value[key].child) {
-                        if (filteredData.value[key].child.hasOwnProperty(key2)) {
-                            count += filteredData.value[key].child[key2].preview.length
-                        }
-                    }
-                } else {
-                    count += filteredData.value[key].preview.length
-                }
-            }
-        }
-    }
-    return count
-}
 
 const getleftMenuBadge = (name: string) => {
     const tagOne = {
@@ -283,9 +276,10 @@ const getleftMenuBadge = (name: string) => {
             tagOne[tmpOne[key].taglist].show = true
         }
     }
-    // console.log(tagOne)
     return tagOne
 }
+
+//获取设备类型
 function detectDeviceType() {
     const ua = navigator.userAgent
     const width = window.innerWidth
@@ -307,7 +301,35 @@ function detectDeviceType() {
         }
     }
 }
-// console.log(detectDeviceType())
+// 区分是否是案例中心的 还是 插件市场的
+const isTvtstore = (onePlugin: any) => {
+    return typeof onePlugin.tvtstore !== 'undefined'
+}
+const getMenusCount = () => {
+    const reCount = {
+        basic: 0,
+        case: 0,
+        tvtstore: 0,
+    }
+    for (const key in filteredData.value) {
+        if (filteredData.value.hasOwnProperty(key)) {
+            if (key === 'basic') {
+                for (const key2 in filteredData.value[key].child) {
+                    if (filteredData.value[key].child.hasOwnProperty(key2)) {
+                        reCount.basic += filteredData.value[key].child[key2].preview.length
+                    }
+                }
+            } else {
+                if (isTvtstore(filteredData.value[key])) {
+                    reCount.tvtstore += filteredData.value[key].preview.length
+                } else {
+                    reCount.case += filteredData.value[key].preview.length
+                }
+            }
+        }
+    }
+    return reCount
+}
 const showTopMune = ref(false)
 const openTopMune = () => {
     showTopMune.value = true

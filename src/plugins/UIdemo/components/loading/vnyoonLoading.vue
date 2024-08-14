@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-03-13 17:14:11
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-03-13 17:22:47
+ * @LastEditTime: 2024-08-12 11:09:17
 -->
 <template>
     <div
@@ -31,19 +31,36 @@
 </template>
 
 <script setup lang="ts">
+import { hasPlugin } from '@/common/utils'
 import { useProgress } from '@tresjs/cientos'
 
 const props = withDefaults(
     defineProps<{
         isDemo?: boolean
         showProgress?: boolean
+        useResourceManager?: boolean
     }>(),
     {
         isDemo: false,
         showProgress: true,
+        useResourceManager: false,
     },
 )
-const { hasFinishLoading, progress } = await useProgress()
+let progress = null as any
+let hasFinishLoading = null as any
+
+if (props.useResourceManager) {
+    if (hasPlugin('resourceManager', '资源管理器插件')) {
+        const modules = import.meta.glob('PLS/resourceManager/index.js')
+        const { Resource } = await modules['/src/plugins/resourceManager/index.js']()
+        progress = Resource.progress
+        hasFinishLoading = Resource.hasAllFinished
+    }
+} else {
+    const uP = await useProgress()
+    progress = uP.progress
+    hasFinishLoading = uP.hasFinishLoading
+}
 
 const animloop = () => {
     if (progress.value++ > 100) {

@@ -4,14 +4,12 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-10-16 10:53:09
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-05-31 11:46:51
+ * @LastEditTime: 2024-08-11 18:02:39
  */
 import { defineRuntimeConfig, useModel } from '@fesjs/fes'
 import { FMenu } from '@fesjs/fes-design'
 import Tres from '@tresjs/core'
 import chalk from 'chalk'
-import PageLoading from '@/components/pageLoading.vue'
-import UserCenter from '@/components/forPreview/userCenter.vue'
 
 // add by 地虎降天龙
 import 'uno.css'
@@ -22,6 +20,9 @@ import { addCollection } from 'iconify-icon'
 import uimIcons from '@iconify/json/json/uim.json'
 import lineMdIcons from '@iconify/json/json/line-md.json'
 import wiIcons from '@iconify/json/json/wi.json'
+import UserCenter from '@/components/forPreview/userCenter.vue'
+import PageLoading from '@/components/pageLoading.vue'
+
 addCollection(uimIcons)
 addCollection(lineMdIcons)
 addCollection(wiIcons)
@@ -30,9 +31,9 @@ export default defineRuntimeConfig({
     beforeRender: {
         loading: <PageLoading />,
         action () {
-            const { signin,getMenu } = useModel('forPreview')
+            const { signin, getMenu } = useModel('forPreview')
             signin()
-            if (process.env.FES_APP_PLUGINS === 'true') { 
+            if (process.env.FES_APP_PLUGINS === 'true') {
                 getMenu()
             }
             // return new Promise((resolve) => {
@@ -51,7 +52,7 @@ export default defineRuntimeConfig({
     // },
 })
 
-export function layout(layoutConfig) {
+export function layout (layoutConfig) {
     return {
         renderCustom: () => <UserCenter />,
         ...layoutConfig,
@@ -66,9 +67,9 @@ export function onAppCreated ({ app }) {
     app.use(FMenu)
     app.use(Tres)
 
-    window['$vue'] = app
+    window.$vue = app
     // if (process.env.FES_APP_PLUGINS === 'true') { 
-        console.log(chalk.hex('#1c86e5')(`
+    console.log(chalk.hex('#1c86e5')(`
      ░▒▓████████▓▒░ ░▒▓█▓▒░░▒▓█▓▒░ ░▒▓████████▓▒░                 ░▒▓█▓▒░  ░▒▓███████▓▒░ 
         ░▒▓█▓▒░     ░▒▓█▓▒░░▒▓█▓▒░    ░▒▓█▓▒░                     ░▒▓█▓▒░ ░▒▓█▓▒░        
         ░▒▓█▓▒░      ░▒▓█▓▒▒▓█▓▒░     ░▒▓█▓▒░                     ░▒▓█▓▒░ ░▒▓█▓▒░        
@@ -77,16 +78,16 @@ export function onAppCreated ({ app }) {
         ░▒▓█▓▒░       ░▒▓█▓▓█▓▒░      ░▒▓█▓▒░     ░▒▓██▓▒░ ░▒▓█▓▒░░▒▓█▓▒░        ░▒▓█▓▒░ 
         ░▒▓█▓▒░        ░▒▓██▓▒░       ░▒▓█▓▒░     ░▒▓██▓▒░  ░▒▓██████▓▒░  ░▒▓███████▓▒░  
         `))
-        console.log(chalk.hex('#5384ff').bold('· 二次开发如用于商业性质或开源竞品请不要删除和修改 TvT.js 源码头部的版权与作者声明及出处。'))
-        console.log(chalk.hex('#5384ff').bold('· 本项目遵循 Apache2 开源协议发布，并提供永久免费使用以及商用，但是不允许二次开源出来并进行收费。'))
-        console.log(chalk.hex('#1c86e5').bold('版权所有 Copyright © 2022-2025 by 🧊icegl (https://www.icegl.cn)'))
+    console.log(chalk.hex('#5384ff').bold('· 二次开发如用于商业性质或开源竞品请不要删除和修改 TvT.js 源码头部的版权与作者声明及出处。'))
+    console.log(chalk.hex('#5384ff').bold('· 本项目遵循 Apache2 开源协议发布，并提供永久免费使用以及商用，但是不允许二次开源出来并进行收费。'))
+    console.log(chalk.hex('#1c86e5').bold('版权所有 Copyright © 2022-2025 by 🧊icegl (https://www.icegl.cn)'))
     // }
 }
 const findStringBetween = (str) => {
-    const regex = /plugins\/([^/]+)\/pages\//;
-    const match = str.match(regex);
+    const regex = /plugins\/([^/]+)\/pages\//
+    const match = str.match(regex)
     if (match && match[1]) {
-        return match[1];
+        return match[1]
     }
     return null
 }
@@ -148,6 +149,7 @@ export function modifyRoute (memo) {
             indexRoute.component = null
         }
     }
+
     return {
         ...memo,
         routes: [

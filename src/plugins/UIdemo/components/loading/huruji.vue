@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-03-12 19:56:21
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-06-11 18:06:21
+ * @LastEditTime: 2024-08-12 11:11:20
 -->
 <template>
     <div v-if="!hasFinishLoading" class="absolute bg-grey-600 t-0 l-0 w-full h-full z-99999999 flex justify-center items-center text-black font-mono bg-black">
@@ -79,6 +79,7 @@
 </template>
 
 <script setup lang="ts">
+import { hasPlugin } from '@/common/utils'
 import { useProgress } from '@tresjs/cientos'
 
 const props = withDefaults(
@@ -86,14 +87,30 @@ const props = withDefaults(
         styleNum?: number
         isDemo?: boolean
         showProgress?: boolean
+        useResourceManager?: boolean
     }>(),
     {
         styleNum: 0,
         isDemo: false,
         showProgress: true,
+        useResourceManager: false,
     },
 )
-const { hasFinishLoading, progress } = await useProgress()
+let progress = null as any
+let hasFinishLoading = null as any
+
+if (props.useResourceManager) {
+    if (hasPlugin('resourceManager', '资源管理器插件')) {
+        const modules = import.meta.glob('PLS/resourceManager/index.js')
+        const { Resource } = await modules['/src/plugins/resourceManager/index.js']()
+        progress = Resource.progress
+        hasFinishLoading = Resource.hasAllFinished
+    }
+} else {
+    const uP = await useProgress()
+    progress = uP.progress
+    hasFinishLoading = uP.hasFinishLoading
+}
 
 const animloop = () => {
     if (progress.value++ > 100) {

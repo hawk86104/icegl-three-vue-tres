@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-10-16 10:53:09
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-05-24 09:52:10
+ * @LastEditTime: 2024-08-12 16:33:18
  */
 // 放工具函数
 import { request } from '@fesjs/fes'
@@ -21,20 +21,49 @@ const findStringBetween = (str) => {
 
 export const getPluginsConfig = () => {
     // 获得插件列表 根据插件目录
-    const modulePaths = import.meta.glob('PLS/*/config.js', { eager: true })
-    const config = {}
-    for (const path of Object.keys(modulePaths)) {
-        const name = findStringBetween(path)
-        if (!name) {
-            continue
+    if (!window.pluginsConfig) {
+        const modulePaths = import.meta.glob('PLS/*/config.js', { eager: true })
+        const config = {}
+        for (const path of Object.keys(modulePaths)) {
+            const name = findStringBetween(path)
+            if (!name) {
+                continue
+            }
+            config[name] = modulePaths[path].default
         }
-        config[name] = modulePaths[path].default
+        window.pluginsConfig = config
     }
-    return config
+    //检查插件依赖关系
+    for (const name of Object.keys(window.pluginsConfig)) {
+        if (window.pluginsConfig[name].require) {
+            window.pluginsConfig[name].require.forEach((req) => {
+                // eslint-disable-next-line no-undefined
+                const re = window.pluginsConfig[req] !== undefined
+                if (!re) {
+                    console.error(`${req}插件_未安装，请到插件市场下载安装:https://icegl.cn/tvtstore/${req}`)
+                    // window.open(`https://icegl.cn/tvtstore/${req}`, '_blank')
+                    const features = 'width=600,height=350' 
+                    window.open(`https://icegl.cn/tvtstore/${req}`, req, features)
+                }
+            })
+        }
+    }
+    return window.pluginsConfig
+}
+
+export const hasPlugin = (ename, cname) => {
+    const config = getPluginsConfig()
+    // eslint-disable-next-line no-undefined
+    const re = config[ename] !== undefined
+    if (!re) {
+        console.error(`${cname}_未安装，请到插件市场下载安装:https://icegl.cn/tvtstore/${cname}`)
+        window.open(`https://icegl.cn/tvtstore/${cname}`, '_blank')
+    }
+    return re
 }
 
 // 警告函数
-function showWarning() {
+function showWarning () {
     FMessage.warning?.({
         content: '官网已经更新的插件功能，请git 更新代码!',
         colorful: true,
@@ -94,11 +123,11 @@ export const getOnlinePluginConfig = (plConfig) => {
 }
 
 // 通过名称查找预览配置
-function findPreviewByName(previews, name) {
+function findPreviewByName (previews, name) {
     return previews.find((preview) => preview.name === name)
 }
 // 在子配置中查找预览配置
-function findChildPreviewByName(children, childName, previewName) {
+function findChildPreviewByName (children, childName, previewName) {
     const child = children.find((chi) => chi.name === childName)
     if (child && child.preview) {
         return child.preview.find((preview) => preview.name === previewName)
@@ -119,7 +148,7 @@ export const getOnePluginConfig = (pName, oName, cName) => {
             // 根据页面参数名查找预览配置
             if (oName && config.preview) {
                 const preview = findPreviewByName(config.preview, oName)
-                if (preview) return { config, preview: preview }
+                if (preview) return { config, preview }
             }
             // 根据子页面参数名查找子配置
             else if (cName && config.child) {

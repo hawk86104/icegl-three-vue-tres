@@ -24,7 +24,7 @@
 
         <TresGridHelper :position-y="0.1" />
     </TresCanvas>
-    <h1 class="text-center text-white w-full absolute">若需查看插件中心，请运行：npm run pre.dev</h1>
+    <h1 class="text-center text-white w-full absolute">若需查看样例中心，请运行：npm run pre.dev</h1>
 </template>
 
 <script setup lang="ts">
