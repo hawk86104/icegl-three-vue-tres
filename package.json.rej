@@ -1,0 +1,9 @@
+diff a/package.json b/package.json	(rejected hunks)
+@@ -83,6 +83,7 @@
+     "iconify-icon": "^2.1.0",
+     "jszip": "^3.10.1",
+     "lamina": "^1.1.23",
++    "lodash": "^4.17.21",
+     "lygia": "^1.1.3",
+     "naive-ui": "^2.39.0",
+     "oimophysics": "^1.2.2",

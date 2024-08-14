@@ -1,8 +1,8 @@
 
 <template>
     <TresCanvas clearColor="#201919" window-size v-bind="state">
-        <TresPerspectiveCamera :fov="60" :near="0.1" :far="2000" :position="[0, 10, -28]" />
-        <TresAmbientLight :intensity="1" />
+        <TresPerspectiveCamera :fov="60" :near="0.1" :far="2000" :position="[0, 0, 200]" :look-at="[0, 0, 0]"/>
+        <TresAmbientLight :intensity="2" />
         <OrbitControls v-bind="controlsState" />
         <Suspense>
            <drawArrows />
@@ -18,19 +18,20 @@ import { Pane } from 'tweakpane'
 import drawArrows from  "../components/drawArrows.vue"
 
 const state = reactive({
-    // windowSize: true,
+    windowSize: true,
     alpha: true,
     antialias: true,
     autoClear: false,
     disableRender: true,
 })
 const controlsState = reactive({
-    enableDamping: false,
-    enableZoom: false,
-    autoRotate: false,
-    enablePan: false,
-    enableRotate: false,
+    enableDamping: true,
+    enableZoom: true,
+    enablePan: true,
+    enableRotate: true,
+    makeDefault: true,
 })
+
 </script>
 
 <style >
