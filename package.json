@@ -7,6 +7,7 @@
     "build": "fes build",
     "pre.dev": "cross-env FES_ENV=predev fes dev",
     "pre.build": "cross-env NODE_OPTIONS=--max-old-space-size=8088 FES_ENV=predev fes build",
+    "both":"yarn dev & yarn pre.dev",
     "plugin.marker": "node pluginMaker/index.js",
     "analyze": "cross-env ANALYZE=1 fes build",
     "test:unit": "fes test:unit",
