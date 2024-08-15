@@ -123,6 +123,8 @@
 6、yarn pre.build	//预览 下的编译打包
 
 7、yarn build	//自己项目 下的编译打包
+
+8、yarn both  //同时启动 dev 和 pre.dev 可以边调试自己得项目，边对照移植样例和插件
 ```
 
 ![展示](./preview/compileMode.png)

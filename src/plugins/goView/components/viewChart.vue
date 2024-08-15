@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-05-27 11:22:46
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-06-01 09:10:37
+ * @LastEditTime: 2024-08-15 13:12:02
 -->
 <template>
     <div v-show="showAllComRef" :class="`go-preview ${chartEditStore.editCanvasConfig.previewScaleType}`" style="pointer-events: none" @mousedown="dragCanvas">
@@ -19,6 +19,7 @@
                         <preview-render-list></preview-render-list>
                         <!-- 遮罩层 -->
                         <div class="go-preview-mask" :style="goPreviewMaskStyle"></div>
+                        <div class="go-preview-mask mask-right" :style="goPreviewMaskStyle"></div>
                     </div>
                 </div>
             </div>
@@ -30,6 +31,7 @@
                     <preview-render-list></preview-render-list>
                     <!-- 遮罩层 -->
                     <div class="go-preview-mask" :style="goPreviewMaskStyle"></div>
+                    <div class="go-preview-mask mask-right" :style="goPreviewMaskStyle"></div>
                 </div>
             </div>
         </template>
@@ -106,39 +108,54 @@ const goPreviewMaskStyle = computed(() => ({
 
 <style lang="scss" scoped>
 @import '../lib/scss/style.scss';
+
 @include go('preview') {
     position: relative;
     height: 100vh;
     width: 100vw;
     @include background-image('background-image');
+
     &.fit,
     &.full {
         display: flex;
         align-items: center;
         justify-content: center;
         overflow: hidden;
+
         .go-preview-scale {
             transform-origin: center center;
         }
     }
+
     &.scrollY {
         overflow-x: hidden;
+
         .go-preview-scale {
             transform-origin: left top;
         }
     }
+
     &.scrollX {
         overflow-y: hidden;
+
         .go-preview-scale {
             transform-origin: left top;
         }
     }
+
     .go-preview-entity {
         overflow: hidden;
     }
+
     .go-preview-mask {
         height: 100%;
         background: linear-gradient(to right, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4) 80%, rgba(0, 0, 0, 0));
+        &.mask-right {
+            background: linear-gradient(to left, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4) 80%, rgba(0, 0, 0, 0));
+            right: 0;
+            position: absolute;
+            top: 0;
+        }
     }
 }
 </style>
