@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-05-28 09:22:40
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-07-18 11:22:10
+ * @LastEditTime: 2024-08-15 11:48:15
 -->
 
 <template>
@@ -18,7 +18,7 @@
             <sceneCom />
         </Suspense>
 
-        <leffect />
+        <effectCom />
     </TresCanvas>
     <viewChart :dataJson="dataJson" :showAllCom="loadingRef?.hasFinishLoading" :delay="1600" :maskWidth="560" />
 </template>
@@ -27,10 +27,10 @@ import * as THREE from 'three'
 import { reactive, watch, ref } from 'vue'
 import { TresCanvas } from '@tresjs/core'
 import { OrbitControls } from '@tresjs/cientos'
-import sceneCom from '../components/alternator/scene.vue'
 import { loading2 as loading } from 'PLS/UIdemo'
-import leffect from '../components/alternator/effect.vue'
 import { viewChart } from 'PLS/goView'
+import sceneCom from '../components/alternator/scene.vue'
+import effectCom from '../components/alternator/effect.vue'
 import dataJson from '../components/alternator/alternatorGoView.json'
 
 const state = reactive({
@@ -67,12 +67,12 @@ const cameraConfig = {
 }
 const loader = new THREE.ObjectLoader()
 const cameraObject = loader.parse(cameraConfig)
-const cameraRef = ref(null)
+const cameraRef = ref(null) as any
 const loadingRef = ref(null)
 watch(
     () => cameraRef.value,
     (val) => {
-        val.copy(cameraObject)
+        val&&val.copy(cameraObject)
     },
 )
 </script>
