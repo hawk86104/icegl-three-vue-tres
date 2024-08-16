@@ -27,7 +27,7 @@
 
 > B 站上对此项目的视频说明点击下方 👇🏻 跳转
 
-<a href="https://www.bilibili.com/video/BV1LH4y1p7Yn"><img src="./preview/bilibili.gif" alt="tres.js webgl"></a>
+<a href="https://www.bilibili.com/video/BV1LH4y1p7Yn"><img src="./preview/bilibili.gif" style="max-width:800px;" alt="tres.js webgl"></a>
 
 # 生态 `@ThreeJS-@Vue3.x-@TresJS`
 
@@ -48,8 +48,9 @@
     易学易用，性能出色，适用场景丰富的 Web 前端框架。<br/><br/>
 
 -   ⚡ TresJS \* [点击详情](https://tresjs.org)
-
-<a href="https://www.npmjs.com/package/@tresjs/core"><img src="https://img.shields.io/npm/v/@tresjs/core?color=%2382DBCA&label=%40tresjs%2Fcore&logo=data:image/svg%2bxml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTExLjY4NTQgMy40MjkxNkMxMi4wNzM4IDIuNzgxODIgMTMuMDEyIDIuNzgxODIgMTMuNDAwNCAzLjQyOTE1TDE5LjE3NzEgMTMuMDU2OUMxOS41NzcgMTMuNzIzNSAxOS4wOTY5IDE0LjU3MTQgMTguMzE5NiAxNC41NzE0SDYuNzY2MjRDNS45ODg5NCAxNC41NzE0IDUuNTA4ODMgMTMuNzIzNSA1LjkwODc1IDEzLjA1NjlMMTEuNjg1NCAzLjQyOTE2WiIgZmlsbD0iIzgyREJDNSIvPgo8cGF0aCBkPSJNMTUuNjg1NyAxMC41NDI5QzE1LjY4NTcgOS45OTA1OSAxNi4xMzM0IDkuNTQyODggMTYuNjg1NyA5LjU0Mjg4SDI2QzI2LjU1MjIgOS41NDI4OCAyNyA5Ljk5MDU5IDI3IDEwLjU0MjlWMTkuODU3MkMyNyAyMC40MDk0IDI2LjU1MjIgMjAuODU3MiAyNiAyMC44NTcySDE2LjY4NTdDMTYuMTMzNCAyMC44NTcyIDE1LjY4NTcgMjAuNDA5NCAxNS42ODU3IDE5Ljg1NzJWMTAuNTQyOVoiIGZpbGw9IiM0RjRGNEYiLz4KPGNpcmNsZSBjeD0iMTYiIGN5PSIyMiIgcj0iNiIgZmlsbD0iI0VGQUMzNSIvPgo8L3N2Zz4K" alt="npm package"></a>
+<a href="https://www.npmjs.com/package/@tresjs/core">
+<img src="https://img.shields.io/npm/v/@tresjs/core?color=%2382DBCA&label=%40tresjs%2Fcore&logo=data:image/svg%2bxml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTExLjY4NTQgMy40MjkxNkMxMi4wNzM4IDIuNzgxODIgMTMuMDEyIDIuNzgxODIgMTMuNDAwNCAzLjQyOTE1TDE5LjE3NzEgMTMuMDU2OUMxOS41NzcgMTMuNzIzNSAxOS4wOTY5IDE0LjU3MTQgMTguMzE5NiAxNC41NzE0SDYuNzY2MjRDNS45ODg5NCAxNC41NzE0IDUuNTA4ODMgMTMuNzIzNSA1LjkwODc1IDEzLjA1NjlMMTEuNjg1NCAzLjQyOTE2WiIgZmlsbD0iIzgyREJDNSIvPgo8cGF0aCBkPSJNMTUuNjg1NyAxMC41NDI5QzE1LjY4NTcgOS45OTA1OSAxNi4xMzM0IDkuNTQyODggMTYuNjg1NyA5LjU0Mjg4SDI2QzI2LjU1MjIgOS41NDI4OCAyNyA5Ljk5MDU5IDI3IDEwLjU0MjlWMTkuODU3MkMyNyAyMC40MDk0IDI2LjU1MjIgMjAuODU3MiAyNiAyMC44NTcySDE2LjY4NTdDMTYuMTMzNCAyMC44NTcyIDE1LjY4NTcgMjAuNDA5NCAxNS42ODU3IDE5Ljg1NzJWMTAuNTQyOVoiIGZpbGw9IiM0RjRGNEYiLz4KPGNpcmNsZSBjeD0iMTYiIGN5PSIyMiIgcj0iNiIgZmlsbD0iI0VGQUMzNSIvPgo8L3N2Zz4K" alt="npm package">
+</a>
 使用 Vue3.x 组件实现声明式的 ThreeJS，做属于前端的三维项目。<br/><br/>
 
 ## 🏕 点击预览：[🌏opensource.icegl.cn](https://opensource.icegl.cn)
@@ -68,6 +69,7 @@
 ![展示](./preview/工业2.gif)
 ![展示](./preview/艺术效果.gif)
 ![展示](./preview/shadertoyMaterial.gif)
+![展示](./preview/specialEffects2408.gif)
 
 更多演示请进入预览页面
 
@@ -135,26 +137,31 @@
 
 ## 三维编辑器：[📊 原生编辑器＋插件生成器](https://docs.icegl.cn/docs/three-vue-tres/editor/threeeditor.html)
 
-![展示](https://docs.icegl.cn/editor.png)
+<a href="https://docs.icegl.cn/docs/three-vue-tres/editor/threeeditor.html">
+<img src="https://docs.icegl.cn/editor.png" style="width:800px;max-width:100%;" alt="tres.js webgl"></a>
 
 ## UI 编辑器：[📊 GoView 导出＋配置导入组件](https://docs.icegl.cn/docs/three-vue-tres/editor/goview.html)
 
-![展示](./public/plugins/goView/preview/goViewPlugin.png)
+<a href="https://docs.icegl.cn/docs/three-vue-tres/editor/goview.html">
+<img src="./public/plugins/goView/preview/goViewPlugin.png" style="width:800px;max-width:100%;" alt="tres.js webgl"></a>
 
 # 🧩 丰富的[插件应用市场🌏tvtstore](https://www.icegl.cn/tvtstore)
-插件中心 [🌏www.icegl.cn/tvtstore](https://www.icegl.cn/tvtstore) 包含各式各样的项目场景和功能。插件是 ICE 社区生态中重要的一环，在应用市场中完整应用和普通插件统一称为插件。<br/>
-[![tvt.js插件市场](https://icegl-1314935952.cos.ap-beijing.myqcloud.com/uploads/20240814/5b370fdeb9e9817c4b78cd919da74d8a.png)](https://www.icegl.cn/tvtstore)
+### 插件中心 [🌏www.icegl.cn/tvtstore](https://www.icegl.cn/tvtstore) 包含各式各样的项目场景和功能。插件是 ICE 社区生态中重要的一环，在应用市场中完整应用和普通插件统一称为插件。<br/>
+<a href="https://www.icegl.cn/tvtstore">
+<img src="https://icegl-1314935952.cos.ap-beijing.myqcloud.com/uploads/20240814/5b370fdeb9e9817c4b78cd919da74d8a.png" style="width:800px;max-width:100%;" alt="tvt.js插件市场"></a>
+
 ### 我们将会逐一把落地的项目以插件的形式加入到此开源框中...
-[![加入我们](https://icegl-1314935952.cos.ap-beijing.myqcloud.com/uploads/20240712/bd350b8cb5bc46d4b7a05b903cf787b4.png)](https://www.icegl.cn/p/tvtdeveloper.html)
+<a href="https://www.icegl.cn/p/tvtdeveloper.html">
+<img src="https://icegl-1314935952.cos.ap-beijing.myqcloud.com/uploads/20240712/bd350b8cb5bc46d4b7a05b903cf787b4.png" style="width:800px;max-width:100%;" alt="tvt.js插件市场"></a>
 
 # ❓ 问题反馈
 
 在使用中有任何问题，请使用以下联系方式联系我们
 
 -   问答社区: [图形学社区 icegl.cn](https://www.icegl.cn/ask)
-<p align = "left">   
-<img src="https://icegl-1314935952.cos.ap-beijing.myqcloud.com/uploads/20230421/QQ20230421-121209.png" width="680" />
-</p>
+
+<a href="https://www.icegl.cn/ask">
+<img src="https://icegl-1314935952.cos.ap-beijing.myqcloud.com/uploads/20230421/QQ20230421-121209.png" style="width:800px;max-width:100%;" alt="图形学问答社区"></a>
 
 -   欢迎大家也加入微信群，已有几个群已满，一起学习讨论 webgl。加微信我拉进群
 <p align = "left">    
