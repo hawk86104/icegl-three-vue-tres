@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-10-16 10:53:09
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-08-12 16:33:18
+ * @LastEditTime: 2024-08-16 10:15:54
  */
 // 放工具函数
 import { request } from '@fesjs/fes'
@@ -75,10 +75,9 @@ const formatMenu = (online, local) => {
     const result = { ...local }
 
     for (const olKey in online) {
-        if (olKey === 'basic') {
+        if (olKey === 'basic' || online[olKey].tvtstore !== undefined) {
             continue
         }
-
         const olItem = online[olKey]
         const loItem = local[olKey]
 
