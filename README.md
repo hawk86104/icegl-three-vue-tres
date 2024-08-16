@@ -68,6 +68,7 @@
 ![展示](./preview/工业2.gif)
 ![展示](./preview/艺术效果.gif)
 ![展示](./preview/shadertoyMaterial.gif)
+![展示](./preview/specialEffects2408.gif)
 
 更多演示请进入预览页面
 
