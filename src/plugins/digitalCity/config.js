@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-10-26 09:20:42
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-08-12 16:18:13
+ * @LastEditTime: 2024-08-19 19:07:32
  */
 export default {
     name: 'digitalCity',
@@ -45,7 +45,8 @@ export default {
         { src: 'plugins/digitalCity/preview/roadLines.png', type: 'img', name: 'roadLines', title: '道路飞线' },
         { src: 'plugins/digitalCity/preview/fence.png', type: 'img', name: 'fence', title: '围栏' },
         { src: 'plugins/digitalCity/preview/regionGlow.png', type: 'img', name: 'regionGlow', title: '区域内发光' },
-        { src: 'plugins/digitalCity/preview/coneAnchor.png', type: 'img', name: 'coneAnchor', title: '浮锚标识' },
+        { src: 'plugins/digitalCity/preview/coneAnchorA.png', type: 'img', name: 'coneAnchorA', title: '浮锚标识A' },
+        { src: 'plugins/digitalCity/preview/coneAnchorB.png', type: 'img', name: 'coneAnchorB', title: '浮锚标识B' },
         { src: 'plugins/digitalCity/preview/particleFirefly.png', type: 'img', name: 'particleFirefly', title: '粒子萤火虫' },
         { src: 'plugins/digitalCity/preview/city2.gif', type: 'img', name: 'city2', title: '城市新模型' },
     ],
