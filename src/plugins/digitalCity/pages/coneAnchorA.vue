@@ -4,29 +4,29 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-07-26 10:13:54
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-07-29 09:40:16
+ * @LastEditTime: 2024-08-19 19:04:55
 -->
 <template>
     <pagesShow ref="pagesShowRef">
         <template v-slot:ability>
             <Suspense>
-                <coneAnchorMesh :position="[0, 19, 0]" v-bind="configState" :scale="6" />
+                <coneAnchorMeshA :position="[0, 19, 0]" v-bind="configState" :scale="6" />
             </Suspense>
             <Suspense>
-                <coneAnchorMesh :position="[319, 19, 119]" color="#2cff00" :height="60" :speed="0.1" :scale="2" />
+                <coneAnchorMeshA :position="[319, 19, 119]" color="#2cff00" :height="60" :speed="0.1" :scale="2" />
             </Suspense>
             <Suspense>
-                <coneAnchorMesh :position="[-319, 19, 619]" color="#ffd900" :height="30" :speed="0.02" :scale="1.5" />
+                <coneAnchorMeshA :position="[-319, 19, 619]" color="#ffd900" :height="30" :speed="0.02" :scale="1.5" />
             </Suspense>
         </template>
     </pagesShow>
 </template>
 
 <script setup lang="ts">
-import pagesShow from '../components/pagesShow.vue'
-import coneAnchorMesh from '../components/mark/coneAnchorMesh.vue'
 import { reactive } from 'vue'
 import { Pane } from 'tweakpane'
+import { coneAnchorMeshA } from 'PLS/digitalCity'
+import pagesShow from '../components/pagesShow.vue'
 
 const paneControl = new Pane({
     title: '旋转椎体-参数',
