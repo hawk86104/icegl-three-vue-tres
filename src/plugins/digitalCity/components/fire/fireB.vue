@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-10-27 16:43:05
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-03-18 09:34:40
+ * @LastEditTime: 2024-08-20 15:42:55
 -->
 <script setup lang="ts">
 import { useTexture, useRenderLoop } from '@tresjs/core'
@@ -61,7 +61,7 @@ const emitter = new SPE.Emitter({
 		value: new THREE.Color('#ff0000'),
 		spread: new THREE.Vector3(0.05, 0.05, 0.01)
 	}
-});
+})
 
 particleGroup.addEmitter(emitter)
 const objCloud = particleGroup.mesh
@@ -73,5 +73,5 @@ onLoop(({ dt }) => {
 </script>
 
 <template>
-	<primitive :object="objCloud" :position="[-130, 26, 20]" :renderOrder="3001" />
+	<primitive :object="objCloud" :renderOrder="3001" />
 </template>
