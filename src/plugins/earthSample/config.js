@@ -4,15 +4,15 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-01 09:49:28
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-07-30 08:02:16
+ * @LastEditTime: 2024-08-24 22:58:36
  */
 export default {
     name: 'earthSample',
     title: '地球的简单例子',
     intro: '基于threeJS简单地球的例子',
-    version: '0.0.1',
-    author: '地虎降天龙',
-    website: 'https://gitee.com/hawk86104',
+    version: '1.0.1',
+    author: '地虎降天龙&何贤',
+    website: 'https://hexianweb.github.io',
     state: 'active',
     require: [],
     preview: [
@@ -22,5 +22,6 @@ export default {
         { src: 'plugins/earthSample/preview/pointsScan.png', type: 'img', name: 'pointsScan', title: '点扫描' },
         { src: 'plugins/earthSample/preview/highlightScan.png', type: 'img', name: 'highlightScan', title: '高光扫描' },
         { src: 'plugins/earthSample/preview/smokeEarth.png', type: 'img', name: 'smokeEarth', title: '烟雾球' },
+        { src: 'plugins/earthSample/preview/pointsEarth.png', type: 'img', name: 'pointsEarth', title: '粒子球' },
     ],
 }
