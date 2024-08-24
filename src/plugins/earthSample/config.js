@@ -22,5 +22,6 @@ export default {
         { src: 'plugins/earthSample/preview/pointsScan.png', type: 'img', name: 'pointsScan', title: '点扫描' },
         { src: 'plugins/earthSample/preview/highlightScan.png', type: 'img', name: 'highlightScan', title: '高光扫描' },
         { src: 'plugins/earthSample/preview/smokeEarth.png', type: 'img', name: 'smokeEarth', title: '烟雾球' },
+        { src: 'plugins/earthSample/preview/pointsEarth.png', type: 'img', name: 'pointsEarth', title: '粒子球' },
     ],
 }
