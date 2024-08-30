@@ -4,10 +4,10 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-04-15 21:03:54
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-07-18 17:24:53
+ * @LastEditTime: 2024-08-30 10:47:01
 -->
 <script setup lang="ts">
-import { defineProps, ref, watchEffect, onMounted } from 'vue'
+import { defineProps, ref, watchEffect, onMounted,watch } from 'vue'
 import type { MeshBasicMaterial, Texture } from 'three'
 import { Color, DoubleSide } from 'three'
 
@@ -37,6 +37,16 @@ watchEffect(() => {
         material.value.needsUpdate = true
     }
 })
+watch(
+    () => props.color,
+    (newVal: any) => {
+        if (material.value) {
+            material.value.color.set(newVal)
+            material.value.color.multiplyScalar(props.intensity)
+            material.value.needsUpdate = true
+        }
+    },
+)
 onMounted(() => {
     // material.value.color.multiplyScalar(props.intensity)
 })
