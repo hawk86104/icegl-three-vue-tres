@@ -8,7 +8,7 @@ import { SelectionHelper } from 'three/examples/jsm/interactive/SelectionHelper'
 import { useTresContext, useRenderLoop } from '@tresjs/core'
 import { useGLTF } from '@tresjs/cientos'
 import { Pane } from 'tweakpane'
-import { abs } from 'three/examples/jsm/nodes/Nodes'
+
 // const { scene: model, nodes } = await useGLTF('/plugins/operationTool/model/湖中小亭/湖中小亭.gltf')
 const { camera, renderer, scene, sizes, raycaster, controls } = useTresContext()
 
