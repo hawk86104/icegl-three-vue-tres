@@ -1,28 +1,26 @@
 <template>
-    <TresMesh :position="[-100, 0, 0]" ref="torusref" @click="changeObject(torusref)">
+    <TresMesh ref="torusref" :position="[-100, 0, 0]" @click="changeObject(torusref)">
         <TresTorusGeometry :args="[50, 5, 128, 128]" />
         <TresMeshBasicMaterial color="orange" />
     </TresMesh>
-    <TresMesh :position="[100, 0, 0]" ref="boxref" @click="changeObject(boxref)">
+    <TresMesh ref="boxref" :position="[100, 0, 0]" @click="changeObject(boxref)">
         <TresBoxGeometry :args="[80, 100, 20]" />
         <TresMeshNormalMaterial />
     </TresMesh>
 </template>
  
 <script setup lang="ts">
-import { onMounted, watchEffect, ref } from 'vue'
+import { ref } from 'vue'
 import * as THREE from 'three'
 import { FontLoader } from 'three/examples/jsm/loaders/FontLoader.js'
 import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry.js'
-import { useTresContext, useRenderLoop } from '@tresjs/core'
-import { useGLTF } from '@tresjs/cientos'
-import { Pane } from 'tweakpane'
-const { camera, renderer, scene, sizes, raycaster, controls } = useTresContext()
-let torusref = ref()
-let boxref = ref()
-let boundingBox = null
-let distant = -5
-function loadFont(fontUrl) {
+import { useTresContext } from '@tresjs/core'
+
+const { scene } = useTresContext()
+const torusref = ref()
+const boxref = ref()
+let boundingBox = null as any
+function loadFont(fontUrl :string) {
     return new Promise((resolve, reject) => {
         const loader = new FontLoader()
         loader.load(
@@ -33,17 +31,17 @@ function loadFont(fontUrl) {
         )
     })
 }
-const font = await loadFont('/plugins/operationTool/fonts/Microsoft YaHei_Regular.json')
-let getOutBox = function (myMesh) {
+const font = await loadFont('https://opensource-1314935952.cos.ap-nanjing.myqcloud.com/fonts/FZLanTingHeiS-UL-GB_Regular.json')
+const getOutBox = function (myMesh : any) {
     boundingBox = new THREE.Box3().setFromObject(myMesh)
     const size = new THREE.Vector3()
     boundingBox.getSize(size)
     const boxCenter = new THREE.Vector3()
     boundingBox.getCenter(boxCenter)
-    console.log(`Width: ${size.x}, Height: ${size.y}, Depth: ${size.z}`)
+    // console.log(`Width: ${size.x}, Height: ${size.y}, Depth: ${size.z}`)
     return { size, boxCenter }
 }
-let addOutBox = function (size, boxCenter) {
+const addOutBox = function (size:any, boxCenter:any) {
     const boxGeometry = new THREE.BoxGeometry(size.x, size.y, size.z)
     const edges = new THREE.EdgesGeometry(boxGeometry)
     const lineMaterial = new THREE.LineBasicMaterial({ color: 'red' })
@@ -52,9 +50,9 @@ let addOutBox = function (size, boxCenter) {
     lineSegments.position.copy(boxCenter)
     scene.value.add(lineSegments)
 }
-let createLabel = (text, position, targetNormal) => {
+const createLabel = (text:any, position:any, targetNormal:any) => {
     const textGeometry = new TextGeometry(text, {
-        font: font,
+        font,
         size: 1,
         height: 0.2,
         curveSegments: 12,
@@ -64,14 +62,14 @@ let createLabel = (text, position, targetNormal) => {
     const textMesh = new THREE.Mesh(textGeometry, textMaterial)
     textMesh.position.copy(position)
 
-    let upx = new THREE.Vector3(1, 0, 0)
-    let upx_ = new THREE.Vector3(-1, 0, 0)
+    const upx = new THREE.Vector3(1, 0, 0)
+    const upx_ = new THREE.Vector3(-1, 0, 0)
 
-    let upy = new THREE.Vector3(0, 1, 0)
-    let upy_ = new THREE.Vector3(0, -1, 0)
+    const upy = new THREE.Vector3(0, 1, 0)
+    const upy_ = new THREE.Vector3(0, -1, 0)
 
-    let upz = new THREE.Vector3(0, 0, 1)
-    let upz_ = new THREE.Vector3(0, 0, -1)
+    const upz = new THREE.Vector3(0, 0, 1)
+    const upz_ = new THREE.Vector3(0, 0, -1)
 
     if (targetNormal.equals(upx) || targetNormal.equals(upx_)) {
     } else if (targetNormal.equals(upy) || targetNormal.equals(upy_)) {
@@ -82,8 +80,8 @@ let createLabel = (text, position, targetNormal) => {
 
     return textMesh
 }
-let createLine = (start, end, targetNormal) => {
-    let group = new THREE.Group()
+const createLine = (start:any, end:any, targetNormal:any) => {
+    const group = new THREE.Group()
     const lineGeometry = new THREE.BufferGeometry().setFromPoints([start, end])
     const line = new THREE.Line(lineGeometry, new THREE.LineBasicMaterial({ color: 'green' }))
     // line.position.copy(midPoint)
@@ -104,14 +102,11 @@ let createLine = (start, end, targetNormal) => {
     // 设置圆锥的位置和朝向
     cone2.position.copy(end)
 
-    let upx = new THREE.Vector3(1, 0, 0)
-    let upx_ = new THREE.Vector3(-1, 0, 0)
+    const upx = new THREE.Vector3(1, 0, 0)
 
-    let upy = new THREE.Vector3(0, 1, 0)
-    let upy_ = new THREE.Vector3(0, -1, 0)
+    const upy = new THREE.Vector3(0, 1, 0)
 
-    let upz = new THREE.Vector3(0, 0, 1)
-    let upz_ = new THREE.Vector3(0, 0, -1)
+    const upz = new THREE.Vector3(0, 0, 1)
 
     if (targetNormal.equals(upx)) {
         cone1.rotation.set(0, 0, Math.PI / 2)
@@ -129,31 +124,31 @@ let createLine = (start, end, targetNormal) => {
     return group
 }
 // 添加标注线和文本
-let addDimensionLabel = function (start, end, text) {
+const addDimensionLabel = function (start:any, end:any, text:any) {
     const midPoint = new THREE.Vector3().addVectors(start, end).multiplyScalar(0.5)
     const direction = new THREE.Vector3().subVectors(end, start).normalize()
-    let lineGroup = createLine(start, end, direction)
+    const lineGroup = createLine(start, end, direction)
     scene.value.add(lineGroup)
     const label = createLabel(text, midPoint, direction)
     scene.value.add(label)
 }
 
-let changeObject = function (params) {
-    let { size, boxCenter } = getOutBox(params)
+const changeObject = function (params:any) {
+    const { size, boxCenter } = getOutBox(params)
     addOutBox(size, boxCenter)
     const min = boundingBox.min
     const max = boundingBox.max
-    let disWidth = Number(size.z.toFixed(2)) + 5
-    let disDepth = 2
-    let disHeight = Number(size.z.toFixed(2)) + 7
+    const disWidth = Number(size.z.toFixed(2)) + 10
+    const disDepth = 10
+    const disHeight = Number(size.z.toFixed(2)) + 16
 
-    addDimensionLabel(new THREE.Vector3(min.x, min.y, min.z + disWidth), new THREE.Vector3(max.x, min.y, min.z + disWidth), `宽: ${size.x.toFixed(2)}`)
+    addDimensionLabel(new THREE.Vector3(min.x, min.y, min.z + disWidth), new THREE.Vector3(max.x, min.y, min.z + disWidth), `长: ${size.x.toFixed(2)}`)
 
     addDimensionLabel(new THREE.Vector3(min.x, min.y, min.z + disHeight), new THREE.Vector3(min.x, max.y, min.z + disHeight), `高: ${size.y.toFixed(2)}`)
 
-    addDimensionLabel(new THREE.Vector3(min.x - disDepth, min.y, min.z), new THREE.Vector3(min.x - disDepth, min.y, max.z), `深: ${size.z.toFixed(2)}`)
+    addDimensionLabel(new THREE.Vector3(min.x - disDepth, min.y, min.z), new THREE.Vector3(min.x - disDepth, min.y, max.z), `宽: ${size.z.toFixed(2)}`)
 }
 </script>
 
-<style >
+<style>
 </style>
