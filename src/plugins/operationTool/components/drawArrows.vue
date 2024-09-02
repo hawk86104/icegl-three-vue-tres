@@ -43,10 +43,6 @@ let onMouseClick = function (event) {
             case 'line':
                 updatePolygonLine(intersects[0].normal)
                 break
-            case 'face':
-                debugger
-                updatePolygonFace(intersects[0].normal)
-                break
         }
     }
 }
@@ -78,8 +74,7 @@ let updatePolygonFace = function (normal) {
         // 计算终点两边的两个点
         const pointLeft = new THREE.Vector3().addVectors(points[1], offset)
         const pointRight = new THREE.Vector3().subVectors(points[1], offset)
-        console.log(pointLeft,pointRight);
-        
+        console.log(pointLeft, pointRight)
 
         // drawTriangle()
         points.length = 0
@@ -155,23 +150,15 @@ let initUI = function () {
     // paneControl.containerElem_.style.top = '54px'
 
     const f1 = paneControl.addFolder({
-        title: '参数',
+        title: '参数(鼠标间断点两个点，分别作为箭头的起点)',
     })
 
     f1.addButton({
-        title: '线箭头',
-        label: '线箭头', // optional
+        title: '绘制箭头',
+        label: '激活', // optional
     }).on('click', () => {
         window.removeEventListener('click', onMouseClick, false)
         type = 'line'
-        initLine()
-    })
-    f1.addButton({
-        title: '面箭头',
-        label: '面箭头', // optional
-    }).on('click', () => {
-        window.removeEventListener('click', onMouseClick, false)
-        type = 'face'
         initLine()
     })
 }
