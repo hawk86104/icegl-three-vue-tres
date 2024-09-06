@@ -44,5 +44,13 @@ export default {
             name: 'bubble',
             title: '泡泡',
         },
+        {
+            src: 'plugins/visualArts/preview/气泡.png',
+            type: 'img',
+            name: 'mirror',
+            title: '玻璃',
+        },
+
+
     ],
 }
