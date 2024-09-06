@@ -4,7 +4,7 @@
 import * as THREE from 'three'
 import { shallowRef, defineProps,watchEffect,watch } from 'vue'
 import { useRenderLoop, useTresContext } from '@tresjs/core'
-import { TweenMax, Power1 } from 'gsap/TweenMax'
+import {gsap } from 'gsap'
 const { scene, sizes, controls } = useTresContext()
 const nbObjects = 800
 var conf = null
@@ -69,22 +69,22 @@ Truc.prototype.shuffle = function () {
     this.material.opacity = props.opacity
 
     this.tt = this.scale2
-    TweenMax.to(this.sprite.scale, 1, { x: this.scale2, y: this.scale2, ease: Power2.easeIn })
-    TweenMax.to(this.sprite.position, this.scale2, { y: this.sprite.position.y + 100, ease: Power2.easeIn })
+    gsap.to(this.sprite.scale, 1, { x: this.scale2, y: this.scale2, ease:'power1.inOut' })
+    gsap.to(this.sprite.position, this.scale2, { y: this.sprite.position.y + 100, ease:'power1.inOut' })
 
     this.t1 = 1
-    TweenMax.to(this.sprite.position, this.t1, {
+    gsap.to(this.sprite.position, this.t1, {
         x: this.sprite.position.x + rnd(10, true),
         z: this.sprite.position.z + rnd(10, true),
-        ease: Linear.ease,
+        ease: 'power1.inOut',
         repeat: Math.floor(this.tt / this.t1 / 2),
         yoyo: true,
     })
 
-    TweenMax.to(this.material, 1, {
+    gsap.to(this.material, 1, {
         opacity: 0,
         delay: this.tt - 1,
-        ease: Power2.easeIn,
+        ease: 'power1.inOut',
         onCompleteParams: [this],
         onComplete: function (o) {
             o.shuffle()

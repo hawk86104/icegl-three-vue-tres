@@ -15,7 +15,7 @@
 import { randomLoading as loading } from 'PLS/UIdemo'
 import * as THREE from 'three'
 import { ref, watch, reactive } from 'vue'
-import { OrbitControls, Levioso } from '@tresjs/cientos'
+import { OrbitControls } from '@tresjs/cientos'
 import Mirror from '../components/mirror.vue'
 
 const controlsState = reactive({
