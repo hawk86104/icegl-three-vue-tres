@@ -39,7 +39,7 @@ export default {
             title: '流动风线',
         },
         {
-            src: 'plugins/visualArts/preview/windLine.png',
+            src: 'plugins/visualArts/preview/气泡.png',
             type: 'img',
             name: 'bubble',
             title: '泡泡',
