@@ -38,5 +38,19 @@ export default {
             name: 'windLine',
             title: '流动风线',
         },
+        {
+            src: 'plugins/visualArts/preview/气泡.png',
+            type: 'img',
+            name: 'bubble',
+            title: '泡泡',
+        },
+        {
+            src: 'plugins/visualArts/preview/玻璃.png',
+            type: 'img',
+            name: 'mirror',
+            title: '玻璃',
+        },
+
+
     ],
 }

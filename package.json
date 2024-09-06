@@ -41,7 +41,6 @@
     "vite-plugin-glsl": "0.2.2"
   },
   "dependencies": {
-    "3d-tiles-renderer": "0.3.35",
     "@amap/amap-jsapi-loader": "^1.0.1",
     "@fesjs/builder-vite": "4.0.2",
     "@fesjs/fes": "3.1.10",
@@ -64,6 +63,7 @@
     "@tweenjs/tween.js": "^23.1.2",
     "@vicons/carbon": "^0.12.0",
     "@vicons/ionicons5": "^0.12.0",
+    "3d-tiles-renderer": "0.3.35",
     "animate.css": "^4.1.1",
     "axios": "^1.7.2",
     "cannon-es": "^0.20.0",
@@ -80,7 +80,7 @@
     "file-saver": "^2.0.5",
     "gl-matrix": "^3.4.3",
     "gl-noise": "^1.6.1",
-    "gsap": "3.12.5",
+    "gsap": "^2.1.3",
     "heatmap.js-fix": "^1.0.0",
     "iconify-icon": "^2.1.0",
     "jszip": "^3.10.1",
