@@ -1,3 +1,11 @@
+<!--
+ * @Description: 
+ * @Version: 1.668
+ * @Autor: 地虎降天龙
+ * @Date: 2024-09-07 22:45:14
+ * @LastEditors: 地虎降天龙
+ * @LastEditTime: 2024-09-07 22:56:41
+-->
 <template>
 	<TresGroup>
 		<TresMesh ref="tmRef" :rotation-x="-Math.PI / 2" :position-y="-0.1">
@@ -94,5 +102,4 @@ watch(
 		gridHelp.visible = newVal
 	}
 )
-
 </script>

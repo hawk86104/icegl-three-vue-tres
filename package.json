@@ -41,7 +41,6 @@
     "vite-plugin-glsl": "0.2.2"
   },
   "dependencies": {
-    "3d-tiles-renderer": "0.3.35",
     "@amap/amap-jsapi-loader": "^1.0.1",
     "@fesjs/builder-vite": "4.0.2",
     "@fesjs/fes": "3.1.10",
@@ -64,6 +63,7 @@
     "@tweenjs/tween.js": "^23.1.2",
     "@vicons/carbon": "^0.12.0",
     "@vicons/ionicons5": "^0.12.0",
+    "3d-tiles-renderer": "0.3.35",
     "animate.css": "^4.1.1",
     "axios": "^1.7.2",
     "cannon-es": "^0.20.0",
