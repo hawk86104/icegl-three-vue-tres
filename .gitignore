@@ -1,6 +1,8 @@
 .DS_Store
 .cache
 
+/dist
+
 # dependencies
 /node_modules/*
 /coverage
