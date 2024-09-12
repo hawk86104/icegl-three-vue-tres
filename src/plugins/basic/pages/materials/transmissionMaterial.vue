@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-04-25 10:54:10
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-04-26 10:23:59
+ * @LastEditTime: 2024-09-12 09:36:29
 -->
 <template>
     <TresCanvas v-bind="state" window-size>
@@ -40,8 +40,8 @@
 import { ACESFilmicToneMapping } from 'three'
 import { reactive } from 'vue'
 import { TresCanvas } from '@tresjs/core'
-import { OrbitControls } from '@tresjs/cientos'
-import { Environment, TransmissionMaterial } from 'PLS/basic'
+import { OrbitControls, Environment } from '@tresjs/cientos'
+import { TransmissionMaterial } from 'PLS/basic'
 import { gridPlus } from 'PLS/floor'
 import { Pane } from 'tweakpane'
 

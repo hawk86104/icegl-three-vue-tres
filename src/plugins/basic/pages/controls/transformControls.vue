@@ -2,7 +2,8 @@
 import { ref, reactive } from 'vue'
 
 import { BasicShadowMap, SRGBColorSpace, NoToneMapping } from 'three'
-import { OrbitControls, TransformControls, useTweakPane } from '@tresjs/cientos'
+import { OrbitControls, TransformControls } from '@tresjs/cientos'
+import { Pane } from 'tweakpane'
 
 const gl = {
   clearColor: '#82DBC5',
@@ -35,7 +36,7 @@ const controlsState = reactive({
   showZ: true,
 })
 
-const { pane } = useTweakPane()
+const pane = new Pane()
 
 pane
   .addBlade({

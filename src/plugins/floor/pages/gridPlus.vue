@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-04-25 08:27:50
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-06-06 09:51:40
+ * @LastEditTime: 2024-09-12 10:48:35
 -->
 <template>
     <TresCanvas v-bind="state" window-size>
@@ -32,9 +32,8 @@
 import { ACESFilmicToneMapping } from 'three'
 import { reactive } from 'vue'
 import { TresCanvas } from '@tresjs/core'
-import { OrbitControls } from '@tresjs/cientos'
+import { OrbitControls, Environment } from '@tresjs/cientos'
 import { Pane } from 'tweakpane'
-import { Environment } from 'PLS/basic'
 import gridPlusCom from '../components/gridPlusCom.vue'
 
 const state = reactive({

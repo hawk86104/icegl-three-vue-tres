@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-18 08:51:19
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-05-14 15:49:00
+ * @LastEditTime: 2024-09-12 10:57:56
 -->
 <template>
     <loading />
@@ -29,9 +29,8 @@
 
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
-import { OrbitControls } from '@tresjs/cientos'
+import { OrbitControls, Environment } from '@tresjs/cientos'
 import { randomLoading as loading } from 'PLS/UIdemo'
-import { Environment } from 'PLS/basic'
 import model from '../components/collectTriangles/model.vue'
 
 const state = reactive({

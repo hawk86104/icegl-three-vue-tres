@@ -2,8 +2,8 @@
 <script setup lang="ts">
 
 import { BasicShadowMap, SRGBColorSpace, NoToneMapping } from 'three'
-
-import { OrbitControls, useTweakPane } from '@tresjs/cientos'
+import { OrbitControls } from '@tresjs/cientos'
+import { Pane } from 'tweakpane'
 import { reactive } from 'vue'
 
 const gl = {
@@ -35,7 +35,7 @@ const controlsState = reactive({
   rotateSpeed: 1,
 })
 
-const { pane } = useTweakPane()
+const pane = new Pane()
 
 pane.addBinding(controlsState, 'enableDamping', { label: '启用阻尼', })
 pane.addBinding(controlsState, 'dampingFactor', {

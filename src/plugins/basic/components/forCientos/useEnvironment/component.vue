@@ -48,7 +48,7 @@ onBeforeLoop(() => {
         }
     }
 })
-const useEnvironmentTexture = (await useEnvironment(props, fbo as any)).texture
+const useEnvironmentTexture = await useEnvironment(props, fbo as any)
 const setTextureEnvAndBG = (fbo: WebGLCubeRenderTarget | null) => {
     if (fbo) {
         scene.value.environment = fbo.texture

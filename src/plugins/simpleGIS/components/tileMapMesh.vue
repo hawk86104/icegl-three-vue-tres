@@ -4,10 +4,10 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-02-26 18:58:32
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-04-01 14:36:26
+ * @LastEditTime: 2024-09-12 11:54:00
 -->
 <template>
-	<primitive :object="map" :rotation="[-Math.PI / 2, 0, 0]" />
+    <primitive :object="map" :rotation="[-Math.PI / 2, 0, 0]" />
 </template>
 
 <script lang="ts" setup>
@@ -18,26 +18,31 @@ import { useTresContext, useRenderLoop } from '@tresjs/core'
 import { watchEffect, watch } from 'vue'
 import { Map, PlaneProvider, MapProvider, TerrainMeshProvider, MERC, MartiniTerrainProvider } from '../lib/threeSatelliteMap/index'
 
-const props = withDefaults(defineProps<{
-	bbox?: Array<number>
-	maxZoom?: number
-	opposite?: boolean
-	genBright?: number
-	genContrast?: number
-	genSaturation?: number
-	monochrome?: string
-	isMonochrome?: boolean
-	mapCenter: Array<number>
-}>(), {
-	bbox: [104.955976, 20.149765, 120.998419, 30.528687],
-	maxZoom: 20,
-	opposite: false,	//反色
-	genBright: 1.0,	//高亮
-	genContrast: 1.0,	//对比度
-	genSaturation: 1.0,	//饱和度
-	monochrome: '#fff',	//单色滤镜
-	isMonochrome: false,	//是否启用单色滤镜
-})
+const props = withDefaults(
+    defineProps<{
+        bbox?: Array<number>
+        maxZoom?: number
+        opposite?: boolean
+        genBright?: number
+        genContrast?: number
+        genSaturation?: number
+        monochrome?: string
+        isMonochrome?: boolean
+        mapCenter: Array<number>
+        tweenInstance?: any
+    }>(),
+    {
+        bbox: [104.955976, 20.149765, 120.998419, 30.528687],
+        maxZoom: 20,
+        opposite: false, //反色
+        genBright: 1.0, //高亮
+        genContrast: 1.0, //对比度
+        genSaturation: 1.0, //饱和度
+        monochrome: '#fff', //单色滤镜
+        isMonochrome: false, //是否启用单色滤镜
+        tweenInstance: null,
+    },
+)
 
 const { renderer, scene } = useTresContext()
 
@@ -45,7 +50,7 @@ const planProvider = new PlaneProvider()
 planProvider.coordType = MERC
 
 const martiniProvider = new MartiniTerrainProvider()
-martiniProvider.source = 'https://api.maptiler.com/tiles/terrain-rgb-v2/[z]/[x]/[y].webp?key=L55MtSxL94Yb4hQeWewp';
+martiniProvider.source = 'https://api.maptiler.com/tiles/terrain-rgb-v2/[z]/[x]/[y].webp?key=L55MtSxL94Yb4hQeWewp'
 // martiniProvider.source = 'http://tile.writter.com.cn/tiles/[z]/[x]/[y]/terrain.webp'
 martiniProvider.coordType = MERC
 
@@ -63,26 +68,28 @@ meshProvider.wireframe = false
 meshProvider.flatShading = false
 meshProvider.useStandardMaterial = false
 meshProvider.filter = {
-	opposite: props.opposite,
-	monochrome: props.isMonochrome ? {
-		r: 0.299,
-		g: 0.587,
-		b: 0.114,
-	} : null,	//单色滤镜
-	genBright: props.genBright,	//高亮
-	genContrast: props.genContrast,	//对比度
-	genSaturation: props.genSaturation,	//饱和度
+    opposite: props.opposite,
+    monochrome: props.isMonochrome
+        ? {
+              r: 0.299,
+              g: 0.587,
+              b: 0.114,
+          }
+        : null, //单色滤镜
+    genBright: props.genBright, //高亮
+    genContrast: props.genContrast, //对比度
+    genSaturation: props.genSaturation, //饱和度
 }
 // meshProvider.filter = null
 if (props.monochrome) {
-	let color = new THREE.Color(props.monochrome)
-	if (meshProvider.filter) {
-		meshProvider.filter.monochrome = {
-			r: color.r,
-			g: color.g,
-			b: color.b,
-		}
-	}
+    let color = new THREE.Color(props.monochrome)
+    if (meshProvider.filter) {
+        meshProvider.filter.monochrome = {
+            r: color.r,
+            g: color.g,
+            b: color.b,
+        }
+    }
 }
 
 const map = new Map()
@@ -99,70 +106,77 @@ map.camera = camera
 
 let orbitControl = null as any
 watchEffect(() => {
-	if (renderer.value && !orbitControl) {
-		orbitControl = new OrbitControls(camera, renderer.value.domElement)
-		orbitControl.enableDamping = true
-		orbitControl.dampingFactor = 0.05
-		orbitControl.minDistance = 600 //避免 在搞得地图瓦片情况下 太近不显示瓦片的问题
-		orbitControl.position0.set(camera.position.x, camera.position.y, camera.position.z)
-		orbitControl.target.set(camera.position.x, 0, camera.position.z - 2000)
-	}
-	if (props.genBright && meshProvider.filter) {
-		meshProvider.filter.genBright = props.genBright
-	}
-	if (props.genContrast && meshProvider.filter) {
-		meshProvider.filter.genContrast = props.genContrast
-	}
-	if (props.genSaturation && meshProvider.filter) {
-		meshProvider.filter.genSaturation = props.genSaturation
-	}
-	if (props.isMonochrome && props.monochrome && meshProvider.filter) {
-		let color = new THREE.Color(props.monochrome)
-		meshProvider.filter.monochrome = {
-			r: color.r,
-			g: color.g,
-			b: color.b,
-		}
-	}
+    if (renderer.value && !orbitControl) {
+        orbitControl = new OrbitControls(camera, renderer.value.domElement)
+        orbitControl.enableDamping = true
+        orbitControl.dampingFactor = 0.05
+        orbitControl.minDistance = 600 //避免 在搞得地图瓦片情况下 太近不显示瓦片的问题
+        orbitControl.position0.set(camera.position.x, camera.position.y, camera.position.z)
+        orbitControl.target.set(camera.position.x, 0, camera.position.z - 2000)
+    }
+    if (props.genBright && meshProvider.filter) {
+        meshProvider.filter.genBright = props.genBright
+    }
+    if (props.genContrast && meshProvider.filter) {
+        meshProvider.filter.genContrast = props.genContrast
+    }
+    if (props.genSaturation && meshProvider.filter) {
+        meshProvider.filter.genSaturation = props.genSaturation
+    }
+    if (props.isMonochrome && props.monochrome && meshProvider.filter) {
+        let color = new THREE.Color(props.monochrome)
+        meshProvider.filter.monochrome = {
+            r: color.r,
+            g: color.g,
+            b: color.b,
+        }
+    }
 })
 
-watch(() => props.opposite, (value) => {
-	if (meshProvider.filter) {
-		meshProvider.filter.opposite = value
-	}
-})
-watch(() => props.isMonochrome, (value) => {
-	let color = new THREE.Color(props.monochrome)
-	if (meshProvider.filter) {
-		meshProvider.filter.monochrome = value ? {
-			r: color.r,
-			g: color.g,
-			b: color.b,
-		} : null
-	}
-})
+watch(
+    () => props.opposite,
+    (value) => {
+        if (meshProvider.filter) {
+            meshProvider.filter.opposite = value
+        }
+    },
+)
+watch(
+    () => props.isMonochrome,
+    (value) => {
+        let color = new THREE.Color(props.monochrome)
+        if (meshProvider.filter) {
+            meshProvider.filter.monochrome = value
+                ? {
+                      r: color.r,
+                      g: color.g,
+                      b: color.b,
+                  }
+                : null
+        }
+    },
+)
 
 const { onLoop } = useRenderLoop()
 onLoop(() => {
-	if (renderer.value) {
-		TWEEN.update()
-		if (orbitControl) {
-			orbitControl.update()
-		}
-		map.update()
+    if (renderer.value) {
+        props.tweenInstance?.update()
+        if (orbitControl) {
+            orbitControl.update()
+        }
+        map.update()
 
-		const far = Math.abs(camera.position.y) * 50
-		camera.far = far + 5000
-		camera.updateProjectionMatrix()
-		orbitControl.target.y = 0
-		renderer.value.render(scene.value, camera)
-	}
-
+        const far = Math.abs(camera.position.y) * 50
+        camera.far = far + 5000
+        camera.updateProjectionMatrix()
+        orbitControl.target.y = 0
+        renderer.value.render(scene.value, camera)
+    }
 })
-
 
 defineExpose({
-	camera, map, orbitControl
+    camera,
+    map,
+    orbitControl,
 })
-
 </script>

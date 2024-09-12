@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-03-05 09:36:24
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-07-18 11:30:29
+ * @LastEditTime: 2024-09-12 11:49:09
 -->
 
 <template>
@@ -59,8 +59,8 @@ import { loadGeojson } from 'PLS/digitalCity/common/utils'
 import { Html } from '@tresjs/cientos'
 import { useTexture, useTresContext, useRenderLoop } from '@tresjs/core'
 import { computeBoundsTree, disposeBoundsTree, acceleratedRaycast } from 'three-mesh-bvh'
-import * as TWEEN from '@tweenjs/tween.js'
 import { flyTo } from '../common/utils'
+
 
 const initMeshBvh = () => {
     THREE.BufferGeometry.prototype.computeBoundsTree = computeBoundsTree
@@ -156,16 +156,17 @@ const pLeave = (intersection) => {
 }
 
 const { camera, controls } = useTresContext()
+let twInstant = null
 const pClick = (intersection) => {
     const targetPosition = new THREE.Vector3()
     targetPosition.x = intersection.point.x
     targetPosition.y = intersection.point.y + 10
     targetPosition.z = intersection.point.z
-    flyTo(camera, targetPosition, controls)
+    twInstant = flyTo(camera, targetPosition, controls)
 }
 const { onBeforeLoop } = useRenderLoop()
 onBeforeLoop(() => {
-    TWEEN.update()
+    twInstant?.update()
 })
 const htmlState = {
     wrapperClass: 'wrapper',

@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-05 10:24:04
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2023-11-05 10:33:25
+ * @LastEditTime: 2024-09-12 09:32:05
 -->
 <script setup lang="ts">
 import { ref, shallowRef, watch } from 'vue'
@@ -26,8 +26,8 @@ const glassMaterialRef = shallowRef()
 const boxRef = shallowRef()
 
 watch(glassMaterialRef, (value) => {
-  boxRef.value.value.material.dispose()
-  boxRef.value.value.material = value.MeshGlassMaterialClass
+  boxRef.value.instance.material.dispose()
+  boxRef.value.instance.material = value.instance
 })
 </script>
 

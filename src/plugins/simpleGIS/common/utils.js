@@ -4,12 +4,12 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-03-31 13:37:31
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-06-19 16:54:59
+ * @LastEditTime: 2024-09-12 11:50:01
  */
-import { get } from '@/plugins/goView/lib/gApi/http'
 import * as TWEEN from '@tweenjs/tween.js'
 import { loadGeojson } from 'PLS/digitalCity/common/utils'
 import * as D3 from 'd3-geo'
+import { get } from '@/plugins/goView/lib/gApi/http'
 
 export const flyTo = (camera, target, controls, duration = 1000) => {
     const startPosition = camera.value.position.clone()
@@ -56,7 +56,7 @@ export const flyTo = (camera, target, controls, duration = 1000) => {
             tween.stop()
         })
 
-    tween.start()
+    return tween
 }
 export const flyToNative = (camera, target, controls, offsetZ = [-2000, -2000], duration = 1000) => {
     const startPosition = camera.position.clone()
@@ -96,7 +96,7 @@ export const flyToNative = (camera, target, controls, offsetZ = [-2000, -2000], 
             tween.stop()
         })
 
-    tween.start()
+    return tween
 }
 
 export const getlinePoints = async (geojson) => {

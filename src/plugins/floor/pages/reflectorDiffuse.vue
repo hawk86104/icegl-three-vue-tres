@@ -25,8 +25,8 @@
 </template>
 
 <script setup lang="ts">
-
-import { OrbitControls, Box, vLightHelper } from '@tresjs/cientos'
+import { vLightHelper } from '@tresjs/core'
+import { OrbitControls, Box } from '@tresjs/cientos'
 
 import { reactive } from 'vue'
 import { Pane } from 'tweakpane'

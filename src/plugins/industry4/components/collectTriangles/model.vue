@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-03-27 10:38:54
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-05-14 15:49:17
+ * @LastEditTime: 2024-09-12 10:57:09
 -->
 <template>
     <TresMesh ref="targetMesh" :geometry="geometry" :scale="0.005" :material="material" />
@@ -74,7 +74,7 @@ watchEffect(() => {
         //@ts-ignore
         targetMesh.value.geometry.computeBoundsTree()
         bvh = geometry.boundsTree
-        initEvent(mouse, brushActive, camera, mouseType, targetMesh, props.controls.value)
+        initEvent(mouse, brushActive, camera, mouseType, targetMesh, props.controls.instance)
     }
 })
 
@@ -84,7 +84,7 @@ onLoop(() => {
     if (!brushMesh.value) {
         return
     }
-    if (props.controls.value.active || !brushActive.value) {
+    if (props.controls.instance.active || !brushActive.value) {
         brushMesh.value.visible = false
     } else {
         brushMesh.value.scale.setScalar(size.value)
@@ -94,7 +94,7 @@ onLoop(() => {
         const res = raycaster.value.intersectObject(targetMesh.value, true)
         if (res.length) {
             brushMesh.value.position.copy(res[0].point)
-            props.controls.value.enabled = false
+            props.controls.instance.enabled = false
             brushMesh.value.visible = true
 
             const inverseMatrix = new THREE.Matrix4()
@@ -152,7 +152,7 @@ onLoop(() => {
             }
         } else {
             brushMesh.value.visible = false
-            props.controls.value.enabled = true
+            props.controls.instance.enabled = true
         }
     }
 })

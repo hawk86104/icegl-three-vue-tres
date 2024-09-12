@@ -4,11 +4,11 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-01-09 15:02:26
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-07-18 10:37:54
+ * @LastEditTime: 2024-09-12 10:24:41
 -->
 
 <template>
-    <TresCanvas renderMode="manual" window-size ref="tcRef">
+    <TresCanvas ref="tcRef" renderMode="manual" window-size>
         <TresPerspectiveCamera :position="[10, 10, 10]" />
         <TresAmbientLight :intensity="1" />
         <OrbitControls />
@@ -20,13 +20,13 @@
 
 <script setup lang="ts">
 import { OrbitControls } from '@tresjs/cientos'
-import ecLayers from '../../components/ecLayers.vue'
 import { watchEffect, ref } from 'vue'
+import ecLayers from '../../components/ecLayers.vue'
 
 const tcRef = ref()
 watchEffect(() => {
     if (tcRef.value) {
-        let renderer = tcRef.value.context.renderer.value
+        const renderer = tcRef.value.context.renderer.value
         renderer.autoClear = false
     }
 })

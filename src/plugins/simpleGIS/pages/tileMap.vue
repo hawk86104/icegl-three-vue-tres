@@ -39,7 +39,8 @@ const tileMapState = reactive({
 	genSaturation: 1,
 	isMonochrome: true,
 	monochrome: '#4688b5',
-	mapCenter
+	mapCenter,
+	tweenInstance: null,
 })
 
 const paneControl = new Pane({ title: '参数' })
@@ -77,7 +78,7 @@ paneControl.addBlade({
 	value: 'at',
 }).on('change', (e: any) => {
 	const toP = new THREE.Vector3(pUtmList[e.value][0], 2000, -pUtmList[e.value][1])
-	flyToNative(tileMapMeshRef.value.camera, toP, tileMapMeshRef.value.orbitControl, [0, -300], 4000)
+	tileMapState.tweenInstance = flyToNative(tileMapMeshRef.value.camera, toP, tileMapMeshRef.value.orbitControl, [0, -300], 4000)
 })
 
 const state = reactive({
@@ -93,6 +94,6 @@ const state = reactive({
 setTimeout(() => {
 	const pUtm = pUtmList.at
 	const toP = new THREE.Vector3(pUtm[0], 1600, -pUtm[1])
-	flyToNative(tileMapMeshRef.value.camera, toP, tileMapMeshRef.value.orbitControl, [-2000, -2000], 2000)
+	tileMapState.tweenInstance = flyToNative(tileMapMeshRef.value.camera, toP, tileMapMeshRef.value.orbitControl, [-2000, -2000], 2000)
 }, 1000)
 </script>

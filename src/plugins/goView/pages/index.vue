@@ -31,8 +31,7 @@
 
 <script setup lang="ts">
 import { TresCanvas } from '@tresjs/core'
-import { OrbitControls } from '@tresjs/cientos'
-import { Environment } from 'PLS/basic'
+import { OrbitControls, Environment } from '@tresjs/cientos'
 import { gridPlus } from 'PLS/floor'
 
 import { viewChart } from 'PLS/goView'
