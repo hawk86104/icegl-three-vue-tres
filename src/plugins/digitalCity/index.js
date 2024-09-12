@@ -4,10 +4,11 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-03-15 22:00:55
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-08-19 19:05:24
+ * @LastEditTime: 2024-09-12 16:28:47
  */
 import radraA from './components/radras/radraA.vue'
 import radraB from './components/radras/radraB.vue'
+import depthBufferDiffuse from './components/radras/depthBufferDiffuse.vue'
 import precipitation from './components/weather/precipitation.vue'
 import cloudMesh from './components/weather/cloudMesh.vue'
 import markA from './components/buildings/buildingsMarkA.vue'
@@ -23,6 +24,7 @@ import { reAnchorCenter, toMeshSceneCenter, objectToSceneCenter, adjustGroupCent
 export {
     radraA,
     radraB,
+    depthBufferDiffuse,
     precipitation,
     cloudMesh,
     markA,

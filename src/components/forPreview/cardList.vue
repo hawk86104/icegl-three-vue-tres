@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-03 16:02:49
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-05-24 18:25:48
+ * @LastEditTime: 2024-09-12 19:10:41
 -->
 <template>
     <FDivider titlePlacement="left">{{ props.onePlugin.title + ' - ' + props.onePlugin.name }}</FDivider>
@@ -43,7 +43,7 @@
                     <video controls class="w-full max-h-70 h-14em" v-if="onePreview.type === 'video'">
                         <source :src="publicPath + onePreview.src" type="video/mp4" autoplay="true" loop="true" />
                     </video>
-                    <FImage class="w-full max-h-70 h-14em" v-else-if="onePreview.type === 'img'" :src="publicPath + onePreview.src" lazy />
+                    <FImage class="w-full max-h-70 h-14em" fit="contain" v-else-if="onePreview.type === 'img'" :src="publicPath + onePreview.src" lazy />
                     <div
                         class="w-full h-48 text-3 text-left mb-2"
                         style="background-color: rgb(55 56 61); overflow: hidden; border-radius: 10px"

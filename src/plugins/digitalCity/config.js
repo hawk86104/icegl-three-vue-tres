@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-10-26 09:20:42
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-08-19 19:07:32
+ * @LastEditTime: 2024-09-12 16:16:49
  */
 export default {
     name: 'digitalCity',
@@ -19,6 +19,7 @@ export default {
         // { "src": "plugins/digitalCity/preview/buildings.mp4", "type": "video", "name": "buildings", "title": "建筑物" },
         { src: 'plugins/digitalCity/preview/buildings.png', type: 'img', name: 'buildings', title: '建筑物' },
         { src: 'plugins/digitalCity/preview/radars.png', type: 'img', name: 'radars', title: '雷达' },
+        { src: 'plugins/digitalCity/preview/depthBufferDiffuse.png', type: 'img', name: 'depthBufferDiffuse', title: '带深度的半球扩散' },
         { src: 'plugins/digitalCity/preview/weather.png', type: 'img', name: 'weather', title: '天气' },
         { src: 'plugins/digitalCity/preview/lightningStorm.png', type: 'img', name: 'lightningStorm', title: '闪电' },
         { src: 'plugins/digitalCity/preview/clouds.png', type: 'img', name: 'clouds', title: '云☁️' },
