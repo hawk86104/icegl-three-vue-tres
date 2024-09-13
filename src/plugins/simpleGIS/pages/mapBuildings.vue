@@ -15,7 +15,8 @@
 
 		<Suspense>
 			<tileMapBuildingsMesh ref="tileMapBuildingsMeshRef" :bbox="[104.955976, 20.149765, 120.998419, 30.528687]"
-				:mapCenter="mapCenter" :camera="camera" />
+				:mapCenter="mapCenter" :camera="camera"
+/>
 		</Suspense>
 
 		<Suspense>
@@ -43,7 +44,7 @@ const buildsPosition = lonLatToUtm(113.942639739199, 22.53171672540276, 50)
 const tileMapBuildingsMeshRef = shallowRef()
 const state = reactive({
 	clearColor: '#000000',
-	disableRender: true,
+	renderMode: 'manual',
 	alpha: false,
 	shadowMapType: THREE.BasicShadowMap,
 	outputColorSpace: THREE.SRGBColorSpace,

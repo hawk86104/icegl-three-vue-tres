@@ -35,7 +35,7 @@ const state = reactive({
 	alpha: true,
 	antialias: true,
 	autoClear: false,
-	disableRender: true,
+	renderMode: 'manual'
 })
 
 </script>

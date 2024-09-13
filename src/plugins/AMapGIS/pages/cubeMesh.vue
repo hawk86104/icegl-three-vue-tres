@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-02-21 13:38:05
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-02-22 09:17:25
+ * @LastEditTime: 2024-09-13 10:15:17
 -->
 <template>
 	<mapContainer :center="mapCenter" />
@@ -13,6 +13,11 @@
 		<TresAmbientLight :intensity="0.5" />
 
 		<TresMesh :position="[0, 0, 500]">
+			<TresBoxGeometry :args="[1000, 1000, 1000]" />
+			<TresMeshNormalMaterial />
+		</TresMesh>
+
+		<TresMesh :position="[0, 1500, 1500]" :rotation="[0, 0, Math.PI / 4]">
 			<TresBoxGeometry :args="[1000, 1000, 1000]" />
 			<TresMeshNormalMaterial />
 		</TresMesh>
@@ -34,7 +39,7 @@ const state = reactive({
 	alpha: true,
 	antialias: true,
 	autoClear: false,
-	disableRender: true,
+	renderMode: 'manual'
 })
 
 </script>

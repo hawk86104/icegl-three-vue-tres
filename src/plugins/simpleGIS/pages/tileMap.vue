@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-02-24 10:03:05
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-04-03 14:39:28
+ * @LastEditTime: 2024-09-13 10:17:38
 -->
 <template>
 	<TresCanvas v-bind="state" window-size>
@@ -85,7 +85,7 @@ const state = reactive({
 	clearColor: '#201919',
 	antialias: true,
 	logarithmicDepthBuffer: true,
-	disableRender: true,
+	renderMode: 'manual',
 	outputColorSpace: THREE.SRGBColorSpace,
 	toneMapping: THREE.NoToneMapping,
 	precision: 'highp'
