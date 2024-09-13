@@ -1,3 +1,11 @@
+<!--
+ * @Descripttion: 光线追踪实例，想学习每行代码的逻辑，请联系ICE社区-Jsonco
+ * @version: 
+ * @Author: Jsonco
+ * @Date: 2024-09-13 20:27:24
+ * @LastEditors: sueRimn
+ * @LastEditTime: 2024-09-13 20:53:21
+-->
 <template>
     <TresCanvas v-bind="state" window-size>
         <TresPerspectiveCamera ref="perspectiveCameraRef" :position="[600, 750, -1221]" :fov="45" :near="1" :far="10000" />

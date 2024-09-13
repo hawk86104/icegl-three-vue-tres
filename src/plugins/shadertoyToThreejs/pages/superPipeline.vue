@@ -4,7 +4,7 @@
  * @Author: Jsonco
  * @Date: 2024-09-13 20:27:24
  * @LastEditors: sueRimn
- * @LastEditTime: 2024-09-13 21:17:58
+ * @LastEditTime: 2024-09-13 21:04:23
 -->
 
 <template>
@@ -25,7 +25,7 @@ import { useRenderLoop } from '@tresjs/core' //useRenderLoop
 import { OrbitControls } from '@tresjs/cientos'
 import { AdditiveBlending, DoubleSide } from 'three'
 import stringVertex from '../shaders/argestCircle.vert?raw'
-import stringFrag from '../shaders/superTunnel.frag?raw'
+import stringFrag from '../shaders/superPipeline.frag?raw'
 
 const state = {
     clearColor: '#000000',

@@ -19,6 +19,14 @@ vec2 path(in float z){
 	return vec2(a*4.-b*1.5,b*1.7+a*1.5);
 	
 }
+vec3 palette(float t) {
+    vec3 a = vec3(0.5, 0.5, 0.5);
+    vec3 b = vec3(0.5, 0.5, 0.5);
+    vec3 c = vec3(1.0, 1.0, 1.0);
+    vec3 d = vec3(sin(uTime * 0.2) * 0.5 + 0.5, cos(uTime * 0.25) * 0.5 + 0.5, sin(uTime * 0.3 + 1.0) * 0.5 + 0.5);
+    
+    return a + b * cos(6.28318 * (c * t + d));
+}
 float map(vec3 p){
 	p.xy-=path(p.z);
 	float n=5.-length(p.xy*vec2(1,.8));
@@ -131,11 +139,11 @@ float calcVoxAO(vec3 vp,vec3 sp,vec3 rd,vec3 mask){
 
 void main(){
 	
-	vec2 uv=(vUv-vec2(.5))*.5;
+	vec2 uv=(vUv-vec2(.5))*2.;
 	
 	// 相机参数
 	vec3 camPos=vec3(0.,-.9,uTime*8.);//相机位置
-	vec3 lookAt=camPos+vec3(0.,0.,.25);// 相机朝向
+	vec3 lookAt=camPos+vec3(0.,0.1,.25);// 相机朝向
 	
 	vec3 lightPos=camPos+vec3(0,2.5,8);
 	
@@ -166,7 +174,7 @@ void main(){
 		vec3 sn=-(mask*sign(rd));
 		vec3 snNoBump=sn;
 		const float tSize0=1./4.;
-		sn=vec3(.1);
+		sn= palette(uv.y +  uTime * 0.4);
 		sn=doBumpMap(sp,sn,.15);//求最大光追面积
 		float ao=calcVoxAO(vPos,sp,rd,mask);
 		
@@ -179,7 +187,7 @@ void main(){
 		float diff=max(dot(sn,ld),0.);
 		float spec=pow(max(dot(reflect(-ld,sn),-rd),0.),32.);
 		vec3 texCol=vec3(1,.6,.4)+step(abs(snNoBump.y),.5)*vec3(0,.4,.6);
-		texCol*=.5;
+		texCol*=palette(uv.y +  uTime * 0.4);;
 		float shading=voxShadow(sp+snNoBump*.01,ld,lDist);
 		sceneCol=texCol*(diff+ambience)+vec3(.7,.9,1.)*spec;
 		sceneCol*=atten*shading*ao;
