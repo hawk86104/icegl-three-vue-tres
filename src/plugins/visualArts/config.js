@@ -49,8 +49,7 @@ export default {
             type: 'img',
             name: 'mirror',
             title: '玻璃',
-        },
-
+        }
 
     ],
 }
