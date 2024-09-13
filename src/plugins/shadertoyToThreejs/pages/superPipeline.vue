@@ -4,13 +4,12 @@
  * @Author: Jsonco
  * @Date: 2024-09-13 20:27:24
  * @LastEditors: sueRimn
- * @LastEditTime: 2024-09-13 21:04:23
+ * @LastEditTime: 2024-09-13 21:20:37
 -->
 
 <template>
     <TresCanvas v-bind="state" window-size>
         <TresPerspectiveCamera ref="perspectiveCameraRef" :position="[0, 0, 1800]" :fov="45" :near="1" :far="10000" />
-        <OrbitControls v-bind="controlsState" />
         <TresAmbientLight color="#ffffff" />
         <TresDirectionalLight :position="[100, 100, 0]" :intensity="0.5" color="#ffffff" />
         <TresMesh ref="quanMeshRef" :rotation-x="Math.PI">
@@ -33,7 +32,7 @@ const state = {
     alpha: false,
     useLegacyLights: true,
 }
-const controlsState = { autoRotate: false, enableDamping: true }
+const controlsState = { autoRotate: true, enableDamping: true }
 const Material = {
     uniforms: {
         uTime: { type: 'f', value: 0.0 },
