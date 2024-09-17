@@ -62,7 +62,7 @@ void main(){
         
         float d = uv0.x * exp(-radius);
 
-        vec3 col = palette(uv0.y + i * 0.4 + uTime * 0.4);
+        vec3 col = palette(uv0.x + i * 0.4 + uTime * 0.4);
 
         d = sin(d * (8.0 + 4.0 * sin(uTime * 0.1)) + uTime) / 8.0;
         d = abs(d);
