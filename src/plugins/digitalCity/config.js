@@ -1,10 +1,10 @@
 /*
- * @Description:
+ * @Description: 
  * @Version: 1.668
  * @Autor: 地虎降天龙
- * @Date: 2023-10-26 09:20:42
+ * @Date: 2024-08-19 20:24:59
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-09-12 16:16:49
+ * @LastEditTime: 2024-09-17 15:05:30
  */
 export default {
     name: 'digitalCity',
@@ -45,6 +45,7 @@ export default {
         { src: 'plugins/digitalCity/preview/buildingsMarkA.png', type: 'img', name: 'buildingsMarkA', title: '建筑物标记A' },
         { src: 'plugins/digitalCity/preview/roadLines.png', type: 'img', name: 'roadLines', title: '道路飞线' },
         { src: 'plugins/digitalCity/preview/fence.png', type: 'img', name: 'fence', title: '围栏' },
+        { src: 'plugins/digitalCity/preview/fenceWave.png', type: 'img', name: 'fenceWave', title: '波浪围栏' },
         { src: 'plugins/digitalCity/preview/regionGlow.png', type: 'img', name: 'regionGlow', title: '区域内发光' },
         { src: 'plugins/digitalCity/preview/coneAnchorA.png', type: 'img', name: 'coneAnchorA', title: '浮锚标识A' },
         { src: 'plugins/digitalCity/preview/coneAnchorB.png', type: 'img', name: 'coneAnchorB', title: '浮锚标识B' },
