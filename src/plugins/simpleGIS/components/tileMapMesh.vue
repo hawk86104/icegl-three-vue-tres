@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-02-26 18:58:32
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-09-12 11:54:00
+ * @LastEditTime: 2024-09-18 09:36:50
 -->
 <template>
     <primitive :object="map" :rotation="[-Math.PI / 2, 0, 0]" />
@@ -12,7 +12,6 @@
 
 <script lang="ts" setup>
 import * as THREE from 'three'
-import * as TWEEN from '@tweenjs/tween.js'
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js'
 import { useTresContext, useRenderLoop } from '@tresjs/core'
 import { watchEffect, watch } from 'vue'
@@ -114,45 +113,31 @@ watchEffect(() => {
         orbitControl.position0.set(camera.position.x, camera.position.y, camera.position.z)
         orbitControl.target.set(camera.position.x, 0, camera.position.z - 2000)
     }
-    if (props.genBright && meshProvider.filter) {
-        meshProvider.filter.genBright = props.genBright
-    }
-    if (props.genContrast && meshProvider.filter) {
-        meshProvider.filter.genContrast = props.genContrast
-    }
-    if (props.genSaturation && meshProvider.filter) {
-        meshProvider.filter.genSaturation = props.genSaturation
-    }
-    if (props.isMonochrome && props.monochrome && meshProvider.filter) {
-        let color = new THREE.Color(props.monochrome)
-        meshProvider.filter.monochrome = {
-            r: color.r,
-            g: color.g,
-            b: color.b,
-        }
-    }
 })
 
 watch(
-    () => props.opposite,
-    (value) => {
+    () => [props.opposite, props.isMonochrome, props.monochrome],
+    ([opposite, isMonochrome, monochrome]) => {
         if (meshProvider.filter) {
-            meshProvider.filter.opposite = value
-        }
-    },
-)
-watch(
-    () => props.isMonochrome,
-    (value) => {
-        let color = new THREE.Color(props.monochrome)
-        if (meshProvider.filter) {
-            meshProvider.filter.monochrome = value
+            let color = new THREE.Color(monochrome as any)
+            meshProvider.filter.opposite = opposite
+            meshProvider.filter.monochrome = isMonochrome
                 ? {
                       r: color.r,
                       g: color.g,
                       b: color.b,
                   }
                 : null
+        }
+    },
+)
+watch(
+    () => [props.genBright, props.genContrast, props.genSaturation],
+    ([genBright, genContrast, genSaturation]) => {
+        if (meshProvider.filter) {
+            meshProvider.filter.genBright = genBright
+            meshProvider.filter.genContrast = genContrast
+            meshProvider.filter.genSaturation = genSaturation
         }
     },
 )
@@ -169,7 +154,7 @@ onLoop(() => {
         const far = Math.abs(camera.position.y) * 50
         camera.far = far + 5000
         camera.updateProjectionMatrix()
-        orbitControl.target.y = 0
+        // orbitControl.target.y = 0
         renderer.value.render(scene.value, camera)
     }
 })
