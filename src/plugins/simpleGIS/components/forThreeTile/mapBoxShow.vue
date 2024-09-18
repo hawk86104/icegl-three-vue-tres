@@ -4,11 +4,12 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-09-18 15:14:57
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-09-18 16:03:39
+ * @LastEditTime: 2024-09-18 17:21:00
 -->
 <template>
     <TresDirectionalLight ref="tdLight" :position="[0, 2e3, 1e3]" :intensity="1" />
     <primitive :object="map" />
+    <flyTo :map="map" ref="flyToRef" />
 </template>
 
 <script setup lang="ts">
@@ -16,6 +17,8 @@ import { watch, ref } from 'vue'
 import * as THREE from 'three'
 import { useTresContext } from '@tresjs/core'
 import * as tt from 'three-tile'
+import flyTo from './flyTo.vue'
+import * as util from './utils'
 
 const MAPBOXKEY = 'pk.eyJ1IjoidG9tYWNoIiwiYSI6ImNrbnR6d3psMzA4YWgydnBzeGhrNW1mdDgifQ.zq6mWEop1OTBrQ24R0SdlA'
 // mapbox 影像数据源
@@ -61,7 +64,7 @@ const cameraPosition = map.localToWorld(map.geo2pos(camersGeo))
 
 const tdLight = ref()
 
-const { camera, controls, scene } = useTresContext()
+const { camera, controls, scene, renderer } = useTresContext()
 
 if (camera.value) {
     camera.value.position.copy(cameraPosition)
@@ -117,4 +120,25 @@ watch(
         }
     },
 )
+
+const flyToRef = ref()
+watch(
+    () => flyToRef.value,
+    (value) => {
+        if (value) {
+            const newCameraGeo = new THREE.Vector3(118.724693, 32.00741, 9.655599)
+            const newCenterGeo = new THREE.Vector3(118.724419, 32.010354, 0.0)
+
+            setTimeout(() => {
+                value.flyToGeo(newCameraGeo, newCenterGeo)
+            }, 500)
+            // value.flyToGeo(newCameraGeo, newCenterGeo)
+            // setTimeout(() => {
+            //     value.goToGeo(newCameraGeo, newCenterGeo)
+            // }, 500)
+        }
+    },
+)
+
+util.showLocation(camera.value, renderer.value.domElement, map)
 </script>

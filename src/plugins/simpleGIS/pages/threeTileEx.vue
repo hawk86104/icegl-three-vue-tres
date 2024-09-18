@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-03-05 12:42:04
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-09-18 15:56:16
+ * @LastEditTime: 2024-09-18 17:07:53
 -->
 <template>
     <TresCanvas v-bind="state" window-size>
@@ -14,6 +14,7 @@
         <TresGridHelper :args="[20, 10]" />
         <mapBoxShow />
     </TresCanvas>
+    <informationDiv />
 </template>
 
 <script setup lang="ts">
@@ -21,6 +22,7 @@ import { reactive } from 'vue'
 
 import { OrbitControls } from '@tresjs/cientos'
 import mapBoxShow from '../components/forThreeTile/mapBoxShow.vue'
+import informationDiv from '../components/forThreeTile/informationDiv.vue'
 
 const state = reactive({
     clearColor: '#dbf0ff',
