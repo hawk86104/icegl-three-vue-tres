@@ -35,7 +35,7 @@ class QuantizedMeshTerrainProvider implements Provider<BufferGeometry> {
     }
 
     async fetchQuantizedMesh(url: string) {
-        const fetch = new Fetch(url, { cache: 'force-cache' });
+        const fetch = new Fetch(url, { cache: 'force-cache', mode: 'cors' });
         const res = await fetch.ready();
         const arrayBuffer = await res.arrayBuffer();
         const data = decode(arrayBuffer, { maxDecodingStep: DECODING_STEPS.triangleIndices });

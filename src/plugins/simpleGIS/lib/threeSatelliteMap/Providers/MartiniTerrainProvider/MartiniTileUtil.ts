@@ -67,7 +67,7 @@ export class MartiniTileUtil {
             return { terrain: _terrain, size, bbox: smallBbox };
         }
 
-        const fetch = new Fetch(url, { cache: 'force-cache' });
+        const fetch = new Fetch(url, { cache: 'force-cache', mode: 'cors' });
         this.fetchingMap.set(id, fetch);
         try {
             const res = await fetch.ready();
