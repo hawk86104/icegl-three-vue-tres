@@ -4,14 +4,13 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-03-05 12:42:04
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-09-18 17:07:53
+ * @LastEditTime: 2024-09-19 17:34:53
 -->
 <template>
     <TresCanvas v-bind="state" window-size>
         <TresPerspectiveCamera :position="[0, 12, 0]" :fov="70" :near="0.1" :far="50000" />
         <OrbitControls v-bind="controlsState" />
         <TresAmbientLight :intensity="1" />
-        <TresGridHelper :args="[20, 10]" />
         <mapBoxShow />
     </TresCanvas>
     <informationDiv />

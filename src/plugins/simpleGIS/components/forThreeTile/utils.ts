@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-09-18 17:13:32
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-09-18 17:18:45
+ * @LastEditTime: 2024-09-19 11:21:24
  */
 import * as THREE from 'three'
 import * as tt from 'three-tile'
@@ -29,4 +29,40 @@ export const showLocation = (camera: any, domElement: DOMElement, map: tt.TileMa
             }
         })
     }
+}
+
+const fogFactor = 1.0
+export const controlsEvents = (controls: any,camera: any,scene: any) => {
+    controls.addEventListener('change', () => {
+        // camera polar
+        const polar = Math.max(controls.getPolarAngle(), 0.1)
+        // dist of camera to controls
+        const dist = Math.max(controls.getDistance(), 0.1)
+
+        // set zoom speed on dist
+        controls.zoomSpeed = Math.max(Math.log(dist), 1.8)
+
+        if (camera) {
+            camera.far = THREE.MathUtils.clamp((dist / polar) * 8, 100, 50000)
+            camera.near = camera.far / 1000
+            camera.updateProjectionMatrix()
+        }
+
+        // set fog density on dist/polar
+        if (scene.fog instanceof THREE.FogExp2) {
+            scene.fog.density = (polar / (dist + 5)) * fogFactor * 0.25
+        }
+
+        // set azimuth to 0 when dist>800
+        if (dist > 8000) {
+            controls.minAzimuthAngle = 0
+            controls.maxAzimuthAngle = 0
+        } else {
+            controls.minAzimuthAngle = -Infinity
+            controls.maxAzimuthAngle = Infinity
+        }
+
+        // limit the max polar on dist
+        controls.maxPolarAngle = Math.min(Math.pow(10000, 4) / Math.pow(dist, 4), 1.2)
+    })
 }

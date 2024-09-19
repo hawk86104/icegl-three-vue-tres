@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-02-23 16:40:14
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-09-18 16:14:41
+ * @LastEditTime: 2024-09-19 11:16:22
  */
 
 export default {
@@ -51,6 +51,9 @@ export default {
         {
             src: 'plugins/simpleGIS/preview/threeTileEx.png', type: 'img', name: 'threeTileEx', title: 'threeTile使用实例',
             referenceSource: { title: 'three-tile', url: 'https://github.com/sxguojf/three-tile' },
+        },
+        {
+            src: 'plugins/simpleGIS/preview/cloundSate.png', type: 'img', name: 'cloundSate', title: '卫星云图',
          },
     ],
 }

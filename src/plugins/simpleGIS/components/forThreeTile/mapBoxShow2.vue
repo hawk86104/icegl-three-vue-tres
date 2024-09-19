@@ -4,21 +4,46 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-09-18 15:14:57
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-09-19 11:22:09
+ * @LastEditTime: 2024-09-19 17:39:57
 -->
 <template>
     <TresDirectionalLight ref="tdLight" :position="[0, 2e3, 1e3]" :intensity="1" />
     <primitive :object="map" />
-    <flyTo :map="map" ref="flyToRef" />
+    <Suspense>
+        <cloundSateShow :map="map" v-bind="cloundSateState" />
+    </Suspense>
 </template>
 
 <script setup lang="ts">
-import { watch, ref } from 'vue'
+import { watch, ref, reactive } from 'vue'
 import * as THREE from 'three'
 import { useTresContext } from '@tresjs/core'
 import * as tt from 'three-tile'
-import flyTo from './flyTo.vue'
 import * as util from './utils'
+import cloundSateShow from './cloundSateShow.vue'
+import { Pane } from 'tweakpane'
+
+const cloundSateState = reactive({
+    height: 500,
+    color: '#cccccc',
+    opacity: 0.6,
+})
+const paneControl = new Pane({ title: '参数' })
+paneControl.addBinding(cloundSateState, 'color', {
+    label: '颜色',
+})
+paneControl.addBinding(cloundSateState, 'height', {
+    label: '高度',
+    min: 10,
+    max: 5000,
+    step: 10,
+})
+paneControl.addBinding(cloundSateState, 'opacity', {
+    label: '透明度',
+    min: 0,
+    max: 1,
+    step: 0.1,
+})
 
 const MAPBOXKEY = 'pk.eyJ1IjoidG9tYWNoIiwiYSI6ImNrbnR6d3psMzA4YWgydnBzeGhrNW1mdDgifQ.zq6mWEop1OTBrQ24R0SdlA'
 // mapbox 影像数据源
@@ -54,7 +79,7 @@ const map = new tt.TileMap({
 map.rotateX(-Math.PI / 2)
 
 // 地图中心坐标(经度，纬度，高度)
-const centerGeo = new THREE.Vector3(110, 30, 0)
+const centerGeo = new THREE.Vector3(105, 34, 0)
 // 摄像坐标(经度，纬度，高度)
 const camersGeo = new THREE.Vector3(110, 0, 10000)
 // 地图中心转为世界坐标
@@ -84,25 +109,6 @@ watch(
     (value) => {
         if (value) {
             value.target.position.copy(centerPostion)
-        }
-    },
-)
-
-const flyToRef = ref()
-watch(
-    () => flyToRef.value,
-    (value) => {
-        if (value) {
-            const newCameraGeo = new THREE.Vector3(118.724693, 32.00741, 9.655599)
-            const newCenterGeo = new THREE.Vector3(118.724419, 32.010354, 0.0)
-
-            setTimeout(() => {
-                value.flyToGeo(newCameraGeo, newCenterGeo)
-            }, 500)
-            // value.flyToGeo(newCameraGeo, newCenterGeo)
-            // setTimeout(() => {
-            //     value.goToGeo(newCameraGeo, newCenterGeo)
-            // }, 500)
         }
     },
 )
