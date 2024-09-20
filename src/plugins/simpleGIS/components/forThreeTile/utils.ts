@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-09-18 17:13:32
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-09-19 11:21:24
+ * @LastEditTime: 2024-09-20 10:26:07
  */
 import * as THREE from 'three'
 import * as tt from 'three-tile'
@@ -32,7 +32,7 @@ export const showLocation = (camera: any, domElement: DOMElement, map: tt.TileMa
 }
 
 const fogFactor = 1.0
-export const controlsEvents = (controls: any,camera: any,scene: any) => {
+export const controlsEvents = (controls: any, camera: any, scene: any) => {
     controls.addEventListener('change', () => {
         // camera polar
         const polar = Math.max(controls.getPolarAngle(), 0.1)
@@ -65,4 +65,26 @@ export const controlsEvents = (controls: any,camera: any,scene: any) => {
         // limit the max polar on dist
         controls.maxPolarAngle = Math.min(Math.pow(10000, 4) / Math.pow(dist, 4), 1.2)
     })
+}
+
+// 根据地理范围的西南、东北角经纬度，计算模型变换矩阵
+export const getMatrixFromBounds = (map: tt.TileMap, sw: THREE.Vector2, ne: THREE.Vector2, alt: number) => {
+    // 经纬度转换为场景坐标
+    const p1 = map.geo2pos(new THREE.Vector3(sw.x, sw.y))
+    const p2 = map.geo2pos(new THREE.Vector3(ne.x, ne.y))
+    // 计算缩放和位置
+    const scale = new THREE.Vector3(p2.x - p1.x, p2.y - p1.y, 1)
+    const pos = new THREE.Vector3(p1.x + scale.x / 2, p2.y - scale.y / 2, alt)
+
+    const matrix = new THREE.Matrix4()
+    matrix.setPosition(pos)
+    matrix.scale(scale)
+    return matrix
+}
+
+export const scaleImg = (map: tt.TileMap, sw: THREE.Vector2, ne: THREE.Vector2, height: number) => {
+    const p1 = map.geo2pos(new THREE.Vector3(sw.x, sw.y))
+    const p2 = map.geo2pos(new THREE.Vector3(ne.x, ne.y))
+    const scale = new THREE.Vector3(p2.x - p1.x, p2.y - p1.y, height)
+    return scale
 }

@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-02-23 16:40:14
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-09-19 11:16:22
+ * @LastEditTime: 2024-09-20 09:48:23
  */
 
 export default {
@@ -49,11 +49,23 @@ export default {
         },
         { src: 'plugins/simpleGIS/preview/mapBuildings.gif', type: 'img', name: 'mapBuildings', title: '地图和3DTiles结合' },
         {
-            src: 'plugins/simpleGIS/preview/threeTileEx.png', type: 'img', name: 'threeTileEx', title: 'threeTile使用实例',
+            src: 'plugins/simpleGIS/preview/threeTileEx.png',
+            type: 'img',
+            name: 'threeTileEx',
+            title: 'threeTile使用实例',
             referenceSource: { title: 'three-tile', url: 'https://github.com/sxguojf/three-tile' },
         },
         {
-            src: 'plugins/simpleGIS/preview/cloundSate.png', type: 'img', name: 'cloundSate', title: '卫星云图',
-         },
+            src: 'plugins/simpleGIS/preview/cloundSate.png',
+            type: 'img',
+            name: 'cloundSate',
+            title: '卫星云图',
+        },
+        {
+            src: 'plugins/simpleGIS/preview/radraImg.png',
+            type: 'img',
+            name: 'radraImg',
+            title: '雷达图',
+        },
     ],
 }
