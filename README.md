@@ -53,9 +53,10 @@
 </a>
 使用 Vue3.x 组件实现声明式的 ThreeJS，做属于前端的三维项目。<br/><br/>
 
-## 🏕 点击预览：[🌏opensource.icegl.cn](https://opensource.icegl.cn)
+## 🏕 点击预览：[🌏 opensource.icegl.cn](https://opensource.icegl.cn)
 
--   如果访问太慢，请访问镜像站点：[🌏 http://myhome.217dan.com:8899](http://myhome.217dan.com:8899/)
+-   如果访问太慢，请访问镜像站点1：[🌏 oss.icegl.cn](http://oss.icegl.cn/)
+-   如果访问太慢，请访问镜像站点2：[🌏 myhome.217dan.com:8899](http://myhome.217dan.com:8899/)
 -   如果有条件翻墙，也可直接访问 github 的镜像站:[🌏 https://hawk86104.github.io](https://hawk86104.github.io/)
 
 ```shell
