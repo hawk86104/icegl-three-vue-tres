@@ -96,7 +96,7 @@
     "simplex-noise": "^4.0.3",
     "three": "^0.168.0",
     "three-bvh-csg": "^0.0.16",
-    "three-custom-shader-material": "6.0.3",
+    "three-custom-shader-material": "^5.4.0",
     "three-loader-3dtiles": "^1.2.6",
     "three-mesh-bvh": "^0.7.8",
     "three-subdivide": "^1.1.5",
