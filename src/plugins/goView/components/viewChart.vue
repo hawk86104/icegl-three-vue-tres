@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-05-27 11:22:46
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-08-15 13:12:02
+ * @LastEditTime: 2024-09-29 08:08:52
 -->
 <template>
     <div v-show="showAllComRef" :class="`go-preview ${chartEditStore.editCanvasConfig.previewScaleType}`" style="pointer-events: none" @mousedown="dragCanvas">
@@ -18,8 +18,9 @@
                         <!-- 渲染层 -->
                         <preview-render-list></preview-render-list>
                         <!-- 遮罩层 -->
+                        <div class="go-preview-top" :style="goPreviewMaskStyleTop"></div>
                         <div class="go-preview-mask" :style="goPreviewMaskStyle"></div>
-                        <div class="go-preview-mask mask-right" :style="goPreviewMaskStyle"></div>
+                        <div class="go-preview-mask mask-right" :style="goPreviewMaskStyleRight"></div>
                     </div>
                 </div>
             </div>
@@ -30,8 +31,9 @@
                     <!-- 渲染层 -->
                     <preview-render-list></preview-render-list>
                     <!-- 遮罩层 -->
+                    <div class="go-preview-top" :style="goPreviewMaskStyleTop"></div>
                     <div class="go-preview-mask" :style="goPreviewMaskStyle"></div>
-                    <div class="go-preview-mask mask-right" :style="goPreviewMaskStyle"></div>
+                    <div class="go-preview-mask mask-right" :style="goPreviewMaskStyleRight"></div>
                 </div>
             </div>
         </template>
@@ -55,11 +57,15 @@ const props = withDefaults(
         showAllCom?: boolean // 是否 显示所有组件 可接入全局等待loading结果
         delay?: number // 延迟显示时间 单位毫秒 用于在three中读取完模型后 载入的延迟配置
         maskWidth?: number // 遮罩层宽度 默认500px
+        maskHeight?: number // 遮罩层高度 默认0px
+        maskColor?: string // 遮罩层颜色 默认#000000
     }>(),
     {
         showAllCom: true,
         delay: 0,
         maskWidth: 500,
+        maskHeight: 0,
+        maskColor: '#000000',
     },
 )
 
@@ -103,6 +109,31 @@ watch(
 
 const goPreviewMaskStyle = computed(() => ({
     width: `${props.maskWidth}px`,
+    background: `linear-gradient(
+    to right,
+    ${props.maskColor}90,
+    ${props.maskColor}60 80%,
+    rgba(0, 0, 0, 0)
+  )`,
+}))
+
+const goPreviewMaskStyleRight = computed(() => ({
+    width: `${props.maskWidth}px`,
+    background: `linear-gradient(
+    to left,
+    ${props.maskColor}90,
+    ${props.maskColor}60 80%,
+    rgba(0, 0, 0, 0)
+  )`,
+}))
+const goPreviewMaskStyleTop = computed(() => ({
+    height: `${props.maskHeight}px`,
+    background: `linear-gradient(
+    to bottom,
+    ${props.maskColor}90,
+    ${props.maskColor}60 80%,
+    rgba(0, 0, 0, 0)
+  )`,
 }))
 </script>
 
@@ -149,13 +180,15 @@ const goPreviewMaskStyle = computed(() => ({
 
     .go-preview-mask {
         height: 100%;
-        background: linear-gradient(to right, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4) 80%, rgba(0, 0, 0, 0));
         &.mask-right {
-            background: linear-gradient(to left, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4) 80%, rgba(0, 0, 0, 0));
             right: 0;
             position: absolute;
             top: 0;
         }
+    }
+    .go-preview-top{
+        width: 100%;
+        position: absolute;
     }
 }
 </style>
