@@ -50,32 +50,35 @@ Since the project is frequently updated and compiled, if you encounter access er
 
 # Advantages
 
--   🌈 Frontend Fundamentals `FesJS` [Click for details](https://fesjs.mumblefe.cn)<br/>
+-   🌈 Frontend Fundamentals `FesJS` [Click for details](https://fesjs.mumblefe.cn)
 <a href="https://www.npmjs.com/package/@fesjs/fes">
 <img src="https://img.shields.io/npm/v/%40fesjs%2Ffes?label=%40fesjs%2Ffes">
 </a><br/>
 Integrates commonly used libraries for project implementation: icons, multi-language support, API calls, Vuex/Pinia, model data encapsulation, page layout/permission access, and route management.<br/>
 
--   🌠 Build 3D Visualization Projects Like Writing Vue3.x [Click for details](https://tresjs.org/guide)<br/>
+-   🌠 Build 3D Visualization Projects Like Writing Vue3.x [Click for details](https://tresjs.org/guide)
 ![npm](https://img.shields.io/npm/v/%40tresjs%2Fcientos?label=%40tresjs%2Fcientos)<br/>
 The npm full-featured version keeps up with the latest ThreeJS version. `TresJS` adopts the latest Vue3.x syntactic sugar and supports both TS/JS, allowing you to build 3D visualization projects in the most efficient and enjoyable way.
 
 ```html
 <template>
-		<TresCanvas window-size>
-				<TresPerspectiveCamera />
-				<TresMesh>
-						<TresTorusGeometry :args="[1, 0.5, 16, 32]" />
-						<TresMeshBasicMaterial color="orange" />
-				</TresMesh>
-		</TresCanvas>
+    <TresCanvas window-size>
+        <TresPerspectiveCamera />
+        <TresMesh>
+            <TresTorusGeometry :args="[1, 0.5, 16, 32]" />
+            <TresMeshBasicMaterial color="orange" />
+        </TresMesh>
+    </TresCanvas>
 </template>
+
 <script setup lang="ts">
-		import { useRenderLoop, useTexture } from '@tresjs/core'
-		const pTexture = await useTexture(['./**.jpg', './**.png'])
-		const { onLoop } = useRenderLoop()
-		onLoop(({ delta }) => {
-		})
+import { useRenderLoop, useTexture } from '@tresjs/core'
+
+const pTexture = await useTexture(['./**.jpg', './**.png'])
+const { onLoop } = useRenderLoop()
+onLoop(({ delta }) => {
+
+})
 </script>
 ```
 # ✅ Quick Start
