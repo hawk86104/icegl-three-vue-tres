@@ -55,8 +55,10 @@ Since the project is frequently updated and compiled, if you encounter access er
 <img src="https://img.shields.io/npm/v/%40fesjs%2Ffes?label=%40fesjs%2Ffes">
 </a><br/>
 Integrates commonly used libraries for project implementation: icons, multi-language support, API calls, Vuex/Pinia, model data encapsulation, page layout/permission access, and route management.<br/>
+<br/>
 
--   🌠 Build 3D Visualization Projects Like Writing Vue3.x [Click for details](https://tresjs.org/guide)
+-   🌠 Build 3D Visualization Projects Like Writing Vue3.x [Click for details](https://tresjs.org/guide)<br/>
+
 ![npm](https://img.shields.io/npm/v/%40tresjs%2Fcientos?label=%40tresjs%2Fcientos)<br/>
 The npm full-featured version keeps up with the latest ThreeJS version. `TresJS` adopts the latest Vue3.x syntactic sugar and supports both TS/JS, allowing you to build 3D visualization projects in the most efficient and enjoyable way.
 
