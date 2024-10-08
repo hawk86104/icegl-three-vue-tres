@@ -1,6 +1,6 @@
-# 🧊🧊🧊 icegl-three-vue-tres 🧊🧊🧊
-
-## 🎉🎉🎊 三维可视化项目快速落地の开源框架 🎊🎉🎉
+# 🧊🧊🧊 TvT.js 🧊🧊🧊
+简体中文 | [English](./README.md)
+## 🎉🎉🎊 三维可视化项目快速落地的开源框架 🎊🎉🎉
 
 <p align="center">
 		<a target="_black" href="https://space.bilibili.com/410503457">
@@ -29,7 +29,7 @@
 
 <a href="https://www.bilibili.com/video/BV1LH4y1p7Yn"><img src="./preview/bilibili.gif" style="max-width:800px;" alt="tres.js webgl"></a>
 
-# 生态 `@ThreeJS-@Vue3.x-@TresJS`
+# 生态 `@ThreeJS @Vue3.x @TresJS`
 
 > icegl 出品，永久开源且免费商用，持续更新 ing，请点击右上角 start⭐ 关注
 
@@ -48,10 +48,10 @@
 		易学易用，性能出色，适用场景丰富的 Web 前端框架。<br/><br/>
 
 -   ⚡ TresJS \* [点击详情](https://tresjs.org)
-<a href="https://www.npmjs.com/package/@tresjs/core">
-<img src="https://img.shields.io/npm/v/@tresjs/core?color=%2382DBCA&label=%40tresjs%2Fcore&logo=data:image/svg%2bxml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTExLjY4NTQgMy40MjkxNkMxMi4wNzM4IDIuNzgxODIgMTMuMDEyIDIuNzgxODIgMTMuNDAwNCAzLjQyOTE1TDE5LjE3NzEgMTMuMDU2OUMxOS41NzcgMTMuNzIzNSAxOS4wOTY5IDE0LjU3MTQgMTguMzE5NiAxNC41NzE0SDYuNzY2MjRDNS45ODg5NCAxNC41NzE0IDUuNTA4ODMgMTMuNzIzNSA1LjkwODc1IDEzLjA1NjlMMTEuNjg1NCAzLjQyOTE2WiIgZmlsbD0iIzgyREJDNSIvPgo8cGF0aCBkPSJNMTUuNjg1NyAxMC41NDI5QzE1LjY4NTcgOS45OTA1OSAxNi4xMzM0IDkuNTQyODggMTYuNjg1NyA5LjU0Mjg4SDI2QzI2LjU1MjIgOS41NDI4OCAyNyA5Ljk5MDU5IDI3IDEwLjU0MjlWMTkuODU3MkMyNyAyMC40MDk0IDI2LjU1MjIgMjAuODU3MiAyNiAyMC44NTcySDE2LjY4NTdDMTYuMTMzNCAyMC44NTcyIDE1LjY4NTcgMjAuNDA5NCAxNS42ODU3IDE5Ljg1NzJWMTAuNTQyOVoiIGZpbGw9IiM0RjRGNEYiLz4KPGNpcmNsZSBjeD0iMTYiIGN5PSIyMiIgcj0iNiIgZmlsbD0iI0VGQUMzNSIvPgo8L3N2Zz4K" alt="npm package">
-</a>
-使用 Vue3.x 组件实现声明式的 ThreeJS，做属于前端的三维项目。<br/><br/>
+		<a href="https://www.npmjs.com/package/@tresjs/core">
+		<img src="https://img.shields.io/npm/v/@tresjs/core?color=%2382DBCA&label=%40tresjs%2Fcore&logo=data:image/svg%2bxml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTExLjY4NTQgMy40MjkxNkMxMi4wNzM4IDIuNzgxODIgMTMuMDEyIDIuNzgxODIgMTMuNDAwNCAzLjQyOTE1TDE5LjE3NzEgMTMuMDU2OUMxOS41NzcgMTMuNzIzNSAxOS4wOTY5IDE0LjU3MTQgMTguMzE5NiAxNC41NzE0SDYuNzY2MjRDNS45ODg5NCAxNC41NzE0IDUuNTA4ODMgMTMuNzIzNSA1LjkwODc1IDEzLjA1NjlMMTEuNjg1NCAzLjQyOTE2WiIgZmlsbD0iIzgyREJDNSIvPgo8cGF0aCBkPSJNMTUuNjg1NyAxMC41NDI5QzE1LjY4NTcgOS45OTA1OSAxNi4xMzM0IDkuNTQyODggMTYuNjg1NyA5LjU0Mjg4SDI2QzI2LjU1MjIgOS41NDI4OCAyNyA5Ljk5MDU5IDI3IDEwLjU0MjlWMTkuODU3MkMyNyAyMC40MDk0IDI2LjU1MjIgMjAuODU3MiAyNiAyMC44NTcySDE2LjY4NTdDMTYuMTMzNCAyMC44NTcyIDE1LjY4NTcgMjAuNDA5NCAxNS42ODU3IDE5Ljg1NzJWMTAuNTQyOVoiIGZpbGw9IiM0RjRGNEYiLz4KPGNpcmNsZSBjeD0iMTYiIGN5PSIyMiIgcj0iNiIgZmlsbD0iI0VGQUMzNSIvPgo8L3N2Zz4K" alt="npm package">
+		</a>
+		使用 Vue3.x 组件实现声明式的 ThreeJS，做属于前端的三维项目。<br/><br/>
 
 ## 🏕 点击预览：[🌏 opensource.icegl.cn](https://opensource.icegl.cn)
 
@@ -76,15 +76,15 @@
 
 # 优势
 
--   🌈 前端の基本素养 \* FesJS [点击详情](https://fesjs.mumblefe.cn)
-		<a href="https://www.npmjs.com/package/@fesjs/fes">
-		<img src="https://img.shields.io/npm/v/%40fesjs%2Ffes?label=%40fesjs%2Ffes">
-		</a>
-		集成封装项目落地的常用库：图标、多语言、API 接口调用、Vuex/Pinia、model 数据封装、页面 layout/权限 access、路由管理等。<br/>
+-   🌈 前端の基本素养 \* FesJS [点击详情](https://fesjs.mumblefe.cn)<br/>
+<a href="https://www.npmjs.com/package/@fesjs/fes">
+<img src="https://img.shields.io/npm/v/%40fesjs%2Ffes?label=%40fesjs%2Ffes">
+</a><br/>
+集成封装项目落地的常用库：图标、多语言、API 接口调用、Vuex/Pinia、model 数据封装、页面 layout/权限 access、路由管理等。<br/>
 
--   🌠 像写 Vue3.x 一样写三维可视化项目[点击详情](https://tresjs.org/guide)
-
-![npm](https://img.shields.io/npm/v/%40tresjs%2Fcientos?label=%40tresjs%2Fcientos)全功能版本追溯保持 threeJS 最新版本 \* TresJS
+-   🌠 像写 Vue3.x 一样写三维可视化项目[点击详情](https://tresjs.org/guide)<br/>
+![npm](https://img.shields.io/npm/v/%40tresjs%2Fcientos?label=%40tresjs%2Fcientos)<br/>
+全功能版本追溯保持 threeJS 最新版本 \* TresJS
 最新 Vue3.x 的语法糖写法，TS/JS 通吃，让你以最新最爽快的方式构建三维可视化项目
 
 ```html
@@ -117,17 +117,17 @@
 
 2、cd 到项目根目录
 
-3、yarn	//安装依赖
+3、yarn	// 安装依赖
 
 4、yarn pre.dev	// 预览 下的调试模式
 
-5、yarn dev // 自己项目 下的调试模式
+5、yarn dev	// 自己项目 下的调试模式
 
-6、yarn pre.build	//预览 下的编译打包
+6、yarn pre.build	// 预览 下的编译打包
 
-7、yarn build	//自己项目 下的编译打包
+7、yarn build	// 自己项目 下的编译打包
 
-8、yarn both  //同时启动 dev 和 pre.dev 可以边调试自己得项目，边对照移植样例和插件
+8、yarn both  // 同时启动 dev 和 pre.dev 可以边调试自己得项目，边对照移植样例和插件
 ```
 
 ![展示](./preview/compileMode.png)
@@ -189,6 +189,6 @@
 <img src="https://icegl-1314935952.cos.ap-beijing.myqcloud.com/uploads/20240619/de51c5e66dd5a8647100cc3b61171223.jpg" width="300" />
 </p>
 
-版权所有 Copyright © 2022-2025 by 🧊icegl (https://www.icegl.cn)
+版权所有 Copyright © 2022-2026 by 🧊icegl (https://www.icegl.cn)
 
 All rights reserved。

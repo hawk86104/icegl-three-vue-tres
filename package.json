@@ -1,7 +1,7 @@
 {
-  "name": "icegl-three-vue-tres",
-  "version": "0.0.1",
-  "description": "icegl出品:基于three + vue3.0的webgl三维可视化快速开发平台",
+  "name": "TvT.js",
+  "version": "1.0.0",
+  "description": "An open-source framework for rapid implementation of 3D visualization projects",
   "scripts": {
     "dev": "fes dev",
     "build": "fes build",
@@ -17,6 +17,7 @@
     "three.js",
     "three",
     "3D",
+    "webgl",
     "三维可视化",
     "TvT.js",
     "数字孪生",
