@@ -4,16 +4,35 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-05-27 11:22:46
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-09-29 08:08:52
+ * @LastEditTime: 2024-10-08 11:13:38
 -->
 <template>
-    <div v-show="showAllComRef" :class="`go-preview ${chartEditStore.editCanvasConfig.previewScaleType}`" style="pointer-events: none" @mousedown="dragCanvas">
-        <template v-if="showEntity">
-            <!-- 实体区域 -->
-            <div ref="entityRef" class="go-preview-entity">
-                <!-- 缩放层 -->
+    <n-config-provider :theme="darkTheme" :hljs="hljsTheme" :locale="locale" :date-locale="dateLocale" :theme-overrides="overridesTheme">
+        <div
+            v-show="showAllComRef"
+            :class="`go-preview ${chartEditStore.editCanvasConfig.previewScaleType}`"
+            style="pointer-events: none"
+            @mousedown="dragCanvas"
+        >
+            <template v-if="showEntity">
+                <!-- 实体区域 -->
+                <div ref="entityRef" class="go-preview-entity">
+                    <!-- 缩放层 -->
+                    <div ref="previewRef" class="go-preview-scale">
+                        <!-- 展示层 -->
+                        <div :style="previewRefStyle" v-if="showAllComRef && show">
+                            <!-- 渲染层 -->
+                            <preview-render-list></preview-render-list>
+                            <!-- 遮罩层 -->
+                            <div class="go-preview-top" :style="goPreviewMaskStyleTop"></div>
+                            <div class="go-preview-mask" :style="goPreviewMaskStyle"></div>
+                            <div class="go-preview-mask mask-right" :style="goPreviewMaskStyleRight"></div>
+                        </div>
+                    </div>
+                </div>
+            </template>
+            <template v-else>
                 <div ref="previewRef" class="go-preview-scale">
-                    <!-- 展示层 -->
                     <div :style="previewRefStyle" v-if="showAllComRef && show">
                         <!-- 渲染层 -->
                         <preview-render-list></preview-render-list>
@@ -23,21 +42,9 @@
                         <div class="go-preview-mask mask-right" :style="goPreviewMaskStyleRight"></div>
                     </div>
                 </div>
-            </div>
-        </template>
-        <template v-else>
-            <div ref="previewRef" class="go-preview-scale">
-                <div :style="previewRefStyle" v-if="showAllComRef && show">
-                    <!-- 渲染层 -->
-                    <preview-render-list></preview-render-list>
-                    <!-- 遮罩层 -->
-                    <div class="go-preview-top" :style="goPreviewMaskStyleTop"></div>
-                    <div class="go-preview-mask" :style="goPreviewMaskStyle"></div>
-                    <div class="go-preview-mask mask-right" :style="goPreviewMaskStyleRight"></div>
-                </div>
-            </div>
-        </template>
-    </div>
+            </template>
+        </div>
+    </n-config-provider>
 </template>
 
 <script setup lang="ts">
@@ -50,6 +57,16 @@ import { useComInstall } from '../lib/hooks/useComInstall.hook'
 import { getFilterStyle } from '../lib/utils/global'
 import { PreviewScaleEnum } from 'PLS/goView/lib/enums/styleEnum'
 import { PreviewRenderList } from '../components/PreviewRenderList'
+import { NConfigProvider } from 'naive-ui'
+import { useDarkThemeHook, useThemeOverridesHook, useCode, useLang } from 'PLS/goView/lib/gHooks/'
+// 暗黑主题
+const darkTheme = useDarkThemeHook()
+// 主题配置
+const overridesTheme = useThemeOverridesHook()
+// 代码主题
+const hljsTheme = useCode()
+// 全局语言
+const { locale, dateLocale } = useLang()
 
 const props = withDefaults(
     defineProps<{
@@ -186,7 +203,7 @@ const goPreviewMaskStyleTop = computed(() => ({
             top: 0;
         }
     }
-    .go-preview-top{
+    .go-preview-top {
         width: 100%;
         position: absolute;
     }

@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-05-27 11:22:46
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-06-03 12:29:35
+ * @LastEditTime: 2024-10-08 10:30:24
 -->
 <template>
     <TresCanvas window-size>
@@ -36,4 +36,5 @@ import { gridPlus } from 'PLS/floor'
 
 import { viewChart } from 'PLS/goView'
 import dataJson from '../common/1716877101106.json'
+// import dataJson from '../common/test.json'
 </script>
