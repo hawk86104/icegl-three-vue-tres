@@ -24,8 +24,7 @@ const props = withDefaults(
         closed: false,
         clockwise: true,
         fewNum: 1,
-        //@ts-ignore
-        linesList: [
+        linesList: () => [
             [15, 0, 15],
             [15, 0, -15],
             [-15, 0, -15],
