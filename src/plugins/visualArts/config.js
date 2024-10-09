@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-04-30 08:18:21
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-10-09 11:58:18
+ * @LastEditTime: 2024-10-09 16:56:33
  */
 export default {
     name: 'visualArts',
@@ -56,6 +56,13 @@ export default {
             name: 'galaxy',
             title: '银河',
             referenceSource: { title: 'alvarosabu', url: 'https://lab.tresjs.org/experiments/galaxy-generator' },
+        },
+        {
+            src: 'plugins/visualArts/preview/repulsionEffect.png',
+            type: 'img',
+            name: 'repulsionEffect',
+            title: '排斥效果',
+            referenceSource: { title: 'alvarosabu', url: 'https://lab.tresjs.org/experiments/repulsion-effect' },
         }
     ],
 }
