@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-04-30 08:18:21
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-07-23 15:11:25
+ * @LastEditTime: 2024-10-09 11:58:18
  */
 export default {
     name: 'visualArts',
@@ -49,7 +49,13 @@ export default {
             type: 'img',
             name: 'mirror',
             title: '玻璃',
+        },
+        {
+            src: 'plugins/visualArts/preview/galaxy.png',
+            type: 'img',
+            name: 'galaxy',
+            title: '银河',
+            referenceSource: { title: 'alvarosabu', url: 'https://lab.tresjs.org/experiments/galaxy-generator' },
         }
-
     ],
 }
