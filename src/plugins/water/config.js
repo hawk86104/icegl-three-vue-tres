@@ -19,6 +19,7 @@ export default {
     preview: [
         { src: 'plugins/water/preview/tilingCaustics.png', type: 'img', name: 'tilingCaustics', title: '波纹A' },
         { src: 'plugins/water/preview/waterGlass.png', type: 'img', name: 'waterGlass', title: '波浪B' },
+        { src: 'plugins/water/preview/waveC.png', type: 'img', name: 'waveC', title: '波浪C' },
         { src: 'plugins/water/preview/threeExampleOcean.png', type: 'img', name: 'threeExampleOcean', title: 'three例子-海洋' },
         {
             src: 'plugins/water/preview/customWater.png',

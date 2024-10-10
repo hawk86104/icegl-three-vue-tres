@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-12-01 17:21:26
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-06-06 08:52:46
+ * @LastEditTime: 2024-10-10 11:03:15
 -->
 
 <template>
@@ -29,12 +29,13 @@
 
 <script setup lang="ts">
 import { OrbitControls } from '@tresjs/cientos'
-import waterGlass from '../components/waterGlass.vue'
 import { reactive } from 'vue'
 import * as THREE from 'three'
 import { Environment, Lightformer } from 'PLS/basic'
 
 import { Pane } from 'tweakpane'
+import waterGlass from '../components/waterGlass.vue'
+
 const gl = {
     clearColor: '#222',
     shadows: true,
