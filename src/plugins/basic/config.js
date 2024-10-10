@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-03 15:07:09
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-06-05 16:36:20
+ * @LastEditTime: 2024-10-10 08:28:26
  */
 export default {
     name: 'basic',
@@ -50,6 +50,7 @@ export default {
                     name: 'instancedMeshCustomShaderMaterial',
                     title: 'instanced和继承材质',
                 },
+                { src: 'plugins/basic/materials/preview/vertexSnapping.png', type: 'img', name: 'vertexSnapping', title: '顶点捕捉材质' },
             ],
         },
         {
