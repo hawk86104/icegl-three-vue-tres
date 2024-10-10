@@ -63,6 +63,12 @@ export default {
             name: 'repulsionEffect',
             title: '排斥效果',
             referenceSource: { title: 'alvarosabu', url: 'https://lab.tresjs.org/experiments/repulsion-effect' },
-        }
+        },
+        {
+            src: 'plugins/visualArts/preview/lightNoise.png',
+            type: 'img',
+            name: 'lightNoise',
+            title: '光噪声',
+        },
     ],
 }
