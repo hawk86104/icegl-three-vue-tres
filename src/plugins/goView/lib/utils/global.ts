@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-05-27 15:23:53
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-05-27 17:49:34
+ * @LastEditTime: 2024-10-10 11:40:46
  */
 import { h } from 'vue'
 import { NIcon } from 'naive-ui'
@@ -185,7 +185,7 @@ export const intervalUnitHandle = (num: number, unit: RequestHttpIntervalEnum) =
 }
 
 export const isPreview = () => {
-  return document.location.hash.includes('preview')
+  return true
 }
 import cloneDeep from 'lodash/cloneDeep'
 export const newFunctionHandle = (
