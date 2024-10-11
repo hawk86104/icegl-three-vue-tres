@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-09-18 15:14:57
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-09-19 11:22:09
+ * @LastEditTime: 2024-10-11 10:22:50
 -->
 <template>
     <TresDirectionalLight ref="tdLight" :position="[0, 2e3, 1e3]" :intensity="1" />
@@ -20,7 +20,7 @@ import * as tt from 'three-tile'
 import flyTo from './flyTo.vue'
 import * as util from './utils'
 
-const MAPBOXKEY = 'pk.eyJ1IjoidG9tYWNoIiwiYSI6ImNrbnR6d3psMzA4YWgydnBzeGhrNW1mdDgifQ.zq6mWEop1OTBrQ24R0SdlA'
+const MAPBOXKEY = 'pk.eyJ1IjoiaGF3azg2MTA0IiwiYSI6ImNrbTQ3cWtyeTAxejEzMHBtcW42bmc0N28ifQ.bvS9U_yWdHDh41jzaDS1dw'
 // mapbox 影像数据源
 // const mapBoxImgSource = new tt.plugin.MapBoxSource({
 //     token: MAPBOXKEY,

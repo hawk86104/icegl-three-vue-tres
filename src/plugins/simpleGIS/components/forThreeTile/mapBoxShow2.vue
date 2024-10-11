@@ -45,7 +45,7 @@ paneControl.addBinding(cloundSateState, 'opacity', {
     step: 0.1,
 })
 
-const MAPBOXKEY = 'pk.eyJ1IjoidG9tYWNoIiwiYSI6ImNrbnR6d3psMzA4YWgydnBzeGhrNW1mdDgifQ.zq6mWEop1OTBrQ24R0SdlA'
+const MAPBOXKEY = 'pk.eyJ1IjoiaGF3azg2MTA0IiwiYSI6ImNrbTQ3cWtyeTAxejEzMHBtcW42bmc0N28ifQ.bvS9U_yWdHDh41jzaDS1dw'
 // mapbox 影像数据源
 // const mapBoxImgSource = new tt.plugin.MapBoxSource({
 //     token: MAPBOXKEY,
