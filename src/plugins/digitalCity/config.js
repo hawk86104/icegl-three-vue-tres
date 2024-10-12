@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-08-19 20:24:59
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-09-17 15:53:45
+ * @LastEditTime: 2024-10-12 08:12:15
  */
 export default {
     name: 'digitalCity',
@@ -45,6 +45,7 @@ export default {
         { src: 'plugins/digitalCity/preview/buildingsEffectA.png', type: 'img', name: 'buildingsEffectA', title: '建筑物效果A' },
         { src: 'plugins/digitalCity/preview/buildingsMarkA.png', type: 'img', name: 'buildingsMarkA', title: '建筑物标记A' },
         { src: 'plugins/digitalCity/preview/roadLines.png', type: 'img', name: 'roadLines', title: '道路飞线' },
+        { src: 'plugins/digitalCity/preview/flyLines.png', type: 'img', name: 'flyLines', title: '飞线' },
         { src: 'plugins/digitalCity/preview/fence.png', type: 'img', name: 'fence', title: '围栏' },
         { src: 'plugins/digitalCity/preview/fenceWave.png', type: 'img', name: 'fenceWave', title: '波浪围栏' },
         { src: 'plugins/digitalCity/preview/regionGlow.png', type: 'img', name: 'regionGlow', title: '区域内发光' },
