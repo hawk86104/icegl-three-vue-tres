@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-04-03 09:50:51
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-06-12 18:21:43
+ * @LastEditTime: 2024-10-15 11:22:59
  */
 import reflectorDiffuse from './components/reflectorDiffuse.vue'
 import reflectorDUDV from './components/reflectorDUDV.vue'
@@ -13,5 +13,6 @@ import reflectorMipMap from './components/reflectorMipMap.vue'
 import whiteFloorMesh from './components/whiteFloorMesh.vue'
 import gridPlus from './components/gridPlusCom.vue'
 import videoFloor from './components/videoFloor.vue'
+import digitalGround from './components/digitalGround.vue'
 
-export { reflectorDiffuse, reflectorDUDV, reflectorShaderMesh, reflectorMipMap, whiteFloorMesh, gridPlus, videoFloor }
+export { reflectorDiffuse, reflectorDUDV, reflectorShaderMesh, reflectorMipMap, whiteFloorMesh, gridPlus, videoFloor, digitalGround }
