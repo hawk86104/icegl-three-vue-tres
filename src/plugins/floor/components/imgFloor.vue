@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-06-12 17:42:50
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-06-12 18:02:54
+ * @LastEditTime: 2024-10-15 11:32:36
 -->
 <template>
     <TresMesh ref="tmRef" :rotation-x="-Math.PI / 2">
@@ -56,7 +56,8 @@ const tmsMaterial = reactive({
     transparent: true,
     opacity: props.opacity,
     blending: THREE.AdditiveBlending,
-    depthTest: false,
+    depthTest: true,
+    depthWrite: false,
 })
 watch(
     () => props.color,

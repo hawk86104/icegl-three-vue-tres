@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-12-20 17:03:14
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-06-12 18:08:28
+ * @LastEditTime: 2024-10-15 11:32:57
 -->
 <template>
     <TresCanvas clearColor="#201919" window-size>
@@ -16,7 +16,7 @@
             <imgFloor :position="[2, -2, 2]" v-bind="configState" imgSrcPath="./plugins/floor/image/imgFloor1.png" />
         </Suspense>
         <Suspense>
-            <imgFloor :position="[2, 0, 2]" v-bind="configState" imgSrcPath="./plugins/floor/image/imgFloor2.png" />
+            <imgFloor :position="[2, 0.1, 2]" v-bind="configState" imgSrcPath="./plugins/floor/image/imgFloor2.png" />
         </Suspense>
         <Suspense>
             <imgFloor :position="[-2, 0, -2]" imgSrcPath="./plugins/floor/image/imgFloor3.png" />
