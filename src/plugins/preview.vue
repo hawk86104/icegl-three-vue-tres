@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-18 22:17:49
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-08-14 11:41:43
+ * @LastEditTime: 2024-10-25 10:04:03
 -->
 <template>
     <div class="absolute menuSelf">
@@ -93,10 +93,13 @@
                     <template v-for="(onePlugin, pkey) in filteredData">
                         <f-menu-item v-if="pkey !== 'basic' && isTvtstore(onePlugin)" :value="pkey">
                             <template #label>
-                                <div class="flex absolute" style="left: 1px; flex-direction: column; top: 2px">
+                                <!-- <div class="flex absolute" style="left: 1px; flex-direction: column; top: 2px"> 插件市场中无 新、推荐、热门
                                     <template v-for="(lbItem, lbKey) in getleftMenuBadge(onePlugin.name)">
                                         <f-badge v-if="lbItem.show" :value="lbItem.text" class="tag-fbdge" type="primary" size="small" />
                                     </template>
+                                </div> -->
+                                <div class="flex absolute" style="left: 1px; flex-direction: column; top: 2px">
+                                    <f-badge value="free" class="tag-fbdge afree-tag" type="success" size="small" v-if="onePlugin.tvtstore === 'FREE'" />
                                 </div>
                                 <span class="left-m-text">{{ onePlugin.title }}</span>
                                 <FBadge :value="onePlugin.preview.length" class="count-fbdge" type="primary" size="small" />
@@ -434,6 +437,11 @@ const openTopMune = () => {
     span {
         border-radius: 2px !important;
         padding: 0px !important;
+    }
+}&.afree-tag{
+    span {
+        border-radius: 2px !important;
+        padding: 2px !important;
     }
 }
 
