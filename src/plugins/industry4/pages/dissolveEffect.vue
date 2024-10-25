@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-05-23 07:51:19
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-05-24 08:50:19
+ * @LastEditTime: 2024-10-25 09:33:33
 -->
 <template>
     <loading />
@@ -56,9 +56,9 @@ import { Environment, Lightformer } from 'PLS/basic'
 import * as THREE from 'three'
 import { bubbleLoading as loading } from 'PLS/UIdemo'
 import { reflectorDUDV } from 'PLS/floor'
+import { Pane } from 'tweakpane'
 import lamboEffect from '../components/lamboEffect.vue'
 import dissolveEffectModel from '../components/dissolveEffectModel.vue'
-import { Pane } from 'tweakpane'
 
 const state = reactive({
     clearColor: '#15151a',
