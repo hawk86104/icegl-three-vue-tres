@@ -10,6 +10,10 @@
 		<a target="_black" href="https://gitee.com/ice-gl/icegl-three-vue-tres">
 			<img src="https://gitee.com/ice-gl/icegl-three-vue-tres/badge/star.svg?theme=dark" alt="gitee-starts" />
 		</a>
+		</a>
+			<a target="_black" href="https://gitcode.com/hawk86104/icegl-three-vue-tres">
+			<img src="https://gitcode.com/hawk86104/icegl-three-vue-tres/star/badge.svg?theme=dark" alt="gitcode-starts" />
+		</a>
 </p>
 
 ![preview](./preview/demo-index.png)
