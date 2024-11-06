@@ -4,33 +4,37 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-02-02 10:00:01
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-03-18 17:55:43
+ * @LastEditTime: 2024-11-06 16:15:44
 -->
 <template>
 	<pagesShow ref="pagesShowRef">
 		<template v-slot:ability>
 			<rippleMesh :position-y="20"
 				:positionSrc="[{ x: -7.3 * 40, y: 4.27 * 40 }, { x: -7.4 * 40, y: 10.05 * 40 }, { x: -4.9 * 40, y: 10.03 * 40 }, { x: -4.9 * 40, y: 4.46 * 40 }, { x: -7.3 * 40, y: 4.27 * 40 }]"
-				:height="180" />
+				:height="180"
+/>
 
 			<rippleMesh :position-y="20"
 				:positionSrc="[{ x: 0.27 * 40, y: -1.19 * 40 }, { x: 0.32 * 40, y: -5.5 * 40 }, { x: -7.59 * 40, y: -5.9 * 40 }, { x: -7.6 * 40, y: -1.3 * 40 }, { x: 0.27 * 40, y: -1.19 * 40 }]"
-				v-bind="typeState" />
+				v-bind="typeState"
+/>
 		</template>
 	</pagesShow>
 </template>
 
 <script setup lang="ts">
-import { ref, watchEffect, reactive } from 'vue'
+import { ref, onMounted, nextTick, reactive } from 'vue'
 import { Pane } from 'tweakpane'
 import pagesShow from '../components/pagesShow.vue'
 import rippleMesh from '../components/fence/rippleMesh.vue'
 
 const pagesShowRef = ref()
-watchEffect(() => {
-	if (pagesShowRef.value) {
-		pagesShowRef.value.$refs.perspectiveCameraRef.position.set(580, 360, 500)
-	}
+onMounted(() => {
+    nextTick(() => {
+        if (pagesShowRef.value) {
+            pagesShowRef.value.$refs.perspectiveCameraRef.position.set(580, 360, 500)
+        }
+    })
 })
 
 const typeState = reactive({
