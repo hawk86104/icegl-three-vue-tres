@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-18 22:17:49
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-10-25 10:04:03
+ * @LastEditTime: 2024-11-08 16:17:09
 -->
 <template>
     <div class="absolute menuSelf">
@@ -41,8 +41,11 @@
                     <template #icon>
                         <AppstoreOutlined />
                     </template>
-                    <template #label
-                        >基础功能 <FBadge :max="999" :value="getMenusCount().basic" class="count-fbdge big-cf" type="primary" size="small"
+                    <template #label>
+                        <div class="flex absolute" style="left: 1px; flex-direction: column; top: 10px">
+                            <f-badge value="free" class="tag-fbdge afree-tag" type="success" size="small" />
+                        </div>
+                        基础功能 <FBadge :max="999" :value="getMenusCount().basic" class="count-fbdge big-cf" type="primary" size="small"
                     /></template>
                     <template v-for="(bP, pkey) in filteredData">
                         <f-menu-item v-if="pkey === 'basic'" v-for="(onePlugin, okey) in bP.child" :value="onePlugin.name">
@@ -62,7 +65,12 @@
                     <template #icon>
                         <PictureOutlined />
                     </template>
-                    <template #label>样例中心 <FBadge :max="999" :value="getMenusCount().case" class="count-fbdge big-cf" type="primary" size="small" /></template>
+                    <template #label>
+                        <div class="flex absolute" style="left: 1px; flex-direction: column; top: 10px">
+                            <f-badge value="free" class="tag-fbdge afree-tag" type="success" size="small" />
+                        </div>
+                        样例中心 <FBadge :max="999" :value="getMenusCount().case" class="count-fbdge big-cf" type="primary" size="small"
+                    /></template>
                     <template v-for="(onePlugin, pkey) in filteredData">
                         <f-menu-item v-if="pkey !== 'basic' && !isTvtstore(onePlugin)" :value="pkey">
                             <template #label>
@@ -81,7 +89,9 @@
                     <template #icon>
                         <ClusterOutlined />
                     </template>
-                    <template #label>插件应用管理 <FBadge :max="999" :value="getMenusCount().tvtstore" class="count-fbdge big-cf" type="primary" size="small" /></template>
+                    <template #label
+                        >插件应用管理 <FBadge :max="999" :value="getMenusCount().tvtstore" class="count-fbdge big-cf" type="primary" size="small"
+                    /></template>
                     <f-menu-item value="tvtPluginUrl">
                         <template #label>
                             <div class="flex absolute" style="left: 1px; flex-direction: column; top: 2px">
@@ -438,7 +448,8 @@ const openTopMune = () => {
         border-radius: 2px !important;
         padding: 0px !important;
     }
-}&.afree-tag{
+}
+&.afree-tag {
     span {
         border-radius: 2px !important;
         padding: 2px !important;
