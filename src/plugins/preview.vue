@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-18 22:17:49
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-11-08 16:17:09
+ * @LastEditTime: 2024-11-08 16:35:26
 -->
 <template>
     <div class="absolute menuSelf">
@@ -43,7 +43,7 @@
                     </template>
                     <template #label>
                         <div class="flex absolute" style="left: 1px; flex-direction: column; top: 10px">
-                            <f-badge value="free" class="tag-fbdge afree-tag" type="success" size="small" />
+                            <f-badge value="AllFree" class="tag-fbdge afree-tag" type="success" size="small" />
                         </div>
                         基础功能 <FBadge :max="999" :value="getMenusCount().basic" class="count-fbdge big-cf" type="primary" size="small"
                     /></template>
@@ -67,7 +67,7 @@
                     </template>
                     <template #label>
                         <div class="flex absolute" style="left: 1px; flex-direction: column; top: 10px">
-                            <f-badge value="free" class="tag-fbdge afree-tag" type="success" size="small" />
+                            <f-badge value="AllFree" class="tag-fbdge afree-tag" type="success" size="small" />
                         </div>
                         样例中心 <FBadge :max="999" :value="getMenusCount().case" class="count-fbdge big-cf" type="primary" size="small"
                     /></template>
