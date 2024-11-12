@@ -29,7 +29,7 @@ public/plugins/digitalMapBlock
 src/plugins/tvtAirport
 public/plugins/tvtAirport
 
-# 排除resourceManager、 tvtCharts、showCabinet、tvtVolumeRendering 等插件 <但可演示> 可通过插件中心下载
+# 排除resourceManager、 tvtCharts、showCabinet、tvtVolumeRendering、dxf2mesh 等插件 <但可演示> 可通过插件中心下载
 src/plugins/tvtViewHelper
 public/plugins/tvtViewHelper
 src/plugins/tvtSceneCreator
@@ -41,6 +41,8 @@ src/plugins/showCabinet
 public/plugins/showCabinet
 src/plugins/tvtVolumeRendering
 public/plugins/tvtVolumeRendering
+src/plugins/dxf2mesh
+public/plugins/dxf2mesh
 
 # 排除安装插件包
 !pluginMaker/install/请把下载的插件包放在这里。
