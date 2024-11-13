@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-10-27 16:43:05
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-08-20 15:42:55
+ * @LastEditTime: 2024-11-13 09:39:00
 -->
 <script setup lang="ts">
 import { useTexture, useRenderLoop } from '@tresjs/core'
@@ -67,8 +67,8 @@ particleGroup.addEmitter(emitter)
 const objCloud = particleGroup.mesh
 
 const { onLoop } = useRenderLoop()
-onLoop(({ dt }) => {
-	particleGroup.tick(dt)
+onLoop(() => {
+	particleGroup.tick()
 })
 </script>
 
