@@ -2,6 +2,7 @@
     <TresShaderMaterial v-bind="tsMaterialConfig" />
 </template>
 <script setup lang="ts">
+import { watch } from 'vue'
 import * as THREE from 'three'
 import { useRenderLoop } from '@tresjs/core'
 import { Resource } from 'PLS/resourceManager'
@@ -43,7 +44,7 @@ const tsMaterialConfig = {
     transparent: true,
     side: THREE.DoubleSide,
     depthWrite: true,
-	depthTest: true,
+    depthTest: true,
 }
 
 const { onLoop } = useRenderLoop()
@@ -51,4 +52,12 @@ const { onLoop } = useRenderLoop()
 onLoop(({ delta }) => {
     tsMaterialConfig.uniforms.uTime.value += delta
 })
+
+watch(
+    () => [props.frontColor, props.backColor],
+    ([frontColor, backColor]) => {
+        tsMaterialConfig.uniforms.uFrontColor.value.setStyle(frontColor)
+        tsMaterialConfig.uniforms.uBackColor.value.setStyle(backColor).multiplyScalar(props.intensity)
+    },
+)
 </script>

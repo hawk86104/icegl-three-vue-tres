@@ -4,12 +4,12 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-11-15 09:21:41
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-11-15 10:03:30
+ * @LastEditTime: 2024-11-15 10:44:54
 -->
 <template>
     <TresMesh :geometry="nodes.tornado.geometry">
         <meshTornadoMaterial
-            colorBase="#3a3a3a"
+            :colorBase="color"
             :colorIntensity="2"
             :twirlAmount="6"
             :radialShearAmount="new THREE.Vector2(0.9, 0.9)"
@@ -27,4 +27,12 @@ import { Resource } from 'PLS/resourceManager'
 import meshTornadoMaterial from './materials/meshTornadoMaterial.vue'
 
 const { nodes } = Resource.getItem('tornado.glb')
+const props = withDefaults(
+    defineProps<{
+        color?: string
+    }>(),
+    {
+        color: '#ff5400',
+    },
+)
 </script>

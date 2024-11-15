@@ -1,7 +1,7 @@
 <template>
     <TresGroup>
         <TresMesh ref="meshRef" :geometry="nodes.Cylinder.geometry" :renderOrder="999991">
-            <meshSpiralMaterial frontColor="#111111" backColor="#ff810c" :intensity="2.7" :powerOffset="12" colorBoth />
+            <meshSpiralMaterial :frontColor="frontColor" :backColor="backColor" :intensity="2.7" :powerOffset="12" colorBoth />
         </TresMesh>
     </TresGroup>
 </template>
@@ -23,4 +23,15 @@ onLoop(({ delta, elapsed }) => {
         meshRef.value.scale.set(scale, scale, scale)
     }
 })
+
+const props = withDefaults(
+    defineProps<{
+        frontColor?: string
+        backColor?: string
+    }>(),
+    {
+        frontColor: '#111111',
+        backColor: '#ff810c',
+    },
+)
 </script>
