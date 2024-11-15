@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-08-19 20:24:59
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-10-12 08:12:15
+ * @LastEditTime: 2024-11-15 08:38:03
  */
 export default {
     name: 'digitalCity',
@@ -23,6 +23,7 @@ export default {
         { src: 'plugins/digitalCity/preview/depthBufferDiffuse.png', type: 'img', name: 'depthBufferDiffuse', title: '带深度的半球扩散' },
         { src: 'plugins/digitalCity/preview/weather.png', type: 'img', name: 'weather', title: '天气' },
         { src: 'plugins/digitalCity/preview/lightningStorm.png', type: 'img', name: 'lightningStorm', title: '闪电' },
+        { src: 'plugins/digitalCity/preview/stylizedTornado.png', type: 'img', name: 'stylizedTornado', title: '漫画龙卷风' },
         { src: 'plugins/digitalCity/preview/clouds.png', type: 'img', name: 'clouds', title: '云☁️' },
         { src: 'plugins/digitalCity/preview/clouds2.png', type: 'img', name: 'clouds2', title: '云彩2☁️' },
         { src: 'plugins/digitalCity/preview/fog.png', type: 'img', name: 'fog', title: '迷雾' },

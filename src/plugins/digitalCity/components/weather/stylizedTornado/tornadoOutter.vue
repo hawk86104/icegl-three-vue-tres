@@ -1,0 +1,32 @@
+<!--
+ * @Description: 
+ * @Version: 1.668
+ * @Autor: 地虎降天龙
+ * @Date: 2024-11-15 09:21:41
+ * @LastEditors: 地虎降天龙
+ * @LastEditTime: 2024-11-15 10:03:30
+-->
+<template>
+    <TresGroup>
+        <TresMesh :geometry="nodes.tornado.geometry">
+            <meshTornadoMaterial
+                colorBase="#3a3a3a"
+                :colorIntensity="2"
+                :twirlAmount="6"
+                :radialShearAmount="new THREE.Vector2(0.9, 0.9)"
+                :twirlCenter="new THREE.Vector2(0.5, -0.52)"
+                :twirlOffset="new THREE.Vector2(-0.5, -0.25)"
+                :radialOffset="new THREE.Vector2(-0.5, 0.5)"
+                :alphaThreshold="0.18"
+                :showEdge="false"
+            />
+        </TresMesh>
+    </TresGroup>
+</template>
+<script setup lang="ts">
+import * as THREE from 'three'
+import { Resource } from 'PLS/resourceManager'
+import meshTornadoMaterial from './materials/meshTornadoMaterial.vue'
+
+const { nodes } = Resource.getItem('tornado.glb')
+</script>
