@@ -42,6 +42,8 @@ const tsMaterialConfig = {
     fragmentShader,
     transparent: true,
     side: THREE.DoubleSide,
+    depthWrite: true,
+	depthTest: true,
 }
 
 const { onLoop } = useRenderLoop()
