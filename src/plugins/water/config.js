@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-10 16:11:27
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-06-06 11:14:12
+ * @LastEditTime: 2024-11-18 10:04:00
  */
 
 export default {
@@ -27,6 +27,13 @@ export default {
             name: 'customWater',
             title: '自定义水',
             referenceSource: { title: 'CustomShaderMaterial', url: 'https://github.com/FarazzShaikh/THREE-CustomShaderMaterial' },
+        },
+        {
+            src: 'plugins/water/preview/realWater.png',
+            type: 'img',
+            name: 'realWater',
+            title: '真实水',
+            referenceSource: { title: 'realWater', url: 'https://github.com/martinRenou/threejs-water' },
         },
     ],
 }

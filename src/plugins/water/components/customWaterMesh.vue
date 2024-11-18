@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-06-05 16:39:29
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-06-06 11:08:32
+ * @LastEditTime: 2024-11-18 10:22:57
 -->
 <template>
     <TresMesh ref="tmRef" :rotation-x="-Math.PI / 2">
