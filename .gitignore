@@ -21,13 +21,15 @@ yarn.lock
 yarn-error.log
 package-lock.json
 
-# 排除tvtViewHelper、 tvtSceneCreator、 eMRIscand、digitalMapBlock、tvtAirport 等插件 可通过插件中心下载
+# 排除tvtViewHelper、 tvtSceneCreator、 eMRIscand、digitalMapBlock、tvtAirport、tvtSubstation 等插件 可通过插件中心下载
 src/plugins/eMRIscan
 public/plugins/eMRIscan
 src/plugins/digitalMapBlock
 public/plugins/digitalMapBlock
 src/plugins/tvtAirport
 public/plugins/tvtAirport
+src/plugins/tvtSubstation
+public/plugins/tvtSubstation
 
 # 排除resourceManager、 tvtCharts、showCabinet、tvtVolumeRendering、dxf2mesh 等插件 <但可演示> 可通过插件中心下载
 src/plugins/tvtViewHelper
