@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-11-18 10:10:50
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-11-19 10:44:20
+ * @LastEditTime: 2024-11-19 11:24:18
 -->
 <template>
     <caustics :lightFrontGeometry="_geometry" :waterTexture="texture.texture" :light="light" />
@@ -81,7 +81,7 @@ const updateNormals = (renderer: any) => {
     _render(renderer, _normalMesh)
 }
 
-const { renderer } = useTresContext()
+const { renderer, camera, raycaster } = useTresContext() as any
 renderer.value.autoClear = false
 const { onBeforeLoop } = useRenderLoop()
 onBeforeLoop(() => {
@@ -95,11 +95,43 @@ const addDrop = (x: number, y: number, radius: number, strength: number) => {
     _dropMesh.material.uniforms['strength'].value = strength
     _render(renderer.value, _dropMesh)
 }
-defineExpose({ addDrop })
 
-setInterval(() => {
-    for (var i = 0; i < 20; i++) {
-        addDrop(Math.random() * 2 - 1, Math.random() * 2 - 1, 0.03, i & 1 ? 0.02 : -0.02)
+const mouse = new THREE.Vector2()
+const targetgeometry = new THREE.PlaneGeometry(2, 2)
+const position = targetgeometry.attributes.position
+for (let i = 0; i < position.count; i++) {
+    const z = -position.getY(i)
+    position.setY(i, 0)
+    position.setZ(i, z)
+}
+position.needsUpdate = true
+const targetmesh = new THREE.Mesh(targetgeometry)
+const onMouseMove = (event: any) => {
+    const rect = renderer.value.domElement.getBoundingClientRect()
+
+    const width = rect.width
+    const height = rect.height
+
+    mouse.x = ((event.clientX - rect.left) * 2) / width - 1
+    mouse.y = (-(event.clientY - rect.top) * 2) / height + 1
+
+    raycaster.value.setFromCamera(mouse, camera.value)
+
+    const intersects = raycaster.value.intersectObject(targetmesh)
+
+    for (let intersect of intersects) {
+        addDrop(intersect.point.x, intersect.point.z, 0.03, 0.04)
     }
-}, 1600)
+}
+const mouseEventHandler = {
+  handleEvent: onMouseMove
+};
+const mouseEvent = (isOn: boolean) => {
+    if(isOn){
+        renderer.value.domElement.addEventListener('mousemove', mouseEventHandler)
+    } else {
+        renderer.value.domElement.removeEventListener('mousemove',mouseEventHandler)
+    }
+}
+defineExpose({ addDrop, mouseEvent })
 </script>
