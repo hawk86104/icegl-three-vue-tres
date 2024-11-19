@@ -1,7 +1,7 @@
 precision highp float;
 precision highp int;
 
-#include <utils>
+#include ../utils.glsl
 
 uniform float underwater;
 uniform samplerCube sky;

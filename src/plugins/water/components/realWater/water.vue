@@ -1,5 +1,6 @@
 <template></template>
 <script lang="ts" setup>
+import { toRaw } from 'vue'
 import * as THREE from 'three'
 import { useRenderLoop, useTresContext, useTexture } from '@tresjs/core'
 import vertexShader from '../../shaders/water/vertex.glsl'
@@ -8,7 +9,7 @@ import fragmentShader from '../../shaders/water/fragment.glsl'
 const props = defineProps<{
     waterTexture: THREE.Texture
     causticsTexture: THREE.Texture
-    light: THREE.Light
+		light: Array<number>
 }>()
 
 const geometry = new THREE.PlaneGeometry(2, 2, 200, 200)

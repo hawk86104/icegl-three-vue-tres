@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-11-18 10:52:37
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-11-18 11:25:42
+ * @LastEditTime: 2024-11-18 12:36:43
 -->
 <template>
     <Suspense>
@@ -13,6 +13,7 @@
 </template>
 <script lang="ts" setup>
 import * as THREE from 'three'
+import { toRaw } from 'vue'
 import { useRenderLoop, useTresContext } from '@tresjs/core'
 import vertexShader from '../../shaders/caustics/vertex.glsl'
 import fragmentShader from '../../shaders/caustics/fragment.glsl'
@@ -21,11 +22,11 @@ import water from './water.vue'
 const props = defineProps<{
     lightFrontGeometry: THREE.Geometry
     waterTexture: THREE.Texture
-    light: THREE.Light
+    light: Array<number>
 }>()
 
 const _camera = new THREE.OrthographicCamera(0, 1, 1, 0, 0, 2000)
-const _geometry = props.lightFrontGeometry
+const _geometry = toRaw(props.lightFrontGeometry)
 const texture = new THREE.WebGLRenderTarget(1024, 1024, { type: THREE.UNSIGNED_BYTE })
 
 const material = new THREE.RawShaderMaterial({

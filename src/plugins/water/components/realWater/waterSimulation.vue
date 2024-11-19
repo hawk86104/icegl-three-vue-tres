@@ -11,7 +11,7 @@ import updateFragmentShader from '../../shaders/simulation/update_fragment.glsl'
 import caustics from './caustics.vue'
 
 const props = defineProps<{
-    light: THREE.Light
+    light: Array<number>
 }>()
 
 const _camera = new THREE.OrthographicCamera(0, 1, 1, 0, 0, 2000)
@@ -73,15 +73,10 @@ const updateNormals = (renderer) => {
     _render(renderer, _normalMesh)
 }
 
-const white = new THREE.Color('white')
 const { renderer } = useTresContext()
 const { onBeforeLoop } = useRenderLoop()
 onBeforeLoop(() => {
     stepSimulation(renderer.value)
     updateNormals(renderer.value)
-
-    renderer.value.setRenderTarget(null)
-    renderer.value.setClearColor(white, 1)
-    renderer.value.clear()
 })
 </script>
