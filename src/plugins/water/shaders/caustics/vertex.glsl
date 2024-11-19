@@ -1,9 +1,9 @@
 precision highp float;
+precision highp int;
 
 varying vec3 oldPos;
 varying vec3 newPos;
 varying vec3 ray;
-attribute vec3 position;
 
 #include ../utils.glsl
 

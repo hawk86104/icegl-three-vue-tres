@@ -1,5 +1,13 @@
+<!--
+ * @Description: 
+ * @Version: 1.668
+ * @Autor: 地虎降天龙
+ * @Date: 2024-11-18 10:10:50
+ * @LastEditors: 地虎降天龙
+ * @LastEditTime: 2024-11-19 10:44:20
+-->
 <template>
-    <caustics :lightFrontGeometry="_geometry" :waterTexture="texture" :light="light" />
+    <caustics :lightFrontGeometry="_geometry" :waterTexture="texture.texture" :light="light" />
 </template>
 <script lang="ts" setup>
 import * as THREE from 'three'
@@ -53,7 +61,7 @@ const _normalMesh = new THREE.Mesh(_geometry, normalMaterial)
 const _updateMesh = new THREE.Mesh(_geometry, updateMaterial)
 
 let texture = _textureA
-const _render = (renderer, mesh) => {
+const _render = (renderer: any, mesh: any) => {
     const oldTexture = texture
     const newTexture = texture === _textureA ? _textureB : _textureA
 
@@ -65,18 +73,33 @@ const _render = (renderer, mesh) => {
 
     texture = newTexture
 }
-const stepSimulation = (renderer) => {
+const stepSimulation = (renderer: any) => {
     _render(renderer, _updateMesh)
 }
 
-const updateNormals = (renderer) => {
+const updateNormals = (renderer: any) => {
     _render(renderer, _normalMesh)
 }
 
 const { renderer } = useTresContext()
+renderer.value.autoClear = false
 const { onBeforeLoop } = useRenderLoop()
 onBeforeLoop(() => {
     stepSimulation(renderer.value)
     updateNormals(renderer.value)
 })
+
+const addDrop = (x: number, y: number, radius: number, strength: number) => {
+    _dropMesh.material.uniforms['center'].value = [x, y]
+    _dropMesh.material.uniforms['radius'].value = radius
+    _dropMesh.material.uniforms['strength'].value = strength
+    _render(renderer.value, _dropMesh)
+}
+defineExpose({ addDrop })
+
+setInterval(() => {
+    for (var i = 0; i < 20; i++) {
+        addDrop(Math.random() * 2 - 1, Math.random() * 2 - 1, 0.03, i & 1 ? 0.02 : -0.02)
+    }
+}, 1600)
 </script>
