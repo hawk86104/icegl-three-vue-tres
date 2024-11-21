@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-03 15:07:09
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-10-10 08:28:26
+ * @LastEditTime: 2024-11-21 16:20:12
  */
 export default {
     name: 'basic',
@@ -84,6 +84,7 @@ export default {
             pNode: 'basic',
             preview: [
                 { src: 'plugins/basic/htmls/preview/htmls.png', type: 'img', name: 'htmls', title: '简单dom' },
+                { src: 'plugins/basic/htmls/preview/component3UI.png', type: 'img', name: 'component3UI', title: '引用UI组件' },
                 { src: 'plugins/basic/htmls/preview/website.png', type: 'img', name: 'website', title: '内嵌网页' },
                 { src: 'plugins/basic/htmls/preview/websiteReflector.png', type: 'img', name: 'websiteReflector', title: '网页电脑+镜面' },
             ],
