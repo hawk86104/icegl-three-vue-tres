@@ -4,12 +4,12 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-06-18 14:32:19
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-06-18 16:01:41
+ * @LastEditTime: 2024-11-27 10:16:09
 -->
 <template>
     <TresGroup>
         <primitive :object="emitters" />
-        <primitive :object="batchSystem" />
+        <primitive :object="batchSystem" :position="position" :scale="scale" :rotation="rotation" />
     </TresGroup>
 </template>
 <script lang="ts" setup>
@@ -21,15 +21,21 @@ import { watch } from 'vue'
 const props = withDefaults(
     defineProps<{
         color?: string
+        position?: Array<number>
+        scale?: Array<number> | number
+        rotation?: Array<number>
     }>(),
     {
         color: '#00ffff',
+        position: [0, 0, 0] as any,
+        scale: 1,
+        rotation: [0, 0, 0] as any,
     },
 )
 
-const getPropsColor = (a) => {
+const getPropsColor = (a: any) => {
     const colorThree = new THREE.Color(props.color)
-    const tv4color = new THREE.Vector4(colorThree.r, colorThree.g, colorThree.b, a)
+    const tv4color = new THREE.Vector4(colorThree.r, colorThree.g, colorThree.b, a) as any
     const colorRange = new TQK.ConstantColor(tv4color)
     return colorRange
 }
@@ -53,7 +59,6 @@ loader.load('./plugins/floor/json/CartoonMagicZone.json', (obj) => {
         }
     })
     if (obj.type === 'ParticleEmitter') {
-        //@ts-ignore
         batchSystem.addSystem(obj.system)
     }
     emitters.add(obj)
@@ -68,7 +73,7 @@ watch(
     () => [props.color],
     ([color]) => {
         batchSystem.systemToBatchIndex.forEach((value, ps) => {
-					(ps as any).startColor = getPropsColor((ps as any).startColor.color.w)
+            ;(ps as any).startColor = getPropsColor((ps as any).startColor.color.w)
         })
     },
 )

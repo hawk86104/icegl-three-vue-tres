@@ -4,15 +4,25 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-06-06 15:51:13
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-06-18 16:03:19
+ * @LastEditTime: 2024-11-27 12:03:06
 -->
 <template>
     <TresCanvas clearColor="#201919" window-size>
         <TresPerspectiveCamera :position="[5, 5, 5]" :fov="45" :near="0.1" :far="10000" />
         <OrbitControls enableDamping />
-        <Suspense>
-            <cartoonMagic v-bind="configState" />
-        </Suspense>
+        <TresAmbientLight :intensity="2" />
+
+        <cartoonMagic v-bind="configState" />
+        <cartoonMagic color="yellow" :scale="1.0" :position="[3, 0, 0]" />
+
+        <TresMesh :position="[3, 0, 0]">
+            <TresSphereGeometry :args="[1, 32, 32]" />
+            <TresMeshBasicMaterial color="yellow" />
+        </TresMesh>
+        <TresMesh :position="[0, 0, 0]">
+            <TresSphereGeometry :args="[1, 32, 32]" />
+            <TresMeshBasicMaterial color="white" />
+        </TresMesh>
 
         <Suspense>
             <reflectorDUDV :position="[0, -0.5, 0]" v-bind="reflectorState" />
@@ -30,8 +40,8 @@ import cartoonMagic from '../components/cartoonMagic.vue'
 
 const reflectorState = reactive({
     reflectivity: 0.1,
-    showGridHelper: false,
-    scale: 2,
+    showGridHelper: true,
+    scale: 1,
 })
 const configState = reactive({
     color: '#ffffff',
