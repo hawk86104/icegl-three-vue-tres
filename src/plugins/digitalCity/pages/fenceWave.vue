@@ -1,3 +1,11 @@
+<!--
+ * @Description: 
+ * @Version: 1.668
+ * @Autor: 地虎降天龙
+ * @Date: 2024-09-17 15:04:20
+ * @LastEditors: 地虎降天龙
+ * @LastEditTime: 2024-12-03 16:28:58
+-->
 <template>
 	<pagesShow ref="pagesShowRef">
 		<template v-slot:ability>
@@ -15,16 +23,18 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watchEffect, reactive } from 'vue'
+import { ref, onMounted, nextTick, reactive } from 'vue'
 import { Pane } from 'tweakpane'
 import {wave} from 'PLS/digitalCity'
 import pagesShow from '../components/pagesShow.vue'
 
 const pagesShowRef = ref()
-watchEffect(() => {
-	if (pagesShowRef.value) {
-		pagesShowRef.value.$refs.perspectiveCameraRef.position.set(580, 360, 500)
-	}
+onMounted(() => {
+    nextTick(() => {
+        if (pagesShowRef.value) {
+            pagesShowRef.value.$refs.perspectiveCameraRef.position.set(580, 360, 500)
+        }
+    })
 })
 
 const typeState = reactive({

@@ -39,7 +39,13 @@ paneControl.addBinding(cmConfig, 'radius', { label: '大小', min: 10, max: 200,
 const pagesShowRef = shallowRef(null)
 watchEffect(() => {
     if (pagesShowRef.value) {
-        pagesShowRef.value.$refs.perspectiveCameraRef.position.set(-135, 250, 320)
+        if (pagesShowRef.value.$refs.tcRef) {
+            pagesShowRef.value.$refs.tcRef.context.camera.value.position.set(-135, 250, 320)
+        } else {
+            if (pagesShowRef.value.$refs.perspectiveCameraRef) {
+                pagesShowRef.value.$refs.perspectiveCameraRef.position.set(-135, 250, 320)
+            }
+        }
     }
 })
 </script>

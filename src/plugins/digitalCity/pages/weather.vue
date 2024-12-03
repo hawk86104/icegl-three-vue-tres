@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-10-17 08:30:49
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-03-12 19:03:01
+ * @LastEditTime: 2024-12-03 16:29:48
 -->
 <template>
 	<loading></loading>
@@ -18,18 +18,20 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watchEffect, reactive, toRefs } from 'vue';
-import { Pane } from 'tweakpane';
+import { ref, onMounted, nextTick, reactive, toRefs } from 'vue'
+import { Pane } from 'tweakpane'
 import loading from 'PLS/UIdemo/components/loading/default.vue'
 import pagesShow from '../components/pagesShow.vue'
-import precipitation from '../components/weather/precipitation.vue';
+import precipitation from '../components/weather/precipitation.vue'
 // import smokes from '../components/weather/smokes.vue';
 
 const pagesShowRef = ref()
-watchEffect(() => {
-	if (pagesShowRef.value) {
-		pagesShowRef.value.$refs.perspectiveCameraRef.position.set(750, 500, 800)
-	}
+onMounted(() => {
+    nextTick(() => {
+        if (pagesShowRef.value) {
+            pagesShowRef.value.$refs.perspectiveCameraRef.position.set(750, 500, 800)
+        }
+    })
 })
 const precipitationState = reactive({
 	speed: 12,
@@ -50,10 +52,10 @@ const toRefsState = reactive({
 const paneControl = new Pane({
 	title: '天气',
 	expanded: true,
-});
+})
 const f1 = paneControl.addFolder({
 	title: '下落物',
-});
+})
 f1.addBinding(precipitationState, 'speed', {
 	label: '速度',
 	min: 0,
@@ -83,5 +85,5 @@ f1.addBinding(precipitationState, 'type', {
 		{ text: '雨', value: 'rain' },
 		{ text: '点', value: 'point' },
 	]
-});
+})
 </script>

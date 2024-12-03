@@ -1,3 +1,11 @@
+<!--
+ * @Description: 
+ * @Version: 1.668
+ * @Autor: 地虎降天龙
+ * @Date: 2024-09-12 16:17:01
+ * @LastEditors: 地虎降天龙
+ * @LastEditTime: 2024-12-03 16:26:53
+-->
 <template>
     <loading></loading>
     <pagesShow ref="pagesShowRef">
@@ -29,7 +37,13 @@ paneControl.addBinding(cmConfig, 'radius', { label: '大小', min: 10, max: 200,
 const pagesShowRef = shallowRef(null)
 watchEffect(() => {
     if (pagesShowRef.value) {
-        pagesShowRef.value.$refs.perspectiveCameraRef.position.set(-135, 250, 320)
+        if (pagesShowRef.value.$refs.tcRef) {
+            pagesShowRef.value.$refs.tcRef.context.camera.value.position.set(-135, 250, 320)
+        } else {
+            if (pagesShowRef.value.$refs.perspectiveCameraRef) {
+                pagesShowRef.value.$refs.perspectiveCameraRef.position.set(-135, 250, 320)
+            }
+        }
     }
 })
 </script>

@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-08-19 20:24:59
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-11-15 11:06:48
+ * @LastEditTime: 2024-12-03 15:24:40
  */
 export default {
     name: 'digitalCity',
@@ -38,6 +38,8 @@ export default {
         { src: 'plugins/digitalCity/preview/fireB.png', type: 'img', name: 'fireB', title: '火B🔥效果' },
         { src: 'plugins/digitalCity/preview/fireC.png', type: 'img', name: 'fireC', title: '火C🔥效果' },
         { src: 'plugins/digitalCity/preview/fireD.png', type: 'img', name: 'fireD', title: '火D🔥效果' },
+        { src: 'plugins/digitalCity/preview/fireE.png', type: 'img', name: 'fireE', title: '火E🔥效果' },
+        { src: 'plugins/digitalCity/preview/fireF.png', type: 'img', name: 'fireF', title: '火F🔥效果' },
         { src: 'plugins/digitalCity/preview/fireBall.png', type: 'img', name: 'fireBall', title: '火球🔥效果' },
         { src: 'plugins/digitalCity/preview/heatmap.png', type: 'img', name: 'heatmap', title: '热力图' },
         { src: 'plugins/digitalCity/preview/heatmap2.png', type: 'img', name: 'heatmap2', title: '建筑物-热力图' },

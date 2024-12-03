@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-28 10:04:13
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-07-29 09:15:58
+ * @LastEditTime: 2024-12-03 16:26:44
 -->
 <template>
     <loading></loading>
@@ -62,7 +62,13 @@ paneControl.addBinding(fireAState, 'gain', {
 const pagesShowRef = ref()
 watchEffect(() => {
     if (pagesShowRef.value) {
-        pagesShowRef.value.$refs.perspectiveCameraRef.position.set(580, 360, 500)
+        if (pagesShowRef.value.$refs.tcRef) {
+            pagesShowRef.value.$refs.tcRef.context.camera.value.position.set(580, 360, 500)
+        } else {
+            if (pagesShowRef.value.$refs.perspectiveCameraRef) {
+                pagesShowRef.value.$refs.perspectiveCameraRef.position.set(580, 360, 500)
+            }
+        }
     }
 })
 </script>
