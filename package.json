@@ -90,6 +90,7 @@
     "lodash": "^4.17.21",
     "lygia": "^1.1.3",
     "naive-ui": "2.40.1",
+    "netcdfjs": "^3.0.0",
     "oimophysics": "^1.2.2",
     "patch-package": "^8.0.0",
     "pinia": "2.2.4",

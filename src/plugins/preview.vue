@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-18 22:17:49
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-11-08 16:35:26
+ * @LastEditTime: 2024-12-03 11:52:27
 -->
 <template>
     <div class="absolute menuSelf">
@@ -110,6 +110,9 @@
                                 </div> -->
                                 <div class="flex absolute" style="left: 1px; flex-direction: column; top: 2px">
                                     <f-badge value="free" class="tag-fbdge afree-tag" type="success" size="small" v-if="onePlugin.tvtstore === 'FREE'" />
+                                </div>
+                                <div class="flex absolute" style="top: 3px;right: 30px;">
+                                    <f-badge :value="onePlugin.version" class="tag-fbdge" type="primary" size="small" />
                                 </div>
                                 <span class="left-m-text">{{ onePlugin.title }}</span>
                                 <FBadge :value="onePlugin.preview.length" class="count-fbdge" type="primary" size="small" />
