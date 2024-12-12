@@ -62,6 +62,7 @@
     "@tresjs/cientos": "4.0.3",
     "@tresjs/core": "4.3.1",
     "@tresjs/leches": "^0.14.0",
+    "@tresjs/post-processing": "^1.0.0",
     "@turf/turf": "^7.1.0",
     "@tweenjs/tween.js": "^25.0.0",
     "@vicons/carbon": "^0.12.0",

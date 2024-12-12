@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-03 15:07:09
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-11-21 16:20:12
+ * @LastEditTime: 2024-12-12 17:55:02
  */
 export default {
     name: 'basic',
@@ -105,6 +105,13 @@ export default {
                     referenceSource: { title: 'FakeGlow', url: 'https://r3f-fake-glow-material.vercel.app/' },
                 },
                 { src: 'plugins/basic/shine/preview/bloomPass.png', type: 'img', name: 'bloomPass', title: '后期处理-效果叠加' },
+                {
+                    src: 'plugins/basic/shine/preview/tresProcessing.png',
+                    type: 'img',
+                    name: 'tresProcessing',
+                    title: 'Tres的后期处理',
+                    referenceSource: { title: 'post-processing.tresjs', url: 'https://post-processing.tresjs.org/guide/' },
+                },
                 { src: 'plugins/basic/shine/preview/MaskPass.png', type: 'img', name: 'MaskPass', title: '后期处理-掩膜通道' },
                 { src: 'plugins/basic/shine/preview/effectComposerLayers.png', type: 'img', name: 'effectComposerLayers', title: '后期处理-图层叠加' },
                 {
