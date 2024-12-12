@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-05-27 11:22:46
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-10-08 11:13:38
+ * @LastEditTime: 2024-12-12 10:24:01
 -->
 <template>
     <n-config-provider :theme="darkTheme" :hljs="hljsTheme" :locale="locale" :date-locale="dateLocale" :theme-overrides="overridesTheme">
@@ -74,6 +74,7 @@ const props = withDefaults(
         showAllCom?: boolean // 是否 显示所有组件 可接入全局等待loading结果
         delay?: number // 延迟显示时间 单位毫秒 用于在three中读取完模型后 载入的延迟配置
         maskWidth?: number // 遮罩层宽度 默认500px
+        maskRightWidth?: number // 右遮罩层宽度 默认-1时 使用maskWidth的宽度
         maskHeight?: number // 遮罩层高度 默认0px
         maskColor?: string // 遮罩层颜色 默认#000000
     }>(),
@@ -81,6 +82,7 @@ const props = withDefaults(
         showAllCom: true,
         delay: 0,
         maskWidth: 500,
+        maskRightWidth: -1,
         maskHeight: 0,
         maskColor: '#000000',
     },
@@ -135,7 +137,7 @@ const goPreviewMaskStyle = computed(() => ({
 }))
 
 const goPreviewMaskStyleRight = computed(() => ({
-    width: `${props.maskWidth}px`,
+    width: `${props.maskRightWidth === -1 ? props.maskWidth : props.maskRightWidth}px`,
     background: `linear-gradient(
     to left,
     ${props.maskColor}90,
