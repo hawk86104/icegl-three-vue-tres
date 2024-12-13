@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-12-13 09:05:58
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-12-13 10:02:41
+ * @LastEditTime: 2024-12-13 10:30:08
 -->
 <template>
     <TresMesh :geometry="geometry">
@@ -15,13 +15,43 @@
 <script setup lang="ts">
 import { reactive, ref, watch } from 'vue'
 import * as THREE from 'three'
+import * as BufferGeometryUtils from 'three/addons/utils/BufferGeometryUtils.js'
+import { OBJLoader } from 'three/addons/loaders/OBJLoader.js'
+import { loadOBJ } from 'PLS/medical/common/util'
 import { useTexture, useRenderLoop } from '@tresjs/core'
+import { useGLTF } from '@tresjs/cientos'
 import { Pane } from 'tweakpane'
 import vertexShader from '../shaders/fragmentModel.vert'
 import fragmentShader from '../shaders/fragmentModel.frag'
 
-const geometry = new THREE.TorusGeometry(0.82, 0.3, 32, 120).toNonIndexed()
-const toGeometry = new THREE.TorusKnotGeometry(0.6, 0.1, 180, 20, 4, 2).toNonIndexed()
+const mergeGeometriesForMesh = (model: THREE.Object3D) => {
+    const gList: any[] = []
+    model.traverse((child: THREE.Object3D) => {
+        if (child instanceof THREE.Mesh) {
+            child.geometry.deleteAttribute('uv')
+            child.geometry.deleteAttribute('tangent')
+            gList.push(child.geometry)
+        }
+    })
+    return BufferGeometryUtils.mergeGeometries(gList)
+}
+
+const guanyuModel = (
+    await useGLTF('https://opensource-1314935952.cos.ap-nanjing.myqcloud.com/model/eCommerce/guanYu.glb', { draco: true, decoderPath: './draco/' })
+).scene
+const guanyuGeometries = mergeGeometriesForMesh(guanyuModel.children[0])
+guanyuGeometries.rotateX(Math.PI / 2)
+guanyuGeometries.translate(0, -0.9, 0)
+const geometry = guanyuGeometries.clone().toNonIndexed()
+
+const planeModel = (await useGLTF('./plugins/industry4/model/modelDraco.glb', { draco: true, decoderPath: './draco/' })).scene
+const planeGeometries = mergeGeometriesForMesh(planeModel.children[0])
+planeGeometries.rotateX(-Math.PI / 2)
+planeGeometries.rotateY(Math.PI / 3)
+const toGeometry = planeGeometries.clone().toNonIndexed()
+
+// const geometry = new THREE.TorusGeometry(0.82, 0.3, 32, 120).toNonIndexed()
+// const toGeometry = new THREE.TorusKnotGeometry(0.6, 0.1, 180, 20, 4, 2).toNonIndexed()
 
 const position = geometry.attributes.position.array
 const length = geometry.attributes.position.count
@@ -30,9 +60,9 @@ const NextNormal = toGeometry.attributes.normal.array
 const NextLength = toGeometry.attributes.position.count
 
 const randoms = new Float32Array(length)
-const centers = new Float32Array(length * 3)
-const toPositions = new Float32Array(length * 3)
-const toNormal = new Float32Array(length * 3)
+const centers = new Float32Array((length + 2) * 3)
+const toPositions = new Float32Array((length + 2) * 3)
+const toNormal = new Float32Array((length + 2) * 3)
 
 for (let index = 0; index < length; index += 3) {
     const random = Math.random() * 1
@@ -88,12 +118,12 @@ const tsMaterialConfig = {
         matcap1: { value: pTexture },
         m1Color: {
             type: 'v3',
-            value: new THREE.Color('#fff'),
+            value: new THREE.Color('#ffc0fa'),
         },
         matcap2: { value: pTexture },
         m2Color: {
             type: 'v3',
-            value: new THREE.Color('#fff'),
+            value: new THREE.Color('#bcd4ff'),
         },
     },
     vertexShader,
@@ -101,8 +131,8 @@ const tsMaterialConfig = {
 }
 
 const colors = reactive({
-    c1: '#fff',
-    c2: '#fff',
+    c1: '#ffc0fa',
+    c2: '#bcd4ff',
 })
 const speed = ref(0.5)
 const paneControl = new Pane({ title: '参数' })

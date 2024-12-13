@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-04-30 08:18:21
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-12-13 09:02:56
+ * @LastEditTime: 2024-12-13 10:31:26
  */
 export default {
     name: 'visualArts',
@@ -75,6 +75,7 @@ export default {
             type: 'img',
             name: 'fragmentModel',
             title: '碎片模型',
+            referenceSource: { title: 'honbingitee', url: 'https://gitee.com/honbingitee/three-template-next.js/commit/f34164073d37a1b23bf5cbfb2f21258b2416e92a' },
         },
     ],
 }
