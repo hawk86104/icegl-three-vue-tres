@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-04-30 08:18:21
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-10-09 16:56:33
+ * @LastEditTime: 2024-12-13 09:02:56
  */
 export default {
     name: 'visualArts',
@@ -69,6 +69,12 @@ export default {
             type: 'img',
             name: 'lightNoise',
             title: '光噪声',
+        },
+        {
+            src: 'plugins/visualArts/preview/fragmentModel.png',
+            type: 'img',
+            name: 'fragmentModel',
+            title: '碎片模型',
         },
     ],
 }
