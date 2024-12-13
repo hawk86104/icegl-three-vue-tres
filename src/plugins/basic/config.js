@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-03 15:07:09
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-12-12 17:55:02
+ * @LastEditTime: 2024-12-13 14:38:17
  */
 export default {
     name: 'basic',
@@ -97,6 +97,10 @@ export default {
             preview: [
                 { src: 'plugins/basic/shine/preview/spriteImage.png', type: 'img', name: 'spriteImage', title: '点精灵贴图' },
                 { src: 'plugins/basic/shine/preview/shader.png', type: 'img', name: 'shader', title: '着色器方式' },
+                {
+                    src: 'plugins/basic/shine/preview/geometricGlow.png', type: 'img', name: 'geometricGlow', title: 'geometric缩放',
+                    referenceSource: { title: 'jeromeetienne', url: 'https://github.com/jeromeetienne/threex.geometricglow' },
+                 },
                 {
                     src: 'plugins/basic/shine/preview/fakeGlow.png',
                     type: 'img',
