@@ -17,7 +17,7 @@ const props = withDefaults(
     defineProps<{
         geoJson: string
         color?: string
-        position?: Array<number>
+        position?: [number, number, number]
         radius?: number
         rotationY?: number
         scale?: number
@@ -25,7 +25,7 @@ const props = withDefaults(
     }>(),
     {
         color: '#ffff00',
-        position: [1837.0641427711184, 30, -457.0929823910632],
+        position: () => [1837.0641427711184, 30, -457.0929823910632],
         radius: 2,
         rotationY: -0.3866683251512052,
         scale: 1.5083171193254858,
@@ -55,11 +55,11 @@ const linePrimary = await loadGeojson(props.geoJson)
 const geoOffSet = [-31.258949, 0, -121.465782]
 const scalegeoScale = 60000
 
-let curve = []
+let curve: CatmullRomCurve3[] = []
 for (var i = 0; i < linePrimary.length; i++) {
     const item = linePrimary[i]
-    const points = []
-    item.geometry.coordinates.forEach((lineOne) => {
+    const points: Vector3[] = []
+    item.geometry.coordinates.forEach((lineOne: number[]) => {
         points.push(new Vector3((lineOne[1] + geoOffSet[0]) * scalegeoScale, geoOffSet[1], (lineOne[0] + geoOffSet[2]) * scalegeoScale))
     })
     curve.push(new CatmullRomCurve3(points))
