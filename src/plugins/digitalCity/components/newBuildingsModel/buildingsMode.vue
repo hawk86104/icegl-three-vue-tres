@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-01-02 10:55:34
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-01-04 08:52:36
+ * @LastEditTime: 2024-12-14 21:11:29
 -->
 <template>
 	<Suspense>
@@ -16,15 +16,15 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useRenderLoop } from '@tresjs/core'
-import { Group, Color, DoubleSide, Mesh, EdgesGeometry, AdditiveBlending } from 'three'
+import { Group, Color, DoubleSide, Mesh, EdgesGeometry,MeshStandardMaterial } from 'three'
 import { LineSegments2 } from 'three/examples/jsm/lines/LineSegments2.js'
 import { LineMaterial } from 'three/examples/jsm/lines/LineMaterial.js'
 import { LineSegmentsGeometry } from 'three/examples/jsm/lines/LineSegmentsGeometry.js'
 import { useGLTF } from '@tresjs/cientos'
 import CustomShaderMaterial from 'three-custom-shader-material/vanilla'
 import { setThreeWater2, initMeshBvh } from '../../common/utils'
-import vertexShader from '../../shaders/buildingsCustomShaderMaterial.vert?raw'
-import fragmentShader from '../../shaders/buildingsCustomShaderMaterial.frag?raw'
+import vertexShader from '../../shaders/buildingsCustomShaderMaterial.vert'
+import fragmentShader from '../../shaders/buildingsCustomShaderMaterial.frag'
 import importantBuildings from './importantBuildings.vue'
 
 initMeshBvh()
@@ -42,7 +42,7 @@ const setEffectMaterial = (mesh) => {
 	geometry.computeBoundsTree()
 	const { max, min } = geometry.boundingBox
 	const material = new CustomShaderMaterial({
-		baseMaterial: mesh.material,
+		baseMaterial: MeshStandardMaterial,
 		vertexShader: vertexShader,
 		fragmentShader: fragmentShader,
 		silent: true,

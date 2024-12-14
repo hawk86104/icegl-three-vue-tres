@@ -3,8 +3,8 @@
 <script setup lang="ts">
 import { useRenderLoop } from '@tresjs/core'
 import HolographicMaterial from '../../common/HolographicMaterial'
-import { resetUV, reAnchorCenter } from '../../common/utils'
-import { Color, DoubleSide, AdditiveBlending, Mesh } from 'three'
+import { resetUV } from '../../common/utils'
+import { Color, DoubleSide, AdditiveBlending } from 'three'
 
 const props = withDefaults(defineProps<{
 	group: any
@@ -27,7 +27,7 @@ holoMaterial.uniforms.hologramColor.value = new Color(PARAMS.hologramColor)
 holoMaterial.uniforms.enableBlinking.value = false
 holoMaterial.depthTest = true
 
-//关键建筑物
+//关键建筑物 
 let shzx, jmds, dfmzt = null
 const setImportantBuilds = () => {
 
