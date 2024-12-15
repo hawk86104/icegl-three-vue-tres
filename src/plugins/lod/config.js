@@ -1,10 +1,10 @@
 export default {
 	"name": "lod",
 	"title": "LOD",
-	"intro": "LOD的应用",
+	"intro": "LOD 是Level of Detail的缩写，是一种优化渲染性能的技术，通过在不同距离和角度下使用不同的模型细节来减少渲染负担。远看粗糙，近看精细。",
 	"version": "0.0.1",
 	"author": "石头web",
-	"website": "icegl.cn",
+	"website": "https://github.com/a876691666",
 	"state": "active",
 	"require": [],
 	"preview": [
