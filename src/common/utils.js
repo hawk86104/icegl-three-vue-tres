@@ -56,17 +56,6 @@ export const getPluginsConfig = () => {
     return window.pluginsConfig
 }
 
-export const hasPlugin = (ename, cname) => {
-    const config = getPluginsConfig()
-    // eslint-disable-next-line no-undefined
-    const re = config[ename] !== undefined
-    if (!re) {
-        console.error(`${cname}_未安装，请到插件市场下载安装:https://icegl.cn/tvtstore/${cname}`)
-        window.open(`https://icegl.cn/tvtstore/${cname}`, '_blank')
-    }
-    return re
-}
-
 // 警告函数
 function showWarning () {
     FMessage.warning?.({
@@ -165,4 +154,13 @@ export const getOnePluginConfig = (pName, oName, cName) => {
     }
     // 如果没有找到匹配的插件配置，返回null
     return null
+}
+export const hasPlugin = (ename, cname) => {
+    const config = getOnePluginConfig(ename, null, null)
+    const re = config
+    if (!re) {
+        console.error(`${cname}_未安装，请到插件市场下载安装:https://icegl.cn/tvtstore/${ename}`)
+        window.open(`https://icegl.cn/tvtstore/${ename}`, '_blank')
+    }
+    return re
 }
