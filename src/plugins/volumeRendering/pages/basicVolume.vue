@@ -1,7 +1,7 @@
 <template>
     <div class="info">
-        <a href="https://klacansky.com/open-scivis-datasets/skull/skull_256x256x256_uint8/raw" target="_blank">
-            https://klacansky.com/open-scivis-datasets/skull/skull_256x256x256_uint8/raw
+        <a href="https://klacansky.com/open-scivis-datasets/skull/skull_256x256x256_uint8.raw" target="_blank">
+            https://klacansky.com/open-scivis-datasets/skull/skull_256x256x256_uint8.raw
         </a>
         <br />
         请自行下载数据集, 复制到 /plugins/volumeRendering/image/skull_256x256x256_uint8.raw

@@ -9,8 +9,8 @@
 import { ref, reactive, onMounted, watch } from 'vue'
 import * as Three from 'three'
 import { Pane } from 'tweakpane'
-import vertex from '../shaders/vertex.glsl?raw'
-import fragment from '../shaders/fragment.glsl?raw'
+import vertex from '../shaders/vertex.glsl'
+import fragment from '../shaders/fragment.glsl'
 import { useRenderLoop, useTresContext } from '@tresjs/core'
 
 const dim = 41
