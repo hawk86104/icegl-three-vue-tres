@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-12-20 17:01:37
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-08-09 14:34:44
+ * @LastEditTime: 2024-12-24 10:36:19
  */
 export default {
     name: 'floor',
@@ -36,5 +36,6 @@ export default {
         },
         { src: 'plugins/floor/preview/circleWave.png', type: 'img', name: 'circleWave', title: 'shaderCircleWave' },
         { src: 'plugins/floor/preview/cartoonMagicZone.png', type: 'img', name: 'cartoonMagicZone', title: '卡通能量圈' },
+        { src: 'plugins/floor/preview/lineMagicZone.png', type: 'img', name: 'lineMagicZone', title: '线条能量圈' },
     ],
 }
