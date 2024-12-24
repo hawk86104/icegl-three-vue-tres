@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-06-06 15:51:13
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-12-24 16:40:06
+ * @LastEditTime: 2024-12-24 16:58:26
 -->
 <template>
     <TresCanvas clearColor="#201919" window-size antialias alpha logarithmicDepthBuffer>
@@ -13,7 +13,10 @@
         <TresAmbientLight :intensity="2" />
 
         <Suspense>
-            <lineMagicZone :position="[0, 0, 0]" v-bind="configState" />
+            <lineMagicZone :position="[3, 0, 0]" v-bind="configState" />
+        </Suspense>
+        <Suspense>
+            <lineMagicZone :position="[-3, 0, 0]" :scale="1.6" :height="3.0" />
         </Suspense>
 
         <Suspense>
