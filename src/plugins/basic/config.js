@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-11-03 15:07:09
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-12-13 14:38:17
+ * @LastEditTime: 2024-12-26 09:32:36
  */
 export default {
     name: 'basic',
@@ -41,6 +41,7 @@ export default {
                 { src: 'plugins/basic/materials/preview/transmissionMaterial.png', type: 'img', name: 'transmissionMaterial', title: '玻璃材质2' },
                 { src: 'plugins/basic/materials/preview/wobbleMaterial.png', type: 'img', name: 'wobbleMaterial', title: '流体波动' },
                 { src: 'plugins/basic/materials/preview/clippingMaterial.png', type: 'img', name: 'clippingMaterial', title: '材质裁剪' },
+                { src: 'plugins/basic/materials/preview/solidClippingMaterial.png', type: 'img', name: 'solidClippingMaterial', title: '裁剪材质补色' },
                 { src: 'plugins/basic/materials/preview/layerMaterial.png', type: 'img', name: 'layerMaterial', title: '图层材质' },
                 { src: 'plugins/basic/materials/preview/outline.png', type: 'img', name: 'outline', title: 'outline' },
                 { src: 'plugins/basic/materials/preview/clearcoat.png', type: 'img', name: 'clearcoat', title: '反光漆图层' },

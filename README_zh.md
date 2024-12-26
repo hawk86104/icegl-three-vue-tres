@@ -30,7 +30,7 @@
 
 > B 站上对此项目的视频说明点击下方 👇🏻 跳转
 
-<a href="https://www.bilibili.com/video/BV1LH4y1p7Yn"><img src="./preview/bilibili.gif" style="max-width:800px;" alt="tres.js webgl"></a>
+<a href="https://www.bilibili.com/video/BV1mfCcYeE9E"><img src="./preview/bilibili.gif" style="max-width:800px;" alt="tres.js webgl three.js"></a>
 
 # 生态 `@ThreeJS @Vue3.x @TresJS`
 
