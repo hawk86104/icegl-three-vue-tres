@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-12-20 17:01:37
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-12-24 10:36:19
+ * @LastEditTime: 2024-12-26 15:54:22
  */
 export default {
     name: 'floor',
@@ -25,6 +25,7 @@ export default {
         { src: 'plugins/floor/preview/imgFloor.png', type: 'img', name: 'imgFloor', title: '图片动态底座' },
         { src: 'plugins/floor/preview/canvasFloor.png', type: 'img', name: 'canvasFloor', title: 'canvas动态底座' },
         { src: 'plugins/floor/preview/digitalGround.png', type: 'img', name: 'digitalGround', title: '数字动态底座' },
+        { src: 'plugins/floor/preview/hexGridGround.png', type: 'img', name: 'hexGridGround', title: '网格动态底座' },
         { src: 'plugins/floor/preview/whiteFloor.png', type: 'img', name: 'whiteFloor', title: '白色边缘模糊' },
         { src: 'plugins/floor/preview/gridPlus.png', type: 'img', name: 'gridPlus', title: '网格扩展' },
         {
