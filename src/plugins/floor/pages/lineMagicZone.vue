@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-06-06 15:51:13
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-12-24 16:58:26
+ * @LastEditTime: 2024-12-27 16:03:32
 -->
 <template>
     <TresCanvas clearColor="#201919" window-size antialias alpha logarithmicDepthBuffer>
@@ -41,6 +41,7 @@ const configState = reactive({
     color: '#ff0000',
     scale: 1.8,
     height: 2.4,
+    speed: 1,
 })
 
 const paneControl = new Pane()
@@ -55,6 +56,12 @@ paneControl.addBinding(configState, 'height', {
     label: '高度',
     min: 0.1,
     max: 3.0,
+    step: 0.1,
+})
+paneControl.addBinding(configState, 'speed', {
+    label: '速度',
+    min: -5.0,
+    max: 5.0,
     step: 0.1,
 })
 </script>
