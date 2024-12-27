@@ -46,10 +46,15 @@ void main() {
     distance = id.x;
   } else if (direction == 5) {
     distance = length(id.xy);
+  } else if (direction == 6) {
+    vec2 center = vec2(0.5 * division * divisionScaleX, 0.5 * division);
+    distance = length(uv - center);
   }
-  float wavy = pow(sin((distance * waveFrequency - time)), wavePow) + raisedBottom;
+  float wavy =
+      pow(sin((distance * waveFrequency - time)), wavePow) + raisedBottom;
 
-  csm_DiffuseColor.a *= wavy;
+  float diffuseColorA = csm_DiffuseColor.a;
+  diffuseColorA *= wavy;
 
   float mask = 1.0;
   if (hasMaskTexture) {
@@ -65,10 +70,18 @@ void main() {
 
   float gridLine = smoothstep(w, stepMax, hc.y);
   gridLine = isReversed ? 1.0 - gridLine : gridLine;
-  csm_DiffuseColor.a *= gridLine;
+  diffuseColorA *= gridLine;
 
-  // 重点：将透明度乘以颜色，以保持颜色的亮度 保留原有颜色，且不被 csm_FragColor	 覆盖掉
-  csm_DiffuseColor.rgb = vec3(csm_DiffuseColor.a * csm_DiffuseColor.r,
-                              csm_DiffuseColor.a * csm_DiffuseColor.g,
-                              csm_DiffuseColor.a * csm_DiffuseColor.b);
+  // 重点：将透明度乘以颜色，以保持颜色的亮度 保留原有颜色，且不被 csm_FragColor
+  // 覆盖掉
+  csm_DiffuseColor.rgb *= diffuseColorA;
+
+// 计算当前像素的亮度（接近黑色为低亮度）
+float brightness = length(csm_DiffuseColor.rgb);
+// 使用 smoothstep 实现透明度的平滑过渡
+float alphaBlend = smoothstep(0.0, 1.0, brightness);
+// 调整透明度，使黑色区域渐变为透明
+csm_DiffuseColor.a *= alphaBlend;
+// 输出最终颜色
+csm_FragColor = vec4(csm_DiffuseColor.rgb, csm_DiffuseColor.a);
 }

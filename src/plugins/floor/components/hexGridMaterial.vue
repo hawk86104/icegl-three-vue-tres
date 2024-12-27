@@ -4,10 +4,10 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-12-26 09:31:40
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-12-27 11:26:28
+ * @LastEditTime: 2024-12-27 11:36:52
 -->
 <template>
-    <CustomShaderMaterial :baseMaterial="baseMaterial" :vertexShader="vertexShader" :fragmentShader="fragmentShader" :uniforms="uniforms" />
+    <CustomShaderMaterial :baseMaterial="baseMaterial" :vertexShader="vertexShader" :side="THREE.DoubleSide" transparent :fragmentShader="fragmentShader" :uniforms="uniforms" />
 </template>
 <script setup lang="ts">
 import { watch } from 'vue'
@@ -31,7 +31,7 @@ const props = defineProps({
     wavePow: { default: 4.0 },
     division: { default: 32.0 },
     divisionScaleX: { default: 1.0 },
-    direction: { default: 4 }, // vertical: 4, horizontal: 3, radial: 5
+    direction: { default: 4 }, // vertical: 4, horizontal: 3, radial: 5 , circle: 6
     isReversed: { default: false },
 })
 

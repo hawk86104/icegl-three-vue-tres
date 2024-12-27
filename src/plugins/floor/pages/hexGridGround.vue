@@ -4,20 +4,18 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-12-26 15:54:59
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-12-27 11:28:28
+ * @LastEditTime: 2024-12-27 12:38:20
 -->
 <template>
     <TresCanvas clearColor="#666666" window-size>
         <TresPerspectiveCamera :position="[3, 3, 0]" :fov="45" :near="0.1" :far="10000" />
         <OrbitControls enableDamping autoRotate />
-        <TresAmbientLight :intensity="1.0" />
-        <TresPointLight color="#0000ff" :position="[0, 0, -3]" :intensity="100" />
         <Suspense>
-            <hexGridMesh v-bind="configState" />
+            <hexGridMesh v-bind="configState" :scale="9" />
         </Suspense>
 
         <Suspense>
-            <reflectorDUDV :position="[0, -0.5, 0]" v-bind="reflectorState" />
+            <reflectorDUDV :position="[0, -0.06, 0]" v-bind="reflectorState" />
         </Suspense>
     </TresCanvas>
 </template>
@@ -31,7 +29,7 @@ import reflectorDUDV from '../components/reflectorDUDV.vue'
 import hexGridMesh from '../components/hexGridMesh.vue'
 
 const reflectorState = reactive({
-    reflectivity: 0.1,
+    reflectivity: 0.8,
     showGridHelper: false,
     scale: 1,
 })
@@ -49,7 +47,7 @@ const configState = reactive({
 })
 
 const paneControl = new Pane({
-    title: 'digitalGround',
+    title: 'hexGridGround',
     expanded: true,
 })
 paneControl.addBinding(configState, 'color', { label: '颜色' })
@@ -73,14 +71,14 @@ paneControl.addBinding(configState, 'raisedBottom', {
 })
 paneControl.addBinding(configState, 'waveFrequency', {
     label: '分段',
-    min: 0.01,
-    max: 2,
-    step: 0.01,
+    min: 0.001,
+    max: 1,
+    step: 0.001,
 })
 paneControl.addBinding(configState, 'wavePow', {
     label: '渐变强度',
-    min: 0.1,
-    max: 10,
+    min: 1,
+    max: 30,
     step: 0.1,
 })
 paneControl.addBinding(configState, 'division', {
@@ -101,7 +99,7 @@ paneControl.addBinding(configState, 'isReversed', {
 paneControl.addBinding(configState, 'direction', {
     label: '方向类别',
     min: 3,
-    max: 5,
+    max: 6,
     step: 1,
 })
 </script>
