@@ -1,25 +1,22 @@
 varying vec2 uvPosition;
 
-// #include <time_animation_uniform_chunk>
 uniform float time;
-uniform bool isAnimate;
-// #include <wavy_animation_uniform_chunk>
+
 uniform float raisedBottom;
 uniform float waveFrequency;
 uniform float wavePow;
 uniform int direction;
-// #include <repeat_pattern_uniform_chunk>
+
 uniform float division;
 uniform float divisionScaleX;
-// #include <mask_map_uniform_chunk>
+
 uniform bool hasMaskTexture;
 uniform sampler2D maskTexture;
-// #include <reversible_uniform_chunk>
+
 uniform bool isReversed;
 
 uniform float gridWeight;
 
-// #include <hex_grid_function_chunk>
 float hexDist(vec2 p) {
   p = abs(p);
   float d = dot(p, normalize(vec2(1.0, 1.73)));
@@ -45,15 +42,12 @@ void main() {
   vec4 hc = hexCoords(uv);
   vec2 id = hc.zw;
   float distance = id.y;
-  // if( direction == ${Directions.horizontal}){
-  //   distance = id.x;
-  // }else if( direction == ${Directions.radial} ){
-  //   distance = length(id.xy);
-  // }
-  float wavy =
-      isAnimate
-          ? pow(sin((distance * waveFrequency - time)), wavePow) + raisedBottom
-          : 1.0;
+  if (direction == 3) {
+    distance = id.x;
+  } else if (direction == 5) {
+    distance = length(id.xy);
+  }
+  float wavy = pow(sin((distance * waveFrequency - time)), wavePow) + raisedBottom;
 
   csm_DiffuseColor.a *= wavy;
 
@@ -72,4 +66,9 @@ void main() {
   float gridLine = smoothstep(w, stepMax, hc.y);
   gridLine = isReversed ? 1.0 - gridLine : gridLine;
   csm_DiffuseColor.a *= gridLine;
+
+  // 重点：将透明度乘以颜色，以保持颜色的亮度 保留原有颜色，且不被 csm_FragColor	 覆盖掉
+  csm_DiffuseColor.rgb = vec3(csm_DiffuseColor.a * csm_DiffuseColor.r,
+                              csm_DiffuseColor.a * csm_DiffuseColor.g,
+                              csm_DiffuseColor.a * csm_DiffuseColor.b);
 }
