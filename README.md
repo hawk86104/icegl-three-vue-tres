@@ -2,17 +2,17 @@
 [简体中文](./README_zh.md) | English
 ## 🎉An open-source framework for rapid implementation of 3D visualization projects.
 <p align="center">
-		<a href="https://github.com/hawk86104/icegl-three-vue-tres" target="_blank">
-			<img src="https://img.shields.io/github/stars/hawk86104/icegl-three-vue-tres" />
+		<a href="https://github.com/hawk86104/three-vue-tres" target="_blank">
+			<img src="https://img.shields.io/github/stars/hawk86104/three-vue-tres" />
 		</a>
-		<img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/hawk86104/icegl-three-vue-tres">
-		<img src="https://img.shields.io/github/license/hawk86104/icegl-three-vue-tres" />
+		<img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/hawk86104/three-vue-tres">
+		<img src="https://img.shields.io/github/license/hawk86104/three-vue-tres" />
 		<a target="_black" href="https://gitee.com/ice-gl/icegl-three-vue-tres">
 			<img src="https://gitee.com/ice-gl/icegl-three-vue-tres/badge/star.svg?theme=dark" alt="gitee-starts" />
 		</a>
 		</a>
-			<a target="_black" href="https://gitcode.com/hawk86104/icegl-three-vue-tres">
-			<img src="https://gitcode.com/hawk86104/icegl-three-vue-tres/star/badge.svg?theme=dark" alt="gitcode-starts" />
+			<a target="_black" href="https://gitcode.com/hawk86104/three-vue-tres">
+			<img src="https://gitcode.com/hawk86104/three-vue-tres/star/badge.svg?theme=dark" alt="gitcode-starts" />
 		</a>
 </p>
 
@@ -126,7 +126,7 @@ If you encounter any problems while using the project, please contact us through
 
 # ⭐ Star History
 
-[![Star History Chart](https://api.star-history.com/svg?repos=hawk86104/icegl-three-vue-tres,hawk86104/vue3-ts-cesium-map-show&type=Date)](https://star-history.com/#hawk86104/icegl-three-vue-tres&hawk86104/vue3-ts-cesium-map-show&Date)
+[![Star History Chart](https://api.star-history.com/svg?repos=hawk86104/three-vue-tres,hawk86104/vue3-ts-cesium-map-show&type=Date)](https://star-history.com/#hawk86104/three-vue-tres&hawk86104/vue3-ts-cesium-map-show&Date)
 
 # ™️ Copyright Information
 

@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2023-12-15 09:11:09
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2024-05-24 09:48:05
+ * @LastEditTime: 2024-12-30 08:16:23
 -->
 <template>
     <FButton type="info" class="absolute home-btn" size="small" @click="tohome()">
@@ -32,7 +32,7 @@ const jump = () => {
     window.open(newUrl)
 }
 const tohome = () => {
-    window.open('https://github.com/hawk86104/icegl-three-vue-tres')
+    window.open('https://github.com/hawk86104/three-vue-tres')
 }
 </script>
 <style lang="less" scoped>
