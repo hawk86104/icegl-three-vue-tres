@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-12-30 11:15:55
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2025-01-02 09:45:03
+ * @LastEditTime: 2025-01-02 13:58:17
  */
 export default {
     name: 'cannonPhysics',
@@ -23,6 +23,14 @@ export default {
             type: 'img',
             name: 'theBasic',
             title: '基础实例',
+            disableFPSGraph: false,
+            disableSrcBtn: false,
+        },
+        {
+            src: 'plugins/cannonPhysics/preview/terrainBalls.png',
+            type: 'img',
+            name: 'terrainBalls',
+            title: '地形球',
             disableFPSGraph: false,
             disableSrcBtn: false,
         },

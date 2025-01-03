@@ -43,7 +43,8 @@ const planeShape = new Plane()
 const planeBody = new Body({ mass: 0 })
 planeBody.addShape(planeShape)
 planeBody.position.copy(props.plane.position)
-planeBody.quaternion.setFromEuler(-Math.PI / 2, 0, 0) 
+planeBody.quaternion.set(...(props.plane.quaternion.toArray() as [number, number, number, number]))
+// planeBody.quaternion.setFromEuler(-Math.PI / 2, 0, 0) 
 planeBody.material = new Material()
 
 // 创建接触材料，定义球体和平面之间的摩擦力和弹性

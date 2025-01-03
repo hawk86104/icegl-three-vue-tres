@@ -4,7 +4,7 @@
  * @Autor: 地虎降天龙
  * @Date: 2024-12-30 11:15:55
  * @LastEditors: 地虎降天龙
- * @LastEditTime: 2025-01-02 11:00:35
+ * @LastEditTime: 2025-01-02 15:42:42
 -->
 <template>
     <TresCanvas v-bind="state" window-size>
@@ -27,14 +27,16 @@
             <TresMeshToonMaterial />
         </TresMesh>
 
-				<theBasicCannon v-if="planeRef" :sphere="sphereRef" :sphere2="sphereRef2" :plane="planeRef" />
+        <theBasicCannon v-if="planeRef" :sphere="sphereRef" :sphere2="sphereRef2" :plane="planeRef" />
 
         <TresDirectionalLight ref="TDirectionalLight" :position="[10, 8, 4]" :intensity="1" cast-shadow />
         <TresDirectionalLight :position="[10, 2, 4]" :intensity="1" cast-shadow />
 
         <TresGridHelper />
     </TresCanvas>
-		<h1 class="text-center text-white w-full absolute">使用cannon-es库 API详见:<a target="_black" href="https://pmndrs.github.io/cannon-es/docs/">cannon-es/docs</a></h1>
+    <h1 class="text-center text-white w-full absolute">
+        使用cannon-es库 API详见:<a target="_black" href="https://pmndrs.github.io/cannon-es/docs/">cannon-es/docs</a>
+    </h1>
 </template>
 
 <script setup lang="ts">
