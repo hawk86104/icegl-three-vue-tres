@@ -9,7 +9,8 @@
 export default {
     name: 'cannonPhysics',
     title: 'Cannon物理引擎',
-    intro: '各种基于Cannon.js物理引擎的例子',
+    intro: `各种基于Cannon.js物理引擎的例子<br>
+    详细文档请查看：<a style="color: #5384ff;" href="https://pmndrs.github.io/cannon-es/" target="_blank">cannon-es</a>`,
     version: '1.0.0',
     author: '地虎降天龙',
     website: 'www.icegl.cn',
